@@ -32,6 +32,10 @@
 			"type": "string",
 			"default": "06"
 		},
+		"noGapBelow": {
+			"type": "boolean",
+			"default": false
+		},
 		"maxWidth": {
 			"type": "string",
 			"default": "content"

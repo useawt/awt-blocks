@@ -298,7 +298,14 @@
 			const doc = isAwt
 				? DOCS[ props.name.slice( PREFIX.length ) ]
 				: null;
-			const showSpacing = mode !== null;
+			// awt/section's "No gap below" switch (its own Layout panel)
+			// overrides the token, so the Spacing panel would be a dead
+			// control while it's on — hide it instead.
+			const noGapBelow =
+				props.name === 'awt/section' &&
+				props.attributes &&
+				!! props.attributes.noGapBelow;
+			const showSpacing = mode !== null && ! noGapBelow;
 			if ( ! doc && ! showSpacing ) {
 				return el( BlockEdit, props );
 			}
@@ -420,6 +427,22 @@
 			const mode = spacingMode( props.name );
 			if ( mode === null ) {
 				return el( BlockListBlock, props );
+			}
+			// awt/section's "No gap below" switch wins over the token —
+			// mirror the front end's awt-spacing-none class.
+			if (
+				props.name === 'awt/section' &&
+				props.attributes &&
+				props.attributes.noGapBelow
+			) {
+				return el(
+					BlockListBlock,
+					Object.assign( {}, props, {
+						className:
+							( props.className ? props.className + ' ' : '' ) +
+							'awt-spacing-none',
+					} )
+				);
 			}
 			const raw = props.attributes && props.attributes.awtSpacing;
 			let spacing = raw;

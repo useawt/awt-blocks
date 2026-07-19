@@ -44,6 +44,11 @@
 
 ### [New]
 
+- Section: new "No gap below" switch (Layout panel). Turn it on and the
+  section sits flush against whatever comes next — no bottom margin — so
+  full-width color bands can stack without a seam of page background
+  between them. While it's on, the Spacing setting is hidden (the switch
+  overrides it); turn it off and your chosen spacing comes back.
 - Button: new "Submit the form" toggle. Turn it on for the button that
   sends a form (place the button inside a Form block) and it renders as a
   real submit button. Before, this setting wasn't registered, so the

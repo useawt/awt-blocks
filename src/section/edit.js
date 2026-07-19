@@ -4,7 +4,12 @@ import {
 	useInnerBlocksProps,
 	InspectorControls,
 } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, TextControl } from '@wordpress/components';
+import {
+	PanelBody,
+	SelectControl,
+	TextControl,
+	ToggleControl,
+} from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 const SPACING_OPTIONS = [
@@ -65,6 +70,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const {
 		paddingBlock,
 		paddingInline,
+		noGapBelow,
 		maxWidth,
 		customMaxWidth,
 		backgroundColor,
@@ -142,6 +148,17 @@ export default function Edit( { attributes, setAttributes } ) {
 						options={ SPACING_OPTIONS }
 						onChange={ ( value ) =>
 							setAttributes( { paddingInline: value } )
+						}
+					/>
+					<ToggleControl
+						label={ __( 'No gap below', 'awt' ) }
+						help={ __(
+							'Removes the space below this section so it sits flush against whatever comes next.',
+							'awt'
+						) }
+						checked={ !! noGapBelow }
+						onChange={ ( value ) =>
+							setAttributes( { noGapBelow: value } )
 						}
 					/>
 					<SelectControl

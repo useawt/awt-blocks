@@ -362,8 +362,14 @@ add_filter(
 			return $content;
 		}
 
-		$token = clamp_token( $block['attrs']['awtSpacing'] ?? SPACING_DEFAULT );
-		$class = 'awt-spacing-' . $token;
+		// awt/section's "No gap below" switch wins over the spacing token:
+		// the section sits flush against whatever follows it.
+		if ( $name === 'awt/section' && ! empty( $block['attrs']['noGapBelow'] ) ) {
+			$class = 'awt-spacing-none';
+		} else {
+			$token = clamp_token( $block['attrs']['awtSpacing'] ?? SPACING_DEFAULT );
+			$class = 'awt-spacing-' . $token;
+		}
 
 		// Add the class to the FIRST opening tag of the rendered output.
 		if ( ! preg_match( '/<[a-zA-Z][^>]*>/', $content, $m, PREG_OFFSET_CAPTURE ) ) {
