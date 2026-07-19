@@ -869,21 +869,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h3 class="wp-block-heading">awt/side-nav + awt/side-nav-section + awt/side-nav-link + awt/side-nav-divider</h3>
 <!-- /wp:heading -->
 
-<!-- wp:awt/side-nav {"ariaLabel":"Showcase side nav","id":"showcase-side-nav"} -->
-<!-- wp:awt/side-nav-section {"title":"Getting started"} -->
-<!-- wp:awt/side-nav-link {"text":"Overview","href":"/overview"} /-->
-
-<!-- wp:awt/side-nav-link {"text":"Install","href":"/install"} /-->
-<!-- /wp:awt/side-nav-section -->
-
-<!-- wp:awt/side-nav-divider /-->
-
-<!-- wp:awt/side-nav-section {"title":"Reference"} -->
-<!-- wp:awt/side-nav-link {"text":"Blocks","href":"/reference/blocks","matchMode":"prefix"} /-->
-
-<!-- wp:awt/side-nav-link {"text":"Patterns","href":"/reference/patterns","matchMode":"prefix"} /-->
-<!-- /wp:awt/side-nav-section -->
-<!-- /wp:awt/side-nav -->
+<!-- wp:paragraph -->
+<p>Site chrome: the side nav docks to the left edge of the screen, next to the header, so a live example cannot sit inline on this page. Edit it in the Site Editor, in the "Side navigation" template part.</p>
+<!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">awt/footer-section + awt/footer-link</h3>

@@ -26,6 +26,7 @@ const COPIES = [
 	[ 'src/shared/current-url.php', 'build/shared/current-url.php' ],
 	[ 'src/shared/faq-schema.php', 'build/shared/faq-schema.php' ],
 	[ 'src/shared/global-controls.php', 'build/shared/global-controls.php' ],
+	[ 'src/shared/template-chrome.php', 'build/shared/template-chrome.php' ],
 	// Editor-only styles for the IconPicker.
 	[ 'src/shared/icon-picker.css', 'build/shared/icon-picker.css' ],
 	// Editor UI: Spacing panel + Carbon doc links.

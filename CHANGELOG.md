@@ -32,6 +32,13 @@
 
 ### [Improvement]
 
+- Side nav: the block no longer appears in the inserter while you edit a
+  post or page. It is site chrome — it docks to the left edge of the
+  screen, next to the header — so inside page content it covered the page
+  instead of sitting where you placed it. Add it in the Site Editor (for
+  example the "Side navigation" template part), where it still works as
+  before. Pages that already contain one keep rendering and stay
+  editable.
 - Sample content (the dev-environment seed and the render-test fixtures)
   now carries the theme's revised pattern placeholder copy: plainer
   language with no "ship" wording or em dashes. No block's own output

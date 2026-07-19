@@ -6,7 +6,7 @@
 	"awt_component": "side-nav",
 	"title": "Side nav",
 	"category": "awt-ui-shell",
-	"description": "A sidebar navigation menu. Add side-nav sections, links, and dividers inside it.",
+	"description": "A sidebar navigation menu, docked to the left edge of the site. Use it in a template or the Side navigation template part; add side-nav sections, links, and dividers inside it.",
 	"textdomain": "awt",
 	"keywords": [
 		"side nav",
