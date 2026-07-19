@@ -914,7 +914,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:awt/section {"paddingBlock":"10","metadata":{"categories":["awt-section","header"],"patternName":"awt/hero","name":"AWT — Hero"}} -->
-<!-- wp:awt/hero {"eyebrow":"Accessible by default","description":"Carbon Design System components, paired light/dark variants, and a real accessibility commitment — all in a free, GPL-licensed theme."} -->
+<!-- wp:awt/hero {"eyebrow":"Accessible by default","description":"Carbon Design System components, paired light/dark variants, and a real accessibility commitment, all in a free, GPL-licensed theme."} -->
 <!-- wp:awt/button {"text":"Get started"} /-->
 
 <!-- wp:awt/button {"text":"Read the docs","kind":"tertiary"} /-->
@@ -939,7 +939,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Every block ships semantically correct HTML and is validated against WCAG 2.2 AA.</p>
+<p>Every block outputs semantically correct HTML and is validated against WCAG 2.2 AA.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -951,7 +951,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Battle-tested visual system from IBM, paired light/dark variants out of the box.</p>
+<p>Proven visual system from IBM, paired light/dark variants out of the box.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -993,7 +993,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/accordion-item {"title":"Does it support dark mode?"} -->
 <!-- wp:paragraph -->
-<p>Yes — visitors switch between paired light and dark Carbon variants via the header toggle. Site owners pick the pairing at design time.</p>
+<p>Yes. Visitors switch between paired light and dark Carbon variants via the header toggle. Site owners pick the pairing at design time.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/accordion-item -->
 <!-- /wp:awt/accordion -->
@@ -1383,7 +1383,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:awt/section -->
 
 <!-- wp:awt/section {"paddingBlock":"10","maxWidth":"content"} -->
-<!-- wp:awt/hero {"eyebrow":"Accessible by default","heading":"Build accessible WordPress sites","description":"Carbon Design System components, paired light/dark variants, and a real accessibility commitment — all in a free, GPL-licensed theme.","layout":"text-only"} -->
+<!-- wp:awt/hero {"eyebrow":"Accessible by default","heading":"Build accessible WordPress sites","description":"Carbon Design System components, paired light/dark variants, and a real accessibility commitment, all in a free, GPL-licensed theme.","layout":"text-only"} -->
 <!-- wp:awt/button {"text":"Get started","kind":"primary","size":"lg"} /-->
 <!-- wp:awt/button {"text":"Read the docs","kind":"tertiary","size":"lg"} /-->
 <!-- /wp:awt/hero -->
@@ -1409,7 +1409,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h3 class="wp-block-heading">Accessible</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Every block ships semantically correct HTML and is validated against WCAG 2.2 AA.</p>
+<p>Every block outputs semantically correct HTML and is validated against WCAG 2.2 AA.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -1419,7 +1419,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h3 class="wp-block-heading">Carbon Design System</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Battle-tested visual system from IBM, paired light/dark variants out of the box.</p>
+<p>Proven visual system from IBM, paired light/dark variants out of the box.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -1517,7 +1517,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/accordion {"singleOpen":true} -->
 <!-- wp:awt/faq-item {"question":"Is this product really free?","level":"3"} -->
 <!-- wp:paragraph -->
-<p>Yes. The base product is GPL-2.0-or-later and ships via WordPress.org with no telemetry, no callbacks, and no license keys. Premium adds optional capabilities; the free tier is feature-complete for typical sites.</p>
+<p>Yes. The base product is GPL-2.0-or-later and is published on WordPress.org with no telemetry, no callbacks, and no license keys. Premium adds optional capabilities; the free theme and plugin are the complete product.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 
@@ -1529,7 +1529,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/faq-item {"question":"Does it support dark mode?","level":"3"} -->
 <!-- wp:paragraph -->
-<p>Yes — visitors switch between paired light and dark Carbon variants via the header toggle. Site owners pick the pairing at design time.</p>
+<p>Yes. Visitors switch between paired light and dark Carbon variants via the header toggle. Site owners pick the pairing at design time.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 <!-- /wp:awt/accordion -->
@@ -1545,11 +1545,11 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/section {"paddingBlock":"10","maxWidth":"narrow"} -->
 <!-- wp:heading {"level":2,"textAlign":"center"} -->
-<h2 class="wp-block-heading has-text-align-center">Ready to ship accessible by default?</h2>
+<h2 class="wp-block-heading has-text-align-center">Ready to publish accessible by default?</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">Install the theme and the blocks plugin from WordPress.org. No license keys, no telemetry, no callbacks. The accessibility linter ships in the box.</p>
+<p class="has-text-align-center">Install the theme and the blocks plugin from WordPress.org. No license keys, no telemetry, no callbacks. The accessibility linter is built in.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:awt/button {"text":"Get started","kind":"primary","size":"lg","href":"#"} /-->
@@ -1569,7 +1569,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>One email per release. New blocks, accessibility-linter changes, and what we're shipping next. No marketing fluff.</p>
+<p>One email per release. New blocks, accessibility-linter changes, and what's coming next. No marketing fluff.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:awt/form -->
@@ -3013,7 +3013,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/tile {"variant":"expandable","summary":"What does AWT include?"} -->
 <!-- wp:paragraph -->
-<p>AWT ships a Carbon-aligned block library + a block theme + a set of starter patterns. The blocks plugin is registered separately from the theme so you can update them independently.</p>
+<p>AWT includes a Carbon-aligned block library + a block theme + a set of starter patterns. The blocks plugin is registered separately from the theme so you can update them independently.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -4149,7 +4149,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>Battle-tested visual system from IBM.</p>
+<p>Proven visual system from IBM.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -4402,7 +4402,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/faq-item {"question":"Does it support dark mode?"} -->
 <!-- wp:paragraph -->
-<p>Yes — visitors switch between paired light / dark Carbon variants via the header toggle.</p>
+<p>Yes. Visitors switch between paired light / dark Carbon variants via the header toggle.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 

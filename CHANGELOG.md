@@ -32,6 +32,10 @@
 
 ### [Improvement]
 
+- Sample content (the dev-environment seed and the render-test fixtures)
+  now carries the theme's revised pattern placeholder copy: plainer
+  language with no "ship" wording or em dashes. No block's own output
+  changes.
 - Section: the "Light (active light variant)" and "Dark (active dark
   variant)" theme-scope choices now work. They resolve to the paired scope
   of the active style variation (for example White + g90 → dark sections
