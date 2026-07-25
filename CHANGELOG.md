@@ -51,6 +51,13 @@
 
 ### [Improvement]
 
+- Icons now render on every installed copy of the plugin. The Icon block
+  (and the icons other blocks draw) read Carbon's SVG files from disk;
+  installed copies were missing all but ten built-in fallbacks, so icons
+  showed as placeholder text like `[image]`. The plugin now bundles the
+  full icon set the picker offers (about 1.2 MB), and nine icons that
+  Carbon publishes without a size variant (`caution`, `circle-fill`, and
+  friends) render correctly for the first time.
 - Side nav: the block no longer appears in the inserter while you edit a
   post or page. It is site chrome — it docks to the left edge of the
   screen, next to the header — so inside page content it covered the page
