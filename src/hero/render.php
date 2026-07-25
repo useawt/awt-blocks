@@ -51,14 +51,20 @@ if ( $image_ratio !== '' ) {
 
 // The hero sits at the top of the page, so its image is almost always the
 // largest paint (LCP). Eager + high priority keeps the browser from
-// deferring it; the explicit fetchpriority also stops WordPress's content
-// filter from handing the high-priority hint to a below-the-fold image.
+// deferring it.
 $image_html = $has_image ? sprintf(
 	'<img class="%1$s" src="%2$s" alt="%3$s" loading="eager" fetchpriority="high" />',
 	esc_attr( $image_class ),
 	esc_url( $image_url ),
 	esc_attr( $image_alt )
 ) : '';
+
+// WordPress's content filter only inspects images that carry width/height,
+// so it never sees this one — without the flag it hands its one
+// fetchpriority="high" hint to some other (usually below-the-fold) image.
+if ( $has_image && function_exists( 'wp_high_priority_element_flag' ) ) {
+	wp_high_priority_element_flag( false );
+}
 
 if ( $version >= 2 ) {
 	printf(
