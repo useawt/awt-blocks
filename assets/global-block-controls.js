@@ -332,7 +332,7 @@
 					? [
 							{
 								value: '',
-								label: __( 'None (theme default)', 'awt' ),
+								label: __( 'None', 'awt' ),
 							},
 					  ].concat(
 							SPACING_OPTIONS.map( function ( o ) {
