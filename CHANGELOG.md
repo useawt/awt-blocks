@@ -14,6 +14,14 @@
 
 ### [Breaking]
 
+- Notification: the close button now works on the published page. Clicking
+  it (or activating it with the keyboard) dismisses the notification — it
+  disappears from the page and from the accessibility tree, matching the
+  Carbon Design System's behavior. Before, the button rendered but did
+  nothing. Notifications with "Hide close button" turned on are unchanged.
+  The block's rendered markup gains Interactivity API attributes
+  (deliberate snapshot update).
+
 - Paragraphs and headings now carry Carbon's editorial rhythm by default.
   The Spacing (bottom margin) default changes from 16px to 24px
   (spacing-06) for paragraphs, and from "None (theme default)" to 16px

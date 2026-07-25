@@ -55,18 +55,25 @@ $is_alert          = $kind === 'error';
 $notification_role = $is_alert ? 'alert' : 'status';
 $aria_live         = $is_alert ? 'assertive' : 'polite';
 
-$wrapper_attrs = get_block_wrapper_attributes(
-	array(
-		'class'     => $root_class,
-		'role'      => $notification_role,
-		'aria-live' => $aria_live,
-	)
+$wrapper_extra = array(
+	'class'     => $root_class,
+	'role'      => $notification_role,
+	'aria-live' => $aria_live,
 );
+if ( ! $hide_close ) {
+	// The close button dismisses via the Interactivity API (view.js). The
+	// reactive `hidden` binding takes the whole notification out of the
+	// accessibility tree on dismiss — Carbon's reference removes the node.
+	$wrapper_extra['data-wp-interactive']  = 'awt/notification';
+	$wrapper_extra['data-wp-context']      = wp_json_encode( array( 'dismissed' => false ) );
+	$wrapper_extra['data-wp-bind--hidden'] = 'context.dismissed';
+}
+$wrapper_attrs = get_block_wrapper_attributes( $wrapper_extra );
 
 $close_btn = $hide_close
 	? ''
 	: sprintf(
-		'<button type="button" class="%1$s__close-button" aria-label="%2$s">%3$s</button>',
+		'<button type="button" class="%1$s__close-button" aria-label="%2$s" data-wp-on--click="actions.dismiss">%3$s</button>',
 		esc_attr( $base ),
 		esc_attr__( 'Close notification', 'awt' ),
 		// Carbon's notification close button uses a 20px icon — matches the 20px
