@@ -51,6 +51,9 @@
 
 ### [Improvement]
 
+- Toggletip: a label with more than one word now stays on one line next to
+  the info button instead of wrapping into a narrow column.
+
 - Icons now render on every installed copy of the plugin. The Icon block
   (and the icons other blocks draw) read Carbon's SVG files from disk;
   installed copies were missing all but ten built-in fallbacks, so icons

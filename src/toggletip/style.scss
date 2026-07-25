@@ -11,3 +11,16 @@
 
 @use '@carbon/styles/scss/components/toggletip';
 @use '@carbon/styles/scss/components/popover';
+
+// AWT renders the optional label INSIDE the flex wrapper (Carbon's reference
+// puts it outside the popover container). Carbon's button reset gives the
+// trigger `inline-size: 100%`, which makes it swallow the flex row and
+// squeeze a multi-word label into wrapping at min-content. Keep the trigger
+// at its natural icon size and the label on one line.
+.wp-block-awt-toggletip .cds--toggletip-button {
+	inline-size: auto;
+}
+
+.wp-block-awt-toggletip .cds--toggletip-label {
+	flex: none;
+}
