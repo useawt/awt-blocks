@@ -34,6 +34,7 @@ const SPACING_OPTIONS = [
 const MAX_WIDTH_OPTIONS = [
 	{ value: 'none', label: __( 'None (full width)', 'awt' ) },
 	{ value: 'narrow', label: __( 'Narrow (42rem)', 'awt' ) },
+	{ value: 'reading', label: __( 'Reading (48rem)', 'awt' ) },
 	{ value: 'content', label: __( 'Content (66rem)', 'awt' ) },
 	{ value: 'wide', label: __( 'Wide (82.5rem)', 'awt' ) },
 	{ value: 'custom', label: __( 'Custom', 'awt' ) },
@@ -82,6 +83,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const widthMap = {
 		none: '100%',
 		narrow: '42rem',
+		reading: '48rem',
 		content: '66rem',
 		wide: '82.5rem',
 		custom: customMaxWidth || '66rem',

@@ -60,6 +60,10 @@
 
 ### [New]
 
+- Section: new "Reading (48rem)" max width option, between Narrow and
+  Content. It matches the reading measure the theme gives paragraphs, so a
+  whole section — headings, images, everything — can line up with the text
+  column. Good for long-form pages like articles and documentation.
 - Section: new "No gap below" switch (Layout panel). Turn it on and the
   section sits flush against whatever comes next — no bottom margin — so
   full-width color bands can stack without a seam of page background

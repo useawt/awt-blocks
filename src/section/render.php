@@ -31,6 +31,7 @@ if ( ! in_array( $tag_name, $allowed_tags, true ) ) {
 $max_widths = array(
 	'none'    => '100%',
 	'narrow'  => '42rem',
+	'reading' => '48rem',
 	'content' => '66rem',
 	'wide'    => '82.5rem',
 );
