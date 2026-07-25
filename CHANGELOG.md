@@ -22,6 +22,13 @@
   The block's rendered markup gains Interactivity API attributes
   (deliberate snapshot update).
 
+- Hero: the hero image now loads immediately with high priority instead of
+  lazy-loading. The hero sits at the top of the page, so lazy-loading held
+  back the page's largest paint (the LCP metric) and could hand the
+  browser's high-priority hint to an image further down the page. The
+  rendered markup changes from `loading="lazy"` to `loading="eager"
+  fetchpriority="high"` — pages get faster with no visual change.
+
 - Paragraphs and headings now carry Carbon's editorial rhythm by default.
   The Spacing (bottom margin) default changes from 16px to 24px
   (spacing-06) for paragraphs, and from "None (theme default)" to 16px

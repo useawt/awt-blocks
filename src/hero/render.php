@@ -49,8 +49,12 @@ if ( $image_ratio !== '' ) {
 	$image_class .= ' awt-hero__image--ratio-' . $image_ratio;
 }
 
+// The hero sits at the top of the page, so its image is almost always the
+// largest paint (LCP). Eager + high priority keeps the browser from
+// deferring it; the explicit fetchpriority also stops WordPress's content
+// filter from handing the high-priority hint to a below-the-fold image.
 $image_html = $has_image ? sprintf(
-	'<img class="%1$s" src="%2$s" alt="%3$s" loading="lazy" />',
+	'<img class="%1$s" src="%2$s" alt="%3$s" loading="eager" fetchpriority="high" />',
 	esc_attr( $image_class ),
 	esc_url( $image_url ),
 	esc_attr( $image_alt )
