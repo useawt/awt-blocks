@@ -14,6 +14,16 @@
 
 ### [Breaking]
 
+- Paragraphs and headings now carry Carbon's editorial rhythm by default.
+  The Spacing (bottom margin) default changes from 16px to 24px
+  (spacing-06) for paragraphs, and from "None (theme default)" to 16px
+  (spacing-05) for headings. Paragraph gaps grow by 8px wherever the
+  author never chose a spacing value; heading gaps look the same as
+  before (the theme's block gap already produced 16px), but the value is
+  now explicit in the heading's own Spacing setting. Any spacing an
+  author picked by hand is kept. To restore the old paragraph rhythm on
+  a page, set those paragraphs' Spacing to spacing-05.
+
 - Section: a full-width section now keeps at least the site's global side
   padding around its content. Before, on screens narrower than the content
   column, a full-width section's text could sit almost against the screen

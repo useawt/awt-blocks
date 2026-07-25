@@ -210,9 +210,13 @@
 	};
 
 	// Per-block default Spacing token for core blocks. Most core blocks are
-	// opt-in (default '' = no AWT spacing), but core/paragraph defaults to '05'
-	// (16px) to match AWT blocks' bottom-margin rhythm. Mirror in global-controls.php.
-	const CORE_SPACING_DEFAULTS = { 'core/paragraph': '05' };
+	// opt-in (default '' = no AWT spacing), but two carry a default to set the
+	// page's editorial rhythm, mirroring Carbon's long-form pages: paragraphs
+	// '06' (24px), headings '05' (16px). Mirror in global-controls.php.
+	const CORE_SPACING_DEFAULTS = {
+		'core/paragraph': '06',
+		'core/heading': '05',
+	};
 
 	function coreSpacingDefault( name ) {
 		return CORE_SPACING_DEFAULTS[ name ] || '';
@@ -317,9 +321,12 @@
 			}
 			// Core blocks get an explicit "None" choice so the author can keep
 			// the theme's natural spacing; AWT blocks always carry a token.
-			// In core mode the default IS "None", so strip the "(default)" tag
-			// from spacing-05 (it's only the default for AWT blocks) to avoid two
-			// options both reading as the default.
+			// The "(default)" tag follows each block's own default: paragraphs
+			// mark spacing-06, headings spacing-05, and blocks with no per-block
+			// default mark nothing (there "None" is the default). The hardcoded
+			// tag on spacing-05 in SPACING_OPTIONS is for AWT blocks; strip it
+			// in core mode so only the real default carries the tag.
+			const blockDefault = coreSpacingDefault( props.name );
 			const spacingOptions =
 				mode === 'core'
 					? [
@@ -329,12 +336,14 @@
 							},
 					  ].concat(
 							SPACING_OPTIONS.map( function ( o ) {
-								return o.value === '05'
-									? {
-											value: '05',
-											label: 'spacing-05 — 16px',
-									  }
-									: o;
+								let label =
+									o.value === '05'
+										? 'spacing-05 — 16px'
+										: o.label;
+								if ( o.value === blockDefault ) {
+									label += ' (default)';
+								}
+								return { value: o.value, label };
 							} )
 					  )
 					: SPACING_OPTIONS;

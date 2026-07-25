@@ -110,10 +110,17 @@ function is_core_spacing_block( string $name, array $args ): bool {
 
 /**
  * Per-block default Spacing token for core blocks. Most core blocks are opt-in
- * (default '' = no AWT spacing), but core/paragraph defaults to '05' (16px) to
- * match AWT blocks' bottom-margin rhythm. Mirror in global-block-controls.js.
+ * (default '' = no AWT spacing), but two carry a default to set the page's
+ * editorial rhythm, mirroring Carbon's long-form pages: core/paragraph '06'
+ * (24px between paragraphs) and core/heading '05' (16px below a heading —
+ * the same gap the theme blockGap already produced, now carried by the
+ * heading itself so the select reads honestly and the gap no longer depends
+ * on the following block's top margin). Mirror in global-block-controls.js.
  */
-const CORE_SPACING_DEFAULTS = array( 'core/paragraph' => '05' );
+const CORE_SPACING_DEFAULTS = array(
+	'core/paragraph' => '06',
+	'core/heading'   => '05',
+);
 
 /**
  * The default spacing token for a core block ('' = none).
