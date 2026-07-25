@@ -24,10 +24,18 @@ const ALIGN_OPTIONS = [
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { label, description, ariaLabel, align } = attributes;
-	const blockProps = useBlockProps( {
-		className: 'cds--toggletip',
-		style: { display: 'inline-flex', alignItems: 'center', gap: '0.25rem' },
-	} );
+	const blockProps = useBlockProps();
+
+	// Mirrors Carbon's reference DOM (label outside the popover container;
+	// popover > popover-content > toggletip-content). The popover stays
+	// closed in the canvas — the description is edited in the sidebar.
+	const containerClass = [
+		'cds--popover-container',
+		'cds--popover--caret',
+		'cds--popover--high-contrast',
+		`cds--popover--${ align }`,
+		'cds--toggletip',
+	].join( ' ' );
 
 	return (
 		<>
@@ -84,36 +92,36 @@ export default function Edit( { attributes, setAttributes } ) {
 						allowedFormats={ [] }
 					/>
 				) }
-				<button
-					type="button"
-					className="cds--toggletip-button"
-					aria-label={ ariaLabel }
-					onClick={ ( e ) => e.preventDefault() }
-					style={ {
-						background: 'transparent',
-						border: 0,
-						padding: '0.25rem',
-						minBlockSize: '1.5rem',
-						minInlineSize: '1.5rem',
-						display: 'inline-flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						cursor: 'pointer',
-					} }
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 16 16"
-						width="16"
-						height="16"
-						fill="currentColor"
-						aria-hidden="true"
-						focusable="false"
+				<span className={ containerClass }>
+					<button
+						type="button"
+						className="cds--toggletip-button"
+						aria-label={ ariaLabel }
+						aria-expanded="false"
+						onClick={ ( e ) => e.preventDefault() }
 					>
-						<path d="M8.5 11V6.5h-2v1h1V11H6v1h4v-1zM8 3.5A.75.75 0 108.75 4.25.75.75 0 008 3.5z" />
-						<path d="M8 15A7 7 0 118 1a7 7 0 010 14zm0-13a6 6 0 100 12A6 6 0 008 2z" />
-					</svg>
-				</button>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 16 16"
+							width="16"
+							height="16"
+							fill="currentColor"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path d="M8.5 11V6.5h-2v1h1V11H6v1h4v-1zM8 3.5A.75.75 0 108.75 4.25.75.75 0 008 3.5z" />
+							<path d="M8 15A7 7 0 118 1a7 7 0 010 14zm0-13a6 6 0 100 12A6 6 0 008 2z" />
+						</svg>
+					</button>
+					<span className="cds--popover">
+						<span className="cds--popover-content">
+							<div className="cds--toggletip-content">
+								<p>{ description }</p>
+							</div>
+						</span>
+						<span className="cds--popover-caret"></span>
+					</span>
+				</span>
 			</span>
 		</>
 	);

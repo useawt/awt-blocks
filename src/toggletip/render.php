@@ -2,10 +2,14 @@
 /**
  * AWT Toggletip — server-rendered output.
  *
- * Renders the Carbon "click-not-hover tooltip" pattern: an inline label
- * (optional) + an info button + a popover that opens on click. View-side
- * Interactivity store wires positioning via @floating-ui/dom and dismissal
- * via installOutsideDismiss (click-outside, Escape, Tab-out).
+ * Renders the Carbon "click-not-hover tooltip" pattern mirroring Carbon's
+ * reference DOM: an optional inline label, then a popover container
+ * (`cds--popover-container … cds--toggletip`) holding the info button and the
+ * popover (`cds--popover > cds--popover-content > cds--toggletip-content`,
+ * caret as a sibling). Carbon's popover CSS positions the popover from the
+ * `cds--popover--<align>` class — no JS positioning. View-side Interactivity
+ * store toggles the open classes and wires dismissal via
+ * installOutsideDismiss (click-outside, Escape, Tab-out).
  *
  * @var array $attributes
  *
@@ -21,19 +25,25 @@ $description = isset( $attributes['description'] ) ? (string) $attributes['descr
 $aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'More information', 'awt' );
 $align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'bottom';
 
-$content_id = unique_id( 'awt-toggletip' );
+$allowed_aligns = array( 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right' );
+if ( ! in_array( $align, $allowed_aligns, true ) ) {
+	$align = 'bottom';
+}
+
+$popover_id = unique_id( 'awt-toggletip' );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
-$root_class    = $ds ? $ds->classes_for( 'toggletip' ) : 'cds--toggletip';
-$label_class   = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'label' ) ) : 'cds--toggletip-label';
-$button_class  = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'button' ) ) : 'cds--toggletip-button';
-$content_class = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'content' ) ) : 'cds--toggletip-content';
+$container_class = $ds ? $ds->classes_for( 'toggletip', array( 'align' => $align ) ) : 'cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--' . $align . ' cds--toggletip';
+$label_class     = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'label' ) ) : 'cds--toggletip-label';
+$button_class    = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'button' ) ) : 'cds--toggletip-button';
+$popover_class   = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'popover' ) ) : 'cds--popover';
+$content_class   = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'popover-content' ) ) : 'cds--popover-content';
+$body_class      = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'content' ) ) : 'cds--toggletip-content';
+$caret_class     = $ds ? $ds->classes_for( 'toggletip', array( 'element' => 'caret' ) ) : 'cds--popover-caret';
 
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
-		'class'               => $root_class,
-		'data-placement'      => $align,
 		'data-wp-interactive' => 'awt/toggletip',
 	)
 );
@@ -51,15 +61,24 @@ $info_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width=
 printf(
 	'<span %1$s>'
 	. '%2$s'
-	. '<button type="button" class="%7$s" aria-label="%3$s" aria-controls="%4$s" aria-expanded="false" data-wp-on--click="actions.toggle">%5$s</button>'
-	. '<span id="%4$s" class="%8$s" role="dialog" aria-label="%3$s" hidden>%6$s</span>'
+	. '<span class="%7$s">'
+	. '<button type="button" class="%8$s" aria-label="%3$s" aria-controls="%4$s" aria-expanded="false" data-wp-on--click="actions.toggle">%5$s</button>'
+	. '<span id="%4$s" class="%9$s">'
+	. '<span class="%10$s"><div class="%11$s"><p>%6$s</p></div></span>'
+	. '<span class="%12$s"></span>'
+	. '</span>'
+	. '</span>'
 	. '</span>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	$label_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
 	esc_attr( $aria_label ),
-	esc_attr( $content_id ),
+	esc_attr( $popover_id ),
 	$info_icon, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above.
 	wp_kses_post( $description ),
+	esc_attr( $container_class ),
 	esc_attr( $button_class ),
-	esc_attr( $content_class )
+	esc_attr( $popover_class ),
+	esc_attr( $content_class ),
+	esc_attr( $body_class ),
+	esc_attr( $caret_class )
 );

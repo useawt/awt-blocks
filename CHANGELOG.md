@@ -41,6 +41,15 @@
   automatically; choose "Heading 2–6" in the block's settings if your
   statistic really does start a section.
 
+- Toggletip: the rendered markup now matches Carbon's reference structure
+  (the pop-up lives in a popover container next to the trigger, with the
+  label outside it). The pop-up gains Carbon's caret arrow and
+  high-contrast styling, positions itself with CSS instead of JavaScript,
+  and shifts to a placement that fits when the author's choice would push
+  it off the screen edge. Content and settings are unchanged — only the
+  generated HTML differs, so custom CSS targeting the old structure may
+  need updating.
+
 ### [A11y]
 
 - Accessibility checker: the heading-order checks (heading-level skips,
