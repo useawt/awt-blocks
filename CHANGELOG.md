@@ -60,6 +60,10 @@
 
 ### [Improvement]
 
+- Footer section: the heading now looks the same in the Site Editor as in
+  the published footer. The editor preview used its own smaller, tighter
+  heading style instead of the theme's real footer heading style.
+
 - Toggletip: a label with more than one word now stays on one line next to
   the info button instead of wrapping into a narrow column.
 

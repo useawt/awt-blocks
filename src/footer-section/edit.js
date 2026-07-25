@@ -44,14 +44,11 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				<RichText
 					tagName="h2"
+					className="cds--footer__heading"
 					value={ title }
 					onChange={ ( value ) => setAttributes( { title: value } ) }
 					placeholder={ __( 'Section heading (optional)', 'awt' ) }
 					allowedFormats={ [] }
-					style={ {
-						fontSize: 'var(--cds-heading-02-font-size, 1rem)',
-						margin: '0 0 0.5rem',
-					} }
 				/>
 				<ul { ...innerBlocksProps } />
 			</div>
