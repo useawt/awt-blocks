@@ -116,9 +116,13 @@ function icon( string $name, int $size = 16, string $extra_class = '' ): string 
  * Resolve the on-disk path of a Carbon SVG.
  *
  * Two sources, in order: `@carbon/icons` in node_modules (development
- * installs), then the SVG set the build copies into `shared/carbon-icons/`
- * (scripts/copy-carbon-icons.js) — installed copies of the plugin have no
- * node_modules, so the bundled set is what production actually reads.
+ * installs), then the SVG set the build copies into
+ * `build/shared/carbon-icons/` (scripts/copy-carbon-icons.js) — installed
+ * copies of the plugin have no node_modules, so the bundled set is what
+ * production actually reads. The bundled path is anchored on the plugin
+ * root (not __DIR__): awt-blocks.php loads these helpers from src/shared/
+ * when that copy exists, and both src/shared/ and build/shared/ sit two
+ * levels below the root.
  * Tries the requested size first, then progressively larger Carbon-shipped
  * sizes. Returns null if no file exists at any size.
  *
@@ -130,7 +134,7 @@ function icon( string $name, int $size = 16, string $extra_class = '' ): string 
 function _resolve_carbon_icon_file( string $name, int $size ): ?string {
 	$bases     = array(
 		dirname( __DIR__, 2 ) . '/node_modules/@carbon/icons/svg',
-		__DIR__ . '/carbon-icons',
+		dirname( __DIR__, 2 ) . '/build/shared/carbon-icons',
 	);
 	$try_sizes = array_unique( array( $size, 16, 20, 24, 32 ) );
 	foreach ( $bases as $base ) {
