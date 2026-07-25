@@ -14,6 +14,15 @@
 
 ### [Breaking]
 
+- Section: a full-width section now keeps at least the site's global side
+  padding around its content. Before, on screens narrower than the content
+  column, a full-width section's text could sit almost against the screen
+  edge when its horizontal padding was a small spacing step (spacing-01 is
+  2px). A larger padding choice still wins — only sections whose padding
+  was below the site's global padding change, and only on narrow screens.
+  (Breaking because the rendered padding style changes for full-width
+  sections.)
+
 - Statistic: the label under the number is now plain text (`<p>`) by
   default instead of an `<h4>`. A stat's label captions the number rather
   than starting a page section, and the old default created heading-level

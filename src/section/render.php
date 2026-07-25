@@ -47,9 +47,28 @@ $classes = array( 'awt-section' );
 // attributes) strips logical longhands silently — they survive in the
 // editor (React inline-style bypasses the sanitizer) but not on the
 // published page. The shorthand has been in the kses CSS allowlist forever.
-$styles = array(
-	'padding: var(--cds-spacing-' . $padding_block . ') var(--cds-spacing-' . $padding_inline . ')',
-);
+//
+// Full-width sections escape the theme's root padding (with
+// useRootPaddingAwareAlignments, core pulls .alignfull out via negative
+// margins so backgrounds bleed edge to edge) and core re-applies that
+// padding only to children of its OWN layout containers — .awt-section__inner
+// isn't one, so on viewports narrower than the inner column the content
+// would sit at the author's raw padding from the screen edge (2px when the
+// author picked spacing-01). Floor the inline padding at the root padding;
+// a larger author choice still wins. max(var(), var()) passes
+// safecss_filter_attr.
+$pad_block = 'var(--cds-spacing-' . $padding_block . ')';
+if ( ( isset( $attributes['align'] ) ? (string) $attributes['align'] : '' ) === 'full' ) {
+	$pad_right = 'max(var(--cds-spacing-' . $padding_inline . '), var(--wp--style--root--padding-right, 0px))';
+	$pad_left  = 'max(var(--cds-spacing-' . $padding_inline . '), var(--wp--style--root--padding-left, 0px))';
+	$styles    = array(
+		'padding: ' . $pad_block . ' ' . $pad_right . ' ' . $pad_block . ' ' . $pad_left,
+	);
+} else {
+	$styles = array(
+		'padding: ' . $pad_block . ' var(--cds-spacing-' . $padding_inline . ')',
+	);
+}
 
 if ( $background !== '' ) {
 	$styles[] = 'background-color: var(--cds-' . $background . ')';

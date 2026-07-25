@@ -108,11 +108,19 @@ export default function Edit( { attributes, setAttributes } ) {
 	};
 	const scopeClass = SCOPE_CLASSES[ themeScope ] || '';
 
+	// Full-width sections floor their inline padding at the theme's root
+	// padding, mirroring render.php (full-width blocks escape the root
+	// padding, and nothing re-applies it inside our own inner wrapper).
+	const paddingInlineValue =
+		attributes.align === 'full'
+			? `max(var(--cds-spacing-${ paddingInline }, 1.5rem), var(--wp--style--root--padding-left, 0px))`
+			: `var(--cds-spacing-${ paddingInline }, 1.5rem)`;
+
 	const blockProps = useBlockProps( {
 		className: `awt-section${ scopeClass ? ' ' + scopeClass : '' }`,
 		style: {
 			paddingBlock: `var(--cds-spacing-${ paddingBlock }, 2rem)`,
-			paddingInline: `var(--cds-spacing-${ paddingInline }, 1.5rem)`,
+			paddingInline: paddingInlineValue,
 			background: backgroundColor
 				? `var(--cds-${ backgroundColor })`
 				: undefined,
