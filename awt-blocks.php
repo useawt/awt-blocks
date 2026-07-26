@@ -143,8 +143,16 @@ add_action(
 	'enqueue_block_editor_assets',
 	static function (): void {
 		$manifest_path = __DIR__ . '/build/shared/icon-manifest.json';
-		$url           = file_exists( $manifest_path )
-			? plugins_url( 'build/shared/icon-manifest.json', __FILE__ )
+		// The version parameter busts browser and proxy caches whenever the
+		// manifest is regenerated — some hosts cache static files by exact
+		// URL, which would otherwise keep serving a stale manifest after an
+		// update.
+		$url = file_exists( $manifest_path )
+			? add_query_arg(
+				'ver',
+				(string) filemtime( $manifest_path ),
+				plugins_url( 'build/shared/icon-manifest.json', __FILE__ )
+			)
 			: '';
 		wp_add_inline_script(
 			'wp-blocks',

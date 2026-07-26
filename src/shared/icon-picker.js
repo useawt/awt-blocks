@@ -43,7 +43,7 @@ const manifestPluginUrl = ( () => {
 			window.awtBlocks.iconManifestUrl ) ||
 		'';
 	return url
-		? url.replace( /\/build\/shared\/icon-manifest\.json$/, '' )
+		? url.replace( /\/build\/shared\/icon-manifest\.json(\?.*)?$/, '' )
 		: '';
 } )();
 
