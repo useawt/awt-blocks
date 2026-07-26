@@ -12,9 +12,12 @@
  * via window.awtBlocks.iconManifestUrl by enqueue_block_editor_assets in
  * awt-blocks.php.
  *
- * Icon previews are fetched as <img src=…> from the plugin's
- * node_modules/@carbon/icons/svg/32/<name>.svg path. The browser caches
- * individual files; the visible grid only loads ~30–50 at a time.
+ * Icon previews are fetched as <img src=…> from the SVG set the build
+ * bundles into build/shared/carbon-icons/ (installed copies of the plugin
+ * have no node_modules, so the bundled set is the only one that exists
+ * everywhere). Bundle filenames are the lowercase token; size-independent
+ * icons (manifest sizes ['glyph']) sit in the bundle root. The browser
+ * caches individual files; the visible grid only loads ~30–50 at a time.
  */
 
 import { __ } from '@wordpress/i18n';
@@ -44,11 +47,12 @@ const manifestPluginUrl = ( () => {
 		: '';
 } )();
 
-// token (lowercase) → exact Carbon SVG filename base. Populated when the
-// manifest loads; lets iconPreviewUrl build correct URLs for icons whose
-// filename preserves case / single dashes (AI-enabled-EDT, BPMN-…) that a
-// blind lowercase + dash-double would 404 on (the blank-tile bug).
-let fileByToken = {};
+// token → 'sized' | 'glyph', for every icon in the manifest. Populated when
+// the manifest loads. 'glyph' marks size-independent icons whose SVG sits in
+// the bundle root (caution, circle-fill, …); a token missing from the map is
+// either legacy single-dash AWT content (arrow-right for arrow--right) or a
+// lookup before the manifest arrived.
+let tokenKind = {};
 
 function loadManifest() {
 	if ( manifestPromise ) {
@@ -66,9 +70,12 @@ function loadManifest() {
 			for ( const [ token, meta ] of Object.entries(
 				manifest.iconsByName || {}
 			) ) {
-				map[ token ] = meta.file || token; // `file` present only when it differs from the token
+				map[ token ] =
+					meta.sizes && meta.sizes.includes( 'glyph' )
+						? 'glyph'
+						: 'sized';
 			}
-			fileByToken = map;
+			tokenKind = map;
 			return manifest;
 		} )
 		.catch( () => ( { iconsByName: {} } ) );
@@ -79,15 +86,22 @@ function iconPreviewUrl( token, sizes ) {
 	if ( ! manifestPluginUrl || ! token ) {
 		return '';
 	}
-	const size =
-		sizes && sizes.includes( 32 ) ? 32 : ( sizes && sizes[ 0 ] ) || 32;
 	const key = String( token ).toLowerCase();
-	// Prefer the manifest's exact filename (correct case + dash pattern). Fall
-	// back to the legacy heuristic for tokens not in the manifest (older
-	// single-dash AWT content like `arrow-right` → `arrow--right`) or before
-	// the manifest has loaded.
-	const file = fileByToken[ key ] || key.replace( /(?<!-)-(?!-)/g, '--' );
-	return `${ manifestPluginUrl }/node_modules/@carbon/icons/svg/${ size }/${ file }.svg`;
+	const base = `${ manifestPluginUrl }/build/shared/carbon-icons`;
+	// Tokens the manifest knows are used as-is (bundle filenames are the
+	// token). Unknown tokens get the legacy heuristic: older AWT content
+	// stored single-dash names (arrow-right) for double-dash icons.
+	const file = tokenKind[ key ] ? key : key.replace( /(?<!-)-(?!-)/g, '--' );
+	// Size-independent icons sit in the bundle root, with no size directory.
+	if (
+		tokenKind[ key ] === 'glyph' ||
+		( sizes && sizes.includes( 'glyph' ) )
+	) {
+		return `${ base }/${ file }.svg`;
+	}
+	const numeric = ( sizes || [] ).filter( ( s ) => typeof s === 'number' );
+	const size = numeric.includes( 32 ) ? 32 : numeric[ 0 ] || 32;
+	return `${ base }/${ size }/${ file }.svg`;
 }
 
 // Re-exported so other blocks (awt/icon, awt/button, awt/header-action, etc.)

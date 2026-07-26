@@ -36,19 +36,25 @@ if ( ! fs.existsSync( MANIFEST ) ) {
 	process.exit( 1 );
 }
 
-const names = Object.keys(
-	JSON.parse( fs.readFileSync( MANIFEST, 'utf8' ) ).iconsByName
-);
+const iconsByName = JSON.parse(
+	fs.readFileSync( MANIFEST, 'utf8' )
+).iconsByName;
 
 // Rebuild from scratch so renamed/removed icons don't linger.
 fs.rmSync( OUT_BASE, { recursive: true, force: true } );
 
 let copied = 0;
 const missing = [];
-for ( const name of names ) {
+for ( const [ name, meta ] of Object.entries( iconsByName ) ) {
+	// Read the source by its exact filename (case preserved:
+	// AI-enabled-EDT.svg) — a lowercase path only resolves on
+	// case-insensitive filesystems like macOS. Write the copy under the
+	// lowercase token, so the bundle is addressable by the same string the
+	// blocks store and the picker requests.
+	const srcName = meta.file || name;
 	let found = false;
 	for ( const size of SIZES ) {
-		const src = path.join( SVG_BASE, String( size ), `${ name }.svg` );
+		const src = path.join( SVG_BASE, String( size ), `${ srcName }.svg` );
 		if ( ! fs.existsSync( src ) ) {
 			continue;
 		}
@@ -61,7 +67,7 @@ for ( const name of names ) {
 	// A few icons ship size-independent, directly in the svg root
 	// (caution, circle-fill, …) — the renderer checks there too.
 	if ( ! found ) {
-		const src = path.join( SVG_BASE, `${ name }.svg` );
+		const src = path.join( SVG_BASE, `${ srcName }.svg` );
 		if ( fs.existsSync( src ) ) {
 			fs.mkdirSync( OUT_BASE, { recursive: true } );
 			fs.copyFileSync( src, path.join( OUT_BASE, `${ name }.svg` ) );
@@ -75,7 +81,9 @@ for ( const name of names ) {
 }
 
 console.log(
-	`[copy-carbon-icons] ${ copied } SVGs → build/shared/carbon-icons (${ names.length } manifest icons)`
+	`[copy-carbon-icons] ${ copied } SVGs → build/shared/carbon-icons (${
+		Object.keys( iconsByName ).length
+	} manifest icons)`
 );
 if ( missing.length ) {
 	console.warn(

@@ -58,14 +58,37 @@ for ( const icon of raw.icons ) {
 		continue;
 	}
 
-	// Every Carbon icon ships at least at 32px and the SVGs are vector, so they
-	// render correctly at any size we ask for. Track the declared sizes so the
-	// picker UI can prefer the smallest one for rendering and the PHP loader
-	// can find the right source file.
-	const sizes =
-		Array.isArray( icon.sizes ) && icon.sizes.length > 0
-			? icon.sizes
-			: [ 32 ];
+	// Record the sizes that actually exist on disk rather than trusting the
+	// metadata's declared sizes — Carbon marks some icons "glyph" that also
+	// ship at numeric sizes (chevron--down) and vice versa. `['glyph']` then
+	// reliably means "size-independent file in the svg root" (caution,
+	// circle-fill, …), which the picker and copy script both key on. Source
+	// lookups use the exact filename (`icon.name`), not the lowercase token:
+	// the svg filenames preserve case (AI-enabled-EDT.svg) and a lowercase
+	// path only resolves on case-insensitive filesystems like macOS.
+	const svgBase = path.join(
+		ROOT,
+		'node_modules',
+		'@carbon',
+		'icons',
+		'svg'
+	);
+	let sizes = [ 16, 20, 24, 32 ].filter( ( s ) =>
+		fs.existsSync( path.join( svgBase, String( s ), `${ icon.name }.svg` ) )
+	);
+	if (
+		sizes.length === 0 &&
+		fs.existsSync( path.join( svgBase, `${ icon.name }.svg` ) )
+	) {
+		sizes = [ 'glyph' ];
+	}
+	if ( sizes.length === 0 ) {
+		console.warn(
+			`[icon-manifest] no svg found for ${ icon.name } — skipped`
+		);
+		dropped++;
+		continue;
+	}
 
 	const token = String( icon.name ).toLowerCase();
 	const entry = {

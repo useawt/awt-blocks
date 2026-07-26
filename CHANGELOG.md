@@ -82,6 +82,15 @@
 - Toggletip: a label with more than one word now stays on one line next to
   the info button instead of wrapping into a narrow column.
 
+- The icon gallery now shows previews on every installed copy of the
+  plugin. The picker's search grid loaded its preview images from a folder
+  that only exists in development installs, so on a normal install every
+  tile came up blank (the icons themselves still worked on the published
+  page). Previews now come from the icon set bundled with the plugin. The
+  nine size-independent icons (`caution`, `circle-fill`, and friends) also
+  preview correctly for the first time, and plugin builds now produce the
+  same icon set on every operating system.
+
 - Icons now render on every installed copy of the plugin. The Icon block
   (and the icons other blocks draw) read Carbon's SVG files from disk;
   installed copies were missing all but ten built-in fallbacks, so icons
