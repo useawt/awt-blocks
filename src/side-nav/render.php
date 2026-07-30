@@ -31,7 +31,13 @@ $root_class = $ds
 			'expanded' => $default_expanded,
 		)
 	)
-	: ( 'cds--side-nav cds--side-nav--' . $nav_mode . ( $default_expanded ? ' cds--side-nav--expanded' : '' ) );
+	// Theme-absent fallback; mirrors Carbon::classes_for( 'side-nav' ), including
+	// the `--ux` class that docks a persistent nav below the 3rem header.
+	: (
+		'cds--side-nav cds--side-nav--' . $nav_mode
+		. ( $nav_mode === 'persistent' ? ' cds--side-nav--ux' : '' )
+		. ( $default_expanded ? ' cds--side-nav--expanded' : '' )
+	);
 
 $nav_class   = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'navigation' ) ) : 'cds--side-nav__navigation';
 $items_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'items' ) ) : 'cds--side-nav__items';

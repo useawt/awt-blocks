@@ -14,6 +14,15 @@
 
 ### [Breaking]
 
+- Side nav: a side nav set to "Persistent" now sits below the header instead
+  of on top of it, and steps aside on phones and small tablets instead of
+  covering the page. Persistent side navs used to start at the very top of the
+  screen, hiding the logo and site title behind them, and on a narrow screen
+  they opened as a full-height panel over the content with no way to close it.
+  The rendered markup gains one class (a deliberate snapshot update). Rail and
+  overlay modes are unchanged, and the block's description now mentions the
+  narrow-screen behavior.
+
 - Notification: the close button now works on the published page. Clicking
   it (or activating it with the keyboard) dismisses the notification — it
   disappears from the page and from the accessibility tree, matching the
