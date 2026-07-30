@@ -10,6 +10,9 @@
 
 declare( strict_types = 1 );
 
+use function AWT\Blocks\Render\html_attrs;
+use function AWT\Blocks\Render\unique_id;
+
 $section_title    = isset( $attributes['title'] ) ? (string) $attributes['title'] : '';
 $default_expanded = ! isset( $attributes['defaultExpanded'] ) || ! empty( $attributes['defaultExpanded'] );
 
@@ -32,14 +35,33 @@ $wrapper_attrs = get_block_wrapper_attributes(
 	array( 'class' => $section_class )
 );
 
+// The section title is a static div, not Carbon's `__submenu` toggle button, so
+// nothing associates it with the list it heads. Name the list after the title
+// (aria-labelledby) so the grouping a sighted user sees is also conveyed to
+// assistive technology (WCAG 1.3.1). Untitled sections get no id and no
+// reference — there is nothing to name the list with.
+$heading_id = $section_title !== '' ? unique_id( 'awt-side-nav-section' ) : '';
+
 $heading = $section_title !== ''
-	? sprintf( '<div class="%s">%s</div>', esc_attr( $heading_class ), wp_kses_post( $section_title ) )
+	? sprintf(
+		'<div class="%s" id="%s">%s</div>',
+		esc_attr( $heading_class ),
+		esc_attr( $heading_id ),
+		wp_kses_post( $section_title )
+	)
 	: '';
 
+$menu_attrs = html_attrs(
+	array(
+		'class'           => $menu_class,
+		'aria-labelledby' => $heading_id,
+	)
+);
+
 printf(
-	'<li %1$s>%2$s<ul class="%3$s">%4$s</ul></li>',
+	'<li %1$s>%2$s<ul%3$s>%4$s</ul></li>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	$heading, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
-	esc_attr( $menu_class ),
+	$menu_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- html_attrs() esc_attr()s every name and value.
 	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
 );

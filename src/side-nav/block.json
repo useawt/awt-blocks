@@ -6,7 +6,7 @@
 	"awt_component": "side-nav",
 	"title": "Side nav",
 	"category": "awt-ui-shell",
-	"description": "A sidebar navigation menu, docked to the left edge of the site on wide screens and hidden on narrower ones. Use it in a template or the Side navigation template part; add side-nav sections, links, and dividers inside it.",
+	"description": "A sidebar navigation menu, docked beside your content on wide screens. On narrow screens its links move into the header menu, behind the header’s menu button. Use it in a template or the Side navigation template part; add side-nav sections, links, and dividers inside it.",
 	"textdomain": "awt",
 	"keywords": [
 		"side nav",
@@ -43,5 +43,6 @@
 		}
 	},
 	"editorScript": "file:./index.js",
+	"viewScriptModule": "file:./view.js",
 	"render": "file:./render.php"
 }

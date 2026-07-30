@@ -4,6 +4,21 @@
  *
  * Mode 'none' self-removes per spec. Otherwise emits Carbon's side-nav landmark.
  *
+ * There is one rendering mode. The inspector used to offer `rail` and `overlay`
+ * alongside `persistent`, and neither had a front end: `--rail` is a real Carbon
+ * class but only means anything with Carbon's React hover/focus expansion, which
+ * ships no CSS here, so it clipped every label to a focusable-but-invisible 3rem
+ * strip; `--overlay` is not a Carbon class at all. Both are normalized to the one
+ * mode that renders. `defaultExpanded` and `togglable` are likewise no longer
+ * read — see the note on the fold-in below and the block's CHANGELOG entry. All
+ * three attributes stay registered so content saved by an older version still
+ * round-trips through the editor without a validation error.
+ *
+ * Narrow screens: the nav itself is hidden below Carbon's lg breakpoint (theme.css
+ * explains why 0-width is worse than `display: none`), and view.js moves its
+ * `<nav>` into the header's slide-out menu so the links stay reachable behind the
+ * header's menu button — Carbon's guidance for a persistent side nav on a phone.
+ *
  * @var array  $attributes
  * @var string $content
  *
@@ -12,41 +27,34 @@
 
 declare( strict_types = 1 );
 
-$nav_mode         = isset( $attributes['mode'] ) ? (string) $attributes['mode'] : 'persistent';
-$aria_label       = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Side navigation', 'awt' );
-$default_expanded = ! isset( $attributes['defaultExpanded'] ) || ! empty( $attributes['defaultExpanded'] );
-$dom_id           = isset( $attributes['id'] ) ? (string) $attributes['id'] : 'side-nav';
+$nav_mode   = isset( $attributes['mode'] ) ? (string) $attributes['mode'] : 'persistent';
+$aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Side navigation', 'awt' );
+$dom_id     = isset( $attributes['id'] ) ? (string) $attributes['id'] : 'side-nav';
 
 if ( $nav_mode === 'none' ) {
 	return;
 }
 
+$nav_mode = 'persistent';
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $root_class = $ds
-	? $ds->classes_for(
-		'side-nav',
-		array(
-			'mode'     => $nav_mode,
-			'expanded' => $default_expanded,
-		)
-	)
+	? $ds->classes_for( 'side-nav', array( 'mode' => $nav_mode ) )
 	// Theme-absent fallback; mirrors Carbon::classes_for( 'side-nav' ), including
 	// the `--ux` class that docks a persistent nav below the 3rem header.
-	: (
-		'cds--side-nav cds--side-nav--' . $nav_mode
-		. ( $nav_mode === 'persistent' ? ' cds--side-nav--ux' : '' )
-		. ( $default_expanded ? ' cds--side-nav--expanded' : '' )
-	);
+	: 'cds--side-nav cds--side-nav--' . $nav_mode . ' cds--side-nav--ux';
 
 $nav_class   = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'navigation' ) ) : 'cds--side-nav__navigation';
 $items_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'items' ) ) : 'cds--side-nav__items';
 
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
-		'class'      => $root_class,
-		'aria-label' => $aria_label,
-		'id'         => $dom_id,
+		'class'               => $root_class,
+		'aria-label'          => $aria_label,
+		'id'                  => $dom_id,
+		'data-wp-interactive' => 'awt/side-nav',
+		'data-wp-init'        => 'callbacks.foldIntoHeaderMenu',
 	)
 );
 

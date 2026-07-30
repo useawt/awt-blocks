@@ -2,9 +2,16 @@
 /**
  * AWT Side nav link — server-rendered output.
  *
- * Inherits aria-current behavior from the shared current-URL matcher. When the
- * parent side-nav is in rail mode and no iconName is set, falls back to the
- * link's first character in a circle (spec §1 Rail-mode icon fallback).
+ * Inherits aria-current behavior from the shared current-URL matcher.
+ *
+ * A link with no icon now renders no icon. It used to emit the link's first
+ * character as a stand-in, for rail mode to show while the label was clipped.
+ * Rail mode has been removed (it never had a front end — see side-nav's
+ * render.php), so the only thing left for that character to do was leak into
+ * places where the label is visible anyway: the fallback was suppressed by
+ * rules keyed to `.cds--side-nav--persistent` / `--expanded`, which stop
+ * matching the moment the nav folds into the header menu on a narrow screen.
+ * A single letter was never a usable icon either.
  *
  * @var array $attributes
  *
@@ -26,17 +33,16 @@ $aria_current = ( $is_current || matches_current( $href, $match_mode ) ) ? 'page
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
-$item_class      = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'item' ) ) : 'cds--side-nav__item';
-$link_class      = $ds ? $ds->classes_for(
+$item_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'item' ) ) : 'cds--side-nav__item';
+$link_class = $ds ? $ds->classes_for(
 	'side-nav',
 	array(
 		'element'   => 'link',
 		'isCurrent' => (bool) $aria_current,
 	)
 ) : ( 'cds--side-nav__link' . ( $aria_current ? ' cds--side-nav__link--current' : '' ) );
-$icon_class      = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'icon' ) ) : 'cds--side-nav__icon';
-$icon_init_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'icon-initial-fallback' ) ) : 'cds--side-nav__icon cds--side-nav__icon--initial-fallback';
-$text_class      = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'link-text' ) ) : 'cds--side-nav__link-text';
+$icon_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'icon' ) ) : 'cds--side-nav__icon';
+$text_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'link-text' ) ) : 'cds--side-nav__link-text';
 
 $icon_html = '';
 if ( $icon_name !== '' ) {
@@ -46,17 +52,6 @@ if ( $icon_name !== '' ) {
 		$icon_html = sprintf( '<span class="%s" aria-hidden="true">[%s]</span>', esc_attr( $icon_class ), esc_html( $icon_name ) );
 	} else {
 		$icon_html = '<span class="' . esc_attr( $icon_class ) . '">' . $icon_html . '</span>';
-	}
-} else {
-	// Rail-mode fallback: first character of text. Visible only when the
-	// parent side-nav's rail-collapsed CSS hides the label.
-	$initial = mb_strtoupper( mb_substr( wp_strip_all_tags( $text ), 0, 1 ) );
-	if ( $initial !== '' ) {
-		$icon_html = sprintf(
-			'<span class="%s" aria-hidden="true">%s</span>',
-			esc_attr( $icon_init_class ),
-			esc_html( $initial )
-		);
 	}
 }
 

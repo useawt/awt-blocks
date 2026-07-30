@@ -6,6 +6,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
+import { useInstanceId } from '@wordpress/compose';
 import IconPicker from '../shared/icon-picker';
 
 const ALLOWED = [ 'awt/side-nav-link', 'awt/side-nav-divider' ];
@@ -13,8 +14,15 @@ const ALLOWED = [ 'awt/side-nav-link', 'awt/side-nav-divider' ];
 export default function Edit( { attributes, setAttributes } ) {
 	const { title, defaultExpanded, iconName } = attributes;
 	const blockProps = useBlockProps( { className: 'cds--side-nav__section' } );
+	// Mirrors render.php: the section title names the list it heads, so the
+	// grouping a sighted user sees is conveyed programmatically too, not by
+	// looks alone (WCAG 1.3.1). Untitled sections get no id and no reference.
+	const headingId = useInstanceId( Edit, 'awt-side-nav-section' );
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: 'cds--side-nav__menu' },
+		{
+			className: 'cds--side-nav__menu',
+			'aria-labelledby': title ? headingId : undefined,
+		},
 		{ allowedBlocks: ALLOWED, orientation: 'vertical' }
 	);
 
@@ -44,6 +52,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<li { ...blockProps }>
 				<RichText
 					tagName="div"
+					id={ headingId }
 					className="cds--side-nav__submenu"
 					value={ title }
 					onChange={ ( value ) => setAttributes( { title: value } ) }

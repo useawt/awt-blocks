@@ -14,14 +14,47 @@
 
 ### [Breaking]
 
-- Side nav: a side nav set to "Persistent" now sits below the header instead
-  of on top of it, and steps aside on phones and small tablets instead of
-  covering the page. Persistent side navs used to start at the very top of the
-  screen, hiding the logo and site title behind them, and on a narrow screen
-  they opened as a full-height panel over the content with no way to close it.
-  The rendered markup gains one class (a deliberate snapshot update). Rail and
-  overlay modes are unchanged, and the block's description now mentions the
-  narrow-screen behavior.
+- Side nav: a side nav now sits below the header instead of on top of it. Side
+  navs used to start at the very top of the screen, hiding the logo and site
+  title behind them. The rendered markup gains one class (a deliberate snapshot
+  update), and the block's description now describes the narrow-screen
+  behavior.
+
+- Side nav: the side nav works on a narrow screen. It used to open as a
+  full-height panel over the content with no way to close it. Below 1056px the
+  panel now steps aside — there is no room for it — and its links move into the
+  header menu, behind the header's menu button, so nothing becomes unreachable.
+  On a documentation site those links are the documentation. Opening the header
+  menu shows them below the site's main menu items, separated by a rule, and
+  they work with the keyboard exactly like the rest of that menu: Tab moves
+  through them, Escape closes and returns you to the menu button. Above 1056px
+  nothing changes. This needs the header to have a menu (the "Header
+  navigation" block); all four header presets include one.
+
+- Side nav: the "Mode" dropdown is now a "Show the side nav" switch, and
+  "Default expanded" and "User can toggle" are gone from the block's settings.
+  Of the four choices Mode offered, only two ever did anything: "Rail" and
+  "Overlay" were never built, and picking either gave you a broken nav — Rail
+  cut every link label off at 48px while leaving the links reachable by
+  keyboard, and Overlay produced a nav that covered the site title. Both now
+  render as the ordinary docked side nav. "Default expanded" had no effect
+  either way, and "User can toggle" promised a button that did not exist; the
+  narrow-screen behavior above replaces it, and it is always on rather than
+  something you have to find and switch on. Side navs already on your site keep
+  working and need no changes.
+
+- Side nav link: a link with no icon no longer shows the first letter of its
+  label in the icon slot. That letter existed only for "Rail" mode, which has
+  been removed, and a single letter was never a usable icon. Links with an icon
+  chosen are unchanged. (Deliberate snapshot update.)
+
+- Side nav section: a section heading now names the list of links under it,
+  so a screen reader announces "Get started, list" instead of an unnamed list
+  of links. The heading was a visual label only — the grouping you can see was
+  never passed on to people who cannot (WCAG 1.3.1, Info and Relationships).
+  The rendered markup gains an `id` on the heading and an `aria-labelledby` on
+  the list pointing at it (a deliberate snapshot update). Sections with no
+  heading and the look of the nav are unchanged.
 
 - Notification: the close button now works on the published page. Clicking
   it (or activating it with the keyboard) dismisses the notification — it

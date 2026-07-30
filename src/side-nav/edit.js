@@ -6,7 +6,6 @@ import {
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
-	SelectControl,
 	ToggleControl,
 	TextControl,
 	Notice,
@@ -32,7 +31,7 @@ const TEMPLATE = [
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { ariaLabel, defaultExpanded, togglable, mode, id } = attributes;
+	const { ariaLabel, mode, id } = attributes;
 	const isNone = mode === 'none';
 	const blockProps = useBlockProps(
 		isNone
@@ -52,100 +51,72 @@ export default function Edit( { attributes, setAttributes } ) {
 		{ allowedBlocks: ALLOWED, template: TEMPLATE, orientation: 'vertical' }
 	);
 
+	// One inspector for both states, so an author who switched the nav off can
+	// switch it back on from the same place.
+	const inspector = (
+		<InspectorControls>
+			<PanelBody title={ __( 'Side nav', 'awt' ) } initialOpen={ true }>
+				<ToggleControl
+					label={ __( 'Show the side nav', 'awt' ) }
+					help={ __(
+						'On wide screens the side nav sits beside your content. On narrow screens its links move into the header menu, behind the header’s menu button.',
+						'awt'
+					) }
+					checked={ ! isNone }
+					onChange={ ( on ) =>
+						setAttributes( { mode: on ? 'persistent' : 'none' } )
+					}
+				/>
+				{ ! isNone && (
+					<>
+						<TextControl
+							label={ __( 'HTML id', 'awt' ) }
+							help={ __(
+								'The id given to the side nav in the page’s HTML. Change it only if something else on the page already uses this one.',
+								'awt'
+							) }
+							value={ id }
+							onChange={ ( value ) =>
+								setAttributes( { id: value } )
+							}
+						/>
+						<TextControl
+							label={ __(
+								'Accessible name (aria-label)',
+								'awt'
+							) }
+							help={ __(
+								'What a screen reader calls this navigation. Give each navigation on the page a different name.',
+								'awt'
+							) }
+							value={ ariaLabel }
+							onChange={ ( value ) =>
+								setAttributes( { ariaLabel: value } )
+							}
+						/>
+					</>
+				) }
+			</PanelBody>
+		</InspectorControls>
+	);
+
 	if ( isNone ) {
 		return (
 			<div { ...blockProps }>
 				<Notice status="info" isDismissible={ false }>
 					{ __(
-						'Side nav mode is "none" — this block does not render on the front-end.',
+						'The side nav is switched off, so it does not appear on the published page.',
 						'awt'
 					) }
 				</Notice>
-				<InspectorControls>
-					<PanelBody
-						title={ __( 'Side nav', 'awt' ) }
-						initialOpen={ true }
-					>
-						<SelectControl
-							label={ __( 'Mode', 'awt' ) }
-							value={ mode }
-							options={ [
-								{
-									value: 'persistent',
-									label: __( 'Persistent', 'awt' ),
-								},
-								{ value: 'rail', label: __( 'Rail', 'awt' ) },
-								{
-									value: 'overlay',
-									label: __( 'Overlay', 'awt' ),
-								},
-								{ value: 'none', label: __( 'None', 'awt' ) },
-							] }
-							onChange={ ( value ) =>
-								setAttributes( { mode: value } )
-							}
-						/>
-					</PanelBody>
-				</InspectorControls>
+				{ inspector }
 			</div>
 		);
 	}
 
 	return (
 		<>
-			<InspectorControls>
-				<PanelBody
-					title={ __( 'Side nav', 'awt' ) }
-					initialOpen={ true }
-				>
-					<SelectControl
-						label={ __( 'Mode', 'awt' ) }
-						value={ mode }
-						options={ [
-							{
-								value: 'persistent',
-								label: __( 'Persistent', 'awt' ),
-							},
-							{ value: 'rail', label: __( 'Rail', 'awt' ) },
-							{ value: 'overlay', label: __( 'Overlay', 'awt' ) },
-							{ value: 'none', label: __( 'None', 'awt' ) },
-						] }
-						onChange={ ( value ) =>
-							setAttributes( { mode: value } )
-						}
-					/>
-					<ToggleControl
-						label={ __( 'Default expanded', 'awt' ) }
-						checked={ defaultExpanded }
-						onChange={ ( value ) =>
-							setAttributes( { defaultExpanded: value } )
-						}
-					/>
-					<ToggleControl
-						label={ __( 'User can toggle', 'awt' ) }
-						checked={ togglable }
-						onChange={ ( value ) =>
-							setAttributes( { togglable: value } )
-						}
-					/>
-					<TextControl
-						label={ __( 'DOM id', 'awt' ) }
-						help={ __(
-							'Match a header-action panelId to this for a toggle button to control the side nav.',
-							'awt'
-						) }
-						value={ id }
-						onChange={ ( value ) => setAttributes( { id: value } ) }
-					/>
-					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
-						value={ ariaLabel }
-						onChange={ ( value ) =>
-							setAttributes( { ariaLabel: value } )
-						}
-					/>
-				</PanelBody>
-			</InspectorControls>
+			{ inspector }
 			<aside { ...blockProps }>
 				<nav
 					className="cds--side-nav__navigation"
