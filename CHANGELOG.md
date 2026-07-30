@@ -48,6 +48,12 @@
   been removed, and a single letter was never a usable icon. Links with an icon
   chosen are unchanged. (Deliberate snapshot update.)
 
+- Side nav section: the "Default expanded" toggle is gone. It set a class no
+  stylesheet defines — neither Carbon's nor the theme's — so both positions
+  rendered the same thing. A section is a static group; there was nothing to
+  expand. Sections already on your site keep working. (The rendered markup
+  drops that class: deliberate snapshot update.)
+
 - Side nav section: a section heading now names the list of links under it,
   so a screen reader announces "Get started, list" instead of an unnamed list
   of links. The heading was a visual label only — the grouping you can see was
@@ -124,6 +130,11 @@
   they are still empty, so you can fill them in — before, they were hidden
   until the brand mode already included a logo, which meant there was no
   way to get there.
+
+- Side nav section: the editor now shows each section's links. In the Site
+  Editor every section appeared as a title with nothing under it, whichever
+  section it was — the links were there, drawn at no height. The section
+  heading also now looks the same in the editor as on the published page.
 
 - Footer section: the heading now looks the same in the Site Editor as in
   the published footer. The editor preview used its own smaller, tighter

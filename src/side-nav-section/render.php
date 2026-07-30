@@ -13,20 +13,19 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 
-$section_title    = isset( $attributes['title'] ) ? (string) $attributes['title'] : '';
-$default_expanded = ! isset( $attributes['defaultExpanded'] ) || ! empty( $attributes['defaultExpanded'] );
+$section_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : '';
 
+// `defaultExpanded` is no longer read. It produced
+// `cds--side-nav__section--expanded`, a class no stylesheet defines — not
+// Carbon's and not ours — so both positions rendered the same thing, and the
+// toggle offering it has been removed from the inspector. A section is a static
+// group; there is nothing to expand. The attribute stays registered in
+// block.json so content saved by an older version still round-trips.
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $section_class = $ds
-	? $ds->classes_for(
-		'side-nav',
-		array(
-			'element'         => 'section',
-			'defaultExpanded' => $default_expanded,
-		)
-	)
-	: ( 'cds--side-nav__section' . ( $default_expanded ? ' cds--side-nav__section--expanded' : '' ) );
+	? $ds->classes_for( 'side-nav', array( 'element' => 'section' ) )
+	: 'cds--side-nav__section';
 
 $heading_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'heading' ) ) : 'cds--side-nav__heading';
 $menu_class    = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'menu' ) ) : 'cds--side-nav__menu';
