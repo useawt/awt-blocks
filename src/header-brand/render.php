@@ -31,7 +31,7 @@ if ( function_exists( '\\AWT\\Theme\\Settings\\get' ) ) {
 
 $kind          = isset( $attributes['kind'] ) && $attributes['kind'] !== ''
 	? (string) $attributes['kind']
-	: ( $theme_kind !== '' ? $theme_kind : 'text-only' );
+	: ( $theme_kind !== '' ? $theme_kind : 'auto' );
 $prefix        = isset( $attributes['prefix'] ) && $attributes['prefix'] !== ''
 	? (string) $attributes['prefix']
 	: $theme_prefix;
@@ -50,6 +50,22 @@ $logo_alt      = isset( $attributes['logoAlt'] ) && $attributes['logoAlt'] !== '
 $href          = isset( $attributes['href'] ) && $attributes['href'] !== ''
 	? (string) $attributes['href']
 	: home_url( '/' );
+
+// 'auto' — the default brand mode — means "show what has actually been set":
+// draw the logo once a logo URL exists, and the prefix once a prefix exists.
+// Anything else pins the brand to a fixed shape. Without this, a logo uploaded
+// during the welcome wizard was saved but never drawn, because the mode that
+// draws it is a separate setting on a different tab. `edit.js` mirrors this so
+// the editor preview matches. Resolved from the *effective* logo and prefix
+// (per-block attribute first, then the AWT Settings default), so a logo set on
+// one block shows on that block even when the site has none.
+if ( $kind === 'auto' ) {
+	if ( $logo_url !== '' ) {
+		$kind = $prefix !== '' ? 'logo-with-text-and-prefix' : 'logo-with-text';
+	} else {
+		$kind = $prefix !== '' ? 'text-with-prefix' : 'text-only';
+	}
+}
 
 $show_logo   = in_array( $kind, array( 'logo-only', 'logo-with-text', 'logo-with-text-and-prefix' ), true ) && $logo_url !== '';
 $show_text   = $kind !== 'logo-only';

@@ -14,8 +14,8 @@ import {
 
 // Empty-string value is the "inherit from AWT Settings → Identity" choice —
 // render.php's precedence chain is: per-block kind → theme default brandMode →
-// hardcoded 'text-only'. An explicit kind pins THIS instance; leaving it empty
-// lets the site-wide default flow through.
+// 'auto'. An explicit kind pins THIS instance; leaving it empty lets the
+// site-wide default flow through.
 const KIND_OPTIONS = [
 	{ value: '', label: __( 'Use site default (from AWT Settings)', 'awt' ) },
 	{ value: 'text-only', label: __( 'Text only', 'awt' ) },
@@ -50,12 +50,28 @@ export default function Edit( { attributes, setAttributes } ) {
 	// reflects the configured brand mode / logo / prefix / title when this
 	// instance leaves them blank ("use site default").
 	const awt = ( typeof window !== 'undefined' && window.awtSettings ) || {};
-	const effKind = kind || awt.brandMode || 'text-only';
+	const rawKind = kind || awt.brandMode || 'auto';
 	const effPrefix = prefix || awt.prefix || '';
 	const effTitle = siteTitle || awt.siteTitle || '';
 	const effAlt = logoAlt || awt.logoAlt || '';
 	const effLogoLight = logoUrl || awt.logoUrl || '';
 	const effLogoDark = logoUrlDark || awt.logoUrlDark || '';
+
+	// Mirror render.php's 'auto' resolution: the default brand mode shows
+	// whatever has been set — the logo once there is one, the prefix once there
+	// is one. Resolved from the effective values so a logo set on this block
+	// alone still shows.
+	const isAuto = rawKind === 'auto';
+	let effKind = rawKind;
+	if ( isAuto ) {
+		if ( effLogoLight ) {
+			effKind = effPrefix
+				? 'logo-with-text-and-prefix'
+				: 'logo-with-text';
+		} else {
+			effKind = effPrefix ? 'text-with-prefix' : 'text-only';
+		}
+	}
 	// Mirror render.php: when a distinct dark logo is configured, emit BOTH
 	// imgs with the --light / --dark classes and let theme.css swap them based
 	// on the header's scope (cds--g90/g100) or the page color scheme — exactly
@@ -74,6 +90,13 @@ export default function Edit( { attributes, setAttributes } ) {
 		'text-with-prefix',
 		'logo-with-text-and-prefix',
 	].includes( effKind );
+
+	// In automatic mode the logo + prefix fields are what *decide* whether those
+	// parts render, so their controls have to stay reachable while still empty —
+	// otherwise there is no way to fill them in. The preview keeps using
+	// showLogo / showPrefix, which describe what actually renders.
+	const offerLogoFields = showLogo || isAuto;
+	const offerPrefixField = showPrefix || isAuto;
 
 	// Mirror render.php: tag the brand when it actually renders a logo image, so
 	// theme.css hides the title/prefix on mobile only for logo brands (text-only
@@ -94,6 +117,14 @@ export default function Edit( { attributes, setAttributes } ) {
 				>
 					<SelectControl
 						label={ __( 'Brand mode', 'awt' ) }
+						help={
+							isAuto
+								? __(
+										'Your site default is automatic: it shows the logo and prefix you have set, and just the site title when you have set neither.',
+										'awt'
+								  )
+								: undefined
+						}
 						value={ kind }
 						options={ KIND_OPTIONS }
 						onChange={ ( value ) =>
@@ -113,7 +144,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					) }
-					{ showPrefix && (
+					{ offerPrefixField && (
 						<TextControl
 							label={ __( 'Prefix (e.g., "IBM")', 'awt' ) }
 							value={ prefix }
@@ -122,7 +153,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					) }
-					{ showLogo && (
+					{ offerLogoFields && (
 						<>
 							<MediaUploadCheck>
 								<MediaUpload

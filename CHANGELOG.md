@@ -75,6 +75,14 @@
 
 ### [Improvement]
 
+- Header brand: a logo you have set now shows without a second setting to
+  find. When brand mode is left on the site default, the block shows the
+  logo and prefix you have set, and just your site title when you have set
+  neither. Its Prefix and Upload logo controls also stay available while
+  they are still empty, so you can fill them in — before, they were hidden
+  until the brand mode already included a logo, which meant there was no
+  way to get there.
+
 - Footer section: the heading now looks the same in the Site Editor as in
   the published footer. The editor preview used its own smaller, tighter
   heading style instead of the theme's real footer heading style.
