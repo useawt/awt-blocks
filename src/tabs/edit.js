@@ -25,13 +25,19 @@ const TEMPLATE = [
 export default function Edit( { attributes, setAttributes } ) {
 	const { orientation, ariaLabel } = attributes;
 	// Pass blockProps to useInnerBlocksProps so our `cds--tabs` classes survive
-	// the merge with Gutenberg's own block-list wrapper class. Render.php uses
-	// a Carbon-spec `<ul class="cds--tab--list" role="tablist">` containing
-	// tab buttons + sibling panels; replicating that exact DOM here requires
-	// splitting tab vs tab-panel children into two outputs which Gutenberg's
-	// InnerBlocks can't do natively. Editor preview therefore renders the
-	// children flat under the tabs wrapper — different from render.php but
-	// at least the wrapper class makes Carbon's styling apply to the buttons.
+	// the merge with Gutenberg's own block-list wrapper class.
+	//
+	// The published page nests a tab list inside this wrapper and keeps the panels
+	// as its siblings. Reproducing that here would mean splitting tab vs tab-panel
+	// children into two outputs, which InnerBlocks can't do — so the children stay
+	// flat under this one wrapper and theme.css places them by block class.
+	//
+	// That also rules out putting the tab list's own class on this element: every
+	// rule keyed on it expects the list to be a separate element inside
+	// `.cds--tabs`, so here it would match nothing, and on a real inner element it
+	// would treat the panels as tabs — laying them out beside the buttons in one
+	// scrolling row, or inside the vertical layout's narrow first column. The
+	// class-parity check records that as a deliberate difference.
 	const blockProps = useBlockProps( {
 		className: `cds--tabs cds--tabs--${ orientation }`,
 	} );

@@ -37,8 +37,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	const [ active, setActive ] = useState( 0 );
 	const listRef = useRef( null );
 
+	// `cds--content-switcher` is the segmented control's own class: it carries the
+	// group's visible edge, and every hover / active / focus rule for the segment
+	// buttons is written as a descendant of it. The published markup puts it on an
+	// inner element holding just the segments; here it has to sit on the wrapper
+	// that also holds the panels, so theme.css undoes the two wrapper declarations
+	// that assumption breaks (the fixed one-row height and the outline) and draws
+	// the edge over the segment row instead.
 	const blockProps = useBlockProps( {
-		className: `awt-content-switcher awt-content-switcher--editor cds--content-switcher--${ size } cds--layout--size-${ size }`,
+		className: `awt-content-switcher awt-content-switcher--editor cds--content-switcher cds--content-switcher--${ size } cds--layout--size-${ size }`,
 	} );
 	const innerProps = useInnerBlocksProps( blockProps, {
 		allowedBlocks: ALLOWED,

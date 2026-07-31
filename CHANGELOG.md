@@ -137,7 +137,15 @@
   the published page was right every time, so nothing caught them. The check
   compares the two for every class the theme's stylesheet styles, and fails the
   build when they disagree. It found two more cases, in the Content switcher and
-  Tabs blocks, which it reports every run until they are fixed.
+  Tabs blocks; both are settled now — the Content switcher one was real and is
+  fixed, and the Tabs one turned out to be a difference the editor has to keep,
+  so it is written down as expected.
+
+- Content switcher: the block now looks in the editor the way it looks on the
+  published page. The row of buttons was a little taller than the published one
+  at every size, and a lot taller at the small size, where the button labels sat
+  in a 40px row instead of a 32px one. Hovering or pressing a button in the
+  editor also now shades it the same way the published page does.
 
 - Side nav: opening a template in the Site Editor no longer draws the side nav
   over the page content. It now sits at the left with the content and footer

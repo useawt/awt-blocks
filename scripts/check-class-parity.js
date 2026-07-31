@@ -117,6 +117,8 @@ const ALLOWED = {
 			'The overflow-scroll tab list is render-only; the editor previews the tabs as a simple row.',
 		'cds--tabs__nav-item--selected':
 			'Runtime state: view.js marks the active tab on the published page. The editor previews the tab strip without a selection.',
+		'cds--tab--list':
+			"Render-only, and unlike most entries here it CANNOT be made otherwise. Every rule keyed on this class — Carbon's `.cds--tabs .cds--tab--list` flex row and `overflow-x`, theme.css's `.cds--tabs--vertical > .cds--tab--list` sidebar grid, its `.awt-tabs__strip > .cds--tab--list` scroll behaviour — needs the tab list to be a SEPARATE element inside `.cds--tabs`. Putting the class on the editor's own wrapper (which is both at once) therefore matches nothing at all, and putting it on a real inner element makes the wrapper's children the tab list, panels included: the horizontal preview lays the panels out beside the tabs in one scrolling row, and the vertical one squeezes every child into the 12rem sidebar column. Measured both, 2026-07-31. The editor previews tabs and panels as flat siblings and places them with `.editor-styles-wrapper .cds--tabs--vertical > .wp-block-awt-tab{-panel}` instead.",
 	},
 	'code-snippet': {
 		'cds--snippet-button--copied':
@@ -125,25 +127,26 @@ const ALLOWED = {
 };
 
 /**
- * Real divergences this check found on the day it was written, in blocks other
- * than the one that prompted it. Reported loudly on every run but NOT fatal, so
- * the check can gate new drift today instead of waiting on two unrelated editor
- * previews to be reworked and re-verified.
+ * Divergences that look real but are not fixed yet. Reported loudly on every run
+ * and NOT fatal, so the check can gate new drift today instead of waiting on an
+ * editor preview to be reworked and re-verified.
  *
  * These are NOT in ALLOWED, deliberately: ALLOWED means "meant to differ", and
  * burying a real bug there is how the three side-nav ones survived four green
  * runs. Fix them and delete the entry; do not move it.
+ *
+ * Currently empty. The two it shipped with, both closed 2026-07-31:
+ *
+ * - `content-switcher` / `cds--content-switcher` was real and is fixed — the
+ *   editor emits the base class now. Its stated symptom was wrong, though: the
+ *   canvas was never missing the control's border. theme.css drew it a second
+ *   way, per-segment, and the cost of the divergence was subtler — the segment
+ *   row ran 2px tall at every size and 8px tall on `sm`, and no hover / active /
+ *   focus rule written under `.cds--content-switcher` reached the canvas.
+ * - `tabs` / `cds--tab--list` was not real. Emitting it cannot help; see the
+ *   ALLOWED entry for what was measured.
  */
-const KNOWN_DRIFT = {
-	'content-switcher': {
-		'cds--content-switcher':
-			"The editor emits `cds--content-switcher--<size>` but not the base class, so theme.css's `.cds--content-switcher { outline: … }` — the rule that draws the control's visible border, since Carbon's per-button borders compute to none — does not apply in the canvas.",
-	},
-	tabs: {
-		'cds--tab--list':
-			'The editor\'s own comment says it renders `<ul class="cds--tab--list" role="tablist">` and it does not, so theme.css\'s tab-list rules (including the vertical-orientation grid) are missing from the canvas.',
-	},
-};
+const KNOWN_DRIFT = {};
 
 /**
  * Strip comments so a class named in a docblock is not read as markup.
