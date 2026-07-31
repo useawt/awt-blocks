@@ -37,7 +37,15 @@ export default function Edit( { attributes, setAttributes } ) {
 		isNone
 			? {}
 			: {
-					className: 'cds--side-nav awt-side-nav-preview',
+					// `--persistent` as well, matching render.php. Without it the
+					// theme's layout rules — which key on
+					// `body:has(.cds--side-nav--persistent)` to clear 16rem for the
+					// content and footer — matched nothing in the editor canvas, so
+					// a template preview drew the nav straight over its own content.
+					// Editor and render class lists diverging is the second bug of
+					// this shape in this block; treat any divergence as a defect.
+					className:
+						'cds--side-nav cds--side-nav--persistent awt-side-nav-preview',
 					'aria-label': ariaLabel,
 					style: {
 						background: 'var(--cds-layer-01, #f4f4f4)',

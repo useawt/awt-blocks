@@ -131,6 +131,11 @@
   until the brand mode already included a logo, which meant there was no
   way to get there.
 
+- Side nav: opening a template in the Site Editor no longer draws the side nav
+  over the page content. It now sits at the left with the content and footer
+  starting to its right, the way the published page renders. Editing the header
+  on its own was already correct; this was templates only.
+
 - Side nav section: the editor now shows each section's links. In the Site
   Editor every section appeared as a title with nothing under it, whichever
   section it was — the links were there, drawn at no height. The section
