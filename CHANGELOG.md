@@ -131,6 +131,14 @@
   until the brand mode already included a logo, which meant there was no
   way to get there.
 
+- A new build check keeps the block editor and the published page in step. Three
+  bugs in one day came from a block putting different CSS classes on its markup
+  in the editor than on the page, and each one only showed up in the editor —
+  the published page was right every time, so nothing caught them. The check
+  compares the two for every class the theme's stylesheet styles, and fails the
+  build when they disagree. It found two more cases, in the Content switcher and
+  Tabs blocks, which it reports every run until they are fixed.
+
 - Side nav: opening a template in the Site Editor no longer draws the side nav
   over the page content. It now sits at the left with the content and footer
   starting to its right, the way the published page renders. Editing the header

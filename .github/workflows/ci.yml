@@ -53,6 +53,35 @@ jobs:
       - name: carbonStyles declarations
         run: npm run check:carbon-styles
 
+  # Own job rather than a step in `lint`, because it reads the sibling awt-theme
+  # checkout (theme.css for the classes our CSS depends on, carbon.php for the
+  # class mapper the render delegates to) and `lint` checks this repo out at the
+  # workspace root, where no sibling can exist.
+  class-parity:
+    name: Class parity (editor vs render)
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    defaults:
+      run:
+        working-directory: awt-blocks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: awt-blocks
+      - uses: actions/checkout@v4
+        with:
+          repository: accessible-wordpress-theme/awt-theme
+          path: awt-theme
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: awt-blocks/package-lock.json
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Editor and render agree on themed classes
+        run: npm run check:class-parity
+
   test:
     name: Unit tests (Jest)
     runs-on: ubuntu-latest
