@@ -17,7 +17,12 @@ module.exports = defineConfig( {
 	globalSetup: require.resolve( './tests/e2e/global-setup.js' ),
 	use: {
 		baseURL: process.env.WP_BASE_URL || 'http://localhost:8889',
-		storageState: './test-results/.auth/storage-state.json',
+		// Deliberately NOT under test-results/: Playwright empties that
+		// directory at the start of every run, so a second run starting while
+		// one is in flight deleted the first one's login and failed it with
+		// "ENOENT: storage-state.json". Keeping the login outside also keeps
+		// its session cookie out of the CI failure artifacts.
+		storageState: './.auth/storage-state.json',
 		trace: 'retain-on-failure',
 	},
 	projects: [
