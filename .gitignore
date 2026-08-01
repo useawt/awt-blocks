@@ -28,3 +28,9 @@ npm-debug.log*
 # commit to a public repo. Nothing reads it as a fixture: the storageState
 # Playwright actually uses is /test-results/.auth/, ignored above.
 /artifacts/
+
+# Logos the UI-shell launch gate uploads through the Media Library. The seed
+# uploads folder is committed fixture content, so without this a gate run leaves
+# an artifact staged for commit. reset.sh sweeps them before each run; this
+# catches the one the last run leaves behind.
+.wp-env/seed/uploads/**/gate-logo*.png
