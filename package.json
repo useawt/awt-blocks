@@ -24,6 +24,7 @@
     "test:php:update": "wp-env run tests-cli --env-cwd=wp-content/plugins/awt-blocks -- bash -c 'UPDATE_SNAPSHOTS=1 vendor/bin/phpunit'",
     "test:e2e": "npm run env:prepare-tests && playwright test --project=e2e",
     "test:axe": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/axe.spec.js",
+    "test:styles": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/computed-styles.spec.js",
     "env:prepare-tests": "wp-env run tests-cli -- bash -c 'wp theme activate awt && wp plugin activate awt-blocks safe-svg'",
     "check:class-parity": "node scripts/check-class-parity.js",
     "check:carbon-styles": "node scripts/check-carbon-styles.js",
