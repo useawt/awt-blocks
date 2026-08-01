@@ -115,6 +115,14 @@
 
 ### [A11y]
 
+- FAQ question: a question placed on its own is no longer announced as a
+  broken list. The block always produced a list item, which is right inside
+  an accordion but wrong on its own, where a screen reader meets a list item
+  with no list around it. On its own it is now a plain container, which looks
+  and behaves exactly the same. Inside an accordion nothing changes. (This
+  changes the rendered HTML of existing pages, so the release is marked
+  breaking, but no page looks different.)
+
 - Accessibility checker: the heading-order checks (heading-level skips,
   illogical heading order) now see the heading a Statistic block emits
   when it's set to a heading level. Before, those headings were invisible

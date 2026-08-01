@@ -1,0 +1,4 @@
+{
+	"$note": "Accessibility violations that are known and accepted. Each entry needs a written reason. Anything not listed here fails the axe gate. Regenerate with UPDATE_AXE_BASELINE=1 npm run test:axe, then write the reasons.",
+	"accepted": []
+}

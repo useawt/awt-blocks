@@ -18,12 +18,16 @@ const TEMPLATE = [
 	],
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, context } ) {
 	// `answer` (the plain-text SEO shadow) is intentionally not destructured: the
 	// attribute stays in block.json for clean round-trip of Premium-authored
 	// content, but the editable control is Premium-gated (see below).
 	const { question, defaultExpanded, level } = attributes;
 	const HeadingTag = `h${ level }`;
+	// Mirrors render.php: <li> only when an awt/accordion is above us (it
+	// renders the <ul>), <div> when this question stands on its own, because a
+	// lone <li> outside a list is an invalid list structure.
+	const RootTag = context?.[ 'awt/accordion/size' ] ? 'li' : 'div';
 	const blockProps = useBlockProps( {
 		className: `awt-faq-item cds--accordion__item${
 			defaultExpanded ? ' cds--accordion__item--active' : ''
@@ -72,7 +76,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<li { ...blockProps }>
+			<RootTag { ...blockProps }>
 				<HeadingTag
 					className="awt-faq-item__question-heading"
 					style={ { margin: 0 } }
@@ -121,7 +125,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					</button>
 				</HeadingTag>
 				<div { ...innerProps } />
-			</li>
+			</RootTag>
 		</>
 	);
 }

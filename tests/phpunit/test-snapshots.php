@@ -11,9 +11,14 @@
  *
  * When a change is intentional, regenerate and commit the snapshots:
  *
- *   UPDATE_SNAPSHOTS=1 npm run test:php
+ *   npm run test:php:update
  *
  * …and call the release [Breaking] per contract rule #5.
+ *
+ * Use that script, not `UPDATE_SNAPSHOTS=1 npm run test:php`: the tests run
+ * inside the wp-env container, and a variable set on the host side of that
+ * command never reaches PHP — the run just repeats the failure it was meant
+ * to resolve, which reads as "regenerating didn't work".
  *
  * Generated ids (unique_id() counters) are canonicalized before comparison,
  * so test ordering can't cause false diffs while aria-controls/labelledby

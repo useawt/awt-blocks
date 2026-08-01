@@ -21,7 +21,9 @@
     "lint:md": "markdownlint-cli2",
     "lint:php": "vendor/bin/phpcs",
     "test:php": "wp-env run tests-cli --env-cwd=wp-content/plugins/awt-blocks vendor/bin/phpunit",
+    "test:php:update": "wp-env run tests-cli --env-cwd=wp-content/plugins/awt-blocks -- bash -c 'UPDATE_SNAPSHOTS=1 vendor/bin/phpunit'",
     "test:e2e": "npm run env:prepare-tests && playwright test --project=e2e",
+    "test:axe": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/axe.spec.js",
     "env:prepare-tests": "wp-env run tests-cli -- bash -c 'wp theme activate awt && wp plugin activate awt-blocks safe-svg'",
     "check:class-parity": "node scripts/check-class-parity.js",
     "check:carbon-styles": "node scripts/check-carbon-styles.js",
@@ -29,6 +31,7 @@
     "test:compat": "npm run env:prepare-tests && playwright test --project=compatibility"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@carbon/styles": "^1.111.0",
     "@playwright/test": "^1.61.1",
     "@wordpress/e2e-test-utils-playwright": "^1.51.0",
