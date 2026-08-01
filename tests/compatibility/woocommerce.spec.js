@@ -20,6 +20,17 @@ test.describe( 'WooCommerce — Floor A coexistence', () => {
 	test.beforeAll( () => {
 		test.setTimeout( 300_000 );
 		bash( 'wp plugin install woocommerce --activate' );
+		// A brand-new store sends the next admin page load to WooCommerce's
+		// setup wizard, so the first attempt at opening the block editor never
+		// reaches the editor at all. It only happens once per store, which is
+		// why it fails on a fresh CI database and passes on the retry — and why
+		// it looked like flakiness for weeks. Skipping the profiler and
+		// clearing the one-shot redirect keeps the admin where the test asks
+		// for it. (Floor A is about coexistence; onboarding is not under test.)
+		wp( 'transient delete _wc_activation_redirect' );
+		wp(
+			`option update woocommerce_onboarding_profile --format=json '{"skipped":true}'`
+		);
 		bash( 'wp wc tool run install_pages --user=admin' );
 		wp( 'option update woocommerce_enable_guest_checkout yes' );
 		wp( 'option update woocommerce_calc_taxes no' );
@@ -93,6 +104,10 @@ test.describe( 'WooCommerce — Floor A coexistence', () => {
 	} ) => {
 		const errors = collectConsoleErrors( page );
 		await admin.createNewPost( { title: 'WC coexistence' } );
+		// Fail here, naming the page we actually landed on, if a plugin sends
+		// the admin somewhere else — rather than three steps later as an
+		// unexplained missing block.
+		await expect( page ).toHaveURL( /post-new\.php/ );
 		await editor.insertBlock( { name: 'awt/button' } );
 		await editor.insertBlock( { name: 'awt/notification' } );
 		await expect(
