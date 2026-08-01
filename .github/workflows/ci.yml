@@ -165,7 +165,9 @@ jobs:
       - name: Playwright
         run: npm run test:e2e
       - uses: actions/upload-artifact@v4
-        if: failure()
+        # always(), not failure(): a flaky test leaves the job green, and its
+        # trace is the one that explains the failure.
+        if: always()
         with:
           name: playwright-traces
           path: awt-blocks/test-results/
@@ -304,7 +306,9 @@ jobs:
       - name: Compatibility specs (WooCommerce, Polylang, WP Super Cache)
         run: npm run test:compat
       - uses: actions/upload-artifact@v4
-        if: failure()
+        # always(), not failure(): a flaky test leaves the job green, and its
+        # trace is the one that explains the failure.
+        if: always()
         with:
           name: compat-traces
           path: awt-blocks/test-results/

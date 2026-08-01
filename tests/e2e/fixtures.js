@@ -39,12 +39,37 @@ async function waitForBlockType( page, name ) {
 			{ timeout: 15_000 }
 		);
 	} catch {
+		// Say what the page actually looked like. Without this the failure is
+		// "block missing" and every explanation stays a guess: a page that
+		// redirected somewhere else, an editor that never booted, and a block
+		// script that threw all produce the same symptom.
+		const state = await page
+			.evaluate( () => ( {
+				url: window.location.href,
+				title: document.title,
+				hasWp: typeof window.wp !== 'undefined',
+				hasBlocksApi: !! window.wp?.blocks?.getBlockTypes,
+				registered: window.wp?.blocks?.getBlockTypes?.().length ?? null,
+				awtRegistered:
+					window.wp?.blocks
+						?.getBlockTypes?.()
+						.filter( ( b ) => b.name.startsWith( 'awt/' ) )
+						.length ?? null,
+				editorMounted: !! document.querySelector(
+					'.block-editor, .edit-post-visual-editor, #editor'
+				),
+				bodyClass: document.body?.className?.slice( 0, 200 ),
+			} ) )
+			.catch( ( error ) => ( { evaluateFailed: String( error ) } ) );
+
 		throw new Error(
-			`Block type "${ name }" was never registered in the editor. ` +
+			`Block type "${ name }" was never registered in the editor within 15s. ` +
 				`Inserting it would recurse forever inside createBlock(), so the ` +
-				`wait failed instead. Either the editor never finished loading, or ` +
-				`the block really is not registered — check the plugin build and ` +
-				`the browser console.`
+				`wait failed instead.\nPage state: ${ JSON.stringify(
+					state,
+					null,
+					2
+				) }`
 		);
 	}
 }
