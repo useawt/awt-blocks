@@ -14,6 +14,15 @@
 
 ### [Breaking]
 
+- Color scheme toggle: the toggle now says which mode it turns on and whether
+  that mode is on. It used to be called "Light mode / Dark mode", which told a
+  screen reader user neither. It is now a toggle button named after the mode it
+  turns on, with an on or off state that a screen reader reads on focus and
+  again on every press. The "Icon with label" version shows that same name
+  instead of always showing the light-mode one. If you renamed the labels, your
+  wording is kept. The rendered markup changes, which is a deliberate snapshot
+  update.
+
 - Breadcrumb: screen readers now announce the breadcrumb as "Breadcrumbs"
   instead of "Breadcrumb". This is the block's default accessible name, so it
   changes only breadcrumbs that never had a name set by hand; anything you typed
@@ -120,6 +129,25 @@
   need updating.
 
 ### [A11y]
+
+- Color scheme toggle: switching between light and dark is announced. There was
+  already a polite announcement, but it was built at the moment it was used,
+  and a screen reader only reads out a region that was already on the page, so
+  the first press was silent. The region is now on the page from the start,
+  empty, and the message is a sentence ("Dark mode on") rather than a bare
+  label.
+
+- Color scheme toggle: the "Segmented" version marks which of Light, Auto and
+  Dark is on. It was three plain buttons with nothing saying which one you were
+  using. The one in use is now filled, bold and underlined, and screen readers
+  read it as pressed.
+
+- Color scheme toggle: a visitor who has chosen a mode before now gets the
+  right state in the page as it arrives, instead of the toggle briefly claiming
+  the opposite.
+
+- Color scheme toggle: when a page has more than one toggle, they all update
+  together instead of disagreeing about the current mode.
 
 - FAQ question: a question placed on its own is no longer announced as a
   broken list. The block always produced a list item, which is right inside

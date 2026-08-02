@@ -99,18 +99,24 @@ export default function Edit( { attributes, setAttributes } ) {
 				>
 					<button
 						type="button"
+						data-awt-scheme="light"
+						aria-pressed="false"
 						onClick={ ( e ) => e.preventDefault() }
 					>
 						{ lightLabel }
 					</button>
 					<button
 						type="button"
+						data-awt-scheme="auto"
+						aria-pressed="true"
 						onClick={ ( e ) => e.preventDefault() }
 					>
 						{ autoLabel }
 					</button>
 					<button
 						type="button"
+						data-awt-scheme="dark"
+						aria-pressed="false"
 						onClick={ ( e ) => e.preventDefault() }
 					>
 						{ darkLabel }
@@ -120,7 +126,10 @@ export default function Edit( { attributes, setAttributes } ) {
 				<button
 					{ ...blockProps }
 					type="button"
-					aria-label={ `${ lightLabel } / ${ darkLabel }` }
+					// A toggle button named after what it turns on, with the
+					// state in aria-pressed. Mirrors render.php, where
+					// with-label takes its name from the visible label instead.
+					aria-label={ kind === 'with-label' ? undefined : darkLabel }
 					aria-pressed="false"
 					onClick={ ( e ) => e.preventDefault() }
 				>
@@ -129,7 +138,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					</span>
 					{ kind === 'with-label' && (
 						<span className="awt-color-scheme-toggle__label">
-							{ lightLabel }
+							{ darkLabel }
 						</span>
 					) }
 				</button>
