@@ -20,8 +20,9 @@
   turns on, with an on or off state that a screen reader reads on focus and
   again on every press. The "Icon with label" version shows that same name
   instead of always showing the light-mode one. If you renamed the labels, your
-  wording is kept. The rendered markup changes, which is a deliberate snapshot
-  update.
+  wording is kept. The icon follows the same state: a sun in light mode and
+  Carbon's crescent in dark mode, where it used to be a sun in both. The
+  rendered markup changes, which is a deliberate snapshot update.
 
 - Breadcrumb: screen readers now announce the breadcrumb as "Breadcrumbs"
   instead of "Breadcrumb". This is the block's default accessible name, so it
