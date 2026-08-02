@@ -23,7 +23,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const blockProps = useBlockProps( {
 		className: classes,
-		'aria-label': ariaLabel || 'Breadcrumb',
+		'aria-label': ariaLabel || 'Breadcrumbs',
 	} );
 	const innerProps = useInnerBlocksProps(
 		{ className: 'cds--breadcrumb__list' },

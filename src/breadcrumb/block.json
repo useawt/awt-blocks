@@ -29,7 +29,7 @@
 		},
 		"ariaLabel": {
 			"type": "string",
-			"default": "Breadcrumb"
+			"default": "Breadcrumbs"
 		}
 	},
 	"editorScript": "file:./index.js",

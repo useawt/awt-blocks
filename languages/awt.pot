@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-30T11:43:52+00:00\n"
+"POT-Creation-Date: 2026-08-02T10:26:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt\n"
@@ -74,8 +74,7 @@ msgstr ""
 
 #: src/breadcrumb/render.php:13
 #: src/breadcrumb/render.php:28
-#: src/breadcrumb/edit.js:40
-msgid "Breadcrumb"
+msgid "Breadcrumbs"
 msgstr ""
 
 #: src/button/render.php:24
@@ -149,7 +148,7 @@ msgid "Choose…"
 msgstr ""
 
 #: src/footer-link/render.php:14
-#: src/side-nav-link/render.php:19
+#: src/side-nav-link/render.php:26
 #: src/button/edit.js:167
 #: src/link/edit.js:59
 #: src/tag/edit.js:87
@@ -258,7 +257,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: src/side-nav/render.php:16
+#: src/side-nav/render.php:31
 msgid "Side navigation"
 msgstr ""
 
@@ -273,7 +272,7 @@ msgid "Tab"
 msgstr ""
 
 #: src/tabs/render.php:27
-#: src/tabs/edit.js:45
+#: src/tabs/edit.js:51
 msgid "Tabs"
 msgstr ""
 
@@ -335,8 +334,6 @@ msgstr ""
 
 #: assets/global-block-controls.js:335
 #: src/data-table/edit.js:373
-#: src/side-nav/edit.js:82
-#: src/side-nav/edit.js:111
 #: src/testimonial/edit.js:123
 msgid "None"
 msgstr ""
@@ -399,14 +396,14 @@ msgstr ""
 
 #: src/accessibility-panel.js:234
 #: src/breadcrumb/edit.js:42
-#: src/content-switcher/edit.js:126
+#: src/content-switcher/edit.js:133
 #: src/form/edit.js:86
 #: src/header-menu/edit.js:71
 #: src/header-nav/edit.js:41
 #: src/pagination/edit.js:55
 #: src/section/edit.js:233
-#: src/side-nav/edit.js:141
-#: src/tabs/edit.js:58
+#: src/side-nav/edit.js:92
+#: src/tabs/edit.js:64
 msgid "Accessible name (aria-label)"
 msgstr ""
 
@@ -444,7 +441,7 @@ msgid "Accordion item"
 msgstr ""
 
 #: src/accordion-item/edit.js:33
-#: src/faq-item/edit.js:60
+#: src/faq-item/edit.js:64
 #: src/tile/edit.js:115
 #: src/tooltip/edit.js:55
 msgid "Open by default"
@@ -494,7 +491,7 @@ msgstr ""
 
 #: src/accordion/edit.js:41
 #: src/button/edit.js:126
-#: src/content-switcher/edit.js:116
+#: src/content-switcher/edit.js:123
 #: src/data-table/edit.js:336
 #: src/dropdown/edit.js:62
 #: src/icon/edit.js:66
@@ -533,6 +530,10 @@ msgstr ""
 
 #: src/breadcrumb-item/edit.js:30
 msgid "Sets aria-current=\"page\" and renders as plain text."
+msgstr ""
+
+#: src/breadcrumb/edit.js:40
+msgid "Breadcrumb"
 msgstr ""
 
 #: src/breadcrumb/edit.js:47
@@ -593,7 +594,7 @@ msgstr ""
 #: src/icon/edit.js:53
 #: src/shared/icon-picker.js:184
 #: src/side-nav-link/edit.js:34
-#: src/side-nav-section/edit.js:36
+#: src/side-nav-section/edit.js:46
 msgid "Icon"
 msgstr ""
 
@@ -773,7 +774,7 @@ msgstr ""
 msgid "Segment label"
 msgstr ""
 
-#: src/content-switcher/edit.js:112
+#: src/content-switcher/edit.js:119
 msgid "Content switcher"
 msgstr ""
 
@@ -919,51 +920,51 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
-#: src/faq-item/edit.js:39
+#: src/faq-item/edit.js:43
 msgid "FAQ question"
 msgstr ""
 
-#: src/faq-item/edit.js:41
+#: src/faq-item/edit.js:45
 msgid "Question heading level"
 msgstr ""
 
-#: src/faq-item/edit.js:42
+#: src/faq-item/edit.js:46
 msgid "The semantic heading level that wraps the question. Default H3 matches Carbon's accordion convention; override based on the surrounding page hierarchy."
 msgstr ""
 
-#: src/faq-item/edit.js:48
+#: src/faq-item/edit.js:52
 #: src/stat/edit.js:33
 msgid "Heading 2"
 msgstr ""
 
-#: src/faq-item/edit.js:51
+#: src/faq-item/edit.js:55
 msgid "Heading 3 (default)"
 msgstr ""
 
-#: src/faq-item/edit.js:53
+#: src/faq-item/edit.js:57
 #: src/stat/edit.js:35
 msgid "Heading 4"
 msgstr ""
 
-#: src/faq-item/edit.js:54
+#: src/faq-item/edit.js:58
 #: src/stat/edit.js:36
 msgid "Heading 5"
 msgstr ""
 
-#: src/faq-item/edit.js:55
+#: src/faq-item/edit.js:59
 #: src/stat/edit.js:37
 msgid "Heading 6"
 msgstr ""
 
-#: src/faq-item/edit.js:67
+#: src/faq-item/edit.js:71
 msgid "FAQ rich results"
 msgstr ""
 
-#: src/faq-item/edit.js:68
+#: src/faq-item/edit.js:72
 msgid "Output FAQ structured data (the JSON Google reads to show this Q&A directly in search results). Available in AWT Premium."
 msgstr ""
 
-#: src/faq-item/edit.js:118
+#: src/faq-item/edit.js:122
 msgid "Question?"
 msgstr ""
 
@@ -1012,7 +1013,7 @@ msgid "Icon (optional)"
 msgstr ""
 
 #: src/footer-section/edit.js:50
-#: src/side-nav-section/edit.js:50
+#: src/side-nav-section/edit.js:75
 msgid "Section heading (optional)"
 msgstr ""
 
@@ -1413,7 +1414,7 @@ msgstr ""
 
 #: src/inline-set/edit.js:60
 #: src/radio-button-group/edit.js:77
-#: src/tabs/edit.js:47
+#: src/tabs/edit.js:53
 msgid "Orientation"
 msgstr ""
 
@@ -1577,7 +1578,6 @@ msgid "Modal"
 msgstr ""
 
 #: src/modal/edit.js:63
-#: src/side-nav/edit.js:132
 msgid "DOM id"
 msgstr ""
 
@@ -1960,50 +1960,36 @@ msgstr ""
 msgid "Side nav link"
 msgstr ""
 
-#: src/side-nav-section/edit.js:25
+#: src/side-nav-section/edit.js:33
 msgid "Side nav section"
 msgstr ""
 
-#: src/side-nav-section/edit.js:29
-#: src/side-nav/edit.js:118
-msgid "Default expanded"
-msgstr ""
-
-#: src/side-nav/edit.js:59
-msgid "Side nav mode is \"none\" — this block does not render on the front-end."
-msgstr ""
-
 #: src/side-nav/edit.js:66
-#: src/side-nav/edit.js:98
 msgid "Side nav"
 msgstr ""
 
-#: src/side-nav/edit.js:70
-#: src/side-nav/edit.js:102
-msgid "Mode"
+#: src/side-nav/edit.js:68
+msgid "Show the side nav"
 msgstr ""
 
-#: src/side-nav/edit.js:75
-#: src/side-nav/edit.js:107
-msgid "Persistent"
+#: src/side-nav/edit.js:69
+msgid "On wide screens the side nav sits beside your content. On narrow screens its links move into the header menu, behind the header’s menu button."
 msgstr ""
 
-#: src/side-nav/edit.js:77
-#: src/side-nav/edit.js:109
-msgid "Rail"
+#: src/side-nav/edit.js:81
+msgid "HTML id"
 msgstr ""
 
-#: src/side-nav/edit.js:80
-#: src/side-nav/edit.js:110
-msgid "Overlay"
+#: src/side-nav/edit.js:82
+msgid "The id given to the side nav in the page’s HTML. Change it only if something else on the page already uses this one."
 msgstr ""
 
-#: src/side-nav/edit.js:125
-msgid "User can toggle"
+#: src/side-nav/edit.js:96
+msgid "What a screen reader calls this navigation. Give each navigation on the page a different name."
 msgstr ""
 
-#: src/side-nav/edit.js:133
-msgid "Match a header-action panelId to this for a toggle button to control the side nav."
+#: src/side-nav/edit.js:115
+msgid "The side nav is switched off, so it does not appear on the published page."
 msgstr ""
 
 #: src/skip-link/edit.js:53
@@ -3330,7 +3316,7 @@ msgstr ""
 
 #: src/side-nav/block.json
 msgctxt "block description"
-msgid "A sidebar navigation menu, docked to the left edge of the site on wide screens and hidden on narrower ones. Use it in a template or the Side navigation template part; add side-nav sections, links, and dividers inside it."
+msgid "A sidebar navigation menu, docked beside your content on wide screens. On narrow screens its links move into the header menu, behind the header’s menu button. It lives in the header template part; add side-nav sections, links, and dividers inside it."
 msgstr ""
 
 #: src/side-nav/block.json

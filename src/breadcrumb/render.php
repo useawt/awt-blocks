@@ -10,7 +10,7 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\html_attrs;
 
-$aria_label        = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Breadcrumb', 'awt' );
+$aria_label        = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Breadcrumbs', 'awt' );
 $no_trailing_slash = ! empty( $attributes['noTrailingSlash'] );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
@@ -25,7 +25,7 @@ $class         = classnames( $nav_class, array(), (string) ( $attributes['classN
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
 		'class'      => $class,
-		'aria-label' => $aria_label !== '' ? $aria_label : __( 'Breadcrumb', 'awt' ),
+		'aria-label' => $aria_label !== '' ? $aria_label : __( 'Breadcrumbs', 'awt' ),
 	)
 );
 

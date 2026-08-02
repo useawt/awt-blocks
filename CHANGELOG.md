@@ -14,6 +14,12 @@
 
 ### [Breaking]
 
+- Breadcrumb: screen readers now announce the breadcrumb as "Breadcrumbs"
+  instead of "Breadcrumb". This is the block's default accessible name, so it
+  changes only breadcrumbs that never had a name set by hand; anything you typed
+  into "Accessible name (aria-label)" is untouched. The rendered markup changes,
+  which is a deliberate snapshot update.
+
 - Side nav: a side nav now sits below the header instead of on top of it. Side
   navs used to start at the very top of the screen, hiding the logo and site
   title behind them. The rendered markup gains one class (a deliberate snapshot
