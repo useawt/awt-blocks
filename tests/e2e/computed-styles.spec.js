@@ -196,6 +196,16 @@ const PROBES = [
 		sel: '.cds--text-input[readonly]',
 		box: true,
 	},
+	/* Both read-only selectors are probed, because D7 writes one rule per
+	   element type and a typo in either is invisible otherwise. Read-only has no
+	   fill, so `borderContrast` here is measured against the page and is the
+	   number D7 exists to keep above 3. */
+	{
+		page: 'forms',
+		key: 'text-area (readonly)',
+		sel: '.cds--text-area[readonly]',
+		box: true,
+	},
 	{
 		page: 'forms',
 		key: 'text-input (disabled)',

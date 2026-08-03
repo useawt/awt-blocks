@@ -76,6 +76,7 @@ const FORMS = `
 <!-- wp:awt/text-area {"label":"Why are you signing up?","name":"reason"} /-->
 <!-- wp:awt/select {"label":"Plan","name":"plan"} /-->
 <!-- wp:awt/text-input {"label":"Account id","name":"account","value":"AC-4471","readonly":true} /-->
+<!-- wp:awt/text-area {"label":"Terms you accepted","name":"terms","value":"Recorded at sign-up.","readonly":true} /-->
 <!-- wp:awt/text-input {"label":"Legacy plan","name":"legacy","disabled":true} /-->
 <!-- wp:awt/text-input {"label":"Carbon-styled field","name":"carbonlook","carbonDefault":true} /-->
 <!-- wp:awt/checkbox {"label":"Email me product updates","name":"updates"} /-->

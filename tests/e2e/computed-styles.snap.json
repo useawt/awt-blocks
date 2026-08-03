@@ -1285,6 +1285,32 @@
 					"padding": "11px 16px 11px 16px"
 				}
 			},
+			"forms/text-area (readonly)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgb(244, 244, 244)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "20px",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(141, 141, 141)",
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 16.45,
+				"borderContrast": 3.32,
+				"box": {
+					"blockSize": "103.94px",
+					"padding": "11px 16px 11px 16px"
+				}
+			},
 			"forms/text-input": {
 				"matches": {
 					"focus": false,
@@ -1430,9 +1456,9 @@
 				"outline": "2px solid rgba(0, 0, 0, 0)",
 				"outlineOffset": "-2px",
 				"boxShadow": "none",
-				"border": "1px solid rgb(224, 224, 224)",
+				"border": "1px solid rgb(141, 141, 141)",
 				"effectiveBackground": "rgb(255, 255, 255)",
-				"borderContrast": 1.32,
+				"borderContrast": 3.32,
 				"box": {
 					"blockSize": "40px",
 					"padding": "0px 16px 0px 16px"
@@ -3285,6 +3311,32 @@
 					"padding": "11px 16px 11px 16px"
 				}
 			},
+			"forms/text-area (readonly)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgb(38, 38, 38)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "20px",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(111, 111, 111)",
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 13.76,
+				"borderContrast": 3.6,
+				"box": {
+					"blockSize": "103.94px",
+					"padding": "11px 16px 11px 16px"
+				}
+			},
 			"forms/text-input": {
 				"matches": {
 					"focus": false,
@@ -3430,9 +3482,9 @@
 				"outline": "2px solid rgba(0, 0, 0, 0)",
 				"outlineOffset": "-2px",
 				"boxShadow": "none",
-				"border": "1px solid rgb(57, 57, 57)",
+				"border": "1px solid rgb(111, 111, 111)",
 				"effectiveBackground": "rgb(22, 22, 22)",
-				"borderContrast": 1.57,
+				"borderContrast": 3.6,
 				"box": {
 					"blockSize": "40px",
 					"padding": "0px 16px 0px 16px"

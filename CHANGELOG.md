@@ -22,10 +22,17 @@
   The border is the same color the line already used, so it clears the 3 to 1
   contrast that user-interface components need, in both modes. Each of the five
   blocks gains a **Carbon default** setting under **Style**: turn it on and that
-  field goes back to the one-line look. Focus and error states are unchanged.
-  A read-only field keeps its softer border color, and a disabled one still
-  shows no border. Text areas are 1px taller. The rendered markup changes,
-  which is a deliberate snapshot update.
+  field goes back to the one-line look. Focus and error states are unchanged,
+  and a disabled field still shows no border. Text areas are 1px taller. The
+  rendered markup changes, which is a deliberate snapshot update.
+
+- Read-only Text input and Text area fields now use the same border color as
+  editable ones. A read-only field has no shaded fill, so its border is the only
+  thing showing where the field is, and the paler color it used to have was too
+  faint to see (1.32 to 1 against the page). You can still tell a read-only
+  field at a glance: an editable field is a filled box, a read-only one is an
+  outline, and a disabled one is a fill with no edge. Unaffected by
+  **Carbon default**.
 
 - Color scheme toggle: the toggle now says which mode it turns on and whether
   that mode is on. It used to be called "Light mode / Dark mode", which told a
