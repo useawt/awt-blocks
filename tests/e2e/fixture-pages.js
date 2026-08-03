@@ -122,6 +122,7 @@ const CONTENT = `
 
 <!-- wp:awt/code-snippet {"code":"wp plugin activate awt-blocks","variant":"single"} /-->
 <!-- wp:awt/link {"text":"Read the documentation","href":"/docs"} /-->
+<!-- wp:paragraph --><p>A plain link typed into a paragraph, such as <a href="/docs">this one</a>, carries no design-system class — so it is the only way to cover difference D4.</p><!-- /wp:paragraph -->
 <!-- wp:awt/stat {"value":"98%","heading":"Automated checks passed","level":"3"} /-->
 <!-- wp:awt/testimonial {"quote":"It stopped being an afterthought.","authorName":"Maria S.","authorRole":"Design lead"} /-->
 
