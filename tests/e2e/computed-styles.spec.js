@@ -53,8 +53,9 @@
  * workflow in this repo, not two. Review the diff before committing — the
  * point of the gate is the reading, not the regeneration.
  *
- * Four traps, all of which would produce a passing test that measures nothing.
- * The first three were hit for real during the 2026-08-01 skip-link work:
+ * Five traps, all of which would produce a passing test that measures nothing.
+ * The first three were hit for real during the 2026-08-01 skip-link work, and
+ * the fifth was hit by this gate itself and committed for two days:
  *
  *   1. `:focus` does not match unless the window has focus, and `:focus-visible`
  *      additionally needs keyboard modality. Every focus probe asserts
@@ -69,6 +70,15 @@
  *      and the scheme is part of the snapshot's own structure.
  *   4. A selector that matches nothing must FAIL, not skip. A renamed class
  *      would otherwise quietly delete coverage while the gate stayed green.
+ *   5. Probes share a page, so releasing an interaction state is not the same
+ *      as it being gone: `:hover` and `:focus` stop matching immediately while
+ *      the color keeps transitioning for another 110ms. This gate recorded a
+ *      resting header nav link in Carbon's hover color that way — `hover:
+ *      false` next to a hover value, entirely plausible, wrong for two days.
+ *      Resting probes now clear and settle first, stateful ones settle after
+ *      releasing, and a resting probe measured mid-interaction fails.
+ *      Related: park the pointer OUTSIDE the viewport, never at `(0, 0)`,
+ *      which is inside the fixed header and hovers the brand.
  */
 
 const fs = require( 'fs' );
@@ -438,6 +448,11 @@ const PROBES = [
 		sel: '.cds--modal-primary-button',
 		box: true,
 	},
+	/* Two probes, because an open modal moves focus to this button, and until
+	   2026-08-03 the resting probe silently recorded that: `focus: true` and a
+	   4.55:1 blue focus border, filed as the button's resting appearance. The
+	   number was worth having and the label was a lie, so it is now declared.
+	   Resting matters too — a user who tabs on within the modal leaves it. */
 	{
 		page: 'widgets',
 		group: 'opened',
@@ -445,6 +460,13 @@ const PROBES = [
 		sel: '.cds--modal-close',
 		box: true,
 		inline: true,
+	},
+	{
+		page: 'widgets',
+		group: 'opened',
+		key: 'modal-close (focused)',
+		sel: '.cds--modal-close',
+		state: 'focus',
 	},
 
 	/* --- Content blocks --- */
@@ -980,7 +1002,41 @@ async function settle( page, probe ) {
 }
 
 /**
+ * Put the pointer where it cannot hover anything, and drop focus.
+ *
+ * Outside the viewport, not `(0, 0)`. Two reasons, both found the hard way:
+ * `(0, 0)` is inside the fixed header — `elementFromPoint(0, 0)` returns
+ * `a.cds--header__name`, a probed element — and Chromium starts every page with
+ * the pointer at `(0, 0)`, so the header brand was measured hovered on every
+ * run of this gate, resting probe and all. A negative coordinate hovers
+ * nothing, which is the only position that is honestly neutral.
+ *
+ * @param {import('@playwright/test').Page} page
+ */
+async function clearInteraction( page ) {
+	await page.mouse.move( -50, -50 );
+	// Serialized into the page under test — see useKeyboardModality().
+	// eslint-disable-next-line @wordpress/no-global-active-element
+	await page.evaluate( () => document.activeElement?.blur() );
+}
+
+/**
  * Measure one probe, applying and then undoing its interaction state.
+ *
+ * Probes share a page, so each one inherits whatever the last one left behind.
+ * That is how this gate came to record a resting header nav link in Carbon's
+ * *hover* color (`$text-primary`, not `$text-secondary`) and enshrine 18.1:1
+ * where the real value is 7.81:1: the state was undone before the next probe,
+ * but nothing waited for the 110ms color transition to run back, and
+ * `:hover`/`:focus` stop matching the instant the state is released. So the
+ * measurement recorded `hover: false` beside a hover color and looked entirely
+ * plausible. Trap 2 in the file header, one page further on than where it was
+ * first found — there it was the state being applied, here the state being
+ * released.
+ *
+ * Hence: clear and settle *before* a resting probe, and settle again *after*
+ * undoing an interaction state. A resting probe is then resting whatever ran
+ * before it, and the assertions below make a lie about it fail loudly.
  *
  * @param {import('@playwright/test').Page} page
  * @param {Object}                          probe
@@ -994,6 +1050,8 @@ async function runProbe( page, probe ) {
 		await locator.focus();
 	} else if ( probe.state === 'hover' ) {
 		await locator.hover();
+	} else {
+		await clearInteraction( page );
 	}
 	await settle( page, probe );
 
@@ -1019,18 +1077,28 @@ async function runProbe( page, probe ) {
 			`${ label } was measured without :focus matching — the window may not ` +
 				`hold focus, in which case every focus value here is the resting one`
 		).toBe( true );
-		// Serialized into the page under test — see useKeyboardModality().
-		// eslint-disable-next-line @wordpress/no-global-active-element
-		await page.evaluate( () => document.activeElement?.blur() );
 	}
 	if ( probe.state === 'hover' ) {
 		expect(
 			result.matches.hover,
 			`${ label } was measured without :hover matching`
 		).toBe( true );
-		// Leave the pointer somewhere harmless, or the next probe measures a
-		// hovered element and records it as the resting state.
-		await page.mouse.move( 0, 0 );
+	}
+	// Trap 5: a resting probe that was still interacting, or still animating
+	// back out of it, records an interaction value as the resting one. Cheap to
+	// assert and it names the culprit instead of leaving a plausible number.
+	if ( ! probe.state ) {
+		expect(
+			result.matches.hover || result.matches.focus,
+			`${ label } is a resting probe but was measured while hovered or ` +
+				`focused, so its values are an interaction state`
+		).toBe( false );
+	}
+	if ( probe.state ) {
+		// Release the state, then wait for the transition *back* before the next
+		// probe reads anything — releasing it is not the same as it being gone.
+		await clearInteraction( page );
+		await settle( page, probe );
 	}
 
 	return result;
