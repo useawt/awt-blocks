@@ -88,6 +88,10 @@
 		"hideLabel": {
 			"type": "boolean",
 			"default": false
+		},
+		"carbonDefault": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",

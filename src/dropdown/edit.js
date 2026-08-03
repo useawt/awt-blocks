@@ -11,6 +11,9 @@ import {
 	ToggleControl,
 	TextareaControl,
 } from '@wordpress/components';
+import CarbonDefaultToggle, {
+	fieldFrameClass,
+} from '../shared/carbon-default-toggle';
 
 function parseOptions( raw ) {
 	return raw
@@ -41,6 +44,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		size,
 		name,
 		options,
+		carbonDefault,
 	} = attributes;
 	return (
 		<>
@@ -85,6 +89,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						rows={ 6 }
 					/>
 				</PanelBody>
+				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
+						}
+					/>
+				</PanelBody>
 				<PanelBody
 					title={ __( 'Help & validation', 'awt' ) }
 					initialOpen={ false }
@@ -115,7 +127,14 @@ export default function Edit( { attributes, setAttributes } ) {
 			     off these specific class chains — without them the editor preview
 			     misses border, focus ring, and density sizing. No inline styles. */ }
 			<div
-				{ ...useBlockProps( { className: 'cds--dropdown__wrapper' } ) }
+				{ ...useBlockProps( {
+					className: [
+						'cds--dropdown__wrapper',
+						fieldFrameClass( carbonDefault ),
+					]
+						.filter( Boolean )
+						.join( ' ' ),
+				} ) }
 			>
 				<RichText
 					tagName="label"

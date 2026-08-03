@@ -15,6 +15,7 @@ use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
+use function AWT\Blocks\Render\field_frame_class;
 
 $label         = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Password', 'awt' );
 $name          = isset( $attributes['name'] ) ? (string) $attributes['name'] : 'password';
@@ -97,7 +98,18 @@ $label_class           = $ds
 
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
-		'class'               => $wrapper_class . ' ' . (string) ( $attributes['className'] ?? '' ),
+		// `field_frame_class()` draws the field's border on all four sides
+		// instead of Carbon's single bottom rule, unless "Carbon default" is on.
+		'class'               => implode(
+			' ',
+			array_filter(
+				array(
+					$wrapper_class,
+					field_frame_class( $attributes ),
+					(string) ( $attributes['className'] ?? '' ),
+				)
+			)
+		),
 		'data-wp-interactive' => 'awt/password-input',
 		'data-wp-context'     => wp_json_encode(
 			array(

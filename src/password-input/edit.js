@@ -10,6 +10,9 @@ import {
 	SelectControl,
 	ToggleControl,
 } from '@wordpress/components';
+import CarbonDefaultToggle, {
+	fieldFrameClass,
+} from '../shared/carbon-default-toggle';
 
 const SIZE_OPTIONS = [
 	{ label: 'Small (sm)', value: 'sm' },
@@ -34,6 +37,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		showLabel,
 		hidePasswordLabel,
 		autocomplete,
+		carbonDefault,
 	} = attributes;
 	const id = `awt-pi-${ clientId.slice( 0, 8 ) }`;
 
@@ -79,6 +83,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						value={ autocomplete }
 						onChange={ ( v ) =>
 							setAttributes( { autocomplete: v } )
+						}
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
 						}
 					/>
 				</PanelBody>
@@ -136,8 +148,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			</InspectorControls>
 			<div
 				{ ...useBlockProps( {
-					className:
+					className: [
 						'cds--form-item cds--text-input-wrapper cds--password-input-wrapper',
+						fieldFrameClass( carbonDefault ),
+					]
+						.filter( Boolean )
+						.join( ' ' ),
 				} ) }
 			>
 				<RichText

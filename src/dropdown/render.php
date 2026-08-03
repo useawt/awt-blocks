@@ -14,6 +14,7 @@
 declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
+use function AWT\Blocks\Render\field_frame_class;
 
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Dropdown', 'awt' );
 $placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt' );
@@ -69,9 +70,13 @@ if ( $ds ) {
 	}
 }
 
+// `field_frame_class()` draws the field's border on all four sides instead of
+// Carbon's single bottom rule, unless this block's "Carbon default" is on. It
+// goes on this outer wrapper; the CSS reaches `.cds--dropdown` (the closed
+// field, rendered below) as a descendant.
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
-		'class'               => $dd_wrapper_class,
+		'class'               => implode( ' ', array_filter( array( $dd_wrapper_class, field_frame_class( $attributes ) ) ) ),
 		'data-wp-interactive' => 'awt/dropdown',
 	)
 );

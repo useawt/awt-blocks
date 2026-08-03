@@ -5,6 +5,9 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import CarbonDefaultToggle, {
+	fieldFrameClass,
+} from '../shared/carbon-default-toggle';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -24,6 +27,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		required,
 		maxlength,
 		hideLabel,
+		carbonDefault,
 	} = attributes;
 	const id = `awt-ta-${ clientId.slice( 0, 8 ) }`;
 
@@ -31,6 +35,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		'cds--form-item',
 		'cds--text-area-wrapper',
 		readonly ? 'cds--text-area-wrapper--readonly' : null,
+		fieldFrameClass( carbonDefault ),
 	]
 		.filter( Boolean )
 		.join( ' ' );
@@ -99,6 +104,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						label={ __( 'Visually hide label', 'awt' ) }
 						checked={ hideLabel }
 						onChange={ ( v ) => setAttributes( { hideLabel: v } ) }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
+						}
 					/>
 				</PanelBody>
 				<PanelBody

@@ -11,6 +11,9 @@ import {
 	ToggleControl,
 	TextareaControl,
 } from '@wordpress/components';
+import CarbonDefaultToggle, {
+	fieldFrameClass,
+} from '../shared/carbon-default-toggle';
 
 function parseOptions( raw ) {
 	return raw
@@ -43,6 +46,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		hideLabel,
 		placeholder,
 		options,
+		carbonDefault,
 	} = attributes;
 	const id = `awt-select-${ clientId.slice( 0, 8 ) }`;
 
@@ -99,6 +103,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						rows={ 6 }
 					/>
 				</PanelBody>
+				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
+						}
+					/>
+				</PanelBody>
 				<PanelBody
 					title={ __( 'Help & validation', 'awt' ) }
 					initialOpen={ false }
@@ -125,7 +137,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			</InspectorControls>
 			<div
 				{ ...useBlockProps( {
-					className: 'cds--form-item cds--select',
+					className: [
+						'cds--form-item cds--select',
+						fieldFrameClass( carbonDefault ),
+					]
+						.filter( Boolean )
+						.join( ' ' ),
 				} ) }
 			>
 				<RichText

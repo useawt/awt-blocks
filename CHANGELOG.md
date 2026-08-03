@@ -14,6 +14,19 @@
 
 ### [Breaking]
 
+- Form fields now draw their border on all four sides. Text input, Text area,
+  Password input, Select and Dropdown used to be marked out by a shaded fill
+  with one line under the text, which left the field's shape resting on that
+  single line: the fill differs from the page by only 1.10 to 1 in light mode
+  and 1.20 to 1 in dark, and in forced-colors mode it is replaced altogether.
+  The border is the same color the line already used, so it clears the 3 to 1
+  contrast that user-interface components need, in both modes. Each of the five
+  blocks gains a **Carbon default** setting under **Style**: turn it on and that
+  field goes back to the one-line look. Focus and error states are unchanged.
+  A read-only field keeps its softer border color, and a disabled one still
+  shows no border. Text areas are 1px taller. The rendered markup changes,
+  which is a deliberate snapshot update.
+
 - Color scheme toggle: the toggle now says which mode it turns on and whether
   that mode is on. It used to be called "Light mode / Dark mode", which told a
   screen reader user neither. It is now a toggle button named after the mode it

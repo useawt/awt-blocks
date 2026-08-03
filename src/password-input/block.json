@@ -84,6 +84,10 @@
 		"autocomplete": {
 			"type": "string",
 			"default": "current-password"
+		},
+		"carbonDefault": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"editorScript": "file:./index.js",

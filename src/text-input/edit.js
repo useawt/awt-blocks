@@ -12,6 +12,9 @@ import {
 	ExternalLink,
 } from '@wordpress/components';
 import { iconPreviewUrl } from '../shared/icon-picker';
+import CarbonDefaultToggle, {
+	fieldFrameClass,
+} from '../shared/carbon-default-toggle';
 
 // Status icon — mirrors render.php's `icon( 'warning--filled', 16, ... )` call.
 // `warning--filled` for invalid (red triangle with !); `warning--alt--filled`
@@ -88,6 +91,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		maxlength,
 		pattern,
 		autocomplete,
+		carbonDefault,
 	} = attributes;
 	const id = `awt-ti-${ clientId.slice( 0, 8 ) }`;
 
@@ -97,6 +101,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		inline ? 'cds--text-input-wrapper--inline' : null,
 		readonly ? 'cds--text-input-wrapper--readonly' : null,
 		fluid ? 'cds--text-input-wrapper--fluid' : null,
+		fieldFrameClass( carbonDefault ),
 	]
 		.filter( Boolean )
 		.join( ' ' );
@@ -206,6 +211,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						) }
 						checked={ fluid }
 						onChange={ ( v ) => setAttributes( { fluid: v } ) }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
+						}
 					/>
 				</PanelBody>
 				<PanelBody

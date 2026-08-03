@@ -12,6 +12,7 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
+use function AWT\Blocks\Render\field_frame_class;
 
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Select', 'awt' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
@@ -64,7 +65,13 @@ $wrapper_class           = $ds
 	? $ds->classes_for( 'select', array( 'invalid' => $invalid ) )
 	: $_wrapper_class_fallback;
 
-$wrapper_attrs = get_block_wrapper_attributes( array( 'class' => $wrapper_class ) );
+// `field_frame_class()` draws the field's border on all four sides instead of
+// Carbon's single bottom rule, unless this block's "Carbon default" is on.
+$wrapper_attrs = get_block_wrapper_attributes(
+	array(
+		'class' => implode( ' ', array_filter( array( $wrapper_class, field_frame_class( $attributes ) ) ) ),
+	)
+);
 
 $select_attrs = html_attrs(
 	array(

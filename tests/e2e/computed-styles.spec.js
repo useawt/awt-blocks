@@ -181,6 +181,33 @@ const PROBES = [
 		sel: '.cds--text-input--warning',
 		box: true,
 	},
+	/* Difference D5: AWT draws a field's border on all four sides, and these
+	   three probes are the parts of that no other probe can see.
+	   - read-only and disabled are the two states where Carbon changes the
+	     border, so they are the two the four-sided rule has to special-case;
+	     get either wrong and the field shows three solid edges and one gap.
+	   - the Carbon-default field is the opt-out path. It must measure as
+	     Carbon's own bottom-only border. If someone ever "simplifies" this by
+	     restyling `.cds--text-input` globally instead of via the frame class,
+	     this is the probe that fails. */
+	{
+		page: 'forms',
+		key: 'text-input (readonly)',
+		sel: '.cds--text-input[readonly]',
+		box: true,
+	},
+	{
+		page: 'forms',
+		key: 'text-input (disabled)',
+		sel: '.cds--text-input:disabled',
+		box: true,
+	},
+	{
+		page: 'forms',
+		key: 'text-input (carbon default)',
+		sel: '.wp-block-awt-text-input:not(.awt-field--framed) .cds--text-input',
+		box: true,
+	},
 	/* The 40x16 target that axe caught on 2026-08-01. Its height comes from
 	   `inset-block: 0` on the field wrapper, which no rule states as a number —
 	   exactly the kind of value that changes without anyone noticing. */
@@ -333,6 +360,16 @@ const PROBES = [
 		page: 'widgets',
 		key: 'dropdown-field',
 		sel: '.cds--list-box__field',
+		box: true,
+	},
+	/* The dropdown's border lives on the `.cds--dropdown` root, not on the
+	   `__field` button above — so without this probe nothing measures the
+	   dropdown's boundary at all, and difference D5 could regress on this one
+	   block unnoticed. */
+	{
+		page: 'widgets',
+		key: 'dropdown-root',
+		sel: '.cds--dropdown',
 		box: true,
 	},
 	{

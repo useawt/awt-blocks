@@ -29,6 +29,7 @@ use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
 use function AWT\Blocks\Render\icon;
+use function AWT\Blocks\Render\field_frame_class;
 
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Label', 'awt' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
@@ -158,7 +159,22 @@ $label_class = $ds
 	)
 	: $_label_class_fallback;
 
-$wrapper_attrs = get_block_wrapper_attributes( array( 'class' => $wrapper_class . ' ' . (string) ( $attributes['className'] ?? '' ) ) );
+// `field_frame_class()` draws the field's border on all four sides instead of
+// Carbon's single bottom rule, unless this block's "Carbon default" is on.
+$wrapper_attrs = get_block_wrapper_attributes(
+	array(
+		'class' => implode(
+			' ',
+			array_filter(
+				array(
+					$wrapper_class,
+					field_frame_class( $attributes ),
+					(string) ( $attributes['className'] ?? '' ),
+				)
+			)
+		),
+	)
+);
 
 $input_attrs = html_attrs(
 	array(

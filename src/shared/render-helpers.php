@@ -333,3 +333,29 @@ function describedby( array $ids ): string {
 	$ids = array_values( array_filter( $ids, static fn( $id ): bool => is_string( $id ) && $id !== '' ) );
 	return implode( ' ', $ids );
 }
+
+/**
+ * The wrapper class that draws a form field's boundary on all four sides.
+ *
+ * Carbon gives a field a fill plus a single rule under the text, and expects
+ * the fill to be what makes the field findable. On Carbon's own palette that
+ * fill differs from the page by 1.10:1 in light and 1.20:1 in dark (measured),
+ * so the field's *shape* rests almost entirely on one 1px line at the bottom —
+ * hard to perceive at low vision, and gone in forced-colors mode. AWT encloses
+ * the field instead. See "Differences from Carbon" (D5) in the Stage 1 spec.
+ *
+ * The class only marks the block; the borders themselves live in the theme's
+ * `theme.css`, which is loaded on the front end and inside the editor canvas
+ * both, so the editor preview and the published page agree.
+ *
+ * Deliberately an opt-*out*: a block with `carbonDefault` set emits nothing
+ * here, so Carbon's own CSS applies with no override of ours in the cascade.
+ * That is what keeps "Carbon default" honestly Carbon, and it means the next
+ * Carbon upgrade cannot leave a half-overridden field behind.
+ *
+ * @param array<string, mixed> $attributes Block attributes.
+ * @return string The frame class, or '' when the block opts into Carbon's own look.
+ */
+function field_frame_class( array $attributes ): string {
+	return empty( $attributes['carbonDefault'] ) ? 'awt-field--framed' : '';
+}
