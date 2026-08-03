@@ -531,6 +531,20 @@ const PROBES = [
 	{ page: 'content', key: 'tag-green', sel: '.cds--tag--green', box: true },
 	{ page: 'content', key: 'tag-purple', sel: '.cds--tag--purple' },
 	{ page: 'content', key: 'tag-filter', sel: '.cds--tag--filter', box: true },
+	// The two tag types whose colors come from scope-level tokens rather than
+	// the tag palette, so they change for different reasons than the ten above.
+	{
+		page: 'content',
+		key: 'tag-outline',
+		sel: '.cds--tag--outline',
+		box: true,
+	},
+	{
+		page: 'content',
+		key: 'tag-high-contrast',
+		sel: '.cds--tag--high-contrast',
+		box: true,
+	},
 	{
 		page: 'content',
 		key: 'table-header-cell',
