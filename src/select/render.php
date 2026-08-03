@@ -84,8 +84,24 @@ ob_start();
 	<label for="<?php echo esc_attr( $select_id ); ?>" class="<?php echo esc_attr( $label_class ); ?>"><?php echo wp_kses_post( $label ); ?></label>
 	<div class="cds--select-input__wrapper">
 		<select<?php echo $select_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by html_attrs(), which escapes every attribute name and value. ?>>
-			<option value="" disabled selected hidden><?php echo esc_html( $placeholder ); ?></option>
 			<?php
+			/*
+			 * The placeholder is a real, visible, disabled first option — it must
+			 * NOT carry `hidden`. Browsers drop a hidden <option> from the popup a
+			 * sighted user sees but still expose it in the accessibility tree, so
+			 * the option count screen readers announce came out one too high
+			 * ("3 of 5" on a select offering four choices). Verified in Chromium's
+			 * AX tree: all five options non-ignored. Carbon's own Storybook example
+			 * uses `disabled hidden` here; we deliberately diverge. `disabled`
+			 * alone already makes it unpickable, and with `required` it still
+			 * blocks submission. Matches edit.js, which never emitted `hidden`.
+			 */
+			if ( $placeholder !== '' ) :
+				?>
+			<option value="" disabled selected><?php echo esc_html( $placeholder ); ?></option>
+				<?php
+			endif;
+
 			foreach ( $options as $opt ) :
 				if ( ! is_array( $opt ) ) {
 					continue; }

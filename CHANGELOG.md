@@ -165,6 +165,19 @@
   to the checker even though they were real headings on the published
   page.
 
+- Select: screen readers now count the options correctly. The placeholder
+  ("Choose…") was put in the list as a hidden option, and a browser leaves a
+  hidden option out of the list you see while still handing it to a screen
+  reader. So a select offering four choices was read out as "3 of 5", and every
+  select was off by one. The placeholder is now an ordinary first option, in
+  the list and greyed out, so the count a screen reader reads matches what is
+  on screen. It still cannot be picked, and a required select still refuses to
+  submit while it is the one selected. Clearing the "Placeholder (first
+  option)" field now leaves the row out altogether instead of adding a blank
+  one. An open dropdown shows one more row than before (the placeholder); the
+  closed control is unchanged. (This changes the rendered HTML of existing
+  pages, so the release is marked breaking.)
+
 ### [Improvement]
 
 - Header brand: a logo you have set now shows without a second setting to

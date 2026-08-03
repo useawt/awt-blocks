@@ -151,9 +151,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						disabled={ disabled }
 						defaultValue=""
 					>
-						<option value="" disabled>
-							{ placeholder }
-						</option>
+						{ /* Visible + disabled, never `hidden` — see render.php. */ }
+						{ !! placeholder && (
+							<option value="" disabled>
+								{ placeholder }
+							</option>
+						) }
 						{ ( options || [] ).map( ( o ) => (
 							<option key={ o.value } value={ o.value }>
 								{ o.label }
