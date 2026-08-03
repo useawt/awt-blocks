@@ -9,7 +9,7 @@
 	"awt_component": "select",
 	"title": "Select",
 	"category": "awt-forms",
-	"description": "A styled native dropdown. Best on mobile and in standard forms. Use the Dropdown block for a richer custom interface.",
+	"description": "A dropdown built on your device’s own select control. Best on mobile and in standard forms. Use the Dropdown block for a richer custom interface.",
 	"textdomain": "awt",
 	"keywords": [
 		"select",

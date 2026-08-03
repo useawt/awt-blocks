@@ -8,7 +8,7 @@
 	"awt_component": "button",
 	"title": "Button",
 	"category": "awt-forms",
-	"description": "A button. Use it to trigger an action, or set a URL to turn it into a link.",
+	"description": "A button that triggers an action, or links somewhere when you give it a URL.",
 	"textdomain": "awt",
 	"keywords": [
 		"button",

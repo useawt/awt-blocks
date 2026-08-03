@@ -8,7 +8,7 @@
 	"awt_component": "form",
 	"title": "Form",
 	"category": "awt-forms",
-	"description": "A form container. Add any input blocks inside it — text inputs, checkboxes, radio groups, toggles, and buttons.",
+	"description": "A container that groups input blocks into a form. Add text inputs, checkboxes, radio groups, toggles, and buttons inside it.",
 	"textdomain": "awt",
 	"keywords": [
 		"form",

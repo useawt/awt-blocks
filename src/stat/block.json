@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Statistic",
 	"category": "awt-section",
-	"description": "A large statistic number with a heading and optional description — good for highlighting key figures.",
+	"description": "A large number with a heading and optional description, for highlighting key figures.",
 	"textdomain": "awt",
 	"keywords": [
 		"stat",

@@ -8,7 +8,7 @@
 	"awt_component": "accordion",
 	"title": "Accordion",
 	"category": "awt-data-display",
-	"description": "An accordion — a vertical stack of expandable sections. Add Accordion item blocks inside it.",
+	"description": "A vertical stack of expandable sections. Add Accordion item blocks inside it.",
 	"textdomain": "awt",
 	"keywords": [
 		"accordion",

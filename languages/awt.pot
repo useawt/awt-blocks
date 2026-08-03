@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-02T10:26:11+00:00\n"
+"POT-Creation-Date: 2026-08-03T07:29:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt\n"
@@ -95,20 +95,31 @@ msgstr ""
 msgid "Copied"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:17
+#: src/color-scheme-toggle/render.php:34
 msgid "Light mode"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:18
+#: src/color-scheme-toggle/render.php:35
 msgid "Dark mode"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:19
+#: src/color-scheme-toggle/render.php:36
 msgid "Use system preference"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:41
-#: src/color-scheme-toggle/edit.js:98
+#. translators: %s: name of the color scheme that was just turned on, e.g. "Dark mode".
+#: src/color-scheme-toggle/render.php:91
+#: src/color-scheme-toggle/render.php:93
+#, php-format
+msgid "%s on"
+msgstr ""
+
+#: src/color-scheme-toggle/render.php:94
+msgid "Now following your system setting."
+msgstr ""
+
+#: src/color-scheme-toggle/render.php:103
+#: src/color-scheme-toggle/edit.js:113
 msgid "Color scheme"
 msgstr ""
 
@@ -541,7 +552,7 @@ msgid "No trailing slash"
 msgstr ""
 
 #: src/button/edit.js:120
-#: src/color-scheme-toggle/edit.js:62
+#: src/color-scheme-toggle/edit.js:77
 #: src/header-action/edit.js:76
 #: src/menu-button/edit.js:65
 #: src/modal-opener/edit.js:39
@@ -742,23 +753,23 @@ msgstr ""
 msgid "Segmented (Light / Auto / Dark)"
 msgstr ""
 
-#: src/color-scheme-toggle/edit.js:58
+#: src/color-scheme-toggle/edit.js:73
 msgid "Color scheme toggle"
 msgstr ""
 
-#: src/color-scheme-toggle/edit.js:68
+#: src/color-scheme-toggle/edit.js:83
 msgid "Light-state label"
 msgstr ""
 
-#: src/color-scheme-toggle/edit.js:74
+#: src/color-scheme-toggle/edit.js:89
 msgid "Auto-state label"
 msgstr ""
 
-#: src/color-scheme-toggle/edit.js:82
+#: src/color-scheme-toggle/edit.js:97
 msgid "Dark-state label"
 msgstr ""
 
-#: src/color-scheme-toggle/edit.js:87
+#: src/color-scheme-toggle/edit.js:102
 msgid "Only renders on the front-end when allowVisitorOverride is enabled in theme settings."
 msgstr ""
 
@@ -2360,7 +2371,7 @@ msgstr ""
 
 #: src/accordion/block.json
 msgctxt "block description"
-msgid "An accordion — a vertical stack of expandable sections. Add Accordion item blocks inside it."
+msgid "A vertical stack of expandable sections. Add Accordion item blocks inside it."
 msgstr ""
 
 #: src/accordion/block.json
@@ -2443,7 +2454,7 @@ msgstr ""
 
 #: src/button/block.json
 msgctxt "block description"
-msgid "A button. Use it to trigger an action, or set a URL to turn it into a link."
+msgid "A button that triggers an action, or links somewhere when you give it a URL."
 msgstr ""
 
 #: src/button/block.json
@@ -2504,7 +2515,7 @@ msgstr ""
 
 #: src/code-snippet/block.json
 msgctxt "block description"
-msgid "A styled code snippet with a copy button — inline, single-line, or multi-line. Use the standard Code block for plain code; use this when you want the styling and click-to-copy."
+msgid "A styled code snippet with a copy button. Choose inline, single-line, or multi-line. Use the standard Code block for plain code; use this when you want the styling and click-to-copy."
 msgstr ""
 
 #: src/code-snippet/block.json
@@ -2641,7 +2652,7 @@ msgstr ""
 
 #: src/dropdown/block.json
 msgctxt "block description"
-msgid "A styled single-choice dropdown. Use the Select block instead if you want your device's native dropdown."
+msgid "A single-choice dropdown with Carbon styling and keyboard behavior. Use the Select block instead if you want your device’s native dropdown."
 msgstr ""
 
 #: src/dropdown/block.json
@@ -2775,7 +2786,7 @@ msgstr ""
 
 #: src/form/block.json
 msgctxt "block description"
-msgid "A form container. Add any input blocks inside it — text inputs, checkboxes, radio groups, toggles, and buttons."
+msgid "A container that groups input blocks into a form. Add text inputs, checkboxes, radio groups, toggles, and buttons inside it."
 msgstr ""
 
 #: src/form/block.json
@@ -3020,7 +3031,7 @@ msgstr ""
 
 #: src/list/block.json
 msgctxt "block description"
-msgid "A list — bulleted, numbered, or styled numbered."
+msgid "A bulleted or numbered list. Numbering can use Carbon's styling or the browser's own."
 msgstr ""
 
 #: src/list/block.json
@@ -3258,7 +3269,7 @@ msgstr ""
 
 #: src/select/block.json
 msgctxt "block description"
-msgid "A styled native dropdown. Best on mobile and in standard forms. Use the Dropdown block for a richer custom interface."
+msgid "A dropdown built on your device’s own select control. Best on mobile and in standard forms. Use the Dropdown block for a richer custom interface."
 msgstr ""
 
 #: src/side-nav-divider/block.json
@@ -3366,7 +3377,7 @@ msgstr ""
 
 #: src/stat/block.json
 msgctxt "block description"
-msgid "A large statistic number with a heading and optional description — good for highlighting key figures."
+msgid "A large number with a heading and optional description, for highlighting key figures."
 msgstr ""
 
 #: src/stat/block.json

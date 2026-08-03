@@ -8,7 +8,7 @@
 	"awt_component": "list",
 	"title": "List",
 	"category": "awt-content",
-	"description": "A list — bulleted, numbered, or styled numbered.",
+	"description": "A bulleted or numbered list. Numbering can use Carbon's styling or the browser's own.",
 	"textdomain": "awt",
 	"keywords": [
 		"list",
