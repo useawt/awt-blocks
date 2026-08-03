@@ -14,6 +14,7 @@
 declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\kses_inline;
+use function AWT\Blocks\Render\unique_id;
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
@@ -32,15 +33,39 @@ $container_class = $ds
 	? $ds->classes_for( 'data-table', array( 'stickyHeader' => $sticky_header ) )
 	: ( 'cds--data-table-container' . ( $sticky_header ? ' cds--data-table-container--sticky-header' : '' ) );
 
-$wrapper_attrs = get_block_wrapper_attributes(
-	array(
-		'class'                       => $container_class,
-		'data-wp-interactive'         => 'awt/data-table',
-		'data-wp-init'                => 'callbacks.init',
-		'data-default-sort-key'       => $default_sort_key,
-		'data-default-sort-direction' => $default_sort_dir,
-	)
+$caption_id = $caption !== '' ? unique_id( 'awt-table-caption' ) : '';
+
+/*
+ * The container scrolls horizontally whenever the table is wider than its box:
+ * `theme.css` adds `overflow-x: auto` here, which Carbon does not ship. A box
+ * that scrolls must be reachable by keyboard, or the columns off the right edge
+ * cannot be read without a mouse or touch (WCAG 2.1.1 Keyboard; axe flags it as
+ * `scrollable-region-focusable`). `tabindex="0"` is set unconditionally so it
+ * holds with no JavaScript; the cost is one tab stop on tables that happen to
+ * fit, which is the cheaper trade.
+ *
+ * `role="group"` rather than `role="region"` on purpose: a region is a landmark,
+ * and pages in the block catalog carry up to three tables each, which would
+ * otherwise sprout three landmarks with nothing gained. The group takes its
+ * name from the caption, so focus announces which table it just entered. With
+ * no caption there is nothing truthful to name it, so the role is left off and
+ * only the tab stop remains.
+ */
+$table_attrs = array(
+	'class'                       => $container_class,
+	'tabindex'                    => '0',
+	'data-wp-interactive'         => 'awt/data-table',
+	'data-wp-init'                => 'callbacks.init',
+	'data-default-sort-key'       => $default_sort_key,
+	'data-default-sort-direction' => $default_sort_dir,
 );
+
+if ( $caption_id !== '' ) {
+	$table_attrs['role']            = 'group';
+	$table_attrs['aria-labelledby'] = $caption_id;
+}
+
+$wrapper_attrs = get_block_wrapper_attributes( $table_attrs );
 
 $table_class = $ds
 	? $ds->classes_for(
@@ -192,7 +217,7 @@ ob_start();
 		<?php
 		if ( $caption !== '' ) :
 			?>
-			<caption><?php echo esc_html( $caption ); ?></caption><?php endif; ?>
+			<caption id="<?php echo esc_attr( $caption_id ); ?>"><?php echo esc_html( $caption ); ?></caption><?php endif; ?>
 		<thead><tr><?php echo $headers_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with esc_attr()/kses_inline() on every dynamic part. ?></tr></thead>
 		<tbody><?php echo $rows_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with esc_attr()/kses_inline() on every dynamic part. ?></tbody>
 	</table>

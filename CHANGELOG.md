@@ -165,6 +165,16 @@
   to the checker even though they were real headings on the published
   page.
 
+- Data table: a table too wide for the space it has can now be scrolled with
+  the keyboard. Such a table scrolls sideways, but the scrolling area could not
+  be focused, so anyone without a mouse or a touch screen could not reach the
+  columns past the right edge and simply could not read them (WCAG 2.1.1). The
+  area is now a tab stop, it takes its name from the table's caption so a
+  screen reader says which table you have entered, and the theme draws its
+  usual focus ring around it. Arrow keys scroll it. Tables that fit gain one
+  tab stop and nothing else. The rendered markup changes, which is a deliberate
+  snapshot update.
+
 - Select: screen readers now count the options correctly. The placeholder
   ("Choose…") was put in the list as a hidden option, and a browser leaves a
   hidden option out of the list you see while still handing it to a screen

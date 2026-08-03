@@ -872,9 +872,9 @@
 <p class="awt-spacing-06 wp-block-paragraph">Read-only, sortable, zebra-striped. Click a column header to sort; click again to reverse; third click clears.</p>
 
 
-<div class="cds--data-table-container wp-block-awt-data-table awt-spacing-05" data-wp-interactive="awt/data-table" data-wp-init="callbacks.init" data-default-sort-key="" data-default-sort-direction="asc">
+<div class="cds--data-table-container wp-block-awt-data-table awt-spacing-05" tabindex="0" data-wp-interactive="awt/data-table" data-wp-init="callbacks.init" data-default-sort-key="" data-default-sort-direction="asc" role="group" aria-labelledby="awt-table-caption-{43}">
 	<table class="cds--data-table cds--data-table--md">
-					<caption>Servers</caption>		<thead><tr><th scope="col" data-key="name"><span class="cds--table-header-label">Name</span></th><th scope="col" data-key="region"><span class="cds--table-header-label">Region</span></th><th scope="col" data-key="status"><span class="cds--table-header-label">Status</span></th><th scope="col" data-key="requests"><span class="cds--table-header-label">Requests (24h)</span></th></tr></thead>
+					<caption id="awt-table-caption-{43}">Servers</caption>		<thead><tr><th scope="col" data-key="name"><span class="cds--table-header-label">Name</span></th><th scope="col" data-key="region"><span class="cds--table-header-label">Region</span></th><th scope="col" data-key="status"><span class="cds--table-header-label">Status</span></th><th scope="col" data-key="requests"><span class="cds--table-header-label">Requests (24h)</span></th></tr></thead>
 		<tbody><tr><td data-key="name">web-1</td><td data-key="region">us-east</td><td data-key="status">Healthy</td><td data-key="requests">104321</td></tr><tr><td data-key="name">web-2</td><td data-key="region">eu-west</td><td data-key="status">Healthy</td><td data-key="requests">87005</td></tr><tr><td data-key="name">web-3</td><td data-key="region">ap-south</td><td data-key="status">Degraded</td><td data-key="requests">52119</td></tr><tr><td data-key="name">db-primary</td><td data-key="region">us-east</td><td data-key="status">Healthy</td><td data-key="requests">9810</td></tr></tbody>
 	</table>
 	</div>
@@ -893,27 +893,27 @@
 
 
 <div class="cds--dropdown__wrapper wp-block-awt-dropdown awt-spacing-05" data-wp-interactive="awt/dropdown">
-	<label id="awt-dd-{43}-label" class="cds--label" for="awt-dd-{43}-trigger">Pick a framework</label>
-	<div class="cds--dropdown cds--list-box cds--list-box--md cds--layout--size-md" id="awt-dd-{43}">
+	<label id="awt-dd-{44}-label" class="cds--label" for="awt-dd-{44}-trigger">Pick a framework</label>
+	<div class="cds--dropdown cds--list-box cds--list-box--md cds--layout--size-md" id="awt-dd-{44}">
 		<input type="hidden" name="" value="" />
 		<button
 			type="button"
-			id="awt-dd-{43}-trigger"
+			id="awt-dd-{44}-trigger"
 			class="cds--list-box__field"
 			role="combobox"
 			aria-haspopup="listbox"
-			aria-controls="awt-dd-{43}-listbox"
+			aria-controls="awt-dd-{44}-listbox"
 			aria-expanded="false"
-			aria-labelledby="awt-dd-{43}-label"
+			aria-labelledby="awt-dd-{44}-label"
 						data-wp-on--click="actions.toggle"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
 		<ul
-			id="awt-dd-{43}-listbox"
+			id="awt-dd-{44}-listbox"
 			class="cds--list-box__menu"
 			role="listbox"
-			aria-labelledby="awt-dd-{43}-label"
+			aria-labelledby="awt-dd-{44}-label"
 			hidden
 		>
 							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
@@ -994,10 +994,10 @@
 
 
 <div class="cds--form-item cds--select wp-block-awt-select awt-spacing-05">
-	<label for="awt-select-{44}" class="cds--label">Country</label>
+	<label for="awt-select-{45}" class="cds--label">Country</label>
 	<div class="cds--select-input__wrapper">
-		<select id="awt-select-{44}" class="cds--select-input cds--select-input--md cds--layout--size-md" aria-describedby="awt-select-{44}-helper">
-							<option value="" disabled selected>Choose…</option>
+		<select id="awt-select-{45}" class="cds--select-input cds--select-input--md cds--layout--size-md" aria-describedby="awt-select-{45}-helper">
+						<option value="" disabled selected>Choose…</option>
 								<option value="de">Germany</option>
 							<option value="tr">Türkiye</option>
 							<option value="us">United States</option>
@@ -1007,7 +1007,7 @@
 			<path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/>
 		</svg>
 	</div>
-				<div id="awt-select-{44}-helper" class="cds--form__helper-text">Pick your billing country.</div>
+				<div id="awt-select-{45}-helper" class="cds--form__helper-text">Pick your billing country.</div>
 	</div>
 
 
@@ -1019,15 +1019,15 @@
 <h2 class="wp-block-heading awt-spacing-05">awt/tabs + awt/tab + awt/tab-panel</h2>
 
 
-<div class="cds--tabs cds--tabs--horizontal wp-block-awt-tabs awt-spacing-05" data-wp-interactive="awt/tabs" data-wp-init="callbacks.init" aria-label="Showcase tabs"><div class="awt-tabs__strip"><button type="button" class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--previous cds--tab--overflow-nav-button--hidden" aria-label="Scroll tabs left" tabindex="-1" data-wp-on--click="actions.scrollPrev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 8 10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"/></svg></button><ul class="cds--tab--list" role="tablist" aria-label="Showcase tabs" aria-orientation="horizontal"><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{45}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Overview</span></button></li><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{46}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Specifications</span></button></li><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{47}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Reviews</span></button></li></ul><button type="button" class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--next cds--tab--overflow-nav-button--hidden" aria-label="Scroll tabs right" tabindex="-1" data-wp-on--click="actions.scrollNext"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"/></svg></button></div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{48}" role="tabpanel" tabindex="0" hidden="1">
+<div class="cds--tabs cds--tabs--horizontal wp-block-awt-tabs awt-spacing-05" data-wp-interactive="awt/tabs" data-wp-init="callbacks.init" aria-label="Showcase tabs"><div class="awt-tabs__strip"><button type="button" class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--previous cds--tab--overflow-nav-button--hidden" aria-label="Scroll tabs left" tabindex="-1" data-wp-on--click="actions.scrollPrev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 8 10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"/></svg></button><ul class="cds--tab--list" role="tablist" aria-label="Showcase tabs" aria-orientation="horizontal"><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{46}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Overview</span></button></li><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{47}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Specifications</span></button></li><li class="cds--tabs__nav-item wp-block-awt-tab" role="presentation"><button class="cds--tabs__nav-link" id="awt-tab-{48}" type="button" role="tab" aria-selected="false" tabindex="-1" data-wp-on--click="actions.choose" data-wp-on--keydown="actions.keydown"><span class="cds--tabs__nav-item-label">Reviews</span></button></li></ul><button type="button" class="cds--tab--overflow-nav-button cds--tab--overflow-nav-button--next cds--tab--overflow-nav-button--hidden" aria-label="Scroll tabs right" tabindex="-1" data-wp-on--click="actions.scrollNext"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"/></svg></button></div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{49}" role="tabpanel" tabindex="0" hidden="1">
 
 <p class="awt-spacing-06 wp-block-paragraph">Specifications panel — second panel <strong>co</strong>ntent.</p>
 
-</div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{49}" role="tabpanel" tabindex="0" hidden="1">
+</div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{50}" role="tabpanel" tabindex="0" hidden="1">
 
 <p class="awt-spacing-06 wp-block-paragraph">Overview panel content. Arrow keys (Left/Right) navigate between tabs and immediately activate the matching panel.</p>
 
-</div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{50}" role="tabpanel" tabindex="0" hidden="1">
+</div><div class="cds--tab-content wp-block-awt-tab-panel" id="awt-tabpanel-{51}" role="tabpanel" tabindex="0" hidden="1">
 
 <p class="awt-spacing-06 wp-block-paragraph">Reviews panel — third panel content.</p>
 
@@ -1078,9 +1078,9 @@
 </div>
 
 
-<div class="cds--data-table-container wp-block-awt-data-table awt-spacing-05" data-wp-interactive="awt/data-table" data-wp-init="callbacks.init" data-default-sort-key="" data-default-sort-direction="asc">
+<div class="cds--data-table-container wp-block-awt-data-table awt-spacing-05" tabindex="0" data-wp-interactive="awt/data-table" data-wp-init="callbacks.init" data-default-sort-key="" data-default-sort-direction="asc" role="group" aria-labelledby="awt-table-caption-{52}">
 	<table class="cds--data-table cds--data-table--md">
-					<caption>Edition options and features</caption>		<thead><tr><th scope="col" data-key="feature"><span class="cds--table-header-label">Feature</span></th><th scope="col" data-key="essentials"><span class="cds--table-header-label">Essentials</span></th><th scope="col" data-key="standard"><span class="cds--table-header-label">Standard</span></th><th scope="col" data-key="premium"><span class="cds--table-header-label">Premium</span></th></tr></thead>
+					<caption id="awt-table-caption-{52}">Edition options and features</caption>		<thead><tr><th scope="col" data-key="feature"><span class="cds--table-header-label">Feature</span></th><th scope="col" data-key="essentials"><span class="cds--table-header-label">Essentials</span></th><th scope="col" data-key="standard"><span class="cds--table-header-label">Standard</span></th><th scope="col" data-key="premium"><span class="cds--table-header-label">Premium</span></th></tr></thead>
 		<tbody><tr><td data-key="feature">Secure protocol-based document routing</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr><tr><td data-key="feature">Support for industry and technical standards</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr><tr><td data-key="feature">Real-time event notifications</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr><tr><td data-key="feature">Advanced data transformations</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr><tr><td data-key="feature">Dedicated customer success manager</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr><tr><td data-key="feature">24/7 priority support</td><td data-key="essentials" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="standard" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Not included</span><span class="awt-data-table__not-included" aria-hidden="true">—</span></td><td data-key="premium" class="awt-data-table__cell--boolean"><span class="cds--visually-hidden">Included</span><svg class="awt-data-table__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.5 11.7L2.8 8l1.1-1 2.6 2.5L11.9 4 13 5.1z"/></svg></td></tr></tbody>
 	</table>
 	</div>
@@ -1094,19 +1094,19 @@
 <h2 class="wp-block-heading awt-spacing-05">Frequently asked questions</h2>
 
 
-<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-how-do-i-install-awt"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{51}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{52}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">How do I install AWT?</span></button></h3><div id="awt-faq-panel-{52}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{51}" hidden>
+<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-how-do-i-install-awt"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{53}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{54}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">How do I install AWT?</span></button></h3><div id="awt-faq-panel-{54}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{53}" hidden>
 
 <p class="awt-spacing-06 wp-block-paragraph">Install AWT from the WordPress admin search. The free theme and blocks plugin both live on WordPress.org. Activate the theme, then activate the blocks plugin to get every Carbon component as a real block.</p>
 
 </div></div>
 
-<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-does-awt-work-with-woocommerce"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{53}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{54}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">Does AWT work with WooCommerce?</span></button></h3><div id="awt-faq-panel-{54}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{53}" hidden>
+<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-does-awt-work-with-woocommerce"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{55}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{56}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">Does AWT work with WooCommerce?</span></button></h3><div id="awt-faq-panel-{56}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{55}" hidden>
 
 <p class="awt-spacing-06 wp-block-paragraph">AWT runs alongside WooCommerce without breaking. WooCommerce's own templates render with WC default styling at Stage 1. Full Carbon-styled WooCommerce templates are part of AWT Premium.</p>
 
 </div></div>
 
-<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-can-i-use-my-own-brand-colors"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{55}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{56}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">Can I use my own brand colors?</span></button></h3><div id="awt-faq-panel-{56}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{55}" hidden>
+<div class="cds--accordion__item awt-faq-item wp-block-awt-faq-item awt-spacing-05" id="faq-can-i-use-my-own-brand-colors"><h3 class="awt-faq-item__question-heading" style="margin:0;"><button id="awt-faq-button-{57}" type="button" class="cds--accordion__heading awt-faq-item__trigger" aria-expanded="false" aria-controls="awt-faq-panel-{58}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title awt-faq-item__question">Can I use my own brand colors?</span></button></h3><div id="awt-faq-panel-{58}" class="cds--accordion__content awt-faq-item__answer" role="region" aria-labelledby="awt-faq-button-{57}" hidden>
 
 <p class="awt-spacing-06 wp-block-paragraph">Yes. The Site Editor's palette panel lets you override any Carbon token. Contrast is checked against both light and dark theme scopes so you cannot accidentally ship an inaccessible palette.</p>
 

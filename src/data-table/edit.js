@@ -303,6 +303,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	// Editor was putting size on the container, so Carbon's per-row height
 	// rules (which key off .cds--data-table--xs / --sm / --md / etc. on
 	// the table) never matched in the editor preview.
+	// Deliberate difference from render.php: the front end gives this container
+	// tabindex="0" so a keyboard user can scroll a table wider than its box
+	// (WCAG 2.1.1). The editor preview does not, because a tab stop on the block
+	// wrapper competes with the editor's own block-selection focus handling, and
+	// the requirement is about the published page. Do not "restore parity" here
+	// without checking block selection still works.
 	const blockProps = useBlockProps( {
 		className: `cds--data-table-container${
 			stickyHeader ? ' cds--data-table-container--sticky-header' : ''
