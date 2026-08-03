@@ -165,6 +165,16 @@
   to the checker even though they were real headings on the published
   page.
 
+- Code snippet: a multi-line snippet wider than the space it has can now be
+  scrolled with the keyboard. The snippet was already a tab stop, but on the
+  wrong box: the multi-line variant scrolls the code itself, one level below the
+  area that was focusable, so a keyboard user could focus the snippet and still
+  not reach the code past the right edge (WCAG 2.1.1). The tab stop now sits on
+  whatever actually scrolls, which differs between the single-line and
+  multi-line variants, and neither carries a tab stop that does nothing. Arrow
+  keys scroll it, and it draws the theme's usual focus ring. The rendered markup
+  changes, which is a deliberate snapshot update.
+
 - Data table: a table too wide for the space it has can now be scrolled with
   the keyboard. Such a table scrolls sideways, but the scrolling area could not
   be focused, so anyone without a mouse or a touch screen could not reach the
