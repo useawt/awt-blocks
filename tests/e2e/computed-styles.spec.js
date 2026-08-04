@@ -493,6 +493,15 @@ const PROBES = [
 		key: 'plain-paragraph-link',
 		sel: 'main p a:not([class*="cds--"]):not([class*="wp-block"])',
 	},
+	// A link inside a tile. The tile is a container, not a link, so a link in one
+	// is ordinary content and has to stay underlined. This probe exists because
+	// resetting the underline on `.cds--tile` instead of `a.cds--tile` silently
+	// stripped it from every link inside every tile, and reached production.
+	{
+		page: 'content',
+		key: 'link-inside-tile',
+		sel: '.cds--tile a.cds--link',
+	},
 	{
 		page: 'content',
 		key: 'link (hover)',

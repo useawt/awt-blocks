@@ -136,6 +136,14 @@ const CONTENT = `
 <!-- wp:awt/tile -->
 <!-- wp:heading {"level":3} --><h3 class="wp-block-heading">Keyboard first</h3><!-- /wp:heading -->
 <!-- wp:paragraph --><p>Every control is reachable without a mouse.</p><!-- /wp:paragraph -->
+<!-- A Link block INSIDE a tile. A tile is a box that holds content, so a link
+     in one is ordinary text-flow content and must look like a link. This is
+     here because the first version of D6 reset the underline on the tile class
+     rather than on the anchor form of it, which stripped the underline from
+     every link inside every tile - invisible to the gate, because no fixture
+     tile held a link. (No backticks in this comment: the fixture is a JS
+     template literal, so one would end the string.) -->
+<!-- wp:awt/link {"text":"Read the keyboard guide","href":"/docs"} /-->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/feature-grid -->
 
