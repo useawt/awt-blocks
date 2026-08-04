@@ -483,6 +483,16 @@ const PROBES = [
 		sel: '.cds--breadcrumb-item [aria-current="page"]',
 	},
 	{ page: 'content', key: 'link', sel: 'a.wp-block-awt-link' },
+	// A plain <a> typed into a paragraph — no design-system class, so nothing in
+	// theme.css targets it. It is here because D6 deliberately leaves it alone:
+	// the browser already underlines it, and the moment our rules start setting
+	// its decoration, turning a switch off would strip an underline the visitor
+	// had before. This probe fails if that ever starts happening.
+	{
+		page: 'content',
+		key: 'plain-paragraph-link',
+		sel: 'main p a:not([class*="cds--"]):not([class*="wp-block"])',
+	},
 	{
 		page: 'content',
 		key: 'link (hover)',
@@ -738,6 +748,13 @@ function measureInPage( probe ) {
 		fontSize: style.fontSize,
 		fontWeight: style.fontWeight,
 		lineHeight: style.lineHeight,
+		// Recorded on every probe, not just links. A link that stops being
+		// underlined is difference D6 drifting back — a WCAG 1.4.1 failure on
+		// any palette where the link colour is under 3:1 against body text,
+		// which Carbon's dark blue is (2.14:1 measured). Recording it
+		// everywhere also freezes the negative: a button or a tag that
+		// suddenly grows an underline is a regression too.
+		textDecoration: `${ style.textDecorationLine } ${ style.textDecorationStyle } ${ style.textDecorationColor } ${ style.textDecorationThickness }`,
 		outline: `${ style.outlineWidth } ${ style.outlineStyle } ${ style.outlineColor }`,
 		outlineOffset: style.outlineOffset,
 		boxShadow: style.boxShadow,
