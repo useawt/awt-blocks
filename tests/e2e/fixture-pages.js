@@ -63,6 +63,30 @@ const WIDGETS = `
 <!-- wp:awt/tile {"variant":"expandable","summary":"Deployment details"} -->
 <!-- wp:paragraph --><p>Region, instance size, and rollout window.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
+
+<!-- Selectable tiles. A selectable tile is a checkbox or a radio drawn as a
+     box, so its whole meaning lives in the accessibility tree - role, checked
+     state, and (for a group) which of how many. Nothing about that is visible
+     to a gate that reads markup or colour, which is why it is here. Two in a
+     group and one standalone, because the group and the lone tile take
+     different roles. -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size"} -->
+<!-- wp:paragraph --><p>Standard instance</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size"} -->
+<!-- wp:paragraph --><p>Large instance</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+<!-- wp:awt/tile {"variant":"selectable"} -->
+<!-- wp:paragraph --><p>Enable nightly backups</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+
+<!-- The colour-scheme toggle's other two kinds. The icon-only kind is in the
+     header on every page already; these two are not anywhere, and the whole
+     reason this gate exists is that this control's accessible name and pressed
+     state were wrong for weeks while every gate passed. Each kind names and
+     announces itself differently, so one kind covered is not three. -->
+<!-- wp:awt/color-scheme-toggle {"kind":"with-label"} /-->
+<!-- wp:awt/color-scheme-toggle {"kind":"segmented"} /-->
 <!-- /wp:awt/section -->
 `;
 

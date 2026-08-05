@@ -1,0 +1,729 @@
+{
+	"$note": "Accessibility subtrees for a curated control list, per colour scheme, as Chromium computes them. Written by UPDATE_SNAPSHOTS=1 npm run test:ax. A diff means a code change altered what assistive technology is told — read it before regenerating. A stable snapshot is not a correct one.",
+	"tree": {
+		"light": {
+			"content-mobile/header-menu-trigger (mobile, open)": [
+				"button \"Close menu\" expanded=true invalid=false",
+				"  none [ignored: uninteresting]"
+			],
+			"content-mobile/header-nav (mobile, revealed)": [
+				"navigation \"Primary\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"    listitem level=1",
+				"      button \"Docs\" expanded=false",
+				"        StaticText \"Docs\""
+			],
+			"content/breadcrumb": [
+				"navigation \"Breadcrumbs\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"      generic",
+				"        StaticText \"/\"",
+				"    listitem level=1",
+				"      link \"Docs\"",
+				"        StaticText \"Docs\"",
+				"      generic",
+				"        StaticText \"/\"",
+				"    listitem level=1",
+				"      generic",
+				"        StaticText \"Blocks\"",
+				"      generic",
+				"        StaticText \"/\""
+			],
+			"content/color-scheme-toggle (icon-only)": [
+				"button \"Dark mode\" pressed=false invalid=false"
+			],
+			"content/header-nav (submenu closed)": [
+				"navigation \"Primary\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"    listitem level=1",
+				"      button \"Docs\" expanded=false",
+				"        StaticText \"Docs\""
+			],
+			"content/header-nav (submenu open)": [
+				"listitem level=1",
+				"  button \"Docs\" expanded=true",
+				"    StaticText \"Docs\"",
+				"  list \"Docs\"",
+				"    listitem level=2",
+				"      link \"Getting started\"",
+				"        StaticText \"Getting started\"",
+				"    listitem level=2",
+				"      link \"Guides\"",
+				"        StaticText \"Guides\""
+			],
+			"content/pagination": [
+				"navigation \"Pagination\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Previous page\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 1\"",
+				"        StaticText \"1\"",
+				"        generic",
+				"    listitem level=1",
+				"      generic \"Page 2, current page\"",
+				"        StaticText \"2\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 3\"",
+				"        StaticText \"3\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 4\"",
+				"        StaticText \"4\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 5\"",
+				"        StaticText \"5\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Next page\"",
+				"        generic"
+			],
+			"content/skip-link": [
+				"link \"Skip to main content\"",
+				"  StaticText \"Skip to main content\""
+			],
+			"content/tag (dismissible)": [
+				"generic",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Filterable\"",
+				"  button \"Dismiss\" invalid=false"
+			],
+			"forms/checkbox": [
+				"generic",
+				"  checkbox \"Email me product updates\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Email me product updates\""
+			],
+			"forms/checkbox (indeterminate)": [
+				"generic",
+				"  checkbox \"Select all regions\" checked=mixed invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Select all regions\""
+			],
+			"forms/password-input": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Password\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Password\" desc=\"At least 12 characters.\" required=false invalid=false",
+				"        generic",
+				"      button \"Show password\" invalid=false",
+				"  generic",
+				"    StaticText \"At least 12 characters.\""
+			],
+			"forms/radio-button-group": [
+				"group \"Billing period\" invalid=false",
+				"  Legend",
+				"    StaticText \"Billing period\"",
+				"  generic",
+				"    radio \"Monthly\" checked=true invalid=false",
+				"    LabelText",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Monthly\"",
+				"  generic",
+				"    radio \"Yearly\" checked=false invalid=false",
+				"    LabelText",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Yearly\""
+			],
+			"forms/select (with placeholder)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Plan\"",
+				"  generic",
+				"    combobox \"Plan\" value=\"Choose…\" expanded=false invalid=false",
+				"      MenuListPopup",
+				"        option \"Choose…\" disabled=true",
+				"        option \"Option 1\" selected=false",
+				"        option \"Option 2\" selected=false",
+				"        option \"Option 3\" selected=false"
+			],
+			"forms/text-input (disabled)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Carbon-styled field\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Carbon-styled field\" required=false invalid=false",
+				"        generic"
+			],
+			"forms/text-input (invalid)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Email\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Email\" desc=\"Enter a valid email address.\" required=true invalid=true",
+				"        generic",
+				"    none [ignored: notRendered]",
+				"      none [ignored: notRendered]"
+			],
+			"forms/text-input (required)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Full name\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Full name\" desc=\"As it appears on your ID.\" required=true invalid=false",
+				"        generic",
+				"  generic",
+				"    StaticText \"As it appears on your ID.\""
+			],
+			"forms/toggle": [
+				"generic",
+				"  switch \"Two-factor authentication On\" checked=true invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Two-factor authentication\"",
+				"    generic",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"On\""
+			],
+			"widgets/accordion (closed)": [
+				"list",
+				"  listitem level=1",
+				"    button \"What is AWT?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"What is AWT?\"",
+				"  listitem level=1",
+				"    button \"Which components ship?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Which components ship?\""
+			],
+			"widgets/accordion (first item open)": [
+				"list",
+				"  listitem level=1",
+				"    button \"What is AWT?\" expanded=true invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"What is AWT?\"",
+				"    region \"What is AWT?\"",
+				"      paragraph",
+				"        StaticText \"An accessibility-first block theme.\"",
+				"  listitem level=1",
+				"    button \"Which components ship?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Which components ship?\""
+			],
+			"widgets/color-scheme-toggle (segmented)": [
+				"group \"Color scheme\"",
+				"  button \"Light mode\" pressed=true invalid=false",
+				"    StaticText \"Light mode\"",
+				"  button \"Use system preference\" pressed=false invalid=false",
+				"    StaticText \"Use system preference\"",
+				"  button \"Dark mode\" pressed=false invalid=false",
+				"    StaticText \"Dark mode\""
+			],
+			"widgets/color-scheme-toggle (with-label)": [
+				"button \"Dark mode\" pressed=false invalid=false",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Dark mode\""
+			],
+			"widgets/content-switcher": [
+				"tablist \"View mode\"",
+				"  tab \"List\" selected=true invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"List\"",
+				"  tab \"Grid\" selected=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Grid\""
+			],
+			"widgets/dropdown (closed)": [
+				"generic",
+				"  combobox \"Region\" value=\"Choose…\" expanded=false required=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Choose…\"",
+				"    generic"
+			],
+			"widgets/dropdown (open)": [
+				"generic",
+				"  combobox \"Region\" value=\"Choose…\" expanded=true required=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Choose…\"",
+				"    generic",
+				"  listbox \"Region\" required=false",
+				"    option \"Option 1\" selected=false",
+				"      button \"Option 1\" invalid=false",
+				"        StaticText \"Option 1\"",
+				"    option \"Option 2\" selected=false",
+				"      button \"Option 2\" invalid=false",
+				"        StaticText \"Option 2\"",
+				"    option \"Option 3\" selected=false",
+				"      button \"Option 3\" invalid=false",
+				"        StaticText \"Option 3\""
+			],
+			"widgets/faq-item (closed)": [
+				"listitem level=1",
+				"  heading \"Does it work without JavaScript?\" level=3",
+				"    button \"Does it work without JavaScript?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Does it work without JavaScript?\""
+			],
+			"widgets/menu-button (closed)": [
+				"generic",
+				"  button \"Actions\" expanded=false invalid=false",
+				"    StaticText \"Actions\"",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenSubtree]",
+				"  none [ignored: notRendered]"
+			],
+			"widgets/modal (open)": [
+				"dialog \"Confirm deletion\"",
+				"  none [ignored: uninteresting]",
+				"    paragraph",
+				"      StaticText \"Account settings\"",
+				"    heading \"Confirm deletion\" level=2",
+				"      StaticText \"Confirm deletion\"",
+				"  button \"Close\" invalid=false",
+				"  generic",
+				"    paragraph",
+				"      StaticText \"This cannot be undone.\"",
+				"  none [ignored: uninteresting]",
+				"    button \"Cancel\" invalid=false",
+				"      StaticText \"Cancel\"",
+				"    button \"Delete\" invalid=false",
+				"      StaticText \"Delete\""
+			],
+			"widgets/modal-opener": [
+				"button \"Open the dialog\" invalid=false",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Open the dialog\""
+			],
+			"widgets/tab-panel (visible)": [
+				"tabpanel \"Overview\"",
+				"  paragraph",
+				"    StaticText \"Overview panel.\""
+			],
+			"widgets/tabs": [
+				"generic \"Product details\"",
+				"  none [ignored: uninteresting]",
+				"    tablist \"Product details\"",
+				"      tab \"Overview\" selected=true invalid=false",
+				"        StaticText \"Overview\"",
+				"      tab \"Specifications\" selected=false invalid=false",
+				"        StaticText \"Specifications\"",
+				"  tabpanel \"Overview\"",
+				"    paragraph",
+				"      StaticText \"Overview panel.\""
+			],
+			"widgets/tile (expandable, closed)": [
+				"group",
+				"  none [ignored: uninteresting]",
+				"    DisclosureTriangle \"Deployment details\" expanded=false",
+				"      none [ignored: uninteresting]",
+				"        none [ignored: uninteresting]",
+				"          StaticText \"Deployment details\"",
+				"  none [ignored: uninteresting]"
+			],
+			"widgets/tile (selectable, in group) 1": [
+				"radio \"Standard instance\" checked=false",
+				"  paragraph",
+				"    StaticText \"Standard instance\""
+			],
+			"widgets/tile (selectable, in group) 2": [
+				"radio \"Large instance\" checked=false",
+				"  paragraph",
+				"    StaticText \"Large instance\""
+			],
+			"widgets/tile (selectable, standalone)": [
+				"checkbox \"Enable nightly backups\" checked=false",
+				"  paragraph",
+				"    StaticText \"Enable nightly backups\""
+			],
+			"widgets/toggletip (closed)": [
+				"none [ignored: uninteresting]",
+				"  button \"More information\" expanded=false invalid=false",
+				"  generic"
+			]
+		},
+		"dark": {
+			"content-mobile/header-menu-trigger (mobile, open)": [
+				"button \"Close menu\" expanded=true invalid=false",
+				"  none [ignored: uninteresting]"
+			],
+			"content-mobile/header-nav (mobile, revealed)": [
+				"navigation \"Primary\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"    listitem level=1",
+				"      button \"Docs\" expanded=false",
+				"        StaticText \"Docs\""
+			],
+			"content/breadcrumb": [
+				"navigation \"Breadcrumbs\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"      generic",
+				"        StaticText \"/\"",
+				"    listitem level=1",
+				"      link \"Docs\"",
+				"        StaticText \"Docs\"",
+				"      generic",
+				"        StaticText \"/\"",
+				"    listitem level=1",
+				"      generic",
+				"        StaticText \"Blocks\"",
+				"      generic",
+				"        StaticText \"/\""
+			],
+			"content/color-scheme-toggle (icon-only)": [
+				"button \"Dark mode\" pressed=true invalid=false"
+			],
+			"content/header-nav (submenu closed)": [
+				"navigation \"Primary\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Home\"",
+				"        StaticText \"Home\"",
+				"    listitem level=1",
+				"      button \"Docs\" expanded=false",
+				"        StaticText \"Docs\""
+			],
+			"content/header-nav (submenu open)": [
+				"listitem level=1",
+				"  button \"Docs\" expanded=true",
+				"    StaticText \"Docs\"",
+				"  list \"Docs\"",
+				"    listitem level=2",
+				"      link \"Getting started\"",
+				"        StaticText \"Getting started\"",
+				"    listitem level=2",
+				"      link \"Guides\"",
+				"        StaticText \"Guides\""
+			],
+			"content/pagination": [
+				"navigation \"Pagination\"",
+				"  list",
+				"    listitem level=1",
+				"      link \"Previous page\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 1\"",
+				"        StaticText \"1\"",
+				"        generic",
+				"    listitem level=1",
+				"      generic \"Page 2, current page\"",
+				"        StaticText \"2\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 3\"",
+				"        StaticText \"3\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 4\"",
+				"        StaticText \"4\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Page 5\"",
+				"        StaticText \"5\"",
+				"        generic",
+				"    listitem level=1",
+				"      link \"Next page\"",
+				"        generic"
+			],
+			"content/skip-link": [
+				"link \"Skip to main content\"",
+				"  StaticText \"Skip to main content\""
+			],
+			"content/tag (dismissible)": [
+				"generic",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Filterable\"",
+				"  button \"Dismiss\" invalid=false"
+			],
+			"forms/checkbox": [
+				"generic",
+				"  checkbox \"Email me product updates\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Email me product updates\""
+			],
+			"forms/checkbox (indeterminate)": [
+				"generic",
+				"  checkbox \"Select all regions\" checked=mixed invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Select all regions\""
+			],
+			"forms/password-input": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Password\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Password\" desc=\"At least 12 characters.\" required=false invalid=false",
+				"        generic",
+				"      button \"Show password\" invalid=false",
+				"  generic",
+				"    StaticText \"At least 12 characters.\""
+			],
+			"forms/radio-button-group": [
+				"group \"Billing period\" invalid=false",
+				"  Legend",
+				"    StaticText \"Billing period\"",
+				"  generic",
+				"    radio \"Monthly\" checked=true invalid=false",
+				"    LabelText",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Monthly\"",
+				"  generic",
+				"    radio \"Yearly\" checked=false invalid=false",
+				"    LabelText",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Yearly\""
+			],
+			"forms/select (with placeholder)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Plan\"",
+				"  generic",
+				"    combobox \"Plan\" value=\"Choose…\" expanded=false invalid=false",
+				"      MenuListPopup",
+				"        option \"Choose…\" disabled=true",
+				"        option \"Option 1\" selected=false",
+				"        option \"Option 2\" selected=false",
+				"        option \"Option 3\" selected=false"
+			],
+			"forms/text-input (disabled)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Carbon-styled field\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Carbon-styled field\" required=false invalid=false",
+				"        generic"
+			],
+			"forms/text-input (invalid)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Email\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Email\" desc=\"Enter a valid email address.\" required=true invalid=true",
+				"        generic",
+				"    none [ignored: notRendered]",
+				"      none [ignored: notRendered]"
+			],
+			"forms/text-input (required)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Full name\"",
+				"  none [ignored: uninteresting]",
+				"    generic",
+				"      textbox \"Full name\" desc=\"As it appears on your ID.\" required=true invalid=false",
+				"        generic",
+				"  generic",
+				"    StaticText \"As it appears on your ID.\""
+			],
+			"forms/toggle": [
+				"generic",
+				"  switch \"Two-factor authentication On\" checked=true invalid=false",
+				"  LabelText",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Two-factor authentication\"",
+				"    generic",
+				"      none [ignored: uninteresting]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"On\""
+			],
+			"widgets/accordion (closed)": [
+				"list",
+				"  listitem level=1",
+				"    button \"What is AWT?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"What is AWT?\"",
+				"  listitem level=1",
+				"    button \"Which components ship?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Which components ship?\""
+			],
+			"widgets/accordion (first item open)": [
+				"list",
+				"  listitem level=1",
+				"    button \"What is AWT?\" expanded=true invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"What is AWT?\"",
+				"    region \"What is AWT?\"",
+				"      paragraph",
+				"        StaticText \"An accessibility-first block theme.\"",
+				"  listitem level=1",
+				"    button \"Which components ship?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Which components ship?\""
+			],
+			"widgets/color-scheme-toggle (segmented)": [
+				"group \"Color scheme\"",
+				"  button \"Light mode\" pressed=false invalid=false",
+				"    StaticText \"Light mode\"",
+				"  button \"Use system preference\" pressed=false invalid=false",
+				"    StaticText \"Use system preference\"",
+				"  button \"Dark mode\" pressed=true invalid=false",
+				"    StaticText \"Dark mode\""
+			],
+			"widgets/color-scheme-toggle (with-label)": [
+				"button \"Dark mode\" pressed=true invalid=false",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Dark mode\""
+			],
+			"widgets/content-switcher": [
+				"tablist \"View mode\"",
+				"  tab \"List\" selected=true invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"List\"",
+				"  tab \"Grid\" selected=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Grid\""
+			],
+			"widgets/dropdown (closed)": [
+				"generic",
+				"  combobox \"Region\" value=\"Choose…\" expanded=false required=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Choose…\"",
+				"    generic"
+			],
+			"widgets/dropdown (open)": [
+				"generic",
+				"  combobox \"Region\" value=\"Choose…\" expanded=true required=false invalid=false",
+				"    none [ignored: uninteresting]",
+				"      StaticText \"Choose…\"",
+				"    generic",
+				"  listbox \"Region\" required=false",
+				"    option \"Option 1\" selected=false",
+				"      button \"Option 1\" invalid=false",
+				"        StaticText \"Option 1\"",
+				"    option \"Option 2\" selected=false",
+				"      button \"Option 2\" invalid=false",
+				"        StaticText \"Option 2\"",
+				"    option \"Option 3\" selected=false",
+				"      button \"Option 3\" invalid=false",
+				"        StaticText \"Option 3\""
+			],
+			"widgets/faq-item (closed)": [
+				"listitem level=1",
+				"  heading \"Does it work without JavaScript?\" level=3",
+				"    button \"Does it work without JavaScript?\" expanded=false invalid=false",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Does it work without JavaScript?\""
+			],
+			"widgets/menu-button (closed)": [
+				"generic",
+				"  button \"Actions\" expanded=false invalid=false",
+				"    StaticText \"Actions\"",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenSubtree]",
+				"  none [ignored: notRendered]"
+			],
+			"widgets/modal (open)": [
+				"dialog \"Confirm deletion\"",
+				"  none [ignored: uninteresting]",
+				"    paragraph",
+				"      StaticText \"Account settings\"",
+				"    heading \"Confirm deletion\" level=2",
+				"      StaticText \"Confirm deletion\"",
+				"  button \"Close\" invalid=false",
+				"  generic",
+				"    paragraph",
+				"      StaticText \"This cannot be undone.\"",
+				"  none [ignored: uninteresting]",
+				"    button \"Cancel\" invalid=false",
+				"      StaticText \"Cancel\"",
+				"    button \"Delete\" invalid=false",
+				"      StaticText \"Delete\""
+			],
+			"widgets/modal-opener": [
+				"button \"Open the dialog\" invalid=false",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Open the dialog\""
+			],
+			"widgets/tab-panel (visible)": [
+				"tabpanel \"Overview\"",
+				"  paragraph",
+				"    StaticText \"Overview panel.\""
+			],
+			"widgets/tabs": [
+				"generic \"Product details\"",
+				"  none [ignored: uninteresting]",
+				"    tablist \"Product details\"",
+				"      tab \"Overview\" selected=true invalid=false",
+				"        StaticText \"Overview\"",
+				"      tab \"Specifications\" selected=false invalid=false",
+				"        StaticText \"Specifications\"",
+				"  tabpanel \"Overview\"",
+				"    paragraph",
+				"      StaticText \"Overview panel.\""
+			],
+			"widgets/tile (expandable, closed)": [
+				"group",
+				"  none [ignored: uninteresting]",
+				"    DisclosureTriangle \"Deployment details\" expanded=false",
+				"      none [ignored: uninteresting]",
+				"        none [ignored: uninteresting]",
+				"          StaticText \"Deployment details\"",
+				"  none [ignored: uninteresting]"
+			],
+			"widgets/tile (selectable, in group) 1": [
+				"radio \"Standard instance\" checked=false",
+				"  paragraph",
+				"    StaticText \"Standard instance\""
+			],
+			"widgets/tile (selectable, in group) 2": [
+				"radio \"Large instance\" checked=false",
+				"  paragraph",
+				"    StaticText \"Large instance\""
+			],
+			"widgets/tile (selectable, standalone)": [
+				"checkbox \"Enable nightly backups\" checked=false",
+				"  paragraph",
+				"    StaticText \"Enable nightly backups\""
+			],
+			"widgets/toggletip (closed)": [
+				"none [ignored: uninteresting]",
+				"  button \"More information\" expanded=false invalid=false",
+				"  generic"
+			]
+		}
+	}
+}

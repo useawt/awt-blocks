@@ -5,6 +5,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { useEffect, useRef } from '@wordpress/element';
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
@@ -20,6 +21,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		invalidText,
 	} = attributes;
 	const id = `awt-cb-${ clientId.slice( 0, 8 ) }`;
+
+	// The partially-checked state has no HTML attribute — it is a property only —
+	// so React cannot express it as a prop and the preview drew an indeterminate
+	// checkbox as a plain empty one. Setting the property is what makes Carbon's
+	// `:indeterminate` rule draw the dash. The front end does the same thing in
+	// view.js.
+	const inputRef = useRef( null );
+	useEffect( () => {
+		if ( inputRef.current ) {
+			inputRef.current.indeterminate = !! indeterminate;
+		}
+	}, [ indeterminate ] );
 
 	return (
 		<>
@@ -93,6 +106,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				     revert the click, keeping the preview at the "Checked by
 				     default" attribute. */ }
 				<input
+					ref={ inputRef }
 					type="checkbox"
 					id={ id }
 					className="cds--checkbox"

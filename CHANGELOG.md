@@ -152,6 +152,14 @@
 
 ### [A11y]
 
+- A partially-checked Checkbox now really is partially checked. The block has
+  had an **Indeterminate** setting all along, but nothing acted on it: the
+  checkbox drew as an ordinary empty one, and a screen reader said "not
+  checked". It now shows the dash Carbon designed for that state and announces
+  itself as partially checked, in the editor and on the published page. The
+  state clears the first time someone ticks the box, which is what you want from
+  a "select all" checkbox.
+
 - Color scheme toggle: switching between light and dark is announced. There was
   already a polite announcement, but it was built at the moment it was used,
   and a screen reader only reads out a region that was already on the page, so
