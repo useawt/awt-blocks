@@ -27,6 +27,7 @@
 		"test:ax": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/ax-tree.spec.js",
 		"test:styles": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/computed-styles.spec.js",
 		"test:focus": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/focus-appearance.spec.js",
+		"test:dropdown-keys": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/dropdown-keyboard.spec.js",
 		"env:prepare-tests": "wp-env run tests-cli -- bash -c 'wp theme activate awt && wp plugin activate awt-blocks safe-svg && wp rewrite structure \"/%postname%/\" --hard && wp rewrite flush --hard'",
 		"i18n:pot": "wp i18n make-pot . languages/awt.pot --exclude=build,tests,scripts --domain=awt",
 		"check:class-parity": "node scripts/check-class-parity.js",

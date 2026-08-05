@@ -17,6 +17,22 @@ const HIGHLIGHTED = 'cds--list-box__menu-item--highlighted';
 const ACTIVE = 'cds--list-box__menu-item--active';
 
 /**
+ * Type-to-select state, per dropdown.
+ *
+ * Screen readers announce `role="combobox"` as something you can type into, so
+ * the role itself promises this. Carbon keeps that promise — measured on its
+ * live component: typing "o" opens the list and lands on "Option 1", "op" keeps
+ * matching, and the buffer clears after about a second. Ours promised it and did
+ * nothing, which is worse than either supporting it or not claiming it.
+ *
+ * @type {WeakMap<HTMLElement, {buffer: string, timer: number}>}
+ */
+const typeahead = new WeakMap();
+
+/** How long a typed prefix stays live. Downshift, which Carbon uses, waits 500ms. */
+const TYPEAHEAD_MS = 500;
+
+/**
  * The options, in DOM order.
  *
  * @param {Object} parts Result of getParts().
@@ -72,6 +88,51 @@ function selectedIndex( parts ) {
 	return itemsOf( parts ).findIndex(
 		( el ) => el.getAttribute( 'aria-selected' ) === 'true'
 	);
+}
+
+/**
+ * Extend the typed prefix and move the highlight to the first option matching it.
+ *
+ * @param {Object} parts Result of getParts().
+ * @param {string} char  The character just typed.
+ * @return {boolean} True when a matching option was found.
+ */
+function typeToSelect( parts, char ) {
+	const state = typeahead.get( parts.root ) || { buffer: '', timer: 0 };
+	window.clearTimeout( state.timer );
+	state.buffer += char.toLowerCase();
+	state.timer = window.setTimeout( () => {
+		state.buffer = '';
+	}, TYPEAHEAD_MS );
+	typeahead.set( parts.root, state );
+
+	const items = itemsOf( parts );
+	let index = items.findIndex( ( el ) =>
+		el.textContent.trim().toLowerCase().startsWith( state.buffer )
+	);
+
+	// A repeated single character cycles through the options starting with it —
+	// the standard behavior when someone presses the same key again rather than
+	// spelling a longer prefix.
+	const repeated =
+		state.buffer.length > 1 &&
+		state.buffer === state.buffer[ 0 ].repeat( state.buffer.length );
+	if ( index < 0 && repeated ) {
+		const letter = state.buffer[ 0 ];
+		const matches = items.filter( ( el ) =>
+			el.textContent.trim().toLowerCase().startsWith( letter )
+		);
+		if ( matches.length ) {
+			const nth = ( state.buffer.length - 1 ) % matches.length;
+			index = items.indexOf( matches[ nth ] );
+		}
+	}
+
+	if ( index < 0 ) {
+		return false;
+	}
+	highlight( parts, index );
+	return true;
 }
 
 /**
@@ -151,6 +212,14 @@ function close( parts, returnFocus = true ) {
 	// too — there, because React unmounts the options; here, because they stay
 	// in the DOM behind `hidden` and a stale id would outlive what it named.
 	trigger.setAttribute( 'aria-activedescendant', '' );
+	// Closing also drops any typed prefix. Without this, a prefix typed just
+	// before closing survives into the next keystroke, so typing "s" after a
+	// stray "v" searches for "vs" and appears to do nothing at all.
+	const typed = typeahead.get( root );
+	if ( typed ) {
+		window.clearTimeout( typed.timer );
+		typed.buffer = '';
+	}
 	listbox
 		.querySelectorAll( `.${ HIGHLIGHTED }` )
 		.forEach( ( el ) => el.classList.remove( HIGHLIGHTED ) );
@@ -233,6 +302,24 @@ store( 'awt/dropdown', {
 				key !== 'Home' &&
 				key !== 'End'
 			) {
+				// Type to select. Single printable characters only, and never with
+				// a modifier held, so browser and screen-reader shortcuts still
+				// reach the page. Space is deliberately excluded: it is handled
+				// above as open/select, which is what Carbon's does too.
+				if (
+					key.length === 1 &&
+					key !== ' ' &&
+					! event.ctrlKey &&
+					! event.metaKey &&
+					! event.altKey
+				) {
+					if ( ! expanded ) {
+						open( parts );
+					}
+					if ( typeToSelect( parts, key ) ) {
+						event.preventDefault();
+					}
+				}
 				return;
 			}
 			event.preventDefault();

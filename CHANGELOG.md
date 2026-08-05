@@ -181,6 +181,15 @@
   announces first. There is a **Value** field on each tile for what it sends when
   a form is submitted.
 
+- Dropdown: you can type to pick a choice. A screen reader tells people this
+  dropdown can be typed into — that comes with the kind of control it is — but
+  typing did nothing, so the instruction was a dead end for exactly the people
+  who were given it. Type a letter and the list opens on the first choice
+  starting with it; keep typing to narrow it down, or press the same letter again
+  to step through the choices that share it. Pause for half a second and the next
+  letter starts a fresh search. A letter that matches nothing leaves your place
+  alone instead of clearing it, and shortcuts like Ctrl+R still reach the browser.
+
 - Dropdown: the choices are no longer buttons, and the keyboard works the way a
   dropdown should. Each choice used to be a button inside the list, which put a
   control inside a control: a screen reader read every choice twice, once as a
