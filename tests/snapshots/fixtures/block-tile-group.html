@@ -1,0 +1,53 @@
+<!-- Grouped selectable tiles: a fieldset + legend around real radio inputs.
+     The group is the whole point — without it each tile announced as a radio
+     button belonging to nothing. -->
+<!-- wp:awt/tile-group {"label":"Instance size"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size","value":"standard"} -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Standard</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Two cores, 4 GB of memory.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size","value":"large"} -->
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Large</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Eight cores, 32 GB of memory.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+<!-- /wp:awt/tile-group -->
+
+<!-- A group whose tiles have no value set. This locks in a decision rather than
+     just covering a path: the render must emit NO value attribute here. The
+     tempting fallback, reusing the generated id, would submit `awt-tile-27` — a
+     number that changes on every render, so a form would receive unstable
+     nonsense that still looked like it worked. -->
+<!-- wp:awt/tile-group {"label":"Billing period"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"billing-period"} -->
+<!-- wp:paragraph -->
+<p>Monthly</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+
+<!-- wp:awt/tile {"variant":"selectable","groupName":"billing-period"} -->
+<!-- wp:paragraph -->
+<p>Yearly</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+<!-- /wp:awt/tile-group -->
+
+<!-- A group with no legend text: the fieldset must still render, and no empty
+     <legend> should be emitted. -->
+<!-- wp:awt/tile-group {"label":""} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"unlabelled","value":"a"} -->
+<!-- wp:paragraph -->
+<p>Only option</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
+<!-- /wp:awt/tile-group -->

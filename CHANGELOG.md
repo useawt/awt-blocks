@@ -14,6 +14,13 @@
 
 ### [Breaking]
 
+- Selectable tiles with a group name render differently. Each one is now a hidden
+  radio button plus the tile as its label, instead of one box carrying the state
+  itself. Existing pages keep working and need no edits, but custom CSS or
+  JavaScript that targeted the tile's own `role` or `aria-checked` should target
+  the radio button instead. Tiles without a group name are unchanged. This is a
+  deliberate snapshot update; the reason it matters is under [A11y].
+
 - Dropdown: each choice in the list is now a plain element instead of a button,
   and carries an id and its value. If you wrote your own CSS or JavaScript
   targeting the button inside a Dropdown choice, point it at the choice itself.
@@ -158,6 +165,21 @@
   need updating.
 
 ### [A11y]
+
+- Selectable tiles that belong together are now one real choice. Tiles sharing a
+  group name were each announced as a radio button that belonged to nothing: a
+  screen reader never said what the choice was about, every tile was its own stop
+  when tabbing, and the arrow keys did nothing. They are now built the way the
+  browser builds a set of radio buttons, so one press of Tab reaches the whole
+  group, the arrow keys move between the tiles, choosing one clears the rest, and
+  the choice can be submitted with a form — which it could not be before, because
+  the tiles carried no value at all. Selected tiles also show the check mark
+  Carbon designed for them, so the state is not carried by colour alone.
+
+- New block: **Tile group**. Put selectable tiles inside it and the choice gets a
+  heading that says what is being chosen, which is the part a screen reader
+  announces first. There is a **Value** field on each tile for what it sends when
+  a form is submitted.
 
 - Dropdown: the choices are no longer buttons, and the keyboard works the way a
   dropdown should. Each choice used to be a button inside the list, which put a

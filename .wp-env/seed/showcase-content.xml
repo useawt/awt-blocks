@@ -2948,11 +2948,12 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:awt/tile -->
 
 <!-- wp:heading {"level":4} -->
-<h4 class="wp-block-heading">Selectable as radio-tile group (3 tiles share groupName; selecting one deselects the others — IBM-style)</h4>
+<h4 class="wp-block-heading">Selectable tiles in a Tile group (pick one; arrow keys move between them)</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/tile-group {"label":"Choose a plan"} -->
 <!-- wp:awt/inline-set -->
-<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan","value":"essentials"} -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Essentials</h3>
 <!-- /wp:heading -->
@@ -2966,7 +2967,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
-<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan","value":"standard"} -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Standard</h3>
 <!-- /wp:heading -->
@@ -2980,7 +2981,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
-<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"showcase-plan","value":"premium"} -->
 <!-- wp:heading {"level":3} -->
 <h3 class="wp-block-heading">Premium</h3>
 <!-- /wp:heading -->
@@ -2994,6 +2995,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/inline-set -->
+<!-- /wp:awt/tile-group -->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">Expandable (native &lt;details&gt; with Carbon chevron — toggles open/closed)</h4>

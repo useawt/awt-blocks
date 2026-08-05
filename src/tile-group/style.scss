@@ -1,0 +1,16 @@
+// Per-block Carbon CSS (tree-shaking architecture — see the Stage 1 spec).
+// Emits ONLY the Carbon component partials this block needs; the always-on
+// foundation (reset, tokens, type, UI shell) ships from awt-theme. The
+// partial list must match block.json's "carbonStyles" — CI checks it.
+//
+// `tile` carries `.cds--tile-group`; `form` carries the `.cds--label` used by
+// the legend.
+
+@use '@carbon/styles/scss/config' with (
+	$css--font-face: false,
+	$css--default-type: false,
+	$css--reset: false
+);
+
+@use '@carbon/styles/scss/components/tile';
+@use '@carbon/styles/scss/components/form';

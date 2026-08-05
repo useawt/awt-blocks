@@ -342,20 +342,31 @@
 				"          StaticText \"Deployment details\"",
 				"  none [ignored: uninteresting]"
 			],
-			"widgets/tile (selectable, in group) 1": [
-				"radio \"Standard instance\" checked=false",
-				"  paragraph",
-				"    StaticText \"Standard instance\""
-			],
-			"widgets/tile (selectable, in group) 2": [
-				"radio \"Large instance\" checked=false",
-				"  paragraph",
-				"    StaticText \"Large instance\""
-			],
 			"widgets/tile (selectable, standalone)": [
 				"checkbox \"Enable nightly backups\" checked=false",
 				"  paragraph",
 				"    StaticText \"Enable nightly backups\""
+			],
+			"widgets/tile group (selectable, radio)": [
+				"group \"Instance size\" invalid=false",
+				"  Legend",
+				"    StaticText \"Instance size\"",
+				"  radio \"Standard instance\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"    paragraph",
+				"      StaticText \"Standard instance\"",
+				"  radio \"Large instance\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"    paragraph",
+				"      StaticText \"Large instance\""
 			],
 			"widgets/toggletip (closed)": [
 				"generic",
@@ -707,20 +718,31 @@
 				"          StaticText \"Deployment details\"",
 				"  none [ignored: uninteresting]"
 			],
-			"widgets/tile (selectable, in group) 1": [
-				"radio \"Standard instance\" checked=false",
-				"  paragraph",
-				"    StaticText \"Standard instance\""
-			],
-			"widgets/tile (selectable, in group) 2": [
-				"radio \"Large instance\" checked=false",
-				"  paragraph",
-				"    StaticText \"Large instance\""
-			],
 			"widgets/tile (selectable, standalone)": [
 				"checkbox \"Enable nightly backups\" checked=false",
 				"  paragraph",
 				"    StaticText \"Enable nightly backups\""
+			],
+			"widgets/tile group (selectable, radio)": [
+				"group \"Instance size\" invalid=false",
+				"  Legend",
+				"    StaticText \"Instance size\"",
+				"  radio \"Standard instance\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"    paragraph",
+				"      StaticText \"Standard instance\"",
+				"  radio \"Large instance\" checked=false invalid=false",
+				"  LabelText",
+				"    none [ignored: ariaHiddenElement]",
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"        none [ignored: ariaHiddenSubtree]",
+				"    paragraph",
+				"      StaticText \"Large instance\""
 			],
 			"widgets/toggletip (closed)": [
 				"generic",

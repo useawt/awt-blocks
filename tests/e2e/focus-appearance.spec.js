@@ -125,6 +125,21 @@ const INDICATOR_ELSEWHERE = [
 		scope: '.cds--toggle',
 		target: '.cds--toggle__switch',
 	},
+	{
+		// Grouped selectable tiles: a visually-hidden radio whose ring Carbon
+		// draws on the tile via `.cds--tile-input:focus + .cds--tile`. Measured on
+		// the input itself it reads 1px, because the input is a 1px clipped box —
+		// which is what this gate reported the day the tiles became native radios.
+		//
+		// `label: true` instead of scope+target: every other entry can name a
+		// unique node inside a wrapper, but a tile group holds several inputs and
+		// several tiles, so `closest(scope).querySelector(target)` would measure
+		// the FIRST tile in the group no matter which radio has focus — passing or
+		// failing for the wrong element. `el.labels` is the association the DOM
+		// already knows, so it is always this input's own tile.
+		when: 'input.cds--tile-input',
+		label: true,
+	},
 ];
 
 /* -------------------------------------------------------------------------
@@ -366,6 +381,16 @@ function measureBands( input ) {
 	const targets = [ { key: 'self', node: el } ];
 	for ( const spec of input.extras ) {
 		if ( ! el.matches( spec.when ) ) {
+			continue;
+		}
+		// `label: true` — the companion is this control's own <label>, taken from
+		// the DOM's own association rather than a selector, so it stays correct
+		// when several identical controls share one wrapper.
+		if ( spec.label ) {
+			const own = el.labels && el.labels[ 0 ];
+			if ( own ) {
+				targets.push( { key: 'label', node: own } );
+			}
 			continue;
 		}
 		const scope = el.closest( spec.scope );
@@ -902,6 +927,15 @@ test.describe( 'Focus appearance', () => {
 					console.log(
 						`\n${ fixture.key } / ${ scheme } — ${ stops.length } tab stops\n` +
 							lines.join( '\n' )
+					);
+				} else {
+					// The count alone, on every run. The Stage 1 spec quotes this
+					// total, and a gate that only prints it when something fails
+					// leaves no way to check the documented figure is still true —
+					// which is how a stale number survives in a doc for weeks.
+					// eslint-disable-next-line no-console
+					console.log(
+						`${ fixture.key } / ${ scheme }: ${ stops.length } tab stops`
 					);
 				}
 

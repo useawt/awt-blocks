@@ -70,12 +70,19 @@ const WIDGETS = `
      to a gate that reads markup or colour, which is why it is here. Two in a
      group and one standalone, because the group and the lone tile take
      different roles. -->
-<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size"} -->
+<!-- Grouped tiles live inside a Tile group, which is what makes them one
+     choice: the fieldset and its legend are the only reason a screen reader can
+     say WHAT is being chosen before listing the options. Kept as a group of two
+     plus a lone tile below, because the two take different roles - the grouped
+     ones are native radios, the lone one is role="checkbox". -->
+<!-- wp:awt/tile-group {"label":"Instance size"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size","value":"standard"} -->
 <!-- wp:paragraph --><p>Standard instance</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
-<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size"} -->
+<!-- wp:awt/tile {"variant":"selectable","groupName":"instance-size","value":"large"} -->
 <!-- wp:paragraph --><p>Large instance</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
+<!-- /wp:awt/tile-group -->
 <!-- wp:awt/tile {"variant":"selectable"} -->
 <!-- wp:paragraph --><p>Enable nightly backups</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->

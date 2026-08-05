@@ -36,6 +36,10 @@
 			"type": "string",
 			"default": ""
 		},
+		"value": {
+			"type": "string",
+			"default": ""
+		},
 		"summary": {
 			"type": "string",
 			"default": "Expandable tile"

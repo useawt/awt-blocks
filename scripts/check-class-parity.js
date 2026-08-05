@@ -63,6 +63,10 @@ const CARBON_PHP = path.join( THEME, 'inc/design-system/carbon.php' );
  * direction it currently differs.
  */
 const ALLOWED = {
+	tile: {
+		'cds--tile-input':
+			'The published page pairs a real <input type="radio"> with the tile as its <label>, so the browser supplies exclusive selection, arrow keys, one tab stop and a submitted value. The editor preview has neither that input nor a group around it: a <label> there would label nothing and a lone role="radio" would announce a radio button belonging to no group — the very defect this markup fixed. The preview is a <div> carrying the same tile classes, so everything theme.css styles is identical; only the invisible input is absent.',
+	},
 	'side-nav': {
 		'cds--side-nav--ux':
 			"Carbon's docking class: inset-block-start 3rem plus the narrow-screen collapse. The editor deliberately omits it and positions the preview itself, because the canvas cancels position:fixed and would drop the nav into the header's flex row.",

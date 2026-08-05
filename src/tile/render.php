@@ -5,10 +5,11 @@
  * Carbon tile variants:
  *   - default     — read-only <div>
  *   - clickable   — <a href="…"> (full surface clickable)
- *   - selectable  — <div role="radio"> with optional groupName for radio-group
- *                   behavior. Single tiles act as a checkbox-style toggle;
- *                   multiple tiles sharing groupName form a radio group where
- *                   selecting one deselects the others (IBM-style radio tile).
+ *   - selectable  — with a groupName: a native <input type="radio"> plus the
+ *                   tile as its <label>, so several tiles sharing the name form
+ *                   a real radio group. Without one: a <div role="checkbox">
+ *                   that toggles on its own. See the branch for why the two
+ *                   differ.
  *   - expandable  — `<details>` element with a Carbon-styled summary header
  *                   and a chevron icon that rotates on expand. Native browser
  *                   toggle, full keyboard + screen-reader support out of the
@@ -22,9 +23,12 @@
 
 declare( strict_types = 1 );
 
+use function AWT\Blocks\Render\unique_id;
+
 $variant      = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'default';
 $href         = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $group_name   = isset( $attributes['groupName'] ) ? (string) $attributes['groupName'] : '';
+$tile_value   = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $summary      = isset( $attributes['summary'] ) ? (string) $attributes['summary'] : __( 'Expandable tile', 'awt' );
 $default_open = ! empty( $attributes['defaultOpen'] );
 
@@ -53,23 +57,82 @@ if ( $variant === 'clickable' && $href !== '' ) {
 }
 
 if ( $variant === 'selectable' ) {
-	// IBM-style radio tile: when `groupName` is set, multiple selectable
-	// tiles sharing the same group form a radio group (click one → others
-	// in the group deselect). view.js handles the exclusive-selection
-	// behavior via the data-wp-interactive store. Without groupName the
-	// tile is a checkbox-style toggle (clicking flips its own state).
-	$tile_role    = $group_name !== '' ? 'radio' : 'checkbox';
-	$context_json = wp_json_encode(
-		array(
-			'groupName' => $group_name,
-			'role'      => $tile_role,
-		)
-	);
+	/*
+	 * Two mechanisms, because Carbon uses two and they are right for different
+	 * jobs:
+	 *
+	 *   groupName set  -> pick ONE of several. A real <input type="radio">
+	 *     sharing a `name`, with the tile as its <label>. The browser then
+	 *     supplies exclusive selection, arrow-key navigation, a single tab stop
+	 *     for the whole group, and a value that submits with the form. None of
+	 *     that needs JavaScript, and the group's name comes from the Tile group
+	 *     block's <legend>.
+	 *
+	 *   no groupName   -> an independent on/off tile. Carbon uses
+	 *     role="checkbox" + aria-checked here too, since there is no native
+	 *     element for "a box-shaped checkbox with arbitrary content", so this
+	 *     branch keeps the scripted toggle.
+	 *
+	 * Until 2026-08-05 BOTH used role="radio" with aria-checked and a
+	 * hand-rolled store, and the grouped case had no group element at all: a
+	 * screen reader was told each tile was a radio button but never what the
+	 * choice was about, and every tile was its own tab stop with no arrow keys.
+	 * The tiles also carried no value, so a selection could not be submitted.
+	 */
+	$checkmark_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">'
+		. '<path d="M8,1C4.1,1,1,4.1,1,8c0,3.9,3.1,7,7,7s7-3.1,7-7C15,4.1,11.9,1,8,1z M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z"/>'
+		. '<path d="M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z" data-icon-path="inner-path" opacity="0"/>'
+		. '</svg>';
+
+	if ( $group_name !== '' ) {
+		$radio_class = $ds
+			? $ds->classes_for(
+				'tile',
+				array(
+					'variant' => 'selectable',
+					'radio'   => true,
+				)
+			)
+			: 'cds--tile cds--tile--selectable cds--tile--radio';
+		$radio_attrs = get_block_wrapper_attributes( array( 'class' => $radio_class ) );
+		$input_id    = unique_id( 'awt-tile' );
+
+		// The <input> must stay the label's immediately-preceding sibling:
+		// Carbon draws the focus ring with `.cds--tile-input:focus + .cds--tile`
+		// and theme.css draws the selected state with `:checked + .cds--tile`.
+		// No tabindex — the browser's own roving tabindex gives a same-name
+		// radio group exactly one tab stop, which is the behavior we want.
+		// (Carbon writes tabindex="0" on every input; it measures as one tab
+		// stop anyway, so the attribute is redundant rather than load-bearing.)
+		// No `value` attribute when the author has not set one. The obvious
+		// fallback — reuse the generated id — would submit `awt-tile-27`, a
+		// number that changes on every render, so a form would receive unstable
+		// nonsense that looks like it works. Omitting it lets the browser do what
+		// plain HTML does, and the block's Value field is there when the tiles
+		// really are in a form.
+		printf(
+			'<input class="%1$s" type="radio" id="%2$s" name="%3$s"%4$s /><label %5$s for="%2$s"><span class="%6$s" aria-hidden="true">%7$s</span><span class="%8$s">%9$s</span></label>',
+			esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'input' ) ) : 'cds--tile-input' ),
+			esc_attr( $input_id ),
+			esc_attr( $group_name ),
+			$tile_value !== '' ? ' value="' . esc_attr( $tile_value ) . '"' : '',
+			$radio_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
+			esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'checkmark' ) ) : 'cds--tile__checkmark' ),
+			$checkmark_svg, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG.
+			esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'selectable-content' ) ) : 'cds--tile-content' ),
+			$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
+		);
+		return;
+	}
+
+	$context_json = wp_json_encode( array( 'role' => 'checkbox' ) );
 	printf(
-		'<div %1$s role="%2$s" aria-checked="false" tabindex="0" data-wp-interactive="awt/tile" data-wp-context=\'%3$s\' data-wp-on--click="actions.toggle" data-wp-on--keydown="actions.keydown">%4$s</div>',
+		'<div %1$s role="checkbox" aria-checked="false" tabindex="0" data-wp-interactive="awt/tile" data-wp-context=\'%2$s\' data-wp-on--click="actions.toggle" data-wp-on--keydown="actions.keydown"><span class="%3$s" aria-hidden="true">%4$s</span><span class="%5$s">%6$s</span></div>',
 		$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
-		esc_attr( $tile_role ),
 		esc_attr( $context_json ),
+		esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'checkmark-persistent' ) ) : 'cds--tile__checkmark cds--tile__checkmark--persistent' ),
+		$checkmark_svg, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG.
+		esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'selectable-content' ) ) : 'cds--tile-content' ),
 		$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
 	);
 	return;

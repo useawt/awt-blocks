@@ -298,27 +298,29 @@ const PROBES = [
 		sel: '.cds--tile--expandable',
 	},
 	{
-		// Three selectable tiles: two in a group, one alone. A selectable tile is
-		// a checkbox or a radio drawn as a box, so its entire meaning — role,
-		// checked state, and which of how many — lives in this tree and nowhere
-		// else. They are probed individually because the block renders no group
-		// wrapper to root a single probe at, which is itself worth seeing.
+		// A selectable tile is a checkbox or a radio drawn as a box, so its entire
+		// meaning — role, checked state, and which of how many — lives in this
+		// tree and nowhere else.
+		//
+		// Rooted at the GROUP, not at each tile. The first version of this probe
+		// measured the three tiles one at a time, because there was no group
+		// element to root at — and that was precisely the defect: each tile said
+		// "radio button" while nothing said what the choice was. A per-tile probe
+		// can never show a missing wrapper, so it recorded the bug as normal. One
+		// probe over the whole group shows the group, its name, and the options
+		// together, which is the only view in which "this group has no name" is
+		// visible at all.
 		page: 'widgets',
-		key: 'tile (selectable, in group) 1',
-		sel: '.cds--tile--selectable',
-		nth: 0,
+		key: 'tile group (selectable, radio)',
+		sel: '.cds--tile-group',
 	},
 	{
-		page: 'widgets',
-		key: 'tile (selectable, in group) 2',
-		sel: '.cds--tile--selectable',
-		nth: 1,
-	},
-	{
+		// `:not(--radio)` rather than an index: the grouped tiles also carry
+		// `--selectable`, so any nth would silently start pointing at one of them
+		// the moment the fixture's order changes.
 		page: 'widgets',
 		key: 'tile (selectable, standalone)',
-		sel: '.cds--tile--selectable',
-		nth: 2,
+		sel: '.cds--tile--selectable:not(.cds--tile--radio)',
 	},
 	{
 		page: 'widgets',

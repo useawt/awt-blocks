@@ -20,11 +20,17 @@ const TEMPLATE = [
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { variant, href, groupName, summary, defaultOpen } = attributes;
+	const { variant, href, groupName, value, summary, defaultOpen } =
+		attributes;
 
 	const classes = [
 		'cds--tile',
 		variant !== 'default' ? `cds--tile--${ variant }` : null,
+		// A grouped selectable tile renders as a <label> for a radio on the
+		// server, and Carbon's radio-tile styling hangs off this class. The
+		// preview has to carry it or the canvas shows a different tile from the
+		// published page — the divergence check-class-parity.js exists for.
+		variant === 'selectable' && groupName ? 'cds--tile--radio' : null,
 	]
 		.filter( Boolean )
 		.join( ' ' );
@@ -89,18 +95,32 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				) }
 				{ variant === 'selectable' && (
-					<TextControl
-						label={ __(
-							'Group name (for radio-tile group)',
-							'awt'
+					<>
+						<TextControl
+							label={ __( 'Group name', 'awt' ) }
+							help={ __(
+								'Give every tile in one choice the same group name, and people can pick only one of them. Leave it empty for a tile that switches on and off by itself. Put the tiles in a Tile group block so the choice also has a heading.',
+								'awt'
+							) }
+							value={ groupName }
+							onChange={ ( v ) =>
+								setAttributes( { groupName: v } )
+							}
+						/>
+						{ groupName && (
+							<TextControl
+								label={ __( 'Value', 'awt' ) }
+								help={ __(
+									'What this tile sends when the form is submitted, such as "large". Only needed if the tiles are inside a form.',
+									'awt'
+								) }
+								value={ value }
+								onChange={ ( v ) =>
+									setAttributes( { value: v } )
+								}
+							/>
 						) }
-						help={ __(
-							'Tiles sharing the same group name form a radio group — only one can be selected. Leave empty for a single checkbox-style toggle.',
-							'awt'
-						) }
-						value={ groupName }
-						onChange={ ( v ) => setAttributes( { groupName: v } ) }
-					/>
+					</>
 				) }
 				{ variant === 'expandable' && (
 					<>
@@ -147,20 +167,76 @@ export default function Edit( { attributes, setAttributes } ) {
 		);
 	}
 
-	let role;
+	// A selectable tile previews with the checkmark the server renders, so the
+	// canvas shows the control the visitor will meet. `aria-hidden` matches the
+	// server: the checkmark is decoration, and the state is already carried by
+	// the radio or by aria-checked.
+	const Checkmark = ( { persistent } ) => (
+		<span
+			className={ `cds--tile__checkmark${
+				persistent ? ' cds--tile__checkmark--persistent' : ''
+			}` }
+			aria-hidden="true"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 16"
+				width="16"
+				height="16"
+				fill="currentColor"
+				focusable="false"
+			>
+				<path d="M8,1C4.1,1,1,4.1,1,8c0,3.9,3.1,7,7,7s7-3.1,7-7C15,4.1,11.9,1,8,1z M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z" />
+			</svg>
+		</span>
+	);
+
 	if ( variant === 'selectable' ) {
-		role = groupName ? 'radio' : 'checkbox';
+		// Grouped tiles are a real radio + <label> on the server, so the preview
+		// is a <label> too. Ungrouped ones stay role="checkbox", which is what
+		// the server renders and what Carbon itself uses for that case.
+		if ( groupName ) {
+			// A plain <div> carrying the radio classes, not a <label> and not
+			// role="radio". The server pairs a real radio input with a label; the
+			// canvas has neither the input nor a group around it, so a <label>
+			// would label nothing and a lone role="radio" would announce a radio
+			// button that belongs to no group — the exact defect being fixed,
+			// reintroduced in the author's canvas. The classes are what the
+			// parity check compares, and they match.
+			return (
+				<>
+					{ inspector }
+					<div { ...blockProps }>
+						<Checkmark />
+						<span className="cds--tile-content">
+							<span { ...innerProps } />
+						</span>
+					</div>
+				</>
+			);
+		}
+		return (
+			<>
+				{ inspector }
+				<div
+					{ ...blockProps }
+					role="checkbox"
+					aria-checked="false"
+					tabIndex={ 0 }
+				>
+					<Checkmark persistent />
+					<span className="cds--tile-content">
+						<span { ...innerProps } />
+					</span>
+				</div>
+			</>
+		);
 	}
 
 	return (
 		<>
 			{ inspector }
-			<div
-				{ ...blockProps }
-				role={ role }
-				aria-checked={ role ? 'false' : undefined }
-				tabIndex={ role ? 0 : undefined }
-			>
+			<div { ...blockProps }>
 				<div { ...innerProps } />
 			</div>
 		</>

@@ -96,6 +96,7 @@ const AWT_BLOCKS = array(
 
 	// Stage 1 — marketing/section blocks (§2, slice 2).
 	'tile',
+	'tile-group',
 	'tag',
 	'notification',
 	'accordion',
