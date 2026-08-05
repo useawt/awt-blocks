@@ -358,9 +358,12 @@
 				"    StaticText \"Enable nightly backups\""
 			],
 			"widgets/toggletip (closed)": [
-				"none [ignored: uninteresting]",
-				"  button \"More information\" expanded=false invalid=false",
-				"  generic"
+				"generic",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Storage limits\"",
+				"  none [ignored: uninteresting]",
+				"    button \"More information\" expanded=false invalid=false",
+				"    generic"
 			]
 		},
 		"dark": {
@@ -720,9 +723,12 @@
 				"    StaticText \"Enable nightly backups\""
 			],
 			"widgets/toggletip (closed)": [
-				"none [ignored: uninteresting]",
-				"  button \"More information\" expanded=false invalid=false",
-				"  generic"
+				"generic",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Storage limits\"",
+				"  none [ignored: uninteresting]",
+				"    button \"More information\" expanded=false invalid=false",
+				"    generic"
 			]
 		}
 	}

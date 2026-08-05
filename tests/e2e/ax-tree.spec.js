@@ -281,9 +281,16 @@ const PROBES = [
 		sel: '.cds--menu-button',
 	},
 	{
+		// Rooted at the BLOCK, not at `.cds--toggletip` — that class is on the
+		// popover container, which sits below the visible label, so a probe there
+		// records the trigger button and leaves the label out of frame. The label
+		// is the whole point: the button's name comes from `ariaLabel` and
+		// defaults to "More information", so the question a reviewer needs to be
+		// able to ask is whether that generic name matches the specific label
+		// beside it. A probe that cannot show both cannot raise the question.
 		page: 'widgets',
 		key: 'toggletip (closed)',
-		sel: '.cds--toggletip',
+		sel: '.wp-block-awt-toggletip',
 	},
 	{
 		page: 'widgets',
