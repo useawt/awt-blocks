@@ -7,11 +7,98 @@
  * value + the hidden <input> that participates in form submission.
  */
 
-import { store, getElement } from '@wordpress/interactivity';
+import { store, getElement, withSyncEvent } from '@wordpress/interactivity';
 import { attach, installOutsideDismiss } from '../shared/floating-ui';
 
 const handles = new WeakMap();
 const dismissers = new WeakMap();
+
+const HIGHLIGHTED = 'cds--list-box__menu-item--highlighted';
+const ACTIVE = 'cds--list-box__menu-item--active';
+
+/**
+ * The options, in DOM order.
+ *
+ * @param {Object} parts Result of getParts().
+ * @return {HTMLElement[]} The `role="option"` elements.
+ */
+function itemsOf( parts ) {
+	return [ ...parts.listbox.querySelectorAll( '[role="option"]' ) ];
+}
+
+/**
+ * Index of the option carrying the moving highlight, or -1.
+ *
+ * @param {Object} parts Result of getParts().
+ * @return {number} Index into itemsOf(), or -1 when nothing is highlighted.
+ */
+function highlightedIndex( parts ) {
+	return itemsOf( parts ).findIndex( ( el ) =>
+		el.classList.contains( HIGHLIGHTED )
+	);
+}
+
+/**
+ * Move the highlight to one option.
+ *
+ * The highlight is NOT focus. Focus stays on the combobox for the whole
+ * interaction and the option is pointed at with `aria-activedescendant` — the
+ * listbox pattern, and what Carbon does. Moving real focus into the list is
+ * what the old markup did (via a button per option) and what this replaces.
+ *
+ * @param {Object} parts Result of getParts().
+ * @param {number} index Index into itemsOf().
+ */
+function highlight( parts, index ) {
+	const items = itemsOf( parts );
+	items.forEach( ( el ) => el.classList.remove( HIGHLIGHTED ) );
+	const el = items[ index ];
+	if ( ! el ) {
+		parts.trigger.setAttribute( 'aria-activedescendant', '' );
+		return;
+	}
+	el.classList.add( HIGHLIGHTED );
+	parts.trigger.setAttribute( 'aria-activedescendant', el.id );
+	el.scrollIntoView( { block: 'nearest' } );
+}
+
+/**
+ * Index of the chosen option, or -1 when nothing has been chosen yet.
+ *
+ * @param {Object} parts Result of getParts().
+ * @return {number} Index into itemsOf(), or -1.
+ */
+function selectedIndex( parts ) {
+	return itemsOf( parts ).findIndex(
+		( el ) => el.getAttribute( 'aria-selected' ) === 'true'
+	);
+}
+
+/**
+ * Choose an option: update the trigger's shown text, the hidden input that
+ * takes part in form submission, and `aria-selected` on the options.
+ *
+ * @param {Object}      parts Result of getParts().
+ * @param {HTMLElement} el    The `role="option"` element to choose.
+ */
+function selectOption( parts, el ) {
+	if ( ! el ) {
+		return;
+	}
+	const items = itemsOf( parts );
+	items.forEach( ( o ) => {
+		o.setAttribute( 'aria-selected', String( o === el ) );
+		o.classList.toggle( ACTIVE, o === el );
+	} );
+	const labelEl = parts.root.querySelector( '.cds--list-box__label' );
+	if ( labelEl ) {
+		labelEl.textContent = el.textContent.trim();
+	}
+	if ( parts.hidden ) {
+		parts.hidden.value = el.dataset.value || '';
+	}
+	close( parts, /* returnFocus */ true );
+}
 
 function getParts( ref ) {
 	const root = ref.closest( '.cds--dropdown' );
@@ -60,6 +147,13 @@ function close( parts, returnFocus = true ) {
 	listbox.setAttribute( 'hidden', '' );
 	listbox.style.width = '';
 	trigger.setAttribute( 'aria-expanded', 'false' );
+	// A closed listbox has no active option to point at. Carbon empties this
+	// too — there, because React unmounts the options; here, because they stay
+	// in the DOM behind `hidden` and a stale id would outlive what it named.
+	trigger.setAttribute( 'aria-activedescendant', '' );
+	listbox
+		.querySelectorAll( `.${ HIGHLIGHTED }` )
+		.forEach( ( el ) => el.classList.remove( HIGHLIGHTED ) );
 	root.classList.remove( 'cds--list-box--expanded' );
 	const h = handles.get( root );
 	if ( h ) {
@@ -90,32 +184,88 @@ store( 'awt/dropdown', {
 			}
 		},
 		choose() {
-			const itemBtn = getElement().ref;
-			const value = itemBtn.dataset.value || '';
-			const label = itemBtn.textContent || '';
-			const root = itemBtn.closest( '.cds--dropdown' );
-			if ( ! root ) {
-				return;
-			}
-			const labelEl = root.querySelector( '.cds--list-box__label' );
-			const hidden = root.querySelector( 'input[type="hidden"]' );
-			if ( labelEl ) {
-				labelEl.textContent = label;
-			}
-			if ( hidden ) {
-				hidden.value = value;
-			}
-			root.querySelectorAll(
-				'.cds--list-box__menu-item--highlighted'
-			).forEach( ( el ) =>
-				el.classList.remove( 'cds--list-box__menu-item--highlighted' )
-			);
-			itemBtn.classList.add( 'cds--list-box__menu-item--highlighted' );
-			itemBtn.setAttribute( 'aria-selected', 'true' );
-			const parts = getParts( itemBtn );
+			const el = getElement().ref;
+			const parts = getParts( el );
 			if ( parts ) {
-				close( parts, /* returnFocus */ true );
+				selectOption( parts, el );
 			}
 		},
+		keydown: withSyncEvent( ( event ) => {
+			const parts = getParts( getElement().ref );
+			if ( ! parts ) {
+				return;
+			}
+			const expanded =
+				parts.trigger.getAttribute( 'aria-expanded' ) === 'true';
+			const { key } = event;
+
+			// Every branch below calls preventDefault(). On a <button>, Enter
+			// fires a click on keydown and Space on keyup, so without it the
+			// trigger's own click action would run a second time and undo what
+			// the key just did. It also stops Home/End/arrows scrolling the page.
+			if ( key === 'Escape' ) {
+				if ( expanded ) {
+					event.preventDefault();
+					close( parts );
+				}
+				return;
+			}
+
+			if ( key === 'Enter' || key === ' ' ) {
+				event.preventDefault();
+				if ( ! expanded ) {
+					open( parts );
+					highlight( parts, Math.max( selectedIndex( parts ), 0 ) );
+					return;
+				}
+				const i = highlightedIndex( parts );
+				if ( i >= 0 ) {
+					selectOption( parts, itemsOf( parts )[ i ] );
+				} else {
+					close( parts );
+				}
+				return;
+			}
+
+			if (
+				key !== 'ArrowDown' &&
+				key !== 'ArrowUp' &&
+				key !== 'Home' &&
+				key !== 'End'
+			) {
+				return;
+			}
+			event.preventDefault();
+			const items = itemsOf( parts );
+			if ( ! items.length ) {
+				return;
+			}
+			if ( ! expanded ) {
+				// Opening with an arrow lands on the chosen option if there is
+				// one, so re-opening does not lose the visitor's place.
+				open( parts );
+				const chosen = selectedIndex( parts );
+				let from = 0;
+				if ( chosen >= 0 ) {
+					from = chosen;
+				} else if ( key === 'ArrowUp' ) {
+					from = items.length - 1;
+				}
+				highlight( parts, from );
+				return;
+			}
+			const cur = highlightedIndex( parts );
+			let next;
+			if ( key === 'Home' ) {
+				next = 0;
+			} else if ( key === 'End' ) {
+				next = items.length - 1;
+			} else if ( key === 'ArrowDown' ) {
+				next = cur < 0 ? 0 : Math.min( cur + 1, items.length - 1 );
+			} else {
+				next = cur < 0 ? items.length - 1 : Math.max( cur - 1, 0 );
+			}
+			highlight( parts, next );
+		} ),
 	},
 } );

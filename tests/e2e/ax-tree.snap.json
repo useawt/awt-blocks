@@ -268,13 +268,13 @@
 				"    generic",
 				"  listbox \"Region\" required=false",
 				"    option \"Option 1\" selected=false",
-				"      button \"Option 1\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 1\"",
 				"    option \"Option 2\" selected=false",
-				"      button \"Option 2\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 2\"",
 				"    option \"Option 3\" selected=false",
-				"      button \"Option 3\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 3\""
 			],
 			"widgets/faq-item (closed)": [
@@ -633,13 +633,13 @@
 				"    generic",
 				"  listbox \"Region\" required=false",
 				"    option \"Option 1\" selected=false",
-				"      button \"Option 1\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 1\"",
 				"    option \"Option 2\" selected=false",
-				"      button \"Option 2\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 2\"",
 				"    option \"Option 3\" selected=false",
-				"      button \"Option 3\" invalid=false",
+				"      generic",
 				"        StaticText \"Option 3\""
 			],
 			"widgets/faq-item (closed)": [

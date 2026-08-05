@@ -904,8 +904,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{44}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{44}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -916,17 +918,45 @@
 			aria-labelledby="awt-dd-{44}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="react" data-wp-on--click="actions.choose">React</button>
+							<li
+					id="awt-dd-{44}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="react"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">React</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="vue" data-wp-on--click="actions.choose">Vue</button>
+							<li
+					id="awt-dd-{44}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="vue"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Vue</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="svelte" data-wp-on--click="actions.choose">Svelte</button>
+							<li
+					id="awt-dd-{44}-listbox-item-2"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="svelte"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Svelte</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="solid" data-wp-on--click="actions.choose">SolidJS</button>
+							<li
+					id="awt-dd-{44}-listbox-item-3"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="solid"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">SolidJS</div>
 				</li>
 					</ul>
 	</div>

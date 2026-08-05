@@ -408,6 +408,29 @@ const PROBES = [
 	},
 	{ page: 'widgets', key: 'tile-summary', sel: '.cds--tile__summary-text' },
 
+	/* --- Open dropdown. Its own group because the `opened` group ends with a
+	   modal holding focus, and this widget closes the moment focus leaves it.
+	   Added 2026-08-05 with the option markup change (button -> div): the gate
+	   probed `dropdown-field` and `dropdown-root` and no option at all, so it
+	   reported "nothing changed" for a swap it could not see. An option's text
+	   came from a <button> before, which carries its own font and color reset,
+	   and now comes from a <div>, which inherits — exactly the kind of drift a
+	   computed-style probe exists to catch. --- */
+	{
+		page: 'widgets',
+		group: 'dropdownOpen',
+		key: 'dropdown-option',
+		sel: '.cds--list-box__menu-item:not(.cds--list-box__menu-item--highlighted) .cds--list-box__menu-item__option',
+		box: true,
+	},
+	{
+		page: 'widgets',
+		group: 'dropdownOpen',
+		key: 'dropdown-option (highlighted)',
+		sel: '.cds--list-box__menu-item--highlighted .cds--list-box__menu-item__option',
+		box: true,
+	},
+
 	/* --- Opened state. A closed panel and an unopened modal are the parts
 	   most likely to be wrong and the parts nothing else measures. --- */
 	{
@@ -618,8 +641,22 @@ const PAGE_READY = {
 	},
 };
 
-/** Setup for probes in the `opened` group. */
+/** Setup for probes in the `opened` and `dropdownOpen` groups. */
 const GROUP_SETUP = {
+	// ArrowDown rather than a click: it both opens the listbox and highlights
+	// the first option, so one keypress produces both states this group
+	// measures. Focus stays on the combobox throughout — if it ever does not,
+	// the outside-dismiss handler closes the listbox and every probe here
+	// errors, which is the failure mode we want rather than a silent skip.
+	'widgets|dropdownOpen': async ( page ) => {
+		const trigger = page.locator( '.cds--list-box__field' ).first();
+		await trigger.focus();
+		await page.keyboard.press( 'ArrowDown' );
+		await expect( trigger ).toHaveAttribute( 'aria-expanded', 'true' );
+		await expect(
+			page.locator( '.cds--list-box__menu-item--highlighted' ).first()
+		).toBeVisible();
+	},
 	'widgets|opened': async ( page ) => {
 		const heading = page.locator( '.cds--accordion__heading' ).first();
 		await heading.click();
@@ -1231,10 +1268,39 @@ test.describe( 'Computed-style snapshots', () => {
 				results
 			);
 		} );
+
+		test( `widgets, dropdown open — ${ scheme }`, async ( {
+			page,
+			baseURL,
+		} ) => {
+			await gotoWithScheme(
+				page,
+				`/?page_id=${ pageIds.widgets }`,
+				scheme,
+				baseURL,
+				'widgets'
+			);
+			await useKeyboardModality( page );
+			await GROUP_SETUP[ 'widgets|dropdownOpen' ]( page );
+
+			const results = {};
+			for ( const probe of probesFor( 'widgets', 'dropdownOpen' ) ) {
+				results[ `${ probe.page }/${ probe.key }` ] = await runProbe(
+					page,
+					probe
+				);
+			}
+			assertAgainstSnapshot(
+				`widgets|${ scheme }|dropdownOpen`,
+				scheme,
+				results
+			);
+		} );
 	}
 
 	test.afterAll( () => {
-		const expectedRuns = PAGES.length * SCHEMES.length + SCHEMES.length;
+		// PAGES x schemes, plus the two widgets-only states (opened, dropdownOpen).
+		const expectedRuns = PAGES.length * SCHEMES.length + SCHEMES.length * 2;
 
 		if ( UPDATING ) {
 			if ( completedRuns.size !== expectedRuns ) {

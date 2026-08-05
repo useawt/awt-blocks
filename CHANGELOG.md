@@ -14,6 +14,13 @@
 
 ### [Breaking]
 
+- Dropdown: each choice in the list is now a plain element instead of a button,
+  and carries an id and its value. If you wrote your own CSS or JavaScript
+  targeting the button inside a Dropdown choice, point it at the choice itself.
+  The class names are unchanged, so styling by class still applies. This is a
+  deliberate snapshot update; the reason it matters for people using the block
+  is under [A11y].
+
 - Form fields now draw their border on all four sides. Text input, Text area,
   Password input, Select and Dropdown used to be marked out by a shaded fill
   with one line under the text, which left the field's shape resting on that
@@ -151,6 +158,16 @@
   need updating.
 
 ### [A11y]
+
+- Dropdown: the choices are no longer buttons, and the keyboard works the way a
+  dropdown should. Each choice used to be a button inside the list, which put a
+  control inside a control: a screen reader read every choice twice, once as a
+  choice and again as a button, and pressing Tab walked you into the open list
+  instead of past the field. Now the choices are plain text, focus stays on the
+  field the whole time, and the arrow keys move the highlight — Home and End
+  jump to the first and last choice, Enter picks the highlighted one, and Escape
+  closes the list without changing your answer. Re-opening the list puts the
+  highlight back on what you already chose. Nothing about how it looks changes.
 
 - A partially-checked Checkbox now really is partially checked. The block has
   had an **Indeterminate** setting all along, but nothing acted on it: the

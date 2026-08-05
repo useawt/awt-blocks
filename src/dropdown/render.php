@@ -106,9 +106,11 @@ ob_start();
 			aria-haspopup="listbox"
 			aria-controls="<?php echo esc_attr( $listbox_id ); ?>"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="<?php echo esc_attr( $label_id ); ?>"
 			<?php echo $disabled ? 'disabled' : ''; ?>
 			data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="<?php echo esc_attr( $dd_trigger_label_class ); ?>"><?php echo esc_html( $placeholder ); ?></span>
 			<?php echo $arrow_svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?>
@@ -121,15 +123,36 @@ ob_start();
 			hidden
 		>
 			<?php
+			/*
+			 * The option's content is a plain <div>, never a control. ARIA marks
+			 * an `option`'s children presentational, but that stripping does not
+			 * apply to focusable descendants — so a <button> in here stays in the
+			 * accessibility tree and the option announces as "option, button".
+			 * It also puts a tab stop inside a listbox, which is not how a
+			 * listbox is operated. Focus belongs on the combobox for the whole
+			 * interaction; the highlight travels via `aria-activedescendant`.
+			 * This mirrors Carbon, whose options are <li> > <div> with no
+			 * tabindex and no interactive descendants.
+			 */
+			$opt_index = 0;
 			foreach ( $options as $opt ) :
 				if ( ! is_array( $opt ) ) {
 					continue;
 				}
 				$val       = isset( $opt['value'] ) ? (string) $opt['value'] : '';
 				$opt_label = isset( $opt['label'] ) ? (string) $opt['label'] : $val;
+				$opt_id    = $listbox_id . '-item-' . $opt_index;
+				++$opt_index;
 				?>
-				<li class="<?php echo esc_attr( $dd_menu_item_class ); ?>" role="option" aria-selected="false">
-					<button type="button" class="<?php echo esc_attr( $dd_menu_item_opt_class ); ?>" data-value="<?php echo esc_attr( $val ); ?>" data-wp-on--click="actions.choose"><?php echo esc_html( $opt_label ); ?></button>
+				<li
+					id="<?php echo esc_attr( $opt_id ); ?>"
+					class="<?php echo esc_attr( $dd_menu_item_class ); ?>"
+					role="option"
+					aria-selected="false"
+					data-value="<?php echo esc_attr( $val ); ?>"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="<?php echo esc_attr( $dd_menu_item_opt_class ); ?>"><?php echo esc_html( $opt_label ); ?></div>
 				</li>
 			<?php endforeach; ?>
 		</ul>

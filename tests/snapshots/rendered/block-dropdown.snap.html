@@ -10,8 +10,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{0}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{0}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -22,14 +24,35 @@
 			aria-labelledby="awt-dd-{0}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="react" data-wp-on--click="actions.choose">React</button>
+							<li
+					id="awt-dd-{0}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="react"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">React</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="vue" data-wp-on--click="actions.choose">Vue</button>
+							<li
+					id="awt-dd-{0}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="vue"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Vue</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="svelte" data-wp-on--click="actions.choose">Svelte</button>
+							<li
+					id="awt-dd-{0}-listbox-item-2"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="svelte"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Svelte</div>
 				</li>
 					</ul>
 	</div>
@@ -48,8 +71,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{1}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{1}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -60,11 +85,25 @@
 			aria-labelledby="awt-dd-{1}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="a" data-wp-on--click="actions.choose">Apple</button>
+							<li
+					id="awt-dd-{1}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="a"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Apple</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="b" data-wp-on--click="actions.choose">Banana</button>
+							<li
+					id="awt-dd-{1}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="b"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Banana</div>
 				</li>
 					</ul>
 	</div>
@@ -83,8 +122,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{2}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{2}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -95,11 +136,25 @@
 			aria-labelledby="awt-dd-{2}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="a" data-wp-on--click="actions.choose">Apple</button>
+							<li
+					id="awt-dd-{2}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="a"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Apple</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="b" data-wp-on--click="actions.choose">Banana</button>
+							<li
+					id="awt-dd-{2}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="b"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Banana</div>
 				</li>
 					</ul>
 	</div>
@@ -118,8 +173,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{3}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{3}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -130,11 +187,25 @@
 			aria-labelledby="awt-dd-{3}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="us-east" data-wp-on--click="actions.choose">us-east</button>
+							<li
+					id="awt-dd-{3}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="us-east"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">us-east</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="eu-west" data-wp-on--click="actions.choose">eu-west</button>
+							<li
+					id="awt-dd-{3}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="eu-west"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">eu-west</div>
 				</li>
 					</ul>
 	</div>
@@ -154,8 +225,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{4}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{4}-label"
 						data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -166,11 +239,25 @@
 			aria-labelledby="awt-dd-{4}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="free" data-wp-on--click="actions.choose">Free</button>
+							<li
+					id="awt-dd-{4}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="free"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Free</div>
 				</li>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="pro" data-wp-on--click="actions.choose">Pro</button>
+							<li
+					id="awt-dd-{4}-listbox-item-1"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="pro"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">Pro</div>
 				</li>
 					</ul>
 	</div>
@@ -190,8 +277,10 @@
 			aria-haspopup="listbox"
 			aria-controls="awt-dd-{5}-listbox"
 			aria-expanded="false"
+			aria-activedescendant=""
 			aria-labelledby="awt-dd-{5}-label"
 			disabled			data-wp-on--click="actions.toggle"
+			data-wp-on--keydown="actions.keydown"
 		>
 			<span class="cds--list-box__label">Choose…</span>
 			<div class="cds--list-box__menu-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/></svg></div>		</button>
@@ -202,8 +291,15 @@
 			aria-labelledby="awt-dd-{5}-label"
 			hidden
 		>
-							<li class="cds--list-box__menu-item" role="option" aria-selected="false">
-					<button type="button" class="cds--list-box__menu-item__option" data-value="a" data-wp-on--click="actions.choose">A</button>
+							<li
+					id="awt-dd-{5}-listbox-item-0"
+					class="cds--list-box__menu-item"
+					role="option"
+					aria-selected="false"
+					data-value="a"
+					data-wp-on--click="actions.choose"
+				>
+					<div class="cds--list-box__menu-item__option">A</div>
 				</li>
 					</ul>
 	</div>
