@@ -873,6 +873,38 @@ function measureInPage( probe ) {
 		);
 	}
 
+	// The same figure for an outline. Added when buttons moved their focus
+	// indicator from a border-plus-shadow ring to a plain outline (D2): the
+	// probe recorded `borderContrast` for the ring, and without this the
+	// snapshot would have kept the new indicator's geometry while silently
+	// losing the number that says whether anyone can see it.
+	//
+	// An outline is painted outside the border box, so it is measured against
+	// what is behind the element, never against the element's own fill — the
+	// same basis as the border above, and the reason a blue outline on a blue
+	// button still reads as a healthy ratio here.
+	const outlineColor = parseColor( style.outlineColor );
+	const outlineWidth = parseFloat( style.outlineWidth );
+	if (
+		outlineColor &&
+		outlineColor.a > 0 &&
+		outlineWidth > 0 &&
+		style.outlineStyle !== 'none'
+	) {
+		const behindOutline = effectiveBackground(
+			probe.pseudo ? el : el.parentElement || el
+		);
+		out.outlineContrast = round(
+			ratio(
+				outlineColor.a === 1
+					? outlineColor
+					: over( outlineColor, behindOutline ),
+				behindOutline
+			),
+			2
+		);
+	}
+
 	if ( probe.box ) {
 		const rect = probe.pseudo ? null : el.getBoundingClientRect();
 		out.box = {

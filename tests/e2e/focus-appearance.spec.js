@@ -839,114 +839,191 @@ test.describe( 'Focus appearance', () => {
 		await requestUtils.deleteAllPages();
 	} );
 
+	/**
+	 * One measured pass over one fixture in one scheme.
+	 *
+	 * Split out of the test body so the same measurement can run against a
+	 * page prepared differently — see the button-focus pass below, which is
+	 * the identical walk with one body class removed.
+	 *
+	 * @param {Object}   args
+	 * @param {Object}   args.page      Playwright page.
+	 * @param {string}   args.baseURL   Site base URL.
+	 * @param {number}   args.pageId    Fixture post ID.
+	 * @param {string}   args.name      What to call this pass in failures.
+	 * @param {string}   args.scheme    'light' or 'dark'.
+	 * @param {Function} [args.prepare] Runs after load, before the walk.
+	 */
+	async function measurePass( {
+		page,
+		baseURL,
+		pageId,
+		name,
+		scheme,
+		prepare,
+	} ) {
+		await gotoWithScheme( page, `/?p=${ pageId }`, scheme, baseURL );
+
+		if ( prepare ) {
+			await prepare( page );
+		}
+
+		const stops = await walkTabRing( page );
+		const resting = await measureResting( page, stops );
+
+		// Trap 5 of the sibling gate, in its focus costume: a walk that
+		// found nothing would pass every assertion below.
+		expect(
+			stops.length,
+			`no tab stops found on ${ name } — the walk measured nothing`
+		).toBeGreaterThan( 5 );
+
+		const failures = [];
+		const lines = [];
+
+		for ( let i = 0; i < stops.length; i++ ) {
+			const stop = stops[ i ];
+			const label = `${ name }/${ scheme } ${ stop.label }`;
+
+			// Trap 3: activeElement points at the element even when the
+			// window has no focus, and then every style read is resting.
+			expect(
+				stop.windowHasFocus,
+				`${ label }: the window does not hold focus, so nothing here is a focus style`
+			).toBe( true );
+			expect(
+				stop.focusMatches,
+				`${ label }: :focus did not match at this tab stop`
+			).toBe( true );
+
+			expect(
+				stop.focused.error,
+				`${ label }: ${ stop.focused.error || '' }`
+			).toBeUndefined();
+			expect(
+				resting[ i ].error,
+				`${ label }: ${ resting[ i ].error || '' }`
+			).toBeUndefined();
+
+			const restingByKey = {};
+			for ( const node of resting[ i ].nodes ) {
+				restingByKey[ node.key ] = node.samples;
+			}
+			const best = bestIndicator( stop.focused, restingByKey );
+
+			lines.push(
+				`  ${ best.thickness }px @ ${ best.contrast }:1  ` +
+					`${ stop.label }  [${ best.key || 'nothing' }]`
+			);
+
+			if ( best.thickness < MIN_THICKNESS ) {
+				const profiles = stop.focused.nodes
+					.map(
+						( node ) =>
+							`  ${ node.key } (${ node.outward }px of ` +
+							`room outside before an ancestor clips):\n` +
+							describeProfile(
+								restingByKey[ node.key ] || [],
+								node.samples
+							)
+					)
+					.join( '\n' );
+				failures.push(
+					`${ stop.label }\n` +
+						`  visible indicator: ${ best.thickness }px ` +
+						`(needs ${ MIN_THICKNESS }px changing by at ` +
+						`least ${ MIN_CONTRAST }:1)\n` +
+						`  path: ${ stop.path }\n${ profiles }`
+				);
+			}
+		}
+
+		if ( REPORTING ) {
+			// eslint-disable-next-line no-console
+			console.log(
+				`\n${ name } / ${ scheme } — ${ stops.length } tab stops\n` +
+					lines.join( '\n' )
+			);
+		} else {
+			// The count alone, on every run. The Stage 1 spec quotes this
+			// total, and a gate that only prints it when something fails
+			// leaves no way to check the documented figure is still true —
+			// which is how a stale number survives in a doc for weeks.
+			// eslint-disable-next-line no-console
+			console.log(
+				`${ name } / ${ scheme }: ${ stops.length } tab stops`
+			);
+		}
+
+		expect(
+			failures,
+			`${ failures.length } of ${ stops.length } tab stops on ` +
+				`${ name } (${ scheme }) draw a visible focus ` +
+				`indicator thinner than ${ MIN_THICKNESS }px.\n\n` +
+				failures.join( '\n\n' )
+		).toEqual( [] );
+	}
+
 	for ( const scheme of SCHEMES ) {
 		for ( const fixture of PAGES ) {
 			test( `${ fixture.key } — ${ scheme }`, async ( {
 				page,
 				baseURL,
 			} ) => {
-				await gotoWithScheme(
+				await measurePass( {
 					page,
-					`/?p=${ pageIds[ fixture.key ] }`,
+					baseURL,
+					pageId: pageIds[ fixture.key ],
+					name: fixture.key,
 					scheme,
-					baseURL
-				);
-
-				const stops = await walkTabRing( page );
-				const resting = await measureResting( page, stops );
-
-				// Trap 5 of the sibling gate, in its focus costume: a walk that
-				// found nothing would pass every assertion below.
-				expect(
-					stops.length,
-					`no tab stops found on ${ fixture.key } — the walk measured nothing`
-				).toBeGreaterThan( 5 );
-
-				const failures = [];
-				const lines = [];
-
-				for ( let i = 0; i < stops.length; i++ ) {
-					const stop = stops[ i ];
-					const label = `${ fixture.key }/${ scheme } ${ stop.label }`;
-
-					// Trap 3: activeElement points at the element even when the
-					// window has no focus, and then every style read is resting.
-					expect(
-						stop.windowHasFocus,
-						`${ label }: the window does not hold focus, so nothing here is a focus style`
-					).toBe( true );
-					expect(
-						stop.focusMatches,
-						`${ label }: :focus did not match at this tab stop`
-					).toBe( true );
-
-					expect(
-						stop.focused.error,
-						`${ label }: ${ stop.focused.error || '' }`
-					).toBeUndefined();
-					expect(
-						resting[ i ].error,
-						`${ label }: ${ resting[ i ].error || '' }`
-					).toBeUndefined();
-
-					const restingByKey = {};
-					for ( const node of resting[ i ].nodes ) {
-						restingByKey[ node.key ] = node.samples;
-					}
-					const best = bestIndicator( stop.focused, restingByKey );
-
-					lines.push(
-						`  ${ best.thickness }px @ ${ best.contrast }:1  ` +
-							`${ stop.label }  [${ best.key || 'nothing' }]`
-					);
-
-					if ( best.thickness < MIN_THICKNESS ) {
-						const profiles = stop.focused.nodes
-							.map(
-								( node ) =>
-									`  ${ node.key } (${ node.outward }px of ` +
-									`room outside before an ancestor clips):\n` +
-									describeProfile(
-										restingByKey[ node.key ] || [],
-										node.samples
-									)
-							)
-							.join( '\n' );
-						failures.push(
-							`${ stop.label }\n` +
-								`  visible indicator: ${ best.thickness }px ` +
-								`(needs ${ MIN_THICKNESS }px changing by at ` +
-								`least ${ MIN_CONTRAST }:1)\n` +
-								`  path: ${ stop.path }\n${ profiles }`
-						);
-					}
-				}
-
-				if ( REPORTING ) {
-					// eslint-disable-next-line no-console
-					console.log(
-						`\n${ fixture.key } / ${ scheme } — ${ stops.length } tab stops\n` +
-							lines.join( '\n' )
-					);
-				} else {
-					// The count alone, on every run. The Stage 1 spec quotes this
-					// total, and a gate that only prints it when something fails
-					// leaves no way to check the documented figure is still true —
-					// which is how a stale number survives in a doc for weeks.
-					// eslint-disable-next-line no-console
-					console.log(
-						`${ fixture.key } / ${ scheme }: ${ stops.length } tab stops`
-					);
-				}
-
-				expect(
-					failures,
-					`${ failures.length } of ${ stops.length } tab stops on ` +
-						`${ fixture.key } (${ scheme }) draw a visible focus ` +
-						`indicator thinner than ${ MIN_THICKNESS }px.\n\n` +
-						failures.join( '\n\n' )
-				).toEqual( [] );
+				} );
 			} );
 		}
+	}
+
+	// The same walk with AWT Settings → Focus turned off (difference D2).
+	//
+	// The setting's entire effect is one body class, so removing the class is
+	// the whole off state — no option write, which matters because this site
+	// is shared and an option left flipped by a crashed test would silently
+	// change what every later test measures.
+	//
+	// It runs on the forms fixture because that is where the button kinds are
+	// (primary, secondary, danger, ghost). Without this pass the default state
+	// is the only one any gate has ever measured, and "both states clear
+	// 2.4.13" would be a claim in a comment rather than something held.
+	const BUTTON_FIXTURE = 'forms';
+
+	for ( const scheme of SCHEMES ) {
+		test( `${ BUTTON_FIXTURE } — ${ scheme } — button outline off`, async ( {
+			page,
+			baseURL,
+		} ) => {
+			await measurePass( {
+				page,
+				baseURL,
+				pageId: pageIds[ BUTTON_FIXTURE ],
+				name: `${ BUTTON_FIXTURE }(button-outline-off)`,
+				scheme,
+				prepare: async ( p ) => {
+					const removed = await p.evaluate( () => {
+						const had = document.body.classList.contains(
+							'awt-btn-focus-outline'
+						);
+						document.body.classList.remove(
+							'awt-btn-focus-outline'
+						);
+						return had;
+					} );
+					// If the class was never there, this pass is measuring the
+					// same thing as the one above and proves nothing — which is
+					// exactly the silent no-op worth failing on.
+					expect(
+						removed,
+						'awt-btn-focus-outline was not on <body>, so the off state was never actually tested'
+					).toBe( true );
+				},
+			} );
+		} );
 	}
 } );
