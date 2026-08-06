@@ -1026,4 +1026,70 @@ test.describe( 'Focus appearance', () => {
 			} );
 		} );
 	}
+
+	// A button inside the header bar, which is its own case and had no coverage
+	// until a real defect went out on 2026-08-06.
+	//
+	// The outward outline is right over a page and wrong over the header. The
+	// bar is 48px and a button fills it, so a ring 1px outside is clipped at the
+	// top of the screen and spills onto the content below; and the 1px offset
+	// gap, which over a page is a sliver of page, is over the bar a sliver of
+	// dark bar that reads as a border drawn inside the button. It also pointed
+	// the opposite way to the icon buttons beside it, which draw inward. So
+	// header buttons draw inward, in currentColor.
+	//
+	// currentColor rather than the focus token is the part this pass exists to
+	// hold. Every outward ring in the theme can use the focus token because an
+	// outward ring lands on the scope surface, which the token is defined
+	// against. An inward ring lands on the button's own fill instead, and in a
+	// light-scoped header the focus token and the primary button fill are both
+	// #0f62fe — the ring would be drawn in exactly the color it has to stand out
+	// from. Swapping this rule back to the token makes the walk report 0px.
+	//
+	// Why move a rendered button rather than add one to a fixture page: the
+	// header comes from the theme's template part, not from page content, and a
+	// second element carrying the header class is positioned on top of the real
+	// one — tried first, and it covered the mobile menu trigger, which axe
+	// correctly failed as a target-size violation. Moving a button that
+	// render.php produced keeps the markup genuine and the container real.
+	for ( const scheme of SCHEMES ) {
+		test( `${ BUTTON_FIXTURE } — ${ scheme } — button in the header`, async ( {
+			page,
+			baseURL,
+		} ) => {
+			await measurePass( {
+				page,
+				baseURL,
+				pageId: pageIds[ BUTTON_FIXTURE ],
+				name: `${ BUTTON_FIXTURE }(button-in-header)`,
+				scheme,
+				prepare: async ( p ) => {
+					const moved = await p.evaluate( () => {
+						const slot =
+							document.querySelector(
+								'.cds--header .cds--header__global'
+							) || document.querySelector( '.cds--header' );
+						const btn = document.querySelector(
+							'.cds--btn.cds--btn--primary'
+						);
+						if ( ! slot || ! btn ) {
+							return false;
+						}
+						slot.appendChild( btn );
+						return (
+							!! btn.closest( '.cds--header' ) &&
+							btn.getBoundingClientRect().width > 0
+						);
+					} );
+					// A pass that quietly failed to move anything would walk the
+					// ordinary page and report green, which is the failure mode
+					// this whole block exists to close.
+					expect(
+						moved,
+						'no primary button ended up inside .cds--header, so the header case was never measured'
+					).toBe( true );
+				},
+			} );
+		} );
+	}
 } );
