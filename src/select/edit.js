@@ -159,7 +159,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					placeholder={ __( 'Label', 'awt' ) }
 					allowedFormats={ [] }
 				/>
-				<div className="cds--select-input__wrapper">
+				<div
+					className="cds--select-input__wrapper"
+					data-invalid={ invalid ? '' : undefined }
+				>
 					<select
 						id={ id }
 						className={ `cds--select-input cds--select-input--${ size } cds--layout--size-${ size }${
@@ -192,6 +195,23 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					>
 						<path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z" />
 					</svg>
+					{ /* Carbon's error icon — mirrors render.php's
+					     `icon( 'warning--filled', 16, … )`. No `fill`
+					     attribute: Carbon's CSS fills it from the
+					     wrapper's `data-invalid`. */ }
+					{ invalid && (
+						<svg
+							className="cds--select__invalid-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 16 16"
+							width="16"
+							height="16"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.1,7-7S11.9,1,8,1z M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z" />
+						</svg>
+					) }
 				</div>
 				{ invalid && invalidText && (
 					<div className="cds--form-requirement">{ invalidText }</div>

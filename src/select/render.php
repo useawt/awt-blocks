@@ -13,6 +13,7 @@ use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
 use function AWT\Blocks\Render\field_frame_class;
+use function AWT\Blocks\Render\icon;
 
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Select', 'awt' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
@@ -85,11 +86,23 @@ $select_attrs = html_attrs(
 	)
 );
 
+/*
+ * Carbon's error icon, missing here until 2026-08-07. Without it the only mark
+ * on the field itself was the red outline — colour alone (WCAG 1.4.1) — and the
+ * focus indicator replaces that outline, so a keyboard user lost the last
+ * visual trace of the error exactly while the field was focused. The icon is
+ * decorative (`aria-hidden`); the announced error stays the
+ * `cds--form-requirement` text wired up through `aria-describedby`. The
+ * `data-invalid` on the wrapper below is what Carbon's CSS keys the icon's red
+ * fill and the field's extra inline-end padding off.
+ */
+$invalid_icon_html = $invalid ? icon( 'warning--filled', 16, 'cds--select__invalid-icon' ) : '';
+
 ob_start();
 ?>
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
 	<label for="<?php echo esc_attr( $select_id ); ?>" class="<?php echo esc_attr( $label_class ); ?>"><?php echo wp_kses_post( $label ); ?></label>
-	<div class="cds--select-input__wrapper">
+	<div class="cds--select-input__wrapper"<?php echo $invalid ? ' data-invalid' : ''; ?>>
 		<select<?php echo $select_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by html_attrs(), which escapes every attribute name and value. ?>>
 			<?php
 			/*
@@ -120,7 +133,7 @@ ob_start();
 		</select>
 		<svg class="cds--select__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false">
 			<path d="M8 11L3 6l.7-.7L8 9.6l4.3-4.3.7.7z"/>
-		</svg>
+		</svg><?php echo $invalid_icon_html . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- icon() returns Carbon's own SVG markup read from disk. The explicit "\n" replaces the one PHP swallows after the closing tag, so a select with no error renders byte-identically to before. ?>
 	</div>
 	<?php if ( $invalid && $invalid_text !== '' ) : ?>
 		<div id="<?php echo esc_attr( $invalid_id ); ?>" class="cds--form-requirement"><?php echo wp_kses_post( $invalid_text ); ?></div>

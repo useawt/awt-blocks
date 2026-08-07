@@ -345,6 +345,15 @@ const PROBES = [
 		sel: '.cds--select',
 	},
 	{
+		// A select in error. The error icon is decorative, so what a screen
+		// reader gets is the `invalid` property plus the error text pulled in by
+		// aria-describedby — recording the subtree freezes both. If the icon
+		// ever stops being `aria-hidden`, it shows up here as a new line.
+		page: 'forms',
+		key: 'select (invalid)',
+		sel: '.cds--select--invalid',
+	},
+	{
 		page: 'forms',
 		key: 'text-input (required)',
 		sel: '.cds--text-input-wrapper',

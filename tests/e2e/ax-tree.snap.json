@@ -143,6 +143,20 @@
 				"      none [ignored: uninteresting]",
 				"        StaticText \"Yearly\""
 			],
+			"forms/select (invalid)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Region\"",
+				"  generic",
+				"    combobox \"Region\" desc=\"Choose a region.\" value=\"Choose…\" expanded=false invalid=true",
+				"      MenuListPopup",
+				"        option \"Choose…\" disabled=true",
+				"        option \"Option 1\" selected=false",
+				"        option \"Option 2\" selected=false",
+				"        option \"Option 3\" selected=false",
+				"  generic",
+				"    StaticText \"Choose a region.\""
+			],
 			"forms/select (with placeholder)": [
 				"generic",
 				"  LabelText",
@@ -518,6 +532,20 @@
 				"      none [ignored: uninteresting]",
 				"      none [ignored: uninteresting]",
 				"        StaticText \"Yearly\""
+			],
+			"forms/select (invalid)": [
+				"generic",
+				"  LabelText",
+				"    StaticText \"Region\"",
+				"  generic",
+				"    combobox \"Region\" desc=\"Choose a region.\" value=\"Choose…\" expanded=false invalid=true",
+				"      MenuListPopup",
+				"        option \"Choose…\" disabled=true",
+				"        option \"Option 1\" selected=false",
+				"        option \"Option 2\" selected=false",
+				"        option \"Option 3\" selected=false",
+				"  generic",
+				"    StaticText \"Choose a region.\""
 			],
 			"forms/select (with placeholder)": [
 				"generic",

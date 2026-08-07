@@ -21,6 +21,11 @@
   the radio button instead. Tiles without a group name are unchanged. This is a
   deliberate snapshot update; the reason it matters is under [A11y].
 
+- Select: a field marked as having an error renders one extra icon, and its
+  inner wrapper gains a `data-invalid` marker. Nothing was renamed, so existing
+  CSS and JavaScript keep working. This is a deliberate snapshot update; the
+  reason it matters for people using the block is under [A11y].
+
 - Dropdown: each choice in the list is now a plain element instead of a button,
   and carries an id and its value. If you wrote your own CSS or JavaScript
   targeting the button inside a Dropdown choice, point it at the choice itself.
@@ -165,6 +170,15 @@
   need updating.
 
 ### [A11y]
+
+- Select: a field with an error now shows an error icon inside it. Until now the
+  error was drawn as a red outline and nothing else, so anyone who does not see
+  red had only the message below the field to go on. Worse, the focus indicator
+  takes the place of that outline, so tabbing into the field removed the last
+  mark of the error at the exact moment you were about to use it. The icon is
+  the one Carbon draws on its own selects, and it stays put whether the field is
+  focused or not. The rendered markup changes, which is a deliberate snapshot
+  update.
 
 - Selectable tiles that belong together are now one real choice. Tiles sharing a
   group name were each announced as a radio button that belonged to nothing: a

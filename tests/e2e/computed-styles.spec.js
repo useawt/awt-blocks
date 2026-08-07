@@ -185,6 +185,31 @@ const PROBES = [
 		box: true,
 	},
 	{ page: 'forms', key: 'invalid-text', sel: '.cds--form-requirement' },
+	/* A select in error. The pair of probes below is the point: at rest the
+	   field carries the red outline, and on focus the focus indicator takes its
+	   place — which is why the error icon exists. The icon probe fails the run
+	   if the icon ever stops rendering, because a selector that matches nothing
+	   is an error here. `fill` is not among the recorded properties, so the
+	   icon's colour is covered by the render snapshot, not by this gate. */
+	{
+		page: 'forms',
+		key: 'select (invalid)',
+		sel: '.cds--select--invalid .cds--select-input',
+		box: true,
+	},
+	{
+		page: 'forms',
+		key: 'select (invalid, focused)',
+		sel: '.cds--select--invalid .cds--select-input',
+		state: 'focus',
+		box: true,
+	},
+	{
+		page: 'forms',
+		key: 'select (invalid) error icon',
+		sel: '.cds--select__invalid-icon',
+		box: true,
+	},
 	{
 		page: 'forms',
 		key: 'text-input (warning)',
