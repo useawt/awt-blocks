@@ -12,6 +12,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Option', 'awt' );
 $value    = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $checked  = ! empty( $attributes['checked'] );

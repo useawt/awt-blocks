@@ -15,6 +15,10 @@ use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label          = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Menu', 'awt' );
 $kind           = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size           = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'lg';

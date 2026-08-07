@@ -14,6 +14,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $icon_name = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : '';
 if ( $icon_name === '' ) {
 	return;

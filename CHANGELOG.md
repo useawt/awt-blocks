@@ -299,6 +299,16 @@
 
 ### [Improvement]
 
+- Every block file that builds a block's output now refuses to run when it is
+  opened directly instead of through WordPress. Nothing changes on your pages —
+  the output is identical, byte for byte — but it is what WordPress.org's own
+  plugin checker asks for, and it closes a way a misconfigured server could
+  have shown a raw file.
+
+- Version numbers now agree with each other. The plugin reported
+  `2026.01.0-stage1` in one place and `2026.01.0` in another, which is the kind
+  of mismatch that can send people the wrong download.
+
 - Header brand: a logo you have set now shows without a second setting to
   find. When brand mode is left on the site default, the block shows the
   logo and prefix you have set, and just your site title when you have set

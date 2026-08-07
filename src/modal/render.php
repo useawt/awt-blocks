@@ -19,6 +19,10 @@ use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\compute_rel;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $modal_id         = isset( $attributes['id'] ) && $attributes['id'] !== '' ? (string) $attributes['id'] : unique_id( 'awt-modal' );
 $heading          = isset( $attributes['heading'] ) ? (string) $attributes['heading'] : '';
 $label            = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';

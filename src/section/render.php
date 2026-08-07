@@ -13,6 +13,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $padding_block  = isset( $attributes['paddingBlock'] ) ? (string) $attributes['paddingBlock'] : '07';
 $padding_inline = isset( $attributes['paddingInline'] ) ? (string) $attributes['paddingInline'] : '06';
 $max_width_key  = isset( $attributes['maxWidth'] ) ? (string) $attributes['maxWidth'] : 'content';

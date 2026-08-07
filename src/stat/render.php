@@ -19,6 +19,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $value       = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $heading     = isset( $attributes['heading'] ) ? (string) $attributes['heading'] : '';
 $description = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';

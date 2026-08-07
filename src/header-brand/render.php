@@ -12,6 +12,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // Theme-wide defaults from AWT Settings → Identity. Per-block attributes
 // override these defaults (same model as the skip-link's text override).
 // Guarded with function_exists so the block continues to work when the

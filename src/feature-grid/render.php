@@ -13,6 +13,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $columns = isset( $attributes['columns'] ) ? (int) $attributes['columns'] : 3;
 $gap     = isset( $attributes['gap'] ) ? (string) $attributes['gap'] : '06';
 

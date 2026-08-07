@@ -35,3 +35,9 @@ npm-debug.log*
 # an artifact staged for commit. reset.sh sweeps them before each run; this
 # catches the one the last run leaves behind.
 .wp-env/seed/uploads/**/gate-logo*.png
+
+# The WordPress.org distribution zip, rebuilt on demand by `npm run plugin-zip`.
+# Never committed: it is derived from tracked files, and Plugin Check flags a
+# zip left sitting in the plugin folder (`compressed_files`) — found exactly
+# that way on 2026-08-07, by a run that was checking something else.
+/awt-blocks.zip

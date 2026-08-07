@@ -11,6 +11,10 @@ use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label         = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Checkbox label', 'awt' );
 $name          = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $value         = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';

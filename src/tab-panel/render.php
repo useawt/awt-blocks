@@ -12,6 +12,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $panel_id = unique_id( 'awt-tabpanel' );

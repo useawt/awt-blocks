@@ -15,6 +15,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\classnames;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $orientation = isset( $attributes['orientation'] ) ? (string) $attributes['orientation'] : 'horizontal';
 $gap         = isset( $attributes['gap'] ) ? (string) $attributes['gap'] : 'md';
 $align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'start';

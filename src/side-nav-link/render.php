@@ -23,6 +23,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\CurrentUrl\matches_current;
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link', 'awt' );
 $href       = isset( $attributes['href'] ) ? (string) $attributes['href'] : '#';
 $icon_name  = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : '';

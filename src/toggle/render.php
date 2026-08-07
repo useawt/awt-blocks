@@ -23,6 +23,10 @@ use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label      = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Toggle label', 'awt' );
 $name       = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $size       = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';

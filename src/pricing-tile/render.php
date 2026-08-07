@@ -17,6 +17,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $tier_name    = isset( $attributes['tierName'] ) ? (string) $attributes['tierName'] : '';
 $price        = isset( $attributes['price'] ) ? (string) $attributes['price'] : '';
 $price_period = isset( $attributes['pricePeriod'] ) ? (string) $attributes['pricePeriod'] : '';

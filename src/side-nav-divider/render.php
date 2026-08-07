@@ -7,6 +7,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $divider_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'divider' ) ) : 'cds--side-nav__divider';

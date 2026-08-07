@@ -40,6 +40,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $aria_label = isset( $attributes['ariaLabel'] ) && $attributes['ariaLabel'] !== ''
 	? (string) $attributes['ariaLabel']
 	: __( 'Primary', 'awt' );

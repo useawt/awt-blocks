@@ -16,6 +16,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\kses_inline;
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $headers          = isset( $attributes['headers'] ) && is_array( $attributes['headers'] ) ? $attributes['headers'] : array();

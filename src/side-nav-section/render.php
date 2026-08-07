@@ -13,6 +13,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $section_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : '';
 
 // `defaultExpanded` is no longer read. It produced

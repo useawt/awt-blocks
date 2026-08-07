@@ -10,6 +10,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\html_attrs;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $aria_label        = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Breadcrumbs', 'awt' );
 $no_trailing_slash = ! empty( $attributes['noTrailingSlash'] );
 

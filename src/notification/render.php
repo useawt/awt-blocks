@@ -14,6 +14,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $kind               = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'info';
 $notification_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Notification', 'awt' );
 $subtitle           = isset( $attributes['subtitle'] ) ? (string) $attributes['subtitle'] : '';

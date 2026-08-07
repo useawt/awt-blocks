@@ -12,6 +12,10 @@ use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\compute_rel;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text      = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link text', 'awt' );
 $href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $target    = isset( $attributes['target'] ) ? (string) $attributes['target'] : '';

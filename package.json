@@ -1,6 +1,6 @@
 {
 	"name": "awt-blocks",
-	"version": "2026.01.0-stage1",
+	"version": "2026.01.0",
 	"description": "AWT blocks plugin — Stage 1: 14 Stage-0 blocks + 13 UI shell blocks + section + icon.",
 	"private": true,
 	"license": "GPL-2.0-or-later",

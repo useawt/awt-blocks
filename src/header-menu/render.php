@@ -26,6 +26,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text = isset( $attributes['text'] ) && $attributes['text'] !== ''
 	? (string) $attributes['text']
 	: __( 'Menu', 'awt' );

@@ -15,6 +15,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $icon_name = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : 'search';
 $label     = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';

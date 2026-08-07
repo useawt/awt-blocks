@@ -9,6 +9,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Open modal', 'awt' );
 $kind     = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';

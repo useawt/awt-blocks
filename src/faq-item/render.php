@@ -28,6 +28,10 @@ use function AWT\Blocks\FaqSchema\register as register_faq;
 use function AWT\Blocks\FaqSchema\plain_text_from_html;
 use function AWT\Blocks\FaqSchema\slugify_question;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $question         = isset( $attributes['question'] ) ? (string) $attributes['question'] : '';
 $answer_override  = isset( $attributes['answer'] ) ? (string) $attributes['answer'] : '';
 $default_expanded = ! empty( $attributes['defaultExpanded'] );

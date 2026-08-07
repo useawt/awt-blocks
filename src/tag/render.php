@@ -13,6 +13,10 @@ use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\compute_rel;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Tag', 'awt' );
 $tag_type = isset( $attributes['type'] ) ? (string) $attributes['type'] : 'gray';
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';

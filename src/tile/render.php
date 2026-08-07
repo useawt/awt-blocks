@@ -25,6 +25,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $variant      = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'default';
 $href         = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $group_name   = isset( $attributes['groupName'] ) ? (string) $attributes['groupName'] : '';

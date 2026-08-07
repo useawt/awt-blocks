@@ -16,6 +16,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Segment', 'awt' );

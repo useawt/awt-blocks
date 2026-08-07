@@ -9,6 +9,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\html_attrs;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text            = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Item', 'awt' );
 $href            = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $is_current_page = ! empty( $attributes['isCurrentPage'] );

@@ -10,6 +10,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : '';
 
 // §A: CSS classes from the active design system (guarded for non-AWT themes).

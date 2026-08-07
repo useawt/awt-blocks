@@ -21,6 +21,10 @@ use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\compute_rel;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text          = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Button', 'awt' );
 $kind          = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size          = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'lg';

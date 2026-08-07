@@ -15,6 +15,10 @@ use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\describedby;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $name           = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $legend         = isset( $attributes['legend'] ) ? (string) $attributes['legend'] : '';
 $orientation    = isset( $attributes['orientation'] ) ? (string) $attributes['orientation'] : 'horizontal';

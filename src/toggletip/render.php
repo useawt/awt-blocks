@@ -20,6 +20,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label       = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $description = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';
 $aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'More information', 'awt' );

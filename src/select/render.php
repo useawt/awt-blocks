@@ -15,6 +15,10 @@ use function AWT\Blocks\Render\describedby;
 use function AWT\Blocks\Render\field_frame_class;
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Select', 'awt' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $helper_text  = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';

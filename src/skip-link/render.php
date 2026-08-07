@@ -9,6 +9,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $target_id = isset( $attributes['targetId'] ) && $attributes['targetId'] !== ''
 	? (string) $attributes['targetId']
 	: 'main-content';

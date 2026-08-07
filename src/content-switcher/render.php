@@ -18,6 +18,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $size       = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'View switcher', 'awt' );
 

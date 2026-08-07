@@ -9,6 +9,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\html_attrs;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $form_action = isset( $attributes['action'] ) ? (string) $attributes['action'] : '';
 $method      = isset( $attributes['method'] ) ? (string) $attributes['method'] : 'post';
 $enctype     = isset( $attributes['enctype'] ) ? (string) $attributes['enctype'] : '';

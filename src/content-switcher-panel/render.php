@@ -18,6 +18,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $panel_id = unique_id( 'awt-cs-panel' );
 
 $wrapper_attrs = get_block_wrapper_attributes(

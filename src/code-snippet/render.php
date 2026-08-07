@@ -11,6 +11,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $variant       = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'multi';
 $code          = isset( $attributes['code'] ) ? (string) $attributes['code'] : '';
 $language      = isset( $attributes['language'] ) ? (string) $attributes['language'] : '';

@@ -27,6 +27,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $nav_mode   = isset( $attributes['mode'] ) ? (string) $attributes['mode'] : 'persistent';
 $aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Side navigation', 'awt' );
 $dom_id     = isset( $attributes['id'] ) ? (string) $attributes['id'] : 'side-nav';

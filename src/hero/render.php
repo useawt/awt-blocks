@@ -20,6 +20,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $version   = isset( $attributes['version'] ) ? (int) $attributes['version'] : 1;
 $layout    = isset( $attributes['layout'] ) ? (string) $attributes['layout'] : 'text-only';
 $image_url = isset( $attributes['imageUrl'] ) ? (string) $attributes['imageUrl'] : '';

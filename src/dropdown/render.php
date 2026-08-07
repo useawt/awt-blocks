@@ -16,6 +16,10 @@ declare( strict_types = 1 );
 use function AWT\Blocks\Render\unique_id;
 use function AWT\Blocks\Render\field_frame_class;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Dropdown', 'awt' );
 $placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt' );
 $helper_text  = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';

@@ -9,6 +9,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\classnames;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $list_type  = isset( $attributes['type'] ) ? (string) $attributes['type'] : 'unordered';
 $expressive = ! empty( $attributes['isExpressive'] );
 $nested     = ! empty( $attributes['nested'] );

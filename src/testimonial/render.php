@@ -14,6 +14,10 @@
 
 declare( strict_types = 1 );
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $quote             = isset( $attributes['quote'] ) ? (string) $attributes['quote'] : '';
 $author_name       = isset( $attributes['authorName'] ) ? (string) $attributes['authorName'] : '';
 $author_role       = isset( $attributes['authorRole'] ) ? (string) $attributes['authorRole'] : '';

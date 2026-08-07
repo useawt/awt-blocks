@@ -16,6 +16,10 @@ declare( strict_types = 1 );
 
 namespace AWT\Blocks\FaqSchema;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Free/Premium boundary for FAQ structured data.
  *

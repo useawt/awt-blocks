@@ -14,6 +14,10 @@ use function AWT\Blocks\Render\html_attrs;
 use function AWT\Blocks\Render\classnames;
 use function AWT\Blocks\Render\unique_id;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $description    = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';
 $align          = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'top';
 $default_open   = ! empty( $attributes['defaultOpen'] );

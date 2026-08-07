@@ -14,6 +14,10 @@ declare( strict_types = 1 );
 
 use function AWT\Blocks\CurrentUrl\matches_current;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Item', 'awt' );
 $href       = isset( $attributes['href'] ) ? (string) $attributes['href'] : '#';
 $is_current = ! empty( $attributes['isCurrent'] );
