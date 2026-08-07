@@ -111,6 +111,7 @@ const FORMS = `
 <!-- wp:awt/text-area {"label":"Terms you accepted","name":"terms","value":"Recorded at sign-up.","readonly":true} /-->
 <!-- wp:awt/text-input {"label":"Legacy plan","name":"legacy","disabled":true} /-->
 <!-- wp:awt/text-input {"label":"Carbon-styled field","name":"carbonlook","carbonDefault":true} /-->
+<!-- wp:awt/text-input {"label":"Fluid field","name":"fluid","fluid":true} /-->
 <!-- wp:awt/checkbox {"label":"Email me product updates","name":"updates"} /-->
 <!-- wp:awt/checkbox {"label":"Select all regions","name":"regions","indeterminate":true} /-->
 <!-- wp:awt/radio-button-group {"legend":"Billing period","name":"billing"} -->

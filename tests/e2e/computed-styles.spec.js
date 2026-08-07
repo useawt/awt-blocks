@@ -168,8 +168,25 @@ const PROBES = [
 	/* --- Forms --- */
 	{ page: 'forms', key: 'form-title', sel: '.cds--form__title' },
 	{ page: 'forms', key: 'form-description', sel: '.cds--form__description' },
+	/* The three probes that hold difference D8. `fontSize`, `lineHeight` and
+	   `color` are recorded on every probe, so the label, the hint (helper-text
+	   below) and the error message (invalid-text further down) each freeze the
+	   14px this theme puts them at. Carbon's own sizes are 12px, so a drift back
+	   shows up as a one-line diff in each of the three. */
 	{ page: 'forms', key: 'field-label', sel: '.cds--label' },
 	{ page: 'forms', key: 'helper-text', sel: '.cds--form__helper-text' },
+	/* D8's one deliberate hole. A fluid field floats its label inside the field
+	   box, in a slot built for 12px, so that label alone keeps Carbon's size.
+	   Without this probe the hole is invisible to every gate: removing the
+	   exclusion would silently overflow the slot and nothing would fail. The
+	   selector matching nothing fails the run, which is also the check that the
+	   fixture still carries a fluid field. */
+	{
+		page: 'forms',
+		key: 'field-label (fluid, keeps Carbon size)',
+		sel: '.cds--text-input--fluid .cds--label',
+		box: true,
+	},
 	{ page: 'forms', key: 'text-input', sel: '.cds--text-input', box: true },
 	{
 		page: 'forms',
