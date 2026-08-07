@@ -1,5 +1,5 @@
 === AWT Blocks ===
-Contributors: awt
+Contributors: getawt
 Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 6.8
