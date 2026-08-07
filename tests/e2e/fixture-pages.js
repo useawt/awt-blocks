@@ -104,6 +104,7 @@ const FORMS = `
 <!-- wp:awt/text-input {"label":"Email","name":"email","type":"email","required":true,"invalid":true,"invalidText":"Enter a valid email address."} /-->
 <!-- wp:awt/text-input {"label":"Company","name":"company","warn":true,"warnText":"We could not verify this company."} /-->
 <!-- wp:awt/password-input {"label":"Password","name":"password","helperText":"At least 12 characters."} /-->
+<!-- wp:awt/password-input {"label":"Confirm password","name":"password2","invalid":true,"invalidText":"Passwords do not match."} /-->
 <!-- wp:awt/text-area {"label":"Why are you signing up?","name":"reason"} /-->
 <!-- wp:awt/select {"label":"Plan","name":"plan"} /-->
 <!-- wp:awt/select {"label":"Region","name":"region","invalid":true,"invalidText":"Choose a region."} /-->

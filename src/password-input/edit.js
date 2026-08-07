@@ -183,6 +183,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						]
 							.filter( Boolean )
 							.join( ' ' ) }
+						// Carbon reveals the error message from
+						// `[data-invalid]`, not from the `--invalid`
+						// class above. Mirrors render.php; see the note
+						// in text-input/edit.js.
+						data-invalid={ invalid ? 'true' : undefined }
 					>
 						<input
 							id={ id }

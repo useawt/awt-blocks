@@ -304,6 +304,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						]
 							.filter( Boolean )
 							.join( ' ' ) }
+						// Carbon reveals the error message from
+						// `[data-invalid]` on this element, not from
+						// the `--invalid` class above (which is ours,
+						// and which Carbon styles nowhere). Without it
+						// the message stays `display: none` and the
+						// preview would show no error text at all.
+						// Mirrors render.php.
+						data-invalid={ invalid ? 'true' : undefined }
 					>
 						<input
 							id={ id }

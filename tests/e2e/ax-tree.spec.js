@@ -367,10 +367,16 @@ const PROBES = [
 		nth: 1,
 	},
 	{
+		/* Selected by what it IS, not by where it sits. This probe used
+		   `nth: 6` and was recording "Carbon-styled field" — a field that is
+		   not disabled — under a name claiming otherwise, and the snapshot
+		   froze that. Nothing failed, because nothing had moved. Adding one
+		   field earlier in the fixture on 2026-08-07 shifted the index and
+		   exposed it. Password-input shares `.cds--text-input-wrapper`, so any
+		   ordinal here is hostage to every field added above it. */
 		page: 'forms',
 		key: 'text-input (disabled)',
-		sel: '.cds--text-input-wrapper',
-		nth: 6,
+		sel: '.cds--text-input-wrapper:has(.cds--text-input:disabled)',
 	},
 	{
 		page: 'forms',

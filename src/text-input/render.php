@@ -88,6 +88,23 @@ $wrapper_class = $ds
 
 // Field wrapper carries the invalid/warning modifier so Carbon's CSS can
 // reposition the icon and target the field for focus styling.
+//
+// It also needs `data-invalid`, and that one is not cosmetic. Carbon reveals
+// the error message with
+// `.cds--text-input__field-wrapper[data-invalid] ~ .cds--form-requirement`,
+// against a `.cds--form-requirement` that is `display: none` by default. Until
+// 2026-08-07 this block emitted only the class, so an invalid field kept its
+// message hidden — and because `aria-describedby` points at it, a `display:none`
+// element is dropped from the accessibility tree too, so a screen reader was
+// not told either. The field's red outline and icon were the whole of the
+// error, in both channels.
+//
+// Worth knowing when reading the modifier list below: `--invalid` and
+// `--warning` on THIS element are ours. Carbon defines no
+// `cds--text-input__field-wrapper--invalid` rule anywhere, which is what made
+// the gap easy to miss — the markup looked like it handled the state. The
+// warning message shows because Carbon's reveal rule happens to match
+// `--warning` as a class; there is no such luck for invalid.
 $field_wrapper_modifiers       = array(
 	$invalid ? 'invalid' : '',
 	$warn ? 'warning' : '',
@@ -233,7 +250,7 @@ ob_start();
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
 	<label for="<?php echo esc_attr( $input_id ); ?>" class="<?php echo esc_attr( $label_class ); ?>"><?php echo wp_kses_post( $label ); ?></label>
 	<div class="cds--text-input__field-outer-wrapper">
-		<div class="<?php echo esc_attr( $field_wrapper_class ); ?>">
+		<div class="<?php echo esc_attr( $field_wrapper_class ); ?>"<?php echo $invalid ? ' data-invalid="true"' : ''; ?>>
 			<input <?php echo $input_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by html_attrs(), which escapes every attribute name and value. ?> />
 			<?php echo $status_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?>
 		</div>

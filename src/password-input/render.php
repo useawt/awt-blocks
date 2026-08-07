@@ -45,6 +45,14 @@ $wrapper_class           = $ds
 	? $ds->classes_for( 'password-input' )
 	: $_wrapper_class_fallback;
 
+// `data-invalid` on the field wrapper below is what Carbon keys the error
+// message off — `.cds--text-input__field-wrapper[data-invalid] ~
+// .cds--form-requirement`, against a message that is `display: none` by
+// default. Missing here until 2026-08-07, with the same consequence as in
+// `text-input/render.php` (see the longer note there): the message was hidden,
+// and hidden from screen readers too, because `aria-describedby` cannot reach a
+// `display:none` element. The `--invalid` modifier below is ours; Carbon
+// defines no rule for it.
 $field_wrapper_modifiers       = array(
 	$invalid ? 'invalid' : '',
 	$warn ? 'warning' : '',
@@ -153,7 +161,7 @@ ob_start();
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
 	<label for="<?php echo esc_attr( $input_id ); ?>" class="<?php echo esc_attr( $label_class ); ?>"><?php echo wp_kses_post( $label ); ?></label>
 	<div class="cds--text-input__field-outer-wrapper">
-		<div class="<?php echo esc_attr( $field_wrapper_class ); ?>">
+		<div class="<?php echo esc_attr( $field_wrapper_class ); ?>"<?php echo $invalid ? ' data-invalid="true"' : ''; ?>>
 			<input <?php echo $input_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by html_attrs(), which escapes every attribute name and value. ?> />
 			<button type="button" class="cds--text-input--password__visibility__toggle" aria-label="<?php echo esc_attr( $show_label ); ?>" aria-controls="<?php echo esc_attr( $input_id ); ?>"<?php echo $disabled ? ' disabled' : ''; ?> data-wp-on--click="actions.toggle">
 				<?php echo $eye_open_svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?>

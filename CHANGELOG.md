@@ -171,6 +171,15 @@
 
 ### [A11y]
 
+- Text input and Password input: an error message now appears under the field.
+  Until now it was written into the page but never shown, so a visitor who
+  filled the field in wrongly saw a red outline and an icon and was never told
+  what the problem was. Screen readers did read the message out, so this
+  affected people reading the screen. Text area and Select were already correct.
+  Warning messages were always shown. The rendered markup changes, which is a
+  deliberate snapshot update, but only for a field that is in error: a valid
+  field renders exactly as before.
+
 - Select: a field with an error now shows an error icon inside it. Until now the
   error was drawn as a red outline and nothing else, so anyone who does not see
   red had only the message below the field to go on. Worse, the focus indicator

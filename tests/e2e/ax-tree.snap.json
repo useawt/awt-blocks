@@ -172,10 +172,10 @@
 			"forms/text-input (disabled)": [
 				"generic",
 				"  LabelText",
-				"    StaticText \"Carbon-styled field\"",
+				"    StaticText \"Legacy plan\"",
 				"  none [ignored: uninteresting]",
 				"    generic",
-				"      textbox \"Carbon-styled field\" required=false invalid=false",
+				"      textbox \"Legacy plan\" disabled=true required=false invalid=false",
 				"        generic"
 			],
 			"forms/text-input (invalid)": [
@@ -186,8 +186,8 @@
 				"    generic",
 				"      textbox \"Email\" desc=\"Enter a valid email address.\" required=true invalid=true",
 				"        generic",
-				"    none [ignored: notRendered]",
-				"      none [ignored: notRendered]"
+				"    generic",
+				"      StaticText \"Enter a valid email address.\""
 			],
 			"forms/text-input (required)": [
 				"generic",
@@ -562,10 +562,10 @@
 			"forms/text-input (disabled)": [
 				"generic",
 				"  LabelText",
-				"    StaticText \"Carbon-styled field\"",
+				"    StaticText \"Legacy plan\"",
 				"  none [ignored: uninteresting]",
 				"    generic",
-				"      textbox \"Carbon-styled field\" required=false invalid=false",
+				"      textbox \"Legacy plan\" disabled=true required=false invalid=false",
 				"        generic"
 			],
 			"forms/text-input (invalid)": [
@@ -576,8 +576,8 @@
 				"    generic",
 				"      textbox \"Email\" desc=\"Enter a valid email address.\" required=true invalid=true",
 				"        generic",
-				"    none [ignored: notRendered]",
-				"      none [ignored: notRendered]"
+				"    generic",
+				"      StaticText \"Enter a valid email address.\""
 			],
 			"forms/text-input (required)": [
 				"generic",

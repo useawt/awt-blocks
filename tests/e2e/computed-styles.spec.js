@@ -201,7 +201,22 @@ const PROBES = [
 		sel: '.cds--text-input--invalid',
 		box: true,
 	},
+	/* The error message under a field. `display` is the property that matters
+	   here, and this probe is why: it recorded `none` for weeks and froze a
+	   defect as ground truth. Carbon leaves `.cds--form-requirement` hidden and
+	   reveals it from `[data-invalid]` on the field wrapper; text-input and
+	   password-input emitted a class Carbon styles nowhere, so the message never
+	   appeared, and the snapshot faithfully recorded that it never appeared.
+	   Fixed 2026-08-07 — a snapshot proves output is stable, never that it is
+	   right. The second probe covers password-input, which the first cannot
+	   reach: `invalid-text` resolves to the first match on the page, which is
+	   the text input's. */
 	{ page: 'forms', key: 'invalid-text', sel: '.cds--form-requirement' },
+	{
+		page: 'forms',
+		key: 'invalid-text (password input)',
+		sel: '.cds--password-input-wrapper .cds--form-requirement',
+	},
 	/* A select in error. The pair of probes below is the point: at rest the
 	   field carries the red outline, and on focus the focus indicator takes its
 	   place — which is why the error icon exists. The icon probe fails the run
