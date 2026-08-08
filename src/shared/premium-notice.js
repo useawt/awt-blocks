@@ -12,7 +12,7 @@
 import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
 
-const PREMIUM_URL = 'https://accessiblewordpresstheme.com/premium';
+const PREMIUM_URL = 'https://useawt.com/premium';
 
 export default function PremiumNotice( { title, description } ) {
 	return (

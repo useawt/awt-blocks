@@ -21,7 +21,7 @@ msgstr ""
 
 #. Plugin URI of the plugin
 #: awt-blocks.php
-msgid "https://accessiblewordpresstheme.com"
+msgid "https://useawt.com"
 msgstr ""
 
 #. Description of the plugin
