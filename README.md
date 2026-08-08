@@ -37,4 +37,4 @@ Other commands: `npm run env:stop`, `npm run env:destroy`,
 
 ## License
 
-GPL-2.0-or-later
+GPL-3.0-or-later

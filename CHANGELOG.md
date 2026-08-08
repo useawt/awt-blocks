@@ -14,6 +14,16 @@
 
 ### [Breaking]
 
+- **AWT Blocks is now GPLv3 or later, instead of GPLv2 or later.** Nothing
+  changes for you as a site owner: you can still use, modify and redistribute
+  it freely, and it runs on WordPress exactly as before. The change matters
+  only if you redistribute the plugin yourself or build on its code, in which
+  case your copy must now follow GPLv3 terms. The reason is that the plugin
+  bundles Carbon Design System styles and icons, which IBM releases under the
+  Apache 2.0 licence. Apache 2.0 can be combined with GPLv3 but not with
+  GPLv2, so the older label was wrong. The full licence text ships in
+  `license.txt`, with the Apache 2.0 text included after it.
+
 - Selectable tiles with a group name render differently. Each one is now a hidden
   radio button plus the tile as its label, instead of one box carrying the state
   itself. Existing pages keep working and need no edits, but custom CSS or

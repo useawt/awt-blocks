@@ -3,7 +3,7 @@
 	"version": "2026.01.0",
 	"description": "AWT blocks plugin — Stage 1: 14 Stage-0 blocks + 13 UI shell blocks + section + icon.",
 	"private": true,
-	"license": "GPL-2.0-or-later",
+	"license": "GPL-3.0-or-later",
 	"scripts": {
 		"build": "npm run build:icons && WP_EXPERIMENTAL_MODULES=true wp-scripts build && node scripts/mirror-runtime-into-build.js",
 		"build:icons": "node scripts/generate-icon-manifest.js && node scripts/copy-carbon-icons.js",

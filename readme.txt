@@ -1,12 +1,12 @@
 === AWT Blocks ===
-Contributors: getawt
+Contributors: useawt
 Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 8.1
 Stable tag: 2026.01.0
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Accessible blocks built on the Carbon Design System, with an accessibility checker inside the editor. Made to pair with the AWT theme.
 
@@ -89,6 +89,30 @@ AWT Premium adds advanced capabilities on top of the free plugin and theme. Ever
 4. The Accessibility panel in a block's settings — accessible name, `aria-label`, role, and language, on every AWT block.
 5. A published page in light mode, built entirely from AWT blocks and patterns.
 6. The same page in dark mode — the visitor color scheme toggle switches instantly.
+
+== Copyright ==
+
+AWT Blocks, (C) 2026 AWT.
+AWT Blocks is distributed under the terms of the GNU GPL v3 or later.
+The full text is in license.txt.
+
+AWT Blocks is GPLv3-or-later rather than GPLv2-or-later because it bundles
+Carbon Design System styles and icons, which are Apache-2.0. Apache 2.0 is
+compatible with GPLv3 but not with GPLv2.
+
+This plugin bundles the following third-party resources:
+
+Carbon Design System styles, compiled from @carbon/styles
+Copyright IBM Corp. 2016, 2026
+License: Apache License 2.0, https://www.apache.org/licenses/LICENSE-2.0
+Full text: LICENSE-Apache-2.0.txt
+Source: https://github.com/carbon-design-system/carbon
+
+Carbon Design System icons, from @carbon/icons
+Copyright IBM Corp. 2016, 2026
+License: Apache License 2.0, https://www.apache.org/licenses/LICENSE-2.0
+Full text: LICENSE-Apache-2.0.txt
+Source: https://github.com/carbon-design-system/carbon
 
 == Accessibility statement ==
 

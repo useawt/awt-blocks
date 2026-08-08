@@ -951,7 +951,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>GPL-2.0-or-later. No telemetry, no callbacks, no lock-in.</p>
+<p>GPL-3.0-or-later. No telemetry, no callbacks, no lock-in.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/feature-grid -->
@@ -969,7 +969,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/accordion {"singleOpen":true} -->
 <!-- wp:awt/accordion-item {"title":"Is AWT really free?"} -->
 <!-- wp:paragraph -->
-<p>Yes. The theme and the blocks plugin are GPL-2.0-or-later and ship via WordPress.org with no telemetry, no callbacks, and no license keys.</p>
+<p>Yes. The theme and the blocks plugin are GPL-3.0-or-later and ship via WordPress.org with no telemetry, no callbacks, and no license keys.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/accordion-item -->
 
@@ -1417,7 +1417,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h3 class="wp-block-heading">Free, forever</h3>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>GPL-2.0-or-later. No telemetry, no callbacks, no lock-in.</p>
+<p>GPL-3.0-or-later. No telemetry, no callbacks, no lock-in.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/feature-grid -->
@@ -1505,7 +1505,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/accordion {"singleOpen":true} -->
 <!-- wp:awt/faq-item {"question":"Is this product really free?","level":"3"} -->
 <!-- wp:paragraph -->
-<p>Yes. The base product is GPL-2.0-or-later and is published on WordPress.org with no telemetry, no callbacks, and no license keys. Premium adds optional capabilities; the free theme and plugin are the complete product.</p>
+<p>Yes. The base product is GPL-3.0-or-later and is published on WordPress.org with no telemetry, no callbacks, and no license keys. Premium adds optional capabilities; the free theme and plugin are the complete product.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 
@@ -3007,7 +3007,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Everything is GPL-2.0-or-later. No telemetry. No license keys.</p>
+<p>Everything is GPL-3.0-or-later. No telemetry. No license keys.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 
@@ -4151,7 +4151,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>GPL-2.0-or-later. No telemetry.</p>
+<p>GPL-3.0-or-later. No telemetry.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/feature-grid -->
@@ -4372,7 +4372,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 
 <!-- wp:awt/faq-item {"question":"Is AWT really free?"} -->
 <!-- wp:paragraph -->
-<p>Yes — GPL-2.0-or-later. No telemetry, no callbacks, no license keys.</p>
+<p>Yes — GPL-3.0-or-later. No telemetry, no callbacks, no license keys.</p>
 <!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 
