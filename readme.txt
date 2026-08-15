@@ -83,7 +83,7 @@ AWT Premium adds advanced capabilities on top of the free plugin and theme. Ever
 
 == Screenshots ==
 
-1. AWT blocks in the editor — a page assembled from hero, feature grid, and stats blocks.
+1. A page built from AWT blocks, open in the editor.
 2. The accessibility checker's sidebar panel, with findings and "Show block" shortcuts.
 3. Accessibility checks in the pre-publish panel — issues surface before you publish.
 4. The Accessibility panel in a block's settings — accessible name, `aria-label`, role, and language, on every AWT block.
