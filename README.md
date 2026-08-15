@@ -1,7 +1,7 @@
 # AWT Blocks
 
 Accessible Gutenberg blocks built on the [Carbon Design System](https://carbondesignsystem.com/),
-for the [AWT theme](https://github.com/accessible-wordpress-theme/awt-theme).
+for the [AWT theme](https://github.com/useawt/awt-theme).
 Part of the AWT project: an accessibility-first WordPress theme + blocks,
 free on WordPress.org.
 
@@ -15,8 +15,8 @@ The theme and blocks repos are developed in lockstep and expect to be cloned
 side by side:
 
 ```bash
-git clone https://github.com/accessible-wordpress-theme/awt-theme.git
-git clone https://github.com/accessible-wordpress-theme/awt-blocks.git
+git clone https://github.com/useawt/awt-theme.git
+git clone https://github.com/useawt/awt-blocks.git
 cd awt-blocks
 npm install
 npm run build
