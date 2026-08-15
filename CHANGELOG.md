@@ -309,6 +309,12 @@
 
 ### [Improvement]
 
+- Clearer wording on two settings. The link setting on Button, Link, Tag and
+  Modal is now called "Link relationship (rel)" and explains underneath that
+  links opening in a new tab are already handled for you. The Code snippet
+  setting is now just "Language", and says plainly that it labels the snippet
+  for screen readers rather than coloring the code.
+
 - Translations now work. AWT Blocks was labelling its text `awt` while
   WordPress looks for it under the plugin's own name, `awt-blocks`, so a
   finished translation would have been ignored and everything shown in
