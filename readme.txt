@@ -12,7 +12,7 @@ Accessible blocks built on the Carbon Design System, with an accessibility check
 
 == Description ==
 
-AWT Blocks gives the block editor a full set of accessible components, built on [IBM's open-source Carbon Design System](https://carbondesignsystem.com/) and reviewed against WCAG 2.2 AA. It's one half of AWT (Accessible WordPress Theme) — install it together with the [AWT theme](https://wordpress.org/themes/awt/), which provides the design foundation, color themes, and 42 ready-made patterns these blocks are designed for.
+AWT Blocks gives the block editor a full set of accessible components, built on [IBM's open-source Carbon Design System](https://carbondesignsystem.com/) and reviewed against WCAG 2.2 AA. It's one half of AWT — install it together with the [AWT theme](https://wordpress.org/themes/awt/), which provides the design foundation, color themes, and 42 ready-made patterns these blocks are designed for.
 
 **58 blocks**, including:
 
