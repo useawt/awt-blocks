@@ -2,7 +2,7 @@
 Contributors: useawt
 Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 8.1
 Stable tag: 2026.01.0
 License: GPLv3 or later

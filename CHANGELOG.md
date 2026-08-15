@@ -309,6 +309,10 @@
 
 ### [Improvement]
 
+- Tested on WordPress 7.0. Everything was checked on it before the version was
+  written down: the blocks on the front end, the editor, the accessibility
+  checker, and every AWT Settings screen.
+
 - Clearer wording on two settings. The link setting on Button, Link, Tag and
   Modal is now called "Link relationship (rel)" and explains underneath that
   links opening in a new tab are already handled for you. The Code snippet
