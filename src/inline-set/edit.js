@@ -14,22 +14,22 @@ const TEMPLATE = [
 ];
 
 const ORIENTATION = [
-	{ label: __( 'Horizontal', 'awt' ), value: 'horizontal' },
-	{ label: __( 'Vertical', 'awt' ), value: 'vertical' },
+	{ label: __( 'Horizontal', 'awt-blocks' ), value: 'horizontal' },
+	{ label: __( 'Vertical', 'awt-blocks' ), value: 'vertical' },
 ];
 
 const GAP = [
-	{ label: __( 'Small (0.25rem)', 'awt' ), value: 'sm' },
-	{ label: __( 'Medium (0.5rem)', 'awt' ), value: 'md' },
-	{ label: __( 'Large (1rem)', 'awt' ), value: 'lg' },
-	{ label: __( 'X-large (1.5rem)', 'awt' ), value: 'xl' },
+	{ label: __( 'Small (0.25rem)', 'awt-blocks' ), value: 'sm' },
+	{ label: __( 'Medium (0.5rem)', 'awt-blocks' ), value: 'md' },
+	{ label: __( 'Large (1rem)', 'awt-blocks' ), value: 'lg' },
+	{ label: __( 'X-large (1.5rem)', 'awt-blocks' ), value: 'xl' },
 ];
 
 const ALIGN = [
-	{ label: __( 'Start', 'awt' ), value: 'start' },
-	{ label: __( 'Center', 'awt' ), value: 'center' },
-	{ label: __( 'End', 'awt' ), value: 'end' },
-	{ label: __( 'Space between', 'awt' ), value: 'between' },
+	{ label: __( 'Start', 'awt-blocks' ), value: 'start' },
+	{ label: __( 'Center', 'awt-blocks' ), value: 'center' },
+	{ label: __( 'End', 'awt-blocks' ), value: 'end' },
+	{ label: __( 'Space between', 'awt-blocks' ), value: 'between' },
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -53,11 +53,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Inline set', 'awt' ) }
+					title={ __( 'Inline set', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Orientation', 'awt' ) }
+						label={ __( 'Orientation', 'awt-blocks' ) }
 						value={ orientation }
 						options={ ORIENTATION }
 						onChange={ ( v ) =>
@@ -65,13 +65,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Gap', 'awt' ) }
+						label={ __( 'Gap', 'awt-blocks' ) }
 						value={ gap }
 						options={ GAP }
 						onChange={ ( v ) => setAttributes( { gap: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Alignment', 'awt' ) }
+						label={ __( 'Alignment', 'awt-blocks' ) }
 						value={ align }
 						options={ ALIGN }
 						onChange={ ( v ) => setAttributes( { align: v } ) }
@@ -79,7 +79,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Wrap to next line when out of space',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ wrap }
 						onChange={ ( v ) => setAttributes( { wrap: v } ) }

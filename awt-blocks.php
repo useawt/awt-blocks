@@ -9,7 +9,7 @@
  * Author:            AWT
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       awt
+ * Text Domain:       awt-blocks
  *
  * @package AWT\Blocks
  */
@@ -198,7 +198,7 @@ add_action(
 				$asset['version'],
 				true
 			);
-			wp_set_script_translations( 'awt-editor', 'awt' );
+			wp_set_script_translations( 'awt-editor', 'awt-blocks' );
 
 			// Bridge the EFFECTIVE document language the front end emits via
 			// language_attributes() (get_bloginfo('language'), e.g. "en-US").
@@ -250,37 +250,37 @@ add_filter(
 		$awt_subcategories = array(
 			array(
 				'slug'  => 'awt-ui-shell',
-				'title' => __( 'AWT — UI shell', 'awt' ),
+				'title' => __( 'AWT — UI shell', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-navigation',
-				'title' => __( 'AWT — Navigation', 'awt' ),
+				'title' => __( 'AWT — Navigation', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-forms',
-				'title' => __( 'AWT — Forms', 'awt' ),
+				'title' => __( 'AWT — Forms', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-content',
-				'title' => __( 'AWT — Content', 'awt' ),
+				'title' => __( 'AWT — Content', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-feedback',
-				'title' => __( 'AWT — Feedback', 'awt' ),
+				'title' => __( 'AWT — Feedback', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-data-display',
-				'title' => __( 'AWT — Data display', 'awt' ),
+				'title' => __( 'AWT — Data display', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-section',
-				'title' => __( 'AWT — Sections', 'awt' ),
+				'title' => __( 'AWT — Sections', 'awt-blocks' ),
 				'icon'  => null,
 			),
 		);

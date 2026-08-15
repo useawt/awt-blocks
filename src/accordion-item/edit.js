@@ -28,16 +28,16 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Accordion item', 'awt' ) }>
+				<PanelBody title={ __( 'Accordion item', 'awt-blocks' ) }>
 					<ToggleControl
-						label={ __( 'Open by default', 'awt' ) }
+						label={ __( 'Open by default', 'awt-blocks' ) }
 						checked={ defaultExpanded }
 						onChange={ ( v ) =>
 							setAttributes( { defaultExpanded: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
@@ -72,7 +72,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						className="cds--accordion__title"
 						value={ title }
 						onChange={ ( v ) => setAttributes( { title: v } ) }
-						placeholder={ __( 'Section title', 'awt' ) }
+						placeholder={ __( 'Section title', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</button>

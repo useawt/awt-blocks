@@ -37,14 +37,17 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Breadcrumb', 'awt' ) }>
+				<PanelBody title={ __( 'Breadcrumb', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'No trailing slash', 'awt' ) }
+						label={ __( 'No trailing slash', 'awt-blocks' ) }
 						checked={ noTrailingSlash }
 						onChange={ ( v ) =>
 							setAttributes( { noTrailingSlash: v } )

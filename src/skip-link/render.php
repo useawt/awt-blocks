@@ -35,7 +35,7 @@ if ( isset( $attributes['text'] ) && $attributes['text'] !== '' ) {
 } elseif ( $theme_default !== '' ) {
 	$text = $theme_default;
 } else {
-	$text = __( 'Skip to main content', 'awt' );
+	$text = __( 'Skip to main content', 'awt-blocks' );
 }
 
 // §A: resolve CSS classes from the design system layer (Carbon).

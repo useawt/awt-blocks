@@ -128,17 +128,17 @@ const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 				<InspectorControls group="color">
 					<div className="awt-contrast">
 						<p className="awt-contrast__ratio">
-							{ __( 'Contrast ratio:', 'awt' ) }{ ' ' }
+							{ __( 'Contrast ratio:', 'awt-blocks' ) }{ ' ' }
 							<strong>{ `${ rounded }:1` }</strong>
 						</p>
 						<div className="awt-contrast__badges">
 							<Badge
 								ok={ passNormal }
-								label={ __( 'AA normal text', 'awt' ) }
+								label={ __( 'AA normal text', 'awt-blocks' ) }
 							/>
 							<Badge
 								ok={ passLarge }
-								label={ __( 'AA large text', 'awt' ) }
+								label={ __( 'AA large text', 'awt-blocks' ) }
 							/>
 						</div>
 						{ ! passNormal && (
@@ -146,11 +146,11 @@ const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 								{ passLarge
 									? __(
 											'Passes for large text only (24px and up, or 18.66px and up if bold). Normal-size text needs more contrast to pass WCAG AA.',
-											'awt'
+											'awt-blocks'
 									  )
 									: __(
 											'Not enough contrast for WCAG AA (needs 4.5:1 for normal text, 3:1 for large text). Choose colors with more contrast.',
-											'awt'
+											'awt-blocks'
 									  ) }
 							</p>
 						) }

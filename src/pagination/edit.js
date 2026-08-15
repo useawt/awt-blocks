@@ -15,19 +15,19 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Pagination', 'awt' ) }
+					title={ __( 'Pagination', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<Notice status="info" isDismissible={ false }>
 						{ __(
 							"On archive / blog templates, leave Total pages = 0 and the block auto-detects the main query's page count.",
-							'awt'
+							'awt-blocks'
 						) }
 					</Notice>
 					<TextControl
 						label={ __(
 							'Total pages (0 = auto from main query)',
-							'awt'
+							'awt-blocks'
 						) }
 						type="number"
 						value={ totalPages }
@@ -36,7 +36,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Current page (0 = auto)', 'awt' ) }
+						label={ __( 'Current page (0 = auto)', 'awt-blocks' ) }
 						type="number"
 						value={ currentPage }
 						onChange={ ( v ) =>
@@ -46,13 +46,16 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __(
 							'Base URL (leave blank for current archive)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ baseUrl }
 						onChange={ ( v ) => setAttributes( { baseUrl: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>
@@ -81,7 +84,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								<path d="M5 8l5-5 .7.7L6.4 8l4.3 4.3-.7.7z" />
 							</svg>
 							<span className="cds--visually-hidden">
-								{ __( 'Previous page', 'awt' ) }
+								{ __( 'Previous page', 'awt-blocks' ) }
 							</span>
 						</span>
 					</li>
@@ -118,7 +121,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							className="cds--pagination-nav__page"
 							href="#"
 							onClick={ ( e ) => e.preventDefault() }
-							aria-label={ __( 'Next page', 'awt' ) }
+							aria-label={ __( 'Next page', 'awt-blocks' ) }
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

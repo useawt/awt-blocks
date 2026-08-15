@@ -56,55 +56,55 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Link', 'awt' ) }>
+				<PanelBody title={ __( 'Link', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'URL', 'awt' ) }
+						label={ __( 'URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Inline style', 'awt' ) }
+						label={ __( 'Inline style', 'awt-blocks' ) }
 						checked={ inline }
 						onChange={ ( v ) => setAttributes( { inline: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Show visited state', 'awt' ) }
+						label={ __( 'Show visited state', 'awt-blocks' ) }
 						checked={ visited }
 						onChange={ ( v ) => setAttributes( { visited: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Target & icon', 'awt' ) }
+					title={ __( 'Target & icon', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<SelectControl
-						label={ __( 'Target', 'awt' ) }
+						label={ __( 'Target', 'awt-blocks' ) }
 						value={ target }
 						options={ TARGET_OPTIONS }
 						onChange={ ( v ) => setAttributes( { target: v } ) }
 					/>
 					<TextControl
-						label={ __( 'rel', 'awt' ) }
+						label={ __( 'rel', 'awt-blocks' ) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 					/>
 					<IconPicker
-						label={ __( 'Trailing icon', 'awt' ) }
+						label={ __( 'Trailing icon', 'awt-blocks' ) }
 						help={ __(
 							'Search the Carbon icon library. Leave empty for none.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ iconName }
 						onChange={ ( v ) => setAttributes( { iconName: v } ) }
@@ -125,7 +125,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					tagName="span"
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }
-					placeholder={ __( 'Link text', 'awt' ) }
+					placeholder={ __( 'Link text', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				{ iconName && (

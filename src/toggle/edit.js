@@ -54,50 +54,50 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Toggle', 'awt' ) }>
+				<PanelBody title={ __( 'Toggle', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Name', 'awt' ) }
+						label={ __( 'Name', 'awt-blocks' ) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'On by default', 'awt' ) }
+						label={ __( 'On by default', 'awt-blocks' ) }
 						checked={ toggled }
 						onChange={ ( v ) => setAttributes( { toggled: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Visually hide label', 'awt' ) }
+						label={ __( 'Visually hide label', 'awt-blocks' ) }
 						checked={ hideLabel }
 						onChange={ ( v ) => setAttributes( { hideLabel: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Readonly', 'awt' ) }
+						label={ __( 'Readonly', 'awt-blocks' ) }
 						checked={ readonly }
 						onChange={ ( v ) => setAttributes( { readonly: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'State labels', 'awt' ) }
+					title={ __( 'State labels', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Off state label', 'awt' ) }
+						label={ __( 'Off state label', 'awt-blocks' ) }
 						value={ labelA }
 						onChange={ ( v ) => setAttributes( { labelA: v } ) }
 					/>
 					<TextControl
-						label={ __( 'On state label', 'awt' ) }
+						label={ __( 'On state label', 'awt-blocks' ) }
 						value={ labelB }
 						onChange={ ( v ) => setAttributes( { labelB: v } ) }
 					/>
@@ -125,7 +125,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							}
 							value={ label }
 							onChange={ ( v ) => setAttributes( { label: v } ) }
-							placeholder={ __( 'Toggle label', 'awt' ) }
+							placeholder={ __( 'Toggle label', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 						<span className={ appearanceClasses }>

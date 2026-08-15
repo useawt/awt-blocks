@@ -8,7 +8,7 @@
 	"title": "Pricing tile",
 	"category": "awt-section",
 	"description": "A selectable pricing tile with a plan name, optional price, short description, and a call-to-action. Put feature comparisons in a separate Data table below, not inside the tile. A card-with-features style is available in AWT Premium.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"pricing",
 		"tile",

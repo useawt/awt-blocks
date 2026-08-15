@@ -9,7 +9,7 @@
 	"title": "Tile",
 	"category": "awt-data-display",
 	"description": "A content box with a heading and body. Variants: default, clickable, selectable, and expandable.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"tile",
 		"card",

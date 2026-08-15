@@ -10,7 +10,7 @@
 	"title": "Tooltip",
 	"category": "awt-feedback",
 	"description": "Wraps text, an icon, or a button and shows a short hint when a visitor hovers over or focuses it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"tooltip",
 		"hint",

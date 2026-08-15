@@ -60,21 +60,21 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Menu button', 'awt' ) }>
+				<PanelBody title={ __( 'Menu button', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KIND_OPTIONS }
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Menu alignment', 'awt' ) }
+						label={ __( 'Menu alignment', 'awt-blocks' ) }
 						value={ menuAlignment }
 						options={ ALIGN_OPTIONS }
 						onChange={ ( v ) =>
@@ -82,12 +82,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Items', 'awt' ) }>
+				<PanelBody title={ __( 'Items', 'awt-blocks' ) }>
 					{ items.map( ( item, idx ) => (
 						<div
 							key={ idx }
@@ -98,17 +98,17 @@ export default function Edit( { attributes, setAttributes } ) {
 							} }
 						>
 							<TextControl
-								label={ __( 'Label', 'awt' ) }
+								label={ __( 'Label', 'awt-blocks' ) }
 								value={ item.label }
 								onChange={ ( v ) =>
 									setItem( idx, { label: v } )
 								}
 							/>
 							<TextControl
-								label={ __( 'Link (optional)', 'awt' ) }
+								label={ __( 'Link (optional)', 'awt-blocks' ) }
 								help={ __(
 									'Selecting this item sends visitors here. Leave empty for an action item (use Value below).',
-									'awt'
+									'awt-blocks'
 								) }
 								value={ item.link || '' }
 								onChange={ ( v ) =>
@@ -116,14 +116,14 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 							/>
 							<TextControl
-								label={ __( 'Value', 'awt' ) }
+								label={ __( 'Value', 'awt-blocks' ) }
 								value={ item.value }
 								onChange={ ( v ) =>
 									setItem( idx, { value: v } )
 								}
 							/>
 							<ToggleControl
-								label={ __( 'Disabled', 'awt' ) }
+								label={ __( 'Disabled', 'awt-blocks' ) }
 								checked={ !! item.disabled }
 								onChange={ ( v ) =>
 									setItem( idx, { disabled: v } )
@@ -134,7 +134,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								isSmall
 								onClick={ () => removeItem( idx ) }
 							>
-								{ __( 'Remove', 'awt' ) }
+								{ __( 'Remove', 'awt-blocks' ) }
 							</WPButton>
 						</div>
 					) ) }
@@ -143,7 +143,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onClick={ addItem }
 						style={ { marginTop: 12 } }
 					>
-						{ __( 'Add item', 'awt' ) }
+						{ __( 'Add item', 'awt-blocks' ) }
 					</WPButton>
 				</PanelBody>
 			</InspectorControls>
@@ -160,7 +160,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							tagName="span"
 							value={ label }
 							onChange={ ( v ) => setAttributes( { label: v } ) }
-							placeholder={ __( 'Menu label', 'awt' ) }
+							placeholder={ __( 'Menu label', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 						{ /* Use `cds--btn__icon` class (matches render.php's `icon( 'chevron-down', 16, 'cds--btn__icon' )`)

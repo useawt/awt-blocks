@@ -58,23 +58,29 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Modal', 'awt' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Modal', 'awt-blocks' ) }
+					initialOpen={ true }
+				>
 					<TextControl
-						label={ __( 'DOM id', 'awt' ) }
+						label={ __( 'DOM id', 'awt-blocks' ) }
 						help={ __(
 							'An awt/modal-opener with a matching Panel ID opens this modal.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ id }
 						onChange={ ( v ) => setAttributes( { id: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Optional label (above heading)', 'awt' ) }
+						label={ __(
+							'Optional label (above heading)',
+							'awt-blocks'
+						) }
 						value={ label }
 						onChange={ ( v ) => setAttributes( { label: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [
 							{ label: 'sm', value: 'sm' },
@@ -85,33 +91,33 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Primary action label', 'awt' ) }
+						label={ __( 'Primary action label', 'awt-blocks' ) }
 						value={ primaryAction }
 						onChange={ ( v ) =>
 							setAttributes( { primaryAction: v } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Secondary action label', 'awt' ) }
+						label={ __( 'Secondary action label', 'awt-blocks' ) }
 						value={ secondaryAction }
 						onChange={ ( v ) =>
 							setAttributes( { secondaryAction: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Danger styling', 'awt' ) }
+						label={ __( 'Danger styling', 'awt-blocks' ) }
 						checked={ danger }
 						onChange={ ( v ) => setAttributes( { danger: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Primary action link', 'awt' ) }
+					title={ __( 'Primary action link', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
 						label={ __(
 							'URL (turns the primary button into a link)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ primaryHref }
 						onChange={ ( v ) =>
@@ -120,7 +126,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						type="url"
 					/>
 					<SelectControl
-						label={ __( 'Target', 'awt' ) }
+						label={ __( 'Target', 'awt-blocks' ) }
 						value={ primaryTarget }
 						options={ TARGET_OPTIONS }
 						onChange={ ( v ) =>
@@ -131,7 +137,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __(
 							'rel (auto: "noopener noreferrer" for new tab)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ primaryRel }
 						onChange={ ( v ) => setAttributes( { primaryRel: v } ) }
@@ -139,14 +145,17 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Primary action — on click', 'awt' ) }
+					title={ __( 'Primary action — on click', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<PremiumNotice
-						title={ __( 'Run a JavaScript function', 'awt' ) }
+						title={ __(
+							'Run a JavaScript function',
+							'awt-blocks'
+						) }
 						description={ __(
 							'Call a JavaScript function by name when clicked.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
@@ -155,7 +164,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<Notice status="info" isDismissible={ false }>
 					{ __(
 						'This is a preview for editing. On your live site the modal stays hidden until a visitor opens it.',
-						'awt'
+						'awt-blocks'
 					) }
 				</Notice>
 				{ label && (
@@ -166,7 +175,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="cds--modal-header__heading"
 					value={ heading }
 					onChange={ ( v ) => setAttributes( { heading: v } ) }
-					placeholder={ __( 'Modal heading', 'awt' ) }
+					placeholder={ __( 'Modal heading', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				<div { ...innerProps } />

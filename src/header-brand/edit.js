@@ -17,29 +17,38 @@ import {
 // 'auto'. An explicit kind pins THIS instance; leaving it empty lets the
 // site-wide default flow through.
 const KIND_OPTIONS = [
-	{ value: '', label: __( 'Use site default (from AWT Settings)', 'awt' ) },
-	{ value: 'text-only', label: __( 'Text only', 'awt' ) },
-	{ value: 'text-with-prefix', label: __( 'Text with prefix', 'awt' ) },
-	{ value: 'logo-only', label: __( 'Logo only', 'awt' ) },
-	{ value: 'logo-with-text', label: __( 'Logo with text', 'awt' ) },
+	{
+		value: '',
+		label: __( 'Use site default (from AWT Settings)', 'awt-blocks' ),
+	},
+	{ value: 'text-only', label: __( 'Text only', 'awt-blocks' ) },
+	{
+		value: 'text-with-prefix',
+		label: __( 'Text with prefix', 'awt-blocks' ),
+	},
+	{ value: 'logo-only', label: __( 'Logo only', 'awt-blocks' ) },
+	{ value: 'logo-with-text', label: __( 'Logo with text', 'awt-blocks' ) },
 	{
 		value: 'logo-with-text-and-prefix',
-		label: __( 'Logo with text and prefix', 'awt' ),
+		label: __( 'Logo with text and prefix', 'awt-blocks' ),
 	},
 ];
 
 const ALT_HINT = [
-	__( 'Writing good alt text for a header logo:', 'awt' ),
-	__( "• Include the brand name (it's what visitors expect to hear)", 'awt' ),
+	__( 'Writing good alt text for a header logo:', 'awt-blocks' ),
+	__(
+		"• Include the brand name (it's what visitors expect to hear)",
+		'awt-blocks'
+	),
 	__(
 		'• Mention that clicking navigates home when relevant (e.g., "Acme logo; back to home")',
-		'awt'
+		'awt-blocks'
 	),
 	__(
 		'• Don\'t include the word "image" or "logo" alone — screen readers already announce that',
-		'awt'
+		'awt-blocks'
 	),
-	__( '• Keep it concise — under ~100 characters', 'awt' ),
+	__( '• Keep it concise — under ~100 characters', 'awt-blocks' ),
 ].join( '\n' );
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -112,16 +121,16 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Header brand', 'awt' ) }
+					title={ __( 'Header brand', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Brand mode', 'awt' ) }
+						label={ __( 'Brand mode', 'awt-blocks' ) }
 						help={
 							isAuto
 								? __(
 										'Your site default is automatic: it shows the logo and prefix you have set, and just the site title when you have set neither.',
-										'awt'
+										'awt-blocks'
 								  )
 								: undefined
 						}
@@ -133,10 +142,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					{ showText && (
 						<TextControl
-							label={ __( 'Site title override', 'awt' ) }
+							label={ __( 'Site title override', 'awt-blocks' ) }
 							help={ __(
 								'Leave blank to use the WordPress site title.',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ siteTitle }
 							onChange={ ( value ) =>
@@ -146,7 +155,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 					{ offerPrefixField && (
 						<TextControl
-							label={ __( 'Prefix (e.g., "IBM")', 'awt' ) }
+							label={ __( 'Prefix (e.g., "IBM")', 'awt-blocks' ) }
 							value={ prefix }
 							onChange={ ( value ) =>
 								setAttributes( { prefix: value } )
@@ -170,8 +179,14 @@ export default function Edit( { attributes, setAttributes } ) {
 											onClick={ open }
 										>
 											{ logoUrl
-												? __( 'Replace logo', 'awt' )
-												: __( 'Upload logo', 'awt' ) }
+												? __(
+														'Replace logo',
+														'awt-blocks'
+												  )
+												: __(
+														'Upload logo',
+														'awt-blocks'
+												  ) }
 										</Button>
 									) }
 								/>
@@ -179,7 +194,10 @@ export default function Edit( { attributes, setAttributes } ) {
 							{ logoUrl && (
 								<>
 									<TextControl
-										label={ __( 'Logo alt text', 'awt' ) }
+										label={ __(
+											'Logo alt text',
+											'awt-blocks'
+										) }
 										help={ ALT_HINT }
 										value={ logoAlt }
 										onChange={ ( value ) =>
@@ -195,14 +213,14 @@ export default function Edit( { attributes, setAttributes } ) {
 											} )
 										}
 									>
-										{ __( 'Remove logo', 'awt' ) }
+										{ __( 'Remove logo', 'awt-blocks' ) }
 									</Button>
 								</>
 							) }
 						</>
 					) }
 					<TextControl
-						label={ __( 'Link target', 'awt' ) }
+						label={ __( 'Link target', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
@@ -246,7 +264,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				) }
 				{ showText && (
 					<span className="cds--header__name--text">
-						{ effTitle || __( '(Site title)', 'awt' ) }
+						{ effTitle || __( '(Site title)', 'awt-blocks' ) }
 					</span>
 				) }
 			</a>

@@ -49,9 +49,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Tag', 'awt' ) }>
+				<PanelBody title={ __( 'Tag', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Color', 'awt' ) }
+						label={ __( 'Color', 'awt-blocks' ) }
 						value={ type }
 						options={ TYPES.map( ( t ) => ( {
 							value: t,
@@ -60,7 +60,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [
 							{ value: 'sm', label: 'sm' },
@@ -70,12 +70,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Filter (dismissible)', 'awt' ) }
+						label={ __( 'Filter (dismissible)', 'awt-blocks' ) }
 						help={
 							isLink
 								? __(
 										'Disabled while a link URL is set — a linked tag can’t be dismissible.',
-										'awt'
+										'awt-blocks'
 								  )
 								: undefined
 						}
@@ -84,15 +84,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { filter: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Link', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Link', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<TextControl
-						label={ __( 'URL (makes the tag a link)', 'awt' ) }
+						label={ __(
+							'URL (makes the tag a link)',
+							'awt-blocks'
+						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 					/>
 					<SelectControl
-						label={ __( 'Target', 'awt' ) }
+						label={ __( 'Target', 'awt-blocks' ) }
 						value={ target }
 						options={ TARGET_OPTIONS }
 						onChange={ ( v ) => setAttributes( { target: v } ) }
@@ -101,7 +107,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __(
 							'rel (auto: "noopener noreferrer" for new tab)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
@@ -121,7 +127,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<button
 						type="button"
 						className="cds--tag__close-icon"
-						aria-label={ __( 'Dismiss', 'awt' ) }
+						aria-label={ __( 'Dismiss', 'awt-blocks' ) }
 						tabIndex={ -1 }
 						onClick={ ( e ) => e.preventDefault() }
 					>

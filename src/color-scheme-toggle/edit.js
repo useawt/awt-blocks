@@ -8,11 +8,11 @@ import {
 } from '@wordpress/components';
 
 const KIND_OPTIONS = [
-	{ value: 'icon-only', label: __( 'Icon only', 'awt' ) },
-	{ value: 'with-label', label: __( 'Icon with label', 'awt' ) },
+	{ value: 'icon-only', label: __( 'Icon only', 'awt-blocks' ) },
+	{ value: 'with-label', label: __( 'Icon with label', 'awt-blocks' ) },
 	{
 		value: 'segmented',
-		label: __( 'Segmented (Light / Auto / Dark)', 'awt' ),
+		label: __( 'Segmented (Light / Auto / Dark)', 'awt-blocks' ),
 	},
 ];
 
@@ -70,23 +70,23 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Color scheme toggle', 'awt' ) }
+					title={ __( 'Color scheme toggle', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KIND_OPTIONS }
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Light-state label', 'awt' ) }
+						label={ __( 'Light-state label', 'awt-blocks' ) }
 						value={ lightLabel }
 						onChange={ ( v ) => setAttributes( { lightLabel: v } ) }
 					/>
 					{ isSegmented && (
 						<TextControl
-							label={ __( 'Auto-state label', 'awt' ) }
+							label={ __( 'Auto-state label', 'awt-blocks' ) }
 							value={ autoLabel }
 							onChange={ ( v ) =>
 								setAttributes( { autoLabel: v } )
@@ -94,14 +94,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					) }
 					<TextControl
-						label={ __( 'Dark-state label', 'awt' ) }
+						label={ __( 'Dark-state label', 'awt-blocks' ) }
 						value={ darkLabel }
 						onChange={ ( v ) => setAttributes( { darkLabel: v } ) }
 					/>
 					<Notice status="info" isDismissible={ false }>
 						{ __(
 							'Only renders on the front-end when allowVisitorOverride is enabled in theme settings.',
-							'awt'
+							'awt-blocks'
 						) }
 					</Notice>
 				</PanelBody>
@@ -110,7 +110,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<div
 					{ ...blockProps }
 					role="group"
-					aria-label={ __( 'Color scheme', 'awt' ) }
+					aria-label={ __( 'Color scheme', 'awt-blocks' ) }
 				>
 					<button
 						type="button"

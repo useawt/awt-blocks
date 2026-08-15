@@ -10,7 +10,7 @@
 	"title": "Modal",
 	"category": "awt-feedback",
 	"description": "A pop-up dialog, hidden until opened by a Modal opener block. Keyboard focus stays inside it, Escape closes it, and focus returns to the button that opened it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"modal",
 		"dialog",

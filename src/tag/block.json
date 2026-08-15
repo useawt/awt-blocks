@@ -9,7 +9,7 @@
 	"title": "Tag",
 	"category": "awt-content",
 	"description": "A small colored label for categorizing or filtering. Choose from a range of colors.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"tag",
 		"chip",

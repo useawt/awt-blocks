@@ -9,7 +9,7 @@
 	"title": "Tabs",
 	"category": "awt-navigation",
 	"description": "Tabs that switch between content panels. Add matching pairs of Tab and Tab panel blocks.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"tabs",
 		"navigation",

@@ -9,7 +9,7 @@
 	"title": "Modal opener",
 	"category": "awt-feedback",
 	"description": "A button that opens a Modal block. Point it at the modal you want to open.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"modal",
 		"trigger",

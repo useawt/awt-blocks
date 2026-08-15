@@ -9,7 +9,7 @@
 	"title": "Form",
 	"category": "awt-forms",
 	"description": "A container that groups input blocks into a form. Add text inputs, checkboxes, radio groups, toggles, and buttons inside it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"form",
 		"input",

@@ -127,7 +127,7 @@ AWT aims to coexist cleanly with the plugins most sites run. "Coexist" means: no
 Verified continuously in our test suite:
 
 * WooCommerce — product, cart, and guest checkout flows complete; the block editor and accessibility checker work with WooCommerce active.
-* Polylang — multiple languages render correctly; AWT is fully translation-ready (text domain `awt`).
+* Polylang — multiple languages render correctly; AWT is fully translation-ready (text domain `awt-blocks`).
 * WP Super Cache — cached pages render correctly, and each visitor's light/dark choice still applies on cached pages.
 
 Checked before every release: Yoast SEO / Rank Math / All in One SEO, Gravity Forms / WPForms / Contact Form 7, MemberPress / LearnDash / LifterLMS, Elementor / Beaver Builder, WPML, WP Rocket.

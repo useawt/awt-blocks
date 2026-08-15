@@ -9,7 +9,7 @@
 	"title": "FAQ question",
 	"category": "awt-section",
 	"description": "A single question and answer that expands on click. Works like an accordion item, but also adds FAQ data that can help your questions appear in Google search results.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"faq",
 		"question",

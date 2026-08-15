@@ -10,7 +10,7 @@
 	"title": "Code snippet",
 	"category": "awt-content",
 	"description": "A styled code snippet with a copy button. Choose inline, single-line, or multi-line. Use the standard Code block for plain code; use this when you want the styling and click-to-copy.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"code",
 		"snippet",

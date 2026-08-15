@@ -27,14 +27,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label      = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Toggle label', 'awt' );
+$label      = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Toggle label', 'awt-blocks' );
 $name       = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $size       = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $toggled    = ! empty( $attributes['toggled'] );
 $disabled   = ! empty( $attributes['disabled'] );
 $readonly   = ! empty( $attributes['readonly'] );
-$label_a    = isset( $attributes['labelA'] ) ? (string) $attributes['labelA'] : __( 'Off', 'awt' );
-$label_b    = isset( $attributes['labelB'] ) ? (string) $attributes['labelB'] : __( 'On', 'awt' );
+$label_a    = isset( $attributes['labelA'] ) ? (string) $attributes['labelA'] : __( 'Off', 'awt-blocks' );
+$label_b    = isset( $attributes['labelB'] ) ? (string) $attributes['labelB'] : __( 'On', 'awt-blocks' );
 $hide_label = ! empty( $attributes['hideLabel'] );
 
 $input_id = unique_id( 'awt-toggle' );

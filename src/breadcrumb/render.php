@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$aria_label        = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Breadcrumbs', 'awt' );
+$aria_label        = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Breadcrumbs', 'awt-blocks' );
 $no_trailing_slash = ! empty( $attributes['noTrailingSlash'] );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
@@ -29,7 +29,7 @@ $class         = classnames( $nav_class, array(), (string) ( $attributes['classN
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
 		'class'      => $class,
-		'aria-label' => $aria_label !== '' ? $aria_label : __( 'Breadcrumbs', 'awt' ),
+		'aria-label' => $aria_label !== '' ? $aria_label : __( 'Breadcrumbs', 'awt-blocks' ),
 	)
 );
 

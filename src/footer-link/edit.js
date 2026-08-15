@@ -14,21 +14,21 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Footer link', 'awt' ) }
+					title={ __( 'Footer link', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt' ) }
+						label={ __( 'Link target (href)', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'External link', 'awt' ) }
+						label={ __( 'External link', 'awt-blocks' ) }
 						help={ __(
 							'Adds target="_blank" rel="noopener noreferrer" and an external-link icon.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ external }
 						onChange={ ( value ) =>
@@ -49,7 +49,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
 						}
-						placeholder={ __( 'Link label', 'awt' ) }
+						placeholder={ __( 'Link label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 					{ external && <span aria-hidden="true"> ↗</span> }

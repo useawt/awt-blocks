@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label          = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Menu', 'awt' );
+$label          = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Menu', 'awt-blocks' );
 $kind           = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size           = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'lg';
 $menu_alignment = isset( $attributes['menuAlignment'] ) ? (string) $attributes['menuAlignment'] : 'bottom';

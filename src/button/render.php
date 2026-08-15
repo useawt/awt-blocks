@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text          = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Button', 'awt' );
+$text          = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Button', 'awt-blocks' );
 $kind          = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size          = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'lg';
 $btn_type      = isset( $attributes['type'] ) && $attributes['type'] === 'submit' ? 'submit' : 'button';

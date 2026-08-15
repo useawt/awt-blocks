@@ -10,7 +10,7 @@
 	"title": "Breadcrumb",
 	"category": "awt-navigation",
 	"description": "A breadcrumb trail showing where the current page sits in your site. The last item marks the current page.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"breadcrumb",
 		"navigation",

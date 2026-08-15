@@ -115,24 +115,24 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Button', 'awt' ) } initialOpen>
+				<PanelBody title={ __( 'Button', 'awt-blocks' ) } initialOpen>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KIND_OPTIONS }
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Expressive type variant', 'awt' ) }
+						label={ __( 'Expressive type variant', 'awt-blocks' ) }
 						help={ __(
 							'Expressive type set is designed for editorial, marketing, and dynamic web experiences. It uses larger base sizes and fluid headings.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ isExpressive }
 						onChange={ ( v ) =>
@@ -140,16 +140,16 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Submit the form', 'awt' ) }
+						label={ __( 'Submit the form', 'awt-blocks' ) }
 						help={
 							href
 								? __(
 										'Not available while a URL is set — a URL turns the button into a link.',
-										'awt'
+										'awt-blocks'
 								  )
 								: __(
 										'Turn on for the button that sends a form. Place the button inside a Form block.',
-										'awt'
+										'awt-blocks'
 								  )
 						}
 						checked={ type === 'submit' && ! href }
@@ -159,20 +159,26 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Link', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Link', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<TextControl
-						label={ __( 'URL (renders <a> when set)', 'awt' ) }
+						label={ __(
+							'URL (renders <a> when set)',
+							'awt-blocks'
+						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 					/>
 					<SelectControl
-						label={ __( 'Target', 'awt' ) }
+						label={ __( 'Target', 'awt-blocks' ) }
 						value={ target }
 						options={ TARGET_OPTIONS }
 						onChange={ ( v ) => setAttributes( { target: v } ) }
@@ -181,25 +187,28 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __(
 							'rel (auto: "noopener noreferrer" for new tab)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						disabled={ ! href }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Icon', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Icon', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<IconPicker
-						label={ __( 'Icon', 'awt' ) }
+						label={ __( 'Icon', 'awt-blocks' ) }
 						help={ __(
 							'Search the Carbon icon library. Leave empty for no icon.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ iconName }
 						onChange={ ( v ) => setAttributes( { iconName: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Icon position', 'awt' ) }
+						label={ __( 'Icon position', 'awt-blocks' ) }
 						value={ iconPosition }
 						options={ ICON_POSITION_OPTIONS }
 						onChange={ ( v ) =>
@@ -209,14 +218,17 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'On click', 'awt' ) }
+					title={ __( 'On click', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<PremiumNotice
-						title={ __( 'Run a JavaScript function', 'awt' ) }
+						title={ __(
+							'Run a JavaScript function',
+							'awt-blocks'
+						) }
 						description={ __(
 							'Call a JavaScript function by name when clicked.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
@@ -244,7 +256,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					tagName="span"
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }
-					placeholder={ __( 'Button label', 'awt' ) }
+					placeholder={ __( 'Button label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				{ iconPosition !== 'leading' && iconEl }

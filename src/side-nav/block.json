@@ -7,7 +7,7 @@
 	"title": "Side nav",
 	"category": "awt-ui-shell",
 	"description": "A sidebar navigation menu, docked beside your content on wide screens. On narrow screens its links move into the header menu, behind the header’s menu button. It lives in the header template part; add side-nav sections, links, and dividers inside it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"side nav",
 		"navigation",

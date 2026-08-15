@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $text = isset( $attributes['text'] ) && $attributes['text'] !== ''
 	? (string) $attributes['text']
-	: __( 'Menu', 'awt' );
+	: __( 'Menu', 'awt-blocks' );
 $aria = isset( $attributes['ariaLabel'] ) && $attributes['ariaLabel'] !== ''
 	? (string) $attributes['ariaLabel']
 	: $text;

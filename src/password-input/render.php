@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label         = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Password', 'awt' );
+$label         = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Password', 'awt-blocks' );
 $name          = isset( $attributes['name'] ) ? (string) $attributes['name'] : 'password';
 $placeholder   = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : '';
 $helper_text   = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';
@@ -33,8 +33,8 @@ $disabled      = ! empty( $attributes['disabled'] );
 $required      = ! empty( $attributes['required'] );
 $size          = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $hide_label    = ! empty( $attributes['hideLabel'] );
-$show_label    = isset( $attributes['showLabel'] ) ? (string) $attributes['showLabel'] : __( 'Show password', 'awt' );
-$hide_pw_label = isset( $attributes['hidePasswordLabel'] ) ? (string) $attributes['hidePasswordLabel'] : __( 'Hide password', 'awt' );
+$show_label    = isset( $attributes['showLabel'] ) ? (string) $attributes['showLabel'] : __( 'Show password', 'awt-blocks' );
+$hide_pw_label = isset( $attributes['hidePasswordLabel'] ) ? (string) $attributes['hidePasswordLabel'] : __( 'Hide password', 'awt-blocks' );
 $autocomplete  = isset( $attributes['autocomplete'] ) ? (string) $attributes['autocomplete'] : 'current-password';
 
 $input_id   = unique_id( 'awt-pwd' );

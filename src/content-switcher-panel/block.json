@@ -10,7 +10,7 @@
 		"awt/content-switcher"
 	],
 	"description": "The content shown when its matching switcher segment is selected. Pairs by position with a switcher segment.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,
 		"reusable": false,

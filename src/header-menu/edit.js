@@ -46,7 +46,7 @@ export default function Edit( {
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: 'cds--header__menu',
-			'aria-label': ariaLabel || text || __( 'Menu', 'awt' ),
+			'aria-label': ariaLabel || text || __( 'Menu', 'awt-blocks' ),
 			style: open
 				? {
 						display: 'block',
@@ -64,14 +64,17 @@ export default function Edit( {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Header menu', 'awt' ) }
+					title={ __( 'Header menu', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						help={ __(
 							'Names the submenu for screen readers. Defaults to the menu label.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ ariaLabel }
 						onChange={ ( value ) =>
@@ -96,7 +99,7 @@ export default function Edit( {
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
 						}
-						placeholder={ __( 'Menu', 'awt' ) }
+						placeholder={ __( 'Menu', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 					<svg

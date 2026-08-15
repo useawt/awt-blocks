@@ -116,11 +116,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Content switcher', 'awt' ) }
+					title={ __( 'Content switcher', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [
 							{ label: 'sm', value: 'sm' },
@@ -130,7 +130,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>

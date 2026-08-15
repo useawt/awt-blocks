@@ -6,7 +6,7 @@
 	"title": "Color scheme toggle",
 	"category": "awt-ui-shell",
 	"description": "A switch that lets visitors choose light or dark mode. Remembers each visitor's choice.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"dark mode",
 		"light mode",

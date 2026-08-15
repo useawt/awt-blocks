@@ -7,7 +7,7 @@
 	"title": "Skip link",
 	"category": "awt-ui-shell",
 	"description": "A \"skip to content\" link for keyboard users. It's the first thing they reach and appears when focused.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"skip",
 		"accessibility",

@@ -38,39 +38,42 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Pricing tile', 'awt' ) }>
+				<PanelBody title={ __( 'Pricing tile', 'awt-blocks' ) }>
 					<ToggleControl
-						label={ __( 'Featured', 'awt' ) }
+						label={ __( 'Featured', 'awt-blocks' ) }
 						help={ __(
 							'Visual emphasis (accent border + slight elevation). Typically one per row.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ featured }
 						onChange={ ( v ) => setAttributes( { featured: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Badge text', 'awt' ) }
+						label={ __( 'Badge text', 'awt-blocks' ) }
 						help={ __(
 							'Optional. E.g. "Most popular", "Best value".',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ badge }
 						onChange={ ( v ) => setAttributes( { badge: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Selectable (radio-tile style)', 'awt' ) }
+						label={ __(
+							'Selectable (radio-tile style)',
+							'awt-blocks'
+						) }
 						help={ __(
 							'Tiles act as a radio group — picking one clears the others. Visual treatment only at Stage 1; selection state is purely decorative.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ selectable }
 						onChange={ ( v ) => setAttributes( { selectable: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Price period', 'awt' ) }
+						label={ __( 'Price period', 'awt-blocks' ) }
 						help={ __(
 							'E.g. "/month", "/year". Rendered inline after the price. Leave empty for "Free" or "Custom" pricing.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ pricePeriod }
 						onChange={ ( v ) =>
@@ -78,24 +81,30 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'CTA button kind', 'awt' ) }
+						label={ __( 'CTA button kind', 'awt-blocks' ) }
 						value={ ctaKind }
 						options={ [
-							{ value: 'primary', label: __( 'Primary', 'awt' ) },
+							{
+								value: 'primary',
+								label: __( 'Primary', 'awt-blocks' ),
+							},
 							{
 								value: 'secondary',
-								label: __( 'Secondary', 'awt' ),
+								label: __( 'Secondary', 'awt-blocks' ),
 							},
 							{
 								value: 'tertiary',
-								label: __( 'Tertiary', 'awt' ),
+								label: __( 'Tertiary', 'awt-blocks' ),
 							},
-							{ value: 'ghost', label: __( 'Ghost', 'awt' ) },
+							{
+								value: 'ghost',
+								label: __( 'Ghost', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { ctaKind: v } ) }
 					/>
 					<TextControl
-						label={ __( 'CTA href', 'awt' ) }
+						label={ __( 'CTA href', 'awt-blocks' ) }
 						value={ ctaHref }
 						onChange={ ( v ) => setAttributes( { ctaHref: v } ) }
 					/>
@@ -110,7 +119,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="awt-pricing-tile__tier-name"
 					value={ tierName }
 					onChange={ ( v ) => setAttributes( { tierName: v } ) }
-					placeholder={ __( 'Tier name', 'awt' ) }
+					placeholder={ __( 'Tier name', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				<div className="awt-pricing-tile__price-row">
@@ -119,7 +128,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						className="awt-pricing-tile__price"
 						value={ price }
 						onChange={ ( v ) => setAttributes( { price: v } ) }
-						placeholder={ __( 'Price (e.g. $49)', 'awt' ) }
+						placeholder={ __( 'Price (e.g. $49)', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 					{ pricePeriod && (
@@ -135,7 +144,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { description: v } ) }
 					placeholder={ __(
 						'1–3 sentence pitch for this tier',
-						'awt'
+						'awt-blocks'
 					) }
 					allowedFormats={ [
 						'core/bold',
@@ -154,7 +163,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						tagName="span"
 						value={ ctaText }
 						onChange={ ( v ) => setAttributes( { ctaText: v } ) }
-						placeholder={ __( 'Get started', 'awt' ) }
+						placeholder={ __( 'Get started', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</a>

@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $size       = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
-$aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'View switcher', 'awt' );
+$aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'View switcher', 'awt-blocks' );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 

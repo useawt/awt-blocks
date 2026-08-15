@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $label       = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $description = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';
-$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'More information', 'awt' );
+$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'More information', 'awt-blocks' );
 $align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'bottom';
 
 $allowed_aligns = array( 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right' );

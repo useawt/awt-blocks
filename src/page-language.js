@@ -22,7 +22,7 @@ const META_KEY = 'awt_page_lang';
 // Common BCP-47 tags (English + the broader-European launch locales). Kept in
 // sync with accessibility-panel.js's element-lang list.
 const LANG_OPTIONS = [
-	{ value: '', label: __( 'Site default', 'awt' ) },
+	{ value: '', label: __( 'Site default', 'awt-blocks' ) },
 	...[
 		'en',
 		'en-US',
@@ -64,13 +64,13 @@ function PageLanguagePanel() {
 	return (
 		<PluginDocumentSettingPanel
 			name="awt-page-language"
-			title={ __( 'Language', 'awt' ) }
+			title={ __( 'Language', 'awt-blocks' ) }
 		>
 			<SelectControl
-				label={ __( 'Page language', 'awt' ) }
+				label={ __( 'Page language', 'awt-blocks' ) }
 				help={ __(
 					'Set a different language for this page — use it when the whole page is in another language. Leave “Site default” to use the site’s language.',
-					'awt'
+					'awt-blocks'
 				) }
 				value={ value }
 				options={ LANG_OPTIONS }

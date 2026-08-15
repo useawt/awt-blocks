@@ -9,7 +9,7 @@
 	"title": "Button",
 	"category": "awt-forms",
 	"description": "A button that triggers an action, or links somewhere when you give it a URL.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"button",
 		"carbon",

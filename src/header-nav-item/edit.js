@@ -24,40 +24,49 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Nav item', 'awt' ) }
+					title={ __( 'Nav item', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt' ) }
+						label={ __( 'Link target (href)', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
 						}
 					/>
 					<SelectControl
-						label={ __( 'Current-URL match mode', 'awt' ) }
+						label={ __( 'Current-URL match mode', 'awt-blocks' ) }
 						help={ __(
 							'Exact: only this URL highlights. Prefix: this URL and any descendant route highlight (useful for section roots).',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ matchMode }
 						options={ [
-							{ value: 'exact', label: __( 'Exact', 'awt' ) },
-							{ value: 'prefix', label: __( 'Prefix', 'awt' ) },
+							{
+								value: 'exact',
+								label: __( 'Exact', 'awt-blocks' ),
+							},
+							{
+								value: 'prefix',
+								label: __( 'Prefix', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( value ) =>
 							setAttributes( { matchMode: value } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Force aria-current="page"', 'awt' ) }
+						label={ __(
+							'Force aria-current="page"',
+							'awt-blocks'
+						) }
 						checked={ isCurrent }
 						onChange={ ( value ) =>
 							setAttributes( { isCurrent: value } )
 						}
 						help={ __(
 							'Overrides automatic URL matching for edge cases.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
@@ -74,7 +83,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
 						}
-						placeholder={ __( 'Nav item label', 'awt' ) }
+						placeholder={ __( 'Nav item label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</a>

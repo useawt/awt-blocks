@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-03T07:29:21+00:00\n"
+"POT-Creation-Date: 2026-08-15T13:58:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: awt\n"
+"X-Domain: awt-blocks\n"
 
 #. Plugin Name of the plugin
 #: awt-blocks.php
@@ -34,336 +34,313 @@ msgstr ""
 msgid "AWT"
 msgstr ""
 
-#: awt-blocks.php:252
+#: awt-blocks.php:253
 msgid "AWT — UI shell"
 msgstr ""
 
-#: awt-blocks.php:257
+#: awt-blocks.php:258
 msgid "AWT — Navigation"
 msgstr ""
 
-#: awt-blocks.php:262
+#: awt-blocks.php:263
 msgid "AWT — Forms"
 msgstr ""
 
-#: awt-blocks.php:267
+#: awt-blocks.php:268
 msgid "AWT — Content"
 msgstr ""
 
-#: awt-blocks.php:272
+#: awt-blocks.php:273
 msgid "AWT — Feedback"
 msgstr ""
 
-#: awt-blocks.php:277
+#: awt-blocks.php:278
 msgid "AWT — Data display"
 msgstr ""
 
-#: awt-blocks.php:282
+#: awt-blocks.php:283
 msgid "AWT — Sections"
 msgstr ""
 
-#: src/accordion-item/render.php:21
+#: src/accordion-item/render.php:25
 msgid "Section"
 msgstr ""
 
-#: src/breadcrumb-item/render.php:12
-#: src/header-nav-item/render.php:17
+#: src/breadcrumb-item/render.php:16
+#: src/header-nav-item/render.php:21
 #: src/breadcrumb-item/edit.js:43
 msgid "Item"
 msgstr ""
 
-#: src/breadcrumb/render.php:13
-#: src/breadcrumb/render.php:28
+#: src/breadcrumb/render.php:17
+#: src/breadcrumb/render.php:32
 msgid "Breadcrumbs"
 msgstr ""
 
-#: src/button/render.php:24
+#: src/button/render.php:28
 #: src/button/edit.js:118
 msgid "Button"
 msgstr ""
 
-#: src/checkbox/render.php:14
-#: src/checkbox/edit.js:109
+#: src/checkbox/render.php:18
+#: src/checkbox/edit.js:123
 msgid "Checkbox label"
 msgstr ""
 
-#: src/code-snippet/render.php:17
+#: src/code-snippet/render.php:21
 msgid "Copy"
 msgstr ""
 
-#: src/code-snippet/render.php:18
+#: src/code-snippet/render.php:22
 msgid "Copied"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:34
+#: src/color-scheme-toggle/render.php:38
 msgid "Light mode"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:35
+#: src/color-scheme-toggle/render.php:39
 msgid "Dark mode"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:36
+#: src/color-scheme-toggle/render.php:40
 msgid "Use system preference"
 msgstr ""
 
 #. translators: %s: name of the color scheme that was just turned on, e.g. "Dark mode".
-#: src/color-scheme-toggle/render.php:91
-#: src/color-scheme-toggle/render.php:93
+#: src/color-scheme-toggle/render.php:95
+#: src/color-scheme-toggle/render.php:97
 #, php-format
 msgid "%s on"
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:94
+#: src/color-scheme-toggle/render.php:98
 msgid "Now following your system setting."
 msgstr ""
 
-#: src/color-scheme-toggle/render.php:103
+#: src/color-scheme-toggle/render.php:107
 #: src/color-scheme-toggle/edit.js:113
 msgid "Color scheme"
 msgstr ""
 
-#: src/content-switcher-item/render.php:21
+#: src/content-switcher-item/render.php:25
 #: src/content-switcher-item/edit.js:23
 msgid "Segment"
 msgstr ""
 
-#: src/content-switcher/render.php:22
+#: src/content-switcher/render.php:26
 msgid "View switcher"
 msgstr ""
 
 #. translators: %s: column header text
-#: src/data-table/render.php:115
+#: src/data-table/render.php:144
 #, php-format
 msgid "Sort by %s"
 msgstr ""
 
-#: src/data-table/render.php:165
+#: src/data-table/render.php:194
 #: src/data-table/edit.js:163
 msgid "Included"
 msgstr ""
 
-#: src/data-table/render.php:165
+#: src/data-table/render.php:194
 #: src/data-table/edit.js:163
 msgid "Not included"
 msgstr ""
 
-#: src/dropdown/render.php:18
-#: src/dropdown/edit.js:48
+#: src/dropdown/render.php:23
+#: src/dropdown/edit.js:52
 msgid "Dropdown"
 msgstr ""
 
-#: src/dropdown/render.php:19
-#: src/select/render.php:25
+#: src/dropdown/render.php:24
+#: src/select/render.php:31
 msgid "Choose…"
 msgstr ""
 
-#: src/footer-link/render.php:14
-#: src/side-nav-link/render.php:26
+#: src/footer-link/render.php:18
+#: src/side-nav-link/render.php:30
 #: src/button/edit.js:167
 #: src/link/edit.js:59
 #: src/tag/edit.js:87
 msgid "Link"
 msgstr ""
 
-#: src/header-menu/render.php:31
-#: src/menu-button/render.php:18
+#: src/header-menu/render.php:35
+#: src/menu-button/render.php:22
 #: src/header-menu/edit.js:49
 #: src/header-menu/edit.js:99
 msgid "Menu"
 msgstr ""
 
-#: src/header-nav/render.php:45
+#: src/header-nav/render.php:49
 #: src/pricing-tile/edit.js:84
 msgid "Primary"
 msgstr ""
 
-#: src/header-nav/render.php:55
+#: src/header-nav/render.php:59
 msgid "Open menu"
 msgstr ""
 
-#: src/header-nav/render.php:56
+#: src/header-nav/render.php:60
 msgid "Close menu"
 msgstr ""
 
-#: src/link/render.php:15
+#: src/link/render.php:19
 #: src/link/edit.js:128
 msgid "Link text"
 msgstr ""
 
-#: src/modal-opener/render.php:12
+#: src/modal-opener/render.php:16
 msgid "Open modal"
 msgstr ""
 
-#: src/modal/render.php:26
+#: src/modal/render.php:30
 msgid "Continue"
 msgstr ""
 
-#: src/modal/render.php:27
+#: src/modal/render.php:31
 msgid "Cancel"
 msgstr ""
 
-#: src/modal/render.php:121
+#: src/modal/render.php:125
 msgid "Close"
 msgstr ""
 
-#: src/notification/render.php:18
+#: src/notification/render.php:22
 #: src/notification/edit.js:99
 msgid "Notification"
 msgstr ""
 
-#: src/notification/render.php:78
+#: src/notification/render.php:82
 #: src/notification/edit.js:193
 msgid "Close notification"
 msgstr ""
 
-#: src/pagination/render.php:23
+#: src/pagination/render.php:27
 #: src/pagination/edit.js:18
 msgid "Pagination"
 msgstr ""
 
-#: src/pagination/render.php:124
-#: src/pagination/render.php:131
+#: src/pagination/render.php:128
+#: src/pagination/render.php:135
 #: src/pagination/edit.js:84
 msgid "Previous page"
 msgstr ""
 
-#: src/pagination/render.php:144
-#: src/pagination/render.php:151
+#: src/pagination/render.php:148
+#: src/pagination/render.php:155
 #: src/pagination/edit.js:121
 msgid "Next page"
 msgstr ""
 
 #. translators: %d — the page number of the current page.
-#: src/pagination/render.php:173
+#: src/pagination/render.php:177
 #, php-format
 msgid "Page %d, current page"
 msgstr ""
 
 #. translators: %d — the page number the link navigates to.
-#: src/pagination/render.php:183
+#: src/pagination/render.php:187
 #, php-format
 msgid "Page %d"
 msgstr ""
 
-#: src/password-input/render.php:19
+#: src/password-input/render.php:24
 msgid "Password"
 msgstr ""
 
-#: src/password-input/render.php:31
+#: src/password-input/render.php:36
 msgid "Show password"
 msgstr ""
 
-#: src/password-input/render.php:32
+#: src/password-input/render.php:37
 msgid "Hide password"
 msgstr ""
 
-#: src/radio-button/render.php:15
+#: src/radio-button/render.php:19
 #: src/radio-button/edit.js:59
 msgid "Option"
 msgstr ""
 
-#: src/select/render.php:16
-#: src/select/edit.js:52
+#: src/select/render.php:22
+#: src/select/edit.js:56
 msgid "Select"
 msgstr ""
 
-#: src/side-nav/render.php:31
+#: src/side-nav/render.php:35
 msgid "Side navigation"
 msgstr ""
 
-#: src/skip-link/render.php:34
+#: src/skip-link/render.php:38
 #: src/skip-link/edit.js:14
 msgid "Skip to main content"
 msgstr ""
 
-#: src/tab/render.php:16
+#: src/tab/render.php:20
 #: src/tab/edit.js:24
 msgid "Tab"
 msgstr ""
 
-#: src/tabs/render.php:27
+#: src/tabs/render.php:31
 #: src/tabs/edit.js:51
 msgid "Tabs"
 msgstr ""
 
-#: src/tabs/render.php:101
+#: src/tabs/render.php:105
 msgid "Scroll tabs left"
 msgstr ""
 
-#: src/tabs/render.php:104
+#: src/tabs/render.php:108
 msgid "Scroll tabs right"
 msgstr ""
 
-#: src/tag/render.php:16
+#: src/tag/render.php:20
 #: src/tag/edit.js:52
 msgid "Tag"
 msgstr ""
 
-#: src/tag/render.php:59
+#: src/tag/render.php:63
 #: src/tag/edit.js:124
 msgid "Dismiss"
 msgstr ""
 
-#: src/text-area/render.php:26
+#: src/text-area/render.php:31
 #: src/form/edit.js:105
 #: src/toggletip/edit.js:66
 #: src/tooltip/edit.js:42
 msgid "Description"
 msgstr ""
 
-#: src/text-input/render.php:33
-#: src/dropdown/edit.js:126
+#: src/text-input/render.php:38
+#: src/dropdown/edit.js:145
 #: src/menu-button/edit.js:101
-#: src/password-input/edit.js:154
-#: src/select/edit.js:142
-#: src/text-area/edit.js:151
-#: src/text-input/edit.js:278
+#: src/password-input/edit.js:170
+#: src/select/edit.js:159
+#: src/text-area/edit.js:164
+#: src/text-input/edit.js:291
 msgid "Label"
 msgstr ""
 
-#: src/tile/render.php:28
+#: src/tile/render.php:36
 msgid "Expandable tile"
 msgstr ""
 
-#: src/toggle/render.php:26
+#: src/toggle/render.php:30
 #: src/toggle/edit.js:128
 msgid "Toggle label"
 msgstr ""
 
-#: src/toggle/render.php:32
+#: src/toggle/render.php:36
 msgid "Off"
 msgstr ""
 
-#: src/toggle/render.php:33
+#: src/toggle/render.php:37
 msgid "On"
 msgstr ""
 
-#: src/toggletip/render.php:25
+#: src/toggletip/render.php:29
 msgid "More information"
-msgstr ""
-
-#: assets/global-block-controls.js:335
-#: src/data-table/edit.js:373
-#: src/testimonial/edit.js:123
-msgid "None"
-msgstr ""
-
-#: assets/global-block-controls.js:384
-#: src/section/edit.js:31
-msgid "Spacing"
-msgstr ""
-
-#: assets/global-block-controls.js:388
-msgid "Spacing (bottom margin)"
-msgstr ""
-
-#: assets/global-block-controls.js:389
-msgid "Carbon spacing token applied as this block’s bottom margin."
-msgstr ""
-
-#: assets/global-block-controls.js:413
-msgid "Carbon spacing"
 msgstr ""
 
 #: src/accessibility-panel.js:38
@@ -453,25 +430,25 @@ msgstr ""
 
 #: src/accordion-item/edit.js:33
 #: src/faq-item/edit.js:64
-#: src/tile/edit.js:115
+#: src/tile/edit.js:135
 #: src/tooltip/edit.js:55
 msgid "Open by default"
 msgstr ""
 
 #: src/accordion-item/edit.js:40
 #: src/button/edit.js:162
-#: src/checkbox/edit.js:56
+#: src/checkbox/edit.js:69
 #: src/content-switcher-item/edit.js:36
-#: src/dropdown/edit.js:72
+#: src/dropdown/edit.js:76
 #: src/link/edit.js:83
 #: src/menu-button/edit.js:85
 #: src/menu-button/edit.js:126
-#: src/password-input/edit.js:68
+#: src/password-input/edit.js:72
 #: src/radio-button/edit.js:28
-#: src/select/edit.js:76
+#: src/select/edit.js:80
 #: src/tab/edit.js:26
-#: src/text-area/edit.js:89
-#: src/text-input/edit.js:168
+#: src/text-area/edit.js:94
+#: src/text-input/edit.js:173
 #: src/toggle/edit.js:80
 msgid "Disabled"
 msgstr ""
@@ -503,17 +480,17 @@ msgstr ""
 #: src/accordion/edit.js:41
 #: src/button/edit.js:126
 #: src/content-switcher/edit.js:123
-#: src/data-table/edit.js:336
-#: src/dropdown/edit.js:62
+#: src/data-table/edit.js:342
+#: src/dropdown/edit.js:66
 #: src/icon/edit.js:66
 #: src/link/edit.js:67
 #: src/menu-button/edit.js:71
 #: src/modal-opener/edit.js:45
 #: src/modal/edit.js:77
-#: src/password-input/edit.js:57
-#: src/select/edit.js:66
+#: src/password-input/edit.js:61
+#: src/select/edit.js:70
 #: src/tag/edit.js:63
-#: src/text-input/edit.js:157
+#: src/text-input/edit.js:162
 #: src/toggle/edit.js:64
 msgid "Size"
 msgstr ""
@@ -636,76 +613,77 @@ msgstr ""
 msgid "Button label"
 msgstr ""
 
-#: src/checkbox/edit.js:27
+#: src/checkbox/edit.js:40
 msgid "Checkbox"
 msgstr ""
 
-#: src/checkbox/edit.js:29
-#: src/dropdown/edit.js:50
-#: src/password-input/edit.js:45
-#: src/select/edit.js:54
-#: src/text-area/edit.js:43
-#: src/text-input/edit.js:130
+#: src/checkbox/edit.js:42
+#: src/dropdown/edit.js:54
+#: src/password-input/edit.js:49
+#: src/select/edit.js:58
+#: src/text-area/edit.js:48
+#: src/text-input/edit.js:135
 #: src/toggle/edit.js:59
 msgid "Name"
 msgstr ""
 
-#: src/checkbox/edit.js:34
+#: src/checkbox/edit.js:47
 #: src/menu-button/edit.js:119
 #: src/radio-button/edit.js:18
+#: src/tile/edit.js:112
 msgid "Value"
 msgstr ""
 
-#: src/checkbox/edit.js:39
+#: src/checkbox/edit.js:52
 #: src/radio-button/edit.js:23
 msgid "Checked by default"
 msgstr ""
 
-#: src/checkbox/edit.js:44
+#: src/checkbox/edit.js:57
 msgid "Indeterminate"
 msgstr ""
 
-#: src/checkbox/edit.js:51
-#: src/password-input/edit.js:63
+#: src/checkbox/edit.js:64
+#: src/password-input/edit.js:67
 #: src/radio-button-group/edit.js:93
-#: src/select/edit.js:81
-#: src/text-area/edit.js:84
-#: src/text-input/edit.js:163
+#: src/select/edit.js:85
+#: src/text-area/edit.js:89
+#: src/text-input/edit.js:168
 msgid "Required"
 msgstr ""
 
-#: src/checkbox/edit.js:62
-#: src/dropdown/edit.js:89
-#: src/password-input/edit.js:103
+#: src/checkbox/edit.js:75
+#: src/dropdown/edit.js:101
+#: src/password-input/edit.js:115
 #: src/radio-button-group/edit.js:99
-#: src/select/edit.js:103
-#: src/text-area/edit.js:105
-#: src/text-input/edit.js:212
+#: src/select/edit.js:115
+#: src/text-area/edit.js:118
+#: src/text-input/edit.js:225
 msgid "Help & validation"
 msgstr ""
 
-#: src/checkbox/edit.js:66
-#: src/dropdown/edit.js:93
-#: src/password-input/edit.js:107
+#: src/checkbox/edit.js:79
+#: src/dropdown/edit.js:105
+#: src/password-input/edit.js:119
 #: src/radio-button-group/edit.js:103
-#: src/select/edit.js:107
-#: src/text-area/edit.js:109
-#: src/text-input/edit.js:216
+#: src/select/edit.js:119
+#: src/text-area/edit.js:122
+#: src/text-input/edit.js:229
 msgid "Helper text"
 msgstr ""
 
-#: src/checkbox/edit.js:71
+#: src/checkbox/edit.js:84
 #: src/radio-button-group/edit.js:108
 msgid "Invalid state"
 msgstr ""
 
-#: src/checkbox/edit.js:76
-#: src/dropdown/edit.js:103
-#: src/password-input/edit.js:117
+#: src/checkbox/edit.js:89
+#: src/dropdown/edit.js:115
+#: src/password-input/edit.js:129
 #: src/radio-button-group/edit.js:113
-#: src/select/edit.js:117
-#: src/text-area/edit.js:119
-#: src/text-input/edit.js:226
+#: src/select/edit.js:129
+#: src/text-area/edit.js:132
+#: src/text-input/edit.js:239
 msgid "Invalid message"
 msgstr ""
 
@@ -715,7 +693,7 @@ msgstr ""
 
 #: src/code-snippet/edit.js:91
 #: src/notification/edit.js:110
-#: src/tile/edit.js:54
+#: src/tile/edit.js:60
 msgid "Variant"
 msgstr ""
 
@@ -835,99 +813,112 @@ msgstr ""
 msgid "Replace the current table data with the pasted content?"
 msgstr ""
 
-#: src/data-table/edit.js:327
+#: src/data-table/edit.js:333
 msgid "Data table"
 msgstr ""
 
-#: src/data-table/edit.js:331
+#: src/data-table/edit.js:337
 msgid "Caption (accessible)"
 msgstr ""
 
-#: src/data-table/edit.js:344
+#: src/data-table/edit.js:350
 msgid "Zebra striping"
 msgstr ""
 
-#: src/data-table/edit.js:349
+#: src/data-table/edit.js:355
 msgid "Static width"
 msgstr ""
 
-#: src/data-table/edit.js:356
+#: src/data-table/edit.js:362
 msgid "Sticky header"
 msgstr ""
 
-#: src/data-table/edit.js:363
+#: src/data-table/edit.js:369
 msgid "Sortable columns"
 msgstr ""
 
-#: src/data-table/edit.js:370
+#: src/data-table/edit.js:376
 msgid "Default sort column"
 msgstr ""
 
-#: src/data-table/edit.js:387
+#: src/data-table/edit.js:379
+#: src/testimonial/edit.js:123
+msgid "None"
+msgstr ""
+
+#: src/data-table/edit.js:393
 msgid "Default sort direction"
 msgstr ""
 
-#: src/data-table/edit.js:400
+#: src/data-table/edit.js:406
 #: src/list/edit.js:308
 msgid "Data"
 msgstr ""
 
-#: src/data-table/edit.js:402
+#: src/data-table/edit.js:408
 #: src/list/edit.js:310
 msgid "Data source"
 msgstr ""
 
-#: src/data-table/edit.js:410
+#: src/data-table/edit.js:416
 msgid "Headers (one per line: key|label)"
 msgstr ""
 
-#: src/data-table/edit.js:419
+#: src/data-table/edit.js:425
 msgid "Rows (one per line, pipe-separated, in header order)"
 msgstr ""
 
-#: src/data-table/edit.js:433
+#: src/data-table/edit.js:439
 #: src/list/edit.js:316
 msgid "Paste content"
 msgstr ""
 
-#: src/data-table/edit.js:436
+#: src/data-table/edit.js:442
 msgid "Paste an HTML <table>. Its header row and body rows become the table data."
 msgstr ""
 
-#: src/data-table/edit.js:440
+#: src/data-table/edit.js:446
 msgid "Paste a Markdown table — a header row, a |---|---| separator row, then data rows."
 msgstr ""
 
-#: src/data-table/edit.js:454
+#: src/data-table/edit.js:460
 msgid "Generate table"
 msgstr ""
 
-#: src/data-table/edit.js:459
+#: src/data-table/edit.js:465
 #: src/list/edit.js:333
 msgid "More data sources"
 msgstr ""
 
-#: src/data-table/edit.js:460
+#: src/data-table/edit.js:466
 msgid "Populate this table from JSON, a REST API, or a WP_Query — available in AWT Premium."
 msgstr ""
 
-#: src/dropdown/edit.js:55
-#: src/password-input/edit.js:50
-#: src/text-area/edit.js:48
-#: src/text-input/edit.js:145
+#: src/dropdown/edit.js:59
+#: src/password-input/edit.js:54
+#: src/text-area/edit.js:53
+#: src/text-input/edit.js:150
 msgid "Placeholder"
 msgstr ""
 
-#: src/dropdown/edit.js:77
-#: src/select/edit.js:91
+#: src/dropdown/edit.js:81
+#: src/select/edit.js:95
 msgid "Options (one per line: value|label)"
 msgstr ""
 
-#: src/dropdown/edit.js:98
-#: src/password-input/edit.js:112
-#: src/select/edit.js:112
-#: src/text-area/edit.js:114
-#: src/text-input/edit.js:221
+#: src/dropdown/edit.js:92
+#: src/password-input/edit.js:89
+#: src/select/edit.js:106
+#: src/text-area/edit.js:109
+#: src/text-input/edit.js:216
+msgid "Style"
+msgstr ""
+
+#: src/dropdown/edit.js:110
+#: src/password-input/edit.js:124
+#: src/select/edit.js:124
+#: src/text-area/edit.js:127
+#: src/text-input/edit.js:234
 msgid "Invalid"
 msgstr ""
 
@@ -1473,9 +1464,9 @@ msgid "Error"
 msgstr ""
 
 #: src/linter/Panel.js:14
-#: src/password-input/edit.js:125
-#: src/text-area/edit.js:127
-#: src/text-input/edit.js:234
+#: src/password-input/edit.js:137
+#: src/text-area/edit.js:140
+#: src/text-input/edit.js:247
 msgid "Warning"
 msgstr ""
 
@@ -1516,7 +1507,7 @@ msgid "List"
 msgstr ""
 
 #: src/list/edit.js:286
-#: src/text-input/edit.js:135
+#: src/text-input/edit.js:140
 msgid "Type"
 msgstr ""
 
@@ -1692,38 +1683,38 @@ msgstr ""
 msgid "Base URL (leave blank for current archive)"
 msgstr ""
 
-#: src/password-input/edit.js:43
+#: src/password-input/edit.js:47
 msgid "Password input"
 msgstr ""
 
-#: src/password-input/edit.js:73
-#: src/select/edit.js:86
-#: src/text-area/edit.js:99
-#: src/text-input/edit.js:178
+#: src/password-input/edit.js:77
+#: src/select/edit.js:90
+#: src/text-area/edit.js:104
+#: src/text-input/edit.js:183
 #: src/toggle/edit.js:75
 msgid "Visually hide label"
 msgstr ""
 
-#: src/password-input/edit.js:78
-#: src/text-input/edit.js:263
+#: src/password-input/edit.js:82
+#: src/text-input/edit.js:276
 msgid "Autocomplete"
 msgstr ""
 
-#: src/password-input/edit.js:86
+#: src/password-input/edit.js:98
 msgid "Toggle button labels"
 msgstr ""
 
-#: src/password-input/edit.js:90
+#: src/password-input/edit.js:102
 msgid "Show-password label"
 msgstr ""
 
-#: src/password-input/edit.js:95
+#: src/password-input/edit.js:107
 msgid "Hide-password label"
 msgstr ""
 
-#: src/password-input/edit.js:130
-#: src/text-area/edit.js:132
-#: src/text-input/edit.js:239
+#: src/password-input/edit.js:142
+#: src/text-area/edit.js:145
+#: src/text-input/edit.js:252
 msgid "Warning message"
 msgstr ""
 
@@ -1813,6 +1804,10 @@ msgstr ""
 
 #: src/radio-button/edit.js:16
 msgid "Radio button"
+msgstr ""
+
+#: src/section/edit.js:31
+msgid "Spacing"
 msgstr ""
 
 #: src/section/edit.js:35
@@ -1911,8 +1906,16 @@ msgstr ""
 msgid "Recommended when multiple <section> elements appear on the same page."
 msgstr ""
 
-#: src/select/edit.js:59
+#: src/select/edit.js:63
 msgid "Placeholder (first option)"
+msgstr ""
+
+#: src/shared/carbon-default-toggle.js:23
+msgid "Carbon default"
+msgstr ""
+
+#: src/shared/carbon-default-toggle.js:24
+msgid "AWT draws a border on all four sides of a field, so its shape is easy to see. Turn this on to use Carbon’s own look instead: a shaded fill with one line under the text."
 msgstr ""
 
 #: src/shared/icon-picker.js:195
@@ -2163,107 +2166,123 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: src/text-area/edit.js:41
+#: src/text-area/edit.js:46
 msgid "Text area"
 msgstr ""
 
-#: src/text-area/edit.js:55
-#: src/text-input/edit.js:152
+#: src/text-area/edit.js:60
+#: src/text-input/edit.js:157
 msgid "Default value"
 msgstr ""
 
-#: src/text-area/edit.js:60
+#: src/text-area/edit.js:65
 msgid "Rows"
 msgstr ""
 
-#: src/text-area/edit.js:68
+#: src/text-area/edit.js:73
 msgid "Cols (0 = auto)"
 msgstr ""
 
-#: src/text-area/edit.js:76
-#: src/text-input/edit.js:250
+#: src/text-area/edit.js:81
+#: src/text-input/edit.js:263
 msgid "Maxlength"
 msgstr ""
 
-#: src/text-area/edit.js:94
-#: src/text-input/edit.js:173
+#: src/text-area/edit.js:99
+#: src/text-input/edit.js:178
 #: src/toggle/edit.js:85
 msgid "Readonly"
 msgstr ""
 
-#: src/text-input/edit.js:128
+#: src/text-input/edit.js:133
 msgid "Field"
 msgstr ""
 
-#: src/text-input/edit.js:139
+#: src/text-input/edit.js:144
 msgid "Sets the HTML input type. Changes on-screen keyboards (mobile), browser validation and autofill — most types look identical on a desktop preview."
 msgstr ""
 
-#: src/text-input/edit.js:183
+#: src/text-input/edit.js:188
 msgid "Inline layout"
 msgstr ""
 
-#: src/text-input/edit.js:184
+#: src/text-input/edit.js:189
 msgid "Label sits to the left of the input on one row."
 msgstr ""
 
-#: src/text-input/edit.js:198
+#: src/text-input/edit.js:203
 msgid "Usage"
 msgstr ""
 
-#: src/text-input/edit.js:202
+#: src/text-input/edit.js:207
 msgid "Fluid layout"
 msgstr ""
 
-#: src/text-input/edit.js:203
+#: src/text-input/edit.js:208
 msgid "Carbon fluid variant: label sits inside the field area. Suited to data-entry forms."
 msgstr ""
 
-#: src/text-input/edit.js:246
+#: src/text-input/edit.js:259
 msgid "Constraints"
 msgstr ""
 
-#: src/text-input/edit.js:258
+#: src/text-input/edit.js:271
 msgid "Pattern"
 msgstr ""
 
-#: src/tile/edit.js:52
+#: src/tile-group/edit.js:17
+msgid "Option 1"
+msgstr ""
+
+#: src/tile-group/edit.js:22
+msgid "Option 2"
+msgstr ""
+
+#: src/tile-group/edit.js:47
+msgid "What is this choice about?"
+msgstr ""
+
+#: src/tile/edit.js:58
 msgid "Tile"
 msgstr ""
 
-#: src/tile/edit.js:59
+#: src/tile/edit.js:65
 msgid "Default (read-only)"
 msgstr ""
 
-#: src/tile/edit.js:63
+#: src/tile/edit.js:69
 msgid "Clickable (renders as link)"
 msgstr ""
 
-#: src/tile/edit.js:67
+#: src/tile/edit.js:73
 msgid "Selectable (checkbox / radio-tile)"
 msgstr ""
 
-#: src/tile/edit.js:74
+#: src/tile/edit.js:80
 msgid "Expandable (details / summary)"
 msgstr ""
 
-#: src/tile/edit.js:84
+#: src/tile/edit.js:90
 msgid "Link URL"
 msgstr ""
 
-#: src/tile/edit.js:85
+#: src/tile/edit.js:91
 msgid "The address this tile links to."
 msgstr ""
 
-#: src/tile/edit.js:93
-msgid "Group name (for radio-tile group)"
+#: src/tile/edit.js:100
+msgid "Group name"
 msgstr ""
 
-#: src/tile/edit.js:97
-msgid "Tiles sharing the same group name form a radio group — only one can be selected. Leave empty for a single checkbox-style toggle."
+#: src/tile/edit.js:101
+msgid "Give every tile in one choice the same group name, and people can pick only one of them. Leave it empty for a tile that switches on and off by itself. Put the tiles in a Tile group block so the choice also has a heading."
 msgstr ""
 
-#: src/tile/edit.js:108
+#: src/tile/edit.js:113
+msgid "What this tile sends when the form is submitted, such as \"large\". Only needed if the tiles are inside a form."
+msgstr ""
+
+#: src/tile/edit.js:128
 msgid "Summary (visible header)"
 msgstr ""
 
@@ -2406,6 +2425,7 @@ msgstr ""
 #: src/tag/block.json
 #: src/text-area/block.json
 #: src/text-input/block.json
+#: src/tile-group/block.json
 #: src/tile/block.json
 #: src/toggle/block.json
 #: src/toggletip/block.json
@@ -3530,6 +3550,32 @@ msgctxt "block keyword"
 msgid "email"
 msgstr ""
 
+#: src/tile-group/block.json
+msgctxt "block title"
+msgid "Tile group"
+msgstr ""
+
+#: src/tile-group/block.json
+msgctxt "block description"
+msgid "Groups selectable tiles into one choice, with a heading that says what the choice is about. Put selectable tiles inside it and give them the same group name to let people pick one."
+msgstr ""
+
+#: src/tile-group/block.json
+msgctxt "block keyword"
+msgid "tile group"
+msgstr ""
+
+#: src/tile-group/block.json
+#: src/tile/block.json
+msgctxt "block keyword"
+msgid "radio tile"
+msgstr ""
+
+#: src/tile-group/block.json
+msgctxt "block keyword"
+msgid "choice"
+msgstr ""
+
 #: src/tile/block.json
 msgctxt "block title"
 msgid "Tile"
@@ -3543,11 +3589,6 @@ msgstr ""
 #: src/tile/block.json
 msgctxt "block keyword"
 msgid "card"
-msgstr ""
-
-#: src/tile/block.json
-msgctxt "block keyword"
-msgid "radio tile"
 msgstr ""
 
 #: src/tile/block.json

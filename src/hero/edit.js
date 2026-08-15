@@ -34,18 +34,18 @@ const ALLOWED = [
 // classes (awt-hero__image--ratio-*, awt-hero--img-*); see render.php for the
 // server side. '' ratio = keep the image's own proportions (no crop).
 const RATIO_OPTIONS = [
-	{ value: '', label: __( 'Original proportions', 'awt' ) },
-	{ value: '1x1', label: __( 'Square (1:1)', 'awt' ) },
-	{ value: '4x3', label: __( 'Landscape (4:3)', 'awt' ) },
-	{ value: '3x2', label: __( 'Landscape (3:2)', 'awt' ) },
-	{ value: '16x9', label: __( 'Widescreen (16:9)', 'awt' ) },
-	{ value: '3x4', label: __( 'Portrait (3:4)', 'awt' ) },
-	{ value: '4x5', label: __( 'Portrait (4:5)', 'awt' ) },
+	{ value: '', label: __( 'Original proportions', 'awt-blocks' ) },
+	{ value: '1x1', label: __( 'Square (1:1)', 'awt-blocks' ) },
+	{ value: '4x3', label: __( 'Landscape (4:3)', 'awt-blocks' ) },
+	{ value: '3x2', label: __( 'Landscape (3:2)', 'awt-blocks' ) },
+	{ value: '16x9', label: __( 'Widescreen (16:9)', 'awt-blocks' ) },
+	{ value: '3x4', label: __( 'Portrait (3:4)', 'awt-blocks' ) },
+	{ value: '4x5', label: __( 'Portrait (4:5)', 'awt-blocks' ) },
 ];
 const WIDTH_OPTIONS = [
-	{ value: 'equal', label: __( 'Equal to text', 'awt' ) },
-	{ value: 'narrow', label: __( 'Narrower than text', 'awt' ) },
-	{ value: 'wide', label: __( 'Wider than text', 'awt' ) },
+	{ value: 'equal', label: __( 'Equal to text', 'awt-blocks' ) },
+	{ value: 'narrow', label: __( 'Narrower than text', 'awt-blocks' ) },
+	{ value: 'wide', label: __( 'Wider than text', 'awt-blocks' ) },
 ];
 
 export default function Edit( { attributes, setAttributes, clientId } ) {
@@ -156,18 +156,24 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Hero', 'awt' ) }>
+				<PanelBody title={ __( 'Hero', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Layout', 'awt' ) }
+						label={ __( 'Layout', 'awt-blocks' ) }
 						value={ layout }
 						options={ [
 							{
 								value: 'text-only',
-								label: __( 'Text only (centered)', 'awt' ),
+								label: __(
+									'Text only (centered)',
+									'awt-blocks'
+								),
 							},
 							{
 								value: 'text-with-image-right',
-								label: __( 'Text + image on right', 'awt' ),
+								label: __(
+									'Text + image on right',
+									'awt-blocks'
+								),
 							},
 						] }
 						onChange={ ( v ) => setAttributes( { layout: v } ) }
@@ -189,8 +195,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 											onClick={ open }
 										>
 											{ imageUrl
-												? __( 'Replace image', 'awt' )
-												: __( 'Upload image', 'awt' ) }
+												? __(
+														'Replace image',
+														'awt-blocks'
+												  )
+												: __(
+														'Upload image',
+														'awt-blocks'
+												  ) }
 										</Button>
 									) }
 								/>
@@ -198,17 +210,23 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							{ imageUrl && (
 								<>
 									<TextControl
-										label={ __( 'Image alt text', 'awt' ) }
+										label={ __(
+											'Image alt text',
+											'awt-blocks'
+										) }
 										value={ imageAlt }
 										onChange={ ( v ) =>
 											setAttributes( { imageAlt: v } )
 										}
 									/>
 									<SelectControl
-										label={ __( 'Image shape', 'awt' ) }
+										label={ __(
+											'Image shape',
+											'awt-blocks'
+										) }
 										help={ __(
 											'Crop the image to a fixed shape. "Original proportions" keeps the image uncropped.',
-											'awt'
+											'awt-blocks'
 										) }
 										value={ imageRatio }
 										options={ RATIO_OPTIONS }
@@ -219,11 +237,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 									<SelectControl
 										label={ __(
 											'Image column width',
-											'awt'
+											'awt-blocks'
 										) }
 										help={ __(
 											'How much horizontal space the image gets next to the text. Applies on wider screens; the image stacks below the text on small screens.',
-											'awt'
+											'awt-blocks'
 										) }
 										value={ imageWidth }
 										options={ WIDTH_OPTIONS }

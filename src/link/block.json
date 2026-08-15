@@ -9,7 +9,7 @@
 	"title": "Link",
 	"category": "awt-content",
 	"description": "A styled text link, on its own or inline, with an optional trailing icon.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"link",
 		"anchor",

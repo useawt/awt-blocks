@@ -63,12 +63,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	// switch it back on from the same place.
 	const inspector = (
 		<InspectorControls>
-			<PanelBody title={ __( 'Side nav', 'awt' ) } initialOpen={ true }>
+			<PanelBody
+				title={ __( 'Side nav', 'awt-blocks' ) }
+				initialOpen={ true }
+			>
 				<ToggleControl
-					label={ __( 'Show the side nav', 'awt' ) }
+					label={ __( 'Show the side nav', 'awt-blocks' ) }
 					help={ __(
 						'On wide screens the side nav sits beside your content. On narrow screens its links move into the header menu, behind the header’s menu button.',
-						'awt'
+						'awt-blocks'
 					) }
 					checked={ ! isNone }
 					onChange={ ( on ) =>
@@ -78,10 +81,10 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ ! isNone && (
 					<>
 						<TextControl
-							label={ __( 'HTML id', 'awt' ) }
+							label={ __( 'HTML id', 'awt-blocks' ) }
 							help={ __(
 								'The id given to the side nav in the page’s HTML. Change it only if something else on the page already uses this one.',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ id }
 							onChange={ ( value ) =>
@@ -91,11 +94,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						<TextControl
 							label={ __(
 								'Accessible name (aria-label)',
-								'awt'
+								'awt-blocks'
 							) }
 							help={ __(
 								'What a screen reader calls this navigation. Give each navigation on the page a different name.',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ ariaLabel }
 							onChange={ ( value ) =>
@@ -114,7 +117,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<Notice status="info" isDismissible={ false }>
 					{ __(
 						'The side nav is switched off, so it does not appear on the published page.',
-						'awt'
+						'awt-blocks'
 					) }
 				</Notice>
 				{ inspector }

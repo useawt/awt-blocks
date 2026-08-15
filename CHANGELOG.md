@@ -309,6 +309,13 @@
 
 ### [Improvement]
 
+- Translations now work. AWT Blocks was labelling its text `awt` while
+  WordPress looks for it under the plugin's own name, `awt-blocks`, so a
+  finished translation would have been ignored and everything shown in
+  English. The theme was also using `awt`, which meant the two products'
+  translations landed in the same place and could overwrite each other. The
+  words on screen are unchanged.
+
 - Every block file that builds a block's output now refuses to run when it is
   opened directly instead of through WordPress. Nothing changes on your pages —
   the output is identical, byte for byte — but it is what WordPress.org's own

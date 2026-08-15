@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
-$accordion_title  = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Section', 'awt' );
+$accordion_title  = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Section', 'awt-blocks' );
 $default_expanded = ! empty( $attributes['defaultExpanded'] );
 $disabled         = ! empty( $attributes['disabled'] );
 

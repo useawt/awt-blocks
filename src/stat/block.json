@@ -6,7 +6,7 @@
 	"title": "Statistic",
 	"category": "awt-section",
 	"description": "A large number with a heading and optional description, for highlighting key figures.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"stat",
 		"statistic",

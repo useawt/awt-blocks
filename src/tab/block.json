@@ -10,7 +10,7 @@
 		"awt/tabs"
 	],
 	"description": "One tab button. It pairs by position with the matching Tab panel.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,
 		"reusable": false,

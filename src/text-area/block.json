@@ -10,7 +10,7 @@
 	"title": "Text area",
 	"category": "awt-forms",
 	"description": "A multi-line text field with a label, helper text, and error, warning, and read-only states.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"textarea",
 		"multi-line",

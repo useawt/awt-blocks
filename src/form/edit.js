@@ -53,56 +53,59 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Form', 'awt' ) }>
+				<PanelBody title={ __( 'Form', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Action URL', 'awt' ) }
+						label={ __( 'Action URL', 'awt-blocks' ) }
 						value={ action }
 						onChange={ ( v ) => setAttributes( { action: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Method', 'awt' ) }
+						label={ __( 'Method', 'awt-blocks' ) }
 						value={ method }
 						options={ METHOD_OPTIONS }
 						onChange={ ( v ) => setAttributes( { method: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Enctype', 'awt' ) }
+						label={ __( 'Enctype', 'awt-blocks' ) }
 						value={ enctype }
 						onChange={ ( v ) => setAttributes( { enctype: v } ) }
 						help={ __(
 							'Typically multipart/form-data for file uploads.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 					<ToggleControl
 						label={ __(
 							'Skip browser validation (novalidate)',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ novalidate }
 						onChange={ ( v ) => setAttributes( { novalidate: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Header', 'awt' ) }
+					title={ __( 'Header', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Legend', 'awt' ) }
+						label={ __( 'Legend', 'awt-blocks' ) }
 						value={ legend }
 						onChange={ ( v ) => setAttributes( { legend: v } ) }
 						help={ __(
 							'Renders as <h2> at the top of the form.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 					<TextControl
-						label={ __( 'Description', 'awt' ) }
+						label={ __( 'Description', 'awt-blocks' ) }
 						value={ description }
 						onChange={ ( v ) =>
 							setAttributes( { description: v } )

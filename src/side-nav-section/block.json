@@ -10,7 +10,7 @@
 		"awt/side-nav"
 	],
 	"description": "Collapsible group of side-nav links with an optional heading.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"side nav",
 		"section",

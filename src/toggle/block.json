@@ -9,7 +9,7 @@
 	"title": "Toggle",
 	"category": "awt-forms",
 	"description": "An on/off switch for a single setting.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"toggle",
 		"switch",

@@ -84,11 +84,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Code snippet', 'awt' ) }
+					title={ __( 'Code snippet', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Variant', 'awt' ) }
+						label={ __( 'Variant', 'awt-blocks' ) }
 						value={ variant }
 						options={ VARIANTS }
 						onChange={ ( v ) => setAttributes( { variant: v } ) }
@@ -96,31 +96,31 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __(
 							'Language (e.g., js, php — used as data-language only)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ language }
 						onChange={ ( v ) => setAttributes( { language: v } ) }
 					/>
 					<TextareaControl
-						label={ __( 'Code', 'awt' ) }
+						label={ __( 'Code', 'awt-blocks' ) }
 						value={ code }
 						onChange={ ( v ) => setAttributes( { code: v } ) }
 						rows={ 8 }
 					/>
 					<ToggleControl
-						label={ __( 'Hide copy button', 'awt' ) }
+						label={ __( 'Hide copy button', 'awt-blocks' ) }
 						checked={ hideCopyBtn }
 						onChange={ ( v ) =>
 							setAttributes( { hideCopyBtn: v } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Copy button label', 'awt' ) }
+						label={ __( 'Copy button label', 'awt-blocks' ) }
 						value={ copyLabel }
 						onChange={ ( v ) => setAttributes( { copyLabel: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Copied-state label', 'awt' ) }
+						label={ __( 'Copied-state label', 'awt-blocks' ) }
 						value={ copiedLabel }
 						onChange={ ( v ) =>
 							setAttributes( { copiedLabel: v } )

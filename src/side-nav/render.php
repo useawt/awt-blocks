@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $nav_mode   = isset( $attributes['mode'] ) ? (string) $attributes['mode'] : 'persistent';
-$aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Side navigation', 'awt' );
+$aria_label = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Side navigation', 'awt-blocks' );
 $dom_id     = isset( $attributes['id'] ) ? (string) $attributes['id'] : 'side-nav';
 
 if ( $nav_mode === 'none' ) {

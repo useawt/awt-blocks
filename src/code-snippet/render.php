@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 $variant       = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'multi';
 $code          = isset( $attributes['code'] ) ? (string) $attributes['code'] : '';
 $language      = isset( $attributes['language'] ) ? (string) $attributes['language'] : '';
-$copy_label    = isset( $attributes['copyLabel'] ) ? (string) $attributes['copyLabel'] : __( 'Copy', 'awt' );
-$copied_label  = isset( $attributes['copiedLabel'] ) ? (string) $attributes['copiedLabel'] : __( 'Copied', 'awt' );
+$copy_label    = isset( $attributes['copyLabel'] ) ? (string) $attributes['copyLabel'] : __( 'Copy', 'awt-blocks' );
+$copied_label  = isset( $attributes['copiedLabel'] ) ? (string) $attributes['copiedLabel'] : __( 'Copied', 'awt-blocks' );
 $hide_copy_btn = ! empty( $attributes['hideCopyBtn'] );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;

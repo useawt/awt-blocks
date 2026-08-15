@@ -10,7 +10,7 @@
 		"awt/header-nav"
 	],
 	"description": "A top-level nav item that opens a submenu of links. Add Header navigation item blocks inside it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",
 		"nav",

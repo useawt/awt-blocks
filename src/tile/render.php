@@ -33,7 +33,7 @@ $variant      = isset( $attributes['variant'] ) ? (string) $attributes['variant'
 $href         = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $group_name   = isset( $attributes['groupName'] ) ? (string) $attributes['groupName'] : '';
 $tile_value   = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
-$summary      = isset( $attributes['summary'] ) ? (string) $attributes['summary'] : __( 'Expandable tile', 'awt' );
+$summary      = isset( $attributes['summary'] ) ? (string) $attributes['summary'] : __( 'Expandable tile', 'awt-blocks' );
 $default_open = ! empty( $attributes['defaultOpen'] );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;

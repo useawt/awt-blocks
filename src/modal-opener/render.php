@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Open modal', 'awt' );
+$text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Open modal', 'awt-blocks' );
 $kind     = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'primary';
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $modal_id = isset( $attributes['modalId'] ) ? (string) $attributes['modalId'] : 'awt-modal';

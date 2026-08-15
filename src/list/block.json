@@ -9,7 +9,7 @@
 	"title": "List",
 	"category": "awt-content",
 	"description": "A bulleted or numbered list. Numbering can use Carbon's styling or the browser's own.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"list",
 		"ul",

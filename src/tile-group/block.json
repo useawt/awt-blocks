@@ -10,7 +10,7 @@
 	"title": "Tile group",
 	"category": "awt-data-display",
 	"description": "Groups selectable tiles into one choice, with a heading that says what the choice is about. Put selectable tiles inside it and give them the same group name to let people pick one.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"tile group",
 		"radio tile",
