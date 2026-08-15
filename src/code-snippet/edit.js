@@ -94,12 +94,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { variant: v } ) }
 					/>
 					<TextControl
-						label={ __(
-							'Language (e.g., js, php — used as data-language only)',
-							'awt-blocks'
-						) }
+						label={ __( 'Language', 'awt-blocks' ) }
 						value={ language }
 						onChange={ ( v ) => setAttributes( { language: v } ) }
+						help={ __(
+							'A short code such as “js” or “php”. It labels the snippet for screen readers and other tools. It does not color the code.',
+							'awt-blocks'
+						) }
 					/>
 					<TextareaControl
 						label={ __( 'Code', 'awt-blocks' ) }

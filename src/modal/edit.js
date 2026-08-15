@@ -135,12 +135,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						disabled={ ! primaryHref }
 					/>
 					<TextControl
-						label={ __(
-							'rel (auto: "noopener noreferrer" for new tab)',
-							'awt-blocks'
-						) }
+						label={ __( 'Link relationship (rel)', 'awt-blocks' ) }
 						value={ primaryRel }
 						onChange={ ( v ) => setAttributes( { primaryRel: v } ) }
+						help={ __(
+							'Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'awt-blocks'
+						) }
 						disabled={ ! primaryHref }
 					/>
 				</PanelBody>
