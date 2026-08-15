@@ -10,7 +10,7 @@
 		"awt/footer-section"
 	],
 	"description": "Single link inside a footer section.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"footer",
 		"link"

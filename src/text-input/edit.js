@@ -130,65 +130,65 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Field', 'awt' ) }>
+				<PanelBody title={ __( 'Field', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Name', 'awt' ) }
+						label={ __( 'Name', 'awt-blocks' ) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Type', 'awt' ) }
+						label={ __( 'Type', 'awt-blocks' ) }
 						value={ type }
 						options={ TYPE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 						help={ __(
 							'Sets the HTML input type. Changes on-screen keyboards (mobile), browser validation and autofill — most types look identical on a desktop preview.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 					<TextControl
-						label={ __( 'Placeholder', 'awt' ) }
+						label={ __( 'Placeholder', 'awt-blocks' ) }
 						value={ placeholder }
 						onChange={ ( v ) =>
 							setAttributes( { placeholder: v } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Default value', 'awt' ) }
+						label={ __( 'Default value', 'awt-blocks' ) }
 						value={ value }
 						onChange={ ( v ) => setAttributes( { value: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Required', 'awt' ) }
+						label={ __( 'Required', 'awt-blocks' ) }
 						checked={ required }
 						onChange={ ( v ) => setAttributes( { required: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Readonly', 'awt' ) }
+						label={ __( 'Readonly', 'awt-blocks' ) }
 						checked={ readonly }
 						onChange={ ( v ) => setAttributes( { readonly: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Visually hide label', 'awt' ) }
+						label={ __( 'Visually hide label', 'awt-blocks' ) }
 						checked={ hideLabel }
 						onChange={ ( v ) => setAttributes( { hideLabel: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Inline layout', 'awt' ) }
+						label={ __( 'Inline layout', 'awt-blocks' ) }
 						help={ __(
 							'Label sits to the left of the input on one row.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ inline }
 						onChange={ ( v ) => setAttributes( { inline: v } ) }
@@ -200,20 +200,23 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						} }
 					>
 						<ExternalLink href="https://carbondesignsystem.com/components/text-input/usage/">
-							{ __( 'Usage', 'awt' ) }
+							{ __( 'Usage', 'awt-blocks' ) }
 						</ExternalLink>
 					</p>
 					<ToggleControl
-						label={ __( 'Fluid layout', 'awt' ) }
+						label={ __( 'Fluid layout', 'awt-blocks' ) }
 						help={ __(
 							'Carbon fluid variant: label sits inside the field area. Suited to data-entry forms.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ fluid }
 						onChange={ ( v ) => setAttributes( { fluid: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Style', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<CarbonDefaultToggle
 						value={ carbonDefault }
 						onChange={ ( v ) =>
@@ -222,21 +225,21 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Help & validation', 'awt' ) }
+					title={ __( 'Help & validation', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Helper text', 'awt' ) }
+						label={ __( 'Helper text', 'awt-blocks' ) }
 						value={ helperText }
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid', 'awt' ) }
+						label={ __( 'Invalid', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Invalid message', 'awt' ) }
+						label={ __( 'Invalid message', 'awt-blocks' ) }
 						value={ invalidText }
 						onChange={ ( v ) =>
 							setAttributes( { invalidText: v } )
@@ -244,23 +247,23 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						disabled={ ! invalid }
 					/>
 					<ToggleControl
-						label={ __( 'Warning', 'awt' ) }
+						label={ __( 'Warning', 'awt-blocks' ) }
 						checked={ warn }
 						onChange={ ( v ) => setAttributes( { warn: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Warning message', 'awt' ) }
+						label={ __( 'Warning message', 'awt-blocks' ) }
 						value={ warnText }
 						onChange={ ( v ) => setAttributes( { warnText: v } ) }
 						disabled={ ! warn }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Constraints', 'awt' ) }
+					title={ __( 'Constraints', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Maxlength', 'awt' ) }
+						label={ __( 'Maxlength', 'awt-blocks' ) }
 						type="number"
 						value={ maxlength }
 						onChange={ ( v ) =>
@@ -268,12 +271,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Pattern', 'awt' ) }
+						label={ __( 'Pattern', 'awt-blocks' ) }
 						value={ pattern }
 						onChange={ ( v ) => setAttributes( { pattern: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Autocomplete', 'awt' ) }
+						label={ __( 'Autocomplete', 'awt-blocks' ) }
 						value={ autocomplete }
 						onChange={ ( v ) =>
 							setAttributes( { autocomplete: v } )
@@ -288,7 +291,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					className={ labelClasses }
 					value={ label }
 					onChange={ ( v ) => setAttributes( { label: v } ) }
-					placeholder={ __( 'Label', 'awt' ) }
+					placeholder={ __( 'Label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				<div className="cds--text-input__field-outer-wrapper">

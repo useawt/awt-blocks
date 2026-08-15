@@ -11,7 +11,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 		text ||
 		awt.skipLinkText ||
 		awt.skipLinkDefault ||
-		__( 'Skip to main content', 'awt' );
+		__( 'Skip to main content', 'awt-blocks' );
 
 	// Skip links are visually hidden on the live site (off-screen until focus).
 	// Keep them hidden in the editor too so they don't crowd the header — but
@@ -50,21 +50,21 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Skip link', 'awt' ) }
+					title={ __( 'Skip link', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Visible-on-focus label', 'awt' ) }
+						label={ __( 'Visible-on-focus label', 'awt-blocks' ) }
 						value={ text }
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Target element ID', 'awt' ) }
+						label={ __( 'Target element ID', 'awt-blocks' ) }
 						help={ __(
 							'DOM id of the page landmark to skip to (e.g., main-content).',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ targetId }
 						onChange={ ( value ) =>

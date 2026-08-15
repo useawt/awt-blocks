@@ -29,11 +29,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Footer section', 'awt' ) }
+					title={ __( 'Footer section', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<IconPicker
-						label={ __( 'Icon (optional)', 'awt' ) }
+						label={ __( 'Icon (optional)', 'awt-blocks' ) }
 						value={ iconName }
 						onChange={ ( value ) =>
 							setAttributes( { iconName: value } )
@@ -47,7 +47,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="cds--footer__heading"
 					value={ title }
 					onChange={ ( value ) => setAttributes( { title: value } ) }
-					placeholder={ __( 'Section heading (optional)', 'awt' ) }
+					placeholder={ __(
+						'Section heading (optional)',
+						'awt-blocks'
+					) }
 					allowedFormats={ [] }
 				/>
 				<ul { ...innerBlocksProps } />

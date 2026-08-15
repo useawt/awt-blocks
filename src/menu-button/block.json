@@ -11,7 +11,7 @@
 	"title": "Menu button",
 	"category": "awt-navigation",
 	"description": "A button that opens a menu of options.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"menu",
 		"dropdown",

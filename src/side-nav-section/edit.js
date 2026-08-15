@@ -30,7 +30,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Side nav section', 'awt' ) }
+					title={ __( 'Side nav section', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					{ /*
@@ -43,7 +43,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					 * registered in block.json so saved content round-trips.
 					 */ }
 					<IconPicker
-						label={ __( 'Icon', 'awt' ) }
+						label={ __( 'Icon', 'awt-blocks' ) }
 						value={ iconName }
 						onChange={ ( value ) =>
 							setAttributes( { iconName: value } )
@@ -72,7 +72,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="cds--side-nav__heading"
 					value={ title }
 					onChange={ ( value ) => setAttributes( { title: value } ) }
-					placeholder={ __( 'Section heading (optional)', 'awt' ) }
+					placeholder={ __(
+						'Section heading (optional)',
+						'awt-blocks'
+					) }
 					allowedFormats={ [] }
 				/>
 				<ul { ...innerBlocksProps } />

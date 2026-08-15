@@ -15,7 +15,7 @@ const SIZE_OPTIONS = [ '16', '20', '24', '32' ].map( ( v ) => ( {
 } ) );
 
 const COLOR_OPTIONS = [
-	{ value: 'inherit', label: __( 'Inherit from text', 'awt' ) },
+	{ value: 'inherit', label: __( 'Inherit from text', 'awt-blocks' ) },
 	{ value: 'text-primary', label: 'text-primary' },
 	{ value: 'text-secondary', label: 'text-secondary' },
 	{ value: 'support-success', label: 'support-success' },
@@ -50,12 +50,15 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Icon', 'awt' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Icon', 'awt-blocks' ) }
+					initialOpen={ true }
+				>
 					<IconPicker
-						label={ __( 'Carbon icon', 'awt' ) }
+						label={ __( 'Carbon icon', 'awt-blocks' ) }
 						help={ __(
 							'Search by name or alias; click an icon to select.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ iconName }
 						onChange={ ( value ) =>
@@ -63,7 +66,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE_OPTIONS }
 						onChange={ ( value ) =>
@@ -71,7 +74,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Color', 'awt' ) }
+						label={ __( 'Color', 'awt-blocks' ) }
 						value={ color }
 						options={ COLOR_OPTIONS }
 						onChange={ ( value ) =>
@@ -79,10 +82,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Align with text baseline', 'awt' ) }
+						label={ __( 'Align with text baseline', 'awt-blocks' ) }
 						help={ __(
 							'Vertically centers the icon against text on the same line. Only has a visible effect when the icon shares a line with other inline content (e.g. several icons in a row).',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ inline }
 						onChange={ ( value ) =>
@@ -90,10 +93,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Decorative', 'awt' ) }
+						label={ __( 'Decorative', 'awt-blocks' ) }
 						help={ __(
 							'Decorative icons are hidden from screen readers. Uncheck to provide an accessible name.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ decorative }
 						onChange={ ( value ) =>
@@ -102,7 +105,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					{ ! decorative && (
 						<TextControl
-							label={ __( 'Accessible name', 'awt' ) }
+							label={ __( 'Accessible name', 'awt-blocks' ) }
 							value={ label }
 							onChange={ ( value ) =>
 								setAttributes( { label: value } )
@@ -113,7 +116,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'Informative icons must carry an accessible name. The linter will flag this as an Error.',
-								'awt'
+								'awt-blocks'
 							) }
 						</Notice>
 					) }
@@ -165,7 +168,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						height="100%"
 						fill="var(--cds-text-placeholder, #a8a8a8)"
 						role="img"
-						aria-label={ __( 'No icon selected', 'awt' ) }
+						aria-label={ __( 'No icon selected', 'awt-blocks' ) }
 						focusable="false"
 					>
 						<path d="M19 14a3 3 0 1 0-3-3 3 3 0 0 0 3 3zm0-4a1 1 0 1 1-1 1 1 1 0 0 1 1-1z" />

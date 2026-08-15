@@ -421,6 +421,6 @@ add_action(
 			(string) filemtime( $path ),
 			true
 		);
-		wp_set_script_translations( 'awt-global-block-controls', 'awt' );
+		wp_set_script_translations( 'awt-global-block-controls', 'awt-blocks' );
 	}
 );

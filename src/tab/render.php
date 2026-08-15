@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
-$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Tab', 'awt' );
+$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Tab', 'awt-blocks' );
 $disabled = ! empty( $attributes['disabled'] );
 
 $tab_id = unique_id( 'awt-tab' );

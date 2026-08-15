@@ -20,10 +20,10 @@ import { ToggleControl } from '@wordpress/components';
 export default function CarbonDefaultToggle( { value, onChange } ) {
 	return (
 		<ToggleControl
-			label={ __( 'Carbon default', 'awt' ) }
+			label={ __( 'Carbon default', 'awt-blocks' ) }
 			help={ __(
 				'AWT draws a border on all four sides of a field, so its shape is easy to see. Turn this on to use Carbon’s own look instead: a shaded fill with one line under the text.',
-				'awt'
+				'awt-blocks'
 			) }
 			checked={ !! value }
 			onChange={ onChange }

@@ -11,7 +11,7 @@
 		"awt/header-menu"
 	],
 	"description": "Single horizontal nav link inside an awt/header-nav.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",
 		"nav",

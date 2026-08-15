@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $kind               = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'info';
-$notification_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Notification', 'awt' );
+$notification_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Notification', 'awt-blocks' );
 $subtitle           = isset( $attributes['subtitle'] ) ? (string) $attributes['subtitle'] : '';
 $caption            = isset( $attributes['caption'] ) ? (string) $attributes['caption'] : '';
 $low_contrast       = ! empty( $attributes['lowContrast'] );
@@ -79,7 +79,7 @@ $close_btn = $hide_close
 	: sprintf(
 		'<button type="button" class="%1$s__close-button" aria-label="%2$s" data-wp-on--click="actions.dismiss">%3$s</button>',
 		esc_attr( $base ),
-		esc_attr__( 'Close notification', 'awt' ),
+		esc_attr__( 'Close notification', 'awt-blocks' ),
 		// Carbon's notification close button uses a 20px icon — matches the 20px
 		// kind icon and the editor preview's hardcoded 20×20 SVG. The helper
 		// defaults to 16, which made the published close glyph smaller than the

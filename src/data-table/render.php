@@ -141,7 +141,7 @@ foreach ( $headers as $h ) {
 		// NEXT state, not the current one (which `aria-sort` already covers).
 		$initial_aria_label = sprintf(
 			/* translators: %s: column header text */
-			__( 'Sort by %s', 'awt' ),
+			__( 'Sort by %s', 'awt-blocks' ),
 			wp_strip_all_tags( $text )
 		);
 		$headers_html .= sprintf(
@@ -191,7 +191,7 @@ foreach ( $rows as $row ) {
 			$is_included    = is_bool( $raw )
 				? $raw
 				: in_array( strtolower( trim( (string) $raw ) ), $truthy_strings, true );
-			$label          = $is_included ? __( 'Included', 'awt' ) : __( 'Not included', 'awt' );
+			$label          = $is_included ? __( 'Included', 'awt-blocks' ) : __( 'Not included', 'awt-blocks' );
 			$content        = $is_included
 				? $check_svg
 				: '<span class="awt-data-table__not-included" aria-hidden="true">—</span>';

@@ -181,7 +181,7 @@ export default function IconPicker( {
 		<BaseControl
 			__nextHasNoMarginBottom
 			id={ controlId }
-			label={ label || __( 'Icon', 'awt' ) }
+			label={ label || __( 'Icon', 'awt-blocks' ) }
 			help={ help }
 		>
 			<div ref={ containerRef } className="awt-icon-picker__row">
@@ -192,8 +192,10 @@ export default function IconPicker( {
 					className="awt-icon-picker__current"
 					aria-label={
 						value
-							? __( 'Change icon (current:', 'awt' ) + value + ')'
-							: __( 'Choose icon', 'awt' )
+							? __( 'Change icon (current:', 'awt-blocks' ) +
+							  value +
+							  ')'
+							: __( 'Choose icon', 'awt-blocks' )
 					}
 				>
 					{ value ? (
@@ -213,7 +215,7 @@ export default function IconPicker( {
 						/>
 					) }
 					<span className="awt-icon-picker__name">
-						{ value || __( 'Choose an icon…', 'awt' ) }
+						{ value || __( 'Choose an icon…', 'awt-blocks' ) }
 					</span>
 					<span
 						className="awt-icon-picker__chevron"
@@ -228,7 +230,7 @@ export default function IconPicker( {
 						onClick={ () => onChange( '' ) }
 						className="awt-icon-picker__clear"
 					>
-						{ __( 'Clear', 'awt' ) }
+						{ __( 'Clear', 'awt-blocks' ) }
 					</Button>
 				) }
 			</div>
@@ -244,18 +246,18 @@ export default function IconPicker( {
 				>
 					<TextControl
 						__nextHasNoMarginBottom
-						label={ __( 'Filter icons', 'awt' ) }
+						label={ __( 'Filter icons', 'awt-blocks' ) }
 						hideLabelFromVision
 						placeholder={ __(
 							'Search by name, alias, or category…',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ query }
 						onChange={ setQuery }
 					/>
 					{ entries === null ? (
 						<div style={ { padding: '1rem', textAlign: 'center' } }>
-							<Spinner /> { __( 'Loading icons…', 'awt' ) }
+							<Spinner /> { __( 'Loading icons…', 'awt-blocks' ) }
 						</div>
 					) : (
 						<>
@@ -270,7 +272,10 @@ export default function IconPicker( {
 									marginTop: '0.5rem',
 								} }
 								role="listbox"
-								aria-label={ __( 'Icon results', 'awt' ) }
+								aria-label={ __(
+									'Icon results',
+									'awt-blocks'
+								) }
 							>
 								{ filtered.map( ( it ) => (
 									<button
@@ -335,16 +340,18 @@ export default function IconPicker( {
 								{ entries.length > 0
 									? `${
 											filtered.length === 240
-												? __( 'Showing first', 'awt' ) +
-												  ' 240'
+												? __(
+														'Showing first',
+														'awt-blocks'
+												  ) + ' 240'
 												: filtered.length
 									  } / ${ entries.length } ${ __(
 											'icons',
-											'awt'
+											'awt-blocks'
 									  ) }`
 									: __(
 											'Manifest unavailable. Run `npm run build:icons` and reload.',
-											'awt'
+											'awt-blocks'
 									  ) }
 							</div>
 						</>

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Tag', 'awt' );
+$text     = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Tag', 'awt-blocks' );
 $tag_type = isset( $attributes['type'] ) ? (string) $attributes['type'] : 'gray';
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $filter   = ! empty( $attributes['filter'] );
@@ -60,7 +60,7 @@ $dismiss = $filter
 	? sprintf(
 		'<button type="button" class="%1$s" aria-label="%2$s">%3$s</button>',
 		esc_attr( $tag_close_class ),
-		esc_attr__( 'Dismiss', 'awt' ),
+		esc_attr__( 'Dismiss', 'awt-blocks' ),
 		icon( 'close' )
 	)
 	: '';

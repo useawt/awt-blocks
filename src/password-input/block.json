@@ -10,7 +10,7 @@
 	"title": "Password input",
 	"category": "awt-forms",
 	"description": "A password field with a show/hide button on the right edge.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"password",
 		"input",

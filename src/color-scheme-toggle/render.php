@@ -35,9 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $kind        = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'icon-only';
-$light_label = isset( $attributes['lightLabel'] ) ? (string) $attributes['lightLabel'] : __( 'Light mode', 'awt' );
-$dark_label  = isset( $attributes['darkLabel'] ) ? (string) $attributes['darkLabel'] : __( 'Dark mode', 'awt' );
-$auto_label  = isset( $attributes['autoLabel'] ) ? (string) $attributes['autoLabel'] : __( 'Use system preference', 'awt' );
+$light_label = isset( $attributes['lightLabel'] ) ? (string) $attributes['lightLabel'] : __( 'Light mode', 'awt-blocks' );
+$dark_label  = isset( $attributes['darkLabel'] ) ? (string) $attributes['darkLabel'] : __( 'Dark mode', 'awt-blocks' );
+$auto_label  = isset( $attributes['autoLabel'] ) ? (string) $attributes['autoLabel'] : __( 'Use system preference', 'awt-blocks' );
 
 // Honour the theme.json allowVisitorOverride flag.
 if ( function_exists( '\\AWT\\Theme\\color_scheme_allow_visitor_override' )
@@ -92,10 +92,10 @@ $context_json = wp_json_encode(
 		'darkLabel'     => $dark_label,
 		'autoLabel'     => $auto_label,
 		/* translators: %s: name of the color scheme that was just turned on, e.g. "Dark mode". */
-		'announceLight' => sprintf( __( '%s on', 'awt' ), $light_label ),
+		'announceLight' => sprintf( __( '%s on', 'awt-blocks' ), $light_label ),
 		/* translators: %s: name of the color scheme that was just turned on, e.g. "Dark mode". */
-		'announceDark'  => sprintf( __( '%s on', 'awt' ), $dark_label ),
-		'announceAuto'  => __( 'Now following your system setting.', 'awt' ),
+		'announceDark'  => sprintf( __( '%s on', 'awt-blocks' ), $dark_label ),
+		'announceAuto'  => __( 'Now following your system setting.', 'awt-blocks' ),
 	)
 );
 
@@ -104,7 +104,7 @@ if ( $kind === 'segmented' ) {
 		array(
 			'class'               => 'awt-color-scheme-toggle awt-color-scheme-toggle--segmented',
 			'role'                => 'group',
-			'aria-label'          => __( 'Color scheme', 'awt' ),
+			'aria-label'          => __( 'Color scheme', 'awt-blocks' ),
 			'data-wp-interactive' => 'awt/color-scheme-toggle',
 			'data-wp-context'     => $context_json,
 			'data-wp-init'        => 'callbacks.initGroup',

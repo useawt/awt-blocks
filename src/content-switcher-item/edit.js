@@ -20,20 +20,20 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Segment', 'awt' ) }
+					title={ __( 'Segment', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Value (optional)', 'awt' ) }
+						label={ __( 'Value (optional)', 'awt-blocks' ) }
 						help={ __(
 							'Sent in the awt:content-switcher-change event for app/JS consumers. Not needed for plain content switching.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ value }
 						onChange={ ( v ) => setAttributes( { value: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
@@ -50,7 +50,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="cds--content-switcher__label"
 					value={ label }
 					onChange={ ( v ) => setAttributes( { label: v } ) }
-					placeholder={ __( 'Segment label', 'awt' ) }
+					placeholder={ __( 'Segment label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 			</button>

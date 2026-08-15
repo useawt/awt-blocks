@@ -34,11 +34,14 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Header navigation', 'awt' ) }
+					title={ __( 'Header navigation', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( value ) =>
 							setAttributes( { ariaLabel: value } )

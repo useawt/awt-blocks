@@ -62,19 +62,19 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Group', 'awt' ) }>
+				<PanelBody title={ __( 'Group', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Shared name attribute', 'awt' ) }
+						label={ __( 'Shared name attribute', 'awt-blocks' ) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Legend', 'awt' ) }
+						label={ __( 'Legend', 'awt-blocks' ) }
 						value={ legend }
 						onChange={ ( v ) => setAttributes( { legend: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Orientation', 'awt' ) }
+						label={ __( 'Orientation', 'awt-blocks' ) }
 						value={ orientation }
 						options={ ORIENTATION }
 						onChange={ ( v ) =>
@@ -82,7 +82,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Label position', 'awt' ) }
+						label={ __( 'Label position', 'awt-blocks' ) }
 						value={ labelPosition }
 						options={ LABEL_POSITION }
 						onChange={ ( v ) =>
@@ -90,27 +90,27 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Required', 'awt' ) }
+						label={ __( 'Required', 'awt-blocks' ) }
 						checked={ required }
 						onChange={ ( v ) => setAttributes( { required: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Help & validation', 'awt' ) }
+					title={ __( 'Help & validation', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Helper text', 'awt' ) }
+						label={ __( 'Helper text', 'awt-blocks' ) }
 						value={ helperText }
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid state', 'awt' ) }
+						label={ __( 'Invalid state', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Invalid message', 'awt' ) }
+						label={ __( 'Invalid message', 'awt-blocks' ) }
 						value={ invalidText }
 						onChange={ ( v ) =>
 							setAttributes( { invalidText: v } )

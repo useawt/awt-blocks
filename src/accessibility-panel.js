@@ -35,7 +35,7 @@ const LANG_CORE_BLOCKS = [ 'core/paragraph', 'core/heading', 'core/list-item' ];
 // generic-container set. This is a curated subset (not the full WAI-ARIA matrix)
 // chosen to avoid roles that would break a block's built-in semantics.
 const roles = ( ...vals ) => [
-	{ value: '', label: __( '— none —', 'awt' ) },
+	{ value: '', label: __( '— none —', 'awt-blocks' ) },
 	...vals.map( ( v ) => ( { value: v, label: v } ) ),
 ];
 const ROLE_GENERIC = roles(
@@ -77,9 +77,9 @@ function rolesFor( name ) {
 
 const LANG_HELP = __(
 	'Search and pick the content’s language so screen readers pronounce it correctly. Leave blank to inherit the page language.',
-	'awt'
+	'awt-blocks'
 );
-const LANG_PLACEHOLDER = __( 'Search languages…', 'awt' );
+const LANG_PLACEHOLDER = __( 'Search languages…', 'awt-blocks' );
 
 // Simplified per-block-type accessible-name computation (spec §4 precedence).
 function computeAccessibleName( name, attrs ) {
@@ -149,11 +149,11 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 					<BlockEdit { ...props } />
 					<InspectorControls>
 						<PanelBody
-							title={ __( 'Accessibility', 'awt' ) }
+							title={ __( 'Accessibility', 'awt-blocks' ) }
 							initialOpen={ false }
 						>
 							<ComboboxControl
-								label={ __( 'Language (lang)', 'awt' ) }
+								label={ __( 'Language (lang)', 'awt-blocks' ) }
 								value={ awtLang }
 								options={ LANGUAGE_OPTIONS }
 								onChange={ ( v ) =>
@@ -184,7 +184,7 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 			accessibleNameNode = (
 				<em>{ `(${ __(
 					'from the aria-labelledby element',
-					'awt'
+					'awt-blocks'
 				) }: #${ ariaLabelledby })` }</em>
 			);
 		} else if ( computed ) {
@@ -194,7 +194,7 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 				<em>
 					{ __(
 						'(none — screen readers may have nothing to read out)',
-						'awt'
+						'awt-blocks'
 					) }
 				</em>
 			);
@@ -205,7 +205,7 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 				<BlockEdit { ...props } />
 				<InspectorControls>
 					<PanelBody
-						title={ __( 'Accessibility', 'awt' ) }
+						title={ __( 'Accessibility', 'awt-blocks' ) }
 						initialOpen={ false }
 					>
 						<p
@@ -214,7 +214,9 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 								fontSize: '0.8125rem',
 							} }
 						>
-							<strong>{ __( 'Accessible name:', 'awt' ) }</strong>
+							<strong>
+								{ __( 'Accessible name:', 'awt-blocks' ) }
+							</strong>
 							{ accessibleNameNode }
 						</p>
 						<p
@@ -226,14 +228,14 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 						>
 							{ __(
 								'What screen readers will most likely read out. Only change it below if you have a clear reason.',
-								'awt'
+								'awt-blocks'
 							) }
 						</p>
 
 						<TextControl
 							label={ __(
 								'Accessible name (aria-label)',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ ariaLabel }
 							onChange={ ( v ) =>
@@ -241,13 +243,13 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							help={ __(
 								'Replaces the name shown above. Leave blank to keep that name.',
-								'awt'
+								'awt-blocks'
 							) }
 						/>
 						<TextControl
 							label={ __(
 								'Described by (aria-describedby)',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ ariaDescribedby }
 							onChange={ ( v ) =>
@@ -255,13 +257,13 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							help={ __(
 								'Type the ID of another element on the page whose text adds a longer description (without the “#”).',
-								'awt'
+								'awt-blocks'
 							) }
 						/>
 						<TextControl
 							label={ __(
 								'Labelled by (aria-labelledby)',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ ariaLabelledby }
 							onChange={ ( v ) =>
@@ -269,11 +271,11 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							help={ __(
 								'Type the ID of another element whose text should be this block’s accessible name (without the “#”).',
-								'awt'
+								'awt-blocks'
 							) }
 						/>
 						<SelectControl
-							label={ __( 'Role', 'awt' ) }
+							label={ __( 'Role', 'awt-blocks' ) }
 							value={ awtRole }
 							options={ rolesFor( name ) }
 							onChange={ ( v ) =>
@@ -281,11 +283,11 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							help={ __(
 								'Only roles that suit this block’s element are listed.',
-								'awt'
+								'awt-blocks'
 							) }
 						/>
 						<ComboboxControl
-							label={ __( 'Language (lang)', 'awt' ) }
+							label={ __( 'Language (lang)', 'awt-blocks' ) }
 							value={ awtLang }
 							options={ LANGUAGE_OPTIONS }
 							onChange={ ( v ) =>

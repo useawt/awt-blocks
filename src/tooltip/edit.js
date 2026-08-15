@@ -37,22 +37,22 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Tooltip', 'awt' ) }>
+				<PanelBody title={ __( 'Tooltip', 'awt-blocks' ) }>
 					<TextareaControl
-						label={ __( 'Description', 'awt' ) }
+						label={ __( 'Description', 'awt-blocks' ) }
 						value={ description }
 						onChange={ ( v ) =>
 							setAttributes( { description: v } )
 						}
 					/>
 					<SelectControl
-						label={ __( 'Alignment', 'awt' ) }
+						label={ __( 'Alignment', 'awt-blocks' ) }
 						value={ align }
 						options={ ALIGN_OPTIONS }
 						onChange={ ( v ) => setAttributes( { align: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Open by default', 'awt' ) }
+						label={ __( 'Open by default', 'awt-blocks' ) }
 						checked={ defaultOpen }
 						onChange={ ( v ) =>
 							setAttributes( { defaultOpen: v } )
@@ -60,11 +60,11 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Delays (ms)', 'awt' ) }
+					title={ __( 'Delays (ms)', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Show delay', 'awt' ) }
+						label={ __( 'Show delay', 'awt-blocks' ) }
 						type="number"
 						value={ enterDelayMs }
 						onChange={ ( v ) =>
@@ -72,7 +72,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Hide delay', 'awt' ) }
+						label={ __( 'Hide delay', 'awt-blocks' ) }
 						type="number"
 						value={ leaveDelayMs }
 						onChange={ ( v ) =>
@@ -90,7 +90,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						onChange={ ( v ) =>
 							setAttributes( { triggerText: v } )
 						}
-						placeholder={ __( 'Trigger text', 'awt' ) }
+						placeholder={ __( 'Trigger text', 'awt-blocks' ) }
 						allowedFormats={ [ 'core/bold', 'core/italic' ] }
 						tabIndex={ 0 }
 					/>

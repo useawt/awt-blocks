@@ -41,32 +41,32 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Toggletip', 'awt' ) }
+					title={ __( 'Toggletip', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Trigger label (visible)', 'awt' ) }
+						label={ __( 'Trigger label (visible)', 'awt-blocks' ) }
 						help={ __(
 							'Optional. Renders before the info button.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ label }
 						onChange={ ( v ) => setAttributes( { label: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Trigger accessible name', 'awt' ) }
+						label={ __( 'Trigger accessible name', 'awt-blocks' ) }
 						help={ __(
 							'Read by screen readers (e.g., "Learn more").',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>
 					<TextareaControl
-						label={ __( 'Description', 'awt' ) }
+						label={ __( 'Description', 'awt-blocks' ) }
 						help={ __(
 							'Body of the popover that opens on click.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ description }
 						onChange={ ( v ) =>
@@ -75,7 +75,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						rows={ 4 }
 					/>
 					<SelectControl
-						label={ __( 'Placement', 'awt' ) }
+						label={ __( 'Placement', 'awt-blocks' ) }
 						value={ align }
 						options={ ALIGN_OPTIONS }
 						onChange={ ( v ) => setAttributes( { align: v } ) }

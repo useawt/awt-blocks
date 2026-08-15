@@ -39,7 +39,7 @@ export default function Edit( {
 				onSplit={ ( value ) => ( { ...attributes, content: value } ) }
 				onReplace={ onReplace }
 				onMerge={ mergeBlocks }
-				placeholder={ __( 'List item', 'awt' ) }
+				placeholder={ __( 'List item', 'awt-blocks' ) }
 			/>
 			<div { ...innerBlocksProps } />
 		</li>

@@ -21,9 +21,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Tab', 'awt' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Tab', 'awt-blocks' ) }
+					initialOpen={ true }
+				>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
@@ -44,7 +47,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						className="cds--tabs__nav-item-label"
 						value={ label }
 						onChange={ ( v ) => setAttributes( { label: v } ) }
-						placeholder={ __( 'Tab label', 'awt' ) }
+						placeholder={ __( 'Tab label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</button>

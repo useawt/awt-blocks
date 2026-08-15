@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Description', 'awt' );
+$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Description', 'awt-blocks' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : '';
 $value        = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';

@@ -38,7 +38,7 @@ export default function PremiumNotice( { title, description } ) {
 				} }
 			>
 				<span aria-hidden="true">🔒</span>
-				{ __( 'AWT Premium', 'awt' ) }
+				{ __( 'AWT Premium', 'awt-blocks' ) }
 			</div>
 			{ title && (
 				<p style={ { fontWeight: 600, margin: '0 0 4px' } }>
@@ -60,7 +60,7 @@ export default function PremiumNotice( { title, description } ) {
 				href={ PREMIUM_URL }
 				style={ { fontSize: '0.8125rem' } }
 			>
-				{ __( 'Learn more about AWT Premium', 'awt' ) }
+				{ __( 'Learn more about AWT Premium', 'awt-blocks' ) }
 			</ExternalLink>
 		</div>
 	);

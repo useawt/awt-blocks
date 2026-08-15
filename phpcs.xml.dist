@@ -26,8 +26,13 @@
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
+			<!-- Must match the Text Domain header, which must in turn match the
+			     WordPress.org slug (awt-blocks) or translations never load.
+			     The theme keeps `awt`; it is a separate package with its own
+			     slug, and sharing one domain across both would merge their
+			     translations into a single bucket. -->
 			<property name="text_domain" type="array">
-				<element value="awt"/>
+				<element value="awt-blocks"/>
 			</property>
 		</properties>
 	</rule>

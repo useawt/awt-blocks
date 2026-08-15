@@ -6,7 +6,7 @@
 	"title": "Icon",
 	"category": "awt-content",
 	"description": "Standalone Carbon icon for decorative graphics, status indicators, or callouts in body content.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"icon",
 		"svg",

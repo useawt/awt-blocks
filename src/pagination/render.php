@@ -24,7 +24,7 @@ $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\Desig
 $total_pages  = isset( $attributes['totalPages'] ) ? (int) $attributes['totalPages'] : 0;
 $current_page = isset( $attributes['currentPage'] ) ? (int) $attributes['currentPage'] : 1;
 $base_url     = isset( $attributes['baseUrl'] ) ? (string) $attributes['baseUrl'] : '';
-$aria_label   = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Pagination', 'awt' );
+$aria_label   = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Pagination', 'awt-blocks' );
 
 // Auto-detect from main query when totalPages = 0.
 if ( $total_pages === 0 ) {
@@ -125,14 +125,14 @@ $prev_html = sprintf(
 		? sprintf(
 			'<span class="%4$s" aria-disabled="true">%1$s<span class="%3$s">%2$s</span></span>',
 			icon( 'chevron--left', 16 ),
-			esc_html__( 'Previous page', 'awt' ),
+			esc_html__( 'Previous page', 'awt-blocks' ),
 			esc_attr( $pagination_vis_hidden_class ),
 			esc_attr( $pagination_page_dis_class )
 		)
 		: sprintf(
 			'<a class="%3$s" href="%1$s" aria-label="%2$s">%4$s</a>',
 			esc_url( $page_link( $current_page - 1 ) ),
-			esc_attr__( 'Previous page', 'awt' ),
+			esc_attr__( 'Previous page', 'awt-blocks' ),
 			esc_attr( $pagination_page_class ),
 			icon( 'chevron--left', 16 )
 		),
@@ -145,14 +145,14 @@ $next_html = sprintf(
 		? sprintf(
 			'<span class="%4$s" aria-disabled="true">%1$s<span class="%3$s">%2$s</span></span>',
 			icon( 'chevron--right', 16 ),
-			esc_html__( 'Next page', 'awt' ),
+			esc_html__( 'Next page', 'awt-blocks' ),
 			esc_attr( $pagination_vis_hidden_class ),
 			esc_attr( $pagination_page_dis_class )
 		)
 		: sprintf(
 			'<a class="%3$s" href="%1$s" aria-label="%2$s">%4$s</a>',
 			esc_url( $page_link( $current_page + 1 ) ),
-			esc_attr__( 'Next page', 'awt' ),
+			esc_attr__( 'Next page', 'awt-blocks' ),
 			esc_attr( $pagination_page_class ),
 			icon( 'chevron--right', 16 )
 		),
@@ -174,7 +174,7 @@ foreach ( $pages_to_render as $item ) {
 		$items_html .= sprintf(
 			'<li class="%3$s"><span class="%4$s" aria-current="page" aria-label="%1$s">%2$d</span></li>',
 			// translators: %d — the page number of the current page.
-			esc_attr( sprintf( __( 'Page %d, current page', 'awt' ), $item ) ),
+			esc_attr( sprintf( __( 'Page %d, current page', 'awt-blocks' ), $item ) ),
 			$item,
 			esc_attr( $pagination_list_item_class ),
 			esc_attr( $pagination_page_cur_class )
@@ -184,7 +184,7 @@ foreach ( $pages_to_render as $item ) {
 			'<li class="%4$s"><a class="%5$s" href="%1$s" aria-label="%2$s">%3$d</a></li>',
 			esc_url( $page_link( $item ) ),
 			// translators: %d — the page number the link navigates to.
-			esc_attr( sprintf( __( 'Page %d', 'awt' ), $item ) ),
+			esc_attr( sprintf( __( 'Page %d', 'awt-blocks' ), $item ) ),
 			$item,
 			esc_attr( $pagination_list_item_class ),
 			esc_attr( $pagination_page_class )

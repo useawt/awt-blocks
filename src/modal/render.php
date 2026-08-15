@@ -27,8 +27,8 @@ $modal_id         = isset( $attributes['id'] ) && $attributes['id'] !== '' ? (st
 $heading          = isset( $attributes['heading'] ) ? (string) $attributes['heading'] : '';
 $label            = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $size             = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
-$primary_action   = isset( $attributes['primaryAction'] ) ? (string) $attributes['primaryAction'] : __( 'Continue', 'awt' );
-$secondary_action = isset( $attributes['secondaryAction'] ) ? (string) $attributes['secondaryAction'] : __( 'Cancel', 'awt' );
+$primary_action   = isset( $attributes['primaryAction'] ) ? (string) $attributes['primaryAction'] : __( 'Continue', 'awt-blocks' );
+$secondary_action = isset( $attributes['secondaryAction'] ) ? (string) $attributes['secondaryAction'] : __( 'Cancel', 'awt-blocks' );
 $danger           = ! empty( $attributes['danger'] );
 $primary_href     = isset( $attributes['primaryHref'] ) ? (string) $attributes['primaryHref'] : '';
 $primary_target   = isset( $attributes['primaryTarget'] ) ? (string) $attributes['primaryTarget'] : '';
@@ -122,7 +122,7 @@ ob_start();
 		// text wraps before reaching it. Putting it INSIDE the header (Stage 0
 		// approach) made it flow as a regular block child below the heading.
 		?>
-		<button type="button" class="<?php echo esc_attr( $close_button_class ); ?>" aria-label="<?php echo esc_attr__( 'Close', 'awt' ); ?>" data-wp-on--click="actions.close"><?php echo $close_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?></button>
+		<button type="button" class="<?php echo esc_attr( $close_button_class ); ?>" aria-label="<?php echo esc_attr__( 'Close', 'awt-blocks' ); ?>" data-wp-on--click="actions.close"><?php echo $close_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?></button>
 		<div class="<?php echo esc_attr( $modal_content_class ); ?>"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render. ?></div>
 		<div class="<?php echo esc_attr( $footer_class ); ?>">
 			<button type="button" class="<?php echo esc_attr( $cancel_btn_class ); ?>" data-wp-on--click="actions.close"><?php echo esc_html( $secondary_action ); ?></button>

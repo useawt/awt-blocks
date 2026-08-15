@@ -20,36 +20,45 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Side nav link', 'awt' ) }
+					title={ __( 'Side nav link', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt' ) }
+						label={ __( 'Link target (href)', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
 						}
 					/>
 					<IconPicker
-						label={ __( 'Icon', 'awt' ) }
+						label={ __( 'Icon', 'awt-blocks' ) }
 						value={ iconName }
 						onChange={ ( value ) =>
 							setAttributes( { iconName: value } )
 						}
 					/>
 					<SelectControl
-						label={ __( 'Current-URL match mode', 'awt' ) }
+						label={ __( 'Current-URL match mode', 'awt-blocks' ) }
 						value={ matchMode }
 						options={ [
-							{ value: 'exact', label: __( 'Exact', 'awt' ) },
-							{ value: 'prefix', label: __( 'Prefix', 'awt' ) },
+							{
+								value: 'exact',
+								label: __( 'Exact', 'awt-blocks' ),
+							},
+							{
+								value: 'prefix',
+								label: __( 'Prefix', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( value ) =>
 							setAttributes( { matchMode: value } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Force aria-current="page"', 'awt' ) }
+						label={ __(
+							'Force aria-current="page"',
+							'awt-blocks'
+						) }
 						checked={ isCurrent }
 						onChange={ ( value ) =>
 							setAttributes( { isCurrent: value } )
@@ -104,7 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
 						}
-						placeholder={ __( 'Link label', 'awt' ) }
+						placeholder={ __( 'Link label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</a>

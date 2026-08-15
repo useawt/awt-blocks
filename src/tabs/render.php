@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $orientation = isset( $attributes['orientation'] ) ? (string) $attributes['orientation'] : 'horizontal';
-$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Tabs', 'awt' );
+$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Tabs', 'awt-blocks' );
 
 $tabs_html   = '';
 $panels_html = '';
@@ -102,10 +102,10 @@ if ( $orientation === 'horizontal' ) {
 		'%3$s' .
 		'<button type="button" class="%7$s" aria-label="%4$s" tabindex="-1" data-wp-on--click="actions.scrollNext">%5$s</button>' .
 		'</div>',
-		esc_attr__( 'Scroll tabs left', 'awt' ),
+		esc_attr__( 'Scroll tabs left', 'awt-blocks' ),
 		icon( 'chevron--left', 16 ),
 		$tab_list_html,
-		esc_attr__( 'Scroll tabs right', 'awt' ),
+		esc_attr__( 'Scroll tabs right', 'awt-blocks' ),
 		icon( 'chevron--right', 16 ),
 		esc_attr( $overflow_prev_class ),
 		esc_attr( $overflow_next_class )

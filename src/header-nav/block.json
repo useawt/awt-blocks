@@ -7,7 +7,7 @@
 	"title": "Header navigation",
 	"category": "awt-ui-shell",
 	"description": "A horizontal navigation menu for the header. Add Header navigation item blocks inside it.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",
 		"nav",

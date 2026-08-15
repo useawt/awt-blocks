@@ -7,7 +7,7 @@
 	"title": "Footer section",
 	"category": "awt-ui-shell",
 	"description": "A column of footer links with an optional heading. Several sections arrange into a responsive grid.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"footer",
 		"column",

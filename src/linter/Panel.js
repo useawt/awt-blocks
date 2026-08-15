@@ -10,9 +10,9 @@ import { Button } from '@wordpress/components';
 import { SEVERITY } from './checks';
 
 const SEV_LABEL = {
-	[ SEVERITY.ERROR ]: __( 'Error', 'awt' ),
-	[ SEVERITY.WARNING ]: __( 'Warning', 'awt' ),
-	[ SEVERITY.INFO ]: __( 'Info', 'awt' ),
+	[ SEVERITY.ERROR ]: __( 'Error', 'awt-blocks' ),
+	[ SEVERITY.WARNING ]: __( 'Warning', 'awt-blocks' ),
+	[ SEVERITY.INFO ]: __( 'Info', 'awt-blocks' ),
 };
 
 const SEV_ORDER = {
@@ -43,7 +43,10 @@ export function LinterList( { findings } ) {
 	if ( ! findings.length ) {
 		return (
 			<p className="awt-linter__empty">
-				{ __( 'No accessibility issues found on this page.', 'awt' ) }
+				{ __(
+					'No accessibility issues found on this page.',
+					'awt-blocks'
+				) }
 			</p>
 		);
 	}
@@ -73,7 +76,7 @@ export function LinterList( { findings } ) {
 							className="awt-linter__goto"
 							onClick={ () => goToBlock( f.clientId ) }
 						>
-							{ __( 'Show block', 'awt' ) }
+							{ __( 'Show block', 'awt-blocks' ) }
 						</Button>
 					) }
 				</li>

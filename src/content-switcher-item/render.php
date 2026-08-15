@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
-$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Segment', 'awt' );
+$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Segment', 'awt-blocks' );
 $value    = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $disabled = ! empty( $attributes['disabled'] );
 

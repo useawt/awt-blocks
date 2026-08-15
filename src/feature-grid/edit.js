@@ -70,9 +70,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Feature grid', 'awt' ) }>
+				<PanelBody title={ __( 'Feature grid', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Columns', 'awt' ) }
+						label={ __( 'Columns', 'awt-blocks' ) }
 						value={ String( columns ) }
 						options={ [ '2', '3', '4' ].map( ( c ) => ( {
 							value: c,
@@ -83,7 +83,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Gap (Carbon spacing scale)', 'awt' ) }
+						label={ __(
+							'Gap (Carbon spacing scale)',
+							'awt-blocks'
+						) }
 						value={ gap }
 						options={ [ '04', '05', '06', '07', '08', '09' ].map(
 							( v ) => ( { value: v, label: `Spacing ${ v }` } )

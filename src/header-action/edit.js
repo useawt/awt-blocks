@@ -4,8 +4,8 @@ import { PanelBody, TextControl, SelectControl } from '@wordpress/components';
 import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
 
 const KIND_OPTIONS = [
-	{ value: 'icon-only', label: __( 'Icon only', 'awt' ) },
-	{ value: 'with-label', label: __( 'Icon with label', 'awt' ) },
+	{ value: 'icon-only', label: __( 'Icon only', 'awt-blocks' ) },
+	{ value: 'with-label', label: __( 'Icon with label', 'awt-blocks' ) },
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -51,21 +51,21 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Header action', 'awt' ) }
+					title={ __( 'Header action', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<IconPicker
-						label={ __( 'Icon', 'awt' ) }
+						label={ __( 'Icon', 'awt-blocks' ) }
 						value={ iconName }
 						onChange={ ( value ) =>
 							setAttributes( { iconName: value } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Accessible name', 'awt' ) }
+						label={ __( 'Accessible name', 'awt-blocks' ) }
 						help={ __(
 							'Required. Spoken by screen readers; visible only when kind is "Icon with label".',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ label }
 						onChange={ ( value ) =>
@@ -73,7 +73,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KIND_OPTIONS }
 						onChange={ ( value ) =>
@@ -81,10 +81,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt' ) }
+						label={ __( 'Link target (href)', 'awt-blocks' ) }
 						help={ __(
 							'If set, renders as <a>. Leave blank for a button.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ href }
 						onChange={ ( value ) =>
@@ -92,10 +92,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Panel ID', 'awt' ) }
+						label={ __( 'Panel ID', 'awt-blocks' ) }
 						help={ __(
 							'If set, clicking the button toggles a matching awt/panel / awt/modal / awt/side-nav.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ panelId }
 						onChange={ ( value ) =>

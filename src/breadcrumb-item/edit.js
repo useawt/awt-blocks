@@ -13,23 +13,23 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Breadcrumb item', 'awt' ) }>
+				<PanelBody title={ __( 'Breadcrumb item', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'URL', 'awt' ) }
+						label={ __( 'URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 						disabled={ isCurrentPage }
 					/>
 					<ToggleControl
-						label={ __( 'Current page', 'awt' ) }
+						label={ __( 'Current page', 'awt-blocks' ) }
 						checked={ isCurrentPage }
 						onChange={ ( v ) =>
 							setAttributes( { isCurrentPage: v } )
 						}
 						help={ __(
 							'Sets aria-current="page" and renders as plain text.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
@@ -40,7 +40,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className={ isLink ? 'cds--link' : undefined }
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }
-					placeholder={ __( 'Item', 'awt' ) }
+					placeholder={ __( 'Item', 'awt-blocks' ) }
 					allowedFormats={ [] }
 					aria-current={ isCurrentPage ? 'page' : undefined }
 				/>

@@ -96,9 +96,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Notification', 'awt' ) }>
+				<PanelBody title={ __( 'Notification', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KINDS.map( ( k ) => ( {
 							value: k,
@@ -107,23 +107,29 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Variant', 'awt' ) }
+						label={ __( 'Variant', 'awt-blocks' ) }
 						value={ variant }
 						options={ [
-							{ value: 'inline', label: __( 'Inline', 'awt' ) },
-							{ value: 'toast', label: __( 'Toast', 'awt' ) },
+							{
+								value: 'inline',
+								label: __( 'Inline', 'awt-blocks' ),
+							},
+							{
+								value: 'toast',
+								label: __( 'Toast', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { variant: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Low contrast', 'awt' ) }
+						label={ __( 'Low contrast', 'awt-blocks' ) }
 						checked={ lowContrast }
 						onChange={ ( v ) =>
 							setAttributes( { lowContrast: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Hide close button', 'awt' ) }
+						label={ __( 'Hide close button', 'awt-blocks' ) }
 						checked={ hideCloseButton }
 						onChange={ ( v ) =>
 							setAttributes( { hideCloseButton: v } )
@@ -153,7 +159,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 								placeholder={ __(
 									'Notification title',
-									'awt'
+									'awt-blocks'
 								) }
 								allowedFormats={ [] }
 							/>{ ' ' }
@@ -166,7 +172,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 								placeholder={ __(
 									'Subtitle (optional)',
-									'awt'
+									'awt-blocks'
 								) }
 							/>
 						</p>
@@ -180,7 +186,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 								placeholder={ __(
 									'Caption (toast only)',
-									'awt'
+									'awt-blocks'
 								) }
 							/>
 						) }
@@ -190,7 +196,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<button
 						type="button"
 						className={ `${ base }__close-button` }
-						aria-label={ __( 'Close notification', 'awt' ) }
+						aria-label={ __( 'Close notification', 'awt-blocks' ) }
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

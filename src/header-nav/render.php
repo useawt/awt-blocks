@@ -46,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $aria_label = isset( $attributes['ariaLabel'] ) && $attributes['ariaLabel'] !== ''
 	? (string) $attributes['ariaLabel']
-	: __( 'Primary', 'awt' );
+	: __( 'Primary', 'awt-blocks' );
 
 // §A: CSS classes from the active design system (guarded for non-AWT themes).
 $ds            = function_exists( '\\AWT\\Theme\\DesignSystem\\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
@@ -56,8 +56,8 @@ $trigger_class = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'trig
 
 $nav_id = wp_unique_id( 'awt-header-nav-' );
 
-$label_open  = __( 'Open menu', 'awt' );
-$label_close = __( 'Close menu', 'awt' );
+$label_open  = __( 'Open menu', 'awt-blocks' );
+$label_close = __( 'Close menu', 'awt-blocks' );
 
 $menu_icon = icon( 'menu', 20 );
 if ( $menu_icon === '' ) {

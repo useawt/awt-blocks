@@ -10,7 +10,7 @@
 	"title": "Radio button group",
 	"category": "awt-forms",
 	"description": "A group of radio buttons with a shared label, so only one option can be chosen.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"radio",
 		"form",

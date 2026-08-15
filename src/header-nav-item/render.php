@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Item', 'awt' );
+$text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Item', 'awt-blocks' );
 $href       = isset( $attributes['href'] ) ? (string) $attributes['href'] : '#';
 $is_current = ! empty( $attributes['isCurrent'] );
 $match_mode = isset( $attributes['matchMode'] ) ? (string) $attributes['matchMode'] : 'exact';

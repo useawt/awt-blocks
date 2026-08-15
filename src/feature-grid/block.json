@@ -6,7 +6,7 @@
 	"title": "Feature grid",
 	"category": "awt-section",
 	"description": "Responsive grid of feature tiles. Each child block becomes one feature cell.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"features",
 		"grid",

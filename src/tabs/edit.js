@@ -48,9 +48,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Tabs', 'awt' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Tabs', 'awt-blocks' ) }
+					initialOpen={ true }
+				>
 					<SelectControl
-						label={ __( 'Orientation', 'awt' ) }
+						label={ __( 'Orientation', 'awt-blocks' ) }
 						value={ orientation }
 						options={ [
 							{ label: 'Horizontal', value: 'horizontal' },
@@ -61,7 +64,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Accessible name (aria-label)', 'awt' ) }
+						label={ __(
+							'Accessible name (aria-label)',
+							'awt-blocks'
+						) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>

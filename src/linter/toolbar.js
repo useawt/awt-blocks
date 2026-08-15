@@ -47,7 +47,7 @@ const withBlockIndicator = createHigherOrderComponent( ( BlockEdit ) => {
 				'%d accessibility issue — open checks',
 				'%d accessibility issues — open checks',
 				findings.length,
-				'awt'
+				'awt-blocks'
 			),
 			findings.length
 		);

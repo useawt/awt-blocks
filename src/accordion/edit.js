@@ -27,18 +27,21 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Accordion', 'awt' ) }>
+				<PanelBody title={ __( 'Accordion', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Chevron alignment', 'awt' ) }
+						label={ __( 'Chevron alignment', 'awt-blocks' ) }
 						value={ align }
 						options={ [
-							{ value: 'end', label: __( 'End', 'awt' ) },
-							{ value: 'start', label: __( 'Start', 'awt' ) },
+							{ value: 'end', label: __( 'End', 'awt-blocks' ) },
+							{
+								value: 'start',
+								label: __( 'Start', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { align: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [
 							{ value: 'sm', label: 'sm' },
@@ -48,10 +51,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Single-open mode', 'awt' ) }
+						label={ __( 'Single-open mode', 'awt-blocks' ) }
 						help={ __(
 							'Only one item can be open at a time. Opening one closes the others.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ singleOpen }
 						onChange={ ( v ) => setAttributes( { singleOpen: v } ) }

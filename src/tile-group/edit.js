@@ -14,12 +14,12 @@ const TEMPLATE = [
 	[
 		'awt/tile',
 		{ variant: 'selectable', groupName: 'tile-choice', value: 'option-1' },
-		[ [ 'core/paragraph', { content: __( 'Option 1', 'awt' ) } ] ],
+		[ [ 'core/paragraph', { content: __( 'Option 1', 'awt-blocks' ) } ] ],
 	],
 	[
 		'awt/tile',
 		{ variant: 'selectable', groupName: 'tile-choice', value: 'option-2' },
-		[ [ 'core/paragraph', { content: __( 'Option 2', 'awt' ) } ] ],
+		[ [ 'core/paragraph', { content: __( 'Option 2', 'awt-blocks' ) } ] ],
 	],
 ];
 
@@ -44,7 +44,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				value={ label }
 				onChange={ ( v ) => setAttributes( { label: v } ) }
 				allowedFormats={ [] }
-				placeholder={ __( 'What is this choice about?', 'awt' ) }
+				placeholder={ __( 'What is this choice about?', 'awt-blocks' ) }
 			/>
 			{ children }
 		</fieldset>

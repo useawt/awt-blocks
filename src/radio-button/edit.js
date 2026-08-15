@@ -13,19 +13,19 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Radio button', 'awt' ) }>
+				<PanelBody title={ __( 'Radio button', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Value', 'awt' ) }
+						label={ __( 'Value', 'awt-blocks' ) }
 						value={ value }
 						onChange={ ( v ) => setAttributes( { value: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Checked by default', 'awt' ) }
+						label={ __( 'Checked by default', 'awt-blocks' ) }
 						checked={ checked }
 						onChange={ ( v ) => setAttributes( { checked: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
@@ -56,7 +56,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						className="cds--radio-button__label-text"
 						value={ label }
 						onChange={ ( v ) => setAttributes( { label: v } ) }
-						placeholder={ __( 'Option', 'awt' ) }
+						placeholder={ __( 'Option', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</label>

@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link', 'awt' );
+$text       = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link', 'awt-blocks' );
 $href       = isset( $attributes['href'] ) ? (string) $attributes['href'] : '#';
 $icon_name  = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : '';
 $is_current = ! empty( $attributes['isCurrent'] );

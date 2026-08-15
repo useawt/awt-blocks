@@ -8,7 +8,7 @@
 	"title": "Inline set",
 	"category": "awt-section",
 	"description": "A container that lays out buttons, tags, icons, or links in a row with even spacing.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"button set",
 		"group",

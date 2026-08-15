@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Select', 'awt' );
+$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Select', 'awt-blocks' );
 $name         = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $helper_text  = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';
 $invalid      = ! empty( $attributes['invalid'] );
@@ -28,7 +28,7 @@ $disabled     = ! empty( $attributes['disabled'] );
 $required     = ! empty( $attributes['required'] );
 $size         = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $hide_label   = ! empty( $attributes['hideLabel'] );
-$placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt' );
+$placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt-blocks' );
 $options      = isset( $attributes['options'] ) && is_array( $attributes['options'] ) ? $attributes['options'] : array();
 
 $select_id  = unique_id( 'awt-select' );

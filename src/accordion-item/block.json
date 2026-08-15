@@ -10,7 +10,7 @@
 		"awt/accordion"
 	],
 	"description": "One expandable section inside an accordion.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"accordion",
 		"collapsible",

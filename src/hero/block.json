@@ -6,7 +6,7 @@
 	"title": "Hero",
 	"category": "awt-section",
 	"description": "Large heading + supporting text + call-to-action. Foundation block for marketing pages.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"hero",
 		"banner",

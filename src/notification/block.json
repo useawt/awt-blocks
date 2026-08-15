@@ -9,7 +9,7 @@
 	"title": "Notification",
 	"category": "awt-feedback",
 	"description": "A notification message, shown inline or as a pop-up toast. Screen readers announce it automatically.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"notification",
 		"alert",

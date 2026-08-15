@@ -77,31 +77,34 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Testimonial', 'awt' ) }>
+				<PanelBody title={ __( 'Testimonial', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Quote size', 'awt' ) }
+						label={ __( 'Quote size', 'awt-blocks' ) }
 						value={ quoteSize }
 						options={ [
 							{
 								value: 'md',
-								label: __( 'Medium (24px)', 'awt' ),
+								label: __( 'Medium (24px)', 'awt-blocks' ),
 							},
 							{
 								value: 'lg',
-								label: __( 'Large (36px — default)', 'awt' ),
+								label: __(
+									'Large (36px — default)',
+									'awt-blocks'
+								),
 							},
 							{
 								value: 'xl',
-								label: __( 'Extra large (48px)', 'awt' ),
+								label: __( 'Extra large (48px)', 'awt-blocks' ),
 							},
 						] }
 						onChange={ ( v ) => setAttributes( { quoteSize: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Mark style', 'awt' ) }
+						label={ __( 'Mark style', 'awt-blocks' ) }
 						help={ __(
 							'Quotation glyph style at the open of the quote.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ markStyle }
 						options={ [
@@ -109,55 +112,64 @@ export default function Edit( { attributes, setAttributes } ) {
 								value: 'double-curved',
 								label: __(
 									'Double curly “ ” (default)',
-									'awt'
+									'awt-blocks'
 								),
 							},
 							{
 								value: 'double-straight',
-								label: __( 'Double straight " "', 'awt' ),
+								label: __(
+									'Double straight " "',
+									'awt-blocks'
+								),
 							},
 							{
 								value: 'single-curved',
-								label: __( 'Single curly ‘ ’', 'awt' ),
+								label: __( 'Single curly ‘ ’', 'awt-blocks' ),
 							},
-							{ value: 'none', label: __( 'None', 'awt' ) },
+							{
+								value: 'none',
+								label: __( 'None', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { markStyle: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ [
 							{
 								value: 'plain',
-								label: __( 'Plain (no background)', 'awt' ),
+								label: __(
+									'Plain (no background)',
+									'awt-blocks'
+								),
 							},
 							{
 								value: 'card',
 								label: __(
 									'Card (layer-01 background)',
-									'awt'
+									'awt-blocks'
 								),
 							},
 						] }
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Attribution layout', 'awt' ) }
+						label={ __( 'Attribution layout', 'awt-blocks' ) }
 						value={ attributionStyle }
 						options={ [
 							{
 								value: 'stacked',
 								label: __(
 									'Stacked (name / role / org on separate lines)',
-									'awt'
+									'awt-blocks'
 								),
 							},
 							{
 								value: 'inline',
 								label: __(
 									'Inline (name · role · org)',
-									'awt'
+									'awt-blocks'
 								),
 							},
 						] }
@@ -166,17 +178,23 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Alignment', 'awt' ) }
+						label={ __( 'Alignment', 'awt-blocks' ) }
 						value={ align }
 						options={ [
-							{ value: 'start', label: __( 'Start', 'awt' ) },
-							{ value: 'center', label: __( 'Center', 'awt' ) },
+							{
+								value: 'start',
+								label: __( 'Start', 'awt-blocks' ),
+							},
+							{
+								value: 'center',
+								label: __( 'Center', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { align: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Author avatar', 'awt' ) }
+					title={ __( 'Author avatar', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<MediaUploadCheck>
@@ -192,8 +210,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							render={ ( { open } ) => (
 								<Button variant="secondary" onClick={ open }>
 									{ authorAvatarUrl
-										? __( 'Replace avatar', 'awt' )
-										: __( 'Upload avatar', 'awt' ) }
+										? __( 'Replace avatar', 'awt-blocks' )
+										: __( 'Upload avatar', 'awt-blocks' ) }
 								</Button>
 							) }
 						/>
@@ -201,10 +219,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ authorAvatarUrl && (
 						<>
 							<TextControl
-								label={ __( 'Avatar alt text', 'awt' ) }
+								label={ __( 'Avatar alt text', 'awt-blocks' ) }
 								help={ __(
 									'Required when an avatar is set. The linter flags missing alt as an Error.',
-									'awt'
+									'awt-blocks'
 								) }
 								value={ authorAvatarAlt }
 								onChange={ ( v ) =>
@@ -220,7 +238,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									} )
 								}
 							>
-								{ __( 'Remove avatar', 'awt' ) }
+								{ __( 'Remove avatar', 'awt-blocks' ) }
 							</Button>
 						</>
 					) }
@@ -235,7 +253,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { quote: v } ) }
 					placeholder={ __(
 						'Quote body — renders in IBM Plex Serif',
-						'awt'
+						'awt-blocks'
 					) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				/>
@@ -255,7 +273,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( v ) =>
 								setAttributes( { authorName: v } )
 							}
-							placeholder={ __( 'Author name', 'awt' ) }
+							placeholder={ __( 'Author name', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 						<RichText
@@ -265,7 +283,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( v ) =>
 								setAttributes( { authorRole: v } )
 							}
-							placeholder={ __( 'Role', 'awt' ) }
+							placeholder={ __( 'Role', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 						<RichText
@@ -275,7 +293,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( v ) =>
 								setAttributes( { authorOrg: v } )
 							}
-							placeholder={ __( 'Organization', 'awt' ) }
+							placeholder={ __( 'Organization', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 					</div>

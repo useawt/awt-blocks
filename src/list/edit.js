@@ -31,9 +31,9 @@ const TYPE_OPTIONS = [
 // live-data sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via
 // the shared PremiumNotice box below the picker — not as dead disabled options.
 const FORMAT_OPTIONS = [
-	{ label: __( 'Text (one item per line)', 'awt' ), value: 'text' },
-	{ label: __( 'HTML', 'awt' ), value: 'html' },
-	{ label: __( 'Markdown', 'awt' ), value: 'markdown' },
+	{ label: __( 'Text (one item per line)', 'awt-blocks' ), value: 'text' },
+	{ label: __( 'HTML', 'awt-blocks' ), value: 'html' },
+	{ label: __( 'Markdown', 'awt-blocks' ), value: 'markdown' },
 ];
 
 const TEMPLATE = [ [ 'awt/list-item' ] ];
@@ -238,7 +238,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			const ok = window.confirm(
 				__(
 					'This list already has items. Replace them with the pasted content?',
-					'awt'
+					'awt-blocks'
 				)
 			);
 			if ( ! ok ) {
@@ -281,18 +281,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'List', 'awt' ) }>
+				<PanelBody title={ __( 'List', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Type', 'awt' ) }
+						label={ __( 'Type', 'awt-blocks' ) }
 						value={ type }
 						options={ TYPE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Expressive type', 'awt' ) }
+						label={ __( 'Expressive type', 'awt-blocks' ) }
 						help={ __(
 							'Expressive type set is designed for editorial, marketing, and dynamic web experiences. It uses larger base sizes and fluid headings.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ isExpressive }
 						onChange={ ( v ) =>
@@ -300,23 +300,26 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Nested style', 'awt' ) }
+						label={ __( 'Nested style', 'awt-blocks' ) }
 						checked={ nested }
 						onChange={ ( v ) => setAttributes( { nested: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Data', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Data', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<SelectControl
-						label={ __( 'Data source', 'awt' ) }
+						label={ __( 'Data source', 'awt-blocks' ) }
 						value={ dataFormat }
 						options={ FORMAT_OPTIONS }
 						onChange={ setDataFormat }
 					/>
 					<TextareaControl
-						label={ __( 'Paste content', 'awt' ) }
+						label={ __( 'Paste content', 'awt-blocks' ) }
 						help={ __(
 							'Each line (or list item) becomes one list item. HTML <ul>/<ol> and indented Markdown create nested sub-lists, and switch the list type to match.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ dataText }
 						onChange={ setDataText }
@@ -327,13 +330,13 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onClick={ applyData }
 						disabled={ ! dataText.trim() }
 					>
-						{ __( 'Generate list items', 'awt' ) }
+						{ __( 'Generate list items', 'awt-blocks' ) }
 					</Button>
 					<PremiumNotice
-						title={ __( 'More data sources', 'awt' ) }
+						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
 							'Populate this list from JSON, a REST API, or a WP_Query — available in AWT Premium.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>

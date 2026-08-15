@@ -23,26 +23,26 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Modal opener', 'awt' ) }
+					title={ __( 'Modal opener', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Modal id to open', 'awt' ) }
+						label={ __( 'Modal id to open', 'awt-blocks' ) }
 						help={ __(
 							"Must match the awt/modal block's id.",
-							'awt'
+							'awt-blocks'
 						) }
 						value={ modalId }
 						onChange={ ( v ) => setAttributes( { modalId: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Kind', 'awt' ) }
+						label={ __( 'Kind', 'awt-blocks' ) }
 						value={ kind }
 						options={ KIND }
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ SIZE }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
@@ -59,7 +59,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }
 					allowedFormats={ [] }
-					placeholder={ __( 'Button label', 'awt' ) }
+					placeholder={ __( 'Button label', 'awt-blocks' ) }
 				/>
 			</button>
 		</>

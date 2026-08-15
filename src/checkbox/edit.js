@@ -37,56 +37,56 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Checkbox', 'awt' ) }>
+				<PanelBody title={ __( 'Checkbox', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Name', 'awt' ) }
+						label={ __( 'Name', 'awt-blocks' ) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Value', 'awt' ) }
+						label={ __( 'Value', 'awt-blocks' ) }
 						value={ value }
 						onChange={ ( v ) => setAttributes( { value: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Checked by default', 'awt' ) }
+						label={ __( 'Checked by default', 'awt-blocks' ) }
 						checked={ checked }
 						onChange={ ( v ) => setAttributes( { checked: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Indeterminate', 'awt' ) }
+						label={ __( 'Indeterminate', 'awt-blocks' ) }
 						checked={ indeterminate }
 						onChange={ ( v ) =>
 							setAttributes( { indeterminate: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Required', 'awt' ) }
+						label={ __( 'Required', 'awt-blocks' ) }
 						checked={ required }
 						onChange={ ( v ) => setAttributes( { required: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Help & validation', 'awt' ) }
+					title={ __( 'Help & validation', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Helper text', 'awt' ) }
+						label={ __( 'Helper text', 'awt-blocks' ) }
 						value={ helperText }
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid state', 'awt' ) }
+						label={ __( 'Invalid state', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Invalid message', 'awt' ) }
+						label={ __( 'Invalid message', 'awt-blocks' ) }
 						value={ invalidText }
 						onChange={ ( v ) =>
 							setAttributes( { invalidText: v } )
@@ -120,7 +120,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						className="cds--checkbox-label-text"
 						value={ label }
 						onChange={ ( v ) => setAttributes( { label: v } ) }
-						placeholder={ __( 'Checkbox label', 'awt' ) }
+						placeholder={ __( 'Checkbox label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
 				</label>

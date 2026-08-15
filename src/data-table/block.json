@@ -10,7 +10,7 @@
 	"title": "Data table",
 	"category": "awt-data-display",
 	"description": "A data table with sortable columns, a sticky header, and striped rows. Selectable and expandable rows, plus dynamic data sources, are available in AWT Premium.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"table",
 		"data table",

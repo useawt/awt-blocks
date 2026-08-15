@@ -35,13 +35,13 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Header global actions', 'awt' ) }
+					title={ __( 'Header global actions', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
 						label={ __(
 							'Region label (aria-label, optional)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ ariaLabel }
 						onChange={ ( value ) =>

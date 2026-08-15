@@ -17,33 +17,57 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Statistic', 'awt' ) }>
+				<PanelBody title={ __( 'Statistic', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Heading level', 'awt' ) }
+						label={ __( 'Heading level', 'awt-blocks' ) }
 						help={ __(
 							'The label under the number is plain text by default. Pick a heading level only when the statistic starts a new section of the page.',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ level }
 						options={ [
 							{
 								value: 'none',
-								label: __( 'Not a heading (default)', 'awt' ),
+								label: __(
+									'Not a heading (default)',
+									'awt-blocks'
+								),
 							},
-							{ value: '2', label: __( 'Heading 2', 'awt' ) },
-							{ value: '3', label: __( 'Heading 3', 'awt' ) },
-							{ value: '4', label: __( 'Heading 4', 'awt' ) },
-							{ value: '5', label: __( 'Heading 5', 'awt' ) },
-							{ value: '6', label: __( 'Heading 6', 'awt' ) },
+							{
+								value: '2',
+								label: __( 'Heading 2', 'awt-blocks' ),
+							},
+							{
+								value: '3',
+								label: __( 'Heading 3', 'awt-blocks' ),
+							},
+							{
+								value: '4',
+								label: __( 'Heading 4', 'awt-blocks' ),
+							},
+							{
+								value: '5',
+								label: __( 'Heading 5', 'awt-blocks' ),
+							},
+							{
+								value: '6',
+								label: __( 'Heading 6', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { level: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Alignment', 'awt' ) }
+						label={ __( 'Alignment', 'awt-blocks' ) }
 						value={ align }
 						options={ [
-							{ value: 'start', label: __( 'Start', 'awt' ) },
-							{ value: 'center', label: __( 'Center', 'awt' ) },
+							{
+								value: 'start',
+								label: __( 'Start', 'awt-blocks' ),
+							},
+							{
+								value: 'center',
+								label: __( 'Center', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { align: v } ) }
 					/>
@@ -55,7 +79,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="awt-stat__value"
 					value={ value }
 					onChange={ ( v ) => setAttributes( { value: v } ) }
-					placeholder={ __( '90%', 'awt' ) }
+					placeholder={ __( '90%', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				<RichText
@@ -65,7 +89,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { heading: v } ) }
 					placeholder={ __(
 						'Heading describing the statistic',
-						'awt'
+						'awt-blocks'
 					) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				/>
@@ -76,7 +100,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { description: v } ) }
 					placeholder={ __(
 						'Optional supporting description',
-						'awt'
+						'awt-blocks'
 					) }
 					allowedFormats={ [
 						'core/bold',

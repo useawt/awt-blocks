@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text      = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link text', 'awt' );
+$text      = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link text', 'awt-blocks' );
 $href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $target    = isset( $attributes['target'] ) ? (string) $attributes['target'] : '';
 $rel       = isset( $attributes['rel'] ) ? (string) $attributes['rel'] : '';

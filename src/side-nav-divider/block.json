@@ -11,7 +11,7 @@
 		"awt/side-nav-section"
 	],
 	"description": "Visual separator between groups of side-nav links.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"divider",
 		"separator",

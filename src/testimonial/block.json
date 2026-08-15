@@ -6,7 +6,7 @@
 	"title": "Testimonial",
 	"category": "awt-section",
 	"description": "A quote with attribution, styled for emphasis and marked up correctly as a quotation.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"quote",
 		"testimonial",

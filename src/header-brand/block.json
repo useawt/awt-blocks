@@ -7,7 +7,7 @@
 	"title": "Header brand",
 	"category": "awt-ui-shell",
 	"description": "Your site name, with an optional prefix and/or logo, linking to your home page.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",
 		"brand",

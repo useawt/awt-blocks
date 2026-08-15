@@ -6,7 +6,7 @@
 	"title": "Section",
 	"category": "awt-section",
 	"description": "A width-limited content wrapper with consistent spacing. It's the outer container for patterns like Hero, Pricing, and Feature grid.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"section",
 		"container",

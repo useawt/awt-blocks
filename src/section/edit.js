@@ -28,24 +28,27 @@ const SPACING_OPTIONS = [
 	'13',
 ].map( ( v ) => ( {
 	value: v,
-	label: __( 'Spacing', 'awt' ) + v,
+	label: __( 'Spacing', 'awt-blocks' ) + v,
 } ) );
 
 const MAX_WIDTH_OPTIONS = [
-	{ value: 'none', label: __( 'None (full width)', 'awt' ) },
-	{ value: 'narrow', label: __( 'Narrow (42rem)', 'awt' ) },
-	{ value: 'reading', label: __( 'Reading (48rem)', 'awt' ) },
-	{ value: 'content', label: __( 'Content (66rem)', 'awt' ) },
-	{ value: 'wide', label: __( 'Wide (82.5rem)', 'awt' ) },
-	{ value: 'custom', label: __( 'Custom', 'awt' ) },
+	{ value: 'none', label: __( 'None (full width)', 'awt-blocks' ) },
+	{ value: 'narrow', label: __( 'Narrow (42rem)', 'awt-blocks' ) },
+	{ value: 'reading', label: __( 'Reading (48rem)', 'awt-blocks' ) },
+	{ value: 'content', label: __( 'Content (66rem)', 'awt-blocks' ) },
+	{ value: 'wide', label: __( 'Wide (82.5rem)', 'awt-blocks' ) },
+	{ value: 'custom', label: __( 'Custom', 'awt-blocks' ) },
 ];
 
 const SCOPE_OPTIONS = [
-	{ value: 'inherit', label: __( 'Inherit from page', 'awt' ) },
-	{ value: 'light', label: __( 'Light (active light variant)', 'awt' ) },
-	{ value: 'dark', label: __( 'Dark (active dark variant)', 'awt' ) },
-	{ value: 'g10', label: __( 'Force g10', 'awt' ) },
-	{ value: 'g100', label: __( 'Force g100', 'awt' ) },
+	{ value: 'inherit', label: __( 'Inherit from page', 'awt-blocks' ) },
+	{
+		value: 'light',
+		label: __( 'Light (active light variant)', 'awt-blocks' ),
+	},
+	{ value: 'dark', label: __( 'Dark (active dark variant)', 'awt-blocks' ) },
+	{ value: 'g10', label: __( 'Force g10', 'awt-blocks' ) },
+	{ value: 'g100', label: __( 'Force g100', 'awt-blocks' ) },
 ];
 
 const TAG_OPTIONS = [ 'section', 'div', 'article', 'aside' ].map( ( v ) => ( {
@@ -61,7 +64,7 @@ const TAG_OPTIONS = [ 'section', 'div', 'article', 'aside' ].map( ( v ) => ( {
 // background / layer-01 / layer-accent-01 (#fff / #f4f4f4 / #e0e0e0 in White,
 // with matching distinct dark steps in g90/g100).
 const BACKGROUND_OPTIONS = [
-	{ value: '', label: __( 'Transparent', 'awt' ) },
+	{ value: '', label: __( 'Transparent', 'awt-blocks' ) },
 	{ value: 'background', label: 'background' },
 	{ value: 'layer-01', label: 'layer-01' },
 	{ value: 'layer-accent-01', label: 'layer-accent-01' },
@@ -143,9 +146,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Layout', 'awt' ) } initialOpen={ true }>
+				<PanelBody
+					title={ __( 'Layout', 'awt-blocks' ) }
+					initialOpen={ true }
+				>
 					<SelectControl
-						label={ __( 'Vertical padding', 'awt' ) }
+						label={ __( 'Vertical padding', 'awt-blocks' ) }
 						value={ paddingBlock }
 						options={ SPACING_OPTIONS }
 						onChange={ ( value ) =>
@@ -153,7 +159,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Horizontal padding', 'awt' ) }
+						label={ __( 'Horizontal padding', 'awt-blocks' ) }
 						value={ paddingInline }
 						options={ SPACING_OPTIONS }
 						onChange={ ( value ) =>
@@ -161,10 +167,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'No gap below', 'awt' ) }
+						label={ __( 'No gap below', 'awt-blocks' ) }
 						help={ __(
 							'Removes the space below this section so it sits flush against whatever comes next.',
-							'awt'
+							'awt-blocks'
 						) }
 						checked={ !! noGapBelow }
 						onChange={ ( value ) =>
@@ -172,7 +178,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Max width', 'awt' ) }
+						label={ __( 'Max width', 'awt-blocks' ) }
 						value={ maxWidth }
 						options={ MAX_WIDTH_OPTIONS }
 						onChange={ ( value ) =>
@@ -183,7 +189,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						<TextControl
 							label={ __(
 								'Custom max width (e.g., 720px)',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ customMaxWidth }
 							onChange={ ( value ) =>
@@ -193,13 +199,13 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Appearance', 'awt' ) }
+					title={ __( 'Appearance', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<SelectControl
 						label={ __(
 							'Background color (palette token)',
-							'awt'
+							'awt-blocks'
 						) }
 						value={ backgroundColor }
 						options={ BACKGROUND_OPTIONS }
@@ -208,7 +214,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Theme scope', 'awt' ) }
+						label={ __( 'Theme scope', 'awt-blocks' ) }
 						value={ themeScope }
 						options={ SCOPE_OPTIONS }
 						onChange={ ( value ) =>
@@ -217,11 +223,11 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Element', 'awt' ) }
+					title={ __( 'Element', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<SelectControl
-						label={ __( 'HTML tag', 'awt' ) }
+						label={ __( 'HTML tag', 'awt-blocks' ) }
 						value={ tagName }
 						options={ TAG_OPTIONS }
 						onChange={ ( value ) =>
@@ -232,11 +238,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						<TextControl
 							label={ __(
 								'Accessible name (aria-label)',
-								'awt'
+								'awt-blocks'
 							) }
 							help={ __(
 								'Recommended when multiple <section> elements appear on the same page.',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ ariaLabel }
 							onChange={ ( value ) =>

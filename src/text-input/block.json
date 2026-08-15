@@ -11,7 +11,7 @@
 	"title": "Text input",
 	"category": "awt-forms",
 	"description": "A single-line text field with a label and optional helper, error, and warning text.",
-	"textdomain": "awt",
+	"textdomain": "awt-blocks",
 	"keywords": [
 		"input",
 		"text",

@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Dropdown', 'awt' );
-$placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt' );
+$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Dropdown', 'awt-blocks' );
+$placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt-blocks' );
 $helper_text  = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';
 $invalid      = ! empty( $attributes['invalid'] );
 $invalid_text = isset( $attributes['invalidText'] ) ? (string) $attributes['invalidText'] : '';

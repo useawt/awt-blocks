@@ -40,38 +40,53 @@ export default function Edit( { attributes, setAttributes, context } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'FAQ question', 'awt' ) }>
+				<PanelBody title={ __( 'FAQ question', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Question heading level', 'awt' ) }
+						label={ __( 'Question heading level', 'awt-blocks' ) }
 						help={ __(
 							"The semantic heading level that wraps the question. Default H3 matches Carbon's accordion convention; override based on the surrounding page hierarchy.",
-							'awt'
+							'awt-blocks'
 						) }
 						value={ level }
 						options={ [
-							{ value: '2', label: __( 'Heading 2', 'awt' ) },
+							{
+								value: '2',
+								label: __( 'Heading 2', 'awt-blocks' ),
+							},
 							{
 								value: '3',
-								label: __( 'Heading 3 (default)', 'awt' ),
+								label: __(
+									'Heading 3 (default)',
+									'awt-blocks'
+								),
 							},
-							{ value: '4', label: __( 'Heading 4', 'awt' ) },
-							{ value: '5', label: __( 'Heading 5', 'awt' ) },
-							{ value: '6', label: __( 'Heading 6', 'awt' ) },
+							{
+								value: '4',
+								label: __( 'Heading 4', 'awt-blocks' ),
+							},
+							{
+								value: '5',
+								label: __( 'Heading 5', 'awt-blocks' ),
+							},
+							{
+								value: '6',
+								label: __( 'Heading 6', 'awt-blocks' ),
+							},
 						] }
 						onChange={ ( v ) => setAttributes( { level: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Open by default', 'awt' ) }
+						label={ __( 'Open by default', 'awt-blocks' ) }
 						checked={ defaultExpanded }
 						onChange={ ( v ) =>
 							setAttributes( { defaultExpanded: v } )
 						}
 					/>
 					<PremiumNotice
-						title={ __( 'FAQ rich results', 'awt' ) }
+						title={ __( 'FAQ rich results', 'awt-blocks' ) }
 						description={ __(
 							'Output FAQ structured data (the JSON Google reads to show this Q&A directly in search results). Available in AWT Premium.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
@@ -119,7 +134,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 							onChange={ ( v ) =>
 								setAttributes( { question: v } )
 							}
-							placeholder={ __( 'Question?', 'awt' ) }
+							placeholder={ __( 'Question?', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
 					</button>

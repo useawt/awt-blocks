@@ -17,9 +17,9 @@ import PremiumNotice from '../shared/premium-notice';
 // live-data sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via
 // the shared PremiumNotice box below the picker — not as dead disabled options.
 const DATA_SOURCE_OPTIONS = [
-	{ label: __( 'Text', 'awt' ), value: 'text' },
-	{ label: __( 'HTML', 'awt' ), value: 'html' },
-	{ label: __( 'Markdown', 'awt' ), value: 'markdown' },
+	{ label: __( 'Text', 'awt-blocks' ), value: 'text' },
+	{ label: __( 'HTML', 'awt-blocks' ), value: 'html' },
+	{ label: __( 'Markdown', 'awt-blocks' ), value: 'markdown' },
 ];
 
 // Make a stable column key from a header label (falls back to col1, col2 …).
@@ -160,7 +160,9 @@ const BooleanCell = ( { value } ) => {
 	return (
 		<td className="awt-data-table__cell--boolean">
 			<span className="cds--visually-hidden">
-				{ yes ? __( 'Included', 'awt' ) : __( 'Not included', 'awt' ) }
+				{ yes
+					? __( 'Included', 'awt-blocks' )
+					: __( 'Not included', 'awt-blocks' ) }
 			</span>
 			{ yes ? (
 				<CheckmarkIcon />
@@ -271,10 +273,10 @@ export default function Edit( { attributes, setAttributes } ) {
 			// eslint-disable-next-line no-alert
 			window.alert(
 				dataSource === 'html'
-					? __( 'No <table> found in the pasted HTML.', 'awt' )
+					? __( 'No <table> found in the pasted HTML.', 'awt-blocks' )
 					: __(
 							'That doesn’t look like a Markdown table. Include a header row and a |---|---| separator row.',
-							'awt'
+							'awt-blocks'
 					  )
 			);
 			return;
@@ -284,7 +286,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			const ok = window.confirm(
 				__(
 					'Replace the current table data with the pasted content?',
-					'awt'
+					'awt-blocks'
 				)
 			);
 			if ( ! ok ) {
@@ -330,16 +332,16 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Data table', 'awt' ) }
+					title={ __( 'Data table', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Caption (accessible)', 'awt' ) }
+						label={ __( 'Caption (accessible)', 'awt-blocks' ) }
 						value={ caption }
 						onChange={ ( v ) => setAttributes( { caption: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Size', 'awt' ) }
+						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [ 'xs', 'sm', 'md', 'lg', 'xl' ].map(
 							( v ) => ( { value: v, label: v } )
@@ -347,36 +349,42 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Zebra striping', 'awt' ) }
+						label={ __( 'Zebra striping', 'awt-blocks' ) }
 						checked={ zebra }
 						onChange={ ( v ) => setAttributes( { zebra: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Static width', 'awt' ) }
+						label={ __( 'Static width', 'awt-blocks' ) }
 						checked={ useStaticWidth }
 						onChange={ ( v ) =>
 							setAttributes( { useStaticWidth: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Sticky header', 'awt' ) }
+						label={ __( 'Sticky header', 'awt-blocks' ) }
 						checked={ stickyHeader }
 						onChange={ ( v ) =>
 							setAttributes( { stickyHeader: v } )
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Sortable columns', 'awt' ) }
+						label={ __( 'Sortable columns', 'awt-blocks' ) }
 						checked={ sortable }
 						onChange={ ( v ) => setAttributes( { sortable: v } ) }
 					/>
 					{ sortable && (
 						<>
 							<SelectControl
-								label={ __( 'Default sort column', 'awt' ) }
+								label={ __(
+									'Default sort column',
+									'awt-blocks'
+								) }
 								value={ defaultSortKey }
 								options={ [
-									{ label: __( 'None', 'awt' ), value: '' },
+									{
+										label: __( 'None', 'awt-blocks' ),
+										value: '',
+									},
 									...headers.map( ( h ) => ( {
 										label: String( h.text || '' ).replace(
 											/<[^>]*>/g,
@@ -390,7 +398,10 @@ export default function Edit( { attributes, setAttributes } ) {
 								}
 							/>
 							<SelectControl
-								label={ __( 'Default sort direction', 'awt' ) }
+								label={ __(
+									'Default sort direction',
+									'awt-blocks'
+								) }
 								value={ defaultSortDirection }
 								options={ [
 									{ label: 'Asc', value: 'asc' },
@@ -403,9 +414,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						</>
 					) }
 				</PanelBody>
-				<PanelBody title={ __( 'Data', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Data', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<SelectControl
-						label={ __( 'Data source', 'awt' ) }
+						label={ __( 'Data source', 'awt-blocks' ) }
 						value={ dataSource }
 						options={ DATA_SOURCE_OPTIONS }
 						onChange={ setDataSource }
@@ -415,7 +429,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextareaControl
 								label={ __(
 									'Headers (one per line: key|label)',
-									'awt'
+									'awt-blocks'
 								) }
 								value={ headerText }
 								onChange={ onHeaderTextChange }
@@ -424,7 +438,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextareaControl
 								label={ __(
 									'Rows (one per line, pipe-separated, in header order)',
-									'awt'
+									'awt-blocks'
 								) }
 								value={ rowText }
 								onChange={ onRowTextChange }
@@ -436,16 +450,16 @@ export default function Edit( { attributes, setAttributes } ) {
 						dataSource === 'markdown' ) && (
 						<>
 							<TextareaControl
-								label={ __( 'Paste content', 'awt' ) }
+								label={ __( 'Paste content', 'awt-blocks' ) }
 								help={
 									dataSource === 'html'
 										? __(
 												'Paste an HTML <table>. Its header row and body rows become the table data.',
-												'awt'
+												'awt-blocks'
 										  )
 										: __(
 												'Paste a Markdown table — a header row, a |---|---| separator row, then data rows.',
-												'awt'
+												'awt-blocks'
 										  )
 								}
 								value={ importText }
@@ -457,15 +471,15 @@ export default function Edit( { attributes, setAttributes } ) {
 								onClick={ applyImport }
 								disabled={ ! importText.trim() }
 							>
-								{ __( 'Generate table', 'awt' ) }
+								{ __( 'Generate table', 'awt-blocks' ) }
 							</Button>
 						</>
 					) }
 					<PremiumNotice
-						title={ __( 'More data sources', 'awt' ) }
+						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
 							'Populate this table from JSON, a REST API, or a WP_Query — available in AWT Premium.',
-							'awt'
+							'awt-blocks'
 						) }
 					/>
 				</PanelBody>

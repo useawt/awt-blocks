@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Option', 'awt' );
+$label    = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Option', 'awt-blocks' );
 $value    = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $checked  = ! empty( $attributes['checked'] );
 $disabled = ! empty( $attributes['disabled'] );

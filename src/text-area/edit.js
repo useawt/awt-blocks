@@ -43,26 +43,26 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Text area', 'awt' ) }>
+				<PanelBody title={ __( 'Text area', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Name', 'awt' ) }
+						label={ __( 'Name', 'awt-blocks' ) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Placeholder', 'awt' ) }
+						label={ __( 'Placeholder', 'awt-blocks' ) }
 						value={ placeholder }
 						onChange={ ( v ) =>
 							setAttributes( { placeholder: v } )
 						}
 					/>
 					<TextControl
-						label={ __( 'Default value', 'awt' ) }
+						label={ __( 'Default value', 'awt-blocks' ) }
 						value={ value }
 						onChange={ ( v ) => setAttributes( { value: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Rows', 'awt' ) }
+						label={ __( 'Rows', 'awt-blocks' ) }
 						type="number"
 						value={ rows }
 						onChange={ ( v ) =>
@@ -70,7 +70,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Cols (0 = auto)', 'awt' ) }
+						label={ __( 'Cols (0 = auto)', 'awt-blocks' ) }
 						type="number"
 						value={ cols }
 						onChange={ ( v ) =>
@@ -78,7 +78,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Maxlength', 'awt' ) }
+						label={ __( 'Maxlength', 'awt-blocks' ) }
 						type="number"
 						value={ maxlength }
 						onChange={ ( v ) =>
@@ -86,27 +86,30 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Required', 'awt' ) }
+						label={ __( 'Required', 'awt-blocks' ) }
 						checked={ required }
 						onChange={ ( v ) => setAttributes( { required: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Disabled', 'awt' ) }
+						label={ __( 'Disabled', 'awt-blocks' ) }
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Readonly', 'awt' ) }
+						label={ __( 'Readonly', 'awt-blocks' ) }
 						checked={ readonly }
 						onChange={ ( v ) => setAttributes( { readonly: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Visually hide label', 'awt' ) }
+						label={ __( 'Visually hide label', 'awt-blocks' ) }
 						checked={ hideLabel }
 						onChange={ ( v ) => setAttributes( { hideLabel: v } ) }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Style', 'awt' ) } initialOpen={ false }>
+				<PanelBody
+					title={ __( 'Style', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
 					<CarbonDefaultToggle
 						value={ carbonDefault }
 						onChange={ ( v ) =>
@@ -115,21 +118,21 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Help & validation', 'awt' ) }
+					title={ __( 'Help & validation', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __( 'Helper text', 'awt' ) }
+						label={ __( 'Helper text', 'awt-blocks' ) }
 						value={ helperText }
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid', 'awt' ) }
+						label={ __( 'Invalid', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Invalid message', 'awt' ) }
+						label={ __( 'Invalid message', 'awt-blocks' ) }
 						value={ invalidText }
 						onChange={ ( v ) =>
 							setAttributes( { invalidText: v } )
@@ -137,12 +140,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						disabled={ ! invalid }
 					/>
 					<ToggleControl
-						label={ __( 'Warning', 'awt' ) }
+						label={ __( 'Warning', 'awt-blocks' ) }
 						checked={ warn }
 						onChange={ ( v ) => setAttributes( { warn: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Warning message', 'awt' ) }
+						label={ __( 'Warning message', 'awt-blocks' ) }
 						value={ warnText }
 						onChange={ ( v ) => setAttributes( { warnText: v } ) }
 						disabled={ ! warn }
@@ -161,7 +164,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						.join( ' ' ) }
 					value={ label }
 					onChange={ ( v ) => setAttributes( { label: v } ) }
-					placeholder={ __( 'Label', 'awt' ) }
+					placeholder={ __( 'Label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				<div

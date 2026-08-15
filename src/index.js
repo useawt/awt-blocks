@@ -90,7 +90,7 @@ function Summary() {
 		parts.push(
 			sprintf(
 				// translators: %d — number of accessibility errors found.
-				_n( '%d error', '%d errors', errors, 'awt' ),
+				_n( '%d error', '%d errors', errors, 'awt-blocks' ),
 				errors
 			)
 		);
@@ -99,7 +99,7 @@ function Summary() {
 		parts.push(
 			sprintf(
 				// translators: %d — number of accessibility warnings found.
-				_n( '%d warning', '%d warnings', warnings, 'awt' ),
+				_n( '%d warning', '%d warnings', warnings, 'awt-blocks' ),
 				warnings
 			)
 		);
@@ -143,19 +143,19 @@ function AccessibilityPlugin() {
 			<LinterRunner />
 
 			<PluginSidebarMoreMenuItem target={ SIDEBAR_NAME } icon={ ICON }>
-				{ __( 'Accessibility checks', 'awt' ) }
+				{ __( 'Accessibility checks', 'awt-blocks' ) }
 			</PluginSidebarMoreMenuItem>
 
 			<PluginSidebar
 				name={ SIDEBAR_NAME }
-				title={ __( 'Accessibility', 'awt' ) }
+				title={ __( 'Accessibility', 'awt-blocks' ) }
 				icon={ ICON }
 			>
 				<SidebarBody />
 			</PluginSidebar>
 
 			<PluginPrePublishPanel
-				title={ __( 'Accessibility checks', 'awt' ) }
+				title={ __( 'Accessibility checks', 'awt-blocks' ) }
 				icon={ ICON_PLAIN }
 				initialOpen={ true }
 			>

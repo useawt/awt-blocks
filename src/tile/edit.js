@@ -55,31 +55,34 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const inspector = (
 		<InspectorControls>
-			<PanelBody title={ __( 'Tile', 'awt' ) }>
+			<PanelBody title={ __( 'Tile', 'awt-blocks' ) }>
 				<SelectControl
-					label={ __( 'Variant', 'awt' ) }
+					label={ __( 'Variant', 'awt-blocks' ) }
 					value={ variant }
 					options={ [
 						{
 							value: 'default',
-							label: __( 'Default (read-only)', 'awt' ),
+							label: __( 'Default (read-only)', 'awt-blocks' ),
 						},
 						{
 							value: 'clickable',
-							label: __( 'Clickable (renders as link)', 'awt' ),
+							label: __(
+								'Clickable (renders as link)',
+								'awt-blocks'
+							),
 						},
 						{
 							value: 'selectable',
 							label: __(
 								'Selectable (checkbox / radio-tile)',
-								'awt'
+								'awt-blocks'
 							),
 						},
 						{
 							value: 'expandable',
 							label: __(
 								'Expandable (details / summary)',
-								'awt'
+								'awt-blocks'
 							),
 						},
 					] }
@@ -87,8 +90,11 @@ export default function Edit( { attributes, setAttributes } ) {
 				/>
 				{ variant === 'clickable' && (
 					<TextControl
-						label={ __( 'Link URL', 'awt' ) }
-						help={ __( 'The address this tile links to.', 'awt' ) }
+						label={ __( 'Link URL', 'awt-blocks' ) }
+						help={ __(
+							'The address this tile links to.',
+							'awt-blocks'
+						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
@@ -97,10 +103,10 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ variant === 'selectable' && (
 					<>
 						<TextControl
-							label={ __( 'Group name', 'awt' ) }
+							label={ __( 'Group name', 'awt-blocks' ) }
 							help={ __(
 								'Give every tile in one choice the same group name, and people can pick only one of them. Leave it empty for a tile that switches on and off by itself. Put the tiles in a Tile group block so the choice also has a heading.',
-								'awt'
+								'awt-blocks'
 							) }
 							value={ groupName }
 							onChange={ ( v ) =>
@@ -109,10 +115,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 						{ groupName && (
 							<TextControl
-								label={ __( 'Value', 'awt' ) }
+								label={ __( 'Value', 'awt-blocks' ) }
 								help={ __(
 									'What this tile sends when the form is submitted, such as "large". Only needed if the tiles are inside a form.',
-									'awt'
+									'awt-blocks'
 								) }
 								value={ value }
 								onChange={ ( v ) =>
@@ -125,14 +131,17 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ variant === 'expandable' && (
 					<>
 						<TextControl
-							label={ __( 'Summary (visible header)', 'awt' ) }
+							label={ __(
+								'Summary (visible header)',
+								'awt-blocks'
+							) }
 							value={ summary }
 							onChange={ ( v ) =>
 								setAttributes( { summary: v } )
 							}
 						/>
 						<ToggleControl
-							label={ __( 'Open by default', 'awt' ) }
+							label={ __( 'Open by default', 'awt-blocks' ) }
 							checked={ defaultOpen }
 							onChange={ ( v ) =>
 								setAttributes( { defaultOpen: v } )
