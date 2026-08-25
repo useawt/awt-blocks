@@ -30,7 +30,9 @@ $wrapper_attrs = get_block_wrapper_attributes(
 		'id'       => $panel_id,
 		'role'     => 'tabpanel',
 		'tabindex' => '0',
-		'hidden'   => true,
+		// A string, not `true`: WordPress 7.1 drops boolean attribute values
+		// here, which shipped every panel visible until the script booted.
+		'hidden'   => 'hidden',
 	)
 );
 

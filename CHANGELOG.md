@@ -10,9 +10,16 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
-## Unreleased
+## 2026.08.0 — 2026-08-25
 
 ### [Breaking]
+
+- Tabs and content switchers no longer show every panel at once while the page
+  loads. WordPress 7.1 changed the way it writes out on/off attributes in block
+  markup, and the mark that hides the inactive panels stopped being written at
+  all: every panel was visible until the page's script ran, and stayed visible
+  for anyone browsing with scripts off. The panels are marked hidden again.
+  (The rendered markup changes, which is a deliberate snapshot update.)
 
 - **AWT Blocks is now GPLv3 or later, instead of GPLv2 or later.** Nothing
   changes for you as a site owner: you can still use, modify and redistribute
