@@ -188,6 +188,12 @@
 
 ### [A11y]
 
+- A Modal with no second button no longer draws an empty one. Clearing the
+  "Secondary action label" left a button with nothing in it, which a screen
+  reader announces as just "button" and a keyboard user tabs into for no
+  reason. Leave the label empty and the button is gone; the setting now says
+  so. Modals with a label are unchanged, down to the whitespace.
+
 - Text input and Password input: an error message now appears under the field.
   Until now it was written into the page but never shown, so a visitor who
   filled the field in wrongly saw a red outline and an icon and was never told

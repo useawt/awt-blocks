@@ -104,6 +104,23 @@ if ( $primary_href !== '' ) {
 	);
 }
 
+// An empty label means the author wants no second button. Rendering it anyway
+// produces a button with no accessible name, which a screen reader announces as
+// just "button" (WCAG 4.1.2) -- found on the demo site's borrowing-rules modal,
+// where axe could not see it because a closed modal is hidden.
+$cancel_button_html = '' !== trim( $secondary_action )
+	? sprintf(
+		// The trailing newline is deliberate. PHP eats the newline that follows
+		// a closing tag, so without one here the two footer buttons run
+		// together on a single line — a whitespace-only change to every modal
+		// ever rendered. Writing that closing tag inside this comment would
+		// itself have ended PHP mode, because a comment does not protect it.
+		'<button type="button" class="%1$s" data-wp-on--click="actions.close">%2$s</button>' . "\n",
+		esc_attr( $cancel_btn_class ),
+		esc_html( $secondary_action )
+	)
+	: '';
+
 ob_start();
 ?>
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
@@ -125,7 +142,7 @@ ob_start();
 		<button type="button" class="<?php echo esc_attr( $close_button_class ); ?>" aria-label="<?php echo esc_attr__( 'Close', 'awt-blocks' ); ?>" data-wp-on--click="actions.close"><?php echo $close_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?></button>
 		<div class="<?php echo esc_attr( $modal_content_class ); ?>"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render. ?></div>
 		<div class="<?php echo esc_attr( $footer_class ); ?>">
-			<button type="button" class="<?php echo esc_attr( $cancel_btn_class ); ?>" data-wp-on--click="actions.close"><?php echo esc_html( $secondary_action ); ?></button>
+			<?php echo $cancel_button_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built + escaped above. ?>
 			<?php echo $primary_button_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built + escaped above. ?>
 		</div>
 	</div>

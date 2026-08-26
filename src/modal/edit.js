@@ -99,6 +99,10 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<TextControl
 						label={ __( 'Secondary action label', 'awt-blocks' ) }
+						help={ __(
+							'Leave empty for a modal with only one button.',
+							'awt-blocks'
+						) }
 						value={ secondaryAction }
 						onChange={ ( v ) =>
 							setAttributes( { secondaryAction: v } )
@@ -181,12 +185,14 @@ export default function Edit( { attributes, setAttributes } ) {
 				/>
 				<div { ...innerProps } />
 				<div className="cds--modal-footer">
-					<button
-						type="button"
-						className="cds--btn cds--btn--secondary cds--btn--lg"
-					>
-						{ secondaryAction }
-					</button>
+					{ secondaryAction.trim() && (
+						<button
+							type="button"
+							className="cds--btn cds--btn--secondary cds--btn--lg"
+						>
+							{ secondaryAction }
+						</button>
+					) }
 					{ primaryHref ? (
 						<a
 							href={ primaryHref }
