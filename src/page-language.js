@@ -2,7 +2,7 @@
  * §4 Language controls — page-level language override.
  *
  * A "Language" panel in the editor's document (Page) settings. Sets the
- * `awt_page_lang` post meta (registered + emitted by awt-theme via the
+ * `awt_theme_page_lang` post meta (registered + emitted by awt-theme via the
  * language_attributes filter) so a page written entirely in another language
  * can declare its own `<html lang>`. Empty = inherit the site language.
  */
@@ -17,7 +17,7 @@ import { SelectControl } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { useEntityProp } from '@wordpress/core-data';
 
-const META_KEY = 'awt_page_lang';
+const META_KEY = 'awt_theme_page_lang';
 
 // Common BCP-47 tags (English + the broader-European launch locales). Kept in
 // sync with accessibility-panel.js's element-lang list.

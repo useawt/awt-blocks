@@ -15,7 +15,7 @@ import { store as blockEditorStore } from '@wordpress/block-editor';
 import { runChecks, blockBg } from './checks';
 
 // Site language bridged from PHP get_bloginfo('language'); the page-level
-// override (awt_page_lang meta) wins when set. Not read from the canvas iframe
+// override (awt_theme_page_lang meta) wins when set. Not read from the canvas iframe
 // (which is empty even when the published page declares a lang).
 function siteDocumentLang() {
 	const data =
@@ -30,15 +30,15 @@ export function useFindings() {
 			const settings = be.getSettings();
 
 			// Effective document language for the linter: per-page override
-			// (awt_page_lang) → site language bridge. Reactive as the author sets it.
+			// (awt_theme_page_lang) → site language bridge. Reactive as the author sets it.
 			const editor = select( 'core/editor' );
 			const meta =
 				editor && editor.getEditedPostAttribute
 					? editor.getEditedPostAttribute( 'meta' )
 					: null;
 			const pageLang =
-				meta && meta.awt_page_lang
-					? String( meta.awt_page_lang ).trim()
+				meta && meta.awt_theme_page_lang
+					? String( meta.awt_theme_page_lang ).trim()
 					: '';
 			const effectiveLang = pageLang || siteDocumentLang();
 

@@ -73,9 +73,9 @@ No. The visitor's light/dark choice is stored in a cookie that only holds a UI p
 
 Yes, out of the box. A small script in the page head applies the visitor's choice before the page paints, so one cached copy of a page serves both light and dark visitors correctly. You don't need to configure your caching plugin to vary by cookie — please don't; it would only shrink your cache hit rate.
 
-= I added code in AWT Settings → Custom code and it doesn't run. Why? =
+= Can I add my own code to every page? =
 
-If your site sends a Content Security Policy (CSP) — a security header that controls which scripts may run — it can block injected code. The Custom code field warns about this. After adding custom code, always verify on the live site that it actually executes; if it doesn't, your CSP (set by a security plugin, your host, or a CDN) is the first thing to check.
+Not with the free theme and plugin. Putting your own markup into the page is a job for a plugin rather than a theme, so it is part of AWT Premium. Custom CSS is different — that is styling, and it is in AWT Settings for everyone.
 
 = Is there a paid version? =
 
@@ -142,8 +142,8 @@ It does not cover:
 - Content written by site owners and authors (the in-editor accessibility
   linter helps here, but authors stay responsible for their content).
 - Third-party plugins installed alongside AWT.
-- Custom code or custom CSS added through the AWT Settings → Custom code
-  fields.
+- Custom CSS added through AWT Settings, and any code added by an AWT Premium
+  add-on.
 
 ## Standard
 
