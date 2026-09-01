@@ -12,7 +12,7 @@ Accessible blocks built on the Carbon Design System, with an accessibility check
 
 == Description ==
 
-AWT Blocks gives the block editor a full set of accessible components, built on [IBM's open-source Carbon Design System](https://carbondesignsystem.com/) and reviewed against WCAG 2.2 AA. It's one half of AWT — install it together with the [AWT theme](https://wordpress.org/themes/awt/), which provides the design foundation, color themes, and 42 ready-made patterns these blocks are designed for.
+AWT Blocks gives the block editor a full set of accessible components, built on [IBM's open-source Carbon Design System](https://carbondesignsystem.com/) and reviewed against WCAG 2.2 AA. It's one half of AWT — install it together with the AWT theme, which provides the design foundation, color themes, and 42 ready-made patterns these blocks are designed for. Both are free, and you download them from useawt.com.
 
 **58 blocks**, including:
 
@@ -55,9 +55,10 @@ Translations for any locale are welcome via WordPress.org's translation platform
 
 == Installation ==
 
-1. Install and activate the plugin from Plugins → Add New (search for "AWT Blocks"), or upload the ZIP.
-2. Install and activate the [AWT theme](https://wordpress.org/themes/awt/) from Appearance → Themes. The blocks are designed for it — on other themes they work, but they won't have the Carbon design foundation.
-3. Open any page in the editor. AWT blocks appear in the inserter, and the accessibility checker icon appears in the top bar.
+1. Download AWT Blocks and the AWT theme from useawt.com.
+2. In Plugins → Add New → Upload Plugin, upload the plugin ZIP and activate it.
+3. In Appearance → Themes → Add New → Upload Theme, upload the theme ZIP and activate it. The blocks need it: the theme carries the colors, typography and spacing they are drawn with, so on any other theme they will look wrong.
+4. Open any page in the editor. AWT blocks appear in the inserter, and the accessibility checker icon appears in the top bar.
 
 == Frequently Asked Questions ==
 
