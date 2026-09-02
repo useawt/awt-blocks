@@ -100,7 +100,14 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		'cds--text-input-wrapper',
 		inline ? 'cds--text-input-wrapper--inline' : null,
 		readonly ? 'cds--text-input-wrapper--readonly' : null,
-		fluid ? 'cds--text-input-wrapper--fluid' : null,
+		// `--fluid` sits on the base `cds--text-input` namespace, not on
+		// `--wrapper`: Carbon's own rule is
+		// `.cds--text-input--fluid.cds--text-input-wrapper`, and its child
+		// selectors read `.cds--text-input--fluid .cds--label`. The editor
+		// emitted `cds--text-input-wrapper--fluid`, which matches nothing, so
+		// the fluid variant previewed as an ordinary field while rendering
+		// correctly on the front end. Keep this in step with render.php.
+		fluid ? 'cds--text-input--fluid' : null,
 		fieldFrameClass( carbonDefault ),
 	]
 		.filter( Boolean )
