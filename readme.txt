@@ -51,7 +51,7 @@ See the Compatibility notes below. WooCommerce, Polylang, and WP Super Cache coe
 
 = Translations =
 
-Translations for any locale are welcome via WordPress.org's translation platform (GlotPress). AWT doesn't ship translations directly; community contributions become available to all users automatically.
+AWT Blocks is English today. Every string a user reads is prepared for translation, and the plugin ships the template file a translator needs, so a language can be added without touching code. If you would like to translate AWT into yours, get in touch at useawt.com.
 
 == Installation ==
 
