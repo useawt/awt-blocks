@@ -1021,6 +1021,28 @@
 				"effectiveBackground": "rgb(255, 255, 255)",
 				"contrast": 18.1
 			},
+			"content/tile-plain (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgb(244, 244, 244)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgba(0, 0, 0, 0)",
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 16.45
+			},
 			"content/toast-notification-title": {
 				"matches": {
 					"focus": false,
@@ -2483,6 +2505,75 @@
 					"padding": "0px 16px 0px 16px"
 				}
 			},
+			"widgets/tile-clickable (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgb(244, 244, 244)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(141, 141, 141)",
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 16.45,
+				"borderContrast": 3.32
+			},
+			"widgets/tile-radio (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgb(244, 244, 244)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(141, 141, 141)",
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 16.45,
+				"borderContrast": 3.32
+			},
+			"widgets/tile-selectable (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgb(244, 244, 244)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(141, 141, 141)",
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 16.45,
+				"borderContrast": 3.32
+			},
 			"widgets/tile-summary": {
 				"matches": {
 					"focus": false,
@@ -3551,6 +3642,28 @@
 				"border": "0px none rgb(244, 244, 244)",
 				"effectiveBackground": "rgb(22, 22, 22)",
 				"contrast": 16.45
+			},
+			"content/tile-plain (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgb(38, 38, 38)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgba(0, 0, 0, 0)",
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 13.76
 			},
 			"content/toast-notification-title": {
 				"matches": {
@@ -5013,6 +5126,75 @@
 					"blockSize": "48px",
 					"padding": "0px 16px 0px 16px"
 				}
+			},
+			"widgets/tile-clickable (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgb(38, 38, 38)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(111, 111, 111)",
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 13.76,
+				"borderContrast": 3.6
+			},
+			"widgets/tile-radio (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgb(38, 38, 38)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(111, 111, 111)",
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 13.76,
+				"borderContrast": 3.6
+			},
+			"widgets/tile-selectable (resting)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgb(38, 38, 38)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": "1px solid rgb(111, 111, 111)",
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 13.76,
+				"borderContrast": 3.6
 			},
 			"widgets/tile-summary": {
 				"matches": {

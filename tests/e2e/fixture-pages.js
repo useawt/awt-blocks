@@ -83,6 +83,12 @@ const WIDGETS = `
 <!-- wp:paragraph --><p>Large instance</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/tile-group -->
+<!-- Clickable tile. The only interactive tile variant no fixture carried, and
+     the tile border added in 2026.09.0 applies to it as much as to the
+     selectable ones. -->
+<!-- wp:awt/tile {"variant":"clickable","href":"/docs"} -->
+<!-- wp:paragraph --><p>Read the deployment guide.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tile -->
 <!-- wp:awt/tile {"variant":"selectable"} -->
 <!-- wp:paragraph --><p>Enable nightly backups</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tile -->

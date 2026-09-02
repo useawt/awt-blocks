@@ -359,3 +359,34 @@ function describedby( array $ids ): string {
 function field_frame_class( array $attributes ): string {
 	return empty( $attributes['carbonDefault'] ) ? 'awt-field--framed' : '';
 }
+
+/**
+ * The frame class for an interactive tile, or '' when the block opts into
+ * Carbon's own look.
+ *
+ * Same opt-out shape as `field_frame_class()` above, and the same reason: a
+ * selectable or clickable tile is a user-interface component, and at rest its
+ * only shape is a fill measuring 1.10:1 from the page in the light themes and
+ * 1.20:1 in the dark ones. WCAG 1.4.11 asks for 3:1.
+ *
+ * Carbon has its own answer to this and it is not enough: the
+ * `enable-tile-contrast` feature flag swaps the transparent border for
+ * `--cds-border-tile`, which measures 1.55:1 against the fill in white, 2.38:1
+ * in g10, 2.30:1 in g90 and 1.94:1 in g100. Visible, still under the bar. So
+ * the border uses `--cds-border-strong` instead, the token D5 already uses on
+ * form fields, which clears 3:1 in all four scopes.
+ *
+ * Only the interactive variants get it. A plain tile is a surface, not a
+ * control: 1.4.11 does not apply, and bordering every content tile would
+ * change the look of the feature grids and pattern layouts built on them.
+ *
+ * @param array<string, mixed> $attributes Block attributes.
+ * @param string               $variant    Tile variant.
+ * @return string The frame class, or ''.
+ */
+function tile_frame_class( array $attributes, string $variant ): string {
+	if ( ! in_array( $variant, array( 'selectable', 'clickable' ), true ) ) {
+		return '';
+	}
+	return empty( $attributes['carbonDefault'] ) ? 'awt-tile--framed' : '';
+}

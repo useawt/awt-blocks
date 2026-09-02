@@ -1,4 +1,7 @@
 import { __ } from '@wordpress/i18n';
+import CarbonDefaultToggle, {
+	tileFrameClass,
+} from '../shared/carbon-default-toggle';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
@@ -20,8 +23,15 @@ const TEMPLATE = [
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { variant, href, groupName, value, summary, defaultOpen } =
-		attributes;
+	const {
+		variant,
+		href,
+		groupName,
+		value,
+		summary,
+		defaultOpen,
+		carbonDefault,
+	} = attributes;
 
 	const classes = [
 		'cds--tile',
@@ -31,6 +41,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		// preview has to carry it or the canvas shows a different tile from the
 		// published page — the divergence check-class-parity.js exists for.
 		variant === 'selectable' && groupName ? 'cds--tile--radio' : null,
+		// Mirrors tile_frame_class() on the server: an interactive tile gets a
+		// border you can see at rest unless the author asks for Carbon's own
+		// look. Kept here so the canvas shows the shape the visitor gets.
+		tileFrameClass( { carbonDefault }, variant ),
 	]
 		.filter( Boolean )
 		.join( ' ' );
@@ -148,6 +162,18 @@ export default function Edit( { attributes, setAttributes } ) {
 							}
 						/>
 					</>
+				) }
+				{ ( variant === 'selectable' || variant === 'clickable' ) && (
+					<CarbonDefaultToggle
+						value={ carbonDefault }
+						onChange={ ( v ) =>
+							setAttributes( { carbonDefault: v } )
+						}
+						help={ __(
+							'AWT draws a border around a selectable or clickable tile, so you can see its shape before you choose it. Turn this on to use Carbon’s own look instead, where the tile is a shaded panel with no outline.',
+							'awt-blocks'
+						) }
+					/>
 				) }
 			</PanelBody>
 		</InspectorControls>

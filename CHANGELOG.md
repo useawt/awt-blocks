@@ -12,6 +12,13 @@
 
 ## Unreleased
 
+### [A11y]
+
+- Selectable and clickable tiles now have a visible border, so you can see the
+  shape of the control before you choose it. Plain content tiles are unchanged.
+  A "Carbon default" switch on the tile turns the border off.
+- The fluid text field now previews in the editor the way it publishes.
+
 ### [Breaking]
 
 - Lists and preformatted blocks now get the same 24px gap below them as

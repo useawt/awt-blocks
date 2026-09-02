@@ -12,19 +12,26 @@
  * Props:
  *   - value:    current `carbonDefault` attribute value.
  *   - onChange: receives the new boolean.
+ *   - help:     optional help text. Defaults to the field wording below.
+ *               awt/tile passes its own, because a tile is not a field and the
+ *               default sentence would describe something the author cannot see.
+ *               Same control, same label, same place in the inspector.
  */
 
 import { __ } from '@wordpress/i18n';
 import { ToggleControl } from '@wordpress/components';
 
-export default function CarbonDefaultToggle( { value, onChange } ) {
+export default function CarbonDefaultToggle( { value, onChange, help } ) {
 	return (
 		<ToggleControl
 			label={ __( 'Carbon default', 'awt-blocks' ) }
-			help={ __(
-				'AWT draws a border on all four sides of a field, so its shape is easy to see. Turn this on to use Carbon’s own look instead: a shaded fill with one line under the text.',
-				'awt-blocks'
-			) }
+			help={
+				help ||
+				__(
+					'AWT draws a border on all four sides of a field, so its shape is easy to see. Turn this on to use Carbon’s own look instead: a shaded fill with one line under the text.',
+					'awt-blocks'
+				)
+			}
 			checked={ !! value }
 			onChange={ onChange }
 		/>
@@ -43,4 +50,22 @@ export default function CarbonDefaultToggle( { value, onChange } ) {
  */
 export function fieldFrameClass( carbonDefault ) {
 	return carbonDefault ? null : 'awt-field--framed';
+}
+
+/**
+ * The editor-preview class for an interactive tile's wrapper.
+ *
+ * Mirrors `tile_frame_class()` on the server. Returns null (not '') so it drops
+ * out of the `.filter( Boolean )` chain the tile already uses.
+ *
+ * @param {Object}  attributes               Block attributes.
+ * @param {boolean} attributes.carbonDefault Opt back into Carbon's own look.
+ * @param {string}  variant                  Tile variant.
+ * @return {string|null} The class, or null.
+ */
+export function tileFrameClass( { carbonDefault }, variant ) {
+	if ( variant !== 'selectable' && variant !== 'clickable' ) {
+		return null;
+	}
+	return carbonDefault ? null : 'awt-tile--framed';
 }

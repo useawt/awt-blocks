@@ -47,7 +47,18 @@ if ( $variant === 'clickable' ) {
 	$classes[] = 'cds--tile--expandable';
 }
 
-$root_class         = $ds ? $ds->classes_for( 'tile', array( 'variant' => $variant ) ) : implode( ' ', $classes );
+$root_class = $ds ? $ds->classes_for( 'tile', array( 'variant' => $variant ) ) : implode( ' ', $classes );
+
+// A resting selectable or clickable tile has no perceivable shape: Carbon
+// reserves a 1px border and leaves it transparent, so the control is found by
+// its fill alone, which measures 1.10:1 from the page in the light themes.
+// See tile_frame_class() for the numbers and for why Carbon's own
+// enable-tile-contrast flag is not enough.
+$frame_class = \AWT\Blocks\Render\tile_frame_class( $attributes, $variant );
+if ( $frame_class !== '' ) {
+	$root_class .= ' ' . $frame_class;
+}
+
 $summary_class      = $ds ? $ds->classes_for( 'tile', array( 'element' => 'summary' ) ) : 'cds--tile__summary';
 $summary_text_class = $ds ? $ds->classes_for( 'tile', array( 'element' => 'summary-text' ) ) : 'cds--tile__summary-text';
 $chevron_class      = $ds ? $ds->classes_for( 'tile', array( 'element' => 'chevron' ) ) : 'cds--tile__chevron';
@@ -98,6 +109,14 @@ if ( $variant === 'selectable' ) {
 				)
 			)
 			: 'cds--tile cds--tile--selectable cds--tile--radio';
+		// The grouped branch builds its own class string, so the frame class
+		// has to be added here too — the $root_class above is not what this
+		// path emits. Missing it meant a radio tile stayed borderless while the
+		// ungrouped one gained an outline, which the contrast measurement
+		// caught and reading the code did not.
+		if ( $frame_class !== '' ) {
+			$radio_class .= ' ' . $frame_class;
+		}
 		$radio_attrs = get_block_wrapper_attributes( array( 'class' => $radio_class ) );
 		$input_id    = unique_id( 'awt-tile' );
 

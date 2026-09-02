@@ -159,6 +159,34 @@ const PROBES = [
 		sel: 'h3.wp-block-heading',
 		spacing: true,
 	},
+	/* --- Tile borders. A resting selectable or clickable tile used to have no
+	   perceivable shape: Carbon reserves the 1px border and leaves it
+	   transparent, and the fill is 1.10:1 from the page in light, 1.20:1 in
+	   dark. Since 2026.09.0 the interactive variants carry
+	   `--cds-border-strong` instead. Nothing here read a tile border before,
+	   which is why a control with no visible edge passed this gate for a month.
+	   The plain tile is probed too, to hold the line that a surface is not a
+	   control and must stay unbordered. --- */
+	{
+		page: 'widgets',
+		key: 'tile-selectable (resting)',
+		sel: '.cds--tile--selectable:not(.cds--tile--radio)',
+	},
+	{
+		page: 'widgets',
+		key: 'tile-radio (resting)',
+		sel: '.cds--tile--radio',
+	},
+	{
+		page: 'widgets',
+		key: 'tile-clickable (resting)',
+		sel: '.cds--tile--clickable',
+	},
+	{
+		page: 'content',
+		key: 'tile-plain (resting)',
+		sel: '.awt-feature-grid .cds--tile',
+	},
 	{ page: 'content', key: 'header', sel: '.cds--header', box: true },
 	{ page: 'content', key: 'header-brand', sel: '.cds--header__name' },
 	{
