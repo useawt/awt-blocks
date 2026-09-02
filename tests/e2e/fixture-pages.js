@@ -181,6 +181,20 @@ const CONTENT = `
 <!-- /wp:awt/tile -->
 <!-- /wp:awt/feature-grid -->
 
+<!-- Core body-copy blocks in sequence, so the editorial-rhythm defaults are
+     covered by the computed-styles gate. core/list and core/preformatted had
+     no default before 2026.09.0 and computed to a 0 bottom margin, so each sat
+     flush against the block after it while the paragraphs around them kept
+     24px. No fixture mixed a list with a paragraph, so nothing saw it. -->
+<!-- wp:paragraph --><p>A paragraph before a list, to set the rhythm the list has to keep.</p><!-- /wp:paragraph -->
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item --><li>First item</li><!-- /wp:list-item -->
+<!-- wp:list-item --><li>Second item</li><!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+<!-- wp:paragraph --><p>A paragraph directly after the list, which must not touch it.</p><!-- /wp:paragraph -->
+<!-- wp:preformatted --><pre class="wp-block-preformatted">Preformatted text in the flow.</pre><!-- /wp:preformatted -->
+<!-- wp:paragraph --><p>A paragraph directly after the preformatted block.</p><!-- /wp:paragraph -->
+
 <!-- wp:awt/pricing-tile {"tierName":"Essentials","price":"0","pricePeriod":"forever","description":"The full component set.","ctaText":"Get started"} /-->
 <!-- wp:awt/pagination {"totalPages":5,"currentPage":2,"baseUrl":"/docs"} /-->
 <!-- /wp:awt/section -->

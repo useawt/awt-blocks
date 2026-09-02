@@ -110,16 +110,28 @@ function is_core_spacing_block( string $name, array $args ): bool {
 
 /**
  * Per-block default Spacing token for core blocks. Most core blocks are opt-in
- * (default '' = no AWT spacing), but two carry a default to set the page's
- * editorial rhythm, mirroring Carbon's long-form pages: core/paragraph '06'
- * (24px between paragraphs) and core/heading '05' (16px below a heading —
- * the same gap the theme blockGap already produced, now carried by the
- * heading itself so the select reads honestly and the gap no longer depends
- * on the following block's top margin). Mirror in global-block-controls.js.
+ * (default '' = no AWT spacing), but the blocks that carry body copy take a
+ * default so the page has one editorial rhythm, mirroring Carbon's long-form
+ * pages: core/paragraph, core/list and core/preformatted '06' (24px) and
+ * core/heading '05' (16px below a heading — the same gap the theme blockGap
+ * already produced, now carried by the heading itself so the select reads
+ * honestly and the gap no longer depends on the following block's top
+ * margin).
+ *
+ * Lists and preformatted blocks were added in 2026.09.0. Without a default
+ * they computed to 0, so a list or a preformatted block sat flush against
+ * whatever followed it while every paragraph around it kept its 24px.
+ *
+ * core/quote is deliberately absent: it carries its own margin and is not
+ * flush, so giving it a token is a design change rather than a fix.
+ *
+ * Mirror in global-block-controls.js.
  */
 const CORE_SPACING_DEFAULTS = array(
-	'core/paragraph' => '06',
-	'core/heading'   => '05',
+	'core/paragraph'    => '06',
+	'core/list'         => '06',
+	'core/preformatted' => '06',
+	'core/heading'      => '05',
 );
 
 /**

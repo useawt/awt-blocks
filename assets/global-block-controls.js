@@ -210,11 +210,17 @@
 	};
 
 	// Per-block default Spacing token for core blocks. Most core blocks are
-	// opt-in (default '' = no AWT spacing), but two carry a default to set the
-	// page's editorial rhythm, mirroring Carbon's long-form pages: paragraphs
-	// '06' (24px), headings '05' (16px). Mirror in global-controls.php.
+	// opt-in (default '' = no AWT spacing), but the blocks that carry body
+	// copy take a default so the page has one editorial rhythm, mirroring
+	// Carbon's long-form pages: paragraphs, lists and preformatted '06'
+	// (24px), headings '05' (16px). Lists and preformatted computed to 0
+	// before 2026.09.0, so they sat flush against the next block. Quote is
+	// deliberately absent: it has its own margin and is not flush.
+	// Mirror in global-controls.php.
 	const CORE_SPACING_DEFAULTS = {
 		'core/paragraph': '06',
+		'core/list': '06',
+		'core/preformatted': '06',
 		'core/heading': '05',
 	};
 

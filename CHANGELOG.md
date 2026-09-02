@@ -12,6 +12,11 @@
 
 ## Unreleased
 
+### [Breaking]
+
+- Lists and preformatted blocks now get the same 24px gap below them as
+  paragraphs. Before, they sat flush against the next block.
+
 ## 2026.08.0 — 2026-08-25
 
 The first public release of AWT Blocks.

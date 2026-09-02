@@ -108,6 +108,12 @@ const SCHEMES = [ 'light', 'dark' ];
  * state  'focus' | 'hover'. Applied to this element, then undone.
  * box    record block-size and padding. Opt-in — see the header.
  * inline also record inline-size. Only where a width is designed, not typed.
+ * spacing record margin-block-end — the editorial rhythm the theme gives a
+ *        block. Opt-in, and safe for CI because the value is a spacing token,
+ *        not a measured box: it does not move with text shaping. Added when
+ *        core/list and core/preformatted were found sitting flush against the
+ *        next block because they carried no default token, a defect no probe
+ *        could see while nothing recorded a margin.
  * group  'default' (page as loaded) or 'opened' (after GROUP_SETUP ran).
  * ---------------------------------------------------------------------- */
 
@@ -122,6 +128,36 @@ const PROBES = [
 		sel: '.cds--skip-to-content',
 		state: 'focus',
 		box: true,
+	},
+	/* --- Editorial rhythm. The gap the theme puts under each body-copy
+	   block, from the per-block Spacing defaults in global-controls.php.
+	   Paragraphs and headings always had one; lists and preformatted blocks
+	   computed to 0 until 2026.09.0 and so collided with whatever followed
+	   them. Recorded here so a future edit to those defaults cannot change
+	   the page's rhythm silently. --- */
+	{
+		page: 'content',
+		key: 'rhythm: paragraph',
+		sel: 'p.wp-block-paragraph.awt-spacing-06',
+		spacing: true,
+	},
+	{
+		page: 'content',
+		key: 'rhythm: list',
+		sel: 'ul.wp-block-list',
+		spacing: true,
+	},
+	{
+		page: 'content',
+		key: 'rhythm: preformatted',
+		sel: 'pre.wp-block-preformatted',
+		spacing: true,
+	},
+	{
+		page: 'content',
+		key: 'rhythm: heading',
+		sel: 'h3.wp-block-heading',
+		spacing: true,
 	},
 	{ page: 'content', key: 'header', sel: '.cds--header', box: true },
 	{ page: 'content', key: 'header-brand', sel: '.cds--header__name' },
@@ -962,6 +998,10 @@ function measureInPage( probe ) {
 		);
 	}
 
+	if ( probe.spacing ) {
+		out.marginBlockEnd = style.marginBlockEnd;
+	}
+
 	if ( probe.box ) {
 		const rect = probe.pseudo ? null : el.getBoundingClientRect();
 		out.box = {
@@ -1221,11 +1261,18 @@ async function runProbe( page, probe ) {
 	}
 	await settle( page, probe );
 
+	// Every option `measureInPage` reads has to be listed here: the probe is
+	// serialized across into the page, so an option missing from this object
+	// is simply absent when the measuring code tests for it. `inline` was
+	// missing from the day it was written, which is why thirteen probes asked
+	// for a width and no snapshot ever held one.
 	const plain = {
 		sel: probe.sel,
 		nth: probe.nth || 0,
 		pseudo: probe.pseudo || null,
 		box: !! probe.box,
+		inline: !! probe.inline,
+		spacing: !! probe.spacing,
 	};
 	const result = await page.evaluate( measureInPage, plain );
 
