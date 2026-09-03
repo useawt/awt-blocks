@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-03T06:00:33+00:00\n"
+"POT-Creation-Date: 2026-09-03T06:09:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -2713,7 +2713,7 @@ msgstr ""
 
 #: src/dropdown/block.json
 msgctxt "block description"
-msgid "A dropdown where people pick one option. It works fully with the keyboard. Use the Select block instead if you want your device’s own dropdown."
+msgid "A dropdown where people pick one option, styled to match the rest of your site. It works fully with the keyboard. Use the Select block instead if you want your device’s own dropdown."
 msgstr ""
 
 #: src/dropdown/block.json
@@ -3092,7 +3092,7 @@ msgstr ""
 
 #: src/list/block.json
 msgctxt "block description"
-msgid "A bulleted or numbered list. Numbered lists can use the theme's styling or your browser's own."
+msgid "A bulleted or numbered list, styled to match the rest of your site. Numbered lists can use the theme's styling or your browser's own."
 msgstr ""
 
 #: src/list/block.json
