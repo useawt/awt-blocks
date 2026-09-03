@@ -63,9 +63,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'DOM id', 'awt-blocks' ) }
+						label={ __( 'Modal id', 'awt-blocks' ) }
 						help={ __(
-							'An awt/modal-opener with a matching Panel ID opens this modal.',
+							'Give this modal an id, then point a Modal opener block at the same id.',
 							'awt-blocks'
 						) }
 						value={ id }
@@ -139,18 +139,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						disabled={ ! primaryHref }
 					/>
 					<TextControl
-						label={ __( 'Link relationship (rel)', 'awt-blocks' ) }
+						label={ __( 'Link relationship', 'awt-blocks' ) }
 						value={ primaryRel }
 						onChange={ ( v ) => setAttributes( { primaryRel: v } ) }
 						help={ __(
-							'Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
 							'awt-blocks'
 						) }
 						disabled={ ! primaryHref }
 					/>
 				</PanelBody>
 				<PanelBody
-					title={ __( 'Primary action — on click', 'awt-blocks' ) }
+					title={ __(
+						'When the primary button is clicked',
+						'awt-blocks'
+					) }
 					initialOpen={ false }
 				>
 					<PremiumNotice

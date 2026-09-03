@@ -10,7 +10,7 @@
 		"awt/header-nav",
 		"awt/header-menu"
 	],
-	"description": "Single horizontal nav link inside an awt/header-nav.",
+	"description": "One link in the header navigation menu. Add these inside a Header navigation block.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",

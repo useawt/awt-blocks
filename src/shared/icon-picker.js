@@ -350,7 +350,7 @@ export default function IconPicker( {
 											'awt-blocks'
 									  ) }`
 									: __(
-											'Manifest unavailable. Run `npm run build:icons` and reload.',
+											'Icons could not be loaded. Reload the page, and if that does not help, reinstall the AWT Blocks plugin.',
 											'awt-blocks'
 									  ) }
 							</div>

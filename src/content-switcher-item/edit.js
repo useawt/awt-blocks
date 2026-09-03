@@ -26,7 +26,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Value (optional)', 'awt-blocks' ) }
 						help={ __(
-							'Sent in the awt:content-switcher-change event for app/JS consumers. Not needed for plain content switching.',
+							'Only needed if your own code has to know which segment was picked. Leave it empty for ordinary content switching.',
 							'awt-blocks'
 						) }
 						value={ value }

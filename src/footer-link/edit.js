@@ -18,7 +18,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt-blocks' ) }
+						label={ __( 'Link URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
@@ -27,7 +27,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'External link', 'awt-blocks' ) }
 						help={ __(
-							'Adds target="_blank" rel="noopener noreferrer" and an external-link icon.',
+							'Opens in a new tab and adds an external-link icon.',
 							'awt-blocks'
 						) }
 						checked={ external }

@@ -45,10 +45,10 @@ const ALT_HINT = [
 		'awt-blocks'
 	),
 	__(
-		'• Don\'t include the word "image" or "logo" alone — screen readers already announce that',
+		'• Don\'t include the word "image" or "logo" on its own. Screen readers already announce that',
 		'awt-blocks'
 	),
-	__( '• Keep it concise — under ~100 characters', 'awt-blocks' ),
+	__( '• Keep it short, under about 100 characters', 'awt-blocks' ),
 ].join( '\n' );
 
 export default function Edit( { attributes, setAttributes } ) {

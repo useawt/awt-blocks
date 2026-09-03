@@ -26,7 +26,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					</Notice>
 					<TextControl
 						label={ __(
-							'Total pages (0 = auto from main query)',
+							'Total pages (0 works it out for you)',
 							'awt-blocks'
 						) }
 						type="number"
@@ -36,7 +36,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Current page (0 = auto)', 'awt-blocks' ) }
+						label={ __(
+							'Current page (0 works it out for you)',
+							'awt-blocks'
+						) }
 						type="number"
 						value={ currentPage }
 						onChange={ ( v ) =>
@@ -45,7 +48,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<TextControl
 						label={ __(
-							'Base URL (leave blank for current archive)',
+							'Base URL (leave blank to use the current page)',
 							'awt-blocks'
 						) }
 						value={ baseUrl }

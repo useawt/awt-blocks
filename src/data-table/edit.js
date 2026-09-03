@@ -336,7 +336,11 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Caption (accessible)', 'awt-blocks' ) }
+						label={ __( 'Table caption', 'awt-blocks' ) }
+						help={ __(
+							'Says what the table shows. Everyone sees it, and screen readers read it before the table.',
+							'awt-blocks'
+						) }
 						value={ caption }
 						onChange={ ( v ) => setAttributes( { caption: v } ) }
 					/>
@@ -349,12 +353,12 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Zebra striping', 'awt-blocks' ) }
+						label={ __( 'Striped rows', 'awt-blocks' ) }
 						checked={ zebra }
 						onChange={ ( v ) => setAttributes( { zebra: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Static width', 'awt-blocks' ) }
+						label={ __( 'Fixed table width', 'awt-blocks' ) }
 						checked={ useStaticWidth }
 						onChange={ ( v ) =>
 							setAttributes( { useStaticWidth: v } )
@@ -458,7 +462,7 @@ export default function Edit( { attributes, setAttributes } ) {
 												'awt-blocks'
 										  )
 										: __(
-												'Paste a Markdown table — a header row, a |---|---| separator row, then data rows.',
+												'Paste a Markdown table: a header row, a |---|---| separator row, then data rows.',
 												'awt-blocks'
 										  )
 								}
@@ -478,7 +482,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<PremiumNotice
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
-							'Populate this table from JSON, a REST API, or a WP_Query — available in AWT Premium.',
+							'Fill this table from JSON, a REST API, or your own posts and pages. Available in AWT Premium.',
 							'awt-blocks'
 						) }
 					/>

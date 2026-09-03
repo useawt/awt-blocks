@@ -10,7 +10,7 @@
 		"awt/side-nav",
 		"awt/side-nav-section"
 	],
-	"description": "Single nav link inside a side nav.",
+	"description": "One link in the side navigation.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"side nav",

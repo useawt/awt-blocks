@@ -24,7 +24,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt-blocks' ) }
+						label={ __( 'Link URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
@@ -38,16 +38,19 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'Current-URL match mode', 'awt-blocks' ) }
+						label={ __( 'Highlight this link when', 'awt-blocks' ) }
 						value={ matchMode }
 						options={ [
 							{
 								value: 'exact',
-								label: __( 'Exact', 'awt-blocks' ),
+								label: __( 'This address only', 'awt-blocks' ),
 							},
 							{
 								value: 'prefix',
-								label: __( 'Prefix', 'awt-blocks' ),
+								label: __(
+									'This address or any page under it',
+									'awt-blocks'
+								),
 							},
 						] }
 						onChange={ ( value ) =>
@@ -56,7 +59,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<ToggleControl
 						label={ __(
-							'Force aria-current="page"',
+							'Always mark as the current page',
 							'awt-blocks'
 						) }
 						checked={ isCurrent }

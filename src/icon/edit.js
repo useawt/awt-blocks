@@ -16,13 +16,13 @@ const SIZE_OPTIONS = [ '16', '20', '24', '32' ].map( ( v ) => ( {
 
 const COLOR_OPTIONS = [
 	{ value: 'inherit', label: __( 'Inherit from text', 'awt-blocks' ) },
-	{ value: 'text-primary', label: 'text-primary' },
-	{ value: 'text-secondary', label: 'text-secondary' },
-	{ value: 'support-success', label: 'support-success' },
-	{ value: 'support-warning', label: 'support-warning' },
-	{ value: 'support-error', label: 'support-error' },
-	{ value: 'support-info', label: 'support-info' },
-	{ value: 'link-primary', label: 'link-primary' },
+	{ value: 'text-primary', label: __( 'Body text', 'awt-blocks' ) },
+	{ value: 'text-secondary', label: __( 'Secondary text', 'awt-blocks' ) },
+	{ value: 'support-success', label: __( 'Success (green)', 'awt-blocks' ) },
+	{ value: 'support-warning', label: __( 'Warning (yellow)', 'awt-blocks' ) },
+	{ value: 'support-error', label: __( 'Error (red)', 'awt-blocks' ) },
+	{ value: 'support-info', label: __( 'Information (blue)', 'awt-blocks' ) },
+	{ value: 'link-primary', label: __( 'Link', 'awt-blocks' ) },
 ];
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -84,7 +84,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'Align with text baseline', 'awt-blocks' ) }
 						help={ __(
-							'Vertically centers the icon against text on the same line. Only has a visible effect when the icon shares a line with other inline content (e.g. several icons in a row).',
+							'Lines the icon up with text on the same line. You only see a difference when the icon sits next to text or other icons.',
 							'awt-blocks'
 						) }
 						checked={ inline }
@@ -115,7 +115,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ ! decorative && ! label && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
-								'Informative icons must carry an accessible name. The linter will flag this as an Error.',
+								'An icon that carries meaning needs an accessible name. Accessibility checks report a missing one as an Error.',
 								'awt-blocks'
 							) }
 						</Notice>

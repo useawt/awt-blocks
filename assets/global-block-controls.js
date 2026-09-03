@@ -42,19 +42,19 @@
 	const LINK_STYLE = { fontSize: '0.8125rem' };
 
 	const SPACING_OPTIONS = [
-		{ value: '01', label: 'spacing-01 — 2px' },
-		{ value: '02', label: 'spacing-02 — 4px' },
-		{ value: '03', label: 'spacing-03 — 8px' },
-		{ value: '04', label: 'spacing-04 — 12px' },
-		{ value: '05', label: 'spacing-05 — 16px (default)' },
-		{ value: '06', label: 'spacing-06 — 24px' },
-		{ value: '07', label: 'spacing-07 — 32px' },
-		{ value: '08', label: 'spacing-08 — 40px' },
-		{ value: '09', label: 'spacing-09 — 48px' },
-		{ value: '10', label: 'spacing-10 — 64px' },
-		{ value: '11', label: 'spacing-11 — 80px' },
-		{ value: '12', label: 'spacing-12 — 96px' },
-		{ value: '13', label: 'spacing-13 — 160px' },
+		{ value: '01', label: '2px — spacing-01' },
+		{ value: '02', label: '4px — spacing-02' },
+		{ value: '03', label: '8px — spacing-03' },
+		{ value: '04', label: '12px — spacing-04' },
+		{ value: '05', label: '16px — spacing-05 (default)' },
+		{ value: '06', label: '24px — spacing-06' },
+		{ value: '07', label: '32px — spacing-07' },
+		{ value: '08', label: '40px — spacing-08' },
+		{ value: '09', label: '48px — spacing-09' },
+		{ value: '10', label: '64px — spacing-10' },
+		{ value: '11', label: '80px — spacing-11' },
+		{ value: '12', label: '96px — spacing-12' },
+		{ value: '13', label: '160px — spacing-13' },
 	];
 
 	// AWT block slug (sans `awt/`) → Carbon component docs. Only blocks that map
@@ -344,7 +344,7 @@
 							SPACING_OPTIONS.map( function ( o ) {
 								let label =
 									o.value === '05'
-										? 'spacing-05 — 16px'
+										? '16px — spacing-05'
 										: o.label;
 								if ( o.value === blockDefault ) {
 									label += ' (default)';
@@ -391,9 +391,9 @@
 								initialOpen: false,
 							},
 							el( SelectControl, {
-								label: __( 'Spacing (bottom margin)', 'awt' ),
+								label: __( 'Space below', 'awt' ),
 								help: __(
-									'Carbon spacing token applied as this block’s bottom margin.',
+									'How much space to leave under this block.',
 									'awt'
 								),
 								value: spacing,

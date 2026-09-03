@@ -101,9 +101,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { quoteSize: v } ) }
 					/>
 					<SelectControl
-						label={ __( 'Mark style', 'awt-blocks' ) }
+						label={ __( 'Quotation mark', 'awt-blocks' ) }
 						help={ __(
-							'Quotation glyph style at the open of the quote.',
+							'The quotation mark shown at the start of the quote.',
 							'awt-blocks'
 						) }
 						value={ markStyle }
@@ -147,7 +147,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							{
 								value: 'card',
 								label: __(
-									'Card (layer-01 background)',
+									'Card (shaded background)',
 									'awt-blocks'
 								),
 							},
@@ -221,7 +221,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextControl
 								label={ __( 'Avatar alt text', 'awt-blocks' ) }
 								help={ __(
-									'Required when an avatar is set. The linter flags missing alt as an Error.',
+									'Required when an avatar is set. Accessibility checks report missing alt text as an Error.',
 									'awt-blocks'
 								) }
 								value={ authorAvatarAlt }
@@ -251,10 +251,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="awt-testimonial__quote"
 					value={ quote }
 					onChange={ ( v ) => setAttributes( { quote: v } ) }
-					placeholder={ __(
-						'Quote body — renders in IBM Plex Serif',
-						'awt-blocks'
-					) }
+					placeholder={ __( 'Write the quote here', 'awt-blocks' ) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
 				/>
 				<figcaption className="awt-testimonial__source">

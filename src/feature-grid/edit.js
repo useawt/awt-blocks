@@ -83,10 +83,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __(
-							'Gap (Carbon spacing scale)',
-							'awt-blocks'
-						) }
+						label={ __( 'Space between tiles', 'awt-blocks' ) }
 						value={ gap }
 						options={ [ '04', '05', '06', '07', '08', '09' ].map(
 							( v ) => ( { value: v, label: `Spacing ${ v }` } )

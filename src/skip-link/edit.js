@@ -63,7 +63,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					<TextControl
 						label={ __( 'Target element ID', 'awt-blocks' ) }
 						help={ __(
-							'DOM id of the page landmark to skip to (e.g., main-content).',
+							'The id of the part of the page to jump to, such as main-content.',
 							'awt-blocks'
 						) }
 						value={ targetId }

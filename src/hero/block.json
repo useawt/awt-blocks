@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Hero",
 	"category": "awt-section",
-	"description": "Large heading + supporting text + call-to-action. Foundation block for marketing pages.",
+	"description": "A large heading, supporting text and a call to action. Use it to open a landing page.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"hero",

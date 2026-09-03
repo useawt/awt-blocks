@@ -22,9 +22,12 @@ import {
 import PremiumNotice from '../shared/premium-notice';
 
 const TYPE_OPTIONS = [
-	{ label: 'Unordered (•)', value: 'unordered' },
-	{ label: 'Ordered (Carbon-styled)', value: 'ordered' },
-	{ label: 'Ordered (native numbering)', value: 'ordered-native' },
+	{ label: 'Bulleted', value: 'unordered' },
+	{ label: 'Numbered', value: 'ordered' },
+	{
+		label: 'Numbered, using your browser’s own style',
+		value: 'ordered-native',
+	},
 ];
 
 // Free tier supplies static/inline sources (text, HTML, Markdown). The dynamic
@@ -289,9 +292,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Expressive type', 'awt-blocks' ) }
+						label={ __( 'Expressive text size', 'awt-blocks' ) }
 						help={ __(
-							'Expressive type set is designed for editorial, marketing, and dynamic web experiences. It uses larger base sizes and fluid headings.',
+							'Larger text that grows with the screen. Suits landing pages and marketing content.',
 							'awt-blocks'
 						) }
 						checked={ isExpressive }
@@ -300,7 +303,11 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'Nested style', 'awt-blocks' ) }
+						label={ __( 'Style as a sub-list', 'awt-blocks' ) }
+						help={ __(
+							'Turn this on when this list sits inside another list, so its markers match.',
+							'awt-blocks'
+						) }
 						checked={ nested }
 						onChange={ ( v ) => setAttributes( { nested: v } ) }
 					/>
@@ -318,7 +325,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<TextareaControl
 						label={ __( 'Paste content', 'awt-blocks' ) }
 						help={ __(
-							'Each line (or list item) becomes one list item. HTML <ul>/<ol> and indented Markdown create nested sub-lists, and switch the list type to match.',
+							'Each line becomes one list item. Pasted HTML lists and indented Markdown become sub-lists, and set the list type to match.',
 							'awt-blocks'
 						) }
 						value={ dataText }
@@ -335,7 +342,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<PremiumNotice
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
-							'Populate this list from JSON, a REST API, or a WP_Query — available in AWT Premium.',
+							'Fill this list from JSON, a REST API, or your own posts and pages. Available in AWT Premium.',
 							'awt-blocks'
 						) }
 					/>

@@ -19,6 +19,12 @@
   A "Carbon default" switch on the tile turns the border off.
 - The fluid text field now previews in the editor the way it publishes.
 
+### [Improvement]
+
+- Block descriptions, settings labels and help text across the editor are now
+  written in plain language. The block spacing control is now "Space below",
+  and lists its sizes in pixels first.
+
 ### [Breaking]
 
 - Lists and preformatted blocks now get the same 24px gap below them as

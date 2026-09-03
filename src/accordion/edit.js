@@ -29,7 +29,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 				<PanelBody title={ __( 'Accordion', 'awt-blocks' ) }>
 					<SelectControl
-						label={ __( 'Chevron alignment', 'awt-blocks' ) }
+						label={ __( 'Arrow position', 'awt-blocks' ) }
 						value={ align }
 						options={ [
 							{ value: 'end', label: __( 'End', 'awt-blocks' ) },
@@ -51,7 +51,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Single-open mode', 'awt-blocks' ) }
+						label={ __(
+							'Open one section at a time',
+							'awt-blocks'
+						) }
 						help={ __(
 							'Only one item can be open at a time. Opening one closes the others.',
 							'awt-blocks'

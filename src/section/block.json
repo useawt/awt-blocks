@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Section",
 	"category": "awt-section",
-	"description": "A width-limited content wrapper with consistent spacing. It's the outer container for patterns like Hero, Pricing, and Feature grid.",
+	"description": "Holds your content at a readable width with even spacing around it. Patterns like Hero, Pricing and Feature grid sit inside one.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"section",

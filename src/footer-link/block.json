@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/footer-section"
 	],
-	"description": "Single link inside a footer section.",
+	"description": "One link in a footer section.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"footer",

@@ -10,7 +10,7 @@
 		"awt/side-nav",
 		"awt/side-nav-section"
 	],
-	"description": "Visual separator between groups of side-nav links.",
+	"description": "A line that separates one group of side navigation links from the next.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"divider",

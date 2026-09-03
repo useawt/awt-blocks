@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/tabs"
 	],
-	"description": "One tab button. It pairs by position with the matching Tab panel.",
+	"description": "One tab button. The first tab shows the first panel, the second shows the second, and so on.",
 	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,

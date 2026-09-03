@@ -13,7 +13,7 @@ const TEMPLATE = [
 		'core/paragraph',
 		{
 			content:
-				'Answer body. Replace with paragraphs, lists, code, links — anything.',
+				'Write the answer here. You can use paragraphs, lists, code and links.',
 		},
 	],
 ];
@@ -44,7 +44,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 					<SelectControl
 						label={ __( 'Question heading level', 'awt-blocks' ) }
 						help={ __(
-							"The semantic heading level that wraps the question. Default H3 matches Carbon's accordion convention; override based on the surrounding page hierarchy.",
+							'The heading level for the question. Use Heading 3 unless the headings around it call for something else.',
 							'awt-blocks'
 						) }
 						value={ level }

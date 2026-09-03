@@ -28,7 +28,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							setAttributes( { isCurrentPage: v } )
 						}
 						help={ __(
-							'Sets aria-current="page" and renders as plain text.',
+							'Marks this as the page the visitor is on. It shows as plain text, not a link.',
 							'awt-blocks'
 						) }
 					/>

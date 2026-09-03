@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/content-switcher"
 	],
-	"description": "One button in a content switcher. It pairs by position with the matching switcher panel.",
+	"description": "One button in a content switcher. The first segment shows the first panel, the second shows the second, and so on.",
 	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,

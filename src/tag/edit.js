@@ -74,7 +74,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						help={
 							isLink
 								? __(
-										'Disabled while a link URL is set — a linked tag can’t be dismissible.',
+										'Not available while a link URL is set. A linked tag can’t be dismissible.',
 										'awt-blocks'
 								  )
 								: undefined
@@ -105,11 +105,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						disabled={ ! href }
 					/>
 					<TextControl
-						label={ __( 'Link relationship (rel)', 'awt-blocks' ) }
+						label={ __( 'Link relationship', 'awt-blocks' ) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						help={ __(
-							'Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
 							'awt-blocks'
 						) }
 						disabled={ ! href }

@@ -4,12 +4,12 @@
 	"name": "awt/header-menu",
 	"carbonStyles": [],
 	"awt_component": "header-nav",
-	"title": "Header menu (multi-level)",
+	"title": "Header menu",
 	"category": "awt-ui-shell",
 	"parent": [
 		"awt/header-nav"
 	],
-	"description": "A top-level nav item that opens a submenu of links. Add Header navigation item blocks inside it.",
+	"description": "A header link that opens a submenu. Add Header navigation item blocks inside it.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",

@@ -100,7 +100,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<Notice status="info" isDismissible={ false }>
 						{ __(
-							'Only renders on the front-end when allowVisitorOverride is enabled in theme settings.',
+							'This appears on your live site only if your theme lets visitors choose their own light or dark mode. AWT does by default.',
 							'awt-blocks'
 						) }
 					</Notice>

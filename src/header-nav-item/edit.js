@@ -28,27 +28,30 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt-blocks' ) }
+						label={ __( 'Link URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>
 							setAttributes( { href: value } )
 						}
 					/>
 					<SelectControl
-						label={ __( 'Current-URL match mode', 'awt-blocks' ) }
+						label={ __( 'Highlight this link when', 'awt-blocks' ) }
 						help={ __(
-							'Exact: only this URL highlights. Prefix: this URL and any descendant route highlight (useful for section roots).',
+							'Use the second option for a link to a section, so it stays highlighted on every page inside that section.',
 							'awt-blocks'
 						) }
 						value={ matchMode }
 						options={ [
 							{
 								value: 'exact',
-								label: __( 'Exact', 'awt-blocks' ),
+								label: __( 'This address only', 'awt-blocks' ),
 							},
 							{
 								value: 'prefix',
-								label: __( 'Prefix', 'awt-blocks' ),
+								label: __(
+									'This address or any page under it',
+									'awt-blocks'
+								),
 							},
 						] }
 						onChange={ ( value ) =>
@@ -57,7 +60,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<ToggleControl
 						label={ __(
-							'Force aria-current="page"',
+							'Always mark as the current page',
 							'awt-blocks'
 						) }
 						checked={ isCurrent }
@@ -65,7 +68,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							setAttributes( { isCurrent: value } )
 						}
 						help={ __(
-							'Overrides automatic URL matching for edge cases.',
+							'Turn this on when the automatic address matching gets it wrong.',
 							'awt-blocks'
 						) }
 					/>

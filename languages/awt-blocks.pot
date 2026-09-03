@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-26T05:22:20+00:00\n"
+"POT-Creation-Date: 2026-09-03T06:00:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -83,7 +83,7 @@ msgid "Button"
 msgstr ""
 
 #: src/checkbox/render.php:18
-#: src/checkbox/edit.js:123
+#: src/checkbox/edit.js:126
 msgid "Checkbox label"
 msgstr ""
 
@@ -161,6 +161,7 @@ msgstr ""
 #: src/footer-link/render.php:18
 #: src/side-nav-link/render.php:30
 #: src/button/edit.js:168
+#: src/icon/edit.js:25
 #: src/link/edit.js:59
 #: src/tag/edit.js:88
 msgid "Link"
@@ -174,7 +175,7 @@ msgid "Menu"
 msgstr ""
 
 #: src/header-nav/render.php:49
-#: src/pricing-tile/edit.js:89
+#: src/pricing-tile/edit.js:86
 msgid "Primary"
 msgstr ""
 
@@ -203,7 +204,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/modal/render.php:125
+#: src/modal/render.php:142
 msgid "Close"
 msgstr ""
 
@@ -224,13 +225,13 @@ msgstr ""
 
 #: src/pagination/render.php:128
 #: src/pagination/render.php:135
-#: src/pagination/edit.js:87
+#: src/pagination/edit.js:90
 msgid "Previous page"
 msgstr ""
 
 #: src/pagination/render.php:148
 #: src/pagination/render.php:155
-#: src/pagination/edit.js:124
+#: src/pagination/edit.js:127
 msgid "Next page"
 msgstr ""
 
@@ -318,7 +319,7 @@ msgstr ""
 #: src/password-input/edit.js:173
 #: src/select/edit.js:165
 #: src/text-area/edit.js:167
-#: src/text-input/edit.js:294
+#: src/text-input/edit.js:301
 msgid "Label"
 msgstr ""
 
@@ -388,7 +389,7 @@ msgstr ""
 #: src/form/edit.js:86
 #: src/header-menu/edit.js:71
 #: src/header-nav/edit.js:41
-#: src/pagination/edit.js:55
+#: src/pagination/edit.js:58
 #: src/section/edit.js:239
 #: src/side-nav/edit.js:95
 #: src/tabs/edit.js:67
@@ -416,7 +417,7 @@ msgid "Type the ID of another element whose text should be this block’s access
 msgstr ""
 
 #: src/accessibility-panel.js:278
-#: src/testimonial/edit.js:286
+#: src/testimonial/edit.js:283
 msgid "Role"
 msgstr ""
 
@@ -430,14 +431,14 @@ msgstr ""
 
 #: src/accordion-item/edit.js:33
 #: src/faq-item/edit.js:79
-#: src/tile/edit.js:144
+#: src/tile/edit.js:155
 #: src/tooltip/edit.js:55
 msgid "Open by default"
 msgstr ""
 
 #: src/accordion-item/edit.js:40
 #: src/button/edit.js:162
-#: src/checkbox/edit.js:69
+#: src/checkbox/edit.js:72
 #: src/content-switcher-item/edit.js:36
 #: src/dropdown/edit.js:76
 #: src/link/edit.js:83
@@ -448,7 +449,7 @@ msgstr ""
 #: src/select/edit.js:83
 #: src/tab/edit.js:29
 #: src/text-area/edit.js:94
-#: src/text-input/edit.js:173
+#: src/text-input/edit.js:180
 #: src/toggle/edit.js:80
 msgid "Disabled"
 msgstr ""
@@ -462,7 +463,7 @@ msgid "Accordion"
 msgstr ""
 
 #: src/accordion/edit.js:32
-msgid "Chevron alignment"
+msgid "Arrow position"
 msgstr ""
 
 #: src/accordion/edit.js:35
@@ -480,7 +481,7 @@ msgstr ""
 #: src/accordion/edit.js:44
 #: src/button/edit.js:126
 #: src/content-switcher/edit.js:123
-#: src/data-table/edit.js:344
+#: src/data-table/edit.js:348
 #: src/dropdown/edit.js:66
 #: src/icon/edit.js:69
 #: src/link/edit.js:67
@@ -490,16 +491,16 @@ msgstr ""
 #: src/password-input/edit.js:61
 #: src/select/edit.js:73
 #: src/tag/edit.js:63
-#: src/text-input/edit.js:162
+#: src/text-input/edit.js:169
 #: src/toggle/edit.js:64
 msgid "Size"
 msgstr ""
 
 #: src/accordion/edit.js:54
-msgid "Single-open mode"
+msgid "Open one section at a time"
 msgstr ""
 
-#: src/accordion/edit.js:55
+#: src/accordion/edit.js:58
 msgid "Only one item can be open at a time. Opening one closes the others."
 msgstr ""
 
@@ -517,7 +518,7 @@ msgid "Current page"
 msgstr ""
 
 #: src/breadcrumb-item/edit.js:30
-msgid "Sets aria-current=\"page\" and renders as plain text."
+msgid "Marks this as the page the visitor is on. It shows as plain text, not a link."
 msgstr ""
 
 #: src/breadcrumb/edit.js:40
@@ -539,12 +540,13 @@ msgid "Kind"
 msgstr ""
 
 #: src/button/edit.js:132
-msgid "Expressive type variant"
+#: src/list/edit.js:295
+msgid "Expressive text size"
 msgstr ""
 
 #: src/button/edit.js:133
-#: src/list/edit.js:293
-msgid "Expressive type set is designed for editorial, marketing, and dynamic web experiences. It uses larger base sizes and fluid headings."
+#: src/list/edit.js:296
+msgid "Larger text that grows with the screen. Suits landing pages and marketing content."
 msgstr ""
 
 #: src/button/edit.js:143
@@ -552,7 +554,7 @@ msgid "Submit the form"
 msgstr ""
 
 #: src/button/edit.js:146
-msgid "Not available while a URL is set — a URL turns the button into a link."
+msgid "Not available while a URL is set. A URL turns the button into a link."
 msgstr ""
 
 #: src/button/edit.js:150
@@ -560,28 +562,28 @@ msgid "Turn on for the button that sends a form. Place the button inside a Form 
 msgstr ""
 
 #: src/button/edit.js:172
-msgid "URL (renders <a> when set)"
+msgid "URL (turns the button into a link)"
 msgstr ""
 
 #: src/button/edit.js:181
 #: src/link/edit.js:93
-#: src/modal/edit.js:129
+#: src/modal/edit.js:133
 #: src/tag/edit.js:101
 msgid "Target"
 msgstr ""
 
 #: src/button/edit.js:188
 #: src/link/edit.js:99
-#: src/modal/edit.js:138
+#: src/modal/edit.js:142
 #: src/tag/edit.js:108
-msgid "Link relationship (rel)"
+msgid "Link relationship"
 msgstr ""
 
 #: src/button/edit.js:191
 #: src/link/edit.js:102
-#: src/modal/edit.js:141
+#: src/modal/edit.js:145
 #: src/tag/edit.js:111
-msgid "Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different."
+msgid "Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different."
 msgstr ""
 
 #: src/button/edit.js:199
@@ -607,12 +609,12 @@ msgid "On click"
 msgstr ""
 
 #: src/button/edit.js:226
-#: src/modal/edit.js:153
+#: src/modal/edit.js:160
 msgid "Run a JavaScript function"
 msgstr ""
 
 #: src/button/edit.js:230
-#: src/modal/edit.js:157
+#: src/modal/edit.js:164
 msgid "Call a JavaScript function by name when clicked."
 msgstr ""
 
@@ -630,7 +632,7 @@ msgstr ""
 #: src/password-input/edit.js:49
 #: src/select/edit.js:58
 #: src/text-area/edit.js:48
-#: src/text-input/edit.js:135
+#: src/text-input/edit.js:142
 #: src/toggle/edit.js:59
 msgid "Name"
 msgstr ""
@@ -638,7 +640,7 @@ msgstr ""
 #: src/checkbox/edit.js:47
 #: src/menu-button/edit.js:119
 #: src/radio-button/edit.js:18
-#: src/tile/edit.js:118
+#: src/tile/edit.js:129
 msgid "Value"
 msgstr ""
 
@@ -648,50 +650,55 @@ msgid "Checked by default"
 msgstr ""
 
 #: src/checkbox/edit.js:57
-msgid "Indeterminate"
+msgid "Indeterminate (partially checked)"
 msgstr ""
 
-#: src/checkbox/edit.js:64
+#: src/checkbox/edit.js:67
 #: src/password-input/edit.js:67
-#: src/radio-button-group/edit.js:93
+#: src/radio-button-group/edit.js:97
 #: src/select/edit.js:88
 #: src/text-area/edit.js:89
-#: src/text-input/edit.js:168
+#: src/text-input/edit.js:175
 msgid "Required"
 msgstr ""
 
-#: src/checkbox/edit.js:75
+#: src/checkbox/edit.js:78
 #: src/dropdown/edit.js:104
 #: src/password-input/edit.js:118
-#: src/radio-button-group/edit.js:99
+#: src/radio-button-group/edit.js:103
 #: src/select/edit.js:121
 #: src/text-area/edit.js:121
-#: src/text-input/edit.js:228
+#: src/text-input/edit.js:235
 msgid "Help & validation"
 msgstr ""
 
-#: src/checkbox/edit.js:79
+#: src/checkbox/edit.js:82
 #: src/dropdown/edit.js:108
 #: src/password-input/edit.js:122
-#: src/radio-button-group/edit.js:103
+#: src/radio-button-group/edit.js:107
 #: src/select/edit.js:125
 #: src/text-area/edit.js:125
-#: src/text-input/edit.js:232
+#: src/text-input/edit.js:239
 msgid "Helper text"
 msgstr ""
 
-#: src/checkbox/edit.js:84
-#: src/radio-button-group/edit.js:108
-msgid "Invalid state"
+#: src/checkbox/edit.js:87
+#: src/dropdown/edit.js:113
+#: src/password-input/edit.js:127
+#: src/radio-button-group/edit.js:112
+#: src/select/edit.js:130
+#: src/text-area/edit.js:130
+#: src/text-input/edit.js:244
+msgid "Invalid"
 msgstr ""
 
-#: src/checkbox/edit.js:89
+#: src/checkbox/edit.js:92
 #: src/dropdown/edit.js:118
 #: src/password-input/edit.js:132
-#: src/radio-button-group/edit.js:113
+#: src/radio-button-group/edit.js:117
 #: src/select/edit.js:135
 #: src/text-area/edit.js:135
-#: src/text-input/edit.js:242
+#: src/text-input/edit.js:249
 msgid "Invalid message"
 msgstr ""
 
@@ -701,13 +708,12 @@ msgstr ""
 
 #: src/code-snippet/edit.js:91
 #: src/notification/edit.js:110
-#: src/tile/edit.js:60
+#: src/tile/edit.js:74
 msgid "Variant"
 msgstr ""
 
 #: src/code-snippet/edit.js:97
-#: src/page-language.js:67
-msgid "Language"
+msgid "Code language"
 msgstr ""
 
 #: src/code-snippet/edit.js:100
@@ -727,7 +733,7 @@ msgid "Copy button label"
 msgstr ""
 
 #: src/code-snippet/edit.js:124
-msgid "Copied-state label"
+msgid "Label shown after copying"
 msgstr ""
 
 #: src/color-scheme-toggle/edit.js:11
@@ -761,7 +767,7 @@ msgid "Dark-state label"
 msgstr ""
 
 #: src/color-scheme-toggle/edit.js:102
-msgid "Only renders on the front-end when allowVisitorOverride is enabled in theme settings."
+msgid "This appears on your live site only if your theme lets visitors choose their own light or dark mode. AWT does by default."
 msgstr ""
 
 #: src/content-switcher-item/edit.js:27
@@ -769,7 +775,7 @@ msgid "Value (optional)"
 msgstr ""
 
 #: src/content-switcher-item/edit.js:28
-msgid "Sent in the awt:content-switcher-change event for app/JS consumers. Not needed for plain content switching."
+msgid "Only needed if your own code has to know which segment was picked. Leave it empty for ordinary content switching."
 msgstr ""
 
 #: src/content-switcher-item/edit.js:53
@@ -805,12 +811,12 @@ msgid "Text"
 msgstr ""
 
 #: src/data-table/edit.js:21
-#: src/list/edit.js:35
+#: src/list/edit.js:38
 msgid "HTML"
 msgstr ""
 
 #: src/data-table/edit.js:22
-#: src/list/edit.js:36
+#: src/list/edit.js:39
 msgid "Markdown"
 msgstr ""
 
@@ -831,86 +837,90 @@ msgid "Data table"
 msgstr ""
 
 #: src/data-table/edit.js:339
-msgid "Caption (accessible)"
+msgid "Table caption"
 msgstr ""
 
-#: src/data-table/edit.js:352
-msgid "Zebra striping"
+#: src/data-table/edit.js:340
+msgid "Says what the table shows. Everyone sees it, and screen readers read it before the table."
 msgstr ""
 
-#: src/data-table/edit.js:357
-msgid "Static width"
+#: src/data-table/edit.js:356
+msgid "Striped rows"
 msgstr ""
 
-#: src/data-table/edit.js:364
+#: src/data-table/edit.js:361
+msgid "Fixed table width"
+msgstr ""
+
+#: src/data-table/edit.js:368
 msgid "Sticky header"
 msgstr ""
 
-#: src/data-table/edit.js:371
+#: src/data-table/edit.js:375
 msgid "Sortable columns"
 msgstr ""
 
-#: src/data-table/edit.js:378
+#: src/data-table/edit.js:382
 msgid "Default sort column"
 msgstr ""
 
-#: src/data-table/edit.js:385
+#: src/data-table/edit.js:389
 #: src/testimonial/edit.js:131
 msgid "None"
 msgstr ""
 
-#: src/data-table/edit.js:401
+#: src/data-table/edit.js:405
 msgid "Default sort direction"
 msgstr ""
 
-#: src/data-table/edit.js:418
-#: src/list/edit.js:309
+#: src/data-table/edit.js:422
+#: src/list/edit.js:316
 msgid "Data"
 msgstr ""
 
-#: src/data-table/edit.js:422
-#: src/list/edit.js:313
+#: src/data-table/edit.js:426
+#: src/list/edit.js:320
 msgid "Data source"
 msgstr ""
 
-#: src/data-table/edit.js:430
+#: src/data-table/edit.js:434
 msgid "Headers (one per line: key|label)"
 msgstr ""
 
-#: src/data-table/edit.js:439
+#: src/data-table/edit.js:443
 msgid "Rows (one per line, pipe-separated, in header order)"
 msgstr ""
 
-#: src/data-table/edit.js:453
-#: src/list/edit.js:319
+#: src/data-table/edit.js:457
+#: src/list/edit.js:326
 msgid "Paste content"
 msgstr ""
 
-#: src/data-table/edit.js:456
+#: src/data-table/edit.js:460
 msgid "Paste an HTML <table>. Its header row and body rows become the table data."
 msgstr ""
 
-#: src/data-table/edit.js:460
-msgid "Paste a Markdown table — a header row, a |---|---| separator row, then data rows."
+#: src/data-table/edit.js:464
+msgid "Paste a Markdown table: a header row, a |---|---| separator row, then data rows."
 msgstr ""
 
-#: src/data-table/edit.js:474
+#: src/data-table/edit.js:478
 msgid "Generate table"
 msgstr ""
 
-#: src/data-table/edit.js:479
-#: src/list/edit.js:336
+#: src/data-table/edit.js:483
+#: src/list/edit.js:343
 msgid "More data sources"
 msgstr ""
 
-#: src/data-table/edit.js:480
-msgid "Populate this table from JSON, a REST API, or a WP_Query — available in AWT Premium."
+#: src/data-table/edit.js:484
+msgid "Fill this table from JSON, a REST API, or your own posts and pages. Available in AWT Premium."
 msgstr ""
 
 #: src/dropdown/edit.js:59
 #: src/password-input/edit.js:54
 #: src/text-area/edit.js:53
-#: src/text-input/edit.js:150
+#: src/text-input/edit.js:157
 msgid "Placeholder"
 msgstr ""
 
@@ -923,16 +933,8 @@ msgstr ""
 #: src/password-input/edit.js:90
 #: src/select/edit.js:110
 #: src/text-area/edit.js:110
-#: src/text-input/edit.js:217
+#: src/text-input/edit.js:224
 msgid "Style"
-msgstr ""
-
-#: src/dropdown/edit.js:113
-#: src/password-input/edit.js:127
-#: src/select/edit.js:130
-#: src/text-area/edit.js:130
-#: src/text-input/edit.js:237
-msgid "Invalid"
 msgstr ""
 
 #: src/faq-item/edit.js:43
@@ -944,7 +946,7 @@ msgid "Question heading level"
 msgstr ""
 
 #: src/faq-item/edit.js:46
-msgid "The semantic heading level that wraps the question. Default H3 matches Carbon's accordion convention; override based on the surrounding page hierarchy."
+msgid "The heading level for the question. Use Heading 3 unless the headings around it call for something else."
 msgstr ""
 
 #: src/faq-item/edit.js:54
@@ -992,7 +994,7 @@ msgid "Columns"
 msgstr ""
 
 #: src/feature-grid/edit.js:86
-msgid "Gap (Carbon spacing scale)"
+msgid "Space between tiles"
 msgstr ""
 
 #: src/footer-link/edit.js:17
@@ -1003,7 +1005,8 @@ msgstr ""
 #: src/header-action/edit.js:84
 #: src/header-nav-item/edit.js:31
 #: src/side-nav-link/edit.js:27
-msgid "Link target (href)"
+#: src/tile/edit.js:104
+msgid "Link URL"
 msgstr ""
 
 #: src/footer-link/edit.js:28
@@ -1011,11 +1014,11 @@ msgid "External link"
 msgstr ""
 
 #: src/footer-link/edit.js:29
-msgid "Adds target=\"_blank\" rel=\"noopener noreferrer\" and an external-link icon."
+msgid "Opens in a new tab and adds an external-link icon."
 msgstr ""
 
 #: src/footer-link/edit.js:52
-#: src/side-nav-link/edit.js:116
+#: src/side-nav-link/edit.js:119
 msgid "Link label"
 msgstr ""
 
@@ -1061,12 +1064,12 @@ msgid "Header"
 msgstr ""
 
 #: src/form/edit.js:99
-#: src/radio-button-group/edit.js:72
+#: src/radio-button-group/edit.js:76
 msgid "Legend"
 msgstr ""
 
 #: src/form/edit.js:102
-msgid "Renders as <h2> at the top of the form."
+msgid "Shows as a heading at the top of the form."
 msgstr ""
 
 #: src/header-action/edit.js:54
@@ -1083,7 +1086,7 @@ msgid "Required. Spoken by screen readers; visible only when kind is \"Icon with
 msgstr ""
 
 #: src/header-action/edit.js:85
-msgid "If set, renders as <a>. Leave blank for a button."
+msgid "Add a URL to make this a link. Leave it blank for a button."
 msgstr ""
 
 #: src/header-action/edit.js:95
@@ -1091,7 +1094,7 @@ msgid "Panel ID"
 msgstr ""
 
 #: src/header-action/edit.js:96
-msgid "If set, clicking the button toggles a matching awt/panel / awt/modal / awt/side-nav."
+msgid "Enter the id of the modal or side navigation this button should open."
 msgstr ""
 
 #: src/header-brand/edit.js:22
@@ -1131,11 +1134,11 @@ msgid "• Mention that clicking navigates home when relevant (e.g., \"Acme logo
 msgstr ""
 
 #: src/header-brand/edit.js:47
-msgid "• Don't include the word \"image\" or \"logo\" alone — screen readers already announce that"
+msgid "• Don't include the word \"image\" or \"logo\" on its own. Screen readers already announce that"
 msgstr ""
 
 #: src/header-brand/edit.js:51
-msgid "• Keep it concise — under ~100 characters"
+msgid "• Keep it short, under about 100 characters"
 msgstr ""
 
 #: src/header-brand/edit.js:124
@@ -1208,33 +1211,33 @@ msgstr ""
 
 #: src/header-nav-item/edit.js:38
 #: src/side-nav-link/edit.js:41
-msgid "Current-URL match mode"
+msgid "Highlight this link when"
 msgstr ""
 
 #: src/header-nav-item/edit.js:39
-msgid "Exact: only this URL highlights. Prefix: this URL and any descendant route highlight (useful for section roots)."
+msgid "Use the second option for a link to a section, so it stays highlighted on every page inside that section."
 msgstr ""
 
 #: src/header-nav-item/edit.js:47
 #: src/side-nav-link/edit.js:46
-msgid "Exact"
+msgid "This address only"
 msgstr ""
 
 #: src/header-nav-item/edit.js:51
 #: src/side-nav-link/edit.js:50
-msgid "Prefix"
+msgid "This address or any page under it"
 msgstr ""
 
-#: src/header-nav-item/edit.js:59
-#: src/side-nav-link/edit.js:58
-msgid "Force aria-current=\"page\""
+#: src/header-nav-item/edit.js:62
+#: src/side-nav-link/edit.js:61
+msgid "Always mark as the current page"
 msgstr ""
 
-#: src/header-nav-item/edit.js:67
-msgid "Overrides automatic URL matching for edge cases."
+#: src/header-nav-item/edit.js:70
+msgid "Turn this on when the automatic address matching gets it wrong."
 msgstr ""
 
-#: src/header-nav-item/edit.js:86
+#: src/header-nav-item/edit.js:89
 msgid "Nav item label"
 msgstr ""
 
@@ -1331,6 +1334,30 @@ msgstr ""
 msgid "Inherit from text"
 msgstr ""
 
+#: src/icon/edit.js:19
+msgid "Body text"
+msgstr ""
+
+#: src/icon/edit.js:20
+msgid "Secondary text"
+msgstr ""
+
+#: src/icon/edit.js:21
+msgid "Success (green)"
+msgstr ""
+
+#: src/icon/edit.js:22
+msgid "Warning (yellow)"
+msgstr ""
+
+#: src/icon/edit.js:23
+msgid "Error (red)"
+msgstr ""
+
+#: src/icon/edit.js:24
+msgid "Information (blue)"
+msgstr ""
+
 #: src/icon/edit.js:58
 msgid "Carbon icon"
 msgstr ""
@@ -1349,7 +1376,7 @@ msgid "Align with text baseline"
 msgstr ""
 
 #: src/icon/edit.js:86
-msgid "Vertically centers the icon against text on the same line. Only has a visible effect when the icon shares a line with other inline content (e.g. several icons in a row)."
+msgid "Lines the icon up with text on the same line. You only see a difference when the icon sits next to text or other icons."
 msgstr ""
 
 #: src/icon/edit.js:96
@@ -1361,7 +1388,7 @@ msgid "Decorative icons are hidden from screen readers. Uncheck to provide an ac
 msgstr ""
 
 #: src/icon/edit.js:117
-msgid "Informative icons must carry an accessible name. The linter will flag this as an Error."
+msgid "An icon that carries meaning needs an accessible name. Accessibility checks report a missing one as an Error."
 msgstr ""
 
 #: src/icon/edit.js:171
@@ -1428,7 +1455,7 @@ msgid "Inline set"
 msgstr ""
 
 #: src/inline-set/edit.js:60
-#: src/radio-button-group/edit.js:77
+#: src/radio-button-group/edit.js:81
 #: src/tabs/edit.js:56
 msgid "Orientation"
 msgstr ""
@@ -1475,7 +1502,7 @@ msgstr ""
 #: src/linter/Panel.js:14
 #: src/password-input/edit.js:140
 #: src/text-area/edit.js:143
-#: src/text-input/edit.js:250
+#: src/text-input/edit.js:257
 msgid "Warning"
 msgstr ""
 
@@ -1503,41 +1530,41 @@ msgstr[1] ""
 msgid "List item"
 msgstr ""
 
-#: src/list/edit.js:34
+#: src/list/edit.js:37
 msgid "Text (one item per line)"
 msgstr ""
 
-#: src/list/edit.js:239
+#: src/list/edit.js:242
 msgid "This list already has items. Replace them with the pasted content?"
 msgstr ""
 
-#: src/list/edit.js:284
+#: src/list/edit.js:287
 msgid "List"
 msgstr ""
 
-#: src/list/edit.js:286
-#: src/text-input/edit.js:140
+#: src/list/edit.js:289
+#: src/text-input/edit.js:147
 msgid "Type"
 msgstr ""
 
-#: src/list/edit.js:292
-msgid "Expressive type"
+#: src/list/edit.js:306
+msgid "Style as a sub-list"
 msgstr ""
 
-#: src/list/edit.js:303
-msgid "Nested style"
+#: src/list/edit.js:307
+msgid "Turn this on when this list sits inside another list, so its markers match."
 msgstr ""
 
-#: src/list/edit.js:320
-msgid "Each line (or list item) becomes one list item. HTML <ul>/<ol> and indented Markdown create nested sub-lists, and switch the list type to match."
+#: src/list/edit.js:327
+msgid "Each line becomes one list item. Pasted HTML lists and indented Markdown become sub-lists, and set the list type to match."
 msgstr ""
 
-#: src/list/edit.js:333
+#: src/list/edit.js:340
 msgid "Generate list items"
 msgstr ""
 
-#: src/list/edit.js:337
-msgid "Populate this list from JSON, a REST API, or a WP_Query — available in AWT Premium."
+#: src/list/edit.js:344
+msgid "Fill this list from JSON, a REST API, or your own posts and pages. Available in AWT Premium."
 msgstr ""
 
 #: src/menu-button/edit.js:63
@@ -1557,7 +1584,7 @@ msgid "Link (optional)"
 msgstr ""
 
 #: src/menu-button/edit.js:109
-msgid "Selecting this item sends visitors here. Leave empty for an action item (use Value below)."
+msgid "Where this item takes visitors. Leave it empty if the item runs an action instead, then fill in Value."
 msgstr ""
 
 #: src/menu-button/edit.js:137
@@ -1589,11 +1616,11 @@ msgid "Modal"
 msgstr ""
 
 #: src/modal/edit.js:66
-msgid "DOM id"
+msgid "Modal id"
 msgstr ""
 
 #: src/modal/edit.js:67
-msgid "An awt/modal-opener with a matching Panel ID opens this modal."
+msgid "Give this modal an id, then point a Modal opener block at the same id."
 msgstr ""
 
 #: src/modal/edit.js:75
@@ -1608,27 +1635,31 @@ msgstr ""
 msgid "Secondary action label"
 msgstr ""
 
-#: src/modal/edit.js:108
+#: src/modal/edit.js:102
+msgid "Leave empty for a modal with only one button."
+msgstr ""
+
+#: src/modal/edit.js:112
 msgid "Danger styling"
 msgstr ""
 
-#: src/modal/edit.js:114
+#: src/modal/edit.js:118
 msgid "Primary action link"
 msgstr ""
 
-#: src/modal/edit.js:118
+#: src/modal/edit.js:122
 msgid "URL (turns the primary button into a link)"
 msgstr ""
 
-#: src/modal/edit.js:149
-msgid "Primary action — on click"
+#: src/modal/edit.js:153
+msgid "When the primary button is clicked"
 msgstr ""
 
-#: src/modal/edit.js:166
+#: src/modal/edit.js:173
 msgid "This is a preview for editing. On your live site the modal stays hidden until a visitor opens it."
 msgstr ""
 
-#: src/modal/edit.js:179
+#: src/modal/edit.js:186
 msgid "Modal heading"
 msgstr ""
 
@@ -1664,12 +1695,16 @@ msgstr ""
 msgid "Site default"
 msgstr ""
 
+#: src/page-language.js:67
+msgid "Language"
+msgstr ""
+
 #: src/page-language.js:70
 msgid "Page language"
 msgstr ""
 
 #: src/page-language.js:71
-msgid "Set a different language for this page — use it when the whole page is in another language. Leave “Site default” to use the site’s language."
+msgid "Set a different language for this page. Use it when the whole page is in another language. Leave “Site default” to use the site’s language."
 msgstr ""
 
 #: src/pagination/edit.js:22
@@ -1677,15 +1712,15 @@ msgid "On archive / blog templates, leave Total pages = 0 and the block auto-det
 msgstr ""
 
 #: src/pagination/edit.js:28
-msgid "Total pages (0 = auto from main query)"
+msgid "Total pages (0 works it out for you)"
 msgstr ""
 
 #: src/pagination/edit.js:39
-msgid "Current page (0 = auto)"
+msgid "Current page (0 works it out for you)"
 msgstr ""
 
-#: src/pagination/edit.js:47
-msgid "Base URL (leave blank for current archive)"
+#: src/pagination/edit.js:50
+msgid "Base URL (leave blank to use the current page)"
 msgstr ""
 
 #: src/password-input/edit.js:47
@@ -1695,13 +1730,13 @@ msgstr ""
 #: src/password-input/edit.js:77
 #: src/select/edit.js:93
 #: src/text-area/edit.js:104
-#: src/text-input/edit.js:183
+#: src/text-input/edit.js:190
 #: src/toggle/edit.js:75
 msgid "Visually hide label"
 msgstr ""
 
 #: src/password-input/edit.js:82
-#: src/text-input/edit.js:279
+#: src/text-input/edit.js:286
 msgid "Autocomplete"
 msgstr ""
 
@@ -1719,7 +1754,7 @@ msgstr ""
 
 #: src/password-input/edit.js:145
 #: src/text-area/edit.js:148
-#: src/text-input/edit.js:255
+#: src/text-input/edit.js:262
 msgid "Warning message"
 msgstr ""
 
@@ -1732,7 +1767,7 @@ msgid "Featured"
 msgstr ""
 
 #: src/pricing-tile/edit.js:44
-msgid "Visual emphasis (accent border + slight elevation). Typically one per row."
+msgid "Adds an accent border and a slight lift. Usually one per row."
 msgstr ""
 
 #: src/pricing-tile/edit.js:52
@@ -1744,54 +1779,54 @@ msgid "Optional. E.g. \"Most popular\", \"Best value\"."
 msgstr ""
 
 #: src/pricing-tile/edit.js:61
-msgid "Selectable (radio-tile style)"
+msgid "Selectable"
 msgstr ""
 
-#: src/pricing-tile/edit.js:65
-msgid "Tiles act as a radio group — picking one clears the others. Visual treatment only at Stage 1; selection state is purely decorative."
+#: src/pricing-tile/edit.js:62
+msgid "Picking one tile clears the others. This is styling only: the choice is not saved or submitted."
 msgstr ""
 
-#: src/pricing-tile/edit.js:73
+#: src/pricing-tile/edit.js:70
 msgid "Price period"
 msgstr ""
 
-#: src/pricing-tile/edit.js:74
-msgid "E.g. \"/month\", \"/year\". Rendered inline after the price. Leave empty for \"Free\" or \"Custom\" pricing."
+#: src/pricing-tile/edit.js:71
+msgid "For example \"/month\" or \"/year\". Shows right after the price. Leave it empty for \"Free\" or \"Custom\" pricing."
 msgstr ""
 
-#: src/pricing-tile/edit.js:84
-msgid "CTA button kind"
+#: src/pricing-tile/edit.js:81
+msgid "Button style"
 msgstr ""
 
-#: src/pricing-tile/edit.js:93
+#: src/pricing-tile/edit.js:90
 msgid "Secondary"
 msgstr ""
 
-#: src/pricing-tile/edit.js:97
+#: src/pricing-tile/edit.js:94
 msgid "Tertiary"
 msgstr ""
 
-#: src/pricing-tile/edit.js:101
+#: src/pricing-tile/edit.js:98
 msgid "Ghost"
 msgstr ""
 
-#: src/pricing-tile/edit.js:107
-msgid "CTA href"
+#: src/pricing-tile/edit.js:104
+msgid "Button URL"
 msgstr ""
 
-#: src/pricing-tile/edit.js:122
+#: src/pricing-tile/edit.js:119
 msgid "Tier name"
 msgstr ""
 
-#: src/pricing-tile/edit.js:131
+#: src/pricing-tile/edit.js:128
 msgid "Price (e.g. $49)"
 msgstr ""
 
-#: src/pricing-tile/edit.js:145
+#: src/pricing-tile/edit.js:142
 msgid "1–3 sentence pitch for this tier"
 msgstr ""
 
-#: src/pricing-tile/edit.js:166
+#: src/pricing-tile/edit.js:163
 msgid "Get started"
 msgstr ""
 
@@ -1800,10 +1835,15 @@ msgid "Group"
 msgstr ""
 
 #: src/radio-button-group/edit.js:67
-msgid "Shared name attribute"
+#: src/tile/edit.js:117
+msgid "Group name"
 msgstr ""
 
-#: src/radio-button-group/edit.js:85
+#: src/radio-button-group/edit.js:68
+msgid "Every radio button in this group shares this name, so people can pick only one of them."
+msgstr ""
+
+#: src/radio-button-group/edit.js:89
 msgid "Label position"
 msgstr ""
 
@@ -1915,11 +1955,11 @@ msgstr ""
 msgid "Placeholder (first option)"
 msgstr ""
 
-#: src/shared/carbon-default-toggle.js:23
+#: src/shared/carbon-default-toggle.js:27
 msgid "Carbon default"
 msgstr ""
 
-#: src/shared/carbon-default-toggle.js:24
+#: src/shared/carbon-default-toggle.js:30
 msgid "AWT draws a border on all four sides of a field, so its shape is easy to see. Turn this on to use Carbon’s own look instead: a shaded fill with one line under the text."
 msgstr ""
 
@@ -1964,7 +2004,7 @@ msgid "icons"
 msgstr ""
 
 #: src/shared/icon-picker.js:352
-msgid "Manifest unavailable. Run `npm run build:icons` and reload."
+msgid "Icons could not be loaded. Reload the page, and if that does not help, reinstall the AWT Blocks plugin."
 msgstr ""
 
 #: src/shared/premium-notice.js:41
@@ -2024,7 +2064,7 @@ msgid "Target element ID"
 msgstr ""
 
 #: src/skip-link/edit.js:65
-msgid "DOM id of the page landmark to skip to (e.g., main-content)."
+msgid "The id of the part of the page to jump to, such as main-content."
 msgstr ""
 
 #: src/stat/edit.js:20
@@ -2068,7 +2108,7 @@ msgid "Filter (dismissible)"
 msgstr ""
 
 #: src/tag/edit.js:76
-msgid "Disabled while a link URL is set — a linked tag can’t be dismissible."
+msgid "Not available while a link URL is set. A linked tag can’t be dismissible."
 msgstr ""
 
 #: src/tag/edit.js:92
@@ -2096,11 +2136,11 @@ msgid "Extra large (48px)"
 msgstr ""
 
 #: src/testimonial/edit.js:104
-msgid "Mark style"
+msgid "Quotation mark"
 msgstr ""
 
 #: src/testimonial/edit.js:105
-msgid "Quotation glyph style at the open of the quote."
+msgid "The quotation mark shown at the start of the quote."
 msgstr ""
 
 #: src/testimonial/edit.js:113
@@ -2120,7 +2160,7 @@ msgid "Plain (no background)"
 msgstr ""
 
 #: src/testimonial/edit.js:149
-msgid "Card (layer-01 background)"
+msgid "Card (shaded background)"
 msgstr ""
 
 #: src/testimonial/edit.js:158
@@ -2152,7 +2192,7 @@ msgid "Avatar alt text"
 msgstr ""
 
 #: src/testimonial/edit.js:223
-msgid "Required when an avatar is set. The linter flags missing alt as an Error."
+msgid "Required when an avatar is set. Accessibility checks report missing alt text as an Error."
 msgstr ""
 
 #: src/testimonial/edit.js:241
@@ -2160,14 +2200,14 @@ msgid "Remove avatar"
 msgstr ""
 
 #: src/testimonial/edit.js:254
-msgid "Quote body — renders in IBM Plex Serif"
+msgid "Write the quote here"
 msgstr ""
 
-#: src/testimonial/edit.js:276
+#: src/testimonial/edit.js:273
 msgid "Author name"
 msgstr ""
 
-#: src/testimonial/edit.js:296
+#: src/testimonial/edit.js:293
 msgid "Organization"
 msgstr ""
 
@@ -2176,7 +2216,7 @@ msgid "Text area"
 msgstr ""
 
 #: src/text-area/edit.js:60
-#: src/text-input/edit.js:157
+#: src/text-input/edit.js:164
 msgid "Default value"
 msgstr ""
 
@@ -2189,49 +2229,49 @@ msgid "Cols (0 = auto)"
 msgstr ""
 
 #: src/text-area/edit.js:81
-#: src/text-input/edit.js:266
+#: src/text-input/edit.js:273
 msgid "Maxlength"
 msgstr ""
 
 #: src/text-area/edit.js:99
-#: src/text-input/edit.js:178
+#: src/text-input/edit.js:185
 #: src/toggle/edit.js:85
 msgid "Readonly"
 msgstr ""
 
-#: src/text-input/edit.js:133
+#: src/text-input/edit.js:140
 msgid "Field"
 msgstr ""
 
-#: src/text-input/edit.js:144
-msgid "Sets the HTML input type. Changes on-screen keyboards (mobile), browser validation and autofill — most types look identical on a desktop preview."
+#: src/text-input/edit.js:151
+msgid "Changes the on-screen keyboard on phones, and how the browser checks and autofills the field. Most types look the same on a desktop screen."
 msgstr ""
 
-#: src/text-input/edit.js:188
+#: src/text-input/edit.js:195
 msgid "Inline layout"
 msgstr ""
 
-#: src/text-input/edit.js:189
+#: src/text-input/edit.js:196
 msgid "Label sits to the left of the input on one row."
 msgstr ""
 
-#: src/text-input/edit.js:203
+#: src/text-input/edit.js:210
 msgid "Usage"
 msgstr ""
 
-#: src/text-input/edit.js:207
+#: src/text-input/edit.js:214
 msgid "Fluid layout"
 msgstr ""
 
-#: src/text-input/edit.js:208
-msgid "Carbon fluid variant: label sits inside the field area. Suited to data-entry forms."
+#: src/text-input/edit.js:215
+msgid "Puts the label inside the field. Suited to data-entry forms."
 msgstr ""
 
-#: src/text-input/edit.js:262
+#: src/text-input/edit.js:269
 msgid "Constraints"
 msgstr ""
 
-#: src/text-input/edit.js:274
+#: src/text-input/edit.js:281
 msgid "Pattern"
 msgstr ""
 
@@ -2247,48 +2287,44 @@ msgstr ""
 msgid "What is this choice about?"
 msgstr ""
 
-#: src/tile/edit.js:58
+#: src/tile/edit.js:72
 msgid "Tile"
 msgstr ""
 
-#: src/tile/edit.js:65
-msgid "Default (read-only)"
-msgstr ""
-
-#: src/tile/edit.js:69
-msgid "Clickable (renders as link)"
-msgstr ""
-
-#: src/tile/edit.js:76
-msgid "Selectable (checkbox / radio-tile)"
+#: src/tile/edit.js:79
+msgid "Plain"
 msgstr ""
 
 #: src/tile/edit.js:83
-msgid "Expandable (details / summary)"
+msgid "Clickable (a link)"
 msgstr ""
 
-#: src/tile/edit.js:93
-msgid "Link URL"
+#: src/tile/edit.js:87
+msgid "Selectable (people pick it)"
 msgstr ""
 
 #: src/tile/edit.js:94
+msgid "Expandable (opens and closes)"
+msgstr ""
+
+#: src/tile/edit.js:105
 msgid "The address this tile links to."
 msgstr ""
 
-#: src/tile/edit.js:106
-msgid "Group name"
-msgstr ""
-
-#: src/tile/edit.js:107
+#: src/tile/edit.js:118
 msgid "Give every tile in one choice the same group name, and people can pick only one of them. Leave it empty for a tile that switches on and off by itself. Put the tiles in a Tile group block so the choice also has a heading."
 msgstr ""
 
-#: src/tile/edit.js:119
+#: src/tile/edit.js:130
 msgid "What this tile sends when the form is submitted, such as \"large\". Only needed if the tiles are inside a form."
 msgstr ""
 
-#: src/tile/edit.js:134
+#: src/tile/edit.js:145
 msgid "Summary (visible header)"
+msgstr ""
+
+#: src/tile/edit.js:169
+msgid "AWT draws a border around a selectable or clickable tile, so you can see its shape before you choose it. Turn this on to use Carbon’s own look instead, where the tile is a shaded panel with no outline."
 msgstr ""
 
 #: src/toggle/edit.js:57
@@ -2332,7 +2368,7 @@ msgid "Read by screen readers (e.g., \"Learn more\")."
 msgstr ""
 
 #: src/toggletip/edit.js:67
-msgid "Body of the popover that opens on click."
+msgid "The text shown in the pop-up."
 msgstr ""
 
 #: src/toggletip/edit.js:78
@@ -2600,7 +2636,7 @@ msgstr ""
 
 #: src/content-switcher-item/block.json
 msgctxt "block description"
-msgid "One button in a content switcher. It pairs by position with the matching switcher panel."
+msgid "One button in a content switcher. The first segment shows the first panel, the second shows the second, and so on."
 msgstr ""
 
 #: src/content-switcher-panel/block.json
@@ -2610,7 +2646,7 @@ msgstr ""
 
 #: src/content-switcher-panel/block.json
 msgctxt "block description"
-msgid "The content shown when its matching switcher segment is selected. Pairs by position with a switcher segment."
+msgid "The content shown when its segment is selected. The first panel belongs to the first segment, the second to the second, and so on."
 msgstr ""
 
 #: src/content-switcher/block.json
@@ -2677,7 +2713,7 @@ msgstr ""
 
 #: src/dropdown/block.json
 msgctxt "block description"
-msgid "A single-choice dropdown with Carbon styling and keyboard behavior. Use the Select block instead if you want your device’s native dropdown."
+msgid "A dropdown where people pick one option. It works fully with the keyboard. Use the Select block instead if you want your device’s own dropdown."
 msgstr ""
 
 #: src/dropdown/block.json
@@ -2741,7 +2777,7 @@ msgstr ""
 
 #: src/feature-grid/block.json
 msgctxt "block description"
-msgid "Responsive grid of feature tiles. Each child block becomes one feature cell."
+msgid "A grid of feature tiles that reflows on small screens. Each block you put inside becomes one cell."
 msgstr ""
 
 #: src/feature-grid/block.json
@@ -2767,7 +2803,7 @@ msgstr ""
 
 #: src/footer-link/block.json
 msgctxt "block description"
-msgid "Single link inside a footer section."
+msgid "One link in a footer section."
 msgstr ""
 
 #: src/footer-link/block.json
@@ -2826,7 +2862,7 @@ msgstr ""
 
 #: src/header-action/block.json
 msgctxt "block description"
-msgid "A square icon button for the header. It can open a panel, link to a page, or run a simple click action."
+msgid "A square icon button for the header. It can open a panel or link to a page."
 msgstr ""
 
 #: src/header-action/block.json
@@ -2891,12 +2927,12 @@ msgstr ""
 
 #: src/header-menu/block.json
 msgctxt "block title"
-msgid "Header menu (multi-level)"
+msgid "Header menu"
 msgstr ""
 
 #: src/header-menu/block.json
 msgctxt "block description"
-msgid "A top-level nav item that opens a submenu of links. Add Header navigation item blocks inside it."
+msgid "A header link that opens a submenu. Add Header navigation item blocks inside it."
 msgstr ""
 
 #: src/header-menu/block.json
@@ -2929,7 +2965,7 @@ msgstr ""
 
 #: src/header-nav-item/block.json
 msgctxt "block description"
-msgid "Single horizontal nav link inside an awt/header-nav."
+msgid "One link in the header navigation menu. Add these inside a Header navigation block."
 msgstr ""
 
 #: src/header-nav/block.json
@@ -2954,7 +2990,7 @@ msgstr ""
 
 #: src/hero/block.json
 msgctxt "block description"
-msgid "Large heading + supporting text + call-to-action. Foundation block for marketing pages."
+msgid "A large heading, supporting text and a call to action. Use it to open a landing page."
 msgstr ""
 
 #: src/hero/block.json
@@ -2980,7 +3016,7 @@ msgstr ""
 
 #: src/icon/block.json
 msgctxt "block description"
-msgid "Standalone Carbon icon for decorative graphics, status indicators, or callouts in body content."
+msgid "A single icon you can place in your content, on its own or next to text."
 msgstr ""
 
 #: src/icon/block.json
@@ -3046,7 +3082,7 @@ msgstr ""
 
 #: src/list-item/block.json
 msgctxt "block description"
-msgid "Item inside an AWT List. May contain a nested awt/list for sub-items."
+msgid "One item in a list. Add a List block inside it to create sub-items."
 msgstr ""
 
 #: src/list/block.json
@@ -3056,7 +3092,7 @@ msgstr ""
 
 #: src/list/block.json
 msgctxt "block description"
-msgid "A bulleted or numbered list. Numbering can use Carbon's styling or the browser's own."
+msgid "A bulleted or numbered list. Numbered lists can use the theme's styling or your browser's own."
 msgstr ""
 
 #: src/list/block.json
@@ -3269,7 +3305,7 @@ msgstr ""
 
 #: src/section/block.json
 msgctxt "block description"
-msgid "A width-limited content wrapper with consistent spacing. It's the outer container for patterns like Hero, Pricing, and Feature grid."
+msgid "Holds your content at a readable width with even spacing around it. Patterns like Hero, Pricing and Feature grid sit inside one."
 msgstr ""
 
 #: src/section/block.json
@@ -3304,7 +3340,7 @@ msgstr ""
 
 #: src/side-nav-divider/block.json
 msgctxt "block description"
-msgid "Visual separator between groups of side-nav links."
+msgid "A line that separates one group of side navigation links from the next."
 msgstr ""
 
 #: src/side-nav-divider/block.json
@@ -3332,7 +3368,7 @@ msgstr ""
 
 #: src/side-nav-link/block.json
 msgctxt "block description"
-msgid "Single nav link inside a side nav."
+msgid "One link in the side navigation."
 msgstr ""
 
 #: src/side-nav-section/block.json
@@ -3342,7 +3378,7 @@ msgstr ""
 
 #: src/side-nav-section/block.json
 msgctxt "block description"
-msgid "Collapsible group of side-nav links with an optional heading."
+msgid "A group of side navigation links that visitors can open and close. It can have a heading."
 msgstr ""
 
 #: src/side-nav/block.json
@@ -3437,7 +3473,7 @@ msgstr ""
 
 #: src/tab-panel/block.json
 msgctxt "block description"
-msgid "The content shown for its matching tab, paired by position."
+msgid "The content shown when its tab is selected. The first panel belongs to the first tab, the second to the second, and so on."
 msgstr ""
 
 #: src/tab/block.json
@@ -3447,7 +3483,7 @@ msgstr ""
 
 #: src/tab/block.json
 msgctxt "block description"
-msgid "One tab button. It pairs by position with the matching Tab panel."
+msgid "One tab button. The first tab shows the first panel, the second shows the second, and so on."
 msgstr ""
 
 #: src/tabs/block.json
@@ -3588,7 +3624,7 @@ msgstr ""
 
 #: src/tile/block.json
 msgctxt "block description"
-msgid "A content box with a heading and body. Variants: default, clickable, selectable, and expandable."
+msgid "A content box with a heading and body. It can be plain, a link, an option people pick, or a section that opens and closes."
 msgstr ""
 
 #: src/tile/block.json

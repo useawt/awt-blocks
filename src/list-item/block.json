@@ -6,7 +6,7 @@
 	"awt_component": "list",
 	"title": "List item",
 	"category": "awt-content",
-	"description": "Item inside an AWT List. May contain a nested awt/list for sub-items.",
+	"description": "One item in a list. Add a List block inside it to create sub-items.",
 	"textdomain": "awt-blocks",
 	"parent": [
 		"awt/list"

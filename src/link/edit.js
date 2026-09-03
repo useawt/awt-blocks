@@ -96,11 +96,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { target: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Link relationship (rel)', 'awt-blocks' ) }
+						label={ __( 'Link relationship', 'awt-blocks' ) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						help={ __(
-							'Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
 							'awt-blocks'
 						) }
 					/>

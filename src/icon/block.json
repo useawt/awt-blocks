@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Icon",
 	"category": "awt-content",
-	"description": "Standalone Carbon icon for decorative graphics, status indicators, or callouts in body content.",
+	"description": "A single icon you can place in your content, on its own or next to text.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"icon",

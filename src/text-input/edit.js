@@ -149,7 +149,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						options={ TYPE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 						help={ __(
-							'Sets the HTML input type. Changes on-screen keyboards (mobile), browser validation and autofill — most types look identical on a desktop preview.',
+							'Changes the on-screen keyboard on phones, and how the browser checks and autofills the field. Most types look the same on a desktop screen.',
 							'awt-blocks'
 						) }
 					/>
@@ -213,7 +213,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<ToggleControl
 						label={ __( 'Fluid layout', 'awt-blocks' ) }
 						help={ __(
-							'Carbon fluid variant: label sits inside the field area. Suited to data-entry forms.',
+							'Puts the label inside the field. Suited to data-entry forms.',
 							'awt-blocks'
 						) }
 						checked={ fluid }

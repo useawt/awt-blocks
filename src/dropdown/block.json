@@ -9,7 +9,7 @@
 	"awt_component": "dropdown",
 	"title": "Dropdown",
 	"category": "awt-forms",
-	"description": "A single-choice dropdown with Carbon styling and keyboard behavior. Use the Select block instead if you want your device’s native dropdown.",
+	"description": "A dropdown where people pick one option. It works fully with the keyboard. Use the Select block instead if you want your device’s own dropdown.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"dropdown",

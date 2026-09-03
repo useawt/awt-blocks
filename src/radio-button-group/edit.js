@@ -64,7 +64,11 @@ export default function Edit( { attributes, setAttributes } ) {
 			<InspectorControls>
 				<PanelBody title={ __( 'Group', 'awt-blocks' ) }>
 					<TextControl
-						label={ __( 'Shared name attribute', 'awt-blocks' ) }
+						label={ __( 'Group name', 'awt-blocks' ) }
+						help={ __(
+							'Every radio button in this group shares this name, so people can pick only one of them.',
+							'awt-blocks'
+						) }
 						value={ name }
 						onChange={ ( v ) => setAttributes( { name: v } ) }
 					/>
@@ -105,7 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid state', 'awt-blocks' ) }
+						label={ __( 'Invalid', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>

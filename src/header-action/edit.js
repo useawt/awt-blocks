@@ -81,9 +81,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Link target (href)', 'awt-blocks' ) }
+						label={ __( 'Link URL', 'awt-blocks' ) }
 						help={ __(
-							'If set, renders as <a>. Leave blank for a button.',
+							'Add a URL to make this a link. Leave it blank for a button.',
 							'awt-blocks'
 						) }
 						value={ href }
@@ -94,7 +94,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Panel ID', 'awt-blocks' ) }
 						help={ __(
-							'If set, clicking the button toggles a matching awt/panel / awt/modal / awt/side-nav.',
+							'Enter the id of the modal or side navigation this button should open.',
 							'awt-blocks'
 						) }
 						value={ panelId }

@@ -54,7 +54,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( v ) => setAttributes( { checked: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Indeterminate', 'awt-blocks' ) }
+						label={ __(
+							'Indeterminate (partially checked)',
+							'awt-blocks'
+						) }
 						checked={ indeterminate }
 						onChange={ ( v ) =>
 							setAttributes( { indeterminate: v } )
@@ -81,7 +84,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( v ) => setAttributes( { helperText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Invalid state', 'awt-blocks' ) }
+						label={ __( 'Invalid', 'awt-blocks' ) }
 						checked={ invalid }
 						onChange={ ( v ) => setAttributes( { invalid: v } ) }
 					/>

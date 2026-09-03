@@ -65,7 +65,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextareaControl
 						label={ __( 'Description', 'awt-blocks' ) }
 						help={ __(
-							'Body of the popover that opens on click.',
+							'The text shown in the pop-up.',
 							'awt-blocks'
 						) }
 						value={ description }

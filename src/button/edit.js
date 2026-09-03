@@ -129,9 +129,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Expressive type variant', 'awt-blocks' ) }
+						label={ __( 'Expressive text size', 'awt-blocks' ) }
 						help={ __(
-							'Expressive type set is designed for editorial, marketing, and dynamic web experiences. It uses larger base sizes and fluid headings.',
+							'Larger text that grows with the screen. Suits landing pages and marketing content.',
 							'awt-blocks'
 						) }
 						checked={ isExpressive }
@@ -144,7 +144,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						help={
 							href
 								? __(
-										'Not available while a URL is set — a URL turns the button into a link.',
+										'Not available while a URL is set. A URL turns the button into a link.',
 										'awt-blocks'
 								  )
 								: __(
@@ -170,7 +170,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				>
 					<TextControl
 						label={ __(
-							'URL (renders <a> when set)',
+							'URL (turns the button into a link)',
 							'awt-blocks'
 						) }
 						value={ href }
@@ -185,11 +185,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						disabled={ ! href }
 					/>
 					<TextControl
-						label={ __( 'Link relationship (rel)', 'awt-blocks' ) }
+						label={ __( 'Link relationship', 'awt-blocks' ) }
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						help={ __(
-							'Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
 							'awt-blocks'
 						) }
 						disabled={ ! href }

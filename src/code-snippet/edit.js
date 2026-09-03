@@ -94,7 +94,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { variant: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Language', 'awt-blocks' ) }
+						label={ __( 'Code language', 'awt-blocks' ) }
 						value={ language }
 						onChange={ ( v ) => setAttributes( { language: v } ) }
 						help={ __(
@@ -121,7 +121,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { copyLabel: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Copied-state label', 'awt-blocks' ) }
+						label={ __(
+							'Label shown after copying',
+							'awt-blocks'
+						) }
 						value={ copiedLabel }
 						onChange={ ( v ) =>
 							setAttributes( { copiedLabel: v } )

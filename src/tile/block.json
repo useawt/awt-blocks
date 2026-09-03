@@ -8,7 +8,7 @@
 	"awt_component": "tile",
 	"title": "Tile",
 	"category": "awt-data-display",
-	"description": "A content box with a heading and body. Variants: default, clickable, selectable, and expandable.",
+	"description": "A content box with a heading and body. It can be plain, a link, an option people pick, or a section that opens and closes.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"tile",

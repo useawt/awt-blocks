@@ -76,26 +76,23 @@ export default function Edit( { attributes, setAttributes } ) {
 					options={ [
 						{
 							value: 'default',
-							label: __( 'Default (read-only)', 'awt-blocks' ),
+							label: __( 'Plain', 'awt-blocks' ),
 						},
 						{
 							value: 'clickable',
-							label: __(
-								'Clickable (renders as link)',
-								'awt-blocks'
-							),
+							label: __( 'Clickable (a link)', 'awt-blocks' ),
 						},
 						{
 							value: 'selectable',
 							label: __(
-								'Selectable (checkbox / radio-tile)',
+								'Selectable (people pick it)',
 								'awt-blocks'
 							),
 						},
 						{
 							value: 'expandable',
 							label: __(
-								'Expandable (details / summary)',
+								'Expandable (opens and closes)',
 								'awt-blocks'
 							),
 						},

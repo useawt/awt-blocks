@@ -100,7 +100,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						value={ legend }
 						onChange={ ( v ) => setAttributes( { legend: v } ) }
 						help={ __(
-							'Renders as <h2> at the top of the form.',
+							'Shows as a heading at the top of the form.',
 							'awt-blocks'
 						) }
 					/>

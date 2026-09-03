@@ -69,7 +69,7 @@ function PageLanguagePanel() {
 			<SelectControl
 				label={ __( 'Page language', 'awt-blocks' ) }
 				help={ __(
-					'Set a different language for this page — use it when the whole page is in another language. Leave “Site default” to use the site’s language.',
+					'Set a different language for this page. Use it when the whole page is in another language. Leave “Site default” to use the site’s language.',
 					'awt-blocks'
 				) }
 				value={ value }

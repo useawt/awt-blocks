@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/side-nav"
 	],
-	"description": "Collapsible group of side-nav links with an optional heading.",
+	"description": "A group of side navigation links that visitors can open and close. It can have a heading.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"side nav",

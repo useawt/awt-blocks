@@ -107,7 +107,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextControl
 								label={ __( 'Link (optional)', 'awt-blocks' ) }
 								help={ __(
-									'Selecting this item sends visitors here. Leave empty for an action item (use Value below).',
+									'Where this item takes visitors. Leave it empty if the item runs an action instead, then fill in Value.',
 									'awt-blocks'
 								) }
 								value={ item.link || '' }

@@ -42,7 +42,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'Featured', 'awt-blocks' ) }
 						help={ __(
-							'Visual emphasis (accent border + slight elevation). Typically one per row.',
+							'Adds an accent border and a slight lift. Usually one per row.',
 							'awt-blocks'
 						) }
 						checked={ featured }
@@ -58,12 +58,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { badge: v } ) }
 					/>
 					<ToggleControl
-						label={ __(
-							'Selectable (radio-tile style)',
-							'awt-blocks'
-						) }
+						label={ __( 'Selectable', 'awt-blocks' ) }
 						help={ __(
-							'Tiles act as a radio group — picking one clears the others. Visual treatment only at Stage 1; selection state is purely decorative.',
+							'Picking one tile clears the others. This is styling only: the choice is not saved or submitted.',
 							'awt-blocks'
 						) }
 						checked={ selectable }
@@ -72,7 +69,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Price period', 'awt-blocks' ) }
 						help={ __(
-							'E.g. "/month", "/year". Rendered inline after the price. Leave empty for "Free" or "Custom" pricing.',
+							'For example "/month" or "/year". Shows right after the price. Leave it empty for "Free" or "Custom" pricing.',
 							'awt-blocks'
 						) }
 						value={ pricePeriod }
@@ -81,7 +78,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<SelectControl
-						label={ __( 'CTA button kind', 'awt-blocks' ) }
+						label={ __( 'Button style', 'awt-blocks' ) }
 						value={ ctaKind }
 						options={ [
 							{
@@ -104,7 +101,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { ctaKind: v } ) }
 					/>
 					<TextControl
-						label={ __( 'CTA href', 'awt-blocks' ) }
+						label={ __( 'Button URL', 'awt-blocks' ) }
 						value={ ctaHref }
 						onChange={ ( v ) => setAttributes( { ctaHref: v } ) }
 					/>
