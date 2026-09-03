@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.08.0
+Stable tag: 2026.09.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,13 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.0 — 2026-09-03 =
+* [A11y] Selectable and clickable tiles now have a visible border, so you can see the shape of the control before you choose it. Plain content tiles are unchanged. A "Carbon default" switch on the tile turns the border off.
+* [A11y] The fluid text field now previews in the editor the way it publishes.
+* [New] WordPress now tells you when a new version of AWT Blocks is out, on Dashboard, Updates. You still install it yourself.
+* [Improvement] Block descriptions, settings labels and help text across the editor are now written in plain language. The block spacing control is now "Space below", and lists its sizes in pixels first.
+* [Breaking] Lists and preformatted blocks now get the same 24px gap below them as paragraphs. Before, they sat flush against the next block.
+
 = 2026.08.0 — 2026-08-25 =
 * [New] **First release.** The Carbon Design System as WordPress blocks — 58 of them, from buttons and form fields to tabs, accordions, data tables, notifications and modals.
 * [New] An accessibility checker in the editor that flags WCAG 2.2 AA problems while you write, plus an Accessibility panel on every block.
