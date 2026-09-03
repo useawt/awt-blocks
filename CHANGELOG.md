@@ -19,6 +19,11 @@
   A "Carbon default" switch on the tile turns the border off.
 - The fluid text field now previews in the editor the way it publishes.
 
+### [New]
+
+- WordPress now tells you when a new version of AWT Blocks is out, on
+  Dashboard, Updates. You still install it yourself.
+
 ### [Improvement]
 
 - Block descriptions, settings labels and help text across the editor are now

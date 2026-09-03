@@ -66,6 +66,10 @@ AWT Blocks is English today. Every string a user reads is prepared for translati
 
 The blocks run on any theme, but they're designed and tested with the AWT theme, which provides the Carbon Design System foundation (colors, typography, light/dark themes) plus 42 ready-made patterns built from these blocks. Use them together.
 
+= How do I update AWT Blocks? =
+
+WordPress tells you when a new version is out, on Dashboard, Updates. AWT does not install it for you: download the new plugin and theme files and upload them, and keep both on the same version. Your settings, pages and content are kept. To know that a version exists, your site reads one small file on useawt.com twice a day. It sends nothing about your site, and you can turn the check off in AWT Settings, Tools.
+
 = Does the color scheme toggle need a cookie banner? =
 
 No. The visitor's light/dark choice is stored in a cookie that only holds a UI preference the visitor set themselves. Under EU rules (GDPR/ePrivacy) that is a strictly necessary cookie: no consent banner is required, and you don't need to add it to an existing banner.

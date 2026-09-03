@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-03T06:09:24+00:00\n"
+"POT-Creation-Date: 2026-09-03T08:15:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -34,31 +34,31 @@ msgstr ""
 msgid "AWT"
 msgstr ""
 
-#: awt-blocks.php:253
+#: awt-blocks.php:254
 msgid "AWT — UI shell"
 msgstr ""
 
-#: awt-blocks.php:258
+#: awt-blocks.php:259
 msgid "AWT — Navigation"
 msgstr ""
 
-#: awt-blocks.php:263
+#: awt-blocks.php:264
 msgid "AWT — Forms"
 msgstr ""
 
-#: awt-blocks.php:268
+#: awt-blocks.php:269
 msgid "AWT — Content"
 msgstr ""
 
-#: awt-blocks.php:273
+#: awt-blocks.php:274
 msgid "AWT — Feedback"
 msgstr ""
 
-#: awt-blocks.php:278
+#: awt-blocks.php:279
 msgid "AWT — Data display"
 msgstr ""
 
-#: awt-blocks.php:283
+#: awt-blocks.php:284
 msgid "AWT — Sections"
 msgstr ""
 
@@ -267,6 +267,21 @@ msgstr ""
 #: src/select/render.php:22
 #: src/select/edit.js:56
 msgid "Select"
+msgstr ""
+
+#: src/shared/updates.php:268
+#: src/shared/updates.php:272
+msgid "No changelog is bundled with this copy of AWT Blocks."
+msgstr ""
+
+#: src/shared/updates.php:308
+msgid "Update the AWT theme and the AWT Blocks plugin together — they are built as a pair."
+msgstr ""
+
+#. translators: %s: URL of the update instructions.
+#: src/shared/updates.php:337
+#, php-format
+msgid "AWT Blocks does not install its own updates. Download the new version and upload it in Plugins, Add Plugin, Upload Plugin, choosing \"Replace current with uploaded\". Step-by-step instructions: %s"
 msgstr ""
 
 #: src/side-nav/render.php:35
