@@ -2,7 +2,8 @@
  * AWT Tabs — view-side store.
  *
  * Pairs tabs with panels by DOM order: the Nth tab activates the Nth panel.
- * On render, the first tab is selected; clicking or keyboard-navigating
+ * The server renders the first usable tab selected and its panel visible, so
+ * the block works without JavaScript; clicking or keyboard-navigating
  * (Left/Right/Home/End) updates the selected tab + reveals the matching
  * panel. Keyboard pattern follows WAI-ARIA's "automatic activation" tabs
  * pattern (arrow keys move + activate immediately).
@@ -120,8 +121,16 @@ store( 'awt/tabs', {
 					panel.setAttribute( 'aria-labelledby', tab.id );
 				}
 			} );
+			// The server already renders one tab selected and its panel
+			// visible, so honour that rather than resetting to the first
+			// tab. Only pick one here when the markup has none selected.
 			if ( tabs.length > 0 ) {
-				activate( root, tabs[ 0 ] );
+				const already = tabs.find(
+					( t ) => t.getAttribute( 'aria-selected' ) === 'true'
+				);
+				const fallback =
+					tabs.find( ( t ) => ! t.disabled ) || tabs[ 0 ];
+				activate( root, already || fallback );
 			}
 
 			// Wire overflow-nav state. The tablist may not have its

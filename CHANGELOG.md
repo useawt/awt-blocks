@@ -10,6 +10,19 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [A11y]
+
+- Tabs now show the first tab's panel before any script runs, so the content is
+  readable without JavaScript. Each tab is also linked to its panel in the
+  markup rather than only after the page loads.
+
+### [Breaking]
+
+- The Tabs block's markup changed: the first usable tab renders selected and its
+  panel renders visible.
+
 ## 2026.09.0 — 2026-09-03
 
 ### [A11y]

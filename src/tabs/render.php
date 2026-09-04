@@ -7,8 +7,14 @@
  * tablist), once for panels — so authors can write the children in either
  * interleaved or grouped order.
  *
- * Per-instance ARIA wiring (aria-controls + aria-labelledby) is finished in
- * view.js's init callback, which knows the live DOM order at boot.
+ * Selection and ARIA wiring are done here, on the server: the first tab that
+ * is not disabled renders selected, its panel renders visible, and each
+ * tab/panel pair is linked with aria-controls + aria-labelledby. view.js
+ * repeats the same wiring on boot and takes over from there.
+ *
+ * This used to be left entirely to view.js, which meant every tab rendered
+ * `aria-selected="false"` and every panel rendered `hidden` — so with no
+ * JavaScript the block showed a row of buttons and none of its content.
  *
  * @var array    $attributes
  * @var string   $content
@@ -30,8 +36,21 @@ $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\Desig
 $orientation = isset( $attributes['orientation'] ) ? (string) $attributes['orientation'] : 'horizontal';
 $aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'Tabs', 'awt-blocks' );
 
-$tabs_html   = '';
-$panels_html = '';
+// The tab buttons are rendered by awt/tab, but which one is selected is only
+// knowable here, so the selected class is swapped in below.
+$nav_link_class          = $ds ? $ds->classes_for( 'tabs', array( 'element' => 'nav-link' ) ) : 'cds--tabs__nav-link';
+$nav_link_selected_class = $ds
+	? $ds->classes_for(
+		'tabs',
+		array(
+			'element'  => 'nav-link',
+			'selected' => true,
+		)
+	)
+	: 'cds--tabs__nav-link cds--tabs__nav-item--selected';
+
+$tab_blocks   = array();
+$panel_blocks = array();
 
 if ( isset( $block ) && $block instanceof \WP_Block && ! empty( $block->inner_blocks ) ) {
 	foreach ( $block->inner_blocks as $inner ) {
@@ -39,11 +58,90 @@ if ( isset( $block ) && $block instanceof \WP_Block && ! empty( $block->inner_bl
 			continue;
 		}
 		if ( $inner->name === 'awt/tab' ) {
-			$tabs_html .= $inner->render();
+			$tab_blocks[] = array(
+				'html'     => $inner->render(),
+				'disabled' => ! empty( $inner->attributes['disabled'] ),
+			);
 		} elseif ( $inner->name === 'awt/tab-panel' ) {
-			$panels_html .= $inner->render();
+			$panel_blocks[] = array( 'html' => $inner->render() );
 		}
 	}
+}
+
+// The first tab that can actually be used. A disabled tab must not be the
+// one that opens, and view.js picks the same one.
+$selected = 0;
+foreach ( $tab_blocks as $index => $tab_block ) {
+	if ( ! $tab_block['disabled'] ) {
+		$selected = $index;
+		break;
+	}
+}
+
+/**
+ * First `id` attribute in a rendered fragment — the tab's or the panel's own.
+ */
+$first_id = static function ( string $html ): string {
+	return preg_match( '/\bid="([^"]+)"/', $html, $m ) ? $m[1] : '';
+};
+
+/**
+ * Add an attribute to a fragment's first tag.
+ */
+$add_attr = static function ( string $html, string $name, string $value ): string {
+	if ( '' === $value ) {
+		return $html;
+	}
+	return (string) preg_replace(
+		'/^(<[a-z0-9-]+)/i',
+		'$1 ' . $name . '="' . esc_attr( $value ) . '"',
+		$html,
+		1
+	);
+};
+
+$tabs_html   = '';
+$panels_html = '';
+
+foreach ( $tab_blocks as $index => $tab_block ) {
+	$html     = $tab_block['html'];
+	$panel_id = isset( $panel_blocks[ $index ] ) ? $first_id( $panel_blocks[ $index ]['html'] ) : '';
+
+	// The button carries the ARIA, not the presentational <li> around it.
+	if ( '' !== $panel_id ) {
+		$html = (string) preg_replace(
+			'/(<button\b)/',
+			'$1 aria-controls="' . esc_attr( $panel_id ) . '"',
+			$html,
+			1
+		);
+	}
+
+	if ( $index === $selected ) {
+		$html = (string) preg_replace( '/aria-selected="false"/', 'aria-selected="true"', $html, 1 );
+		$html = (string) preg_replace( '/tabindex="-1"/', 'tabindex="0"', $html, 1 );
+		$html = str_replace(
+			'class="' . esc_attr( $nav_link_class ) . '"',
+			'class="' . esc_attr( $nav_link_selected_class ) . '"',
+			$html
+		);
+	}
+
+	$tabs_html .= $html;
+}
+
+foreach ( $panel_blocks as $index => $panel_block ) {
+	$html   = $panel_block['html'];
+	$tab_id = isset( $tab_blocks[ $index ] ) ? $first_id( $tab_blocks[ $index ]['html'] ) : '';
+
+	$html = $add_attr( $html, 'aria-labelledby', $tab_id );
+
+	if ( $index === $selected ) {
+		// Only the open panel loses `hidden`.
+		$html = (string) preg_replace( '/\s+hidden="hidden"/', '', $html, 1 );
+	}
+
+	$panels_html .= $html;
 }
 
 $tabs_root_class = $ds
