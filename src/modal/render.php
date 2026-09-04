@@ -82,7 +82,14 @@ $close_icon = icon( 'close', 20 );
 
 // Primary action: a link (<a>) when a URL is set, otherwise a button that just
 // closes the modal. A linked primary action navigates instead of closing.
-if ( $primary_href !== '' ) {
+//
+// An empty label means no primary button, for the same reason as the secondary
+// one below: a control with no accessible name is announced as just "button"
+// (WCAG 4.1.2). A modal whose content carries its own submit button is the
+// case that needs this.
+if ( trim( $primary_action ) === '' ) {
+	$primary_button_html = '';
+} elseif ( $primary_href !== '' ) {
 	$primary_attrs       = html_attrs(
 		array(
 			'href'   => $primary_href,

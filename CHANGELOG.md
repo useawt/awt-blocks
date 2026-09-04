@@ -17,6 +17,8 @@
 - Tabs now show the first tab's panel before any script runs, so the content is
   readable without JavaScript. Each tab is also linked to its panel in the
   markup rather than only after the page loads.
+- A modal with no primary action label no longer renders an empty button. Leave
+  the label blank when the modal holds a form with its own submit button.
 
 ### [Breaking]
 

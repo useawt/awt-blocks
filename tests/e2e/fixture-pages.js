@@ -56,6 +56,14 @@ const WIDGETS = `
 <!-- wp:paragraph --><p>This cannot be undone.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/modal -->
 
+<!-- wp:awt/modal-opener {"text":"Open the form dialog","modalId":"axe-modal-form"} /-->
+<!-- wp:awt/modal {"id":"axe-modal-form","heading":"Ask for a demo","primaryAction":"","secondaryAction":""} -->
+<!-- wp:awt/form {"ariaLabel":"Demo request"} -->
+<!-- wp:awt/text-input {"label":"Business email","name":"email_address","type":"email","required":true} /-->
+<!-- wp:awt/button {"text":"Send","type":"submit"} /-->
+<!-- /wp:awt/form -->
+<!-- /wp:awt/modal -->
+
 <!-- wp:awt/dropdown {"label":"Region"} /-->
 <!-- wp:awt/menu-button {"label":"Actions"} /-->
 <!-- wp:awt/toggletip {"label":"Storage limits"} /-->
