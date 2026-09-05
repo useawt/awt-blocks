@@ -255,7 +255,10 @@ const HANDWRITTEN = `
 <!-- /wp:html -->
 
 <!-- wp:html -->
-<style>.awt-widget-table { border-collapse: separate; } .awt-widget-table th { background: #1a263b; color: #fff; padding: 2px; }</style>
+<style>.awt-widget-table { border-collapse: separate; } .awt-widget-table th { background: #1a263b; color: #fff; padding: 2px; } .awt-widget-search { border: 1px solid #1a263b; padding: 4px; } .awt-widget-clear { background: #1a263b; color: #fff; border: 0; min-height: 24px; min-width: 24px; } .awt-widget-search:focus-visible, .awt-widget-clear:focus-visible { outline: 3px solid #1a263b; outline-offset: 1px; } @media (prefers-color-scheme: dark) { .awt-widget-search:focus-visible, .awt-widget-clear:focus-visible { outline-color: #ffffff; } }</style>
+<label for="awt-widget-q">Search the widget</label>
+<input type="text" id="awt-widget-q" class="awt-widget-search">
+<button type="button" class="awt-widget-clear">Clear</button>
 <table class="awt-widget-table">
 <tbody>
 <tr><th>Plan</th><th>Price</th></tr>
