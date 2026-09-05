@@ -38,6 +38,7 @@ $awt_shared_dir = file_exists( __DIR__ . '/src/shared/render-helpers.php' )
 require_once $awt_shared_dir . '/render-helpers.php';
 require_once $awt_shared_dir . '/current-url.php';
 require_once $awt_shared_dir . '/faq-schema.php';
+require_once $awt_shared_dir . '/excerpts.php';
 require_once $awt_shared_dir . '/global-controls.php';
 require_once $awt_shared_dir . '/template-chrome.php';
 require_once $awt_shared_dir . '/updates.php';
