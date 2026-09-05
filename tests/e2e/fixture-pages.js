@@ -214,10 +214,63 @@ const CONTENT = `
 <!-- /wp:awt/section -->
 `;
 
+/* Markup an author wrote by hand, in a Custom HTML block.
+
+   Imported sites lean on this block heavily — one post carries 18 tables that
+   way — and the theme styles what is inside it: form controls, tables, lists,
+   headings. None of that had a fixture, so the front end went unstyled for two
+   rounds without a gate noticing, and the first attempt at a wider scope
+   flattened the focus ring on controls that style themselves. Both are gate
+   failures here now. */
+const HANDWRITTEN = `
+<!-- wp:awt/section {"ariaLabel":"Hand-written markup"} -->
+<!-- wp:html -->
+<h2>A heading in hand-written markup</h2>
+<p>A paragraph, followed by a list with no class on it.</p>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+</ul>
+<table>
+<tbody>
+<tr><th>Component</th><th>Result</th></tr>
+<tr><td>Text input</td><td>Passed</td></tr>
+<tr><th>Row header</th><td>Passed</td></tr>
+</tbody>
+</table>
+<form action="#" method="post">
+<label for="hw-name">Your name</label>
+<input type="text" id="hw-name" name="hw-name">
+<label for="hw-email">Email</label>
+<input type="email" id="hw-email" name="hw-email">
+<label for="hw-topic">Topic</label>
+<select id="hw-topic" name="hw-topic"><option>Support</option><option>Sales</option></select>
+<label for="hw-message">Message</label>
+<textarea id="hw-message" name="hw-message" rows="3"></textarea>
+<label><input type="checkbox" name="hw-news"> Send me product news</label>
+<label><input type="radio" name="hw-plan" value="free"> Free</label>
+<label><input type="radio" name="hw-plan" value="paid"> Paid</label>
+<button type="submit">Send</button>
+</form>
+<!-- /wp:html -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote">
+<!-- wp:paragraph --><p>A quote block, which Carbon ships no component for.</p><!-- /wp:paragraph -->
+</blockquote>
+<!-- /wp:quote -->
+<!-- /wp:awt/section -->
+`;
+
 const PAGES = [
 	{ key: 'widgets', title: 'gate — interactive widgets', content: WIDGETS },
 	{ key: 'forms', title: 'gate — forms', content: FORMS },
 	{ key: 'content', title: 'gate — content blocks', content: CONTENT },
+	{
+		key: 'handwritten',
+		title: 'gate — hand-written markup',
+		content: HANDWRITTEN,
+	},
 ];
 
-module.exports = { PAGES, WIDGETS, FORMS, CONTENT };
+module.exports = { PAGES, WIDGETS, FORMS, CONTENT, HANDWRITTEN };
