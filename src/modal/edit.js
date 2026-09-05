@@ -196,26 +196,31 @@ export default function Edit( { attributes, setAttributes } ) {
 							{ secondaryAction }
 						</button>
 					) }
-					{ primaryHref ? (
-						<a
-							href={ primaryHref }
-							className={ `cds--btn cds--btn--${
-								danger ? 'danger' : 'primary'
-							} cds--btn--lg cds--modal-primary-button` }
-							onClick={ ( e ) => e.preventDefault() }
-						>
-							{ primaryAction }
-						</a>
-					) : (
-						<button
-							type="button"
-							className={ `cds--btn cds--btn--${
-								danger ? 'danger' : 'primary'
-							} cds--btn--lg` }
-						>
-							{ primaryAction }
-						</button>
-					) }
+					{ /* Blank label means no primary button, the same as the
+					     secondary above and the same as render.php. Without
+					     this the editor drew an empty blue rectangle for a
+					     modal whose content carries its own submit button. */ }
+					{ primaryAction.trim() &&
+						( primaryHref ? (
+							<a
+								href={ primaryHref }
+								className={ `cds--btn cds--btn--${
+									danger ? 'danger' : 'primary'
+								} cds--btn--lg cds--modal-primary-button` }
+								onClick={ ( e ) => e.preventDefault() }
+							>
+								{ primaryAction }
+							</a>
+						) : (
+							<button
+								type="button"
+								className={ `cds--btn cds--btn--${
+									danger ? 'danger' : 'primary'
+								} cds--btn--lg` }
+							>
+								{ primaryAction }
+							</button>
+						) ) }
 				</div>
 			</div>
 		</>
