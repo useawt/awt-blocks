@@ -254,6 +254,16 @@ const HANDWRITTEN = `
 </form>
 <!-- /wp:html -->
 
+<!-- wp:html -->
+<style>.awt-widget-table { border-collapse: separate; } .awt-widget-table th { background: #1a263b; color: #fff; padding: 2px; }</style>
+<table class="awt-widget-table">
+<tbody>
+<tr><th>Plan</th><th>Price</th></tr>
+<tr><td>Standard</td><td>1980</td></tr>
+</tbody>
+</table>
+<!-- /wp:html -->
+
 <!-- wp:quote -->
 <blockquote class="wp-block-quote">
 <!-- wp:paragraph --><p>A quote block, which Carbon ships no component for.</p><!-- /wp:paragraph -->
