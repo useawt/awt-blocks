@@ -7,6 +7,7 @@
 
 use function AWT\Blocks\CurrentUrl\normalize;
 use function AWT\Blocks\CurrentUrl\matches_current;
+use function AWT\Blocks\CurrentUrl\only_most_specific_current;
 use function AWT\Blocks\FaqSchema\slugify_question;
 use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\compute_rel;
@@ -77,6 +78,45 @@ class Test_Shared_Helpers extends WP_UnitTestCase {
 		$this->assertSame( 'noopener noreferrer', compute_rel( '_blank', '' ) );
 		$this->assertSame( 'nofollow', compute_rel( '_blank', 'nofollow' ) );
 		$this->assertSame( '', compute_rel( '', '' ) );
+	}
+
+	/**
+	 * One current page per navigation: an ancestor loses the mark.
+	 *
+	 * A parent item matching on prefix stays marked while the reader is under
+	 * it, so on the child's own page both claimed to be the current page and a
+	 * screen reader announced two.
+	 */
+	public function test_only_the_deepest_current_item_keeps_the_mark() {
+		$html = '<li><a href="/features/automatic/" aria-current="page">Automatic</a></li>'
+			. '<li><a href="/features/automatic/websites/" aria-current="page">Websites</a></li>';
+
+		$out = only_most_specific_current( $html );
+
+		$this->assertStringNotContainsString( '/features/automatic/" aria-current="page"', $out );
+		$this->assertStringContainsString( '/features/automatic/websites/" aria-current="page"', $out );
+		$this->assertSame( 1, substr_count( $out, 'aria-current="page"' ) );
+	}
+
+	/**
+	 * A section item stays marked on a page that has no item of its own.
+	 */
+	public function test_a_lone_current_item_is_left_alone() {
+		$html = '<li><a href="/features/automatic/" aria-current="page">Automatic</a></li>'
+			. '<li><a href="/features/manual/">Manual</a></li>';
+
+		$this->assertSame( $html, only_most_specific_current( $html ) );
+	}
+
+	/**
+	 * Two current items that are not on the same trail are both kept: nothing
+	 * here can tell which the author meant.
+	 */
+	public function test_unrelated_current_items_are_both_kept() {
+		$html = '<li><a href="/features/automatic/" aria-current="page">Automatic</a></li>'
+			. '<li><a href="/pricing/" aria-current="page">Pricing</a></li>';
+
+		$this->assertSame( 2, substr_count( only_most_specific_current( $html ), 'aria-current="page"' ) );
 	}
 
 	/**

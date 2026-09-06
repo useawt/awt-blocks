@@ -123,3 +123,63 @@ function matches_current( string $href, string $mode = 'exact' ): bool {
 	}
 	return $current === $target;
 }
+
+/**
+ * Keep one aria-current="page" in a navigation, the most specific one.
+ *
+ * A parent item set to match on prefix stays highlighted while the reader is
+ * on any page beneath it, which is what makes a section readable at a glance.
+ * On the child's own page both then claim `aria-current="page"`, and a screen
+ * reader announces two current pages in one menu — there is only ever one.
+ *
+ * Only an ancestor loses the attribute: an item whose path another current
+ * item sits beneath. Two current items that are not related that way are left
+ * alone, because nothing here can tell which the author meant.
+ *
+ * @param string $html Rendered navigation items.
+ * @return string The same markup with ancestors' aria-current removed.
+ */
+function only_most_specific_current( string $html ): string {
+	if ( substr_count( $html, 'aria-current="page"' ) < 2 ) {
+		return $html;
+	}
+
+	// Collect the path of every link claiming to be the current page.
+	$paths = array();
+	if ( preg_match_all( '/<a\b[^>]*>/i', $html, $tags ) ) {
+		foreach ( $tags[0] as $tag ) {
+			if ( ! str_contains( $tag, 'aria-current="page"' ) ) {
+				continue;
+			}
+			if ( preg_match( '/\shref="([^"]*)"/i', $tag, $m ) ) {
+				$paths[] = normalize( html_entity_decode( $m[1], ENT_QUOTES, 'UTF-8' ) );
+			}
+		}
+	}
+
+	if ( count( $paths ) < 2 ) {
+		return $html;
+	}
+
+	return (string) preg_replace_callback(
+		'/<a\b[^>]*>/i',
+		static function ( array $m ) use ( $paths ): string {
+			$tag = $m[0];
+			if ( ! str_contains( $tag, 'aria-current="page"' ) ) {
+				return $tag;
+			}
+			if ( ! preg_match( '/\shref="([^"]*)"/i', $tag, $href ) ) {
+				return $tag;
+			}
+			$path = normalize( html_entity_decode( $href[1], ENT_QUOTES, 'UTF-8' ) );
+			foreach ( $paths as $other ) {
+				if ( $other !== $path && str_starts_with( $other, $path . '/' ) ) {
+					// Something deeper is also current, so this is the trail.
+					return (string) preg_replace( '/\s*aria-current="page"/i', '', $tag );
+				}
+			}
+			return $tag;
+		},
+		$html
+	);
+}

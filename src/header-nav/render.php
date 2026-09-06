@@ -39,6 +39,7 @@
 declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\icon;
+use function AWT\Blocks\CurrentUrl\only_most_specific_current;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -126,5 +127,7 @@ printf(
 	esc_attr( $nav_class ),
 	esc_attr( $aria_label ),
 	esc_attr( $menubar_class ),
-	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
+	// A parent set to match on prefix and its own child page both come back
+	// marked current; only the deepest one keeps the mark.
+	only_most_specific_current( $content ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
 );
