@@ -1949,14 +1949,9 @@
 				"outline": "3px none rgb(22, 22, 22)",
 				"outlineOffset": "0px",
 				"boxShadow": "none",
-				"border": {
-					"top": "1px solid rgb(244, 244, 244)",
-					"right": "1px solid rgb(244, 244, 244)",
-					"bottom": "1px solid rgb(141, 141, 141)",
-					"left": "1px solid rgb(244, 244, 244)"
-				},
+				"border": "1px solid rgb(141, 141, 141)",
 				"effectiveBackground": "rgb(244, 244, 244)",
-				"borderContrast": 1.1,
+				"borderContrast": 3.32,
 				"box": {
 					"blockSize": "40px",
 					"padding": "1px 16px 1px 16px"
@@ -4627,14 +4622,9 @@
 				"outline": "3px none rgb(244, 244, 244)",
 				"outlineOffset": "0px",
 				"boxShadow": "none",
-				"border": {
-					"top": "1px solid rgb(38, 38, 38)",
-					"right": "1px solid rgb(38, 38, 38)",
-					"bottom": "1px solid rgb(111, 111, 111)",
-					"left": "1px solid rgb(38, 38, 38)"
-				},
+				"border": "1px solid rgb(111, 111, 111)",
 				"effectiveBackground": "rgb(38, 38, 38)",
-				"borderContrast": 1.2,
+				"borderContrast": 3.6,
 				"box": {
 					"blockSize": "40px",
 					"padding": "1px 16px 1px 16px"
