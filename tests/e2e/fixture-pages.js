@@ -275,6 +275,17 @@ const HANDWRITTEN = `
 <!-- /wp:awt/section -->
 `;
 
+/* A page behind a password, so the form core prints for it is covered.
+
+   Nothing on it matters except the form: WordPress replaces the content with
+   its own markup. It is here because that form is core markup sitting in the
+   post content rather than inside a block, so every scope written for block
+   content misses it — which is how it went unstyled for a day, behind a
+   comment asserting core's form had rules of its own. */
+const PASSWORD_PROTECTED = `
+<!-- wp:paragraph --><p>Behind the password.</p><!-- /wp:paragraph -->
+`;
+
 const PAGES = [
 	{ key: 'widgets', title: 'gate — interactive widgets', content: WIDGETS },
 	{ key: 'forms', title: 'gate — forms', content: FORMS },
@@ -284,6 +295,19 @@ const PAGES = [
 		title: 'gate — hand-written markup',
 		content: HANDWRITTEN,
 	},
+	{
+		key: 'password',
+		title: 'gate — password protected',
+		content: PASSWORD_PROTECTED,
+		password: 'gate',
+	},
 ];
 
-module.exports = { PAGES, WIDGETS, FORMS, CONTENT, HANDWRITTEN };
+module.exports = {
+	PAGES,
+	WIDGETS,
+	FORMS,
+	CONTENT,
+	HANDWRITTEN,
+	PASSWORD_PROTECTED,
+};

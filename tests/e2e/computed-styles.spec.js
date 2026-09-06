@@ -187,6 +187,23 @@ const PROBES = [
 		key: 'tile-plain (resting)',
 		sel: '.awt-feature-grid .cds--tile',
 	},
+	// Core's password form. It is not block markup, so every scope written for
+	// block content misses it — which is how the field spent a day at the
+	// browser's default 153x21 while the rest of the site was Carbon. A probe
+	// here is what turns that from something someone has to notice into
+	// something a run reports.
+	{
+		page: 'password',
+		key: 'password-form-field',
+		sel: '.post-password-form input[type="password"]',
+		box: true,
+	},
+	{
+		page: 'password',
+		key: 'password-form-submit',
+		sel: '.post-password-form input[type="submit"]',
+		box: true,
+	},
 	{ page: 'content', key: 'header', sel: '.cds--header', box: true },
 	{ page: 'content', key: 'header-brand', sel: '.cds--header__name' },
 	{
@@ -1370,6 +1387,9 @@ test.describe( 'Computed-style snapshots', () => {
 				title: fixture.title,
 				content: fixture.content,
 				status: 'publish',
+				// A fixture may sit behind a password, so core's own form is
+				// covered as well as block content.
+				...( fixture.password ? { password: fixture.password } : {} ),
 			} );
 			pageIds[ fixture.key ] = created.id;
 		}

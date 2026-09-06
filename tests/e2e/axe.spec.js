@@ -262,6 +262,9 @@ test.describe( 'axe-core: WCAG 2.2 AA on rendered AWT blocks', () => {
 				title: fixture.title,
 				content: fixture.content,
 				status: 'publish',
+				// A fixture may sit behind a password, so core's own form is
+				// covered as well as block content.
+				...( fixture.password ? { password: fixture.password } : {} ),
 			} );
 			pageIds[ fixture.key ] = created.id;
 		}
