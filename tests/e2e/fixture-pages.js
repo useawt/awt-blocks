@@ -258,6 +258,12 @@ const HANDWRITTEN = `
 <style>.awt-widget-table { border-collapse: separate; } .awt-widget-table th { background: #1a263b; color: #fff; padding: 2px; } .awt-widget-search { border: 1px solid #1a263b; padding: 4px; } .awt-widget-clear { background: #1a263b; color: #fff; border: 0; min-height: 24px; min-width: 24px; } .awt-widget-search:focus-visible, .awt-widget-clear:focus-visible { outline: 3px solid #1a263b; outline-offset: 1px; } @media (prefers-color-scheme: dark) { .awt-widget-search:focus-visible, .awt-widget-clear:focus-visible { outline-color: #ffffff; } }</style>
 <label for="awt-widget-q">Search the widget</label>
 <input type="text" id="awt-widget-q" class="awt-widget-search">
+<!-- A field the widget's own stylesheet says nothing about. It has to take
+     the theme's field styling, while the classed one above keeps the widget's
+     — the partner portal shipped a day with its fields at the browser's
+     default because the two were not told apart. -->
+<label for="awt-widget-note">A field the widget does not style</label>
+<input type="text" id="awt-widget-note">
 <button type="button" class="awt-widget-clear">Clear</button>
 <table class="awt-widget-table">
 <tbody>

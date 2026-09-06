@@ -187,6 +187,20 @@ const PROBES = [
 		key: 'tile-plain (resting)',
 		sel: '.awt-feature-grid .cds--tile',
 	},
+	// The two fields inside the self-styled widget: the one its stylesheet
+	// claims keeps that design, the one it does not gets the theme's.
+	{
+		page: 'handwritten',
+		key: 'widget-field (widget styles it)',
+		sel: '.awt-widget-search',
+		box: true,
+	},
+	{
+		page: 'handwritten',
+		key: 'widget-field (nobody styles it)',
+		sel: '#awt-widget-note',
+		box: true,
+	},
 	// Core's password form. It is not block markup, so every scope written for
 	// block content misses it — which is how the field spent a day at the
 	// browser's default 153x21 while the rest of the site was Carbon. A probe
