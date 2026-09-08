@@ -7,7 +7,7 @@ import {
 	ToggleControl,
 	Notice,
 } from '@wordpress/components';
-import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 
 const SIZE_OPTIONS = [ '16', '20', '24', '32' ].map( ( v ) => ( {
 	value: v,
@@ -144,12 +144,8 @@ export default function Edit( { attributes, setAttributes } ) {
 							width: '100%',
 							height: '100%',
 							background: 'currentColor',
-							WebkitMaskImage: `url(${ iconPreviewUrl( iconName, [
-								32,
-							] ) })`,
-							maskImage: `url(${ iconPreviewUrl( iconName, [
-								32,
-							] ) })`,
+							WebkitMaskImage: iconMaskImage( iconName, [ 32 ] ),
+							maskImage: iconMaskImage( iconName, [ 32 ] ),
 							WebkitMaskRepeat: 'no-repeat',
 							maskRepeat: 'no-repeat',
 							WebkitMaskPosition: 'center',

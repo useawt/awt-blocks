@@ -24,6 +24,12 @@ import { __ } from '@wordpress/i18n';
 import { useState, useMemo, useEffect, useRef } from '@wordpress/element';
 import { useInstanceId } from '@wordpress/compose';
 import {
+	iconPreviewUrl,
+	iconPreviewUrls,
+	iconMaskImage,
+	setIconTokenKinds,
+} from './icon-preview-url';
+import {
 	BaseControl,
 	Button,
 	TextControl,
@@ -31,28 +37,6 @@ import {
 } from '@wordpress/components';
 
 let manifestPromise = null;
-
-// Derive the plugin base URL EAGERLY at module load. The current-icon thumb
-// in the chip needs this URL to render before the picker grid is ever opened
-// — previously this was set lazily inside loadManifest(), so an icon saved
-// on a block showed no preview thumbnail until the user clicked the picker.
-const manifestPluginUrl = ( () => {
-	const url =
-		( typeof window !== 'undefined' &&
-			window.awtBlocks &&
-			window.awtBlocks.iconManifestUrl ) ||
-		'';
-	return url
-		? url.replace( /\/build\/shared\/icon-manifest\.json(\?.*)?$/, '' )
-		: '';
-} )();
-
-// token → 'sized' | 'glyph', for every icon in the manifest. Populated when
-// the manifest loads. 'glyph' marks size-independent icons whose SVG sits in
-// the bundle root (caution, circle-fill, …); a token missing from the map is
-// either legacy single-dash AWT content (arrow-right for arrow--right) or a
-// lookup before the manifest arrived.
-let tokenKind = {};
 
 function loadManifest() {
 	if ( manifestPromise ) {
@@ -75,38 +59,16 @@ function loadManifest() {
 						? 'glyph'
 						: 'sized';
 			}
-			tokenKind = map;
+			setIconTokenKinds( map );
 			return manifest;
 		} )
 		.catch( () => ( { iconsByName: {} } ) );
 	return manifestPromise;
 }
 
-function iconPreviewUrl( token, sizes ) {
-	if ( ! manifestPluginUrl || ! token ) {
-		return '';
-	}
-	const key = String( token ).toLowerCase();
-	const base = `${ manifestPluginUrl }/build/shared/carbon-icons`;
-	// Tokens the manifest knows are used as-is (bundle filenames are the
-	// token). Unknown tokens get the legacy heuristic: older AWT content
-	// stored single-dash names (arrow-right) for double-dash icons.
-	const file = tokenKind[ key ] ? key : key.replace( /(?<!-)-(?!-)/g, '--' );
-	// Size-independent icons sit in the bundle root, with no size directory.
-	if (
-		tokenKind[ key ] === 'glyph' ||
-		( sizes && sizes.includes( 'glyph' ) )
-	) {
-		return `${ base }/${ file }.svg`;
-	}
-	const numeric = ( sizes || [] ).filter( ( s ) => typeof s === 'number' );
-	const size = numeric.includes( 32 ) ? 32 : numeric[ 0 ] || 32;
-	return `${ base }/${ size }/${ file }.svg`;
-}
-
 // Re-exported so other blocks (awt/icon, awt/button, awt/header-action, etc.)
 // can render the same SVG preview in their edit.js as the chip uses.
-export { iconPreviewUrl };
+export { iconPreviewUrl, iconPreviewUrls, iconMaskImage };
 
 /**
  * @param {Object}   props
@@ -205,7 +167,19 @@ export default function IconPicker( {
 							aria-hidden="true"
 							className="awt-icon-picker__thumb"
 							onError={ ( e ) => {
-								e.currentTarget.style.visibility = 'hidden';
+								// First miss is usually the other spelling.
+								const img = e.currentTarget;
+								const tried =
+									Number( img.dataset.awtTry || 0 ) + 1;
+								const next = iconPreviewUrls( value, [ 32 ] )[
+									tried
+								];
+								if ( next ) {
+									img.dataset.awtTry = String( tried );
+									img.src = next;
+									return;
+								}
+								img.style.visibility = 'hidden';
 							} }
 						/>
 					) : (

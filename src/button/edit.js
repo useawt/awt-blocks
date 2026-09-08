@@ -18,7 +18,7 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import PremiumNotice from '../shared/premium-notice';
 import looksLikeUrl from '../shared/looks-like-url';
 
@@ -102,8 +102,8 @@ export default function Edit( { attributes, setAttributes } ) {
 				inlineSize: '16px',
 				blockSize: '16px',
 				background: 'currentColor',
-				WebkitMaskImage: `url(${ iconPreviewUrl( iconName, [ 32 ] ) })`,
-				maskImage: `url(${ iconPreviewUrl( iconName, [ 32 ] ) })`,
+				WebkitMaskImage: iconMaskImage( iconName, [ 32 ] ),
+				maskImage: iconMaskImage( iconName, [ 32 ] ),
 				WebkitMaskRepeat: 'no-repeat',
 				maskRepeat: 'no-repeat',
 				WebkitMaskPosition: 'center',

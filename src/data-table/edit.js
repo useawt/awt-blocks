@@ -9,7 +9,7 @@ import {
 	TextareaControl,
 	Button,
 } from '@wordpress/components';
-import { iconPreviewUrl } from '../shared/icon-picker';
+import { iconMaskImage } from '../shared/icon-picker';
 import { sanitizeInlineHtml, mdInline } from '../shared/import-format';
 import PremiumNotice from '../shared/premium-notice';
 
@@ -143,8 +143,8 @@ const CheckmarkIcon = () => (
 			width: '1rem',
 			height: '1rem',
 			background: 'var(--cds-support-success, #24a148)',
-			WebkitMaskImage: `url(${ iconPreviewUrl( 'checkmark', [ 32 ] ) })`,
-			maskImage: `url(${ iconPreviewUrl( 'checkmark', [ 32 ] ) })`,
+			WebkitMaskImage: iconMaskImage( 'checkmark', [ 32 ] ),
+			maskImage: iconMaskImage( 'checkmark', [ 32 ] ),
 			WebkitMaskRepeat: 'no-repeat',
 			maskRepeat: 'no-repeat',
 			WebkitMaskPosition: 'center',
@@ -348,7 +348,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }
 						options={ [ 'xs', 'sm', 'md', 'lg', 'xl' ].map(
-							( v ) => ( { value: v, label: v } )
+							( v ) => ( {
+								value: v,
+								label: v,
+							} )
 						) }
 						onChange={ ( v ) => setAttributes( { size: v } ) }
 					/>

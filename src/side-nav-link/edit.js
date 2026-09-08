@@ -10,7 +10,7 @@ import {
 	SelectControl,
 	ToggleControl,
 } from '@wordpress/components';
-import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { text, href, iconName, isCurrent, matchMode } = attributes;
@@ -91,14 +91,12 @@ export default function Edit( { attributes, setAttributes } ) {
 									width: '1rem',
 									height: '1rem',
 									background: 'currentColor',
-									WebkitMaskImage: `url(${ iconPreviewUrl(
-										iconName,
-										[ 32 ]
-									) })`,
-									maskImage: `url(${ iconPreviewUrl(
-										iconName,
-										[ 32 ]
-									) })`,
+									WebkitMaskImage: iconMaskImage( iconName, [
+										32,
+									] ),
+									maskImage: iconMaskImage( iconName, [
+										32,
+									] ),
 									WebkitMaskRepeat: 'no-repeat',
 									maskRepeat: 'no-repeat',
 									WebkitMaskPosition: 'center',

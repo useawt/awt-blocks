@@ -11,7 +11,7 @@ import {
 	ToggleControl,
 	ExternalLink,
 } from '@wordpress/components';
-import { iconPreviewUrl } from '../shared/icon-picker';
+import { iconMaskImage } from '../shared/icon-picker';
 import CarbonDefaultToggle, {
 	fieldFrameClass,
 } from '../shared/carbon-default-toggle';
@@ -39,8 +39,8 @@ const StatusIcon = ( { variant } ) => {
 						variant === 'invalid'
 							? 'var(--cds-support-error, #da1e28)'
 							: 'var(--cds-support-warning, #f1c21b)',
-					WebkitMaskImage: `url(${ iconPreviewUrl( slug, [ 32 ] ) })`,
-					maskImage: `url(${ iconPreviewUrl( slug, [ 32 ] ) })`,
+					WebkitMaskImage: iconMaskImage( slug, [ 32 ] ),
+					maskImage: iconMaskImage( slug, [ 32 ] ),
 					WebkitMaskRepeat: 'no-repeat',
 					maskRepeat: 'no-repeat',
 					WebkitMaskPosition: 'center',

@@ -7,7 +7,7 @@ import {
 	TextareaControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { iconPreviewUrl } from '../shared/icon-picker';
+import { iconMaskImage } from '../shared/icon-picker';
 
 // Carbon's `copy` icon — mirrors render.php's `icon( 'copy', 16 )` call.
 const CopyIcon = () => (
@@ -18,8 +18,8 @@ const CopyIcon = () => (
 			width: '1rem',
 			height: '1rem',
 			background: 'currentColor',
-			WebkitMaskImage: `url(${ iconPreviewUrl( 'copy', [ 32 ] ) })`,
-			maskImage: `url(${ iconPreviewUrl( 'copy', [ 32 ] ) })`,
+			WebkitMaskImage: iconMaskImage( 'copy', [ 32 ] ),
+			maskImage: iconMaskImage( 'copy', [ 32 ] ),
 			WebkitMaskRepeat: 'no-repeat',
 			maskRepeat: 'no-repeat',
 			WebkitMaskPosition: 'center',

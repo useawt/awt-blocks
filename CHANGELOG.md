@@ -16,6 +16,8 @@
 
 - The header collapses to the menu button when the menu outgrows a header that
   is contained to the content width, not only when it outgrows the screen.
+- Every icon now previews in the editor. Some icons drew a blank space there
+  while the published page showed them correctly.
 
 ## 2026.09.2 — 2026-09-08
 

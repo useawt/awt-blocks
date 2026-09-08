@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl } from '@wordpress/components';
-import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 
 const KIND_OPTIONS = [
 	{ value: 'icon-only', label: __( 'Icon only', 'awt-blocks' ) },
@@ -24,8 +24,8 @@ export default function Edit( { attributes, setAttributes } ) {
 				width: '1.25rem',
 				height: '1.25rem',
 				background: 'currentColor',
-				WebkitMaskImage: `url(${ iconPreviewUrl( iconName, [ 32 ] ) })`,
-				maskImage: `url(${ iconPreviewUrl( iconName, [ 32 ] ) })`,
+				WebkitMaskImage: iconMaskImage( iconName, [ 32 ] ),
+				maskImage: iconMaskImage( iconName, [ 32 ] ),
 				WebkitMaskRepeat: 'no-repeat',
 				maskRepeat: 'no-repeat',
 				WebkitMaskPosition: 'center',

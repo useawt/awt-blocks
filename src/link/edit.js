@@ -11,7 +11,7 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import looksLikeUrl from '../shared/looks-like-url';
 
 const SIZE_OPTIONS = [
@@ -150,13 +150,10 @@ export default function Edit( { attributes, setAttributes } ) {
 								width: '1rem',
 								height: '1rem',
 								background: 'currentColor',
-								WebkitMaskImage: `url(${ iconPreviewUrl(
-									iconName,
-									[ 32 ]
-								) })`,
-								maskImage: `url(${ iconPreviewUrl( iconName, [
+								WebkitMaskImage: iconMaskImage( iconName, [
 									32,
-								] ) })`,
+								] ),
+								maskImage: iconMaskImage( iconName, [ 32 ] ),
 								WebkitMaskRepeat: 'no-repeat',
 								maskRepeat: 'no-repeat',
 								WebkitMaskPosition: 'center',
