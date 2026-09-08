@@ -34,7 +34,9 @@ const PAGE_CONTENT = `
 
 <!-- wp:paragraph --><p><a href="#elsewhere">Another link behind it</a></p><!-- /wp:paragraph -->
 
-<!-- wp:awt/section {"themeScope":"dark","align":"full"} -->
+<!-- wp:html --><style>.awt-hostile-ancestor h2 { color: rgb(255, 0, 0) !important; }</style><!-- /wp:html -->
+
+<!-- wp:awt/section {"themeScope":"dark","align":"full","className":"awt-hostile-ancestor"} -->
 <!-- wp:awt/modal-opener {"text":"Open the dialog in the dark band","modalId":"band-modal"} /-->
 <!-- wp:awt/modal {"id":"band-modal","heading":"In a dark band","primaryAction":"","secondaryAction":""} -->
 <!-- wp:paragraph --><p>Body copy inside the dialog.</p><!-- /wp:paragraph -->
@@ -168,5 +170,44 @@ test.describe( 'Modal dialog', () => {
 		const plain = await tokensOf( 'trap-modal' );
 
 		expect( inBand ).toEqual( plain );
+	} );
+
+	// Tokens are only half of it. A rule that names an ancestor reaches the
+	// dialog too — the site this was found on paints every heading in its
+	// footer white, which on the dialog's own surface is invisible, and gives
+	// the footer a white focus ring, which on that surface cannot be seen at
+	// all. `!important` here stands in for all of them: nothing but leaving
+	// the subtree can beat it.
+	test( 'a rule on an ancestor does not reach the open dialog', async ( {
+		page,
+	} ) => {
+		await page.goto( `/?page_id=${ pageId }` );
+
+		const headingColour = () =>
+			page.evaluate( () =>
+				getComputedStyle(
+					document.querySelector(
+						'#band-modal .cds--modal-header__heading'
+					)
+				).color.replace( /\s/g, '' )
+			);
+
+		// Closed, it is still inside the section and the rule does apply.
+		expect( await headingColour() ).toBe( 'rgb(255,0,0)' );
+
+		await page
+			.getByText( 'Open the dialog in the dark band', { exact: true } )
+			.click();
+		await expect( page.locator( '#band-modal' ) ).toHaveClass(
+			/is-visible/
+		);
+		expect( await headingColour() ).not.toBe( 'rgb(255,0,0)' );
+
+		// And it goes back where the page put it.
+		await page.keyboard.press( 'Escape' );
+		await expect( page.locator( '#band-modal' ) ).not.toHaveClass(
+			/is-visible/
+		);
+		expect( await headingColour() ).toBe( 'rgb(255,0,0)' );
 	} );
 } );

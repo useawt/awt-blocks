@@ -601,26 +601,26 @@ const PROBES = [
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-label',
-		sel: '.cds--modal-header__label',
+		sel: '#axe-modal .cds--modal-header__label',
 	},
 	{
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-heading',
-		sel: '.cds--modal-header__heading',
+		sel: '#axe-modal .cds--modal-header__heading',
 	},
 	{
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-secondary-button',
-		sel: '.cds--modal-cancel-button',
+		sel: '#axe-modal .cds--modal-cancel-button',
 		box: true,
 	},
 	{
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-primary-button (danger)',
-		sel: '.cds--modal-primary-button',
+		sel: '#axe-modal .cds--modal-primary-button',
 		box: true,
 	},
 	/* Two probes, because an open modal moves focus to this button, and until
@@ -628,11 +628,16 @@ const PROBES = [
 	   4.55:1 blue focus border, filed as the button's resting appearance. The
 	   number was worth having and the label was a lie, so it is now declared.
 	   Resting matters too — a user who tabs on within the modal leaves it. */
+	/* Scoped to the dialog this group opens, like `modal-container` above.
+	   The page holds two modals, and an open dialog is moved to the end of
+	   <body> — so an unscoped selector picks the CLOSED one, whose close
+	   button cannot take focus. The focus trap caught that rather than
+	   recording a resting value and calling it focused. */
 	{
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-close',
-		sel: '.cds--modal-close',
+		sel: '#axe-modal .cds--modal-close',
 		box: true,
 		inline: true,
 	},
@@ -640,7 +645,7 @@ const PROBES = [
 		page: 'widgets',
 		group: 'opened',
 		key: 'modal-close (focused)',
-		sel: '.cds--modal-close',
+		sel: '#axe-modal .cds--modal-close',
 		state: 'focus',
 	},
 

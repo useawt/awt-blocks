@@ -27,30 +27,47 @@ const FOCUSABLE = [
 
 const handlers = new WeakMap();
 
-// Carbon's four colour zones. A scope class declares the `--cds-*` tokens for
-// everything inside it.
-const SCOPES = [ 'cds--white', 'cds--g10', 'cds--g90', 'cds--g100' ];
+// Where each open modal came from, so it can be put back exactly there.
+const origins = new WeakMap();
 
 /**
- * Give the modal the page's colour, not the colour of whatever it sits inside.
+ * Lift the modal out to the end of <body> while it is open.
  *
- * A modal covers the whole page, but in the markup it is wherever the author
- * put it — and a Section with a theme scope declares that zone's tokens for
- * everything within, a modal included. Moving a call to action into a dark
- * footer band turned both of its forms dark on a light site (2026-09-08).
+ * Tokens are only half of what an ancestor can do to a dialog. The same move
+ * into the footer put the forms inside every rule that site writes for its
+ * footer: a white heading colour (invisible on the dialog), emptied list
+ * markers, and a white focus ring — on a white dialog, which is a focus
+ * indicator nobody can see. None of that is reachable by fixing tokens,
+ * because those rules name an ancestor.
  *
- * Declaring the page's zone on the modal itself wins: a custom property
- * resolves to the nearest declaration, and nothing is nearer than the element.
+ * A dialog covers the page, so the page is where it belongs. The overlay is
+ * `position: fixed` and out of flow already, so nothing reflows where it left.
  *
  * @param {HTMLElement} modal The modal root.
  */
-function applyPageScope( modal ) {
-	const page = SCOPES.find( ( scope ) =>
-		document.body.classList.contains( scope )
-	);
-	SCOPES.forEach( ( scope ) => {
-		modal.classList.toggle( scope, scope === page );
+function liftToBody( modal ) {
+	if ( modal.parentElement === document.body ) {
+		return;
+	}
+	origins.set( modal, {
+		parent: modal.parentElement,
+		next: modal.nextSibling,
 	} );
+	document.body.appendChild( modal );
+}
+
+/**
+ * Put it back where the page rendered it.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function returnToOrigin( modal ) {
+	const origin = origins.get( modal );
+	if ( ! origin || ! origin.parent || ! origin.parent.isConnected ) {
+		return;
+	}
+	origin.parent.insertBefore( modal, origin.next );
+	origins.delete( modal );
 }
 
 function focusableIn( modal ) {
@@ -80,15 +97,7 @@ function open( modal, returnTo ) {
 	modal.removeAttribute( 'aria-hidden' );
 	document.body.style.overflow = 'hidden';
 
-	applyPageScope( modal );
-	// The colour-scheme toggle rewrites the class on <body> and announces
-	// nothing, so watch for it: a visitor switching to dark with the modal
-	// open should take the modal with them.
-	const scopeWatch = new MutationObserver( () => applyPageScope( modal ) );
-	scopeWatch.observe( document.body, {
-		attributes: true,
-		attributeFilter: [ 'class' ],
-	} );
+	liftToBody( modal );
 
 	const items = focusableIn( modal );
 	if ( items.length > 0 ) {
@@ -119,7 +128,7 @@ function open( modal, returnTo ) {
 		}
 	};
 	document.addEventListener( 'keydown', onKey );
-	handlers.set( modal, { onKey, returnTo, scopeWatch } );
+	handlers.set( modal, { onKey, returnTo } );
 }
 
 function close( modal ) {
@@ -129,14 +138,11 @@ function close( modal ) {
 	modal.classList.remove( 'is-visible' );
 	modal.setAttribute( 'aria-hidden', 'true' );
 	document.body.style.overflow = '';
-	SCOPES.forEach( ( scope ) => modal.classList.remove( scope ) );
+	returnToOrigin( modal );
 
 	const h = handlers.get( modal );
 	if ( h ) {
 		document.removeEventListener( 'keydown', h.onKey );
-		if ( h.scopeWatch ) {
-			h.scopeWatch.disconnect();
-		}
 		if ( h.returnTo && typeof h.returnTo.focus === 'function' ) {
 			h.returnTo.focus();
 		}
