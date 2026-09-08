@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.2
+Stable tag: 2026.09.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,12 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.3 — 2026-09-08 =
+* [Improvement] The header collapses to the menu button when the menu outgrows a header that is contained to the content width, not only when it outgrows the screen.
+* [Improvement] A modal opens in the colours of the page, not of the section it was added to. One added inside a dark section opened dark on a light site.
+* [Improvement] Every icon now previews in the editor. Some icons drew a blank space there while the published page showed them correctly.
+* [Improvement] The editor shows the same external-link icon on a Footer link that the page does, instead of a typed arrow.
+
 = 2026.09.2 — 2026-09-08 =
 * [Improvement] A Section set wider than the content width now gets that width, on the page and in the editor. Picking "Wide" on a section in a page's content changed nothing, because the page layout was holding it to the content width.
 * [Improvement] A Section's Content and Wide widths now follow the site's own layout settings instead of fixed sizes, so a section lines up with the page title and the breadcrumb above it. Narrow and Reading are unchanged — those are measures for text, not the page's layout.
