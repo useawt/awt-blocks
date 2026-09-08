@@ -56,6 +56,22 @@ const lengthenMenu = ( page ) =>
 		window.dispatchEvent( new Event( 'resize' ) );
 	} );
 
+/**
+ * Pad the header in to a narrower row, the way the "Header width" setting does
+ * when the header is contained to the site's content width.
+ *
+ * @param {Object} page   Playwright page.
+ * @param {number} gutter Pixels taken off each side.
+ * @return {Promise<void>} Once the row has been measured again.
+ */
+const containHeader = ( page, gutter ) =>
+	page.evaluate( ( px ) => {
+		const style = document.createElement( 'style' );
+		style.textContent = `.cds--header{padding-inline:${ px }px !important}`;
+		document.head.appendChild( style );
+		window.dispatchEvent( new Event( 'resize' ) );
+	}, gutter );
+
 test.describe( 'Header collapse', () => {
 	test( 'a menu that fits stays a row where a breakpoint would have hidden it', async ( {
 		page,
@@ -94,6 +110,27 @@ test.describe( 'Header collapse', () => {
 
 		await page.setViewportSize( { width: 900, height: 700 } );
 		await expect.poll( () => collapsed( page ) ).toBe( false );
+	} );
+
+	// A contained header is padded in to the content width, and the row has to
+	// be measured against the width it actually has. `scrollWidth` on a box
+	// that overflows visibly counts only what escapes the PADDING box, so the
+	// menu spilled into the gutter it was meant to stay out of and nothing
+	// collapsed. The measurement is taken under `overflow: hidden` for that.
+	test( 'a contained header collapses when the row outgrows the contained width', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1200, height: 700 } );
+		await page.goto( '/' );
+		await expect.poll( () => collapsed( page ) ).toBe( false );
+
+		// Still roomy: a gutter this size leaves the menu space to sit in.
+		await containHeader( page, 100 );
+		await expect.poll( () => collapsed( page ) ).toBe( false );
+
+		// A 400px gutter each side leaves 400px of row, which it cannot fit.
+		await containHeader( page, 400 );
+		await expect.poll( () => collapsed( page ) ).toBe( true );
 	} );
 
 	test( 'widening with the drawer open puts the row back and closes it', async ( {

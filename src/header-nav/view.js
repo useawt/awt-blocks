@@ -64,7 +64,20 @@ function fitHeader() {
 	// painted in between, so this does not flicker.
 	const wasCollapsed = root.classList.contains( COLLAPSED );
 	root.classList.remove( COLLAPSED );
+
+	// Measure as a scroll container. On a box that overflows visibly,
+	// `scrollWidth` counts only content that escapes the PADDING box — so a
+	// header contained to the content width (AWT Settings → Appearance →
+	// Header) reported no overflow at all while its menu spilled into the
+	// gutter it was supposed to stay out of. Under `overflow: hidden` the
+	// padding is part of the scroll area and the row is measured against the
+	// width it actually has. Set and undone between two layout reads, so
+	// nothing paints in between.
+	const previousOverflow = header.style.overflow;
+	header.style.overflow = 'hidden';
 	const overflows = header.scrollWidth > header.clientWidth + 1;
+	header.style.overflow = previousOverflow;
+
 	root.classList.toggle( COLLAPSED, overflows );
 
 	// A drawer left open while the header goes back to a row would strand the

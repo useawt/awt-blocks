@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The header collapses to the menu button when the menu outgrows a header that
+  is contained to the content width, not only when it outgrows the screen.
+
 ## 2026.09.2 — 2026-09-08
 
 ### [Improvement]
