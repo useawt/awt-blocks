@@ -1,16 +1,13 @@
-## 2026.09.1 — 2026-09-08
-
-### [A11y]
-
-- Tabs now show the first tab's panel before any script runs, so the content is readable without JavaScript. Each tab is also linked to its panel in the markup rather than only after the page loads.
-- A modal with no primary action label no longer renders an empty button. Leave the label blank when the modal holds a form with its own submit button.
-- Keyboard focus now stays inside an open modal. A control the modal held but Tab could not reach — a hidden field taken out of the tab order — used to let focus walk out into the page behind it.
-- A modal's dark overlay now covers the whole screen. It could sit slightly down the page, or be cropped to the content width when the modal was placed directly on a page.
+## 2026.09.2 — 2026-09-08
 
 ### [Improvement]
 
-- A style change now reaches people who have visited the site before. Block stylesheets were served under a web address that never changed, so a browser or host that had cached one kept serving the old file.
+- A Section set wider than the content width now gets that width, on the page and in the editor. Picking "Wide" on a section in a page's content changed nothing, because the page layout was holding it to the content width.
+- A Section's Content and Wide widths now follow the site's own layout settings instead of fixed sizes, so a section lines up with the page title and the breadcrumb above it. Narrow and Reading are unchanged — those are measures for text, not the page's layout.
+- The Testimonial block's Attribution style now takes effect in the editor. The page laid the name and role out as chosen; the editor always showed them stacked.
 
-### [Breaking]
+### [A11y]
 
-- The Tabs block's markup changed: the first usable tab renders selected and its panel renders visible.
+- The header now collapses to the menu button when the navigation does not fit, instead of at a fixed screen width. A long menu used to overflow — items wrapping and the last button cut off by the edge of the screen — while a short one was hidden behind the menu button with room to spare.
+- Text typed into a URL field no longer becomes a broken link. On the Link, Button and Tile blocks, "Read more" in the URL field was turned into a link to a web address of that name; now nothing links to it, and the editor says the field does not hold an address.
+- A clickable Tile that has a link inside it now renders as a plain tile, with that link still working. A link cannot contain another link, and browsers broke the tile apart when it did — the tile split in two with an empty box between and the link loose underneath. The editor now says so while you are building it.

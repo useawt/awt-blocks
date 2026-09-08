@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.1
+Stable tag: 2026.09.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,14 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.2 — 2026-09-08 =
+* [Improvement] A Section set wider than the content width now gets that width, on the page and in the editor. Picking "Wide" on a section in a page's content changed nothing, because the page layout was holding it to the content width.
+* [Improvement] A Section's Content and Wide widths now follow the site's own layout settings instead of fixed sizes, so a section lines up with the page title and the breadcrumb above it. Narrow and Reading are unchanged — those are measures for text, not the page's layout.
+* [Improvement] The Testimonial block's Attribution style now takes effect in the editor. The page laid the name and role out as chosen; the editor always showed them stacked.
+* [A11y] The header now collapses to the menu button when the navigation does not fit, instead of at a fixed screen width. A long menu used to overflow — items wrapping and the last button cut off by the edge of the screen — while a short one was hidden behind the menu button with room to spare.
+* [A11y] Text typed into a URL field no longer becomes a broken link. On the Link, Button and Tile blocks, "Read more" in the URL field was turned into a link to a web address of that name; now nothing links to it, and the editor says the field does not hold an address.
+* [A11y] A clickable Tile that has a link inside it now renders as a plain tile, with that link still working. A link cannot contain another link, and browsers broke the tile apart when it did — the tile split in two with an empty box between and the link loose underneath. The editor now says so while you are building it.
+
 = 2026.09.1 — 2026-09-08 =
 * [A11y] Tabs now show the first tab's panel before any script runs, so the content is readable without JavaScript. Each tab is also linked to its panel in the markup rather than only after the page loads.
 * [A11y] A modal with no primary action label no longer renders an empty button. Leave the label blank when the modal holds a form with its own submit button.

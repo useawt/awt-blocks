@@ -10,13 +10,19 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
-## Unreleased
+## 2026.09.2 — 2026-09-08
 
 ### [Improvement]
 
 - A Section set wider than the content width now gets that width, on the page
   and in the editor. Picking "Wide" on a section in a page's content changed
   nothing, because the page layout was holding it to the content width.
+
+- A Section's Content and Wide widths now follow the site's own layout
+  settings instead of fixed sizes, so a section lines up with the page title
+  and the breadcrumb above it. Narrow and Reading are unchanged — those are
+  measures for text, not the page's layout.
+
 - The Testimonial block's Attribution style now takes effect in the editor. The
   page laid the name and role out as chosen; the editor always showed them
   stacked.
@@ -27,10 +33,6 @@
   fit, instead of at a fixed screen width. A long menu used to overflow — items
   wrapping and the last button cut off by the edge of the screen — while a short
   one was hidden behind the menu button with room to spare.
-- A Section's Content and Wide widths now follow the site's own layout
-  settings instead of fixed sizes, so a section lines up with the page title
-  and the breadcrumb above it. Narrow and Reading are unchanged — those are
-  measures for text, not the page's layout.
 - Text typed into a URL field no longer becomes a broken link. On the Link,
   Button and Tile blocks, "Read more" in the URL field was turned into a link
   to a web address of that name; now nothing links to it, and the editor says
