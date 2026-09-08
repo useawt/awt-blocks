@@ -46,6 +46,22 @@ if ( $max_width_key === 'custom' && $custom_max !== '' ) {
 
 $classes = array( 'awt-section' );
 
+// A section asking for more room than the content width has to be allowed to
+// take it. WordPress's constrained layout caps every ordinary child at the
+// content width, so a section sitting in post content was capped at 66rem no
+// matter what its own max width said — picking "Wide" changed nothing, with
+// nothing to say why. The cap is lifted only for the widths that need it, so
+// a section at the content width or below renders exactly as before; the
+// inner element still does the actual capping.
+$section_align = isset( $attributes['align'] ) ? (string) $attributes['align'] : '';
+$needs_room    = in_array( $max_width_key, array( 'wide', 'none' ), true )
+	|| ( $max_width_key === 'custom' && $custom_max !== '' );
+// A section already set to full or wide alignment has escaped the cap; the
+// class would say nothing there.
+if ( $needs_room && ! in_array( $section_align, array( 'full', 'wide' ), true ) ) {
+	$classes[] = 'awt-section--past-content-width';
+}
+
 // We use the `padding` shorthand (top right bottom left) rather than the
 // logical longhands `padding-block` / `padding-inline`, because WordPress's
 // `safecss_filter_attr` (which sanitizes inline styles on block wrapper
