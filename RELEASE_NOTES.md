@@ -1,18 +1,16 @@
-## 2026.09.0 — 2026-09-03
+## 2026.09.1 — 2026-09-08
 
 ### [A11y]
 
-- Selectable and clickable tiles now have a visible border, so you can see the shape of the control before you choose it. Plain content tiles are unchanged. A "Carbon default" switch on the tile turns the border off.
-- The fluid text field now previews in the editor the way it publishes.
-
-### [New]
-
-- WordPress now tells you when a new version of AWT Blocks is out, on Dashboard, Updates. You still install it yourself.
+- Tabs now show the first tab's panel before any script runs, so the content is readable without JavaScript. Each tab is also linked to its panel in the markup rather than only after the page loads.
+- A modal with no primary action label no longer renders an empty button. Leave the label blank when the modal holds a form with its own submit button.
+- Keyboard focus now stays inside an open modal. A control the modal held but Tab could not reach — a hidden field taken out of the tab order — used to let focus walk out into the page behind it.
+- A modal's dark overlay now covers the whole screen. It could sit slightly down the page, or be cropped to the content width when the modal was placed directly on a page.
 
 ### [Improvement]
 
-- Block descriptions, settings labels and help text across the editor are now written in plain language. The block spacing control is now "Space below", and lists its sizes in pixels first.
+- A style change now reaches people who have visited the site before. Block stylesheets were served under a web address that never changed, so a browser or host that had cached one kept serving the old file.
 
 ### [Breaking]
 
-- Lists and preformatted blocks now get the same 24px gap below them as paragraphs. Before, they sat flush against the next block.
+- The Tabs block's markup changed: the first usable tab renders selected and its panel renders visible.
