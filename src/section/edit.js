@@ -121,8 +121,18 @@ export default function Edit( { attributes, setAttributes } ) {
 			? `max(var(--cds-spacing-${ paddingInline }, 1.5rem), var(--wp--style--root--padding-left, 0px))`
 			: `var(--cds-spacing-${ paddingInline }, 1.5rem)`;
 
+	// Mirrors render.php: a section asking for more than the content width has
+	// to be let out of the layout's cap, or the canvas shows it at the content
+	// width while the published page shows it wide.
+	const pastContentWidth =
+		( [ 'wide', 'none' ].includes( maxWidth ) ||
+			( maxWidth === 'custom' && customMaxWidth ) ) &&
+		! [ 'full', 'wide' ].includes( attributes.align );
+
 	const blockProps = useBlockProps( {
-		className: `awt-section${ scopeClass ? ' ' + scopeClass : '' }`,
+		className: `awt-section${ scopeClass ? ' ' + scopeClass : '' }${
+			pastContentWidth ? ' awt-section--past-content-width' : ''
+		}`,
 		style: {
 			paddingBlock: `var(--cds-spacing-${ paddingBlock }, 2rem)`,
 			paddingInline: paddingInlineValue,

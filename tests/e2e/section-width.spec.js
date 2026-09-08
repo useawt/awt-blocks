@@ -61,6 +61,51 @@ test.describe( 'Section width', () => {
 		).toBeGreaterThan( widths.def );
 	} );
 
+	test( 'the editor canvas shows the same width as the page', async ( {
+		admin,
+		editor,
+		page,
+	} ) => {
+		// The canvas has to be wider than the content width, or both sections
+		// fill it and the comparison proves nothing.
+		await page.setViewportSize( { width: 1920, height: 1080 } );
+		// The canvas builds its own preview from edit.js, so a fix made only in
+		// the rendered output leaves the author looking at the wrong width —
+		// which is exactly what happened.
+		await admin.createNewPost( { title: 'Section width in the canvas' } );
+		await editor.insertBlock( {
+			name: 'awt/section',
+			attributes: { maxWidth: 'content' },
+		} );
+		await editor.insertBlock( {
+			name: 'awt/section',
+			attributes: { maxWidth: 'wide' },
+		} );
+
+		const sections = editor.canvas.locator( '.awt-section' );
+		await expect( sections ).toHaveCount( 2 );
+
+		const canvasWidth = await editor.canvas
+			.locator( 'body' )
+			.evaluate( ( el ) => el.clientWidth );
+		expect(
+			canvasWidth,
+			'the canvas must be wider than the content width for this to mean anything'
+		).toBeGreaterThan( 1056 );
+
+		const def = await sections.nth( 0 ).boundingBox();
+		const wide = await sections.nth( 1 ).boundingBox();
+
+		expect(
+			Math.round( wide.width ),
+			`wide section in the canvas (${ Math.round(
+				wide.width
+			) }px) should be wider than the default one (${ Math.round(
+				def.width
+			) }px)`
+		).toBeGreaterThan( Math.round( def.width ) );
+	} );
+
 	test( 'a section at the content width is left where it was', async ( {
 		page,
 	} ) => {
