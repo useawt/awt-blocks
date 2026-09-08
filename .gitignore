@@ -41,3 +41,7 @@ npm-debug.log*
 # zip left sitting in the plugin folder (`compressed_files`) — found exactly
 # that way on 2026-08-07, by a run that was checking something else.
 /awt-blocks.zip
+
+# Throwaway probe scripts written while debugging.
+*-tmp.cjs
+*-tmp.js
