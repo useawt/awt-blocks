@@ -17,6 +17,9 @@
 - A Section set wider than the content width now gets that width, on the page
   and in the editor. Picking "Wide" on a section in a page's content changed
   nothing, because the page layout was holding it to the content width.
+- The Testimonial block's Attribution style now takes effect in the editor. The
+  page laid the name and role out as chosen; the editor always showed them
+  stacked.
 
 ## 2026.09.1 — 2026-09-08
 

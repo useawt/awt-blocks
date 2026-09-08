@@ -71,7 +71,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	} = attributes;
 
 	const blockProps = useBlockProps( {
-		className: `awt-testimonial awt-testimonial--${ kind } awt-testimonial--${ quoteSize } awt-testimonial--align-${ align } awt-testimonial--mark-${ markStyle }`,
+		className: `awt-testimonial awt-testimonial--${ kind } awt-testimonial--${ quoteSize } awt-testimonial--align-${ align } awt-testimonial--mark-${ markStyle } awt-testimonial--attr-${ attributionStyle }`,
 	} );
 
 	return (
