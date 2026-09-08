@@ -5,6 +5,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { iconMaskImage } from '../shared/icon-preview-url';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { text, href, external } = attributes;
@@ -52,7 +53,30 @@ export default function Edit( { attributes, setAttributes } ) {
 						placeholder={ __( 'Link label', 'awt-blocks' ) }
 						allowedFormats={ [] }
 					/>
-					{ external && <span aria-hidden="true"> ↗</span> }
+					{ /* The page draws Carbon's `launch` here; a typed arrow
+					     was standing in for it, so the editor showed a
+					     different mark from the one the link would have. */ }
+					{ external && (
+						<span
+							aria-hidden="true"
+							style={ {
+								display: 'inline-block',
+								inlineSize: '1rem',
+								blockSize: '1rem',
+								background: 'currentColor',
+								WebkitMaskImage: iconMaskImage( 'launch', [
+									32,
+								] ),
+								maskImage: iconMaskImage( 'launch', [ 32 ] ),
+								WebkitMaskRepeat: 'no-repeat',
+								maskRepeat: 'no-repeat',
+								WebkitMaskPosition: 'center',
+								maskPosition: 'center',
+								WebkitMaskSize: 'contain',
+								maskSize: 'contain',
+							} }
+						/>
+					) }
 				</a>
 			</li>
 		</>

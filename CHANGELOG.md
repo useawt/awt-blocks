@@ -18,6 +18,8 @@
   is contained to the content width, not only when it outgrows the screen.
 - Every icon now previews in the editor. Some icons drew a blank space there
   while the published page showed them correctly.
+- The editor shows the same external-link icon on a Footer link that the page
+  does, instead of a typed arrow.
 
 ## 2026.09.2 — 2026-09-08
 
