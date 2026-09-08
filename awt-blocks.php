@@ -292,6 +292,44 @@ add_filter(
 );
 
 /**
+ * Version this plugin's stylesheets by the file they point at.
+ *
+ * A block's scripts come with a content hash from the build, but its
+ * stylesheet is registered from block.json with no version of its own, so
+ * WordPress stamps it with the WordPress version instead. The URL then stays
+ * identical when the CSS inside it changes — and a host that caches by URL
+ * goes on serving the old file to anyone who has been to the site before. One
+ * host in the wild sends these with a max-age of ten years.
+ *
+ * The file's own modification time changes whenever the CSS does, and only
+ * then, so a return visit gets the new file and an unchanged one stays cached.
+ */
+add_filter(
+	'style_loader_src',
+	static function ( $src, $handle ) {
+		if ( ! is_string( $src ) || ! str_contains( $src, '/awt-blocks/' ) ) {
+			return $src;
+		}
+
+		$base = plugin_dir_url( __FILE__ );
+		$path = strtok( $src, '?' );
+		if ( ! str_starts_with( $path, $base ) ) {
+			return $src;
+		}
+
+		$file = __DIR__ . '/' . substr( $path, strlen( $base ) );
+		if ( ! file_exists( $file ) ) {
+			return $src;
+		}
+
+		unset( $handle );
+		return add_query_arg( 'ver', (string) filemtime( $file ), $path );
+	},
+	10,
+	2
+);
+
+/**
  * Register every block from its built block.json.
  *
  * Each block's source lives in src/<slug>/ and is mirrored into build/<slug>/ by

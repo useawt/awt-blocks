@@ -26,6 +26,12 @@
   down the page, or be cropped to the content width when the modal was placed
   directly on a page.
 
+### [Improvement]
+
+- A style change now reaches people who have visited the site before. Block
+  stylesheets were served under a web address that never changed, so a browser
+  or host that had cached one kept serving the old file.
+
 ### [Breaking]
 
 - The Tabs block's markup changed: the first usable tab renders selected and its
