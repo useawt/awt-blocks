@@ -23,6 +23,10 @@
 
 ### [A11y]
 
+- A Section's Content and Wide widths now follow the site's own layout
+  settings instead of fixed sizes, so a section lines up with the page title
+  and the breadcrumb above it. Narrow and Reading are unchanged — those are
+  measures for text, not the page's layout.
 - Text typed into a URL field no longer becomes a broken link. On the Link,
   Button and Tile blocks, "Read more" in the URL field was turned into a link
   to a web address of that name; now nothing links to it, and the editor says

@@ -83,13 +83,14 @@ export default function Edit( { attributes, setAttributes } ) {
 		ariaLabel,
 	} = attributes;
 
+	// Same as render.php: Content and Wide follow the site's own layout, so
+	// the canvas shows the width the page will use.
 	const widthMap = {
 		none: '100%',
 		narrow: '42rem',
 		reading: '48rem',
-		content: '66rem',
-		wide: '82.5rem',
-		custom: customMaxWidth || '66rem',
+		content: 'var(--wp--style--global--content-size, 66rem)',
+		wide: 'var(--wp--style--global--wide-size, 82.5rem)',
 	};
 	// Mirror render.php's theme-scope classes so the editor island resolves
 	// the same Carbon tokens (e.g. cds--g100 → dark palette) as the published

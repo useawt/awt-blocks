@@ -32,12 +32,17 @@ if ( ! in_array( $tag_name, $allowed_tags, true ) ) {
 	$tag_name = 'section';
 }
 
+// "Content" and "Wide" mean whatever the site says they mean, so a section
+// lines up with everything the templates render — the breadcrumb and the page
+// title are laid out by the site's own content width, and a section that
+// hardcoded its own number sat 132px inside them. Narrow and Reading stay
+// fixed: those are measures for text, not the page's layout.
 $max_widths = array(
 	'none'    => '100%',
 	'narrow'  => '42rem',
 	'reading' => '48rem',
-	'content' => '66rem',
-	'wide'    => '82.5rem',
+	'content' => 'var(--wp--style--global--content-size, 66rem)',
+	'wide'    => 'var(--wp--style--global--wide-size, 82.5rem)',
 );
 $max_width  = $max_widths[ $max_width_key ] ?? '66rem';
 if ( $max_width_key === 'custom' && $custom_max !== '' ) {
