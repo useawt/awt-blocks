@@ -52,6 +52,10 @@ const SPACE_KEYS = [ ' ', 'Spacebar', 'Space' ];
  */
 const COLLAPSED = 'awt-header-collapsed';
 
+// Worn only while the header is being measured. theme.css turns off every
+// transition in the header underneath it — see the note there.
+const MEASURING = 'awt-header-measuring';
+
 function fitHeader() {
 	const header = document.querySelector( '.cds--header' );
 	if ( ! header ) {
@@ -62,7 +66,14 @@ function fitHeader() {
 	// Measure in the row state, whatever the current state is. Reading a
 	// layout property forces the browser to resolve it now, and nothing is
 	// painted in between, so this does not flicker.
+	//
+	// Every call measures, including the height-only resizes a phone fires
+	// while the URL bar hides. Skipping those was tried and reverted: width is
+	// not the only input — a menu that gains an item has to collapse at the
+	// same window size — and measuring rather than assuming a width is the
+	// whole point of this header.
 	const wasCollapsed = root.classList.contains( COLLAPSED );
+	root.classList.add( MEASURING );
 	root.classList.remove( COLLAPSED );
 
 	// Measure as a scroll container. On a box that overflows visibly,
@@ -79,6 +90,14 @@ function fitHeader() {
 	header.style.overflow = previousOverflow;
 
 	root.classList.toggle( COLLAPSED, overflows );
+
+	// Settle the header back into its real state while transitions are still
+	// suppressed. Without this read the browser never sees that state on its
+	// own: it would go straight from the measured one to a header whose
+	// transitions are back on, and animate the difference — which is the
+	// drawer sliding out, on every scroll of the page.
+	void header.offsetWidth;
+	root.classList.remove( MEASURING );
 
 	// A drawer left open while the header goes back to a row would strand the
 	// panel on screen with nothing to close it.

@@ -133,6 +133,66 @@ test.describe( 'Header collapse', () => {
 		await expect.poll( () => collapsed( page ) ).toBe( true );
 	} );
 
+	// Deciding whether the menu fits means taking the collapsed class off,
+	// reading the width and putting it back. That made the drawer a visible
+	// row for an instant and then animated it out again — on every resize,
+	// which on a phone is every scroll, because hiding the URL bar changes the
+	// window height. The menu opened and closed continuously while scrolling.
+	test( 'resizing does not animate the drawer', async ( { page } ) => {
+		await page.setViewportSize( { width: 375, height: 700 } );
+		await page.goto( '/' );
+		await expect.poll( () => collapsed( page ) ).toBe( true );
+
+		await page.evaluate( () => {
+			window.__drawerAnimations = 0;
+			document
+				.querySelector( '.cds--header__nav' )
+				.addEventListener( 'transitionrun', () => {
+					window.__drawerAnimations += 1;
+				} );
+		} );
+
+		// Height only: what a phone reports while the URL bar hides.
+		for ( const height of [ 640, 700, 640, 700 ] ) {
+			await page.setViewportSize( { width: 375, height } );
+		}
+		// And a real width change, which does have to be measured.
+		for ( const width of [ 420, 375, 420 ] ) {
+			await page.setViewportSize( { width, height: 700 } );
+		}
+		await expect.poll( () => collapsed( page ) ).toBe( true );
+
+		expect( await page.evaluate( () => window.__drawerAnimations ) ).toBe(
+			0
+		);
+	} );
+
+	// The pair to the test above: the drawer has to still slide. Suppressing
+	// the animation everywhere would pass that one and lose the component.
+	test( 'the drawer still animates when it is opened', async ( { page } ) => {
+		await page.setViewportSize( { width: 375, height: 700 } );
+		await page.goto( '/' );
+		await expect.poll( () => collapsed( page ) ).toBe( true );
+
+		await page.evaluate( () => {
+			window.__drawerAnimations = [];
+			document
+				.querySelector( '.cds--header__nav' )
+				.addEventListener( 'transitionrun', ( event ) => {
+					window.__drawerAnimations.push( event.propertyName );
+				} );
+		} );
+
+		await page.locator( '.awt-header-nav__trigger' ).click();
+		await expect( page.locator( '.cds--header__nav' ) ).toHaveClass(
+			/awt-nav-open/
+		);
+
+		await expect
+			.poll( () => page.evaluate( () => window.__drawerAnimations ) )
+			.toContain( 'transform' );
+	} );
+
 	test( 'widening with the drawer open puts the row back and closes it', async ( {
 		page,
 	} ) => {
