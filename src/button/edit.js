@@ -12,6 +12,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import {
+	Notice,
 	PanelBody,
 	SelectControl,
 	TextControl,
@@ -19,6 +20,7 @@ import {
 } from '@wordpress/components';
 import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
 import PremiumNotice from '../shared/premium-notice';
+import looksLikeUrl from '../shared/looks-like-url';
 
 const KIND_OPTIONS = [
 	{ label: 'Primary', value: 'primary' },
@@ -177,6 +179,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 					/>
+					{ href && ! looksLikeUrl( href ) && (
+						<Notice status="warning" isDismissible={ false }>
+							{ __(
+								'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+								'awt-blocks'
+							) }
+						</Notice>
+					) }
 					<SelectControl
 						label={ __( 'Target', 'awt-blocks' ) }
 						value={ target }

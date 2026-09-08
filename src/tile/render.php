@@ -29,8 +29,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$variant      = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'default';
-$href         = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
+$variant = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'default';
+$href    = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
+// Prose typed into a URL field is not a link. Left as an empty href, it would
+// become `http://<the sentence>`; dropped, the block renders as it does with
+// no address at all, and the editor flags it.
+if ( ! \AWT\Blocks\Render\looks_like_url( $href ) ) {
+	$href = '';
+}
 $group_name   = isset( $attributes['groupName'] ) ? (string) $attributes['groupName'] : '';
 $tile_value   = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $summary      = isset( $attributes['summary'] ) ? (string) $attributes['summary'] : __( 'Expandable tile', 'awt-blocks' );

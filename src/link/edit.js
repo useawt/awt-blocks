@@ -5,12 +5,14 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import {
+	Notice,
 	PanelBody,
 	SelectControl,
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
 import IconPicker, { iconPreviewUrl } from '../shared/icon-picker';
+import looksLikeUrl from '../shared/looks-like-url';
 
 const SIZE_OPTIONS = [
 	{ label: 'Small (sm)', value: 'sm' },
@@ -63,6 +65,14 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { href: v } ) }
 						type="url"
 					/>
+					{ href && ! looksLikeUrl( href ) && (
+						<Notice status="warning" isDismissible={ false }>
+							{ __(
+								'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+								'awt-blocks'
+							) }
+						</Notice>
+					) }
 					<SelectControl
 						label={ __( 'Size', 'awt-blocks' ) }
 						value={ size }

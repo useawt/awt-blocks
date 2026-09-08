@@ -12,6 +12,7 @@ use function AWT\Blocks\FaqSchema\slugify_question;
 use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\compute_rel;
 use function AWT\Blocks\Render\classnames;
+use function AWT\Blocks\Render\looks_like_url;
 
 /**
  * Shared helper behavior.
@@ -117,6 +118,45 @@ class Test_Shared_Helpers extends WP_UnitTestCase {
 			. '<li><a href="/pricing/" aria-current="page">Pricing</a></li>';
 
 		$this->assertSame( 2, substr_count( only_most_specific_current( $html ), 'aria-current="page"' ) );
+	}
+
+	/**
+	 * A URL field holding prose is not a link.
+	 *
+	 * WordPress gives anything without a scheme an http://, so a sentence
+	 * typed into one became a link to a host of that name — dead, and not
+	 * visibly wrong. Every real shape of address still has to pass.
+	 */
+	public function test_looks_like_url_accepts_real_addresses() {
+		foreach ( array(
+			'https://example.com/x',
+			'http://example.com',
+			'/relative/path',
+			'#anchor',
+			'?s=x',
+			'mailto:a@b.com',
+			'tel:+123',
+			'example.com',
+			'example.com/path',
+			'www.example.com/a?b=c#d',
+		) as $href ) {
+			$this->assertTrue( looks_like_url( $href ), $href . ' should be usable as a link' );
+		}
+	}
+
+	/**
+	 * Prose in a URL field links nowhere, rather than somewhere wrong.
+	 */
+	public function test_looks_like_url_rejects_prose() {
+		foreach ( array(
+			'Request a free auditor account',
+			'Read more',
+			'auditor-account',
+			'',
+			'   ',
+		) as $href ) {
+			$this->assertFalse( looks_like_url( $href ), $href . ' should not be used as a link' );
+		}
 	}
 
 	/**

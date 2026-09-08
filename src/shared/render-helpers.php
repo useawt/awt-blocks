@@ -207,6 +207,37 @@ function _read_carbon_icon( string $file, int $size, string $extra_class = '' ):
 }
 
 /**
+ * Is this a web address, or is it prose someone typed into a URL field?
+ *
+ * `esc_url()` gives anything without a scheme an `http://`, so the sentence
+ * "Request a free auditor account" became a link to a host of that name — a
+ * dead link rather than a visible mistake. Whitespace is the giveaway: no URL
+ * contains a raw space, and every real form of one is allowed through here,
+ * including a bare domain, a root-relative path, a fragment and a mailto:.
+ *
+ * @param string $href The attribute's value.
+ * @return bool True when it can be used as a link target.
+ */
+function looks_like_url( string $href ): bool {
+	$href = trim( $href );
+	if ( '' === $href ) {
+		return false;
+	}
+	// A space, tab or newline anywhere means prose. A URL that genuinely needs
+	// one carries %20 by the time it is typed into a field.
+	if ( preg_match( '/\s/', $href ) ) {
+		return false;
+	}
+	// Anything with a scheme, or plainly relative, is a link.
+	if ( preg_match( '#^(https?:|mailto:|tel:|/|\#|\?)#i', $href ) ) {
+		return true;
+	}
+	// Otherwise it has to look like a host: something.tld, optionally with a
+	// path. "auditor-account" alone does not.
+	return (bool) preg_match( '/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?:[:\/?#]|$)/i', $href );
+}
+
+/**
  * Build an HTML attribute string from a name=>value map, escaping each value.
  *
  * Booleans render as bare attributes when true and are omitted when false.

@@ -16,8 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$text      = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link text', 'awt-blocks' );
-$href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
+$text = isset( $attributes['text'] ) ? (string) $attributes['text'] : __( 'Link text', 'awt-blocks' );
+$href = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
+// Prose typed into a URL field is not a link. Left as an empty href, it would
+// become `http://<the sentence>`; dropped, the block renders as it does with
+// no address at all, and the editor flags it.
+if ( ! \AWT\Blocks\Render\looks_like_url( $href ) ) {
+	$href = '';
+}
 $target    = isset( $attributes['target'] ) ? (string) $attributes['target'] : '';
 $rel       = isset( $attributes['rel'] ) ? (string) $attributes['rel'] : '';
 $size      = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';

@@ -16,6 +16,7 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import looksLikeUrl from '../shared/looks-like-url';
 
 const TEMPLATE = [
 	[ 'core/heading', { level: 3, content: 'Tile heading' } ],
@@ -138,16 +139,26 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					</Notice>
 				) }
 				{ variant === 'clickable' && (
-					<TextControl
-						label={ __( 'Link URL', 'awt-blocks' ) }
-						help={ __(
-							'The address this tile links to.',
-							'awt-blocks'
+					<>
+						<TextControl
+							label={ __( 'Link URL', 'awt-blocks' ) }
+							help={ __(
+								'The address this tile links to.',
+								'awt-blocks'
+							) }
+							value={ href }
+							onChange={ ( v ) => setAttributes( { href: v } ) }
+							type="url"
+						/>
+						{ href && ! looksLikeUrl( href ) && (
+							<Notice status="warning" isDismissible={ false }>
+								{ __(
+									'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+									'awt-blocks'
+								) }
+							</Notice>
 						) }
-						value={ href }
-						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
-					/>
+					</>
 				) }
 				{ variant === 'selectable' && (
 					<>

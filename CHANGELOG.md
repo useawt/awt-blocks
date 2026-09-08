@@ -23,6 +23,10 @@
 
 ### [A11y]
 
+- Text typed into a URL field no longer becomes a broken link. On the Link,
+  Button and Tile blocks, "Read more" in the URL field was turned into a link
+  to a web address of that name; now nothing links to it, and the editor says
+  the field does not hold an address.
 - A clickable Tile that has a link inside it now renders as a plain tile, with
   that link still working. A link cannot contain another link, and browsers
   broke the tile apart when it did — the tile split in two with an empty box
