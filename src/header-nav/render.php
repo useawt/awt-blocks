@@ -105,6 +105,8 @@ $wrapper_attrs = get_block_wrapper_attributes(
 		'class'                      => 'awt-header-nav',
 		'style'                      => 'display:contents',
 		'data-wp-interactive'        => 'awt/header-nav',
+		// Whether the row fits is measured, not assumed from a width.
+		'data-wp-init'               => 'callbacks.fitHeader',
 		'data-wp-on-window--keydown' => 'actions.onWindowKey',
 	)
 );

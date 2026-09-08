@@ -38,6 +38,54 @@ import {
 
 const SPACE_KEYS = [ ' ', 'Spacebar', 'Space' ];
 
+/**
+ * Collapse the header when the menu does not fit, rather than at a width.
+ *
+ * How wide the row needs to be depends on how many items the menu has and how
+ * long their labels are, which no breakpoint can know. Carbon's is 66rem — the
+ * width its own short menu needs — and a nine-item menu overflowed it, wrapping
+ * the last item and pushing the sign-in button off the edge of the screen.
+ *
+ * The menu bar never wraps (theme.css), so an overflowing header is a real
+ * overflow and can be measured. The class goes on <html> because the drawer,
+ * its backdrop and the header itself all react to it.
+ */
+const COLLAPSED = 'awt-header-collapsed';
+
+function fitHeader() {
+	const header = document.querySelector( '.cds--header' );
+	if ( ! header ) {
+		return;
+	}
+	const root = document.documentElement;
+
+	// Measure in the row state, whatever the current state is. Reading a
+	// layout property forces the browser to resolve it now, and nothing is
+	// painted in between, so this does not flicker.
+	const wasCollapsed = root.classList.contains( COLLAPSED );
+	root.classList.remove( COLLAPSED );
+	const overflows = header.scrollWidth > header.clientWidth + 1;
+	root.classList.toggle( COLLAPSED, overflows );
+
+	// A drawer left open while the header goes back to a row would strand the
+	// panel on screen with nothing to close it.
+	if ( wasCollapsed && ! overflows && state.navOpen ) {
+		state.navOpen = false;
+	}
+}
+
+let fitQueued = false;
+function scheduleFit() {
+	if ( fitQueued ) {
+		return;
+	}
+	fitQueued = true;
+	requestAnimationFrame( () => {
+		fitQueued = false;
+		fitHeader();
+	} );
+}
+
 const FOCUSABLE =
 	'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -228,6 +276,17 @@ const { state } = store( 'awt/header-nav', {
 		},
 		// Move the hamburger to just after the skip-link (before the brand) so
 		// it's reached first by keyboard on mobile. Runs once on init.
+		// Decide the header's shape on load, and again whenever the space or
+		// the text in it changes. Fonts matter: a menu measured before the
+		// webfont arrives is measured at the wrong width.
+		fitHeader() {
+			scheduleFit();
+			window.addEventListener( 'resize', scheduleFit );
+			if ( document.fonts && document.fonts.ready ) {
+				document.fonts.ready.then( scheduleFit );
+			}
+		},
+
 		relocateTrigger() {
 			const el = getElement().ref;
 			const header = el?.closest( '.cds--header' );

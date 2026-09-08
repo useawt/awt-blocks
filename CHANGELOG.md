@@ -23,6 +23,10 @@
 
 ### [A11y]
 
+- The header now collapses to the menu button when the navigation does not
+  fit, instead of at a fixed screen width. A long menu used to overflow — items
+  wrapping and the last button cut off by the edge of the screen — while a short
+  one was hidden behind the menu button with room to spare.
 - A Section's Content and Wide widths now follow the site's own layout
   settings instead of fixed sizes, so a section lines up with the page title
   and the breadcrumb above it. Narrow and Reading are unchanged — those are
