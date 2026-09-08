@@ -20,14 +20,17 @@ const path = require( 'node:path' );
 
 const ROOT = path.resolve( __dirname, '..' );
 
+// Every shared PHP file, found rather than listed. The list used to be written
+// out by hand, and two files added on 2026-09-06 were required by
+// awt-blocks.php but never mirrored — the shipped zip fatalled on activation
+// while every check passed, because a checkout has src/ and the zip does not.
+const SHARED_PHP = fs
+	.readdirSync( path.join( __dirname, '..', 'src', 'shared' ) )
+	.filter( ( name ) => name.endsWith( '.php' ) )
+	.map( ( name ) => [ `src/shared/${ name }`, `build/shared/${ name }` ] );
+
 const COPIES = [
-	// Shared runtime PHP, hard-required by awt-blocks.php.
-	[ 'src/shared/render-helpers.php', 'build/shared/render-helpers.php' ],
-	[ 'src/shared/current-url.php', 'build/shared/current-url.php' ],
-	[ 'src/shared/faq-schema.php', 'build/shared/faq-schema.php' ],
-	[ 'src/shared/global-controls.php', 'build/shared/global-controls.php' ],
-	[ 'src/shared/template-chrome.php', 'build/shared/template-chrome.php' ],
-	[ 'src/shared/updates.php', 'build/shared/updates.php' ],
+	...SHARED_PHP,
 	// Editor-only styles for the IconPicker.
 	[ 'src/shared/icon-picker.css', 'build/shared/icon-picker.css' ],
 	// Editor UI: Spacing panel + Carbon doc links.
@@ -42,6 +45,27 @@ for ( const [ from, to ] of COPIES ) {
 	const dest = path.join( ROOT, to );
 	fs.mkdirSync( path.dirname( dest ), { recursive: true } );
 	fs.copyFileSync( src, dest );
+}
+
+// Everything awt-blocks.php requires has to be in build/, or the shipped
+// plugin dies on activation. Checked here rather than left to whoever notices.
+const pluginPhp = fs.readFileSync(
+	path.join( ROOT, 'awt-blocks.php' ),
+	'utf8'
+);
+const required = [
+	...pluginPhp.matchAll( /require_once \$awt_shared_dir \. '\/([^']+)'/g ),
+].map( ( m ) => m[ 1 ] );
+const missing = required.filter(
+	( name ) => ! fs.existsSync( path.join( ROOT, 'build', 'shared', name ) )
+);
+if ( missing.length ) {
+	console.error(
+		`[mirror-runtime] awt-blocks.php requires build/shared/{${ missing.join(
+			', '
+		) }}, which the build did not produce. The distribution zip would fatal on activation.`
+	);
+	process.exit( 1 );
 }
 
 process.stdout.write(

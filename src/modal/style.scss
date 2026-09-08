@@ -11,3 +11,18 @@
 
 @use '@carbon/styles/scss/components/modal';
 @use '@carbon/styles/scss/components/button';
+
+// The block spacing system puts a margin on every block's outer element. This
+// block's outer element is the full-screen overlay, so that margin moves the
+// overlay down and leaves a strip of the page uncovered above it — and the
+// dialog inside it lands off-centre by the same amount. A fixed overlay has
+// nothing to be spaced from.
+.cds--modal.wp-block-awt-modal {
+	margin: 0;
+
+	// A modal placed straight into a constrained layout is also a child that
+	// the layout narrows to the content width, which crops the overlay to a
+	// column down the middle of the screen. It covers the viewport, so it
+	// takes neither the width nor the spacing the layout hands its children.
+	max-inline-size: none;
+}

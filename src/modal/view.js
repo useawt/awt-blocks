@@ -28,9 +28,22 @@ const FOCUSABLE = [
 const handlers = new WeakMap();
 
 function focusableIn( modal ) {
-	return Array.from( modal.querySelectorAll( FOCUSABLE ) ).filter(
-		( el ) => ! el.hasAttribute( 'aria-hidden' )
-	);
+	return Array.from( modal.querySelectorAll( FOCUSABLE ) ).filter( ( el ) => {
+		if ( el.hasAttribute( 'aria-hidden' ) || el.closest( '[hidden]' ) ) {
+			return false;
+		}
+		// Something the selector matches but Tab never reaches would become a
+		// "last" element that focus never lands on, and the wrap back to the
+		// first would never fire — the trap silently stops trapping. A form's
+		// honeypot field is exactly this: a real input, taken out of the tab
+		// order with tabindex="-1".
+		if ( el.tabIndex < 0 ) {
+			return false;
+		}
+		// display:none and friends. A visually hidden control that is still
+		// reachable by keyboard — a skip link — keeps its rects and stays.
+		return el.getClientRects().length > 0;
+	} );
 }
 
 function open( modal, returnTo ) {

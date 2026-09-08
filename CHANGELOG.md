@@ -19,6 +19,12 @@
   markup rather than only after the page loads.
 - A modal with no primary action label no longer renders an empty button. Leave
   the label blank when the modal holds a form with its own submit button.
+- Keyboard focus now stays inside an open modal. A control the modal held but
+  Tab could not reach — a hidden field taken out of the tab order — used to let
+  focus walk out into the page behind it.
+- A modal's dark overlay now covers the whole screen. It could sit slightly
+  down the page, or be cropped to the content width when the modal was placed
+  directly on a page.
 
 ### [Breaking]
 
