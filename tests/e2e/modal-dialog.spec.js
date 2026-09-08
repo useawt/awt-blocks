@@ -33,6 +33,13 @@ const PAGE_CONTENT = `
 <!-- /wp:awt/modal -->
 
 <!-- wp:paragraph --><p><a href="#elsewhere">Another link behind it</a></p><!-- /wp:paragraph -->
+
+<!-- wp:awt/section {"themeScope":"dark","align":"full"} -->
+<!-- wp:awt/modal-opener {"text":"Open the dialog in the dark band","modalId":"band-modal"} /-->
+<!-- wp:awt/modal {"id":"band-modal","heading":"In a dark band","primaryAction":"","secondaryAction":""} -->
+<!-- wp:paragraph --><p>Body copy inside the dialog.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/modal -->
+<!-- /wp:awt/section -->
 `;
 
 test.describe( 'Modal dialog', () => {
@@ -122,5 +129,44 @@ test.describe( 'Modal dialog', () => {
 			/is-visible/
 		);
 		await expect( opener ).toBeFocused();
+	} );
+
+	// A modal covers the page, so it takes the page's colour — not the colour
+	// of the Section it happens to be written inside. A call to action moved
+	// into a dark footer band opened both of its forms in dark on a light
+	// site, because a theme scope declares its tokens for everything within.
+	test( 'a dialog inside a dark band takes the colour of the page', async ( {
+		page,
+	} ) => {
+		await page.goto( `/?page_id=${ pageId }` );
+
+		const tokensOf = ( id ) =>
+			page.evaluate( ( modalId ) => {
+				const modal = document.getElementById( modalId );
+				const styles = getComputedStyle( modal );
+				return {
+					layer: styles.getPropertyValue( '--cds-layer' ).trim(),
+					text: styles
+						.getPropertyValue( '--cds-text-primary' )
+						.trim(),
+				};
+			}, id );
+
+		await page
+			.getByText( 'Open the dialog in the dark band', { exact: true } )
+			.click();
+		await expect( page.locator( '#band-modal' ) ).toHaveClass(
+			/is-visible/
+		);
+		const inBand = await tokensOf( 'band-modal' );
+
+		await page.keyboard.press( 'Escape' );
+		await page.getByText( 'Open the form dialog', { exact: true } ).click();
+		await expect( page.locator( '#trap-modal' ) ).toHaveClass(
+			/is-visible/
+		);
+		const plain = await tokensOf( 'trap-modal' );
+
+		expect( inBand ).toEqual( plain );
 	} );
 } );

@@ -27,6 +27,32 @@ const FOCUSABLE = [
 
 const handlers = new WeakMap();
 
+// Carbon's four colour zones. A scope class declares the `--cds-*` tokens for
+// everything inside it.
+const SCOPES = [ 'cds--white', 'cds--g10', 'cds--g90', 'cds--g100' ];
+
+/**
+ * Give the modal the page's colour, not the colour of whatever it sits inside.
+ *
+ * A modal covers the whole page, but in the markup it is wherever the author
+ * put it — and a Section with a theme scope declares that zone's tokens for
+ * everything within, a modal included. Moving a call to action into a dark
+ * footer band turned both of its forms dark on a light site (2026-09-08).
+ *
+ * Declaring the page's zone on the modal itself wins: a custom property
+ * resolves to the nearest declaration, and nothing is nearer than the element.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function applyPageScope( modal ) {
+	const page = SCOPES.find( ( scope ) =>
+		document.body.classList.contains( scope )
+	);
+	SCOPES.forEach( ( scope ) => {
+		modal.classList.toggle( scope, scope === page );
+	} );
+}
+
 function focusableIn( modal ) {
 	return Array.from( modal.querySelectorAll( FOCUSABLE ) ).filter( ( el ) => {
 		if ( el.hasAttribute( 'aria-hidden' ) || el.closest( '[hidden]' ) ) {
@@ -53,6 +79,16 @@ function open( modal, returnTo ) {
 	modal.classList.add( 'is-visible' );
 	modal.removeAttribute( 'aria-hidden' );
 	document.body.style.overflow = 'hidden';
+
+	applyPageScope( modal );
+	// The colour-scheme toggle rewrites the class on <body> and announces
+	// nothing, so watch for it: a visitor switching to dark with the modal
+	// open should take the modal with them.
+	const scopeWatch = new MutationObserver( () => applyPageScope( modal ) );
+	scopeWatch.observe( document.body, {
+		attributes: true,
+		attributeFilter: [ 'class' ],
+	} );
 
 	const items = focusableIn( modal );
 	if ( items.length > 0 ) {
@@ -83,7 +119,7 @@ function open( modal, returnTo ) {
 		}
 	};
 	document.addEventListener( 'keydown', onKey );
-	handlers.set( modal, { onKey, returnTo } );
+	handlers.set( modal, { onKey, returnTo, scopeWatch } );
 }
 
 function close( modal ) {
@@ -93,9 +129,14 @@ function close( modal ) {
 	modal.classList.remove( 'is-visible' );
 	modal.setAttribute( 'aria-hidden', 'true' );
 	document.body.style.overflow = '';
+	SCOPES.forEach( ( scope ) => modal.classList.remove( scope ) );
+
 	const h = handlers.get( modal );
 	if ( h ) {
 		document.removeEventListener( 'keydown', h.onKey );
+		if ( h.scopeWatch ) {
+			h.scopeWatch.disconnect();
+		}
 		if ( h.returnTo && typeof h.returnTo.focus === 'function' ) {
 			h.returnTo.focus();
 		}

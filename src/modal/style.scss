@@ -25,4 +25,16 @@
 	// column down the middle of the screen. It covers the viewport, so it
 	// takes neither the width nor the spacing the layout hands its children.
 	max-inline-size: none;
+
+	// The overlay stays the dim backdrop.
+	//
+	// view.js puts the page's Carbon zone class on this element when the
+	// dialog opens, so the dialog is the colour of the page rather than of the
+	// section it was written inside. A zone class carries more than tokens: it
+	// also paints `background-color`, at the same specificity as Carbon's
+	// overlay rule. That turned the backdrop opaque white on a light page and
+	// took the dialog's own border down to 1.71:1 against it — under the 3:1
+	// that WCAG 1.4.11 asks of a boundary you have to see. Two class names
+	// here outrank one, whatever order the stylesheets load in.
+	background-color: var(--cds-overlay);
 }
