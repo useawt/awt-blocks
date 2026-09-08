@@ -6,13 +6,16 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	InspectorControls,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import {
+	Notice,
 	PanelBody,
 	SelectControl,
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
 
 const TEMPLATE = [
 	[ 'core/heading', { level: 3, content: 'Tile heading' } ],
@@ -22,7 +25,26 @@ const TEMPLATE = [
 	],
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+/**
+ * Does anything inside this tile link somewhere?
+ *
+ * @param {Array} blocks Inner blocks to look through.
+ * @return {boolean} True when one of them is, or contains, a link.
+ */
+function containsLink( blocks ) {
+	return ( blocks || [] ).some( ( block ) => {
+		if ( block.name === 'awt/link' || block.name === 'core/button' ) {
+			return true;
+		}
+		const inAttribute = Object.values( block.attributes || {} ).some(
+			( value ) =>
+				typeof value === 'string' && /<a\s[^>]*href=/i.test( value )
+		);
+		return inAttribute || containsLink( block.innerBlocks );
+	} );
+}
+
+export default function Edit( { attributes, setAttributes, clientId } ) {
 	const {
 		variant,
 		href,
@@ -48,6 +70,14 @@ export default function Edit( { attributes, setAttributes } ) {
 	]
 		.filter( Boolean )
 		.join( ' ' );
+	const hasInnerLink = useSelect(
+		( select ) =>
+			containsLink(
+				select( blockEditorStore ).getBlock( clientId )?.innerBlocks
+			),
+		[ clientId ]
+	);
+
 	const blockProps = useBlockProps( { className: classes } );
 	const innerProps = useInnerBlocksProps( {}, { template: TEMPLATE } );
 
@@ -99,6 +129,14 @@ export default function Edit( { attributes, setAttributes } ) {
 					] }
 					onChange={ ( v ) => setAttributes( { variant: v } ) }
 				/>
+				{ variant === 'clickable' && hasInnerLink && (
+					<Notice status="warning" isDismissible={ false }>
+						{ __(
+							'This tile has a link inside it, so the whole tile cannot also be a link — a link cannot contain another link, and browsers break the tile apart when it does. It will render as a plain tile with the inner link working. Remove the inner link to make the whole tile clickable.',
+							'awt-blocks'
+						) }
+					</Notice>
+				) }
 				{ variant === 'clickable' && (
 					<TextControl
 						label={ __( 'Link URL', 'awt-blocks' ) }

@@ -36,6 +36,17 @@ $tile_value   = isset( $attributes['value'] ) ? (string) $attributes['value'] : 
 $summary      = isset( $attributes['summary'] ) ? (string) $attributes['summary'] : __( 'Expandable tile', 'awt-blocks' );
 $default_open = ! empty( $attributes['defaultOpen'] );
 
+// A clickable tile is an <a>, and an <a> cannot contain another one. A browser
+// meeting the inner link closes the outer anchor early and repairs the rest as
+// siblings, which on the page reads as the tile splitting in two with an empty
+// box in the middle and the link loose underneath. So a tile whose content
+// holds a link is a plain tile: everything inside it still works, including
+// that link, and nothing is thrown away. It also stops looking clickable,
+// because it is not. The editor says so while the author is still there.
+if ( $variant === 'clickable' && preg_match( '/<a\s[^>]*href=/i', (string) $content ) ) {
+	$variant = 'default';
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $classes = array( 'cds--tile' );

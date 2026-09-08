@@ -21,6 +21,14 @@
   page laid the name and role out as chosen; the editor always showed them
   stacked.
 
+### [A11y]
+
+- A clickable Tile that has a link inside it now renders as a plain tile, with
+  that link still working. A link cannot contain another link, and browsers
+  broke the tile apart when it did — the tile split in two with an empty box
+  between and the link loose underneath. The editor now says so while you are
+  building it.
+
 ## 2026.09.1 — 2026-09-08
 
 ### [A11y]
