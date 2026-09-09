@@ -12,6 +12,7 @@ import './linter/toolbar';
 import './linter/canvas-marker';
 import './accessibility-panel';
 import './contrast-preview';
+import './decorative-image';
 import './page-language';
 
 import { __, _n, sprintf } from '@wordpress/i18n';

@@ -50,6 +50,51 @@ describe( '#1 missing image alt', () => {
 		);
 		expect( has( f, 1 ) ).toBe( false );
 	} );
+	// `isDecorative` is core's own attribute, set by the Image block's "Mark
+	// as decorative" checkbox. The name is pinned here because the check read
+	// a different one for months: nothing set it, so ticking the box left the
+	// error standing and the advice could not be followed.
+	test( 'silent when the author marked the image decorative', () => {
+		const f = runChecks(
+			[
+				B( 'core/image', {
+					url: 'a.jpg',
+					alt: '',
+					isDecorative: true,
+				} ),
+			],
+			ctx()
+		);
+		expect( has( f, 1 ) ).toBe( false );
+	} );
+	test( 'the same for a cover', () => {
+		const f = runChecks(
+			[
+				B( 'core/cover', {
+					url: 'a.jpg',
+					alt: '',
+					isDecorative: true,
+				} ),
+			],
+			ctx()
+		);
+		expect( has( f, 1 ) ).toBe( false );
+	} );
+	test( 'decorative does not excuse a linked image', () => {
+		const f = runChecks(
+			[
+				B( 'core/image', {
+					url: 'a.jpg',
+					alt: '',
+					isDecorative: true,
+					linkDestination: 'custom',
+					href: 'https://x',
+				} ),
+			],
+			ctx()
+		);
+		expect( has( f, 4 ) ).toBe( true );
+	} );
 	test( 'a linked image is #4, not #1', () => {
 		const f = runChecks(
 			[

@@ -151,7 +151,10 @@ export function checkImageAlt( blocks ) {
 			continue;
 		}
 		const alt = String( attr( b, 'alt', '' ) ).trim();
-		const decorative = attr( b, 'awtDecorative', false ) === true;
+		// Core's own "Mark as decorative" on the Image block sets this, and
+		// decorative-image.js gives Cover the same checkbox and the same
+		// attribute. It is the author saying the empty alt is deliberate.
+		const decorative = attr( b, 'isDecorative', false ) === true;
 		if ( ! alt && ! decorative ) {
 			out.push( {
 				clientId: b.clientId,
