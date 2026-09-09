@@ -26,6 +26,9 @@ const ALLOWED = [
 	'core/list',
 	'awt/inline-set',
 	'awt/button',
+	// A call to action that opens a dialog is still a call to action, so it
+	// belongs in a hero next to the ones that follow a link.
+	'awt/modal-opener',
 	'awt/link',
 ];
 

@@ -18,8 +18,8 @@ const ALLOWED = [
 ];
 
 const TEMPLATE = [
-	[ 'awt/button', { label: 'Primary action', kind: 'primary' } ],
-	[ 'awt/button', { label: 'Secondary action', kind: 'secondary' } ],
+	[ 'awt/button', { text: 'Primary action', kind: 'primary' } ],
+	[ 'awt/button', { text: 'Secondary action', kind: 'secondary' } ],
 ];
 
 const ORIENTATION = [
