@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.7
+Stable tag: 2026.09.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.8 — 2026-09-09 =
+* [New] Testimonials can link to their source. Set a URL, the link text, whether it opens in a new tab, an optional trailing icon, and a rel value if you need one. The link sits with the name and role, under the quote.
+
 = 2026.09.7 — 2026-09-09 =
 * [A11y] Ticking "Mark as decorative" on an image now clears the accessibility check's "Image is missing alt text" error. The check ignored it, so the fix it asked for could not be made.
 * [A11y] Cover and Media & Text now have the same "Mark as decorative" checkbox the Image block has.
