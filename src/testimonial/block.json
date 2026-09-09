@@ -68,6 +68,30 @@
 			"type": "string",
 			"default": "plain"
 		},
+		"href": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"linkText": {
+			"type": "string",
+			"default": "Read the full story",
+			"role": "content"
+		},
+		"target": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"rel": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"iconName": {
+			"type": "string",
+			"default": ""
+		},
 		"align": {
 			"type": "string",
 			"default": "start"

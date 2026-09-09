@@ -14,6 +14,11 @@
 
 declare( strict_types = 1 );
 
+use function AWT\Blocks\Render\compute_rel;
+use function AWT\Blocks\Render\html_attrs;
+use function AWT\Blocks\Render\icon;
+use function AWT\Blocks\Render\looks_like_url;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -29,6 +34,21 @@ $quote_size        = isset( $attributes['quoteSize'] ) ? (string) $attributes['q
 $attribution_style = isset( $attributes['attributionStyle'] ) ? (string) $attributes['attributionStyle'] : 'stacked';
 $kind              = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'plain';
 $align             = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'start';
+
+// Source link. A quote that was said in public usually has somewhere it can be
+// read in full, and the attribution is where a reader looks for it.
+$href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
+$link_text = isset( $attributes['linkText'] ) ? (string) $attributes['linkText'] : '';
+$target    = isset( $attributes['target'] ) ? (string) $attributes['target'] : '';
+$rel       = isset( $attributes['rel'] ) ? (string) $attributes['rel'] : '';
+$icon_name = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : '';
+
+// Prose typed into a URL field is not a link — same guard as awt/link. Left as
+// an href it would become `http://<the sentence>`; dropped, the block renders
+// as it does with no address at all.
+if ( ! looks_like_url( $href ) ) {
+	$href = '';
+}
 
 // Validate enums.
 $valid_marks  = array( 'double-curved', 'double-straight', 'single-curved', 'none' );
@@ -103,6 +123,44 @@ if ( $author_role !== '' ) {
 if ( $author_org !== '' ) {
 	$source_parts[] = sprintf( '<div class="awt-testimonial__source-org">%s</div>', esc_html( $author_org ) );
 }
+// The link is the last line of the attribution rather than a sibling of it, so
+// it starts where the name and the role start. An empty label would be a link
+// with no accessible name (WCAG 2.4.4), so an author who clears the field gets
+// the default back rather than an unreadable link.
+if ( $href !== '' ) {
+	$label = trim( $link_text );
+	if ( $label === '' ) {
+		$label = __( 'Read the full story', 'awt-blocks' );
+	}
+
+	// Carbon's `.cds--link__icon` span is what supplies the 0.5rem gap, the
+	// 1.25rem sizing and the baseline alignment; the bare SVG sits flush
+	// against the text without it.
+	$icon_html = '';
+	if ( $icon_name !== '' ) {
+		$svg = icon( $icon_name, 20 );
+		if ( $svg !== '' ) {
+			$icon_html = '<span class="cds--link__icon">' . $svg . '</span>';
+		}
+	}
+
+	$link_attrs = html_attrs(
+		array(
+			'class'  => 'awt-testimonial__source-link cds--link',
+			'href'   => $href,
+			'target' => $target,
+			'rel'    => compute_rel( $target, $rel ),
+		)
+	);
+
+	$source_parts[] = sprintf(
+		'<a%1$s>%2$s%3$s</a>',
+		$link_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built by html_attrs(), which escapes every attribute name and value.
+		esc_html( $label ),
+		$icon_html // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- an inline SVG from the vetted Carbon set, in a span with a static class.
+	);
+}
+
 $source_details_html = ! empty( $source_parts )
 	? sprintf( '<div class="awt-testimonial__source-details">%s</div>', implode( '', $source_parts ) )
 	: '';

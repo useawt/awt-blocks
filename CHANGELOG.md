@@ -10,6 +10,14 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [New]
+
+- Testimonials can link to their source. Set a URL, the link text, whether it
+  opens in a new tab, an optional trailing icon, and a rel value if you need
+  one. The link sits with the name and role, under the quote.
+
 ## 2026.09.7 — 2026-09-09
 
 ### [A11y]

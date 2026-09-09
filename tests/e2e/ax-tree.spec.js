@@ -423,6 +423,14 @@ const PROBES = [
 		sel: '.cds--pagination-nav',
 	},
 	{
+		// A testimonial's source link sits inside the figcaption, which is
+		// the quote's attribution — so what a screen reader is told about it
+		// has to make sense read away from the quote it belongs to.
+		page: 'content',
+		key: 'testimonial (attribution)',
+		sel: '.awt-testimonial__source',
+	},
+	{
 		// A filter tag carries a dismiss button whose only name is an aria-label.
 		page: 'content',
 		key: 'tag (dismissible)',

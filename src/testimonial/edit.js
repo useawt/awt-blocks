@@ -7,11 +7,15 @@ import {
 	MediaUploadCheck,
 } from '@wordpress/block-editor';
 import {
+	Notice,
 	PanelBody,
 	SelectControl,
 	TextControl,
+	ToggleControl,
 	Button,
 } from '@wordpress/components';
+import IconPicker, { iconMaskImage } from '../shared/icon-picker';
+import looksLikeUrl from '../shared/looks-like-url';
 
 // Inline SVGs mirror the four mark variants from render.php so the editor
 // preview shows the same opening quotation glyph the published page renders.
@@ -68,6 +72,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		attributionStyle,
 		kind,
 		align,
+		href,
+		linkText,
+		target,
+		rel,
+		iconName,
 	} = attributes;
 
 	const blockProps = useBlockProps( {
@@ -194,6 +203,63 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 				<PanelBody
+					title={ __( 'Source link', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
+					<TextControl
+						label={ __( 'URL', 'awt-blocks' ) }
+						help={ __(
+							'Where the quote can be read in full. Leave empty for no link.',
+							'awt-blocks'
+						) }
+						value={ href }
+						onChange={ ( v ) => setAttributes( { href: v } ) }
+						type="url"
+					/>
+					{ href && ! looksLikeUrl( href ) && (
+						<Notice status="warning" isDismissible={ false }>
+							{ __(
+								'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+								'awt-blocks'
+							) }
+						</Notice>
+					) }
+					<TextControl
+						label={ __( 'Link text', 'awt-blocks' ) }
+						help={ __(
+							'What the link says. Write something that makes sense read on its own, away from the quote.',
+							'awt-blocks'
+						) }
+						value={ linkText }
+						onChange={ ( v ) => setAttributes( { linkText: v } ) }
+					/>
+					<ToggleControl
+						label={ __( 'Open in a new tab', 'awt-blocks' ) }
+						checked={ target === '_blank' }
+						onChange={ ( v ) =>
+							setAttributes( { target: v ? '_blank' : '' } )
+						}
+					/>
+					<TextControl
+						label={ __( 'Link relationship', 'awt-blocks' ) }
+						value={ rel }
+						onChange={ ( v ) => setAttributes( { rel: v } ) }
+						help={ __(
+							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'awt-blocks'
+						) }
+					/>
+					<IconPicker
+						label={ __( 'Trailing icon', 'awt-blocks' ) }
+						help={ __(
+							'Search the Carbon icon library. Leave empty for none.',
+							'awt-blocks'
+						) }
+						value={ iconName }
+						onChange={ ( v ) => setAttributes( { iconName: v } ) }
+					/>
+				</PanelBody>
+				<PanelBody
 					title={ __( 'Author avatar', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
@@ -293,6 +359,45 @@ export default function Edit( { attributes, setAttributes } ) {
 							placeholder={ __( 'Organization', 'awt-blocks' ) }
 							allowedFormats={ [] }
 						/>
+						{ /* Mirrors render.php: the link is the last line of
+						     the attribution, and only exists once there is an
+						     address to point at. Not clickable here — a click
+						     in the canvas selects the block. */ }
+						{ href && (
+							<span className="awt-testimonial__source-link cds--link">
+								{ linkText ||
+									__( 'Read the full story', 'awt-blocks' ) }
+								{ iconName && (
+									<span
+										className="cds--link__icon"
+										aria-hidden="true"
+									>
+										<span
+											style={ {
+												display: 'inline-block',
+												width: '1rem',
+												height: '1rem',
+												background: 'currentColor',
+												WebkitMaskImage: iconMaskImage(
+													iconName,
+													[ 32 ]
+												),
+												maskImage: iconMaskImage(
+													iconName,
+													[ 32 ]
+												),
+												WebkitMaskRepeat: 'no-repeat',
+												maskRepeat: 'no-repeat',
+												WebkitMaskPosition: 'center',
+												maskPosition: 'center',
+												WebkitMaskSize: 'contain',
+												maskSize: 'contain',
+											} }
+										/>
+									</span>
+								) }
+							</span>
+						) }
 					</div>
 				</figcaption>
 			</figure>

@@ -763,6 +763,11 @@ const PROBES = [
 		key: 'testimonial-quote',
 		sel: '.awt-testimonial__quote',
 	},
+	{
+		page: 'content',
+		key: 'testimonial-source-link',
+		sel: '.awt-testimonial__source-link',
+	},
 	{ page: 'content', key: 'pricing-price', sel: '.awt-pricing-tile__price' },
 	{
 		page: 'content',
