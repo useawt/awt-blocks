@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- You can now put a Modal opener inside an Inline set, so a row of calls to
+  action can mix buttons that open a dialog with buttons that follow a link.
+
 ## 2026.09.4 — 2026-09-09
 
 ### [Breaking]

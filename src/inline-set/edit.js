@@ -6,7 +6,16 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 
-const ALLOWED = [ 'awt/button', 'awt/link', 'awt/tag', 'awt/icon' ];
+// The modal opener is on the list because it renders as a button — a call to
+// action that opens a dialog instead of following a link — and a row of calls
+// to action is what this block is for.
+const ALLOWED = [
+	'awt/button',
+	'awt/modal-opener',
+	'awt/link',
+	'awt/tag',
+	'awt/icon',
+];
 
 const TEMPLATE = [
 	[ 'awt/button', { label: 'Primary action', kind: 'primary' } ],
