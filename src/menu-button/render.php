@@ -49,6 +49,13 @@ $context_json = wp_json_encode(
 	)
 );
 
+// See `button/render.php`: `cds--btn--{size}` sets no height, only
+// `cds--layout--size-{size}` does, so without it the trigger sits at Carbon's
+// `lg` default whatever size is chosen.
+$layout_size_class = in_array( $size, array( 'xs', 'sm', 'md', 'lg', 'xl', '2xl' ), true )
+	? 'cds--layout--size-' . $size
+	: '';
+
 $root_class      = $ds ? $ds->classes_for( 'menu-button' ) : 'cds--menu-button';
 $trigger_class   = $ds ? $ds->classes_for(
 	'menu-button',
@@ -57,7 +64,11 @@ $trigger_class   = $ds ? $ds->classes_for(
 		'kind'    => $kind,
 		'size'    => $size,
 	)
-) : classnames( 'cds--btn', array( $kind, $size ), 'cds--menu-button__trigger' );
+) : classnames(
+	'cds--btn',
+	array( $kind, $size ),
+	trim( $layout_size_class . ' cds--menu-button__trigger' )
+);
 $menu_class      = $ds ? $ds->classes_for(
 	'menu-button',
 	array(

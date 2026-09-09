@@ -42,6 +42,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		'cds--btn',
 		`cds--btn--${ kind }`,
 		`cds--btn--${ size }`,
+		// The class that actually sets the height — see render.php.
+		`cds--layout--size-${ size }`,
 	].join( ' ' );
 
 	const setItem = ( idx, patch ) => {

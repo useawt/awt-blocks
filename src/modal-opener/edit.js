@@ -17,7 +17,10 @@ const SIZE = [ 'sm', 'md', 'lg', 'xl' ].map( ( v ) => ( {
 export default function Edit( { attributes, setAttributes } ) {
 	const { text, kind, size, modalId } = attributes;
 	const blockProps = useBlockProps( {
-		className: `cds--btn cds--btn--${ kind } cds--btn--${ size }`,
+		// `cds--btn--{size}` sets no height; only `cds--layout--size-{size}`
+		// does. Without it the canvas shows every size at Carbon's `lg`
+		// default, which is what the page did too (see render.php).
+		className: `cds--btn cds--btn--${ kind } cds--btn--${ size } cds--layout--size-${ size }`,
 	} );
 	return (
 		<>

@@ -18,6 +18,15 @@ $kind     = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'prima
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $modal_id = isset( $attributes['modalId'] ) ? (string) $attributes['modalId'] : 'awt-modal';
 
+// Carbon's button height comes from the `--cds-layout-size-height` variable,
+// which only `cds--layout--size-{size}` sets — `cds--btn--{size}` does not.
+// Without it the button sits at Carbon's `lg` default whatever size is chosen,
+// which is what the Size control did here until 2026-09-09. Same reasoning as
+// `button/render.php`.
+$layout_size_class = in_array( $size, array( 'xs', 'sm', 'md', 'lg', 'xl', '2xl' ), true )
+	? ' cds--layout--size-' . $size
+	: '';
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $root_class = $ds ? $ds->classes_for(
@@ -27,7 +36,7 @@ $root_class = $ds ? $ds->classes_for(
 		'kind'    => $kind,
 		'size'    => $size,
 	)
-) : 'cds--btn cds--btn--' . $kind . ' cds--btn--' . $size;
+) : 'cds--btn cds--btn--' . $kind . ' cds--btn--' . $size . $layout_size_class;
 
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
