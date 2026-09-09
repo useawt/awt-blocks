@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.4
+Stable tag: 2026.09.5
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.5 — 2026-09-09 =
+* [Improvement] You can now put a Modal opener inside an Inline set or a Hero, so a row of calls to action can mix buttons that open a dialog with buttons that follow a link.
+* [Improvement] A new Inline set arrives with its two buttons labelled "Primary action" and "Secondary action" again. Both read "Button".
+
 = 2026.09.4 — 2026-09-09 =
 * [Breaking] The size you pick for a Modal opener or a Menu button now changes the button, in the editor and on the page. Both stayed at the largest size whatever you chose. Each button carries one more class to do it, so custom CSS written against the old markup is worth checking.
 
