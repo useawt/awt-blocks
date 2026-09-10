@@ -91,4 +91,54 @@ test.describe( 'Header action with a label', () => {
 			'an icon-only action keeps the width it had'
 		).toBe( before.plainWidth );
 	} );
+
+	// A label costs about 100px in a row that also holds a logo, a menu button
+	// and the other actions. On a 390px screen that pushed the last action —
+	// the colour-scheme toggle — off the edge of the header, with nothing on
+	// screen to say a control had gone. Below 672px the label is dropped and
+	// the action is an icon again.
+	test( 'below 672px the label is dropped and the square comes back', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1440, height: 800 } );
+		await page.goto( '/' );
+		await page
+			.locator( '.cds--header__action' )
+			.first()
+			.waitFor( { state: 'attached' } );
+
+		const iconOnly = ( await boxes( page ) ).plainWidth;
+		await addLabel( page, 'Learn' );
+		expect(
+			( await boxes( page ) ).button.width,
+			'above the breakpoint the label is shown and the action is wide'
+		).toBeGreaterThan( iconOnly );
+
+		await page.setViewportSize( { width: 671, height: 800 } );
+		const narrow = await boxes( page );
+
+		expect(
+			await page.evaluate(
+				( cls ) =>
+					getComputedStyle( document.querySelector( '.' + cls ) )
+						.display,
+				LABEL_CLASS
+			),
+			'the label is not drawn below the breakpoint'
+		).toBe( 'none' );
+
+		expect(
+			narrow.button.width,
+			'and the action is the same square as every other icon'
+		).toBe( narrow.plainWidth );
+
+		// The name never depended on the span: it is on the element itself.
+		expect(
+			await page.evaluate( () =>
+				document
+					.querySelector( '.cds--header__action' )
+					.getAttribute( 'aria-label' )
+			)
+		).toBeTruthy();
+	} );
 } );
