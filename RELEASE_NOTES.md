@@ -1,5 +1,5 @@
-## 2026.09.10 — 2026-09-10
+## 2026.09.11 — 2026-09-10
 
 ### [Improvement]
 
-- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+- A FAQ question inside an accordion no longer leaves a gap under its row, so the highlight covers the whole row on hover and on focus.
