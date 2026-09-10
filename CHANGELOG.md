@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- An accordion now takes FAQ question blocks, so you can add, duplicate and
+  drag one into it.
+
 ## 2026.09.11 — 2026-09-10
 
 ### [Improvement]

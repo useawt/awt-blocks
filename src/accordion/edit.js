@@ -6,7 +6,11 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 
-const ALLOWED = [ 'awt/accordion-item' ];
+// A FAQ question is an accordion item that keeps its question in a heading,
+// and renders the same <li> when it sits in here. The theme's FAQ pattern
+// ships that nesting, so leaving it off this list only stopped an author
+// adding, duplicating or dragging one in by hand.
+const ALLOWED = [ 'awt/accordion-item', 'awt/faq-item' ];
 const TEMPLATE = [
 	[ 'awt/accordion-item', { title: 'First section' } ],
 	[ 'awt/accordion-item', { title: 'Second section' } ],
