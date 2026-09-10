@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.8
+Stable tag: 2026.09.9
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.9 — 2026-09-10 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.8 — 2026-09-09 =
 * [New] Testimonials can link to their source. Set a URL, the link text, whether it opens in a new tab, an optional trailing icon, and a rel value if you need one. The link sits with the name and role, under the quote.
 
@@ -371,25 +374,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [New] WordPress now tells you when a new version of AWT Blocks is out, on Dashboard, Updates. You still install it yourself.
 * [Improvement] Block descriptions, settings labels and help text across the editor are now written in plain language. The block spacing control is now "Space below", and lists its sizes in pixels first.
 * [Breaking] Lists and preformatted blocks now get the same 24px gap below them as paragraphs. Before, they sat flush against the next block.
-
-= 2026.08.0 — 2026-08-25 =
-* [New] **First release.** The Carbon Design System as WordPress blocks — 58 of them, from buttons and form fields to tabs, accordions, data tables, notifications and modals.
-* [New] An accessibility checker in the editor that flags WCAG 2.2 AA problems while you write, plus an Accessibility panel on every block.
-* [New] Each block loads only its own CSS, so a page carries the styles it uses and nothing more.
-* [New] Carbon's spacing scale on core WordPress blocks, so ordinary paragraphs and headings line up with everything else.
-* [New] A per-page language setting, for a page written in a different language from the rest of the site.
-* [New] Forms that submit: put a Button inside a Form block and turn on **Submit the form**.
-* [New] **Tile group**, a new block that turns selectable tiles into one real choice with a heading saying what is being chosen.
-* [New] Licensed GPLv3 or later. That matters only if you redistribute the plugin or build on its code — using it on your site is unaffected.
-* [A11y] Dropdown works from the keyboard the way a dropdown should: arrow keys move the highlight, Home and End jump to the ends, Enter picks, Escape closes. Type a letter to jump to a choice.
-* [A11y] Selectable tiles sharing a group name are one real radio group. One press of Tab reaches the whole group, the arrow keys move between tiles, and the choice submits with the form.
-* [A11y] Text and Password fields show their error message under the field. It used to be written into the page for screen readers but never displayed, so anyone filling the form in by eye saw a red outline and no explanation.
-* [A11y] Select shows an error icon as well as the red outline, and screen readers now count its options correctly.
-* [A11y] Wide data tables and code snippets can be scrolled with the keyboard, and say which one you have entered.
-* [A11y] A checkbox set to **Indeterminate** really is partially checked — it shows the dash, and screen readers say so.
-* [A11y] The light/dark toggle names the mode it switches to, says whether that mode is on, announces the change, and keeps several toggles on one page in step.
-* [A11y] Modal: leaving the second button's label empty removes the button instead of drawing an empty one.
-* [A11y] A Statistic's label is plain text rather than a heading, so statistics stop creating heading-level skips.
-* [A11y] A Notification's close button works on the published page.
-* [A11y] Breadcrumbs, a lone FAQ question, and side navigation sections all announce correctly to screen readers.
 <!-- CHANGELOG_END -->
