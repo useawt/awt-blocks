@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.9
+Stable tag: 2026.09.10
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.10 — 2026-09-10 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.9 — 2026-09-10 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -367,11 +370,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [A11y] A modal's dark overlay now covers the whole screen. It could sit slightly down the page, or be cropped to the content width when the modal was placed directly on a page.
 * [Improvement] A style change now reaches people who have visited the site before. Block stylesheets were served under a web address that never changed, so a browser or host that had cached one kept serving the old file.
 * [Breaking] The Tabs block's markup changed: the first usable tab renders selected and its panel renders visible.
-
-= 2026.09.0 — 2026-09-03 =
-* [A11y] Selectable and clickable tiles now have a visible border, so you can see the shape of the control before you choose it. Plain content tiles are unchanged. A "Carbon default" switch on the tile turns the border off.
-* [A11y] The fluid text field now previews in the editor the way it publishes.
-* [New] WordPress now tells you when a new version of AWT Blocks is out, on Dashboard, Updates. You still install it yourself.
-* [Improvement] Block descriptions, settings labels and help text across the editor are now written in plain language. The block spacing control is now "Space below", and lists its sizes in pixels first.
-* [Breaking] Lists and preformatted blocks now get the same 24px gap below them as paragraphs. Before, they sat flush against the next block.
 <!-- CHANGELOG_END -->
