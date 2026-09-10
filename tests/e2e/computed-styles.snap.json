@@ -2320,6 +2320,64 @@
 					"padding": "0px 0px 0px 0px"
 				}
 			},
+			"widgets/faq-item (in accordion)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "list-item",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "16px",
+				"fontWeight": "400",
+				"lineHeight": "16px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "3px none rgb(22, 22, 22)",
+				"outlineOffset": "0px",
+				"boxShadow": "none",
+				"border": {
+					"top": "1px solid rgb(224, 224, 224)",
+					"right": "0px none rgb(22, 22, 22)",
+					"bottom": "0px none rgb(22, 22, 22)",
+					"left": "0px none rgb(22, 22, 22)"
+				},
+				"effectiveBackground": "rgb(255, 255, 255)",
+				"contrast": 18.1,
+				"borderContrast": 1.32,
+				"marginBlockEnd": "0px"
+			},
+			"widgets/faq-item (standalone)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "list-item",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(22, 22, 22)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "16px",
+				"fontWeight": "400",
+				"lineHeight": "16px",
+				"textDecoration": "none solid rgb(22, 22, 22) auto",
+				"outline": "3px none rgb(22, 22, 22)",
+				"outlineOffset": "0px",
+				"boxShadow": "none",
+				"border": {
+					"top": "1px solid rgb(224, 224, 224)",
+					"right": "0px none rgb(22, 22, 22)",
+					"bottom": "0px none rgb(22, 22, 22)",
+					"left": "0px none rgb(22, 22, 22)"
+				},
+				"effectiveBackground": "rgb(255, 255, 255)",
+				"contrast": 18.1,
+				"borderContrast": 1.32,
+				"marginBlockEnd": "16px"
+			},
 			"widgets/faq-question": {
 				"matches": {
 					"focus": false,
@@ -5066,6 +5124,64 @@
 					"blockSize": "40px",
 					"padding": "0px 0px 0px 0px"
 				}
+			},
+			"widgets/faq-item (in accordion)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "list-item",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "16px",
+				"fontWeight": "400",
+				"lineHeight": "16px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "3px none rgb(244, 244, 244)",
+				"outlineOffset": "0px",
+				"boxShadow": "none",
+				"border": {
+					"top": "1px solid rgb(57, 57, 57)",
+					"right": "0px none rgb(244, 244, 244)",
+					"bottom": "0px none rgb(244, 244, 244)",
+					"left": "0px none rgb(244, 244, 244)"
+				},
+				"effectiveBackground": "rgb(22, 22, 22)",
+				"contrast": 16.45,
+				"borderContrast": 1.57,
+				"marginBlockEnd": "0px"
+			},
+			"widgets/faq-item (standalone)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "list-item",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgb(244, 244, 244)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "16px",
+				"fontWeight": "400",
+				"lineHeight": "16px",
+				"textDecoration": "none solid rgb(244, 244, 244) auto",
+				"outline": "3px none rgb(244, 244, 244)",
+				"outlineOffset": "0px",
+				"boxShadow": "none",
+				"border": {
+					"top": "1px solid rgb(57, 57, 57)",
+					"right": "0px none rgb(244, 244, 244)",
+					"bottom": "0px none rgb(244, 244, 244)",
+					"left": "0px none rgb(244, 244, 244)"
+				},
+				"effectiveBackground": "rgb(22, 22, 22)",
+				"contrast": 16.45,
+				"borderContrast": 1.57,
+				"marginBlockEnd": "16px"
 			},
 			"widgets/faq-question": {
 				"matches": {

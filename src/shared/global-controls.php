@@ -369,7 +369,7 @@ function clamp_token( $token ): string {
  */
 add_filter(
 	'render_block',
-	static function ( string $content, array $block ): string {
+	static function ( string $content, array $block, $instance = null ): string {
 		$name = $block['blockName'] ?? '';
 		if ( strpos( $name, PREFIX ) !== 0 || trim( $content ) === '' ) {
 			return $content;
@@ -378,6 +378,16 @@ add_filter(
 		// (structural template-part layouts) — same scope as the attribute.
 		$type = \WP_Block_Type_Registry::get_instance()->get_registered( $name );
 		if ( $type && ( ! empty( $type->parent ) || $type->category === 'awt-ui-shell' ) ) {
+			return $content;
+		}
+
+		// A FAQ question declares no parent, because it is equally valid on its
+		// own — but inside an accordion it is one row of a list, and a row may
+		// not carry the standalone gap below it. The gap pushes the next row's
+		// divider down and leaves a strip that the hover and focus styles do
+		// not reach, so the row stops looking like one thing. The accordion's
+		// context is the signal, the same one the block uses to choose <li>.
+		if ( $instance instanceof \WP_Block && isset( $instance->context['awt/accordion/size'] ) ) {
 			return $content;
 		}
 
@@ -407,7 +417,7 @@ add_filter(
 		return substr_replace( $content, $new_tag, $offset, strlen( $tag ) );
 	},
 	10,
-	2
+	3
 );
 
 /**

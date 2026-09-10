@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- A FAQ question inside an accordion no longer leaves a gap under its row, so
+  the highlight covers the whole row on hover and on focus.
+
 ## 2026.09.10 — 2026-09-10
 
 ### [Improvement]

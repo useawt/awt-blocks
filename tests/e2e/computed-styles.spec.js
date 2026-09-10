@@ -498,6 +498,23 @@ const PROBES = [
 		sel: '.awt-faq-item__trigger',
 		box: true,
 	},
+	/* A FAQ question declares no parent, so the spacing filter used to give it
+	   the standalone gap wherever it stood — including inside an accordion,
+	   where the gap pushed the next row's divider away from the row above and
+	   left a strip that hover and focus never covered. On its own it still
+	   keeps the gap; these two record both halves of that. */
+	{
+		page: 'widgets',
+		key: 'faq-item (standalone)',
+		sel: '.awt-faq-item:not(.cds--accordion .awt-faq-item)',
+		spacing: true,
+	},
+	{
+		page: 'widgets',
+		key: 'faq-item (in accordion)',
+		sel: '.cds--accordion .awt-faq-item',
+		spacing: true,
+	},
 	{
 		page: 'widgets',
 		key: 'tab (selected)',

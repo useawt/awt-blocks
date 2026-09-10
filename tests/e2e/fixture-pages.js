@@ -29,6 +29,15 @@ const WIDGETS = `
 <!-- wp:paragraph --><p>The content is server-rendered and readable either way.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/faq-item -->
 
+<!-- wp:awt/accordion -->
+<!-- wp:awt/faq-item {"question":"Can questions sit in an accordion?"} -->
+<!-- wp:paragraph --><p>They render as rows of the list the accordion draws.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/faq-item -->
+<!-- wp:awt/faq-item {"question":"Do the rows stay flush?"} -->
+<!-- wp:paragraph --><p>Each row ends where the next one starts, with nothing between them.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/faq-item -->
+<!-- /wp:awt/accordion -->
+
 <!-- wp:awt/tabs {"ariaLabel":"Product details"} -->
 <!-- wp:awt/tab {"label":"Overview"} /-->
 <!-- wp:awt/tab {"label":"Specifications"} /-->
