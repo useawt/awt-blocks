@@ -16,6 +16,8 @@ const { test, expect } = require( './fixtures' );
 
 const SEARCH = '.block-editor-link-control input';
 
+// Every block that takes a link, in something it is allowed to sit in. The
+// child blocks are wrapped in their own parent; the rest stand on their own.
 const CASES = [
 	{
 		block: 'awt/button',
@@ -30,9 +32,63 @@ const CASES = [
 	{
 		// Only a clickable tile takes a link; the others have nowhere to put one.
 		block: 'awt/tile',
-		panel: 'Link',
+		panel: 'Tile',
 		content:
 			'<!-- wp:awt/tile {"variant":"clickable","heading":"A tile"} /-->',
+	},
+	{
+		block: 'awt/tag',
+		panel: 'Link',
+		content: '<!-- wp:awt/tag {"text":"A tag"} /-->',
+	},
+	{
+		block: 'awt/testimonial',
+		panel: 'Source link',
+		content: '<!-- wp:awt/testimonial {"quote":"It works."} /-->',
+	},
+	{
+		block: 'awt/modal',
+		panel: 'Primary action link',
+		content: '<!-- wp:awt/modal {"heading":"A modal"} /-->',
+	},
+	{
+		block: 'awt/pricing-tile',
+		panel: 'Pricing tile',
+		content: '<!-- wp:awt/pricing-tile {"title":"A plan"} /-->',
+	},
+	{
+		block: 'awt/header-brand',
+		panel: 'Header brand',
+		content: '<!-- wp:awt/header-brand {"text":"Brand"} /-->',
+	},
+	{
+		block: 'awt/header-action',
+		panel: 'Header action',
+		content: '<!-- wp:awt/header-action {"label":"Log in"} /-->',
+	},
+	{
+		block: 'awt/breadcrumb-item',
+		panel: 'Breadcrumb item',
+		content:
+			'<!-- wp:awt/breadcrumb --><!-- wp:awt/breadcrumb-item {"text":"Home"} /--><!-- /wp:awt/breadcrumb -->',
+	},
+	{
+		block: 'awt/header-nav-item',
+		panel: 'Nav item',
+		content:
+			'<!-- wp:awt/header-nav --><!-- wp:awt/header-nav-item {"text":"Features"} /--><!-- /wp:awt/header-nav -->',
+	},
+	{
+		block: 'awt/side-nav-link',
+		panel: 'Side nav link',
+		content:
+			'<!-- wp:awt/side-nav --><!-- wp:awt/side-nav-link {"text":"Overview"} /--><!-- /wp:awt/side-nav -->',
+	},
+	{
+		block: 'awt/footer-link',
+		panel: 'Footer link',
+		content:
+			'<!-- wp:awt/footer-section --><!-- wp:awt/footer-link {"text":"Privacy"} /--><!-- /wp:awt/footer-section -->',
 	},
 ];
 
@@ -70,12 +126,19 @@ async function selectAndOpen( page, editor, block, panel ) {
 
 test.describe( 'Link picker', () => {
 	for ( const { block, panel, content } of CASES ) {
-		test( `${ block } offers a page search`, async ( {
+		test( `${ block } offers a page search that fits the panel`, async ( {
 			admin,
 			editor,
 			page,
 			requestUtils,
 		} ) => {
+			// Its own target, so the test does not depend on what the site holds.
+			await requestUtils.createPage( {
+				title: 'Findable target page',
+				content:
+					'<!-- wp:paragraph --><p>Target.</p><!-- /wp:paragraph -->',
+				status: 'publish',
+			} );
 			const created = await requestUtils.createPage( {
 				title: `Link picker in ${ block }`,
 				content,
@@ -86,9 +149,50 @@ test.describe( 'Link picker', () => {
 			await selectAndOpen( page, editor, block, panel );
 
 			await expect(
-				page.locator( SEARCH ).first(),
-				`${ block } should offer a page search`
+				page.locator( '.awt-link-field' ).first(),
+				`${ block } should have a link field`
 			).toBeVisible();
+
+			// A block whose link starts empty shows the search box; one with a
+			// default address shows that address, and the way back to the
+			// search is the Edit button beside it. Both have to lead to the
+			// same picker.
+			const search = page.locator( SEARCH ).first();
+			if ( ! ( await search.isVisible().catch( () => false ) ) ) {
+				const edit = page
+					.locator( 'button[aria-label="Edit link"]' )
+					.first();
+				await expect(
+					edit,
+					`${ block } shows an address, so it should offer a way to change it`
+				).toBeVisible();
+				// The icon inside the button is what sits under the pointer.
+				await edit.click( { force: true } );
+			}
+			await expect( search ).toBeVisible();
+
+			await search.fill( 'Findable target' );
+			await page.locator( '[role="option"]' ).first().waitFor();
+
+			// Core sizes this control for the popover it normally lives in: a
+			// 350px floor on the control, a 300px floor on the search box
+			// inside it, a 16px margin for good measure, and result rows whose
+			// title does not shrink. The inspector column is 248px, so each of
+			// those put part of the field past the edge of the screen.
+			const overflowing = await page.evaluate( () => {
+				const field = document.querySelector( '.awt-link-field' );
+				const edge = field.getBoundingClientRect().right;
+				return [ ...field.querySelectorAll( '*' ) ]
+					.filter( ( el ) => {
+						const r = el.getBoundingClientRect();
+						return r.width > 0 && r.right > edge + 0.5;
+					} )
+					.map( ( el ) => String( el.className ).slice( 0, 60 ) );
+			} );
+			expect(
+				overflowing,
+				`nothing in ${ block }'s link field should reach past the panel`
+			).toEqual( [] );
 		} );
 	}
 
@@ -126,54 +230,6 @@ test.describe( 'Link picker', () => {
 			search,
 			'the search box should start from the current address'
 		).toHaveValue( 'https://example.com/old' );
-	} );
-
-	test( 'the whole field fits the inspector column', async ( {
-		admin,
-		editor,
-		page,
-		requestUtils,
-	} ) => {
-		// Its own target, so the test does not depend on what the site holds.
-		await requestUtils.createPage( {
-			title: 'Widthwise target page',
-			content:
-				'<!-- wp:paragraph --><p>Target.</p><!-- /wp:paragraph -->',
-			status: 'publish',
-		} );
-		const created = await requestUtils.createPage( {
-			title: 'Link picker width',
-			content: '<!-- wp:awt/button {"text":"Go"} /-->',
-			status: 'publish',
-		} );
-
-		await admin.editPost( created.id );
-		await editor.canvas.locator( 'body .wp-block' ).first().waitFor();
-		await selectAndOpen( page, editor, 'awt/button', 'Link' );
-
-		await page.locator( SEARCH ).first().fill( 'Widthwise target' );
-		await page.locator( '[role="option"]' ).first().waitFor();
-
-		// Core sizes this control for the popover it normally lives in: a
-		// 350px floor on the control, a 300px floor on the search box inside
-		// it, a 16px margin for good measure, and result rows whose title does
-		// not shrink. The inspector column is 248px, so each of those put part
-		// of the field past the edge of the screen, out of reach.
-		const overflowing = await page.evaluate( () => {
-			const field = document.querySelector( '.awt-link-field' );
-			const edge = field.getBoundingClientRect().right;
-			return [ ...field.querySelectorAll( '*' ) ]
-				.filter( ( el ) => {
-					const r = el.getBoundingClientRect();
-					return r.width > 0 && r.right > edge + 0.5;
-				} )
-				.map( ( el ) => String( el.className ).slice( 0, 60 ) );
-		} );
-
-		expect(
-			overflowing,
-			'nothing in the link field should reach past the panel'
-		).toEqual( [] );
 	} );
 
 	test( 'choosing a page fills in its address', async ( {
