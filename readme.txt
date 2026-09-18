@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.14
+Stable tag: 2026.09.15
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.15 — 2026-09-18 =
+* [Improvement] The page search fits the block settings column. Part of it sat off the edge of the panel, including the button that applies a typed address.
+
 = 2026.09.14 — 2026-09-18 =
 * [Improvement] Blocks that take a link let you search for a page and pick it, instead of asking you to paste the address. Typing an address or an anchor still works.
 
@@ -353,8 +356,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.6 — 2026-09-09 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.5 — 2026-09-09 =
-* [Improvement] You can now put a Modal opener inside an Inline set or a Hero, so a row of calls to action can mix buttons that open a dialog with buttons that follow a link.
-* [Improvement] A new Inline set arrives with its two buttons labelled "Primary action" and "Secondary action" again. Both read "Button".
 <!-- CHANGELOG_END -->
