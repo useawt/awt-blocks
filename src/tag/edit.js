@@ -10,6 +10,7 @@ import {
 	ToggleControl,
 	TextControl,
 } from '@wordpress/components';
+import LinkField from '../shared/link-field';
 
 const TYPES = [
 	'red',
@@ -88,14 +89,13 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Link', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<TextControl
+					<LinkField
 						label={ __(
 							'URL (makes the tag a link)',
 							'awt-blocks'
 						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
 					/>
 					<SelectControl
 						label={ __( 'Target', 'awt-blocks' ) }

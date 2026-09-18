@@ -13,6 +13,7 @@ import {
 } from '@wordpress/components';
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import looksLikeUrl from '../shared/looks-like-url';
+import LinkField from '../shared/link-field';
 
 const SIZE_OPTIONS = [
 	{ label: 'Small (sm)', value: 'sm' },
@@ -59,11 +60,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Link', 'awt-blocks' ) }>
-					<TextControl
+					<LinkField
 						label={ __( 'URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
 					/>
 					{ href && ! looksLikeUrl( href ) && (
 						<Notice status="warning" isDismissible={ false }>

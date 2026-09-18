@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl } from '@wordpress/components';
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
+import LinkField from '../shared/link-field';
 
 const KIND_OPTIONS = [
 	{ value: 'icon-only', label: __( 'Icon only', 'awt-blocks' ) },
@@ -80,7 +81,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							setAttributes( { kind: value } )
 						}
 					/>
-					<TextControl
+					<LinkField
 						label={ __( 'Link URL', 'awt-blocks' ) }
 						help={ __(
 							'Add a URL to make this a link. Leave it blank for a button.',

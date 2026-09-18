@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- Blocks that take a link let you search for a page and pick it, instead of
+  asking you to paste the address. Typing an address or an anchor still works.
+
 ## 2026.09.13 — 2026-09-18
 
 ### [Breaking]

@@ -16,6 +16,7 @@ import {
 } from '@wordpress/components';
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import looksLikeUrl from '../shared/looks-like-url';
+import LinkField from '../shared/link-field';
 
 // Inline SVGs mirror the four mark variants from render.php so the editor
 // preview shows the same opening quotation glyph the published page renders.
@@ -206,7 +207,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Source link', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<TextControl
+					<LinkField
 						label={ __( 'URL', 'awt-blocks' ) }
 						help={ __(
 							'Where the quote can be read in full. Leave empty for no link.',
@@ -214,7 +215,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
 					/>
 					{ href && ! looksLikeUrl( href ) && (
 						<Notice status="warning" isDismissible={ false }>

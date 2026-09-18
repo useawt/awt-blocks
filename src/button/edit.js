@@ -21,6 +21,7 @@ import {
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import PremiumNotice from '../shared/premium-notice';
 import looksLikeUrl from '../shared/looks-like-url';
+import LinkField from '../shared/link-field';
 
 const KIND_OPTIONS = [
 	{ label: 'Primary', value: 'primary' },
@@ -170,14 +171,13 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Link', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<TextControl
+					<LinkField
 						label={ __(
 							'URL (turns the button into a link)',
 							'awt-blocks'
 						) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
 					/>
 					{ href && ! looksLikeUrl( href ) && (
 						<Notice status="warning" isDismissible={ false }>

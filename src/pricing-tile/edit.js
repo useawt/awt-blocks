@@ -10,6 +10,7 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
+import LinkField from '../shared/link-field';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -100,7 +101,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						] }
 						onChange={ ( v ) => setAttributes( { ctaKind: v } ) }
 					/>
-					<TextControl
+					<LinkField
 						label={ __( 'Button URL', 'awt-blocks' ) }
 						value={ ctaHref }
 						onChange={ ( v ) => setAttributes( { ctaHref: v } ) }

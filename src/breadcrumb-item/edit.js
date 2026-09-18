@@ -4,7 +4,8 @@ import {
 	RichText,
 	InspectorControls,
 } from '@wordpress/block-editor';
-import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl } from '@wordpress/components';
+import LinkField from '../shared/link-field';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { text, href, isCurrentPage } = attributes;
@@ -14,11 +15,10 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Breadcrumb item', 'awt-blocks' ) }>
-					<TextControl
+					<LinkField
 						label={ __( 'URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( v ) => setAttributes( { href: v } ) }
-						type="url"
 						disabled={ isCurrentPage }
 					/>
 					<ToggleControl

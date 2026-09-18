@@ -4,12 +4,8 @@ import {
 	InspectorControls,
 	RichText,
 } from '@wordpress/block-editor';
-import {
-	PanelBody,
-	TextControl,
-	SelectControl,
-	ToggleControl,
-} from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
+import LinkField from '../shared/link-field';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { text, href, isCurrent, matchMode } = attributes;
@@ -27,7 +23,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Nav item', 'awt-blocks' ) }
 					initialOpen={ true }
 				>
-					<TextControl
+					<LinkField
 						label={ __( 'Link URL', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>

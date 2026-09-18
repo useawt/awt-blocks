@@ -17,6 +17,7 @@ import {
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import looksLikeUrl from '../shared/looks-like-url';
+import LinkField from '../shared/link-field';
 
 const TEMPLATE = [
 	[ 'core/heading', { level: 3, content: 'Tile heading' } ],
@@ -140,7 +141,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				) }
 				{ variant === 'clickable' && (
 					<>
-						<TextControl
+						<LinkField
 							label={ __( 'Link URL', 'awt-blocks' ) }
 							help={ __(
 								'The address this tile links to.',
@@ -148,7 +149,6 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							) }
 							value={ href }
 							onChange={ ( v ) => setAttributes( { href: v } ) }
-							type="url"
 						/>
 						{ href && ! looksLikeUrl( href ) && (
 							<Notice status="warning" isDismissible={ false }>

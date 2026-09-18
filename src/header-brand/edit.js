@@ -11,6 +11,7 @@ import {
 	TextControl,
 	Button,
 } from '@wordpress/components';
+import LinkField from '../shared/link-field';
 
 // Empty-string value is the "inherit from AWT Settings → Identity" choice —
 // render.php's precedence chain is: per-block kind → theme default brandMode →
@@ -219,7 +220,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							) }
 						</>
 					) }
-					<TextControl
+					<LinkField
 						label={ __( 'Link target', 'awt-blocks' ) }
 						value={ href }
 						onChange={ ( value ) =>

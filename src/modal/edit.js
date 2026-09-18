@@ -13,6 +13,7 @@ import {
 	Notice,
 } from '@wordpress/components';
 import PremiumNotice from '../shared/premium-notice';
+import LinkField from '../shared/link-field';
 
 const TEMPLATE = [ [ 'core/paragraph', { content: 'Modal body content.' } ] ];
 
@@ -118,7 +119,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Primary action link', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<TextControl
+					<LinkField
 						label={ __(
 							'URL (turns the primary button into a link)',
 							'awt-blocks'
@@ -127,7 +128,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) =>
 							setAttributes( { primaryHref: v } )
 						}
-						type="url"
 					/>
 					<SelectControl
 						label={ __( 'Target', 'awt-blocks' ) }
