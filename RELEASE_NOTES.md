@@ -1,5 +1,5 @@
-## 2026.09.12 — 2026-09-10
+## 2026.09.13 — 2026-09-18
 
-### [Improvement]
+### [Breaking]
 
-- An accordion now takes FAQ question blocks, so you can add, duplicate and drag one into it.
+- A new list item starts empty instead of holding the word "Item". A list item saved without text of its own no longer shows "Item" on the page.

@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.12
+Stable tag: 2026.09.13
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.13 — 2026-09-18 =
+* [Breaking] A new list item starts empty instead of holding the word "Item". A list item saved without text of its own no longer shows "Item" on the page.
+
 = 2026.09.12 — 2026-09-10 =
 * [Improvement] An accordion now takes FAQ question blocks, so you can add, duplicate and drag one into it.
 
@@ -354,10 +357,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.4 — 2026-09-09 =
 * [Breaking] The size you pick for a Modal opener or a Menu button now changes the button, in the editor and on the page. Both stayed at the largest size whatever you chose. Each button carries one more class to do it, so custom CSS written against the old markup is worth checking.
-
-= 2026.09.3 — 2026-09-08 =
-* [Improvement] The header collapses to the menu button when the menu outgrows a header that is contained to the content width, not only when it outgrows the screen.
-* [Improvement] A modal opens in the colours of the page, not of the section it was added to. One added inside a dark section opened dark on a light site.
-* [Improvement] Every icon now previews in the editor. Some icons drew a blank space there while the published page showed them correctly.
-* [Improvement] The editor shows the same external-link icon on a Footer link that the page does, instead of a typed arrow.
 <!-- CHANGELOG_END -->
