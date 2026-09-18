@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Breaking]
+
+- A new list item starts empty instead of holding the word "Item". A list item
+  saved without text of its own no longer shows "Item" on the page.
+
 ## 2026.09.12 — 2026-09-10
 
 ### [Improvement]

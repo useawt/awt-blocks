@@ -20,7 +20,7 @@
 	"attributes": {
 		"content": {
 			"type": "string",
-			"default": "Item"
+			"default": ""
 		}
 	},
 	"editorScript": "file:./index.js",
