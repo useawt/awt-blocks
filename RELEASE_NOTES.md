@@ -1,5 +1,5 @@
-## 2026.09.13 — 2026-09-18
+## 2026.09.14 — 2026-09-18
 
-### [Breaking]
+### [Improvement]
 
-- A new list item starts empty instead of holding the word "Item". A list item saved without text of its own no longer shows "Item" on the page.
+- Blocks that take a link let you search for a page and pick it, instead of asking you to paste the address. Typing an address or an anchor still works.
