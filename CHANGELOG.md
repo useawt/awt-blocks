@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The page search fits the block settings column. Part of it sat off the edge
+  of the panel, including the button that applies a typed address.
+
 ## 2026.09.14 — 2026-09-18
 
 ### [Improvement]

@@ -128,6 +128,54 @@ test.describe( 'Link picker', () => {
 		).toHaveValue( 'https://example.com/old' );
 	} );
 
+	test( 'the whole field fits the inspector column', async ( {
+		admin,
+		editor,
+		page,
+		requestUtils,
+	} ) => {
+		// Its own target, so the test does not depend on what the site holds.
+		await requestUtils.createPage( {
+			title: 'Widthwise target page',
+			content:
+				'<!-- wp:paragraph --><p>Target.</p><!-- /wp:paragraph -->',
+			status: 'publish',
+		} );
+		const created = await requestUtils.createPage( {
+			title: 'Link picker width',
+			content: '<!-- wp:awt/button {"text":"Go"} /-->',
+			status: 'publish',
+		} );
+
+		await admin.editPost( created.id );
+		await editor.canvas.locator( 'body .wp-block' ).first().waitFor();
+		await selectAndOpen( page, editor, 'awt/button', 'Link' );
+
+		await page.locator( SEARCH ).first().fill( 'Widthwise target' );
+		await page.locator( '[role="option"]' ).first().waitFor();
+
+		// Core sizes this control for the popover it normally lives in: a
+		// 350px floor on the control, a 300px floor on the search box inside
+		// it, a 16px margin for good measure, and result rows whose title does
+		// not shrink. The inspector column is 248px, so each of those put part
+		// of the field past the edge of the screen, out of reach.
+		const overflowing = await page.evaluate( () => {
+			const field = document.querySelector( '.awt-link-field' );
+			const edge = field.getBoundingClientRect().right;
+			return [ ...field.querySelectorAll( '*' ) ]
+				.filter( ( el ) => {
+					const r = el.getBoundingClientRect();
+					return r.width > 0 && r.right > edge + 0.5;
+				} )
+				.map( ( el ) => String( el.className ).slice( 0, 60 ) );
+		} );
+
+		expect(
+			overflowing,
+			'nothing in the link field should reach past the panel'
+		).toEqual( [] );
+	} );
+
 	test( 'choosing a page fills in its address', async ( {
 		admin,
 		editor,

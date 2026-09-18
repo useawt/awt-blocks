@@ -36,7 +36,11 @@ export default function LinkField( {
 	placeholder,
 	disabled = false,
 } ) {
-	const { baseControlProps } = useBaseControlProps( { label, help } );
+	const { baseControlProps } = useBaseControlProps( {
+		label,
+		help,
+		className: 'awt-link-field',
+	} );
 
 	if ( disabled ) {
 		return (

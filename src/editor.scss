@@ -179,3 +179,55 @@
 		}
 	}
 }
+
+/**
+ * The link field, in the block inspector.
+ *
+ * Core sizes `LinkControl` for the popover it usually lives in — a hard
+ * `min-width: 350px`. The inspector column is 248px wide, so the search box
+ * and its Apply button hung off the right edge and could not be reached.
+ * Scoped to our own wrapper so core's popover keeps the width it was given.
+ */
+.awt-link-field {
+	.block-editor-link-control {
+		inline-size: 100%;
+		min-inline-size: 0;
+	}
+
+	// The results list inherits the same width and would overflow with it.
+	.block-editor-link-control__search-results-wrapper,
+	.block-editor-link-control__search-input-wrapper {
+		inline-size: 100%;
+		min-inline-size: 0;
+	}
+
+	// The search box itself carries a second popover-sized floor of its own
+	// (`min-width: 300px` on .block-editor-url-input), so relaxing the
+	// control alone left the input 35px past the panel's edge.
+	.block-editor-url-input {
+		inline-size: 100%;
+		min-inline-size: 0;
+		// It also carries a 16px margin on all four sides for the popover it
+		// expects to sit in. Sideways that is 32px the panel does not have,
+		// and it pushed the box past the right edge even at the right width.
+		margin-inline: 0;
+	}
+
+	// A long address has nowhere to go in a narrow column; let it wrap rather
+	// than widen the panel.
+	.block-editor-link-control__search-item-title,
+	.block-editor-link-control__search-item-info {
+		overflow-wrap: anywhere;
+	}
+
+	// Each result is a flex row: the page's title on the left, its type on the
+	// right. The title does not shrink by default, so in a narrow panel the
+	// type label was pushed past the edge of its own row.
+	.components-menu-item__button > * {
+		min-inline-size: 0;
+	}
+
+	.components-menu-item__shortcut {
+		padding-inline-start: 0.5rem;
+	}
+}
