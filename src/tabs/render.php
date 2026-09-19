@@ -148,6 +148,13 @@ $tabs_root_class = $ds
 	? $ds->classes_for( 'tabs', array( 'orientation' => $orientation ) )
 	: ( 'cds--tabs cds--tabs--' . $orientation );
 
+// Marks the block as *authored* vertical. The Carbon classes on the root are
+// swapped for the horizontal ones on small screens (see view.js), so they can
+// no longer answer "which orientation did the author pick?" — this class can.
+if ( 'vertical' === $orientation ) {
+	$tabs_root_class .= ' awt-tabs--vertical-source';
+}
+
 $tab_list_class      = $ds ? $ds->classes_for( 'tabs', array( 'element' => 'tab-list' ) ) : 'cds--tab--list';
 $overflow_btn_class  = $ds ? $ds->classes_for( 'tabs', array( 'element' => 'overflow-btn' ) ) : 'cds--tab--overflow-nav-button';
 $overflow_prev_class = $ds ? $ds->classes_for( 'tabs', array( 'element' => 'overflow-btn-prev' ) ) : 'cds--tab--overflow-nav-button cds--tab--overflow-nav-button--previous cds--tab--overflow-nav-button--hidden';
@@ -168,7 +175,7 @@ $wrapper_attrs = get_block_wrapper_attributes(
 // the double-dash name, so the wrong class meant Carbon delivered zero
 // styling for the tablist and our items shrunk to a 20px tall flat row.
 //
-// Mobile / overflow behavior (horizontal orientation only):
+// Mobile / overflow behavior:
 //
 // Carbon's reference wraps the <ul> in a flex row alongside two
 // "overflow nav" buttons (`.cds--tab--overflow-nav-button--previous`
@@ -180,11 +187,11 @@ $wrapper_attrs = get_block_wrapper_attributes(
 // chevron buttons. Buttons start with `--hidden` (Carbon's `display:
 // none` modifier); view.js toggles it based on scroll position.
 //
-// Vertical tabs don't need this — the tab list is a fixed-width
-// sidebar that wraps via flex-direction:column, so overflow falls to
-// vertical scrolling of the surrounding page. We skip the strip
-// wrapper for vertical and keep the simpler structure that the
-// `.cds--tabs--vertical > .cds--tab--list` grid CSS depends on.
+// Vertical tabs get the same wrapper. Below Carbon's `md` breakpoint
+// (672px) Carbon renders vertical tabs as horizontal contained tabs —
+// its `TabListVertical` swaps to `TabList` on `(max-width: 42rem)` —
+// so the collapsed state needs the same scroll affordance. The
+// chevrons stay hidden while the tabs are actually vertical.
 $tab_list_html = sprintf(
 	'<ul class="%4$s" role="tablist" aria-label="%1$s" aria-orientation="%2$s">%3$s</ul>',
 	esc_attr( $aria_label ),
@@ -193,24 +200,20 @@ $tab_list_html = sprintf(
 	esc_attr( $tab_list_class )
 );
 
-if ( $orientation === 'horizontal' ) {
-	$tab_strip_html = sprintf(
-		'<div class="awt-tabs__strip">' .
-		'<button type="button" class="%6$s" aria-label="%1$s" tabindex="-1" data-wp-on--click="actions.scrollPrev">%2$s</button>' .
-		'%3$s' .
-		'<button type="button" class="%7$s" aria-label="%4$s" tabindex="-1" data-wp-on--click="actions.scrollNext">%5$s</button>' .
-		'</div>',
-		esc_attr__( 'Scroll tabs left', 'awt-blocks' ),
-		icon( 'chevron--left', 16 ),
-		$tab_list_html,
-		esc_attr__( 'Scroll tabs right', 'awt-blocks' ),
-		icon( 'chevron--right', 16 ),
-		esc_attr( $overflow_prev_class ),
-		esc_attr( $overflow_next_class )
-	);
-} else {
-	$tab_strip_html = $tab_list_html;
-}
+$tab_strip_html = sprintf(
+	'<div class="awt-tabs__strip">' .
+	'<button type="button" class="%6$s" aria-label="%1$s" tabindex="-1" data-wp-on--click="actions.scrollPrev">%2$s</button>' .
+	'%3$s' .
+	'<button type="button" class="%7$s" aria-label="%4$s" tabindex="-1" data-wp-on--click="actions.scrollNext">%5$s</button>' .
+	'</div>',
+	esc_attr__( 'Scroll tabs left', 'awt-blocks' ),
+	icon( 'chevron--left', 16 ),
+	$tab_list_html,
+	esc_attr__( 'Scroll tabs right', 'awt-blocks' ),
+	icon( 'chevron--right', 16 ),
+	esc_attr( $overflow_prev_class ),
+	esc_attr( $overflow_next_class )
+);
 
 printf(
 	'<div %1$s>%2$s%3$s</div>',

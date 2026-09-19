@@ -49,6 +49,17 @@ const WIDGETS = `
 <!-- /wp:awt/tab-panel -->
 <!-- /wp:awt/tabs -->
 
+<!-- wp:awt/tabs {"orientation":"vertical","ariaLabel":"Partnership options"} -->
+<!-- wp:awt/tab {"label":"Referrer"} /-->
+<!-- wp:awt/tab {"label":"Infrastructure"} /-->
+<!-- wp:awt/tab-panel -->
+<!-- wp:paragraph --><p>Referrer panel.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tab-panel -->
+<!-- wp:awt/tab-panel -->
+<!-- wp:paragraph --><p>Infrastructure panel.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tab-panel -->
+<!-- /wp:awt/tabs -->
+
 <!-- wp:awt/content-switcher {"ariaLabel":"View mode"} -->
 <!-- wp:awt/content-switcher-item {"label":"List","value":"list"} /-->
 <!-- wp:awt/content-switcher-item {"label":"Grid","value":"grid"} /-->

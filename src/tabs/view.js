@@ -106,6 +106,36 @@ function scrollBy( root, direction ) {
 	list.scrollBy( { left: delta, behavior: 'smooth' } );
 }
 
+/**
+ * Carbon renders vertical tabs as horizontal contained tabs on small
+ * screens: `TabListVertical` watches `(max-width: 42rem)` — its `md`
+ * breakpoint — and returns a plain `TabList` with `contained` and size
+ * `lg` when that matches. We do the same swap on the classes Carbon's
+ * own CSS keys off, so the collapsed state is styled by Carbon rather
+ * than by a layout of our own.
+ *
+ * `aria-orientation` moves with it, which is what makes the arrow keys
+ * follow what's on screen (the keydown handler reads the root class).
+ */
+const COLLAPSE_QUERY = '(max-width: 42rem)';
+
+function applyOrientation( root, collapsed ) {
+	if ( ! root.classList.contains( 'awt-tabs--vertical-source' ) ) {
+		return;
+	}
+	const list = getTabList( root );
+	root.classList.toggle( 'cds--tabs--vertical', ! collapsed );
+	root.classList.toggle( 'cds--tabs--horizontal', collapsed );
+	root.classList.toggle( 'cds--tabs--contained', collapsed );
+	root.classList.toggle( 'cds--layout--size-lg', collapsed );
+	if ( list ) {
+		list.setAttribute(
+			'aria-orientation',
+			collapsed ? 'horizontal' : 'vertical'
+		);
+	}
+}
+
 store( 'awt/tabs', {
 	callbacks: {
 		init() {
@@ -133,6 +163,15 @@ store( 'awt/tabs', {
 				activate( root, already || fallback );
 			}
 
+			// Collapse vertical tabs to horizontal on small screens,
+			// the way Carbon's TabListVertical does.
+			const mq = window.matchMedia( COLLAPSE_QUERY );
+			applyOrientation( root, mq.matches );
+			mq.addEventListener( 'change', ( event ) => {
+				applyOrientation( root, event.matches );
+				updateOverflowButtons( root );
+			} );
+
 			// Wire overflow-nav state. The tablist may not have its
 			// final width yet (fonts, images, late layout), so update
 			// once now and once after the next frame to catch settled
@@ -144,7 +183,9 @@ store( 'awt/tabs', {
 				list.addEventListener(
 					'scroll',
 					() => updateOverflowButtons( root ),
-					{ passive: true }
+					{
+						passive: true,
+					}
 				);
 			}
 			// Resize listener is attached to window — one per tabs
