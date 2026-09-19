@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.22 — 2026-09-19 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.21 — 2026-09-19 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -352,7 +355,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.13 — 2026-09-18 =
 * [Breaking] A new list item starts empty instead of holding the word "Item". A list item saved without text of its own no longer shows "Item" on the page.
-
-= 2026.09.12 — 2026-09-10 =
-* [Improvement] An accordion now takes FAQ question blocks, so you can add, duplicate and drag one into it.
 <!-- CHANGELOG_END -->
