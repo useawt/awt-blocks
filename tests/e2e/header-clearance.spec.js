@@ -12,6 +12,11 @@
  * Measured from the header's own bottom edge rather than from the top of the
  * page, because that is the distance a reader sees, and it is the one the
  * admin bar must not change.
+ *
+ * The last test covers the other half of the same relationship. At 782px and
+ * below WordPress makes the admin bar `position: absolute`, so it scrolls away
+ * — and the fixed header, holding an offset for a bar that is no longer there,
+ * floated below the top of the screen with page content in the gap.
  */
 
 const { test, expect } = require( './fixtures' );
@@ -28,6 +33,16 @@ const GAP = () => {
 	return Math.round(
 		nav.getBoundingClientRect().top - header.getBoundingClientRect().bottom
 	);
+};
+
+// Where the header's top edge sits, and where the admin bar's bottom edge is.
+const EDGES = () => {
+	const bar = document.getElementById( 'wpadminbar' );
+	const header = document.querySelector( '.cds--header' );
+	return {
+		barBottom: Math.round( bar.getBoundingClientRect().bottom ),
+		headerTop: Math.round( header.getBoundingClientRect().top ),
+	};
 };
 
 test.describe( 'Header clearance', () => {
@@ -66,6 +81,46 @@ test.describe( 'Header clearance', () => {
 
 			expect( withBar ).not.toBeNull();
 			expect( withBar ).toBe( withoutBar );
+		} );
+	}
+
+	// 375px is below WP core's 600px line, where the bar turns `absolute` and
+	// scrolls away; 1440px is above it, where the bar is fixed and nothing
+	// should move at all. 600px, not the better-known 782px — that one is the
+	// bar's height. Measured against core's own stylesheet rather than
+	// remembered, after a first version of this test picked 700px and watched
+	// a bar that never moved.
+	for ( const [ width, scrolls ] of [
+		[ 375, true ],
+		[ 1440, false ],
+	] ) {
+		test( `the header follows the admin bar at ${ width }px`, async ( {
+			page,
+			requestUtils,
+		} ) => {
+			const created = await requestUtils.createPage( {
+				title: `Header follows the bar ${ width }`,
+				content: `${ CONTENT }<!-- wp:spacer {"height":"2000px"} --><div style="height:2000px" aria-hidden="true" class="wp-block-spacer"></div><!-- /wp:spacer -->`,
+				status: 'publish',
+			} );
+			await page.setViewportSize( { width, height: 700 } );
+			await page.goto( `/?page_id=${ created.id }` );
+			await expect( page.locator( '#wpadminbar' ) ).toBeVisible();
+
+			// At rest the header starts exactly where the bar ends.
+			const atRest = await page.evaluate( EDGES );
+			expect( atRest.headerTop ).toBe( atRest.barBottom );
+
+			await page.evaluate( () => window.scrollTo( 0, 800 ) );
+			await expect
+				.poll( async () => ( await page.evaluate( EDGES ) ).headerTop )
+				.toBe( scrolls ? 0 : atRest.barBottom );
+
+			// And back: the header returns under the bar, not over it.
+			await page.evaluate( () => window.scrollTo( 0, 0 ) );
+			await expect
+				.poll( async () => ( await page.evaluate( EDGES ) ).headerTop )
+				.toBe( atRest.barBottom );
 		} );
 	}
 } );
