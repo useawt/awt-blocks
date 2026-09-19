@@ -13,6 +13,11 @@
  * of it at 375px on the site this was found on (2026-09-19). That is a Reflow
  * failure (WCAG 1.4.10), so the overflow assertion is the point of this file,
  * not a detail of it.
+ *
+ * The last test covers a second deviation reported against the same block: the
+ * open tab kept a right edge, so it read as a separate box beside the panel
+ * instead of joining it. Carbon draws that edge on each tab and takes it off
+ * the selected one — the continuous line our strip drew could not do that.
  */
 
 const { test, expect } = require( './fixtures' );
@@ -102,6 +107,40 @@ test.describe( 'Vertical tabs', () => {
 			expect( state.stripShare ).toBeCloseTo( 1, 2 );
 		} );
 	}
+
+	test( 'open the tab into its panel, with no edge between them', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1440, height: 900 } );
+		await page.goto( url );
+		await page.locator( ROOT ).waitFor();
+
+		const edges = () =>
+			page.evaluate(
+				( root ) =>
+					[
+						...document.querySelectorAll(
+							`${ root } .cds--tabs__nav-item`
+						),
+					].map(
+						( li ) => getComputedStyle( li ).borderInlineEndWidth
+					),
+				ROOT
+			);
+
+		// Only the open tab has no right edge, and it moves with the choice.
+		expect( await edges() ).toEqual( [ '0px', '1px', '1px', '1px' ] );
+		await page.locator( `${ ROOT } [role="tab"]` ).nth( 2 ).click();
+		expect( await edges() ).toEqual( [ '1px', '1px', '0px', '1px' ] );
+
+		// Hovering the open tab leaves its indicator alone.
+		const open = page.locator( `${ ROOT } .cds--tabs__nav-item` ).nth( 2 );
+		const indicator = () =>
+			open.evaluate( ( li ) => getComputedStyle( li ).boxShadow );
+		const resting = await indicator();
+		await open.hover();
+		expect( await indicator() ).toBe( resting );
+	} );
 
 	test( 'follow the window as it is resized', async ( { page } ) => {
 		await page.setViewportSize( { width: 1440, height: 900 } );
