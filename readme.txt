@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.19 — 2026-09-19 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.18 — 2026-09-19 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -351,8 +354,5 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [Improvement] A FAQ question inside an accordion no longer leaves a gap under its row, so the highlight covers the whole row on hover and on focus.
 
 = 2026.09.10 — 2026-09-10 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.9 — 2026-09-10 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->
