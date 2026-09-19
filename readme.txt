@@ -325,6 +325,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.17 — 2026-09-19 =
+* [A11y] Vertical tabs become a row of tabs on a narrow screen. They kept a fixed sidebar at every screen size, so on a phone the panel ran off the side of the screen and the page scrolled sideways.
+* [Breaking] Vertical tabs wrap their tab list in the same element horizontal tabs use. Custom CSS that targeted the list as a direct child of the block needs updating.
+
 = 2026.09.16 — 2026-09-18 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -351,9 +355,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.8 — 2026-09-09 =
 * [New] Testimonials can link to their source. Set a URL, the link text, whether it opens in a new tab, an optional trailing icon, and a rel value if you need one. The link sits with the name and role, under the quote.
-
-= 2026.09.7 — 2026-09-09 =
-* [A11y] Ticking "Mark as decorative" on an image now clears the accessibility check's "Image is missing alt text" error. The check ignored it, so the fix it asked for could not be made.
-* [A11y] Cover and Media & Text now have the same "Mark as decorative" checkbox the Image block has.
-* [Improvement] The alt text help now names the page it links to, and says what to do instead of leaving alt text empty.
 <!-- CHANGELOG_END -->
