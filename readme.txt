@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.18 — 2026-09-19 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.17 — 2026-09-19 =
 * [A11y] Vertical tabs become a row of tabs on a narrow screen. They kept a fixed sidebar at every screen size, so on a phone the panel ran off the side of the screen and the page scrolled sideways.
 * [Breaking] Vertical tabs wrap their tab list in the same element horizontal tabs use. Custom CSS that targeted the list as a direct child of the block needs updating.
@@ -352,7 +355,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.9 — 2026-09-10 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.8 — 2026-09-09 =
-* [New] Testimonials can link to their source. Set a URL, the link text, whether it opens in a new tab, an optional trailing icon, and a rel value if you need one. The link sits with the name and role, under the quote.
 <!-- CHANGELOG_END -->
