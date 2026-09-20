@@ -4,6 +4,7 @@ import {
 	useInnerBlocksProps,
 	RichText,
 } from '@wordpress/block-editor';
+import { IndentControls, useIndentKeys } from './indent';
 
 /**
  * List items optionally contain a nested awt/list as an inner block — that's
@@ -18,30 +19,39 @@ export default function Edit( {
 	setAttributes,
 	onReplace,
 	mergeBlocks,
+	clientId,
 } ) {
 	const { content } = attributes;
 	const blockProps = useBlockProps( { className: 'cds--list__item' } );
-	const innerBlocksProps = useInnerBlocksProps(
-		{},
-		{
-			allowedBlocks: ALLOWED,
-			renderAppender: false,
-		}
-	);
+	// The inner blocks sit directly inside the <li>, which is what render.php
+	// emits and what a nested list needs: a wrapper element between the item
+	// and its sub-list would indent it differently here than on the page.
+	const innerBlocksProps = useInnerBlocksProps( blockProps, {
+		allowedBlocks: ALLOWED,
+		renderAppender: false,
+	} );
+	const indentKeysRef = useIndentKeys( clientId );
 
 	return (
-		<li { ...blockProps }>
-			<RichText
-				identifier="content"
-				tagName="span"
-				value={ content }
-				onChange={ ( v ) => setAttributes( { content: v } ) }
-				onSplit={ ( value ) => ( { ...attributes, content: value } ) }
-				onReplace={ onReplace }
-				onMerge={ mergeBlocks }
-				placeholder={ __( 'List item', 'awt-blocks' ) }
-			/>
-			<div { ...innerBlocksProps } />
-		</li>
+		<>
+			<li { ...innerBlocksProps }>
+				<RichText
+					ref={ indentKeysRef }
+					identifier="content"
+					tagName="span"
+					value={ content }
+					onChange={ ( v ) => setAttributes( { content: v } ) }
+					onSplit={ ( value ) => ( {
+						...attributes,
+						content: value,
+					} ) }
+					onReplace={ onReplace }
+					onMerge={ mergeBlocks }
+					placeholder={ __( 'List item', 'awt-blocks' ) }
+				/>
+				{ innerBlocksProps.children }
+			</li>
+			<IndentControls clientId={ clientId } />
+		</>
 	);
 }

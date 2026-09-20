@@ -187,7 +187,26 @@ const CONTENT = `
 
 <!-- wp:awt/list -->
 <!-- wp:awt/list-item {"content":"Keyboard reachable"} /-->
-<!-- wp:awt/list-item {"content":"Screen-reader labelled"} /-->
+<!-- wp:awt/list-item {"content":"Screen-reader labelled"} -->
+<!-- wp:awt/list {"nested":true} -->
+<!-- wp:awt/list-item {"content":"A name every control can be read by"} /-->
+<!-- wp:awt/list-item {"content":"State announced, not only drawn"} -->
+<!-- wp:awt/list {"nested":true} -->
+<!-- wp:awt/list-item {"content":"Three levels deep, which is where indentation stops being obvious"} /-->
+<!-- /wp:awt/list -->
+<!-- /wp:awt/list-item -->
+<!-- /wp:awt/list -->
+<!-- /wp:awt/list-item -->
+<!-- wp:awt/list-item {"content":"Visible focus"} /-->
+<!-- /wp:awt/list -->
+
+<!-- wp:awt/list {"type":"ordered"} -->
+<!-- wp:awt/list-item {"content":"A numbered list that nests"} -->
+<!-- wp:awt/list {"type":"ordered","nested":true} -->
+<!-- wp:awt/list-item {"content":"A numbered sub-item"} /-->
+<!-- /wp:awt/list -->
+<!-- /wp:awt/list-item -->
+<!-- wp:awt/list-item {"content":"And carries on afterwards"} /-->
 <!-- /wp:awt/list -->
 
 <!-- wp:awt/code-snippet {"code":"wp plugin activate awt-blocks","variant":"single"} /-->

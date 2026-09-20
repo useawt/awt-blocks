@@ -117,6 +117,8 @@ const ALLOWED = {
 			'The ellipsis appears only once there are more pages than fit; the editor preview has a fixed short page list.',
 	},
 	tabs: {
+		'cds--tab--overflow-nav-button':
+			"Render-only chrome. The prev/next chevrons on a horizontal tab strip are built by render.php and shown or hidden by view.js as the strip scrolls; the editor previews the tabs as a plain row with no scrolling and no chevrons, so there is nothing for the class to sit on. It entered this gate's scope on 2026-09-20, when theme.css gained a rule hiding these buttons in the vertical layout — Carbon's vertical tabs scroll the list itself and have no chevrons.",
 		'cds--tab-list':
 			'The overflow-scroll tab list is render-only; the editor previews the tabs as a simple row.',
 		'cds--tabs__nav-item--selected':

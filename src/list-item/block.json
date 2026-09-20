@@ -6,7 +6,7 @@
 	"awt_component": "list",
 	"title": "List item",
 	"category": "awt-content",
-	"description": "One item in a list. Add a List block inside it to create sub-items.",
+	"description": "One item in a list. Press Tab to make it a sub-item of the one above.",
 	"textdomain": "awt-blocks",
 	"parent": [
 		"awt/list"

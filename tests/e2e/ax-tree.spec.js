@@ -237,6 +237,18 @@ const PROBES = [
 		sel: '.awt-color-scheme-toggle--icon-only',
 	},
 
+	{
+		// A nested list. How deep an item sits, and how many items its level
+		// holds, is computed by the browser from the ul/li structure — it is
+		// nowhere in the markup, so a wrapper element between an item and its
+		// sub-list would change what a screen reader announces while leaving
+		// every other gate green. Three levels, because two can be right by
+		// accident.
+		page: 'content',
+		key: 'list (nested three levels)',
+		sel: 'ul.cds--list--unordered:not(.cds--list--nested)',
+	},
+
 	/* --- Widgets --- */
 	{
 		page: 'widgets',
