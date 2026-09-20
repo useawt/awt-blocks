@@ -1,5 +1,5 @@
-## 2026.09.27 — 2026-09-20
+## 2026.09.28 — 2026-09-20
 
-### [New]
+### [Improvement]
 
-- List items can be indented. Press Tab to make an item part of the one above and Shift+Tab to move it back out, or use the two buttons in the block toolbar. Sub-lists take the numbering and text size of the list they sit in.
+- The Indent and Outdent buttons on a list item name their keyboard shortcut and where it works: Tab and Shift+Tab indent from the start of an item.
