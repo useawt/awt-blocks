@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The Indent and Outdent buttons on a list item name their keyboard shortcut
+  and where it works: Tab and Shift+Tab indent from the start of an item.
+
 ## 2026.09.27 — 2026-09-20
 
 ### [New]

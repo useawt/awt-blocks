@@ -28,7 +28,7 @@ import {
 import { createBlock, cloneBlock } from '@wordpress/blocks';
 import { ToolbarButton } from '@wordpress/components';
 import { useRefEffect } from '@wordpress/compose';
-import { SPACE, TAB, displayShortcut } from '@wordpress/keycodes';
+import { SPACE, TAB } from '@wordpress/keycodes';
 import { __, isRTL } from '@wordpress/i18n';
 import { SVG, Path } from '@wordpress/primitives';
 
@@ -323,6 +323,14 @@ export function useIndentKeys( clientId ) {
 /**
  * The two toolbar buttons, in the editor's standard block-controls group.
  *
+ * The key is part of each button's label rather than a `shortcut` chip. The
+ * chip would say "Tab" flatly, and Tab only indents when the cursor is at the
+ * start of the item — it is a navigation key everywhere else, which is what
+ * lets a keyboard user leave the list at all. A tooltip that promises Tab and
+ * then does nothing is worse than one that spells out when it works; the chip
+ * is also invisible to the `description` slot, which icon-only buttons hide
+ * from sighted readers.
+ *
  * @param {Object} props          Component props.
  * @param {string} props.clientId The list item's client ID.
  * @return {Element} The Outdent and Indent buttons.
@@ -349,8 +357,10 @@ export function IndentControls( { clientId } ) {
 		<BlockControls group="block">
 			<ToolbarButton
 				icon={ isRTL() ? formatOutdentRTL : formatOutdent }
-				title={ __( 'Outdent', 'awt-blocks' ) }
-				shortcut={ displayShortcut.shift( 'Tab' ) }
+				title={ __(
+					'Outdent (Shift+Tab at the start of the item)',
+					'awt-blocks'
+				) }
 				description={ __(
 					'Move this item out one level',
 					'awt-blocks'
@@ -360,8 +370,10 @@ export function IndentControls( { clientId } ) {
 			/>
 			<ToolbarButton
 				icon={ isRTL() ? formatIndentRTL : formatIndent }
-				title={ __( 'Indent', 'awt-blocks' ) }
-				shortcut="Tab"
+				title={ __(
+					'Indent (Tab at the start of the item)',
+					'awt-blocks'
+				) }
 				description={ __(
 					'Make this item part of the one above',
 					'awt-blocks'

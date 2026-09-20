@@ -144,10 +144,10 @@ test.describe( 'List nesting', () => {
 		await caretAtStartOf( editor, page, 'One' );
 
 		await expect(
-			page.getByRole( 'button', { name: 'Indent' } )
+			page.getByRole( 'button', { name: /^Indent/ } )
 		).toBeDisabled();
 		await expect(
-			page.getByRole( 'button', { name: 'Outdent' } )
+			page.getByRole( 'button', { name: /^Outdent/ } )
 		).toBeDisabled();
 
 		await page.keyboard.press( 'Tab' );
@@ -167,13 +167,13 @@ test.describe( 'List nesting', () => {
 		await openList( admin, editor, requestUtils, 'List nesting toolbar' );
 		await caretAtStartOf( editor, page, 'Two' );
 
-		await page.getByRole( 'button', { name: 'Indent' } ).click();
+		await page.getByRole( 'button', { name: /^Indent/ } ).click();
 		expect( await shape( editor ) ).toEqual( [
 			[ 'One', [ 'Two' ] ],
 			[ 'Three', [] ],
 		] );
 
-		await page.getByRole( 'button', { name: 'Outdent' } ).click();
+		await page.getByRole( 'button', { name: /^Outdent/ } ).click();
 		expect( await shape( editor ) ).toEqual( [
 			[ 'One', [] ],
 			[ 'Two', [] ],
@@ -205,6 +205,30 @@ test.describe( 'List nesting', () => {
 			[ 'One', [] ],
 			[ 'Two', [ 'Three' ] ],
 		] );
+	} );
+
+	test( 'the buttons say where the key works, not just which key', async ( {
+		admin,
+		editor,
+		page,
+		requestUtils,
+	} ) => {
+		await openList( admin, editor, requestUtils, 'List nesting labels' );
+		await caretAtStartOf( editor, page, 'Two' );
+
+		// Tab only indents at the start of an item — everywhere else it is
+		// the key a keyboard user leaves the list with. A tooltip saying just
+		// "Tab" promises something that mostly does nothing.
+		await expect(
+			page.getByRole( 'button', {
+				name: 'Indent (Tab at the start of the item)',
+			} )
+		).toBeVisible();
+		await expect(
+			page.getByRole( 'button', {
+				name: 'Outdent (Shift+Tab at the start of the item)',
+			} )
+		).toBeVisible();
 	} );
 
 	test( 'a sub-list is indented by the same 36px Carbon indents one by', async ( {
