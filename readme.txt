@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.26
+Stable tag: 2026.09.27
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.27 — 2026-09-20 =
+* [New] List items can be indented. Press Tab to make an item part of the one above and Shift+Tab to move it back out, or use the two buttons in the block toolbar. Sub-lists take the numbering and text size of the list they sit in.
+
 = 2026.09.26 — 2026-09-20 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -351,8 +354,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.18 — 2026-09-19 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.17 — 2026-09-19 =
-* [A11y] Vertical tabs become a row of tabs on a narrow screen. They kept a fixed sidebar at every screen size, so on a phone the panel ran off the side of the screen and the page scrolled sideways.
-* [Breaking] Vertical tabs wrap their tab list in the same element horizontal tabs use. Custom CSS that targeted the list as a direct child of the block needs updating.
 <!-- CHANGELOG_END -->
