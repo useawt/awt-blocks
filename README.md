@@ -3,9 +3,12 @@
 Accessible Gutenberg blocks built on the [Carbon Design System](https://carbondesignsystem.com/),
 for the [AWT theme](https://github.com/useawt/awt-theme).
 Part of the AWT project: an accessibility-first WordPress theme + blocks,
-free on WordPress.org.
+free and GPL.
 
-**Status: pre-release.** Stage 1 development — not yet published on WordPress.org.
+**Status: released.** Download the latest version from
+[Releases](https://github.com/useawt/awt-blocks/releases); installed sites are offered
+updates in WordPress's own Updates screen. AWT is not distributed through the
+WordPress.org directory.
 
 ## Development setup
 
