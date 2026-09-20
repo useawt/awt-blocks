@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.28
+Stable tag: 2026.09.29
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.29 — 2026-09-20 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.28 — 2026-09-20 =
 * [Improvement] The Indent and Outdent buttons on a list item name their keyboard shortcut and where it works: Tab and Shift+Tab indent from the start of an item.
 
@@ -350,8 +353,5 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
 = 2026.09.20 — 2026-09-19 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.19 — 2026-09-19 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->

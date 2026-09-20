@@ -1,5 +1,5 @@
-## 2026.09.28 — 2026-09-20
+## 2026.09.29 — 2026-09-20
 
 ### [Improvement]
 
-- The Indent and Outdent buttons on a list item name their keyboard shortcut and where it works: Tab and Shift+Tab indent from the start of an item.
+- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
