@@ -207,6 +207,58 @@ test.describe( 'List nesting', () => {
 		] );
 	} );
 
+	test( 'a sub-list is indented by the same 36px Carbon indents one by', async ( {
+		admin,
+		editor,
+		page,
+		requestUtils,
+	} ) => {
+		// Carbon's UnorderedList → Nested story, measured 2026-09-20: the
+		// sub-list's text sits 36px right of its parent's — 32px of indent
+		// plus the 4px Carbon puts on a sub-list's items. Ours indented by 60
+		// until the theme stopped adding its own marker padding on top.
+		const created = await requestUtils.createPage( {
+			title: 'List nesting indent',
+			content: `<!-- wp:awt/list -->
+<!-- wp:awt/list-item {"content":"Parent"} -->
+<!-- wp:awt/list {"nested":true} -->
+<!-- wp:awt/list-item {"content":"Child"} -->
+<!-- wp:awt/list {"nested":true} -->
+<!-- wp:awt/list-item {"content":"Grandchild"} /-->
+<!-- /wp:awt/list -->
+<!-- /wp:awt/list-item -->
+<!-- /wp:awt/list -->
+<!-- /wp:awt/list-item -->
+<!-- /wp:awt/list -->`,
+			status: 'publish',
+		} );
+
+		const steps = async ( scope ) =>
+			scope.evaluate( () => {
+				const textLeft = ( el ) => {
+					const range = document.createRange();
+					range.selectNodeContents( el );
+					return Math.round( range.getBoundingClientRect().left );
+				};
+				const level = ( depth ) =>
+					textLeft(
+						document.querySelectorAll( '.cds--list__item' )[ depth ]
+					);
+				return [ level( 1 ) - level( 0 ), level( 2 ) - level( 1 ) ];
+			} );
+
+		await page.goto( created.link );
+		expect( await steps( page ), 'on the page' ).toEqual( [ 36, 36 ] );
+
+		// The editor has to agree, or authors lay out against the wrong indent.
+		await admin.editPost( created.id );
+		await editor.canvas.locator( '.cds--list__item' ).first().waitFor();
+		expect(
+			await steps( editor.canvas.locator( 'body' ) ),
+			'in the editor'
+		).toEqual( [ 36, 36 ] );
+	} );
+
 	test( 'the page renders the sub-list inside the item', async ( {
 		admin,
 		editor,
