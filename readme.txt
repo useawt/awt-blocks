@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.25
+Stable tag: 2026.09.26
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.26 — 2026-09-20 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.25 — 2026-09-20 =
 * [New] List block: a "Text (comma separated values)" data source that turns each comma-separated value into its own list item.
 
@@ -352,7 +355,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.09.17 — 2026-09-19 =
 * [A11y] Vertical tabs become a row of tabs on a narrow screen. They kept a fixed sidebar at every screen size, so on a phone the panel ran off the side of the screen and the page scrolled sideways.
 * [Breaking] Vertical tabs wrap their tab list in the same element horizontal tabs use. Custom CSS that targeted the list as a direct child of the block needs updating.
-
-= 2026.09.16 — 2026-09-18 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->
