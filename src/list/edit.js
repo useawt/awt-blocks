@@ -18,6 +18,7 @@ import {
 	escapeHtml,
 	mdInline,
 	sanitizeInlineHtml,
+	splitCommaSeparated,
 } from '../shared/import-format';
 import PremiumNotice from '../shared/premium-notice';
 
@@ -30,14 +31,36 @@ const TYPE_OPTIONS = [
 	},
 ];
 
-// Free tier supplies static/inline sources (text, HTML, Markdown). The dynamic
-// live-data sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via
-// the shared PremiumNotice box below the picker — not as dead disabled options.
+// Free tier supplies static/inline sources (text, comma-separated text, HTML,
+// Markdown). The dynamic live-data sources (JSON, REST, WP_Query) are AWT
+// Premium and are surfaced via the shared PremiumNotice box below the picker —
+// not as dead disabled options.
 const FORMAT_OPTIONS = [
 	{ label: __( 'Text (one item per line)', 'awt-blocks' ), value: 'text' },
+	{
+		label: __( 'Text (comma separated values)', 'awt-blocks' ),
+		value: 'csv',
+	},
 	{ label: __( 'HTML', 'awt-blocks' ), value: 'html' },
 	{ label: __( 'Markdown', 'awt-blocks' ), value: 'markdown' },
 ];
+
+// What the paste field promises, per source. One sentence each.
+const PASTE_HELP = {
+	text: __( 'Each line becomes one list item.', 'awt-blocks' ),
+	csv: __(
+		'Each comma starts a new list item. Line breaks start one too.',
+		'awt-blocks'
+	),
+	html: __(
+		'Each list item becomes one list item, and a nested list becomes a sub-list. The list type is set to match.',
+		'awt-blocks'
+	),
+	markdown: __(
+		'Each bullet becomes one list item, and indented bullets become sub-lists. The list type is set to match.',
+		'awt-blocks'
+	),
+};
 
 const TEMPLATE = [ [ 'awt/list-item' ] ];
 
@@ -178,6 +201,15 @@ function parseContent( text, mode ) {
 			type: null,
 			blocks: arr.map( ( h ) =>
 				createBlock( 'awt/list-item', { content: h } )
+			),
+		};
+	}
+
+	if ( mode === 'csv' ) {
+		return {
+			type: null,
+			blocks: splitCommaSeparated( raw ).map( ( v ) =>
+				createBlock( 'awt/list-item', { content: escapeHtml( v ) } )
 			),
 		};
 	}
@@ -324,10 +356,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 					<TextareaControl
 						label={ __( 'Paste content', 'awt-blocks' ) }
-						help={ __(
-							'Each line becomes one list item. Pasted HTML lists and indented Markdown become sub-lists, and set the list type to match.',
-							'awt-blocks'
-						) }
+						help={ PASTE_HELP[ dataFormat ] }
 						value={ dataText }
 						onChange={ setDataText }
 						rows={ 6 }

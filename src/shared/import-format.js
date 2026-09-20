@@ -127,4 +127,13 @@ export function mdInline( s ) {
 	return sanitizeInlineHtml( out );
 }
 
+// Comma-separated text → the trimmed values, empties dropped. Line breaks
+// split as well, so a value never carries a stray line break into an item.
+export function splitCommaSeparated( s ) {
+	return String( s || '' )
+		.split( /[,\r\n]+/ )
+		.map( ( v ) => v.trim() )
+		.filter( Boolean );
+}
+
 export { escapeHtml };

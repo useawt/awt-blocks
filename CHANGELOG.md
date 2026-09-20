@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [New]
+
+- List block: a "Text (comma separated values)" data source that turns each
+  comma-separated value into its own list item.
+
 ## 2026.09.24 — 2026-09-20
 
 ### [Improvement]
