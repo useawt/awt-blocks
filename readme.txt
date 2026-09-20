@@ -325,6 +325,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.24 — 2026-09-20 =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.09.23 — 2026-09-20 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -352,7 +355,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.15 — 2026-09-18 =
 * [Improvement] The page search fits the block settings column. Part of it sat off the edge of the panel, including the button that applies a typed address.
-
-= 2026.09.14 — 2026-09-18 =
-* [Improvement] Blocks that take a link let you search for a page and pick it, instead of asking you to paste the address. Typing an address or an anchor still works.
 <!-- CHANGELOG_END -->
