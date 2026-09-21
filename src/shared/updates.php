@@ -15,7 +15,13 @@
  * carries the site's own address. It is overridden below. No query string, no
  * POST body, no cookies: a plain GET of a file that is identical for everyone.
  *
- * **The free tier is told, not served.** The response carries no package URL,
+ * **Every site is served, free included** *(2026-09-21)*. The response
+ * carries the package, so a site on the default setting keeps itself up to
+ * date, stopping at a release the changelog marks `[Breaking]`. The rule and
+ * the reasoning live in the theme's `inc/updates.php`; this half carries the
+ * same walk because the plugin has to work when AWT is not the active theme.
+ *
+ * Superseded, kept for the shape of the old design: the response carried no package URL,
  * which is what makes WordPress print "Automatic update is unavailable for
  * this plugin" beside a link to the release instead of a button that could not
  * work. `awt_blocks_update_package` is the seam an AWT Premium licence fills
@@ -58,6 +64,7 @@ const CACHE_TTL_FAILED = HOUR_IN_SECONDS;
 const TIMEOUT = 5;
 
 add_filter( 'site_transient_update_plugins', __NAMESPACE__ . '\\offer_update' );
+add_filter( 'auto_update_plugin', __NAMESPACE__ . '\\should_auto_update', 10, 2 );
 add_filter( 'plugins_api', __NAMESPACE__ . '\\details', 10, 3 );
 add_action( 'in_plugin_update_message-awt-blocks/awt-blocks.php', __NAMESPACE__ . '\\pair_note' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- core names this hook after the plugin file.
 add_filter( 'upgrader_pre_download', __NAMESPACE__ . '\\explain_manual_update', 10, 4 );
@@ -71,15 +78,90 @@ add_filter( 'upgrader_pre_download', __NAMESPACE__ . '\\explain_manual_update', 
  * site with no AWT settings saved yet has to default to on.
  */
 function enabled(): bool {
+	return (bool) apply_filters( 'awt_update_check_enabled', mode() !== 'off' );
+}
+
+/**
+ * How this site handles a new AWT: 'auto', 'notify' or 'off'.
+ *
+ * Read straight out of the theme's settings row rather than through the
+ * theme's own code, for the reason above: the plugin can be active under
+ * another theme, and a site with nothing saved yet has to default to on.
+ *
+ * `updates.check` is the pre-2026-09-21 shape — a yes/no. A site that had it
+ * on becomes 'auto' and one that had it off becomes 'off', which is the same
+ * mapping the theme's schema migration performs.
+ *
+ * @return string One of: auto | notify | off.
+ */
+function mode(): string {
 	$raw = get_option( 'awt_theme_settings', array() );
 	if ( is_string( $raw ) ) {
 		$decoded = json_decode( $raw, true );
 		$raw     = is_array( $decoded ) ? $decoded : array();
 	}
-	$stored = is_array( $raw ) ? ( $raw['updates']['check'] ?? null ) : null;
-	$on     = $stored === null ? true : (bool) $stored;
+	$updates = is_array( $raw ) ? ( $raw['updates'] ?? array() ) : array();
 
-	return (bool) apply_filters( 'awt_update_check_enabled', $on );
+	$mode = (string) ( $updates['mode'] ?? '' );
+	if ( in_array( $mode, array( 'auto', 'notify', 'off' ), true ) ) {
+		return $mode;
+	}
+	if ( array_key_exists( 'check', (array) $updates ) ) {
+		return empty( $updates['check'] ) ? 'off' : 'auto';
+	}
+	return 'auto';
+}
+
+/**
+ * Whether this site may install an update without being asked.
+ *
+ * The theme's `inc/updates.php` documents what each of these refusals is
+ * for. Duplicated rather than shared because the plugin has to answer the
+ * same question on a site where AWT is not the active theme.
+ *
+ * @return bool True when AWT Blocks may install its own updates here.
+ */
+function automatic_allowed(): bool {
+	$deployed = defined( 'AWT_DEPLOYED_FROM_SOURCE' ) && AWT_DEPLOYED_FROM_SOURCE;
+	if ( apply_filters( 'awt_deployed_from_source', $deployed ) ) {
+		return false;
+	}
+	if ( mode() !== 'auto' ) {
+		return false;
+	}
+	$environment = function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production';
+	return (string) apply_filters( 'awt_update_environment', $environment ) === 'production';
+}
+
+/**
+ * The newest release this site may install by itself right now, or null.
+ *
+ * The same four-line walk as the theme's, against the same list: step up from
+ * the installed version, stop at the first breaking release, stop at the
+ * first that has not soaked, take the last one that passed.
+ *
+ * @param array  $data      Decoded manifest.
+ * @param string $installed The version running here.
+ * @return array|null The release entry to install, or null for none.
+ */
+function auto_install_target( array $data, string $installed ): ?array {
+	$releases = $data['releases'] ?? null;
+	if ( ! is_array( $releases ) ) {
+		return null;
+	}
+
+	$target = null;
+	foreach ( array_reverse( $releases ) as $release ) {
+		$version = (string) ( $release['version'] ?? '' );
+		if ( $version === '' || version_compare( $version, $installed, '<=' ) ) {
+			continue;
+		}
+		if ( ! empty( $release['breaking'] ) || empty( $release['autoInstall'] ) ) {
+			break;
+		}
+		$target = $release;
+	}
+	return $target;
 }
 
 /**
@@ -190,14 +272,36 @@ function offer_update( $transient ) {
 	$installed = \AWT\Blocks\AWT_BLOCKS_VERSION;
 	$latest    = (string) $data['version'];
 
+	$offer   = $latest;
+	$package = (string) ( $data['plugin']['package'] ?? '' );
+
+	if ( wp_doing_cron() ) {
+		/*
+		 * The unattended path, and the only place the breaking hold can be
+		 * enforced. Core installs whatever this entry names without asking
+		 * anybody, so during cron it must name only what this site may
+		 * install by itself, or nothing at all. Every human-facing screen
+		 * still sees the newest version, because this filter runs on each
+		 * read rather than on the stored value.
+		 */
+		$target = automatic_allowed() ? auto_install_target( $data, $installed ) : null;
+		if ( null === $target ) {
+			$transient->no_update[ $key ] = current_entry( $key, $installed, $data );
+			unset( $transient->response[ $key ] );
+			return $transient;
+		}
+		$offer   = (string) $target['version'];
+		$package = (string) ( $target['plugin']['package'] ?? '' );
+	}
+
 	$entry = (object) array(
 		'id'            => 'useawt.com/plugins/awt-blocks',
 		'slug'          => slug(),
 		'plugin'        => $key,
-		'new_version'   => $latest,
+		'new_version'   => $offer,
 		'url'           => (string) ( $data['plugin']['releaseUrl'] ?? '' ),
-		// Empty on the free tier — see the file docblock.
-		'package'       => (string) apply_filters( 'awt_blocks_update_package', '', $data ),
+		// Served to every site since 2026-09-21 — see the file docblock.
+		'package'       => (string) apply_filters( 'awt_blocks_update_package', $package, $data ),
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
 		'tested'        => (string) ( $data['testedWp'] ?? '' ),
@@ -207,18 +311,63 @@ function offer_update( $transient ) {
 		'compatibility' => new \stdClass(),
 	);
 
-	if ( version_compare( $installed, $latest, '<' ) ) {
+	if ( version_compare( $installed, $offer, '<' ) ) {
 		$transient->response[ $key ] = $entry;
 		unset( $transient->no_update[ $key ] );
 	} else {
-		// Core reads no_update to know a plugin was checked and is current.
-		// Without it the Plugins screen can say nothing about AWT Blocks.
-		$entry->new_version           = $installed;
-		$transient->no_update[ $key ] = $entry;
+		$transient->no_update[ $key ] = current_entry( $key, $installed, $data );
 		unset( $transient->response[ $key ] );
 	}
 
 	return $transient;
+}
+
+/**
+ * The "checked, and up to date" entry.
+ *
+ * Core reads `no_update` to know a plugin was looked at. Without it the
+ * Plugins screen can say nothing about AWT Blocks at all.
+ *
+ * @param string $key       Plugin basename.
+ * @param string $installed Version running here.
+ * @param array  $data      Decoded manifest.
+ * @return object Entry for the no_update list.
+ */
+function current_entry( string $key, string $installed, array $data ): object {
+	return (object) array(
+		'id'            => 'useawt.com/plugins/awt-blocks',
+		'slug'          => slug(),
+		'plugin'        => $key,
+		'new_version'   => $installed,
+		'url'           => (string) ( $data['plugin']['releaseUrl'] ?? '' ),
+		'package'       => '',
+		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
+		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
+		'tested'        => (string) ( $data['testedWp'] ?? '' ),
+		'icons'         => array(),
+		'banners'       => array(),
+		'banners_rtl'   => array(),
+		'compatibility' => new \stdClass(),
+	);
+}
+
+/**
+ * Answer WordPress's "should this update itself?" question for AWT Blocks.
+ *
+ * Always a boolean rather than null, which takes the per-plugin toggle off
+ * the Plugins screen and replaces it with plain text, so AWT Settings is the
+ * only place the answer can be changed.
+ *
+ * @param bool|null $update Core's answer so far.
+ * @param mixed     $item   The update offer.
+ * @return bool|null Ours for AWT Blocks, core's for everything else.
+ */
+function should_auto_update( $update, $item ) {
+	$plugin = is_object( $item ) ? ( $item->plugin ?? '' ) : ( is_array( $item ) ? ( $item['plugin'] ?? '' ) : '' );
+	if ( $plugin !== basename_key() ) {
+		return $update;
+	}
+	return automatic_allowed();
 }
 
 /**

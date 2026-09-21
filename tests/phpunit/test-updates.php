@@ -37,6 +37,7 @@ class Test_Updates extends WP_UnitTestCase {
 	 */
 	public function tear_down(): void {
 		remove_all_filters( 'wp_doing_cron' );
+		remove_all_filters( 'awt_update_environment' );
 		delete_site_transient( Updates\CACHE_KEY );
 		delete_option( 'awt_theme_settings' );
 		remove_all_filters( 'awt_blocks_update_package' );
@@ -49,6 +50,8 @@ class Test_Updates extends WP_UnitTestCase {
 	 * Plugins screen looks it up.
 	 */
 	public function test_a_newer_version_is_offered(): void {
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
 		$this->cache( '2099.01.0' );
 
 		$result = Updates\offer_update( $this->transient() );
@@ -74,25 +77,32 @@ class Test_Updates extends WP_UnitTestCase {
 	}
 
 	/**
-	 * The free tier carries no package.
+	 * Every site carries the package.
 	 *
-	 * An empty package is what makes WordPress say "Automatic update is
-	 * unavailable" rather than offering a button. If a change ever fills it in
-	 * by default, every free site silently gains one-click updates.
+	 * **This test used to assert the opposite**, and said so: an empty
+	 * package was the free/Premium boundary, and this existed to fail if a
+	 * change ever filled it in by default. On 2026-09-21 that became the
+	 * decision rather than the accident, so the guard is inverted rather
+	 * than deleted. An empty package here would now mean a fix that reaches
+	 * nobody, and WordPress telling the owner their update failed.
 	 */
-	public function test_free_offers_no_package(): void {
+	public function test_every_site_is_offered_the_package(): void {
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
 		$this->cache( '2099.01.0' );
 
 		$result = Updates\offer_update( $this->transient() );
 		$key    = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
 
-		$this->assertSame( '', $result->response[ $key ]->package );
+		$this->assertSame( 'https://example.com/blocks-2099.01.0.zip', $result->response[ $key ]->package );
 	}
 
 	/**
-	 * A licence can fill the package in without touching this code.
+	 * The filter is still the seam, it just no longer decides the tier.
 	 */
-	public function test_a_licence_can_add_the_package(): void {
+	public function test_the_package_can_still_be_replaced_by_a_filter(): void {
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
 		$this->cache( '2099.01.0' );
 		add_filter( 'awt_blocks_update_package', static fn () => 'https://example.com/awt-blocks.zip' );
 
@@ -197,12 +207,152 @@ class Test_Updates extends WP_UnitTestCase {
 
 	// --- helpers ------------------------------------------------------------
 
+	/* ------------------------------------------- what may install itself */
+
+	/**
+	 * A release list, newest first, in the shape the manifest publishes.
+	 *
+	 * @param array $rows version => [ breaking, autoInstall ].
+	 * @return array Release entries.
+	 */
+	private function releases( array $rows ): array {
+		$out = array();
+		foreach ( $rows as $version => $flags ) {
+			$out[] = array(
+				'version'     => (string) $version,
+				'breaking'    => ! empty( $flags['breaking'] ),
+				'autoInstall' => ! empty( $flags['autoInstall'] ),
+				'theme'       => array( 'package' => 'https://example.com/awt-' . $version . '.zip' ),
+				'plugin'      => array( 'package' => 'https://example.com/blocks-' . $version . '.zip' ),
+			);
+		}
+		return $out;
+	}
+
+	/** The walk stops underneath a breaking release. */
+	public function test_the_walk_stops_under_a_breaking_release(): void {
+		$target = Updates\auto_install_target(
+			array(
+				'releases' => $this->releases(
+					array(
+						'2099.01.3' => array( 'autoInstall' => true ),
+						'2099.01.2' => array( 'breaking' => true ),
+						'2099.01.1' => array( 'autoInstall' => true ),
+					)
+				),
+			),
+			'2099.01.0'
+		);
+
+		$this->assertSame( '2099.01.1', $target['version'] );
+	}
+
+	/** A manifest with no release list installs nothing. */
+	public function test_a_manifest_without_releases_installs_nothing(): void {
+		$this->assertNull( Updates\auto_install_target( array(), '2000.01.0' ) );
+	}
+
+	/** Unattended, the plugin is offered exactly what it may install. */
+	public function test_cron_is_offered_the_target_and_not_the_newest(): void {
+		add_filter( 'awt_update_environment', static fn () => 'production' );
+		$this->cache(
+			'2099.01.3',
+			$this->releases(
+				array(
+					'2099.01.3' => array( 'autoInstall' => true ),
+					'2099.01.2' => array( 'breaking' => true ),
+					'2099.01.1' => array( 'autoInstall' => true ),
+				)
+			)
+		);
+
+		$result = Updates\offer_update( $this->transient() );
+		$key    = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+
+		$this->assertSame( '2099.01.1', $result->response[ $key ]->new_version );
+		$this->assertSame( 'https://example.com/blocks-2099.01.1.zip', $result->response[ $key ]->package );
+	}
+
+	/**
+	 * With a wall immediately ahead, cron is offered nothing at all.
+	 *
+	 * The load-bearing one: core installs whatever the entry names, without
+	 * asking anybody.
+	 */
+	public function test_cron_is_offered_nothing_when_the_wall_is_next(): void {
+		add_filter( 'awt_update_environment', static fn () => 'production' );
+		$this->cache( '2099.01.2', $this->releases( array( '2099.01.2' => array( 'breaking' => true ) ) ) );
+
+		$result = Updates\offer_update( $this->transient() );
+		$key    = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+
+		$this->assertArrayNotHasKey( $key, $result->response );
+		$this->assertArrayHasKey( $key, $result->no_update );
+	}
+
+	/** A person still sees the newest version, wall or no wall. */
+	public function test_the_admin_still_sees_the_newest_version(): void {
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
+		$this->cache( '2099.01.2', $this->releases( array( '2099.01.2' => array( 'breaking' => true ) ) ) );
+
+		$result = Updates\offer_update( $this->transient() );
+		$key    = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+
+		$this->assertSame( '2099.01.2', $result->response[ $key ]->new_version );
+	}
+
+	/** Nothing installs itself outside production. */
+	public function test_cron_installs_nothing_outside_production(): void {
+		add_filter( 'awt_update_environment', static fn () => 'staging' );
+		$this->cache( '2099.01.1', $this->releases( array( '2099.01.1' => array( 'autoInstall' => true ) ) ) );
+
+		$result = Updates\offer_update( $this->transient() );
+
+		$this->assertArrayNotHasKey( plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE ), $result->response );
+	}
+
+	/**
+	 * The theme's setting drives the plugin, in both the new shape and the
+	 * yes/no it replaced.
+	 */
+	public function test_the_mode_is_read_from_the_theme_setting(): void {
+		update_option( 'awt_theme_settings', (string) wp_json_encode( array( 'updates' => array( 'mode' => 'notify' ) ) ) );
+		$this->assertSame( 'notify', Updates\mode() );
+		$this->assertTrue( Updates\enabled() );
+		$this->assertFalse( Updates\automatic_allowed() );
+
+		update_option( 'awt_theme_settings', (string) wp_json_encode( array( 'updates' => array( 'check' => true ) ) ) );
+		$this->assertSame( 'auto', Updates\mode(), 'the pre-2026-09-21 shape still reads' );
+
+		update_option( 'awt_theme_settings', (string) wp_json_encode( array( 'updates' => array( 'check' => false ) ) ) );
+		$this->assertSame( 'off', Updates\mode() );
+
+		delete_option( 'awt_theme_settings' );
+		$this->assertSame( 'auto', Updates\mode(), 'a site with nothing saved keeps itself up to date' );
+	}
+
+	/** WordPress always gets a definite answer for AWT Blocks. */
+	public function test_wordpress_is_given_a_definite_answer(): void {
+		add_filter( 'awt_update_environment', static fn () => 'production' );
+		$key = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+
+		$this->assertTrue( Updates\should_auto_update( null, (object) array( 'plugin' => $key ) ) );
+		$this->assertNull(
+			Updates\should_auto_update( null, (object) array( 'plugin' => 'akismet/akismet.php' ) ),
+			'another plugin is not ours to answer for'
+		);
+	}
+
 	/**
 	 * Put a manifest naming $version straight into the cache.
 	 *
-	 * @param string $version Version to announce.
+	 * @param string $version  Version to announce.
+	 * @param array  $releases Optional release list, newest first. Without
+	 *                         one nothing can install itself, which is the
+	 *                         safe default and what most tests here want.
 	 */
-	private function cache( string $version ): void {
+	private function cache( string $version, array $releases = array() ): void {
 		set_site_transient(
 			Updates\CACHE_KEY,
 			array(
@@ -214,11 +364,14 @@ class Test_Updates extends WP_UnitTestCase {
 				'theme'         => array(
 					'slug'       => 'awt',
 					'releaseUrl' => 'https://example.com/theme',
+					'package'    => 'https://example.com/awt-' . $version . '.zip',
 				),
 				'plugin'        => array(
 					'slug'       => 'awt-blocks',
 					'releaseUrl' => 'https://example.com/plugin',
+					'package'    => 'https://example.com/blocks-' . $version . '.zip',
 				),
+				'releases'      => $releases,
 			),
 			HOUR_IN_SECONDS
 		);
