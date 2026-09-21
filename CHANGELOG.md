@@ -10,6 +10,14 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [New]
+
+- AWT Blocks now keeps itself up to date, alongside the AWT theme. New
+  versions install three days after they are released; one that comes with
+  changes that could affect your site waits for you.
+
 ## 2026.09.29 — 2026-09-20
 
 ### [Improvement]
