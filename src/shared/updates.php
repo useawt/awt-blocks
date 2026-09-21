@@ -130,7 +130,34 @@ function automatic_allowed(): bool {
 		return false;
 	}
 	$environment = function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production';
-	return (string) apply_filters( 'awt_update_environment', $environment ) === 'production';
+	if ( (string) apply_filters( 'awt_update_environment', $environment ) !== 'production' ) {
+		return false;
+	}
+	return package_folder_matches();
+}
+
+/**
+ * Whether an update would land in the folder this plugin actually lives in.
+ *
+ * The release zip unpacks to `awt-blocks/`. A site that installed it under
+ * any other name — a renamed zip, a clone — would get the package unpacked
+ * beside the plugin rather than over it, leaving a second copy and an update
+ * notice that never clears. The theme's `inc/updates.php` has the long
+ * version of why, including what a mismatched folder costs a site that has
+ * edited its templates.
+ *
+ * @param array|null $data Decoded manifest, or null to read the cached one.
+ * @return bool True when an update would replace this plugin.
+ */
+function package_folder_matches( ?array $data = null ): bool {
+	if ( $data === null ) {
+		$data = manifest();
+	}
+	$expected = is_array( $data ) ? (string) ( $data['plugin']['slug'] ?? '' ) : '';
+	if ( $expected === '' ) {
+		return true;
+	}
+	return $expected === slug();
 }
 
 /**
@@ -274,6 +301,12 @@ function offer_update( $transient ) {
 
 	$offer   = $latest;
 	$package = (string) ( $data['plugin']['package'] ?? '' );
+
+	// An update that would unpack beside this plugin instead of over it is
+	// worse than none: it leaves a second copy and changes nothing.
+	if ( ! package_folder_matches( $data ) ) {
+		$package = '';
+	}
 
 	if ( wp_doing_cron() ) {
 		/*

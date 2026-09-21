@@ -252,6 +252,40 @@ class Test_Updates extends WP_UnitTestCase {
 		$this->assertNull( Updates\auto_install_target( array(), '2000.01.0' ) );
 	}
 
+	/**
+	 * A plugin folder that is not what the zip unpacks to withholds the
+	 * package, and never installs by itself.
+	 *
+	 * The zip extracts to `awt-blocks/`. Installed under any other name, an
+	 * update would land beside the plugin rather than over it — a second
+	 * copy, the old one still running, and a notice that never clears.
+	 */
+	public function test_a_mismatched_folder_withholds_the_package(): void {
+		add_filter( 'awt_update_environment', static fn () => 'production' );
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
+		$this->cache( '2099.01.0' );
+		$this->assertTrue( Updates\package_folder_matches(), 'the fixture matches by default' );
+
+		$data                   = get_site_transient( Updates\CACHE_KEY );
+		$data['plugin']['slug'] = 'somewhere-else';
+		set_site_transient( Updates\CACHE_KEY, $data, HOUR_IN_SECONDS );
+
+		$this->assertFalse( Updates\package_folder_matches() );
+		$this->assertFalse( Updates\automatic_allowed() );
+
+		$result = Updates\offer_update( $this->transient() );
+		$key    = plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+
+		$this->assertArrayHasKey( $key, $result->response, 'still announced' );
+		$this->assertSame( '', $result->response[ $key ]->package, 'but not installable' );
+	}
+
+	/** A manifest that does not say where it unpacks is not treated as wrong. */
+	public function test_a_manifest_without_a_slug_is_given_the_benefit_of_the_doubt(): void {
+		$this->assertTrue( Updates\package_folder_matches( array() ) );
+	}
+
 	/** Unattended, the plugin is offered exactly what it may install. */
 	public function test_cron_is_offered_the_target_and_not_the_newest(): void {
 		add_filter( 'awt_update_environment', static fn () => 'production' );
@@ -367,7 +401,7 @@ class Test_Updates extends WP_UnitTestCase {
 					'package'    => 'https://example.com/awt-' . $version . '.zip',
 				),
 				'plugin'        => array(
-					'slug'       => 'awt-blocks',
+					'slug'       => Updates\slug(),
 					'releaseUrl' => 'https://example.com/plugin',
 					'package'    => 'https://example.com/blocks-' . $version . '.zip',
 				),
