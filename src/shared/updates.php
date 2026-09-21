@@ -483,7 +483,7 @@ function explain_manual_update( $reply, $package, $upgrader, $hook_extra = array
 		'awt_manual_update',
 		sprintf(
 			/* translators: %s: URL of the update instructions. */
-			__( 'AWT Blocks does not install its own updates. Download the new version and upload it in Plugins, Add Plugin, Upload Plugin, choosing "Replace current with uploaded". Step-by-step instructions: %s', 'awt-blocks' ),
+			__( 'This version of AWT Blocks cannot be downloaded automatically. Get it from the AWT website and upload it in Plugins, Add Plugin, Upload Plugin, choosing "Replace current with uploaded". Your settings, pages and content are kept. %s', 'awt-blocks' ),
 			'https://useawt.com/faq/#updating'
 		)
 	);
