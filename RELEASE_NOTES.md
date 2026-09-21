@@ -1,5 +1,5 @@
-## 2026.09.29 — 2026-09-20
+## 2026.09.30 — 2026-09-21
 
-### [Improvement]
+### [New]
 
-- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+- AWT Blocks now keeps itself up to date, alongside the AWT theme. New versions install three days after they are released; one that comes with changes that could affect your site waits for you.
