@@ -1,5 +1,5 @@
-## 2026.09.30 — 2026-09-21
+## 2026.09.31 — 2026-09-21
 
-### [New]
+### [Improvement]
 
-- AWT Blocks now keeps itself up to date, alongside the AWT theme. New versions install three days after they are released; one that comes with changes that could affect your site waits for you.
+- If AWT Blocks is installed in a folder with a different name than the one updates install into, it no longer tries to update itself.
