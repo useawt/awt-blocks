@@ -5,10 +5,13 @@ for the [AWT theme](https://github.com/useawt/awt-theme).
 Part of the AWT project: an accessibility-first WordPress theme + blocks,
 free and GPL.
 
-**Status: released.** Download the latest version from
-[Releases](https://github.com/useawt/awt-blocks/releases); installed sites are offered
-updates in WordPress's own Updates screen. AWT is not distributed through the
-WordPress.org directory.
+**Status: released.** AWT keeps itself up to date — a new version installs
+three days after release, and the theme and the plugin always move together.
+The exception is a version that comes with changes that could affect a site:
+that one waits for a person. Every version is also on
+[Releases](https://github.com/useawt/awt-blocks/releases) to install by hand, and the whole
+behaviour is a setting in AWT Settings → Tools. AWT is not distributed through
+the WordPress.org directory.
 
 ## Development setup
 
