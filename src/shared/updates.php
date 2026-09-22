@@ -63,6 +63,16 @@ const CACHE_TTL_FAILED = HOUR_IN_SECONDS;
 /** Seconds to wait for the manifest before giving up. */
 const TIMEOUT = 5;
 
+/**
+ * Where a package may come from. The theme's `inc/updates.php` has the long
+ * version: nothing signs the manifest, so the destination is pinned down and
+ * anything else is refused, whatever the manifest says.
+ */
+const PACKAGE_HOST = 'github.com';
+
+/** And under whose releases. */
+const PACKAGE_PATH = '/useawt/';
+
 add_filter( 'site_transient_update_plugins', __NAMESPACE__ . '\\offer_update' );
 add_filter( 'auto_update_plugin', __NAMESPACE__ . '\\should_auto_update', 10, 2 );
 add_filter( 'plugins_api', __NAMESPACE__ . '\\details', 10, 3 );
@@ -151,13 +161,52 @@ function automatic_allowed(): bool {
  */
 function package_folder_matches( ?array $data = null ): bool {
 	if ( $data === null ) {
-		$data = manifest();
+		$data = manifest() ?? cached();
 	}
 	$expected = is_array( $data ) ? (string) ( $data['plugin']['slug'] ?? '' ) : '';
 	if ( $expected === '' ) {
 		return true;
 	}
 	return $expected === slug();
+}
+
+/**
+ * The last manifest this site read, without going and reading one.
+ *
+ * `manifest()` answers null outside wp-admin and cron by design. The folder
+ * check has to work anyway, or it quietly passes everywhere else.
+ *
+ * @return array|null The cached manifest, or null before the first check.
+ */
+function cached(): ?array {
+	$cached = get_site_transient( CACHE_KEY );
+	return is_array( $cached ) ? $cached : null;
+}
+
+/**
+ * The package URL, or '' when it is not one of ours.
+ *
+ * @param string $url Whatever the manifest named.
+ * @return string The same URL, or '' to install nothing.
+ */
+function trusted_package( string $url ): string {
+	if ( $url === '' ) {
+		return '';
+	}
+	$parts = wp_parse_url( $url );
+	if ( ! is_array( $parts ) ) {
+		return '';
+	}
+	if ( ( $parts['scheme'] ?? '' ) !== 'https' ) {
+		return '';
+	}
+	if ( strtolower( (string) ( $parts['host'] ?? '' ) ) !== PACKAGE_HOST ) {
+		return '';
+	}
+	if ( strpos( (string) ( $parts['path'] ?? '' ), PACKAGE_PATH ) !== 0 ) {
+		return '';
+	}
+	return $url;
 }
 
 /**
@@ -173,7 +222,23 @@ function package_folder_matches( ?array $data = null ): bool {
  */
 function auto_install_target( array $data, string $installed ): ?array {
 	$releases = $data['releases'] ?? null;
-	if ( ! is_array( $releases ) ) {
+	if ( ! is_array( $releases ) || ! $releases ) {
+		return null;
+	}
+
+	/*
+	 * The list is capped, so a site can sit below the whole of it — and then
+	 * the walk cannot see what was tagged breaking in the range that fell off
+	 * the end. A site this far back installs by hand.
+	 */
+	$oldest = '';
+	foreach ( $releases as $release ) {
+		$version = (string) ( $release['version'] ?? '' );
+		if ( $version !== '' && ( $oldest === '' || version_compare( $version, $oldest, '<' ) ) ) {
+			$oldest = $version;
+		}
+	}
+	if ( $oldest === '' || version_compare( $installed, $oldest, '<' ) ) {
 		return null;
 	}
 
@@ -300,7 +365,7 @@ function offer_update( $transient ) {
 	$latest    = (string) $data['version'];
 
 	$offer   = $latest;
-	$package = (string) ( $data['plugin']['package'] ?? '' );
+	$package = trusted_package( (string) ( $data['plugin']['package'] ?? '' ) );
 
 	// An update that would unpack beside this plugin instead of over it is
 	// worse than none: it leaves a second copy and changes nothing.
@@ -317,14 +382,14 @@ function offer_update( $transient ) {
 		 * still sees the newest version, because this filter runs on each
 		 * read rather than on the stored value.
 		 */
-		$target = automatic_allowed() ? auto_install_target( $data, $installed ) : null;
-		if ( null === $target ) {
+		$target  = automatic_allowed() ? auto_install_target( $data, $installed ) : null;
+		$package = null === $target ? '' : trusted_package( (string) ( $target['plugin']['package'] ?? '' ) );
+		if ( null === $target || '' === $package ) {
 			$transient->no_update[ $key ] = current_entry( $key, $installed, $data );
 			unset( $transient->response[ $key ] );
 			return $transient;
 		}
-		$offer   = (string) $target['version'];
-		$package = (string) ( $target['plugin']['package'] ?? '' );
+		$offer = (string) $target['version'];
 	}
 
 	$entry = (object) array(
