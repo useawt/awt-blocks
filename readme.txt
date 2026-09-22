@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.31
+Stable tag: 2026.09.32
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.32 — 2026-09-22 =
+* [Improvement] AWT Blocks no longer installs updates by itself on a site that is many releases behind. Those sites need to be updated manually.
+* [Improvement] AWT Blocks only installs update packages published on AWT's own GitHub releases.
+
 = 2026.09.31 — 2026-09-21 =
 * [Improvement] If AWT Blocks is installed in a folder with a different name than the one updates install into, it no longer tries to update itself.
 
@@ -354,8 +358,5 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
 = 2026.09.23 — 2026-09-20 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.22 — 2026-09-19 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->

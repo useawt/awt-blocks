@@ -1,5 +1,6 @@
-## 2026.09.31 — 2026-09-21
+## 2026.09.32 — 2026-09-22
 
 ### [Improvement]
 
-- If AWT Blocks is installed in a folder with a different name than the one updates install into, it no longer tries to update itself.
+- AWT Blocks no longer installs updates by itself on a site that is many releases behind. Those sites need to be updated manually.
+- AWT Blocks only installs update packages published on AWT's own GitHub releases.
