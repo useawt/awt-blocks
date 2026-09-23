@@ -124,6 +124,38 @@ async function selectAndOpen( page, editor, block, panel ) {
 	}
 }
 
+/**
+ * Get the link control into its search state, whichever state it starts in.
+ *
+ * With no address the search box is already there. With one, the control shows
+ * the address and a pencil beside it, and the pencil has to be clicked.
+ *
+ * That click is retried rather than made once. WordPress mounts this control
+ * and attaches its handler in separate frames, so a click that lands between
+ * the two is swallowed and the panel stays exactly as it was — which is what
+ * the saved snapshot showed on 2026-09-23, when this failed twice on CI and
+ * never once locally, on a commit whose only change was two version strings.
+ * Retrying the click is the fix; shortening what is asserted afterwards would
+ * not have been.
+ *
+ * @param {import('@playwright/test').Page} page The editor page.
+ * @return {Promise<import('@playwright/test').Locator>} The search box.
+ */
+async function openSearch( page ) {
+	const search = page.locator( SEARCH ).first();
+	const edit = page.locator( 'button[aria-label="Edit link"]' ).first();
+	await expect( async () => {
+		// Gone once the control is in its search state, so this stops clicking
+		// as soon as the click has landed.
+		if ( await edit.isVisible().catch( () => false ) ) {
+			// The icon inside the button is what sits under the pointer.
+			await edit.click( { force: true } );
+		}
+		await expect( search ).toBeVisible( { timeout: 1000 } );
+	} ).toPass( { timeout: 15000 } );
+	return search;
+}
+
 test.describe( 'Link picker', () => {
 	for ( const { block, panel, content } of CASES ) {
 		test( `${ block } offers a page search that fits the panel`, async ( {
@@ -159,16 +191,12 @@ test.describe( 'Link picker', () => {
 			// same picker.
 			const search = page.locator( SEARCH ).first();
 			if ( ! ( await search.isVisible().catch( () => false ) ) ) {
-				const edit = page
-					.locator( 'button[aria-label="Edit link"]' )
-					.first();
 				await expect(
-					edit,
+					page.locator( 'button[aria-label="Edit link"]' ).first(),
 					`${ block } shows an address, so it should offer a way to change it`
 				).toBeVisible();
-				// The icon inside the button is what sits under the pointer.
-				await edit.click( { force: true } );
 			}
+			await openSearch( page );
 			await expect( search ).toBeVisible();
 
 			await search.fill( 'Findable target' );
@@ -221,11 +249,7 @@ test.describe( 'Link picker', () => {
 			edit,
 			'an address already set should offer a way to change it'
 		).toBeVisible();
-		// The icon inside the button is what sits under the pointer.
-		await edit.click( { force: true } );
-
-		const search = page.locator( SEARCH ).first();
-		await expect( search ).toBeVisible();
+		const search = await openSearch( page );
 		await expect(
 			search,
 			'the search box should start from the current address'
