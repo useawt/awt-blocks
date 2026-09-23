@@ -1,6 +1,6 @@
-## 2026.09.32 — 2026-09-22
+## 2026.09.33 — 2026-09-23
 
 ### [Improvement]
 
-- AWT Blocks no longer installs updates by itself on a site that is many releases behind. Those sites need to be updated manually.
-- AWT Blocks only installs update packages published on AWT's own GitHub releases.
+- Blocks now share one copy of the styles they have in common instead of each carrying its own, so a page loads far less CSS.
+- The files AWT loads in the editor are now compressed.
