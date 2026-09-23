@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.34
+Stable tag: 2026.09.35
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.35 — 2026-09-23 =
+* [Improvement] Images you crop in the Media Library now show cropped everywhere, including as featured images.
+
 = 2026.09.34 — 2026-09-23 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -357,7 +360,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.26 — 2026-09-20 =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.25 — 2026-09-20 =
-* [New] List block: a "Text (comma separated values)" data source that turns each comma-separated value into its own list item.
 <!-- CHANGELOG_END -->

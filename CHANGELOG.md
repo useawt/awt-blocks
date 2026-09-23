@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## 2026.09.35 — 2026-09-23
+
+### [Improvement]
+
+- Images you crop in the Media Library now show cropped everywhere, including
+  as featured images.
+
 ## 2026.09.34 — 2026-09-23
 
 ### [Improvement]
