@@ -426,12 +426,11 @@ add_filter(
 add_action(
 	'enqueue_block_editor_assets',
 	static function (): void {
-		// The distribution zip ships only the build/assets/ mirror of this
-		// file (scripts/mirror-runtime-into-build.js), so fall back to it.
-		$rel = 'assets/global-block-controls.js';
-		if ( ! file_exists( \AWT\Blocks\AWT_BLOCKS_DIR . '/' . $rel ) ) {
-			$rel = 'build/assets/global-block-controls.js';
-		}
+		// Always the build/ copy, never the original in assets/: that one
+		// carries the comments explaining the panel, and nothing a browser
+		// downloads should (scripts/mirror-runtime-into-build.js compiles one
+		// into the other, as the last step of npm run build).
+		$rel  = 'build/assets/global-block-controls.js';
 		$path = \AWT\Blocks\AWT_BLOCKS_DIR . '/' . $rel;
 		if ( ! file_exists( $path ) ) {
 			return;

@@ -170,11 +170,10 @@ add_action(
 		// IconPicker editor-only styles. The picker is rendered in inspector
 		// sidebars where horizontal space is constrained; this stylesheet
 		// styles the chip-style current-icon trigger and the dropdown grid.
-		// The distribution zip ships only the build/shared/ mirror of this
-		// file (see the shared-runtime requires above), so fall back to it.
-		$icon_picker_rel = file_exists( __DIR__ . '/src/shared/icon-picker.css' )
-			? 'src/shared/icon-picker.css'
-			: 'build/shared/icon-picker.css';
+		// Always the build/ copy, never src/: the original carries the
+		// comments explaining it, and nothing a browser downloads should
+		// (scripts/mirror-runtime-into-build.js compiles one into the other).
+		$icon_picker_rel = 'build/shared/icon-picker.css';
 		$icon_picker_css = __DIR__ . '/' . $icon_picker_rel;
 		if ( file_exists( $icon_picker_css ) ) {
 			wp_enqueue_style(

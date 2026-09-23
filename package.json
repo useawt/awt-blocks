@@ -34,7 +34,8 @@
 		"check:carbon-styles": "node scripts/check-carbon-styles.js",
 		"release:prepare": "node scripts/release.js",
 		"release:publish": "node scripts/release-publish.js",
-		"test:compat": "npm run env:prepare-tests && playwright test --project=compatibility"
+		"test:compat": "npm run env:prepare-tests && playwright test --project=compatibility",
+		"check:assets": "node scripts/check-assets-clean.js"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.12.1",

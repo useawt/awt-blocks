@@ -8,13 +8,20 @@
  * under src/ or assets/ ships. These files are required (or enqueued) at
  * runtime, so without a mirror the shipped plugin fatals on activation.
  *
- * awt-blocks.php and global-controls.php prefer the src/ + assets/ originals
- * when present (working checkout — edits apply without a rebuild) and fall
- * back to these build/ copies in the shipped plugin.
+ * PHP is copied as it is — the server reads it and nobody downloads it.
+ * The stylesheet and the script are compiled instead of copied, because those
+ * two the browser fetches: their comments would be readable on any AWT site by
+ * anyone who opened the editor and looked. The originals keep every word of
+ * them; build/ carries none. `npm run check:assets` holds that line.
+ *
+ * awt-blocks.php and global-controls.php load the build/ copies, in a checkout
+ * as in the shipped plugin, so there is no path by which the commented
+ * original reaches a browser. Editing either one needs a rebuild.
  *
  * Runs as the last step of `npm run build`.
  */
 
+const { execFileSync } = require( 'node:child_process' );
 const fs = require( 'node:fs' );
 const path = require( 'node:path' );
 
@@ -29,14 +36,17 @@ const SHARED_PHP = fs
 	.filter( ( name ) => name.endsWith( '.php' ) )
 	.map( ( name ) => [ `src/shared/${ name }`, `build/shared/${ name }` ] );
 
-const COPIES = [
-	...SHARED_PHP,
+const COPIES = SHARED_PHP;
+
+/** Fetched by the browser, so compiled rather than copied. */
+const COMPILED = [
 	// Editor-only styles for the IconPicker.
-	[ 'src/shared/icon-picker.css', 'build/shared/icon-picker.css' ],
+	[ 'src/shared/icon-picker.css', 'build/shared/icon-picker.css', 'sass' ],
 	// Editor UI: Spacing panel + Carbon doc links.
 	[
 		'assets/global-block-controls.js',
 		'build/assets/global-block-controls.js',
+		'terser',
 	],
 ];
 
@@ -45,6 +55,26 @@ for ( const [ from, to ] of COPIES ) {
 	const dest = path.join( ROOT, to );
 	fs.mkdirSync( path.dirname( dest ), { recursive: true } );
 	fs.copyFileSync( src, dest );
+}
+
+for ( const [ from, to, tool ] of COMPILED ) {
+	fs.mkdirSync( path.join( ROOT, path.dirname( to ) ), { recursive: true } );
+	const args =
+		tool === 'sass'
+			? [ '--style=compressed', '--no-source-map', from, to ]
+			: [
+					from,
+					'--compress',
+					'--mangle',
+					'--comments',
+					'false',
+					'--output',
+					to,
+			  ];
+	execFileSync( path.join( ROOT, 'node_modules', '.bin', tool ), args, {
+		cwd: ROOT,
+		stdio: 'inherit',
+	} );
 }
 
 // Everything awt-blocks.php requires has to be in build/, or the shipped
@@ -69,5 +99,5 @@ if ( missing.length ) {
 }
 
 process.stdout.write(
-	`Mirrored ${ COPIES.length } runtime files into build/ for the distribution zip.\n`
+	`Mirrored ${ COPIES.length } runtime files and compiled ${ COMPILED.length } into build/ for the distribution zip.\n`
 );

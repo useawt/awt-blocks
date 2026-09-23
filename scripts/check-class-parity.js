@@ -21,7 +21,7 @@
  *
  * What it compares, and why it is scoped this way:
  *
- * - **Only classes `awt-theme/assets/css/theme.css` has a selector for.** Those are
+ * - **Only classes `awt-theme/src/theme.css` has a selector for.** Those are
  *   the ones OUR css depends on, so a divergence changes rendering. Comparing every
  *   `cds--*` token instead flags ~26 blocks of legitimate difference — the editor
  *   previews a simplified widget and deliberately skips sub-elements and states —
@@ -53,7 +53,10 @@ const path = require( 'node:path' );
 
 const SRC = path.resolve( __dirname, '../src' );
 const THEME = path.resolve( __dirname, '../../awt-theme' );
-const THEME_CSS = path.join( THEME, 'assets/css/theme.css' );
+// The authored stylesheet, not the compiled one in assets/. Compression
+// rewrites selectors — attribute quotes go, `:has( x )` becomes `:has(x)` —
+// and every selector this check compares would have to survive that intact.
+const THEME_CSS = path.join( THEME, 'src/theme.css' );
 const CARBON_PHP = path.join( THEME, 'inc/design-system/carbon.php' );
 
 /**

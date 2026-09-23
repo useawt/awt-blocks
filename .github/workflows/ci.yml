@@ -25,6 +25,8 @@ jobs:
         run: WP_EXPERIMENTAL_MODULES=true npm run build
       - name: Fail if AWT Premium code leaked in
         run: npm run check:premium
+      - name: Served files carry no comments
+        run: npm run check:assets
 
   lint:
     name: Lint (ESLint, PHPCS, markdownlint)

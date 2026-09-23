@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The files AWT loads in the editor are now compressed.
+
 ## 2026.09.32 — 2026-09-22
 
 ### [Improvement]
