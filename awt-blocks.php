@@ -329,6 +329,51 @@ add_filter(
 );
 
 /**
+ * Register the shared Carbon stylesheets the blocks point at.
+ *
+ * Several Carbon components are built on others — the button alone is a
+ * dependency of nine — so every block that used one shipped the whole chain
+ * again. scripts/split-shared-css.js lifts what they share into build/
+ * shared-css/ and lists the handles ahead of the block's own stylesheet in its
+ * built block.json, where core reads a plain string as an already-registered
+ * handle. Registering has to happen before the blocks do, hence the earlier
+ * priority.
+ *
+ * No `path` is set, deliberately. That is what the theme's inline budget looks
+ * for, and shared CSS is the CSS most worth leaving as a cacheable file: a
+ * visitor downloads it on the first page and on no other.
+ */
+add_action(
+	'init',
+	static function (): void {
+		$manifest = __DIR__ . '/build/shared-css/manifest.php';
+		if ( ! file_exists( $manifest ) ) {
+			return;
+		}
+		foreach ( (array) require $manifest as $name ) {
+			$file = __DIR__ . '/build/shared-css/' . $name . '.css';
+			if ( ! file_exists( $file ) ) {
+				continue;
+			}
+			$handle = 'awt-' . $name;
+			wp_register_style(
+				$handle,
+				plugins_url( 'build/shared-css/' . $name . '.css', __FILE__ ),
+				array(),
+				AWT_BLOCKS_VERSION
+			);
+			// The file name carries a hash of its contents, so the browser
+			// re-fetches when it changes and never otherwise.
+			if ( is_rtl() && file_exists( __DIR__ . '/build/shared-css/' . $name . '-rtl.css' ) ) {
+				wp_style_add_data( $handle, 'rtl', 'replace' );
+				wp_style_add_data( $handle, 'suffix', '' );
+			}
+		}
+	},
+	5
+);
+
+/**
  * Register every block from its built block.json.
  *
  * Each block's source lives in src/<slug>/ and is mirrored into build/<slug>/ by

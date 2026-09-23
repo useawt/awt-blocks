@@ -5,7 +5,7 @@
 	"private": true,
 	"license": "GPL-3.0-or-later",
 	"scripts": {
-		"build": "npm run build:icons && WP_EXPERIMENTAL_MODULES=true wp-scripts build && node scripts/mirror-runtime-into-build.js",
+		"build": "npm run build:icons && WP_EXPERIMENTAL_MODULES=true wp-scripts build && node scripts/split-shared-css.js && node scripts/mirror-runtime-into-build.js",
 		"build:icons": "node scripts/generate-icon-manifest.js && node scripts/copy-carbon-icons.js",
 		"start": "WP_EXPERIMENTAL_MODULES=true wp-scripts start",
 		"format": "wp-scripts format",
