@@ -552,7 +552,7 @@ function changelog_html(): string {
  * one updated half is running a combination nobody tested.
  */
 function pair_note(): void {
-	echo ' <strong>' . esc_html__( 'Update the AWT theme and the AWT Blocks plugin together — they are built as a pair.', 'awt-blocks' ) . '</strong>';
+	echo ' <strong>' . esc_html__( 'Update the AWT theme and AWT Blocks together. They work as a pair.', 'awt-blocks' ) . '</strong>';
 }
 
 /**
@@ -581,7 +581,7 @@ function explain_manual_update( $reply, $package, $upgrader, $hook_extra = array
 		'awt_manual_update',
 		sprintf(
 			/* translators: %s: URL of the update instructions. */
-			__( 'This version of AWT Blocks cannot be downloaded automatically. Get it from the AWT website and upload it in Plugins, Add Plugin, Upload Plugin, choosing "Replace current with uploaded". Your settings, pages and content are kept. %s', 'awt-blocks' ),
+			__( 'This version can\'t be downloaded automatically. Download it from the AWT website, then go to Plugins → Add Plugin → Upload Plugin and choose "Replace current with uploaded". Your settings and content are kept. %s', 'awt-blocks' ),
 			'https://useawt.com/faq/#updating'
 		)
 	);

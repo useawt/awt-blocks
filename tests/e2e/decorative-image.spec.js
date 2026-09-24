@@ -80,14 +80,12 @@ test.describe( 'Decorative images', () => {
 		await editor.openDocumentSettingsSidebar();
 
 		await expect(
-			page.getByRole( 'link', { name: /An alt Decision Tree/ } )
+			page.getByRole( 'link', { name: /Alt text decision tree/ } )
 		).toBeVisible();
 
 		// The line that used to read only "Leave empty if decorative."
 		await expect(
-			page.getByText( 'tick “Mark as decorative” instead', {
-				exact: false,
-			} )
+			page.getByText( 'Leave it empty and tick', { exact: false } )
 		).toBeVisible();
 	} );
 } );

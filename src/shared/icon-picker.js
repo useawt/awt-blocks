@@ -20,7 +20,7 @@
  * caches individual files; the visible grid only loads ~30–50 at a time.
  */
 
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { useState, useMemo, useEffect, useRef } from '@wordpress/element';
 import { useInstanceId } from '@wordpress/compose';
 import {
@@ -154,9 +154,14 @@ export default function IconPicker( {
 					className="awt-icon-picker__current"
 					aria-label={
 						value
-							? __( 'Change icon (current:', 'awt-blocks' ) +
-							  value +
-							  ')'
+							? sprintf(
+									/* translators: %s: name of the icon now chosen. */
+									__(
+										'Change icon (current: %s)',
+										'awt-blocks'
+									),
+									value
+							  )
 							: __( 'Choose icon', 'awt-blocks' )
 					}
 				>
@@ -311,22 +316,34 @@ export default function IconPicker( {
 									color: 'var(--wp-color-foreground-secondary, #757575)',
 								} }
 							>
-								{ entries.length > 0
-									? `${
-											filtered.length === 240
-												? __(
-														'Showing first',
-														'awt-blocks'
-												  ) + ' 240'
-												: filtered.length
-									  } / ${ entries.length } ${ __(
-											'icons',
-											'awt-blocks'
-									  ) }`
-									: __(
+								{ entries.length > 0 && filtered.length === 240
+									? sprintf(
+											/* translators: 1: icons shown, 2: icons in the library. */
+											__(
+												'Showing the first %1$d of %2$d icons',
+												'awt-blocks'
+											),
+											filtered.length,
+											entries.length
+									  )
+									: null }
+								{ entries.length > 0 && filtered.length !== 240
+									? sprintf(
+											/* translators: 1: icons matching the search, 2: icons in the library. */
+											__(
+												'%1$d of %2$d icons',
+												'awt-blocks'
+											),
+											filtered.length,
+											entries.length
+									  )
+									: null }
+								{ entries.length === 0
+									? __(
 											'Icons could not be loaded. Reload the page, and if that does not help, reinstall the AWT Blocks plugin.',
 											'awt-blocks'
-									  ) }
+									  )
+									: null }
 							</div>
 						</>
 					) }

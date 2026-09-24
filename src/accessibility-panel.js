@@ -242,7 +242,7 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 								setAttributes( { ariaLabel: v } )
 							}
 							help={ __(
-								'Replaces the name shown above. Leave blank to keep that name.',
+								'Replaces the name above. Leave blank to keep it.',
 								'awt-blocks'
 							) }
 						/>
