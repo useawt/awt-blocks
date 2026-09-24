@@ -512,11 +512,11 @@ function details( $result, $action, $args ) {
 function changelog_html(): string {
 	$file = \AWT\Blocks\AWT_BLOCKS_DIR . '/build/changelog.json';
 	if ( ! is_readable( $file ) ) {
-		return '<p>' . esc_html__( 'No changelog is bundled with this copy of AWT Blocks.', 'awt-blocks' ) . '</p>';
+		return '<p>' . esc_html__( 'This copy of AWT Blocks has no release notes.', 'awt-blocks' ) . '</p>';
 	}
 	$data = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local plugin file.
 	if ( ! is_array( $data ) || empty( $data['releases'] ) ) {
-		return '<p>' . esc_html__( 'No changelog is bundled with this copy of AWT Blocks.', 'awt-blocks' ) . '</p>';
+		return '<p>' . esc_html__( 'This copy of AWT Blocks has no release notes.', 'awt-blocks' ) . '</p>';
 	}
 
 	$html = '';
