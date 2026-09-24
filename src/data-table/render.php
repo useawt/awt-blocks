@@ -194,7 +194,7 @@ foreach ( $rows as $row ) {
 			$label          = $is_included ? __( 'Included', 'awt-blocks' ) : __( 'Not included', 'awt-blocks' );
 			$content        = $is_included
 				? $check_svg
-				: '<span class="awt-data-table__not-included" aria-hidden="true">—</span>';
+				: '<svg class="awt-data-table__not-included" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 15H24V17H8z"/></svg>';
 			$rows_html     .= sprintf(
 				'<td data-key="%1$s" class="awt-data-table__cell--boolean"><span class="%4$s">%2$s</span>%3$s</td>',
 				esc_attr( $key ),

@@ -44,8 +44,8 @@ const withBlockIndicator = createHigherOrderComponent( ( BlockEdit ) => {
 		const label = sprintf(
 			// translators: %d is the number of accessibility issues on this block.
 			_n(
-				'%d accessibility issue — open checks',
-				'%d accessibility issues — open checks',
+				'%d accessibility issue: open checks',
+				'%d accessibility issues: open checks',
 				findings.length,
 				'awt-blocks'
 			),

@@ -253,37 +253,37 @@ add_filter(
 		$awt_subcategories = array(
 			array(
 				'slug'  => 'awt-ui-shell',
-				'title' => __( 'AWT — UI shell', 'awt-blocks' ),
+				'title' => __( 'AWT: UI shell', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-navigation',
-				'title' => __( 'AWT — Navigation', 'awt-blocks' ),
+				'title' => __( 'AWT: Navigation', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-forms',
-				'title' => __( 'AWT — Forms', 'awt-blocks' ),
+				'title' => __( 'AWT: Forms', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-content',
-				'title' => __( 'AWT — Content', 'awt-blocks' ),
+				'title' => __( 'AWT: Content', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-feedback',
-				'title' => __( 'AWT — Feedback', 'awt-blocks' ),
+				'title' => __( 'AWT: Feedback', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-data-display',
-				'title' => __( 'AWT — Data display', 'awt-blocks' ),
+				'title' => __( 'AWT: Data display', 'awt-blocks' ),
 				'icon'  => null,
 			),
 			array(
 				'slug'  => 'awt-section',
-				'title' => __( 'AWT — Sections', 'awt-blocks' ),
+				'title' => __( 'AWT: Sections', 'awt-blocks' ),
 				'icon'  => null,
 			),
 		);

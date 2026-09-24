@@ -118,7 +118,9 @@ const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 		const text = ownText( attrs, colors ) || DEFAULT_TEXT;
 		const bg = ownBg( attrs, colors ) || ancestorBg || DEFAULT_BG;
 		const r = ratio( text, bg );
-		const rounded = r ? r.toFixed( 2 ) : '—';
+		const ratioText = r
+			? `${ r.toFixed( 2 ) }:1`
+			: __( 'Unknown', 'awt-blocks' );
 		const passNormal = r !== null && r >= 4.5;
 		const passLarge = r !== null && r >= 3.0;
 
@@ -129,7 +131,7 @@ const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 					<div className="awt-contrast">
 						<p className="awt-contrast__ratio">
 							{ __( 'Contrast ratio:', 'awt-blocks' ) }{ ' ' }
-							<strong>{ `${ rounded }:1` }</strong>
+							<strong>{ ratioText }</strong>
 						</p>
 						<div className="awt-contrast__badges">
 							<Badge

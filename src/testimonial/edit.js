@@ -99,7 +99,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							{
 								value: 'lg',
 								label: __(
-									'Large (36px — default)',
+									'Large (36px, default)',
 									'awt-blocks'
 								),
 							},

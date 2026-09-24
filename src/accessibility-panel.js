@@ -35,7 +35,7 @@ const LANG_CORE_BLOCKS = [ 'core/paragraph', 'core/heading', 'core/list-item' ];
 // generic-container set. This is a curated subset (not the full WAI-ARIA matrix)
 // chosen to avoid roles that would break a block's built-in semantics.
 const roles = ( ...vals ) => [
-	{ value: '', label: __( '— none —', 'awt-blocks' ) },
+	{ value: '', label: __( 'None', 'awt-blocks' ) },
 	...vals.map( ( v ) => ( { value: v, label: v } ) ),
 ];
 const ROLE_GENERIC = roles(
@@ -193,7 +193,7 @@ const withAccessibilityPanel = createHigherOrderComponent( ( BlockEdit ) => {
 			accessibleNameNode = (
 				<em>
 					{ __(
-						'(none — screen readers may have nothing to read out)',
+						'(none: screen readers may have nothing to read out)',
 						'awt-blocks'
 					) }
 				</em>

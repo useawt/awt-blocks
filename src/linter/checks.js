@@ -182,7 +182,7 @@ export function checkHeadingSkips( blocks ) {
 				checkId: 2,
 				severity: SEVERITY.WARNING,
 				title: `Heading level skips from H${ prev } to H${ h.level }`,
-				description: `Don’t skip heading levels — put an H${
+				description: `Don’t skip heading levels. Put an H${
 					prev + 1
 				} after your H${ prev } so the page outline stays in order.`,
 			} );
@@ -558,7 +558,7 @@ export function checkColorOverrides( blocks ) {
 					' & '
 				) } color isn’t in your palette`,
 				description:
-					'This block uses a custom color instead of one from your palette. Custom colors can hurt contrast and look inconsistent — use a palette color where you can.',
+					'This block uses a custom color instead of one from your palette. Custom colors can hurt contrast and look inconsistent. Use a palette color where you can.',
 			} );
 		}
 	}

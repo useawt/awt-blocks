@@ -155,6 +155,26 @@ const CheckmarkIcon = () => (
 	/>
 );
 
+const SubtractIcon = () => (
+	<span
+		aria-hidden="true"
+		style={ {
+			display: 'inline-block',
+			width: '1rem',
+			height: '1rem',
+			background: 'var(--cds-text-secondary, #525252)',
+			WebkitMaskImage: iconMaskImage( 'subtract', [ 32 ] ),
+			maskImage: iconMaskImage( 'subtract', [ 32 ] ),
+			WebkitMaskRepeat: 'no-repeat',
+			maskRepeat: 'no-repeat',
+			WebkitMaskPosition: 'center',
+			maskPosition: 'center',
+			WebkitMaskSize: 'contain',
+			maskSize: 'contain',
+		} }
+	/>
+);
+
 const BooleanCell = ( { value } ) => {
 	const yes = isTruthy( value );
 	return (
@@ -164,16 +184,7 @@ const BooleanCell = ( { value } ) => {
 					? __( 'Included', 'awt-blocks' )
 					: __( 'Not included', 'awt-blocks' ) }
 			</span>
-			{ yes ? (
-				<CheckmarkIcon />
-			) : (
-				<span
-					className="awt-data-table__not-included"
-					aria-hidden="true"
-				>
-					—
-				</span>
-			) }
+			{ yes ? <CheckmarkIcon /> : <SubtractIcon /> }
 		</td>
 	);
 };
