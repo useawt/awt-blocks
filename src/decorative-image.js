@@ -83,7 +83,7 @@ const withDecorativeControl = createHigherOrderComponent( ( BlockEdit ) => {
 						__nextHasNoMarginBottom
 						label={ __( 'Mark as decorative', 'awt-blocks' ) }
 						help={ __(
-							'Hidden from assistive technologies.',
+							'Hides the image from screen readers and clears its alt text.',
 							'awt-blocks'
 						) }
 						checked={ !! attributes.isDecorative }
@@ -113,7 +113,10 @@ const REWRITTEN = {
 	'Describe the purpose of the image.': () =>
 		__( 'An alt Decision Tree', 'awt-blocks' ),
 	'Leave empty if decorative.': () =>
-		__( 'Leave it empty and tick “Mark as decorative”.', 'awt-blocks' ),
+		__(
+			'If it is decorative, tick “Mark as decorative” instead.',
+			'awt-blocks'
+		),
 };
 
 addFilter(

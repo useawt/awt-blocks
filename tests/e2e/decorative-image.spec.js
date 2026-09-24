@@ -85,7 +85,9 @@ test.describe( 'Decorative images', () => {
 
 		// The line that used to read only "Leave empty if decorative."
 		await expect(
-			page.getByText( 'Leave it empty and tick', { exact: false } )
+			page.getByText( 'tick “Mark as decorative” instead', {
+				exact: false,
+			} )
 		).toBeVisible();
 	} );
 } );

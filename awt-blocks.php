@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       AWT Blocks
  * Plugin URI:        https://useawt.com
- * Description:       58 accessible blocks built on the Carbon Design System, with an accessibility checker inside the editor. Made to pair with the AWT theme.
+ * Description:       Accessible blocks built on the Carbon Design System, with an accessibility checker inside the editor. Made to pair with the AWT theme.
  * Version:           2026.09.35
  * Requires at least: 6.6
  * Requires PHP:      8.1

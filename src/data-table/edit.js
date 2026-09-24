@@ -361,7 +361,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { zebra: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Fixed table width', 'awt-blocks' ) }
+						label={ __( 'Fit width to content', 'awt-blocks' ) }
 						checked={ useStaticWidth }
 						onChange={ ( v ) =>
 							setAttributes( { useStaticWidth: v } )

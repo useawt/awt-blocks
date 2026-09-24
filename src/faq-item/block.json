@@ -8,7 +8,7 @@
 	"awt_component": "accordion",
 	"title": "FAQ question",
 	"category": "awt-section",
-	"description": "A single question and answer that expands on click. Works like an accordion item, but also adds FAQ data that can help your questions appear in Google search results.",
+	"description": "A question and answer that opens on click. Works like an accordion item.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"faq",

@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
@@ -28,7 +28,8 @@ const SPACING_OPTIONS = [
 	'13',
 ].map( ( v ) => ( {
 	value: v,
-	label: __( 'Spacing', 'awt-blocks' ) + v,
+	/* translators: %s: step on the spacing scale, from 01 to 13. */
+	label: sprintf( __( 'Spacing %s', 'awt-blocks' ), v ),
 } ) );
 
 const MAX_WIDTH_OPTIONS = [

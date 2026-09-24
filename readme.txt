@@ -14,7 +14,7 @@ Accessible blocks built on the Carbon Design System, with an accessibility check
 
 AWT Blocks gives the block editor a full set of accessible components, built on [IBM's open-source Carbon Design System](https://carbondesignsystem.com/) and reviewed against WCAG 2.2 AA. It's one half of AWT — install it together with the AWT theme, which provides the design foundation, color themes, and 42 ready-made patterns these blocks are designed for. Both are free, and you download them from useawt.com.
 
-**58 blocks**, including:
+**59 blocks**, including:
 
 * Page structure: hero, section, feature grid, stats, testimonials, pricing tiles, tiles, and a skip link
 * Site chrome: header, navigation, side navigation, breadcrumbs, footer sections, and a visitor-facing color scheme toggle
