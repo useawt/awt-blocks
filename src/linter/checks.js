@@ -368,7 +368,7 @@ export function checkIllogicalHeadingOrder( blocks ) {
 				clientId: h.clientId,
 				checkId: 7,
 				severity: SEVERITY.WARNING,
-				title: `Heading levels jump around: H${ prev } is followed by H${ h.level }`,
+				title: `Heading skips from H${ prev } to H${ h.level }`,
 				description: `An H${ h.level } comes right after a deeper H${ prev }, skipping levels. Move up one heading level at a time, or restructure the section.`,
 			} );
 		}

@@ -288,8 +288,8 @@
 				"group \"Color scheme\"",
 				"  button \"Light mode\" pressed=true invalid=false",
 				"    StaticText \"Light mode\"",
-				"  button \"Use system preference\" pressed=false invalid=false",
-				"    StaticText \"Use system preference\"",
+				"  button \"System setting\" pressed=false invalid=false",
+				"    StaticText \"System setting\"",
 				"  button \"Dark mode\" pressed=false invalid=false",
 				"    StaticText \"Dark mode\""
 			],
@@ -718,8 +718,8 @@
 				"group \"Color scheme\"",
 				"  button \"Light mode\" pressed=false invalid=false",
 				"    StaticText \"Light mode\"",
-				"  button \"Use system preference\" pressed=false invalid=false",
-				"    StaticText \"Use system preference\"",
+				"  button \"System setting\" pressed=false invalid=false",
+				"    StaticText \"System setting\"",
 				"  button \"Dark mode\" pressed=true invalid=false",
 				"    StaticText \"Dark mode\""
 			],

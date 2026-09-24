@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $kind        = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'icon-only';
 $light_label = isset( $attributes['lightLabel'] ) ? (string) $attributes['lightLabel'] : __( 'Light mode', 'awt-blocks' );
 $dark_label  = isset( $attributes['darkLabel'] ) ? (string) $attributes['darkLabel'] : __( 'Dark mode', 'awt-blocks' );
-$auto_label  = isset( $attributes['autoLabel'] ) ? (string) $attributes['autoLabel'] : __( 'Use system preference', 'awt-blocks' );
+$auto_label  = isset( $attributes['autoLabel'] ) ? (string) $attributes['autoLabel'] : __( 'System setting', 'awt-blocks' );
 
 // Honour the theme.json allowVisitorOverride flag.
 if ( function_exists( '\\AWT\\Theme\\color_scheme_allow_visitor_override' )
@@ -95,7 +95,7 @@ $context_json = wp_json_encode(
 		'announceLight' => sprintf( __( '%s on', 'awt-blocks' ), $light_label ),
 		/* translators: %s: name of the color scheme that was just turned on, e.g. "Dark mode". */
 		'announceDark'  => sprintf( __( '%s on', 'awt-blocks' ), $dark_label ),
-		'announceAuto'  => __( 'Now following your system setting.', 'awt-blocks' ),
+		'announceAuto'  => __( 'Following system setting', 'awt-blocks' ),
 	)
 );
 

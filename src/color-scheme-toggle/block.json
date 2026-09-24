@@ -34,7 +34,7 @@
 		},
 		"autoLabel": {
 			"type": "string",
-			"default": "Use system preference"
+			"default": "System setting"
 		},
 		"placement": {
 			"type": "string",
