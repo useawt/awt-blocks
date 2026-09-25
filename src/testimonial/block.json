@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Testimonial",
 	"category": "awt-section",
-	"description": "A quote with attribution, styled for emphasis and marked up correctly as a quotation.",
+	"description": "A highlighted quote with attribution.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"quote",

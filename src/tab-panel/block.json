@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/tabs"
 	],
-	"description": "The content shown when its tab is selected. The first panel belongs to the first tab, the second to the second, and so on.",
+	"description": "The panel shown by the tab in the same position.",
 	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,

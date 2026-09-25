@@ -9,7 +9,7 @@
 	"awt_component": "toggletip",
 	"title": "Toggletip",
 	"category": "awt-feedback",
-	"description": "An info button that opens a small pop-up on click. Use it when the extra content needs to stay visible — for example links or longer text — instead of the hover Tooltip.",
+	"description": "An info button that opens a small pop-up on click. Use it instead of Tooltip for links or longer text.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"toggletip",

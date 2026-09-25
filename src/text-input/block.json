@@ -10,7 +10,7 @@
 	"awt_component": "text-input",
 	"title": "Text input",
 	"category": "awt-forms",
-	"description": "A single-line text field with a label and optional helper, error, and warning text.",
+	"description": "A single-line text field with a label and optional helper, error and warning text.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"input",

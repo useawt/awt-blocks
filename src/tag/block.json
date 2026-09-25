@@ -8,7 +8,7 @@
 	"awt_component": "tag",
 	"title": "Tag",
 	"category": "awt-content",
-	"description": "A small colored label for categorizing or filtering. Choose from a range of colors.",
+	"description": "A small colored label for categories or filters.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"tag",

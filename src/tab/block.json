@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/tabs"
 	],
-	"description": "One tab button. The first tab shows the first panel, the second shows the second, and so on.",
+	"description": "One tab button. It shows the panel in the same position.",
 	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,

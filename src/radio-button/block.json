@@ -6,7 +6,7 @@
 	"awt_component": "radio",
 	"title": "Radio button",
 	"category": "awt-forms",
-	"description": "A single radio button. Place it inside a Radio button group.",
+	"description": "One radio button in a radio button group.",
 	"textdomain": "awt-blocks",
 	"parent": [
 		"awt/radio-button-group"

@@ -8,7 +8,7 @@
 	"awt_component": "tabs",
 	"title": "Tabs",
 	"category": "awt-navigation",
-	"description": "Tabs that switch between content panels. Add matching pairs of Tab and Tab panel blocks.",
+	"description": "Tabs that switch between content panels. Add one Tab and one Tab panel for each.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"tabs",
