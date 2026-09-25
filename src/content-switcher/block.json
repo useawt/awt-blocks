@@ -8,7 +8,7 @@
 	"awt_component": "content-switcher",
 	"title": "Content switcher",
 	"category": "awt-navigation",
-	"description": "A segmented control that swaps between content panels. Add matching pairs of switcher segments and panels. Best for up to four short options — use Tabs for more.",
+	"description": "Segments that swap between panels. Add a switcher segment and a panel for each. Best for up to four short options; use Tabs for more.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"content switcher",

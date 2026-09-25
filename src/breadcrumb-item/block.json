@@ -6,7 +6,7 @@
 	"awt_component": "breadcrumb",
 	"title": "Breadcrumb item",
 	"category": "awt-navigation",
-	"description": "One step in a breadcrumb trail. It shows as plain text (not a link) when it has no URL or is the current page.",
+	"description": "One step in a breadcrumb trail. It is plain text if it has no URL or is the current page.",
 	"textdomain": "awt-blocks",
 	"parent": [
 		"awt/breadcrumb"

@@ -8,7 +8,7 @@
 	"awt_component": "modal",
 	"title": "Modal opener",
 	"category": "awt-feedback",
-	"description": "A button that opens a Modal block. Point it at the modal you want to open.",
+	"description": "A button that opens the modal you choose.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"modal",

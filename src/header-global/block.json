@@ -6,7 +6,7 @@
 	"awt_component": "header-global",
 	"title": "Header global actions",
 	"category": "awt-ui-shell",
-	"description": "A right-aligned container for header buttons such as search, user menu, and the light/dark toggle.",
+	"description": "A group of header buttons, such as search and the color scheme toggle.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",

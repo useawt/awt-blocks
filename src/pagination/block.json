@@ -8,7 +8,7 @@
 	"awt_component": "pagination",
 	"title": "Pagination",
 	"category": "awt-navigation",
-	"description": "Page navigation with numbered pages and previous/next controls. On blog, category, and search pages it works out the page count and current page for you.",
+	"description": "Pagination links with previous and next buttons. Works automatically on blog, category and search pages.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"pagination",

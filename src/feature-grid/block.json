@@ -5,7 +5,7 @@
 	"carbonStyles": [],
 	"title": "Feature grid",
 	"category": "awt-section",
-	"description": "A grid of feature tiles that reflows on small screens. Each block you put inside becomes one cell.",
+	"description": "A grid of feature tiles that adapts to small screens. Each block inside becomes one tile.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"features",

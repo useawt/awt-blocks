@@ -9,7 +9,7 @@
 	"awt_component": "checkbox",
 	"title": "Checkbox",
 	"category": "awt-forms",
-	"description": "A checkbox with a label, optional helper and error text, and an indeterminate (partially-checked) state.",
+	"description": "A checkbox with a label and optional helper and error text.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"checkbox",

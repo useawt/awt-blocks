@@ -8,7 +8,7 @@
 	"awt_component": "link",
 	"title": "Link",
 	"category": "awt-content",
-	"description": "A styled text link, on its own or inline, with an optional trailing icon.",
+	"description": "A text link, on its own or inline, with an optional icon.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"link",

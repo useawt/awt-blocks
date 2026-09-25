@@ -8,7 +8,7 @@
 	"awt_component": "notification",
 	"title": "Notification",
 	"category": "awt-feedback",
-	"description": "A notification message, shown inline or as a pop-up toast. Screen readers announce it automatically.",
+	"description": "A notification, shown inline or as a toast. Screen readers announce it.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"notification",

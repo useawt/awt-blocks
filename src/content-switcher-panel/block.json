@@ -9,7 +9,7 @@
 	"parent": [
 		"awt/content-switcher"
 	],
-	"description": "The content shown when its segment is selected. The first panel belongs to the first segment, the second to the second, and so on.",
+	"description": "The panel shown by the segment of the content switcher which is in the same position.",
 	"textdomain": "awt-blocks",
 	"supports": {
 		"html": false,

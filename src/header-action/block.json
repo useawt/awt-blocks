@@ -6,7 +6,7 @@
 	"awt_component": "header-action",
 	"title": "Header action",
 	"category": "awt-ui-shell",
-	"description": "A square icon button for the header. It can open a panel or link to a page.",
+	"description": "An icon button for the header that opens a panel or a page.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"header",

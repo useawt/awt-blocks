@@ -9,7 +9,7 @@
 	"awt_component": "password-input",
 	"title": "Password input",
 	"category": "awt-forms",
-	"description": "A password field with a show/hide button on the right edge.",
+	"description": "A password field with a show/hide button.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"password",
