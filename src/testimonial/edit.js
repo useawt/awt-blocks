@@ -113,7 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<SelectControl
 						label={ __( 'Quotation mark', 'awt-blocks' ) }
 						help={ __(
-							'The quotation mark shown at the start of the quote.',
+							'Shown at the start of the quote.',
 							'awt-blocks'
 						) }
 						value={ markStyle }
@@ -227,14 +227,14 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Link text', 'awt-blocks' ) }
 						help={ __(
-							'What the link says. Write something that makes sense read on its own, away from the quote.',
+							'Make it clear on its own, such as "Read the full review".',
 							'awt-blocks'
 						) }
 						value={ linkText }
 						onChange={ ( v ) => setAttributes( { linkText: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Open in a new tab', 'awt-blocks' ) }
+						label={ __( 'Open in new tab', 'awt-blocks' ) }
 						checked={ target === '_blank' }
 						onChange={ ( v ) =>
 							setAttributes( { target: v ? '_blank' : '' } )
@@ -287,7 +287,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<TextControl
 								label={ __( 'Avatar alt text', 'awt-blocks' ) }
 								help={ __(
-									'Required when an avatar is set. Accessibility checks report missing alt text as an Error.',
+									'Required with an avatar. Missing alt text is reported as an error.',
 									'awt-blocks'
 								) }
 								value={ authorAvatarAlt }

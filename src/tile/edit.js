@@ -134,7 +134,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				{ variant === 'clickable' && hasInnerLink && (
 					<Notice status="warning" isDismissible={ false }>
 						{ __(
-							'This tile has a link inside it, so the whole tile cannot also be a link — a link cannot contain another link, and browsers break the tile apart when it does. It will render as a plain tile with the inner link working. Remove the inner link to make the whole tile clickable.',
+							"This tile contains a link, so it can't be a link too. Remove the inner link to make the whole tile clickable.",
 							'awt-blocks'
 						) }
 					</Notice>
@@ -165,7 +165,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						<TextControl
 							label={ __( 'Group name', 'awt-blocks' ) }
 							help={ __(
-								'Give every tile in one choice the same group name, and people can pick only one of them. Leave it empty for a tile that switches on and off by itself. Put the tiles in a Tile group block so the choice also has a heading.',
+								'Tiles with the same group name let people pick only one. Leave it empty for a tile that switches on and off by itself. Use a Tile group block to add a heading.',
 								'awt-blocks'
 							) }
 							value={ groupName }
@@ -177,7 +177,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							<TextControl
 								label={ __( 'Value', 'awt-blocks' ) }
 								help={ __(
-									'What this tile sends when the form is submitted, such as "large". Only needed if the tiles are inside a form.',
+									'What this tile sends with a form, such as "large". Only needed in a form.',
 									'awt-blocks'
 								) }
 								value={ value }
@@ -216,7 +216,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							setAttributes( { carbonDefault: v } )
 						}
 						help={ __(
-							'AWT draws a border around a selectable or clickable tile, so you can see its shape before you choose it. Turn this on to use Carbon’s own look instead, where the tile is a shaded panel with no outline.',
+							'Turn on for Carbon’s shaded panel with no border on selectable and clickable tiles. The default border is easier to see.',
 							'awt-blocks'
 						) }
 					/>

@@ -48,8 +48,8 @@ const SCOPE_OPTIONS = [
 		label: __( 'Light (active light variant)', 'awt-blocks' ),
 	},
 	{ value: 'dark', label: __( 'Dark (active dark variant)', 'awt-blocks' ) },
-	{ value: 'g10', label: __( 'Force g10', 'awt-blocks' ) },
-	{ value: 'g100', label: __( 'Force g100', 'awt-blocks' ) },
+	{ value: 'g10', label: __( 'Always light gray (g10)', 'awt-blocks' ) },
+	{ value: 'g100', label: __( 'Always dark (g100)', 'awt-blocks' ) },
 ];
 
 const TAG_OPTIONS = [ 'section', 'div', 'article', 'aside' ].map( ( v ) => ( {
@@ -181,7 +181,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'No gap below', 'awt-blocks' ) }
 						help={ __(
-							'Removes the space below this section so it sits flush against whatever comes next.',
+							'Removes the space below this section.',
 							'awt-blocks'
 						) }
 						checked={ !! noGapBelow }
@@ -215,10 +215,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ false }
 				>
 					<SelectControl
-						label={ __(
-							'Background color (palette token)',
-							'awt-blocks'
-						) }
+						label={ __( 'Background color', 'awt-blocks' ) }
 						value={ backgroundColor }
 						options={ BACKGROUND_OPTIONS }
 						onChange={ ( value ) =>
@@ -253,7 +250,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								'awt-blocks'
 							) }
 							help={ __(
-								'Recommended when multiple <section> elements appear on the same page.',
+								'Recommended when a page has more than one <section>.',
 								'awt-blocks'
 							) }
 							value={ ariaLabel }

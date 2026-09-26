@@ -20,13 +20,13 @@ export default function Edit( { attributes, setAttributes } ) {
 				>
 					<Notice status="info" isDismissible={ false }>
 						{ __(
-							"On archive / blog templates, leave Total pages = 0 and the block auto-detects the main query's page count.",
+							'On blog and archive pages, leave Total pages at 0 to count pages automatically.',
 							'awt-blocks'
 						) }
 					</Notice>
 					<TextControl
 						label={ __(
-							'Total pages (0 works it out for you)',
+							'Total pages (0 = automatic)',
 							'awt-blocks'
 						) }
 						type="number"
@@ -37,7 +37,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<TextControl
 						label={ __(
-							'Current page (0 works it out for you)',
+							'Current page (0 = automatic)',
 							'awt-blocks'
 						) }
 						type="number"

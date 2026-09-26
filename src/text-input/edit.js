@@ -149,7 +149,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						options={ TYPE_OPTIONS }
 						onChange={ ( v ) => setAttributes( { type: v } ) }
 						help={ __(
-							'Changes the on-screen keyboard on phones, and how the browser checks and autofills the field. Most types look the same on a desktop screen.',
+							'Sets the phone keyboard, autofill and browser checks. Most types look the same on desktop.',
 							'awt-blocks'
 						) }
 					/>
@@ -194,7 +194,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<ToggleControl
 						label={ __( 'Inline layout', 'awt-blocks' ) }
 						help={ __(
-							'Label sits to the left of the input on one row.',
+							'Puts the label beside the field.',
 							'awt-blocks'
 						) }
 						checked={ inline }
@@ -207,7 +207,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						} }
 					>
 						<ExternalLink href="https://carbondesignsystem.com/components/text-input/usage/">
-							{ __( 'Usage', 'awt-blocks' ) }
+							{ __( 'Carbon usage guidelines', 'awt-blocks' ) }
 						</ExternalLink>
 					</p>
 					<ToggleControl
@@ -278,7 +278,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Pattern', 'awt-blocks' ) }
+						label={ __(
+							'Pattern (regular expression)',
+							'awt-blocks'
+						) }
 						value={ pattern }
 						onChange={ ( v ) => setAttributes( { pattern: v } ) }
 					/>

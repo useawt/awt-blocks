@@ -33,7 +33,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<SelectControl
 						label={ __( 'Highlight this link when', 'awt-blocks' ) }
 						help={ __(
-							'Use the second option for a link to a section, so it stays highlighted on every page inside that section.',
+							'For a section link, choose "This address or any page under it".',
 							'awt-blocks'
 						) }
 						value={ matchMode }

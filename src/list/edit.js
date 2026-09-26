@@ -48,16 +48,13 @@ const FORMAT_OPTIONS = [
 // What the paste field promises, per source. One sentence each.
 const PASTE_HELP = {
 	text: __( 'Each line becomes one list item.', 'awt-blocks' ),
-	csv: __(
-		'Each comma starts a new list item. Line breaks start one too.',
-		'awt-blocks'
-	),
+	csv: __( 'Each comma or line break starts a new list item.', 'awt-blocks' ),
 	html: __(
-		'Each list item becomes one list item, and a nested list becomes a sub-list. The list type is set to match.',
+		'Each HTML list item becomes an item; nested lists become sub-lists. The list type updates to match.',
 		'awt-blocks'
 	),
 	markdown: __(
-		'Each bullet becomes one list item, and indented bullets become sub-lists. The list type is set to match.',
+		'Each bullet becomes an item; indented bullets become sub-lists. The list type updates to match.',
 		'awt-blocks'
 	),
 };
@@ -371,7 +368,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<PremiumNotice
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
-							'Fill this list from JSON, a REST API, or your own posts and pages. Available in AWT Premium.',
+							'Fill this list from JSON, a REST API, or your own posts and pages.',
 							'awt-blocks'
 						) }
 					/>

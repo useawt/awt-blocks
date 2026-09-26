@@ -70,7 +70,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<ToggleControl
 					label={ __( 'Show the side nav', 'awt-blocks' ) }
 					help={ __(
-						'On wide screens the side nav sits beside your content. On narrow screens its links move into the header menu, behind the header’s menu button.',
+						'Shows beside your content on wide screens. On small screens, its links move into the header menu.',
 						'awt-blocks'
 					) }
 					checked={ ! isNone }
@@ -81,9 +81,9 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ ! isNone && (
 					<>
 						<TextControl
-							label={ __( 'HTML id', 'awt-blocks' ) }
+							label={ __( 'HTML ID', 'awt-blocks' ) }
 							help={ __(
-								'The id given to the side nav in the page’s HTML. Change it only if something else on the page already uses this one.',
+								'Change this only if another element on the page uses the same ID.',
 								'awt-blocks'
 							) }
 							value={ id }
@@ -97,7 +97,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								'awt-blocks'
 							) }
 							help={ __(
-								'What a screen reader calls this navigation. Give each navigation on the page a different name.',
+								'What screen readers call this navigation. Use a different name for each navigation on the page.',
 								'awt-blocks'
 							) }
 							value={ ariaLabel }
@@ -116,7 +116,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				<Notice status="info" isDismissible={ false }>
 					{ __(
-						'The side nav is switched off, so it does not appear on the published page.',
+						"The side nav is off and won't show on your site.",
 						'awt-blocks'
 					) }
 				</Notice>

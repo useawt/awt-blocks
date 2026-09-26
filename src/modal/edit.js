@@ -64,9 +64,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Modal id', 'awt-blocks' ) }
+						label={ __( 'Modal ID', 'awt-blocks' ) }
 						help={ __(
-							'Give this modal an id, then point a Modal opener block at the same id.',
+							'Enter this ID in a Modal opener block to open the modal.',
 							'awt-blocks'
 						) }
 						value={ id }
@@ -171,7 +171,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<div { ...blockProps }>
 				<Notice status="info" isDismissible={ false }>
 					{ __(
-						'This is a preview for editing. On your live site the modal stays hidden until a visitor opens it.',
+						'Editing preview. On your site, the modal stays hidden until a visitor opens it.',
 						'awt-blocks'
 					) }
 				</Notice>
