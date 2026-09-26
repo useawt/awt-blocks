@@ -212,7 +212,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<IconPicker
 						label={ __( 'Icon', 'awt-blocks' ) }
 						help={ __(
-							'Search the Carbon icon library. Leave empty for no icon.',
+							'Search the Carbon icon library, or leave empty for none.',
 							'awt-blocks'
 						) }
 						value={ iconName }
