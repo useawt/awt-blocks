@@ -54,7 +54,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Visible-on-focus label', 'awt-blocks' ) }
+						label={ __( 'Link text', 'awt-blocks' ) }
 						value={ text }
 						onChange={ ( value ) =>
 							setAttributes( { text: value } )
@@ -63,7 +63,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 					<TextControl
 						label={ __( 'Target element ID', 'awt-blocks' ) }
 						help={ __(
-							'The id of the part of the page to jump to, such as main-content.',
+							'The ID of the part of the page to jump to, such as main-content.',
 							'awt-blocks'
 						) }
 						value={ targetId }

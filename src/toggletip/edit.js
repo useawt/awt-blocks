@@ -45,9 +45,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Trigger label (visible)', 'awt-blocks' ) }
+						label={ __( 'Trigger label', 'awt-blocks' ) }
 						help={ __(
-							'Optional. Renders before the info button.',
+							'Optional. Shown before the info button.',
 							'awt-blocks'
 						) }
 						value={ label }
@@ -55,10 +55,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<TextControl
 						label={ __( 'Trigger accessible name', 'awt-blocks' ) }
-						help={ __(
-							'Read by screen readers (e.g., "Learn more").',
-							'awt-blocks'
-						) }
+						help={ __( 'Read by screen readers.', 'awt-blocks' ) }
 						value={ ariaLabel }
 						onChange={ ( v ) => setAttributes( { ariaLabel: v } ) }
 					/>

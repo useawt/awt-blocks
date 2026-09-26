@@ -70,7 +70,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Cols (0 = auto)', 'awt-blocks' ) }
+						label={ __( 'Columns (0 = auto)', 'awt-blocks' ) }
 						type="number"
 						value={ cols }
 						onChange={ ( v ) =>
@@ -78,7 +78,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						}
 					/>
 					<TextControl
-						label={ __( 'Maxlength', 'awt-blocks' ) }
+						label={ __( 'Max length', 'awt-blocks' ) }
 						type="number"
 						value={ maxlength }
 						onChange={ ( v ) =>
@@ -96,7 +96,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
 					<ToggleControl
-						label={ __( 'Readonly', 'awt-blocks' ) }
+						label={ __( 'Read-only', 'awt-blocks' ) }
 						checked={ readonly }
 						onChange={ ( v ) => setAttributes( { readonly: v } ) }
 					/>

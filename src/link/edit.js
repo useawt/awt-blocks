@@ -117,7 +117,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<IconPicker
 						label={ __( 'Trailing icon', 'awt-blocks' ) }
 						help={ __(
-							'Search the Carbon icon library. Leave empty for none.',
+							'Search the Carbon icon library, or leave empty for none.',
 							'awt-blocks'
 						) }
 						value={ iconName }

@@ -30,9 +30,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ true }
 				>
 					<TextControl
-						label={ __( 'Modal id to open', 'awt-blocks' ) }
+						label={ __( 'Modal ID to open', 'awt-blocks' ) }
 						help={ __(
-							"Must match the awt/modal block's id.",
+							'Use the same ID as the Modal block.',
 							'awt-blocks'
 						) }
 						value={ modalId }

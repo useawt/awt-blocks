@@ -375,7 +375,7 @@ export function IndentControls( { clientId } ) {
 					'awt-blocks'
 				) }
 				description={ __(
-					'Make this item part of the one above',
+					'Nest this item under the one above',
 					'awt-blocks'
 				) }
 				disabled={ ! canIndent }
