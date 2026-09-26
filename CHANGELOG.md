@@ -10,13 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
-## Unreleased
+## 2026.09.37 (2026-09-26)
 
 ### [Improvement]
 
-- The plugin's author is now CLSDIR, linked to clsdir.com in a new tab.
-- WordPress no longer says AWT Blocks is untested on a point release of a
-  tested version, such as 7.1.2.
+- WordPress no longer wrongly says the plugin is untested on minor WordPress
+  updates, such as 7.1.2.
 
 ## 2026.09.36 (2026-09-26)
 

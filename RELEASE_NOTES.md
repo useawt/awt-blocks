@@ -1,6 +1,5 @@
-## 2026.09.36 (2026-09-26)
+## 2026.09.37 (2026-09-26)
 
 ### [Improvement]
 
-- Text improvements to admin pages and authoring experience.
-- Other small improvements.
+- WordPress no longer wrongly says the plugin is untested on minor WordPress updates, such as 7.1.2.
