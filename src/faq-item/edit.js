@@ -44,7 +44,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 					<SelectControl
 						label={ __( 'Question heading level', 'awt-blocks' ) }
 						help={ __(
-							'The heading level for the question. Use Heading 3 unless the headings around it call for something else.',
+							'The heading level for the question.',
 							'awt-blocks'
 						) }
 						value={ level }
@@ -85,7 +85,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 					<PremiumNotice
 						title={ __( 'FAQ rich results', 'awt-blocks' ) }
 						description={ __(
-							'Output FAQ structured data (the JSON Google reads to show this Q&A directly in search results). Available in AWT Premium.',
+							'Adds FAQ structured data so Google can show this Q&A in search results. Available in AWT Premium.',
 							'awt-blocks'
 						) }
 					/>

@@ -141,7 +141,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					value={ description }
 					onChange={ ( v ) => setAttributes( { description: v } ) }
 					placeholder={ __(
-						'1–3 sentence pitch for this tier',
+						'Short description of this plan',
 						'awt-blocks'
 					) }
 					allowedFormats={ [

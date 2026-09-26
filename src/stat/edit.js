@@ -98,10 +98,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="awt-stat__description"
 					value={ description }
 					onChange={ ( v ) => setAttributes( { description: v } ) }
-					placeholder={ __(
-						'Optional supporting description',
-						'awt-blocks'
-					) }
+					placeholder={ __( 'Description (optional)', 'awt-blocks' ) }
 					allowedFormats={ [
 						'core/bold',
 						'core/italic',

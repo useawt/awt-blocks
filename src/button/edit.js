@@ -134,7 +134,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'Expressive text size', 'awt-blocks' ) }
 						help={ __(
-							'Larger text that grows with the screen. Suits landing pages and marketing content.',
+							'Grows with the screen size. Good for landing pages.',
 							'awt-blocks'
 						) }
 						checked={ isExpressive }
@@ -151,7 +151,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										'awt-blocks'
 								  )
 								: __(
-										'Turn on for the button that sends a form. Place the button inside a Form block.',
+										'Sends the form. The button must be inside a Form block.',
 										'awt-blocks'
 								  )
 						}
@@ -182,7 +182,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ href && ! looksLikeUrl( href ) && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
-								'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+								"This is not a web address, so the link won't work. Use a full address or a path starting with /.",
 								'awt-blocks'
 							) }
 						</Notice>
@@ -199,7 +199,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						help={ __(
-							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Optional. Sets the rel attribute. New-tab links already get “noopener noreferrer”.',
 							'awt-blocks'
 						) }
 						disabled={ ! href }

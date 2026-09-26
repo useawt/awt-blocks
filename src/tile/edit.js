@@ -153,7 +153,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						{ href && ! looksLikeUrl( href ) && (
 							<Notice status="warning" isDismissible={ false }>
 								{ __(
-									'That does not look like a web address, so nothing will link to it. Paste the full address, or a path that starts with a slash.',
+									"This is not a web address, so the link won't work. Use a full address or a path starting with /.",
 									'awt-blocks'
 								) }
 							</Notice>

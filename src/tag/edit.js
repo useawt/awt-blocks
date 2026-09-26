@@ -109,7 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						value={ rel }
 						onChange={ ( v ) => setAttributes( { rel: v } ) }
 						help={ __(
-							'Sets the link’s rel attribute. Links that open in a new tab already get “noopener noreferrer”. Fill this in only if you need something different.',
+							'Optional. Sets the rel attribute. New-tab links already get “noopener noreferrer”.',
 							'awt-blocks'
 						) }
 						disabled={ ! href }

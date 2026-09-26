@@ -326,7 +326,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					<ToggleControl
 						label={ __( 'Expressive text size', 'awt-blocks' ) }
 						help={ __(
-							'Larger text that grows with the screen. Suits landing pages and marketing content.',
+							'Grows with the screen size. Good for landing pages.',
 							'awt-blocks'
 						) }
 						checked={ isExpressive }

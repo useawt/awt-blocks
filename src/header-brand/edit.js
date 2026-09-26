@@ -36,17 +36,11 @@ const KIND_OPTIONS = [
 ];
 
 const ALT_HINT = [
-	__( 'Writing good alt text for a header logo:', 'awt-blocks' ),
+	__( 'Good logo alt text:', 'awt-blocks' ),
+	__( '• Include the brand name', 'awt-blocks' ),
+	__( '• Say if it links home (e.g., "Acme, home page")', 'awt-blocks' ),
 	__(
-		"• Include the brand name (it's what visitors expect to hear)",
-		'awt-blocks'
-	),
-	__(
-		'• Mention that clicking navigates home when relevant (e.g., "Acme logo; back to home")',
-		'awt-blocks'
-	),
-	__(
-		'• Don\'t include the word "image" or "logo" on its own. Screen readers already announce that',
+		'• Don\'t add "image" or "logo". Screen readers already say it is an image',
 		'awt-blocks'
 	),
 	__( '• Keep it short, under about 100 characters', 'awt-blocks' ),
@@ -130,7 +124,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						help={
 							isAuto
 								? __(
-										'Your site default is automatic: it shows the logo and prefix you have set, and just the site title when you have set neither.',
+										'Shows your logo and prefix if set, otherwise the site title.',
 										'awt-blocks'
 								  )
 								: undefined
