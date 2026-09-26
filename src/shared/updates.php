@@ -78,6 +78,7 @@ add_filter( 'auto_update_plugin', __NAMESPACE__ . '\\should_auto_update', 10, 2 
 add_filter( 'plugins_api', __NAMESPACE__ . '\\details', 10, 3 );
 add_action( 'in_plugin_update_message-awt-blocks/awt-blocks.php', __NAMESPACE__ . '\\pair_note' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- core names this hook after the plugin file.
 add_filter( 'upgrader_pre_download', __NAMESPACE__ . '\\explain_manual_update', 10, 4 );
+add_filter( 'plugin_row_meta', __NAMESPACE__ . '\\author_opens_new_tab', 10, 2 );
 
 /**
  * Whether this site checks for updates at all.
@@ -345,6 +346,28 @@ function slug(): string {
 }
 
 /**
+ * "Tested up to", widened to the point release this site runs.
+ *
+ * The manifest names a major version ("7.1"), the way a readme does.
+ * WordPress.org widens that to the newest point release before core sees it,
+ * and core warns "This %s has not been tested with your current version of
+ * WordPress" whenever the site runs anything higher. Left as it is, "7.1" read
+ * as untested on 7.1.2. A point release is maintenance, so "7.1" covers every
+ * 7.1.x; a newer major version still gets the warning, as it should.
+ *
+ * @param array $data Decoded manifest.
+ * @return string The version to report, or '' when the manifest names none.
+ */
+function tested_up_to( array $data ): string {
+	$tested = (string) ( $data['testedWp'] ?? '' );
+	$wp     = (string) get_bloginfo( 'version' );
+	if ( '' !== $tested && implode( '.', array_slice( explode( '.', $wp ), 0, 2 ) ) === $tested ) {
+		return $wp;
+	}
+	return $tested;
+}
+
+/**
  * Add AWT Blocks to WordPress's list of plugins with an update available.
  *
  * @param mixed $transient The update_plugins site transient.
@@ -402,7 +425,7 @@ function offer_update( $transient ) {
 		'package'       => (string) apply_filters( 'awt_blocks_update_package', $package, $data ),
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
-		'tested'        => (string) ( $data['testedWp'] ?? '' ),
+		'tested'        => tested_up_to( $data ),
 		'icons'         => array(),
 		'banners'       => array(),
 		'banners_rtl'   => array(),
@@ -441,7 +464,7 @@ function current_entry( string $key, string $installed, array $data ): object {
 		'package'       => '',
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
-		'tested'        => (string) ( $data['testedWp'] ?? '' ),
+		'tested'        => tested_up_to( $data ),
 		'icons'         => array(),
 		'banners'       => array(),
 		'banners_rtl'   => array(),
@@ -493,17 +516,53 @@ function details( $result, $action, $args ) {
 		'name'          => 'AWT Blocks',
 		'slug'          => slug(),
 		'version'       => (string) ( $data['version'] ?? \AWT\Blocks\AWT_BLOCKS_VERSION ),
-		'author'        => '<a href="https://useawt.com">AWT</a>',
+		'author'        => author_link(),
 		'homepage'      => 'https://useawt.com',
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
-		'tested'        => (string) ( $data['testedWp'] ?? '' ),
+		'tested'        => tested_up_to( $data ),
 		'download_link' => '',
 		'sections'      => array(
 			'changelog' => changelog_html(),
 		),
 		'external'      => true,
 	);
+}
+
+/**
+ * The author's name, linked to clsdir.com in a new tab.
+ *
+ * Used wherever WordPress shows AWT's author: the details window, and the
+ * screen that lists it. The hidden words tell a screen reader the link opens
+ * a new tab.
+ */
+function author_link(): string {
+	return sprintf(
+		'<a href="https://www.clsdir.com/" target="_blank" rel="noopener">CLSDIR<span class="screen-reader-text"> %s</span></a>',
+		esc_html__( '(opens in a new tab)', 'awt-blocks' )
+	);
+}
+
+/**
+ * Open the author link on the Plugins screen in a new tab.
+ *
+ * Core builds "By CLSDIR" from the plugin header, which can only give an
+ * address, so the link is swapped for author_link() here.
+ *
+ * @param mixed  $meta The row's links: version, author, details.
+ * @param string $file Plugin basename of the row.
+ * @return mixed The same, with AWT Blocks' author link replaced.
+ */
+function author_opens_new_tab( $meta, $file ) {
+	if ( $file !== basename_key() || ! is_array( $meta ) ) {
+		return $meta;
+	}
+	foreach ( $meta as $i => $item ) {
+		if ( is_string( $item ) ) {
+			$meta[ $i ] = str_replace( '<a href="https://www.clsdir.com/">CLSDIR</a>', author_link(), $item );
+		}
+	}
+	return $meta;
 }
 
 /**

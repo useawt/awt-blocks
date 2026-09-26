@@ -14,7 +14,9 @@
 
 ### [Improvement]
 
-- The plugin's author is now CLSDIR, linked to clsdir.com.
+- The plugin's author is now CLSDIR, linked to clsdir.com in a new tab.
+- WordPress no longer says AWT Blocks is untested on a point release of a
+  tested version, such as 7.1.2.
 
 ## 2026.09.36 (2026-09-26)
 
