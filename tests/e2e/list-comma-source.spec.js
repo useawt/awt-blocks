@@ -34,9 +34,12 @@ test.describe( 'List: comma separated values', () => {
 
 		// The help text under the field has to describe the chosen source.
 		await expect(
-			sidebar.getByText( 'Each comma starts a new list item.', {
-				exact: false,
-			} )
+			sidebar.getByText(
+				'Each comma or line break starts a new list item.',
+				{
+					exact: false,
+				}
+			)
 		).toBeVisible();
 
 		await sidebar
