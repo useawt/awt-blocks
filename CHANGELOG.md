@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The plugin's author is now CLSDIR, linked to clsdir.com.
+
 ## 2026.09.36 (2026-09-26)
 
 ### [Improvement]

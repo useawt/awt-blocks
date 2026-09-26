@@ -6,7 +6,8 @@
  * Version:           2026.09.36
  * Requires at least: 6.6
  * Requires PHP:      8.1
- * Author:            AWT
+ * Author:            CLSDIR
+ * Author URI:        https://www.clsdir.com/
  * License:           GPL-3.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       awt-blocks
