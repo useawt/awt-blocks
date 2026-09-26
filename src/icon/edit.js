@@ -57,7 +57,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<IconPicker
 						label={ __( 'Carbon icon', 'awt-blocks' ) }
 						help={ __(
-							'Search by name or alias; click an icon to select.',
+							'Search by name, then pick an icon.',
 							'awt-blocks'
 						) }
 						value={ iconName }
@@ -84,7 +84,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'Align with text baseline', 'awt-blocks' ) }
 						help={ __(
-							'Lines the icon up with text on the same line. You only see a difference when the icon sits next to text or other icons.',
+							'Lines the icon up with the text beside it.',
 							'awt-blocks'
 						) }
 						checked={ inline }
@@ -95,7 +95,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __( 'Decorative', 'awt-blocks' ) }
 						help={ __(
-							'Decorative icons are hidden from screen readers. Uncheck to provide an accessible name.',
+							'Hides the icon from screen readers. Turn off to give it an accessible name.',
 							'awt-blocks'
 						) }
 						checked={ decorative }
@@ -115,7 +115,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					{ ! decorative && ! label && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
-								'An icon that carries meaning needs an accessible name. Accessibility checks report a missing one as an Error.',
+								'Add an accessible name. Without one, accessibility checks report an error.',
 								'awt-blocks'
 							) }
 						</Notice>

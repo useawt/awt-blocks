@@ -98,7 +98,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						value={ language }
 						onChange={ ( v ) => setAttributes( { language: v } ) }
 						help={ __(
-							'A short code such as “js” or “php”. It labels the snippet for screen readers and other tools. It does not color the code.',
+							'A short code like “js” or “php”. Tells screen readers the language.',
 							'awt-blocks'
 						) }
 					/>

@@ -27,9 +27,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						}
 					/>
 					<ToggleControl
-						label={ __( 'External link', 'awt-blocks' ) }
+						label={ __( 'Open in new tab', 'awt-blocks' ) }
 						help={ __(
-							'Opens in a new tab and adds an external-link icon.',
+							'Also adds an external-link icon.',
 							'awt-blocks'
 						) }
 						checked={ external }

@@ -80,13 +80,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { kind: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Light-state label', 'awt-blocks' ) }
+						label={ __( 'Light mode label', 'awt-blocks' ) }
 						value={ lightLabel }
 						onChange={ ( v ) => setAttributes( { lightLabel: v } ) }
 					/>
 					{ isSegmented && (
 						<TextControl
-							label={ __( 'Auto-state label', 'awt-blocks' ) }
+							label={ __( 'Auto mode label', 'awt-blocks' ) }
 							value={ autoLabel }
 							onChange={ ( v ) =>
 								setAttributes( { autoLabel: v } )
@@ -94,13 +94,13 @@ export default function Edit( { attributes, setAttributes } ) {
 						/>
 					) }
 					<TextControl
-						label={ __( 'Dark-state label', 'awt-blocks' ) }
+						label={ __( 'Dark mode label', 'awt-blocks' ) }
 						value={ darkLabel }
 						onChange={ ( v ) => setAttributes( { darkLabel: v } ) }
 					/>
 					<Notice status="info" isDismissible={ false }>
 						{ __(
-							'This appears on your live site only if your theme lets visitors choose their own light or dark mode. AWT does by default.',
+							'Shows on your site only if your theme lets visitors pick light or dark mode.',
 							'awt-blocks'
 						) }
 					</Notice>

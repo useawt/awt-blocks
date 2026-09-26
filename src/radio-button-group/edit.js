@@ -66,7 +66,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Group name', 'awt-blocks' ) }
 						help={ __(
-							'Every radio button in this group shares this name, so people can pick only one of them.',
+							'Radio buttons with the same name let people pick only one.',
 							'awt-blocks'
 						) }
 						value={ name }

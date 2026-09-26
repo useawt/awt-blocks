@@ -40,7 +40,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				>
 					<TextControl
 						label={ __(
-							'Region label (aria-label, optional)',
+							'Accessible name (aria-label)',
 							'awt-blocks'
 						) }
 						value={ ariaLabel }

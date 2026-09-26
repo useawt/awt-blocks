@@ -65,7 +65,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Accessible name', 'awt-blocks' ) }
 						help={ __(
-							'Required. Spoken by screen readers; visible only when kind is "Icon with label".',
+							'Required. Read by screen readers. Shown only when kind is “Icon with label”.',
 							'awt-blocks'
 						) }
 						value={ label }
@@ -95,7 +95,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Panel ID', 'awt-blocks' ) }
 						help={ __(
-							'Enter the id of the modal or side navigation this button should open.',
+							'ID of the modal or side navigation this button opens.',
 							'awt-blocks'
 						) }
 						value={ panelId }

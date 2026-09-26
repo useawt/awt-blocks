@@ -349,7 +349,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<TextControl
 						label={ __( 'Table caption', 'awt-blocks' ) }
 						help={ __(
-							'Says what the table shows. Everyone sees it, and screen readers read it before the table.',
+							'Describes the table. Everyone sees it; screen readers read it first.',
 							'awt-blocks'
 						) }
 						value={ caption }
@@ -455,7 +455,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							/>
 							<TextareaControl
 								label={ __(
-									'Rows (one per line, pipe-separated, in header order)',
+									'Rows, one per line (values separated by |, in header order)',
 									'awt-blocks'
 								) }
 								value={ rowText }

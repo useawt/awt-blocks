@@ -75,7 +75,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						help={
 							isLink
 								? __(
-										'Not available while a link URL is set. A linked tag can’t be dismissible.',
+										'Not available when the tag is a link.',
 										'awt-blocks'
 								  )
 								: undefined

@@ -66,11 +66,11 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { method: v } ) }
 					/>
 					<TextControl
-						label={ __( 'Enctype', 'awt-blocks' ) }
+						label={ __( 'Encoding (enctype)', 'awt-blocks' ) }
 						value={ enctype }
 						onChange={ ( v ) => setAttributes( { enctype: v } ) }
 						help={ __(
-							'Typically multipart/form-data for file uploads.',
+							'Use multipart/form-data if the form uploads files.',
 							'awt-blocks'
 						) }
 					/>
