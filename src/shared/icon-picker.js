@@ -172,19 +172,8 @@ export default function IconPicker( {
 							aria-hidden="true"
 							className="awt-icon-picker__thumb"
 							onError={ ( e ) => {
-								// First miss is usually the other spelling.
-								const img = e.currentTarget;
-								const tried =
-									Number( img.dataset.awtTry || 0 ) + 1;
-								const next = iconPreviewUrls( value, [ 32 ] )[
-									tried
-								];
-								if ( next ) {
-									img.dataset.awtTry = String( tried );
-									img.src = next;
-									return;
-								}
-								img.style.visibility = 'hidden';
+								// A token no longer in Carbon's set has no file.
+								e.currentTarget.style.visibility = 'hidden';
 							} }
 						/>
 					) : (

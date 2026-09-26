@@ -124,6 +124,24 @@ fs.writeFileSync(
 	)
 );
 
+// A small index the editor bundles, so a block preview can name the one file
+// that exists before the full manifest (450 KB) is fetched. Only two facts
+// are needed: which tokens are size-independent (`glyph`, in the bundle root)
+// and which genuinely contain a single dash (so a single-dash token that is
+// NOT one of them is legacy content spelled for a double-dash icon). No
+// timestamp, so the file changes only when Carbon's icon set does.
+const INDEX = path.join( ROOT, 'src', 'shared', 'icon-token-index.json' );
+const tokens = Object.keys( iconsByName ).sort();
+fs.writeFileSync(
+	INDEX,
+	JSON.stringify( {
+		glyph: tokens.filter(
+			( t ) => iconsByName[ t ].sizes[ 0 ] === 'glyph'
+		),
+		single: tokens.filter( ( t ) => /(?<!-)-(?!-)/.test( t ) ),
+	} ) + '\n'
+);
+
 const stat = fs.statSync( OUT );
 console.log(
 	`[icon-manifest] wrote ${ kept } icons (skipped ${ dropped }) → ${ path.relative(

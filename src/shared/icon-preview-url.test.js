@@ -64,11 +64,29 @@ describe( 'icon preview URLs, before the manifest is loaded', () => {
 	} );
 } );
 
+describe( 'one request per icon', () => {
+	// Every candidate URL is a request, and every wrong one is a 404 in the
+	// author's console. Each of these once produced one.
+	it.each( [
+		[ 'earth', '32/earth.svg' ],
+		[ 'tools', '32/tools.svg' ],
+		[ 'arrow--right', '32/arrow--right.svg' ],
+		[ 'game--console', '32/game--console.svg' ],
+		[ 'two-person-lift', '32/two-person-lift.svg' ],
+		[ 'arrow-right', '32/arrow--right.svg' ],
+		[ 'circle-fill', 'circle-fill.svg' ],
+	] )( '%s resolves to exactly one file', ( token, file ) => {
+		expect( iconPreviewUrls( token, [ 32 ] ) ).toEqual( [
+			`${ BASE }/${ file }`,
+		] );
+	} );
+} );
+
 describe( 'the mask value blocks paint through', () => {
-	it( 'lists every candidate, so the one that exists wins', () => {
-		const mask = iconMaskImage( 'two-person-lift', [ 32 ] );
-		expect( mask ).toContain( `url(${ BASE }/32/two-person-lift.svg)` );
-		expect( mask.split( ',' ).length ).toBeGreaterThan( 1 );
+	it( 'points at the one file that exists', () => {
+		expect( iconMaskImage( 'two-person-lift', [ 32 ] ) ).toBe(
+			`url(${ BASE }/32/two-person-lift.svg)`
+		);
 	} );
 
 	it( 'is `none` rather than a broken url() when there is no icon', () => {

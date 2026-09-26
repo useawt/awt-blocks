@@ -5,6 +5,8 @@
  * in half of `@wordpress/components`, and this is arithmetic on a filename.
  */
 
+import tokenIndex from './icon-token-index.json';
+
 // Derive the plugin base URL EAGERLY at module load. The current-icon thumb
 // in the chip needs this URL to render before the picker grid is ever opened
 // — previously this was set lazily inside loadManifest(), so an icon saved
@@ -29,6 +31,10 @@ const manifestPluginUrl = ( () => {
  */
 let tokenKind = {};
 
+const GLYPH = new Set( tokenIndex.glyph );
+const SINGLE = new Set( tokenIndex.single );
+const SINGLE_DASH = /(?<!-)-(?!-)/;
+
 /**
  * Record what the manifest says. Called by the picker when it loads.
  *
@@ -39,63 +45,55 @@ export function setIconTokenKinds( kinds ) {
 }
 
 /**
- * Where a token's SVG might sit in the bundle, best guess first.
+ * Where a token's SVG sits in the bundle.
  *
- * Two things about a token are unknown until the manifest arrives, and the
- * manifest is only fetched when the picker is first opened — so for an icon
- * already saved on a block, both were being guessed, and both guesses could
- * be wrong. The block then drew nothing while the page it was saved on
- * rendered the icon perfectly.
+ * Two things about a token decide the file, and both used to be unknown until
+ * the manifest arrived, which is only fetched when the picker is first opened.
+ * So every possibility was offered and the one that existed won. The browser
+ * requests every candidate, though, and each wrong one is a 404 in the
+ * console: authors saw a column of them while editing a page with icons.
+ * `icon-token-index.json`, generated with the manifest and bundled here,
+ * answers both questions up front, so exactly one URL is returned.
  *
  * **How it is spelled.** Carbon's own token names the bundle file
  * (`two-person-lift`, `arrow--right`), and older AWT content stored a
- * single-dash spelling of a double-dash icon (`arrow-right`). Every
- * single-dash token was being rewritten to double dashes, which is right for
- * the legacy ones and wrong for every genuinely single-dash icon —
- * `two-person-lift`, `carbon-for-aem`, `enable-step` and 409 others.
+ * single-dash spelling of a double-dash icon (`arrow-right`). A single-dash
+ * token that is not in the index's `single` list is that legacy spelling, and
+ * is read as its double-dash form.
  *
  * **Where it lives.** Nine icons are size-independent (`caution`,
- * `circle-fill`, the severity marks) and sit in the bundle root with no size
- * directory. Asked for under a size, they are not there.
- *
- * So every possibility is offered and the one that exists wins. No icon is
- * bundled under two names, so there is nothing to pick between.
+ * `circle-fill`, the severity marks) and sit in the bundle root. Every other
+ * icon has a 32px file, so a size directory is always there.
  *
  * @param {string} token Carbon icon token.
  * @param {Array}  sizes Sizes the icon is available in, from the manifest.
- * @return {string[]} Candidate URLs, best guess first.
+ * @return {string[]} The icon's URL, or an empty list when there is no icon.
  */
 export function iconPreviewUrls( token, sizes ) {
 	if ( ! manifestPluginUrl || ! token ) {
 		return [];
 	}
-	const key = String( token ).toLowerCase();
 	const base = `${ manifestPluginUrl }/build/shared/carbon-icons`;
 
-	const known = tokenKind[ key ];
-	const isGlyph = known === 'glyph' || ( sizes && sizes.includes( 'glyph' ) );
+	let name = String( token ).toLowerCase();
+	if (
+		SINGLE_DASH.test( name ) &&
+		! SINGLE.has( name ) &&
+		! tokenKind[ name ]
+	) {
+		name = name.replace( /(?<!-)-(?!-)/g, '--' );
+	}
+
+	const isGlyph =
+		GLYPH.has( name ) ||
+		tokenKind[ name ] === 'glyph' ||
+		( sizes && sizes.includes( 'glyph' ) );
+	if ( isGlyph ) {
+		return [ `${ base }/${ name }.svg` ];
+	}
 	const numeric = ( sizes || [] ).filter( ( s ) => typeof s === 'number' );
 	const size = numeric.includes( 32 ) ? 32 : numeric[ 0 ] || 32;
-
-	// Sized first: all but nine of the icons are there.
-	let dirs = [ `${ base }/${ size }`, base ];
-	if ( isGlyph ) {
-		dirs = [ base ];
-	} else if ( known ) {
-		dirs = [ `${ base }/${ size }` ];
-	}
-
-	const names = [ key ];
-	const legacy = key.replace( /(?<!-)-(?!-)/g, '--' );
-	// A token the manifest knows is a real Carbon name and needs no second
-	// guess. One it does not know may be legacy content — try that spelling too.
-	if ( ! known && legacy !== key ) {
-		names.push( legacy );
-	}
-
-	return dirs.flatMap( ( dir ) =>
-		names.map( ( name ) => `${ dir }/${ name }.svg` )
-	);
+	return [ `${ base }/${ size }/${ name }.svg` ];
 }
 
 /**
@@ -110,12 +108,11 @@ export function iconPreviewUrl( token, sizes ) {
 }
 
 /**
- * The whole `mask-image` value for a token — every candidate at once.
+ * The whole `mask-image` value for a token.
  *
- * A mask layer whose image fails to load contributes nothing, so listing both
- * spellings shows whichever one is really there. This is what block previews
- * use: they paint `currentColor` through the mask, so the icon takes the
- * colour of the text around it the way the published page does.
+ * This is what block previews use: they paint `currentColor` through the
+ * mask, so the icon takes the colour of the text around it the way the
+ * published page does.
  *
  * @param {string} token Carbon icon token.
  * @param {Array}  sizes Sizes the icon is available in, from the manifest.
