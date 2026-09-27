@@ -1,5 +1,5 @@
-## 2026.09.37 (2026-09-26)
+## 2026.09.38 (2026-09-27)
 
 ### [Improvement]
 
-- WordPress no longer wrongly says the plugin is untested on minor WordPress updates, such as 7.1.2.
+- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
