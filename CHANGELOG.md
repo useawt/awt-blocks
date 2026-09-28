@@ -10,6 +10,14 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- A Toggletip can now go in an Inline set.
+- A button, tag, link, icon, modal opener or toggletip added straight to a page
+  now arrives in an Inline set, so it lines up with the text on wide screens.
+
 ## 2026.09.38 (2026-09-27)
 
 ### [Improvement]

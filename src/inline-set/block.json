@@ -7,7 +7,7 @@
 	],
 	"title": "Inline set",
 	"category": "awt-section",
-	"description": "A row of evenly spaced buttons, tags, icons or links.",
+	"description": "A row of evenly spaced buttons, tags, icons, links or toggletips.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"button set",

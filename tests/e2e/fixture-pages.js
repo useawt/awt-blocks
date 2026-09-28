@@ -87,6 +87,10 @@ const WIDGETS = `
 <!-- wp:awt/dropdown {"label":"Region"} /-->
 <!-- wp:awt/menu-button {"label":"Actions"} /-->
 <!-- wp:awt/toggletip {"label":"Storage limits"} /-->
+<!-- wp:awt/inline-set -->
+<!-- wp:awt/tag {"text":"Nightly"} /-->
+<!-- wp:awt/toggletip {"label":"Backup schedule","description":"Backups run at 02:00 in your region."} /-->
+<!-- /wp:awt/inline-set -->
 <!-- wp:awt/tooltip {"triggerText":"Retention","description":"Backups are kept for 30 days."} /-->
 <!-- wp:awt/tile {"variant":"expandable","summary":"Deployment details"} -->
 <!-- wp:paragraph --><p>Region, instance size, and rollout window.</p><!-- /wp:paragraph -->

@@ -6,16 +6,7 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 
-// The modal opener is on the list because it renders as a button — a call to
-// action that opens a dialog instead of following a link — and a row of calls
-// to action is what this block is for.
-const ALLOWED = [
-	'awt/button',
-	'awt/modal-opener',
-	'awt/link',
-	'awt/tag',
-	'awt/icon',
-];
+import { INLINE_SET_CHILDREN } from './children';
 
 const TEMPLATE = [
 	[ 'awt/button', { text: 'Primary action', kind: 'primary' } ],
@@ -54,7 +45,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps( { className: classes } );
 	const innerProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
-		allowedBlocks: ALLOWED,
+		allowedBlocks: INLINE_SET_CHILDREN,
 		orientation: orientation === 'vertical' ? 'vertical' : 'horizontal',
 	} );
 

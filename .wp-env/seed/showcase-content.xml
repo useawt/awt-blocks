@@ -321,6 +321,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Standalone Carbon icon — decorative by default, accessible name when informative.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/icon {"iconName":"checkmark","size":"24","label":"Success","decorative":false,"color":"support-success"} /-->
 
 <!-- wp:awt/icon {"iconName":"information","size":"24","label":"Info","decorative":false,"color":"support-info"} /-->
@@ -328,6 +329,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/icon {"iconName":"warning","size":"24","label":"Warning","decorative":false,"color":"support-warning"} /-->
 
 <!-- wp:awt/icon {"iconName":"close","size":"24","label":"Error","decorative":false,"color":"support-error"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -341,6 +343,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Carbon button — multiple kinds and sizes.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/button {"text":"Primary","size":"md"} /-->
 
 <!-- wp:awt/button {"text":"Secondary","kind":"secondary","size":"md"} /-->
@@ -350,6 +353,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/button {"text":"Ghost","kind":"ghost","size":"md"} /-->
 
 <!-- wp:awt/button {"text":"Danger","kind":"danger","size":"md"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -363,9 +367,11 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Carbon link variant — distinct from a regular anchor.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/link {"text":"Standalone link","href":"#"} /-->
 
 <!-- wp:awt/link {"text":"Link with arrow","href":"#","iconName":"arrow-right"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -469,6 +475,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Carbon tag — color variants + dismissible (filter) mode.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/tag {"text":"red","type":"red"} /-->
 
 <!-- wp:awt/tag {"text":"blue","type":"blue"} /-->
@@ -480,6 +487,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- wp:awt/tag {"text":"gray"} /-->
 
 <!-- wp:awt/tag {"text":"filter","type":"cool-gray","filter":true} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -553,7 +561,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Click-not-hover variant. Opens an anchored popover whose content stays visible until dismissed (Escape, click outside, or click the trigger again).</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/toggletip {"label":"Definitions","description":"WCAG (Web Content Accessibility Guidelines) is a W3C standard with three conformance levels: A, AA, and AAA. AWT targets WCAG 2.2 AA.","ariaLabel":"Show definition of WCAG","align":"bottom-start"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator -->
 <hr class="wp-block-separator has-alpha-channel-opacity"/>
@@ -1090,7 +1100,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <p>Click the opener to launch the modal. Escape, backdrop click, or either footer button closes; focus returns to the opener.</p>
 <!-- /wp:paragraph -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/modal-opener {"text":"Open the modal","modalId":"showcase-modal"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:awt/modal {"id":"showcase-modal","heading":"Confirm deletion","label":"Account settings","primaryAction":"Delete","danger":true} -->
 <!-- wp:paragraph -->
@@ -2671,7 +2683,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Informative (carries accessible name; visible to screen readers)</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/icon {"iconName":"warning\u002d\u002dalt\u002d\u002dfilled","size":"24","label":"Warning","decorative":false,"color":"support-warning"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator {"className":"is-style-wide"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
@@ -2745,7 +2759,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">As link (rendered as &lt;a&gt;)</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/button {"text":"Visit docs","href":"/docs"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator {"className":"is-style-wide"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
@@ -2775,19 +2791,25 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">With trailing icon</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/link {"text":"Read more","href":"#","iconName":"arrow\u002d\u002dright"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">Disabled</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/link {"text":"Disabled link","href":"#","disabled":true} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:heading {"level":4} -->
 <h4 class="wp-block-heading">Visited-state visible</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/link {"text":"Visited-state link","href":"#","visited":true} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator {"className":"is-style-wide"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
@@ -2843,7 +2865,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Filter (dismissible)</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/tag {"text":"Region: us-east","type":"blue","filter":true} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator {"className":"is-style-wide"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
@@ -3862,7 +3886,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Default modal</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/modal-opener {"text":"Open default modal","modalId":"awt-modal-demo"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:awt/modal {"id":"awt-modal-demo","heading":"Default modal","label":"A basic modal example.","primaryAction":"Save"} -->
 <!-- wp:paragraph -->
@@ -3874,7 +3900,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Danger modal</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/modal-opener {"text":"Delete account…","kind":"danger","modalId":"awt-modal-danger"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:awt/modal {"id":"awt-modal-danger","heading":"Delete account?","label":"This cannot be undone.","primaryAction":"Delete","danger":true} -->
 <!-- wp:paragraph -->
@@ -3886,7 +3914,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Large modal</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/modal-opener {"text":"Open large modal","modalId":"awt-modal-lg"} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:awt/modal {"id":"awt-modal-lg","heading":"Large modal","size":"lg","primaryAction":"Done"} -->
 <!-- wp:paragraph -->
@@ -4436,7 +4466,9 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <h4 class="wp-block-heading">Default (click trigger reveals popover)</h4>
 <!-- /wp:heading -->
 
+<!-- wp:awt/inline-set -->
 <!-- wp:awt/toggletip {"label":"Toggletip","description":"Toggletips are click-triggered tooltips for longer content. Persist on click; dismiss via Escape or click-outside."} /-->
+<!-- /wp:awt/inline-set -->
 
 <!-- wp:separator {"className":"is-style-wide"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity is-style-wide"/>
