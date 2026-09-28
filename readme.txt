@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.38
+Stable tag: 2026.09.39
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.39 (2026-09-28) =
+* [Improvement] A Toggletip can now go in an Inline set.
+* [Improvement] A button, tag, link, icon, modal opener or toggletip added straight to a page now arrives in an Inline set, so it lines up with the text on wide screens.
+
 = 2026.09.38 (2026-09-27) =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -358,7 +362,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.30 — 2026-09-21 =
 * [New] AWT Blocks now keeps itself up to date, alongside the AWT theme. New versions install three days after they are released; one that comes with changes that could affect your site waits for you.
-
-= 2026.09.29 — 2026-09-20 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->

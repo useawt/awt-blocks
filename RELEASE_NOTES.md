@@ -1,5 +1,6 @@
-## 2026.09.38 (2026-09-27)
+## 2026.09.39 (2026-09-28)
 
 ### [Improvement]
 
-- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+- A Toggletip can now go in an Inline set.
+- A button, tag, link, icon, modal opener or toggletip added straight to a page now arrives in an Inline set, so it lines up with the text on wide screens.
