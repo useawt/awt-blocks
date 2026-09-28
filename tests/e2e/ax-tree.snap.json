@@ -100,8 +100,9 @@
 				"        StaticText \"1\"",
 				"        generic",
 				"    listitem level=1",
-				"      generic \"Page 2, current page\"",
-				"        StaticText \"2\"",
+				"      generic",
+				"        none [ignored: uninteresting]",
+				"          StaticText \"Page 2, current page\"",
 				"        generic",
 				"    listitem level=1",
 				"      link \"Page 3\"",
@@ -376,7 +377,7 @@
 				"    StaticText \"Overview panel.\""
 			],
 			"widgets/tabs": [
-				"generic \"Product details\"",
+				"generic",
 				"  none [ignored: uninteresting]",
 				"    tablist \"Product details\"",
 				"      tab \"Overview\" selected=true invalid=false",
@@ -427,7 +428,7 @@
 				"  none [ignored: uninteresting]",
 				"    StaticText \"Storage limits\"",
 				"  none [ignored: uninteresting]",
-				"    button \"More information\" expanded=false invalid=false",
+				"    button \"About storage limits\" expanded=false invalid=false",
 				"    generic"
 			]
 		},
@@ -530,8 +531,9 @@
 				"        StaticText \"1\"",
 				"        generic",
 				"    listitem level=1",
-				"      generic \"Page 2, current page\"",
-				"        StaticText \"2\"",
+				"      generic",
+				"        none [ignored: uninteresting]",
+				"          StaticText \"Page 2, current page\"",
 				"        generic",
 				"    listitem level=1",
 				"      link \"Page 3\"",
@@ -806,7 +808,7 @@
 				"    StaticText \"Overview panel.\""
 			],
 			"widgets/tabs": [
-				"generic \"Product details\"",
+				"generic",
 				"  none [ignored: uninteresting]",
 				"    tablist \"Product details\"",
 				"      tab \"Overview\" selected=true invalid=false",
@@ -857,7 +859,7 @@
 				"  none [ignored: uninteresting]",
 				"    StaticText \"Storage limits\"",
 				"  none [ignored: uninteresting]",
-				"    button \"More information\" expanded=false invalid=false",
+				"    button \"About storage limits\" expanded=false invalid=false",
 				"    generic"
 			]
 		}

@@ -64,6 +64,18 @@ const BASELINE_NOTE =
  */
 const RULE_TAGS = [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa' ];
 
+/**
+ * Needs-review results that count as violations here.
+ *
+ * axe files some findings under "incomplete" (needs review) rather than
+ * "violations", and this gate used to read violations only. An `aria-label` on
+ * a `<div>` or `<span>` with no role is one of them, and four blocks wrote a
+ * second copy of their label onto such a wrapper on every page that used them
+ * while this gate passed (issue useawt/awt-workspace#13, 2026-09-27). A label
+ * on a roleless wrapper is never what we meant, so it fails like a violation.
+ */
+const REVIEW_AS_VIOLATION = [ 'aria-prohibited-attr' ];
+
 const SCHEMES = [ 'light', 'dark' ];
 
 /**
@@ -126,7 +138,10 @@ function fingerprint( run, rule, targetSelectors ) {
 
 function flatten( run, results ) {
 	const out = [];
-	for ( const violation of results.violations ) {
+	const reviewed = results.incomplete.filter( ( r ) =>
+		REVIEW_AS_VIOLATION.includes( r.id )
+	);
+	for ( const violation of [ ...results.violations, ...reviewed ] ) {
 		for ( const node of violation.nodes ) {
 			out.push( {
 				id: fingerprint( run, violation.id, node.target ),

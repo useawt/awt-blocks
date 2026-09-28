@@ -46,7 +46,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					// this shape in this block; treat any divergence as a defect.
 					className:
 						'cds--side-nav cds--side-nav--persistent awt-side-nav-preview',
-					'aria-label': ariaLabel,
 					style: {
 						background: 'var(--cds-layer-01, #f4f4f4)',
 						padding: '0.5rem',

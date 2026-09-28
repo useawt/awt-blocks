@@ -86,7 +86,7 @@ const WIDGETS = `
 
 <!-- wp:awt/dropdown {"label":"Region"} /-->
 <!-- wp:awt/menu-button {"label":"Actions"} /-->
-<!-- wp:awt/toggletip {"label":"Storage limits"} /-->
+<!-- wp:awt/toggletip {"label":"Storage limits","ariaLabel":"About storage limits"} /-->
 <!-- wp:awt/inline-set -->
 <!-- wp:awt/tag {"text":"Nightly"} /-->
 <!-- wp:awt/toggletip {"label":"Backup schedule","description":"Backups run at 02:00 in your region."} /-->

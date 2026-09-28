@@ -171,13 +171,17 @@ foreach ( $pages_to_render as $item ) {
 	}
 	$is_current = ( $item === $current_page );
 	if ( $is_current ) {
+		// The name is hidden text, not an aria-label: a span has no role, and
+		// an aria-label on it is not reliably read (axe flags it as
+		// aria-prohibited-attr, issue useawt/awt-workspace#13, 2026-09-28).
 		$items_html .= sprintf(
-			'<li class="%3$s"><span class="%4$s" aria-current="page" aria-label="%1$s">%2$d</span></li>',
+			'<li class="%3$s"><span class="%4$s" aria-current="page"><span class="%5$s">%1$s</span><span aria-hidden="true">%2$d</span></span></li>',
 			// translators: %d — the page number of the current page.
-			esc_attr( sprintf( __( 'Page %d, current page', 'awt-blocks' ), $item ) ),
+			esc_html( sprintf( __( 'Page %d, current page', 'awt-blocks' ), $item ) ),
 			$item,
 			esc_attr( $pagination_list_item_class ),
-			esc_attr( $pagination_page_cur_class )
+			esc_attr( $pagination_page_cur_class ),
+			esc_attr( $pagination_vis_hidden_class )
 		);
 	} else {
 		$items_html .= sprintf(

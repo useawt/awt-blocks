@@ -226,6 +226,30 @@ add_filter(
  */
 const A11Y_ATTRS = array( 'ariaLabel', 'ariaDescribedby', 'ariaLabelledby', 'awtRole', 'awtLang' );
 
+/**
+ * Blocks that declare `ariaLabel` in their own block.json and put it on the
+ * right element themselves: the tablist of a content switcher or tabs, the
+ * button of a toggletip, the inner `<nav>` of a side nav, the `<ul>` of a
+ * header menu. The emit below must leave these alone, or it writes a second
+ * copy onto the outer element. On a wrapper with no role that copy does
+ * nothing for a screen reader and axe flags it (`aria-prohibited-attr`); on
+ * the side nav it named two landmarks the same. Found 2026-09-27, issue
+ * useawt/awt-workspace#13.
+ *
+ * Recorded at registration, from what the block declared before the filter
+ * below adds the attribute to every block.
+ *
+ * @param string|null $name Block name to record, or null to only read.
+ * @return array<string,bool> Names of the blocks that own their aria-label.
+ */
+function owns_aria_label( ?string $name = null ): array {
+	static $owners = array();
+	if ( $name !== null ) {
+		$owners[ $name ] = true;
+	}
+	return $owners;
+}
+
 add_filter(
 	'register_block_type_args',
 	static function ( array $args, string $name ): array {
@@ -234,6 +258,9 @@ add_filter(
 		}
 		if ( ! isset( $args['attributes'] ) || ! is_array( $args['attributes'] ) ) {
 			$args['attributes'] = array();
+		}
+		if ( isset( $args['attributes']['ariaLabel'] ) ) {
+			owns_aria_label( $name );
 		}
 		foreach ( A11Y_ATTRS as $key ) {
 			if ( ! isset( $args['attributes'][ $key ] ) ) {
@@ -270,6 +297,9 @@ add_filter(
 		);
 		$attrs = $block['attrs'] ?? array();
 		$add   = array();
+		if ( isset( owns_aria_label()[ $name ] ) ) {
+			unset( $map['ariaLabel'] );
+		}
 		foreach ( $map as $attr_key => $html_attr ) {
 			$v = isset( $attrs[ $attr_key ] ) ? trim( (string) $attrs[ $attr_key ] ) : '';
 			if ( $v !== '' ) {

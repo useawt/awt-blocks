@@ -52,10 +52,12 @@ $root_class = $ds
 $nav_class   = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'navigation' ) ) : 'cds--side-nav__navigation';
 $items_class = $ds ? $ds->classes_for( 'side-nav', array( 'element' => 'items' ) ) : 'cds--side-nav__items';
 
+// The name goes on the inner `<nav>` only. It was on the `<aside>` too, so a
+// screen reader listed two landmarks with the same name (issue
+// useawt/awt-workspace#13, 2026-09-27).
 $wrapper_attrs = get_block_wrapper_attributes(
 	array(
 		'class'               => $root_class,
-		'aria-label'          => $aria_label,
 		'id'                  => $dom_id,
 		'data-wp-interactive' => 'awt/side-nav',
 		'data-wp-init'        => 'callbacks.foldIntoHeaderMenu',
