@@ -14,10 +14,9 @@
 
 ### [A11y]
 
-- Buttons, links, footer links, tags and testimonial source links that open in a new tab now tell screen
-  readers so.
-- A Header navigation block with no links now shows nothing, instead of an empty menu and, on small screens,
-  a menu button that opens nothing.
+- Links from blocks that open in a new tab now have specific screen reader adaptations, which make it clear
+  that the click causes a context change by opening a new tab.
+- A Header navigation block with no links in it now shows nothing, instead of an empty menu.
 
 ## 2026.09.40 (2026-09-29)
 
