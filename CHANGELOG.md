@@ -19,10 +19,6 @@
 - A Header navigation block with no links now shows nothing, instead of an empty menu and, on small screens,
   a menu button that opens nothing.
 
-### [Improvement]
-
-- The block editor links to AWT Premium at awtpremium.com.
-
 ## 2026.09.40 (2026-09-29)
 
 ### [A11y]

@@ -13,7 +13,8 @@
  *
  *   npm run test:php:update
  *
- * …and call the release [Breaking] per contract rule #5.
+ * …and tag the changelog entry [Breaking] if the site now renders
+ * differently, or [A11y] if only what screen readers are told changed.
  *
  * Use that script, not `UPDATE_SNAPSHOTS=1 npm run test:php`: the tests run
  * inside the wp-env container, and a variable set on the host side of that
@@ -122,7 +123,7 @@ class Test_Snapshots extends WP_UnitTestCase {
 		$this->assertSame(
 			$expected,
 			$rendered,
-			"Rendered output for '{$base}' drifted from the committed snapshot. If this change is DELIBERATE, regenerate with UPDATE_SNAPSHOTS=1, commit the diff, and mark the release [Breaking] (attribute-evolution contract rules #2/#5)."
+			"Rendered output for '{$base}' drifted from the committed snapshot. If this change is DELIBERATE, regenerate with UPDATE_SNAPSHOTS=1, commit the diff, and tag the changelog entry [Breaking] if the site now renders differently, or [A11y] if only what screen readers are told changed."
 		);
 	}
 }
