@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The block editor link to AWT Premium at awtpremium.com.
+
 ## 2026.09.40 (2026-09-29)
 
 ### [A11y]
