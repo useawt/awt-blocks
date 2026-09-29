@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.39
+Stable tag: 2026.09.40
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.40 (2026-09-29) =
+* [A11y] The Content switcher, Tabs, Toggletip, Side nav and Header menu blocks put their aria-label only on the element it names. It was also copied onto the block's outer element.
+* [A11y] Screen readers now read the current page in the Pagination block as, for example, "Page 2, current page".
+
 = 2026.09.39 (2026-09-28) =
 * [Improvement] A Toggletip can now go in an Inline set.
 * [Improvement] A button, tag, link, icon, modal opener or toggletip added straight to a page now arrives in an Inline set, so it lines up with the text on wide screens.
@@ -359,7 +363,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.31 — 2026-09-21 =
 * [Improvement] If AWT Blocks is installed in a folder with a different name than the one updates install into, it no longer tries to update itself.
-
-= 2026.09.30 — 2026-09-21 =
-* [New] AWT Blocks now keeps itself up to date, alongside the AWT theme. New versions install three days after they are released; one that comes with changes that could affect your site waits for you.
 <!-- CHANGELOG_END -->

@@ -1,6 +1,6 @@
-## 2026.09.39 (2026-09-28)
+## 2026.09.40 (2026-09-29)
 
-### [Improvement]
+### [A11y]
 
-- A Toggletip can now go in an Inline set.
-- A button, tag, link, icon, modal opener or toggletip added straight to a page now arrives in an Inline set, so it lines up with the text on wide screens.
+- The Content switcher, Tabs, Toggletip, Side nav and Header menu blocks put their aria-label only on the element it names. It was also copied onto the block's outer element.
+- Screen readers now read the current page in the Pagination block as, for example, "Page 2, current page".
