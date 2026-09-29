@@ -21,7 +21,7 @@
 
 ### [Improvement]
 
-- The block editor link to AWT Premium at awtpremium.com.
+- The block editor links to AWT Premium at awtpremium.com.
 
 ## 2026.09.40 (2026-09-29)
 
