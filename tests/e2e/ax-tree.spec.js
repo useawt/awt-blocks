@@ -443,6 +443,26 @@ const PROBES = [
 		sel: '.awt-testimonial__source',
 	},
 	{
+		// A link that opens a new tab has to say so in its name: the launch
+		// icon is decorative. Text links get hidden text; a link named by an
+		// aria-label gets the words in the label (awtpremium.com, 2026-09-29).
+		page: 'content',
+		key: 'link (new tab)',
+		sel: 'a.wp-block-awt-link[target="_blank"]',
+	},
+	{
+		page: 'content',
+		key: 'button (new tab)',
+		sel: 'a.wp-block-awt-button[target="_blank"]',
+		nth: 0,
+	},
+	{
+		page: 'content',
+		key: 'button (new tab, icon only)',
+		sel: 'a.wp-block-awt-button[target="_blank"]',
+		nth: 1,
+	},
+	{
 		// A filter tag carries a dismiss button whose only name is an aria-label.
 		page: 'content',
 		key: 'tag (dismissible)',

@@ -35,6 +35,17 @@
 				"      generic",
 				"        StaticText \"/\""
 			],
+			"content/button (new tab, icon only)": [
+				"link \"Open the demo site (opens in a new tab)\"",
+				"  none [ignored: uninteresting]"
+			],
+			"content/button (new tab)": [
+				"link \"Open the demo (opens in a new tab)\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Open the demo\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"(opens in a new tab)\""
+			],
 			"content/color-scheme-toggle (icon-only)": [
 				"button \"Dark mode\" pressed=false invalid=false"
 			],
@@ -59,6 +70,12 @@
 				"    listitem level=2",
 				"      link \"Guides\"",
 				"        StaticText \"Guides\""
+			],
+			"content/link (new tab)": [
+				"link \"Read the release notes (opens in a new tab)\"",
+				"  StaticText \"Read the release notes\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"(opens in a new tab)\""
 			],
 			"content/list (nested three levels)": [
 				"list",
@@ -466,6 +483,17 @@
 				"      generic",
 				"        StaticText \"/\""
 			],
+			"content/button (new tab, icon only)": [
+				"link \"Open the demo site (opens in a new tab)\"",
+				"  none [ignored: uninteresting]"
+			],
+			"content/button (new tab)": [
+				"link \"Open the demo (opens in a new tab)\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"Open the demo\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"(opens in a new tab)\""
+			],
 			"content/color-scheme-toggle (icon-only)": [
 				"button \"Dark mode\" pressed=true invalid=false"
 			],
@@ -490,6 +518,12 @@
 				"    listitem level=2",
 				"      link \"Guides\"",
 				"        StaticText \"Guides\""
+			],
+			"content/link (new tab)": [
+				"link \"Read the release notes (opens in a new tab)\"",
+				"  StaticText \"Read the release notes\"",
+				"  none [ignored: uninteresting]",
+				"    StaticText \"(opens in a new tab)\""
 			],
 			"content/list (nested three levels)": [
 				"list",

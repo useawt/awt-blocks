@@ -43,7 +43,7 @@ class Test_Aria_Label_Once extends WP_UnitTestCase {
 			'side nav'         => array( 'awt/side-nav', '<!-- wp:awt/side-nav-link {"label":"A","url":"#"} /-->', array(), 'nav.cds--side-nav__navigation' ),
 			'header menu'      => array( 'awt/header-menu', '', array(), 'ul.cds--header__menu' ),
 			'breadcrumb'       => array( 'awt/breadcrumb', '', array(), 'nav.cds--breadcrumb' ),
-			'header nav'       => array( 'awt/header-nav', '', array(), 'nav.cds--header__nav' ),
+			'header nav'       => array( 'awt/header-nav', '<!-- wp:awt/header-nav-item {"text":"A","href":"#"} /-->', array(), 'nav.cds--header__nav' ),
 			'header global'    => array( 'awt/header-global', '', array(), 'div.cds--header__global' ),
 			'form'             => array( 'awt/form', '', array(), 'form.cds--form' ),
 			'section'          => array( 'awt/section', $para, array(), 'section.awt-section' ),

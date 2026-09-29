@@ -43,6 +43,7 @@ require_once $awt_shared_dir . '/excerpts.php';
 require_once $awt_shared_dir . '/image-edit.php';
 require_once $awt_shared_dir . '/custom-html.php';
 require_once $awt_shared_dir . '/global-controls.php';
+require_once $awt_shared_dir . '/new-tab-note.php';
 require_once $awt_shared_dir . '/template-chrome.php';
 require_once $awt_shared_dir . '/updates.php';
 unset( $awt_shared_dir );

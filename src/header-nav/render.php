@@ -45,6 +45,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// With no links there is nothing to navigate: no landmark, and no "Open menu"
+// button on small screens that opens an empty list. An author who removes
+// every item gets a header without a menu, not a menu with nothing in it.
+if ( trim( (string) $content ) === '' ) {
+	return;
+}
+
 $aria_label = isset( $attributes['ariaLabel'] ) && $attributes['ariaLabel'] !== ''
 	? (string) $attributes['ariaLabel']
 	: __( 'Primary', 'awt-blocks' );

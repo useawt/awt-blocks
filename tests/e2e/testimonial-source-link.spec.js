@@ -9,7 +9,8 @@
  * Three properties, none of which the render snapshots can see: the editor
  * canvas shows the link the page shows (the two render from one set of
  * attributes and nothing else keeps them in step); the accessible name is the
- * label alone, with the trailing icon contributing nothing; and prose typed
+ * label and, for a new tab, the new-tab warning, with the trailing icon
+ * contributing nothing; and prose typed
  * into the URL field produces no link at all rather than a broken one.
  */
 
@@ -19,7 +20,7 @@ const LINKED = `<!-- wp:awt/testimonial {"quote":"It stopped being an afterthoug
 const PROSE = `<!-- wp:awt/testimonial {"quote":"No link here.","authorName":"Maria S.","href":"ask marketing for the link"} /-->`;
 
 test.describe( 'Testimonial source link', () => {
-	test( 'the page renders it in the attribution, named by its label alone', async ( {
+	test( 'the page renders it in the attribution, named by its label and the new-tab warning', async ( {
 		page,
 		requestUtils,
 	} ) => {
@@ -41,9 +42,10 @@ test.describe( 'Testimonial source link', () => {
 		// Not typed by the author — a new tab gets these on its own.
 		await expect( link ).toHaveAttribute( 'rel', 'noopener noreferrer' );
 
+		// The label, then the new-tab warning, and nothing from the icon.
 		await expect(
 			page.getByRole( 'link', {
-				name: 'Read the case study',
+				name: 'Read the case study (opens in a new tab)',
 				exact: true,
 			} )
 		).toBeVisible();

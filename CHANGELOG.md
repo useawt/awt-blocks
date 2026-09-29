@@ -12,6 +12,13 @@
 
 ## Unreleased
 
+### [A11y]
+
+- Buttons, links, footer links, tags and testimonial source links that open in a new tab now tell screen
+  readers so.
+- A Header navigation block with no links now shows nothing, instead of an empty menu and, on small screens,
+  a menu button that opens nothing.
+
 ### [Improvement]
 
 - The block editor link to AWT Premium at awtpremium.com.
