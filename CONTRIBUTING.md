@@ -11,8 +11,6 @@ were before.
 - **Something hard or impossible to use** with a keyboard, screen reader,
   zoom or other assistive technology: open an
   [accessibility problem](https://github.com/useawt/awt-blocks/issues/new?template=accessibility.yml).
-- **A security problem:** do not open an issue. Email
-  [hello@useawt.com](mailto:hello@useawt.com) instead.
 - **A problem with templates, styles or AWT Settings:** report it in
   [AWT Theme](https://github.com/useawt/awt-theme/issues). Those live there.
 
@@ -65,8 +63,6 @@ Block code in `src/` is built into `build/`, with the comments removed. So:
 - **Plain language.** Anything a site owner or visitor reads is short and
   clear, with no unexplained jargon. Keep real terms such as `aria-label` or
   alt text, and explain them briefly if needed.
-- **Nothing from AWT Premium.** Code for the paid add-on does not belong here.
-  A check runs on every commit and in CI.
 
 ## Run the checks
 
