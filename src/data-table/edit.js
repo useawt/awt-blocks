@@ -31,6 +31,15 @@ function slugifyKey( text, i ) {
 	return s || `col${ i + 1 }`;
 }
 
+// Plain text of a header cell's HTML, for option labels.
+function plainText( html ) {
+	const doc = new window.DOMParser().parseFromString(
+		String( html || '' ),
+		'text/html'
+	);
+	return ( doc.body.textContent || '' ).trim();
+}
+
 // De-duplicate column keys in place (Carbon needs one key per column).
 function dedupeKeys( headers ) {
 	const seen = {};
@@ -404,10 +413,7 @@ export default function Edit( { attributes, setAttributes } ) {
 										value: '',
 									},
 									...headers.map( ( h ) => ( {
-										label: String( h.text || '' ).replace(
-											/<[^>]*>/g,
-											''
-										),
+										label: plainText( h.text ),
 										value: h.key,
 									} ) ),
 								] }
