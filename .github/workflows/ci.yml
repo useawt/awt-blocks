@@ -8,6 +8,9 @@ on:
     # Nightly plugin-compatibility sweep (03:17 UTC).
     - cron: '17 3 * * *'
 
+permissions:
+  contents: read
+
 jobs:
   premium-guard:
     name: No premium code in free repo
