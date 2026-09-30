@@ -32,6 +32,14 @@ module.exports = defineConfig( {
 			use: { ...devices[ 'Desktop Chrome' ] },
 		},
 		{
+			// Safari's engine, for behaviour that differs from Chrome's. Only
+			// the specs listed here run in it.
+			name: 'webkit',
+			testDir: './tests/e2e',
+			testMatch: /header-submenu-click\.spec\.js/,
+			use: { ...devices[ 'Desktop Safari' ] },
+		},
+		{
 			// Plugin-compatibility floor (Floor A) — heavier, own CI job.
 			name: 'compatibility',
 			testDir: './tests/compatibility',

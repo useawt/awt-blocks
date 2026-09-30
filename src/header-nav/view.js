@@ -38,6 +38,27 @@ import {
 
 const SPACE_KEYS = [ ' ', 'Spacebar', 'Space' ];
 
+// The element under the latest mouse or touch press, until its click or the
+// next key press. Safari does not focus a link when it is clicked, so pressing
+// a submenu link blurs the title with no new focus target (for touch, only
+// after the finger lifts). `onSubmenuFocusOut` reads this to tell that apart
+// from focus really leaving the page.
+let pressTarget = null;
+if ( typeof window !== 'undefined' ) {
+	const clearPress = () => {
+		pressTarget = null;
+	};
+	window.addEventListener(
+		'pointerdown',
+		( event ) => {
+			pressTarget = event.target;
+		},
+		true
+	);
+	window.addEventListener( 'click', clearPress, true );
+	window.addEventListener( 'keydown', clearPress, true );
+}
+
 /**
  * Collapse the header when the menu does not fit, rather than at a width.
  *
@@ -267,10 +288,14 @@ const { state } = store( 'awt/header-nav', {
 			) {
 				return;
 			}
-			// `relatedTarget` is the element receiving focus. Null = focus left
-			// the document/window. Either way, if it's not inside this submenu,
-			// the dropdown should close.
+			// `relatedTarget` is the element receiving focus. Null means focus
+			// left the page, or, in Safari, that a submenu link is being
+			// pressed (see `pressTarget`). Closing in that second case hides
+			// the link before its click lands, so the item never navigates.
 			const next = event.relatedTarget;
+			if ( ! next && pressTarget && li.contains( pressTarget ) ) {
+				return;
+			}
 			if ( ! next || ! li.contains( next ) ) {
 				ctx.submenuOpen = false;
 			}

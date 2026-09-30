@@ -16,6 +16,7 @@
 
 - The Data table block's Default sort column list shows column names as plain text, such as `&` instead of
   `&amp;`.
+- In Safari, clicking or tapping an item in a Header menu dropdown now opens its link.
 
 ## 2026.09.41 (2026-09-29)
 

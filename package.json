@@ -22,7 +22,7 @@
 		"lint:php": "vendor/bin/phpcs",
 		"test:php": "wp-env run tests-cli --env-cwd=wp-content/plugins/awt-blocks vendor/bin/phpunit",
 		"test:php:update": "wp-env run tests-cli --env-cwd=wp-content/plugins/awt-blocks -- bash -c 'UPDATE_SNAPSHOTS=1 vendor/bin/phpunit'",
-		"test:e2e": "npm run env:prepare-tests && playwright test --project=e2e",
+		"test:e2e": "npm run env:prepare-tests && playwright test --project=e2e --project=webkit",
 		"test:axe": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/axe.spec.js",
 		"test:ax": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/ax-tree.spec.js",
 		"test:styles": "npm run env:prepare-tests && playwright test --project=e2e tests/e2e/computed-styles.spec.js",

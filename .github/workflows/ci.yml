@@ -163,8 +163,8 @@ jobs:
         run: npm ci
       - name: Build blocks
         run: WP_EXPERIMENTAL_MODULES=true npm run build
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
       - name: Start wp-env
         run: npx wp-env start
       - name: Playwright
