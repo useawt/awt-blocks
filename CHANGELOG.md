@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The Data table block's Default sort column list shows column names as plain text, such as `&` instead of
+  `&amp;`.
+
 ## 2026.09.41 (2026-09-29)
 
 ### [A11y]
