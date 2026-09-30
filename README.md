@@ -41,6 +41,8 @@ npm run build         # or: npm start (watch mode)
 Other commands: `npm run env:stop`, `npm run env:destroy`,
 `npm run lint:js`, `npm run test:unit`, `npm run check:premium`.
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) before you open a pull request.
+
 ## License
 
 GPL-3.0-or-later

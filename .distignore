@@ -37,6 +37,7 @@
 /.wp-env.json
 /.wp-env
 /CHANGELOG.md
+/CONTRIBUTING.md
 /RELEASE_NOTES.md
 /.husky
 /.markdownlint-cli2.jsonc
