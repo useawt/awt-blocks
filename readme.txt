@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.09.41
+Stable tag: 2026.09.42
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.09.42 (2026-09-30) =
+* [Improvement] The Data table block's Default sort column list shows column names as plain text, such as `&` instead of `&amp;`.
+* [Improvement] In Safari, clicking or tapping an item in a Header menu dropdown now opens its link.
+
 = 2026.09.41 (2026-09-29) =
 * [A11y] Links from blocks that open in a new tab now have specific screen reader adaptations, which make it clear that the click causes a context change by opening a new tab.
 * [A11y] A Header navigation block with no links in it now shows nothing, instead of an empty menu.
@@ -360,8 +364,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.09.33 — 2026-09-23 =
 * [Improvement] Blocks now share one copy of the styles they have in common instead of each carrying its own, so a page loads far less CSS.
 * [Improvement] The files AWT loads in the editor are now compressed.
-
-= 2026.09.32 — 2026-09-22 =
-* [Improvement] AWT Blocks no longer installs updates by itself on a site that is many releases behind. Those sites need to be updated manually.
-* [Improvement] AWT Blocks only installs update packages published on AWT's own GitHub releases.
 <!-- CHANGELOG_END -->
