@@ -12,6 +12,7 @@ import {
 import { iconMaskImage } from '../shared/icon-picker';
 import { sanitizeInlineHtml, mdInline } from '../shared/import-format';
 import PremiumNotice from '../shared/premium-notice';
+import { slugifyKey, plainText, dedupeKeys } from './columns';
 
 // Free tier supplies static/inline sources (text, HTML, Markdown). The dynamic
 // live-data sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via
@@ -21,38 +22,6 @@ const DATA_SOURCE_OPTIONS = [
 	{ label: __( 'HTML', 'awt-blocks' ), value: 'html' },
 	{ label: __( 'Markdown', 'awt-blocks' ), value: 'markdown' },
 ];
-
-// Make a stable column key from a header label (falls back to col1, col2 …).
-function slugifyKey( text, i ) {
-	const s = String( text )
-		.toLowerCase()
-		.replace( /[^a-z0-9]+/g, '-' )
-		.replace( /^-+|-+$/g, '' );
-	return s || `col${ i + 1 }`;
-}
-
-// Plain text of a header cell's HTML, for option labels.
-function plainText( html ) {
-	const doc = new window.DOMParser().parseFromString(
-		String( html || '' ),
-		'text/html'
-	);
-	return ( doc.body.textContent || '' ).trim();
-}
-
-// De-duplicate column keys in place (Carbon needs one key per column).
-function dedupeKeys( headers ) {
-	const seen = {};
-	headers.forEach( ( h ) => {
-		let k = h.key;
-		while ( seen[ k ] ) {
-			k = `${ k }-2`;
-		}
-		seen[ k ] = true;
-		h.key = k;
-	} );
-	return headers;
-}
 
 // Parse a pasted HTML <table> into { headers, rows }. The first row with <th>
 // cells (or the first row) is the header; remaining rows become data.

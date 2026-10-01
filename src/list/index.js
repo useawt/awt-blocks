@@ -3,6 +3,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
 import metadata from './block.json';
 import Edit from './edit';
+import transforms from './transforms';
 
 // Parent block with inner blocks. save() must emit <InnerBlocks.Content /> so
 // WordPress preserves child block markup between the parent's comments on
@@ -12,5 +13,6 @@ import Edit from './edit';
 registerBlockType( metadata.name, {
 	edit: Edit,
 	save: () => <InnerBlocks.Content />,
+	transforms,
 	deprecated: [],
 } );

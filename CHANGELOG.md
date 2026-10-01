@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [New]
+
+- Transform to turns WordPress's List, Table and Code blocks into the List, Data table and Code snippet blocks, and back.
+
 ## 2026.09.42 (2026-09-30)
 
 ### [Improvement]
