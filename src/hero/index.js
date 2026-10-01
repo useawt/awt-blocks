@@ -1,6 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
 import metadata from './block.json';
+import carbonIcon from '@carbon/icons/es/bullhorn/32';
+import { blockIcon } from '../shared/block-icon';
 import Edit from './edit';
 
 // v1 → v2 migration note: the upgrade from attribute-based text fields to a
@@ -10,6 +12,7 @@ import Edit from './edit';
 // conversion silently drops inline formats that aren't registered yet (it ate a
 // <mark> in real content). By edit-mount time all formats are registered.
 registerBlockType( metadata.name, {
+	icon: blockIcon( carbonIcon ),
 	edit: Edit,
 	save: () => <InnerBlocks.Content />,
 	deprecated: [],

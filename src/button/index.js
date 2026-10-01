@@ -10,9 +10,12 @@ import './style.scss';
 
 import { registerBlockType } from '@wordpress/blocks';
 import metadata from './block.json';
+import carbonIcon from '@carbon/icons/es/button--centered/32';
+import { blockIcon } from '../shared/block-icon';
 import Edit from './edit';
 
 registerBlockType( metadata.name, {
+	icon: blockIcon( carbonIcon ),
 	edit: Edit,
 	// No save() because this block is server-rendered via render.php.
 	save: () => null,

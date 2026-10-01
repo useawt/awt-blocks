@@ -16,6 +16,10 @@
 
 - Transform to turns WordPress's List, Table and Code blocks into the List, Data table and Code snippet blocks, and back.
 
+### [Improvement]
+
+- Every block has its own icon in the block inserter, the block toolbar and List View.
+
 ## 2026.09.42 (2026-09-30)
 
 ### [Improvement]

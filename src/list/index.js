@@ -2,6 +2,8 @@ import './style.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from '@wordpress/block-editor';
 import metadata from './block.json';
+import carbonIcon from '@carbon/icons/es/list--bulleted/32';
+import { blockIcon } from '../shared/block-icon';
 import Edit from './edit';
 import transforms from './transforms';
 
@@ -11,6 +13,7 @@ import transforms from './transforms';
 // though they're still visible during authoring. The actual front-end render
 // still runs via render.php — save() just controls what lands in post_content.
 registerBlockType( metadata.name, {
+	icon: blockIcon( carbonIcon ),
 	edit: Edit,
 	save: () => <InnerBlocks.Content />,
 	transforms,

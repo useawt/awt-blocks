@@ -1,6 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import metadata from './block.json';
+import carbonIcon from '@carbon/icons/es/subtract/32';
+import { blockIcon } from '../shared/block-icon';
 
 function Edit() {
 	const blockProps = useBlockProps( {
@@ -19,6 +21,7 @@ function Edit() {
 }
 
 registerBlockType( metadata.name, {
+	icon: blockIcon( carbonIcon ),
 	edit: Edit,
 	save: () => null,
 	deprecated: [],
