@@ -1,6 +1,9 @@
-## 2026.09.42 (2026-09-30)
+## 2026.10.0 (2026-10-03)
+
+### [New]
+
+- WordPress's List, Table and Code blocks can now be turned into AWT's List, Data table and Code snippet blocks, and back, from the block toolbar's Transform to menu.
 
 ### [Improvement]
 
-- The Data table block's Default sort column list shows column names as plain text, such as `&` instead of `&amp;`.
-- In Safari, clicking or tapping an item in a Header menu dropdown now opens its link.
+- Every AWT block has its own icon in the block inserter, the block toolbar and List View.

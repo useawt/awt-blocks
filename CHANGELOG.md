@@ -10,15 +10,16 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
-## Unreleased
+## 2026.10.0 (2026-10-03)
 
 ### [New]
 
-- Transform to turns WordPress's List, Table and Code blocks into the List, Data table and Code snippet blocks, and back.
+- WordPress's List, Table and Code blocks can now be turned into AWT's List, Data table and Code snippet blocks, and
+  back, from the block toolbar's Transform to menu.
 
 ### [Improvement]
 
-- Every block has its own icon in the block inserter, the block toolbar and List View.
+- Every AWT block has its own icon in the block inserter, the block toolbar and List View.
 
 ## 2026.09.42 (2026-09-30)
 
