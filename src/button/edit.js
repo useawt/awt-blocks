@@ -233,6 +233,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					initialOpen={ false }
 				>
 					<PremiumNotice
+						feature="click-function"
+						attributes={ attributes }
+						setAttributes={ setAttributes }
 						title={ __(
 							'Run a JavaScript function',
 							'awt-blocks'

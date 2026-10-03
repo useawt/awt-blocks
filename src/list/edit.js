@@ -366,6 +366,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						{ __( 'Generate list items', 'awt-blocks' ) }
 					</Button>
 					<PremiumNotice
+						feature="data-sources"
+						attributes={ attributes }
+						setAttributes={ setAttributes }
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
 							'Fill this list from JSON, a REST API, or your own posts and pages.',

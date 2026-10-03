@@ -469,6 +469,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						</>
 					) }
 					<PremiumNotice
+						feature="data-sources"
+						attributes={ attributes }
+						setAttributes={ setAttributes }
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
 							'Fill this table from JSON, a REST API, or your own posts and pages. Available in AWT Premium.',

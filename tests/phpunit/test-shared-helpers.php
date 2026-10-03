@@ -8,7 +8,7 @@
 use function AWT\Blocks\CurrentUrl\normalize;
 use function AWT\Blocks\CurrentUrl\matches_current;
 use function AWT\Blocks\CurrentUrl\only_most_specific_current;
-use function AWT\Blocks\FaqSchema\slugify_question;
+use function AWT\Blocks\Faq\slugify_question;
 use function AWT\Blocks\Render\icon;
 use function AWT\Blocks\Render\compute_rel;
 use function AWT\Blocks\Render\classnames;

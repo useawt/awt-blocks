@@ -6,13 +6,12 @@
  * button + content panel with aria-expanded / aria-controls / role="region"),
  * reusing the existing `awt/accordion-item` Interactivity store for the toggle.
  *
- * Two things this block does that plain accordion-item does NOT:
- *   1. Wraps the trigger button in a real semantic heading (default <h3>) so
- *      screen-reader users can navigate by heading and the structure mirrors
- *      what schema.org FAQPage rich-result eligibility expects.
- *   2. Registers itself with the request-scoped FAQ schema collector. The
- *      collector emits a single FAQPage JSON-LD blob on wp_footer covering
- *      every awt/faq-item on the page (Google rich-result SEO).
+ * What this block does that plain accordion-item does NOT: it wraps the
+ * trigger button in a real semantic heading (default <h3>) so screen-reader
+ * users can navigate by heading, and gives each question a linkable anchor.
+ * It also announces each rendered question through the
+ * `awt_faq_item_rendered` action, for code that wants to know which questions
+ * a page carries.
  *
  * @var array    $attributes
  * @var string   $content   Rendered inner blocks (the answer body).
@@ -24,9 +23,7 @@
 declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
-use function AWT\Blocks\FaqSchema\register as register_faq;
-use function AWT\Blocks\FaqSchema\plain_text_from_html;
-use function AWT\Blocks\FaqSchema\slugify_question;
+use function AWT\Blocks\Faq\slugify_question;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -47,14 +44,15 @@ $heading_tag = 'h' . $level;
 // Anchor: author override wins, otherwise auto-slug from the question.
 $anchor = $anchor_attr !== '' ? $anchor_attr : slugify_question( $question );
 
-// Answer plain-text: explicit override wins, otherwise extract from the
-// rendered inner blocks. Empty string falls through silently.
-$plain_answer = $answer_override !== ''
-	? $answer_override
-	: plain_text_from_html( $content );
-
-// Register with the FAQ schema collector — one entry per render.
-register_faq( $question, $anchor, $plain_answer );
+/**
+ * Fires once for each FAQ item rendered on the page.
+ *
+ * @param string $question        The question.
+ * @param string $anchor          The id the item carries.
+ * @param string $answer_override The block's plain-text answer, '' when unset.
+ * @param string $content         The rendered answer.
+ */
+do_action( 'awt_faq_item_rendered', $question, $anchor, $answer_override, $content );
 
 $panel_id  = unique_id( 'awt-faq-panel' );
 $button_id = unique_id( 'awt-faq-button' );

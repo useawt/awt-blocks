@@ -23,6 +23,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Another copy of this plugin already loaded (it is installed in two
+// folders). Running a second copy would declare every function twice, so
+// step aside.
+if ( defined( __NAMESPACE__ . '\\AWT_BLOCKS_VERSION' ) ) {
+	return;
+}
+
 const AWT_BLOCKS_VERSION = '2026.10.0';
 const AWT_BLOCKS_FILE    = __FILE__;
 const AWT_BLOCKS_DIR     = __DIR__;
@@ -38,7 +45,7 @@ $awt_shared_dir = file_exists( __DIR__ . '/src/shared/render-helpers.php' )
 	: __DIR__ . '/build/shared';
 require_once $awt_shared_dir . '/render-helpers.php';
 require_once $awt_shared_dir . '/current-url.php';
-require_once $awt_shared_dir . '/faq-schema.php';
+require_once $awt_shared_dir . '/faq-anchor.php';
 require_once $awt_shared_dir . '/excerpts.php';
 require_once $awt_shared_dir . '/image-edit.php';
 require_once $awt_shared_dir . '/custom-html.php';

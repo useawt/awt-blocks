@@ -2,19 +2,41 @@
  * PremiumNotice — a small in-context upsell shown in the editor where an AWT
  * Premium-only capability would otherwise live. Informational only (no input);
  * the free block keeps the underlying attribute for clean round-trip and the
- * Premium add-on supplies the real control + runtime.
+ * real control comes from AWT Premium, through the filter below.
  *
  * Props:
+ *   - feature:     a stable key naming the capability (e.g. 'faq-schema').
  *   - title:       short bold heading (the capability name).
  *   - description: one-line plain-language explanation.
+ *   - any others:  passed through to the filter below (typically the block's
+ *                  `attributes` and `setAttributes`).
+ *
+ * The notice goes through the `awt.premiumNotice` filter
+ * (`@wordpress/hooks`) with the feature key and the extra props, so other
+ * code can put a control in its place.
  */
 
 import { __ } from '@wordpress/i18n';
 import { ExternalLink } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
 
 const PREMIUM_URL = 'https://awtpremium.com/';
 
-export default function PremiumNotice( { title, description } ) {
+export default function PremiumNotice( {
+	feature,
+	title,
+	description,
+	...context
+} ) {
+	return applyFilters(
+		'awt.premiumNotice',
+		<Notice title={ title } description={ description } />,
+		feature,
+		context
+	);
+}
+
+function Notice( { title, description } ) {
 	return (
 		<div
 			style={ {

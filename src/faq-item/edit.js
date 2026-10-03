@@ -83,6 +83,9 @@ export default function Edit( { attributes, setAttributes, context } ) {
 						}
 					/>
 					<PremiumNotice
+						feature="faq-schema"
+						attributes={ attributes }
+						setAttributes={ setAttributes }
 						title={ __( 'FAQ rich results', 'awt-blocks' ) }
 						description={ __(
 							'Adds FAQ structured data so Google can show this Q&A in search results. Available in AWT Premium.',
