@@ -57,6 +57,30 @@ for ( const [ from, to ] of COPIES ) {
 	fs.copyFileSync( src, dest );
 }
 
+// A shared PHP file deleted from src/ has to leave build/ too. Nothing else
+// clears it, and the distribution zip packs build/ as it finds it, so a copy
+// left behind ships in the next release. Found 2026-10-03: a build of an older
+// checkout put build/shared/faq-schema.php back after its source was deleted,
+// and later builds kept it; only `check:premium` stopped it. Only PHP is
+// swept: every PHP file here is the
+// mirror's own, while the icons and the manifest beside them come from other
+// build steps.
+const MIRRORED_PHP = new Set(
+	SHARED_PHP.map( ( [ , to ] ) => path.basename( to ) )
+);
+const BUILD_SHARED = path.join( ROOT, 'build', 'shared' );
+const stale = fs
+	.readdirSync( BUILD_SHARED )
+	.filter(
+		( name ) => name.endsWith( '.php' ) && ! MIRRORED_PHP.has( name )
+	);
+for ( const name of stale ) {
+	fs.rmSync( path.join( BUILD_SHARED, name ) );
+	process.stdout.write(
+		`[mirror-runtime] removed build/shared/${ name }: its source is gone.\n`
+	);
+}
+
 for ( const [ from, to, tool ] of COMPILED ) {
 	fs.mkdirSync( path.join( ROOT, path.dirname( to ) ), { recursive: true } );
 	const args =
