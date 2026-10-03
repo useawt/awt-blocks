@@ -10,7 +10,7 @@
 #   3. FAQ structured data (FAQPage JSON-LD), which is a Premium capability.
 #      Premium code does not ship here, not even switched off.
 #
-# What this does NOT flag (by design — this is the shared base AWT Premium
+# What this does NOT flag (by design: this is the shared base AWT Premium
 # relies on):
 #   - The PremiumNotice component, its `awt.premiumNotice` slot, and upsell
 #     copy / URLs.

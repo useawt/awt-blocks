@@ -1,6 +1,6 @@
 <?php
 /**
- * FAQ item anchors — the id each question carries, so a link can point
+ * FAQ item anchors: the id each question carries, so a link can point
  * straight at it (`/faq/#faq-how-do-i-update`).
  *
  * @package AWT\Blocks
