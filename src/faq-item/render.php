@@ -9,9 +9,6 @@
  * What this block does that plain accordion-item does NOT: it wraps the
  * trigger button in a real semantic heading (default <h3>) so screen-reader
  * users can navigate by heading, and gives each question a linkable anchor.
- * It also announces each rendered question through the
- * `awt_faq_item_rendered` action, for code that wants to know which questions
- * a page carries.
  *
  * @var array    $attributes
  * @var string   $content   Rendered inner blocks (the answer body).
@@ -30,7 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $question         = isset( $attributes['question'] ) ? (string) $attributes['question'] : '';
-$answer_override  = isset( $attributes['answer'] ) ? (string) $attributes['answer'] : '';
 $default_expanded = ! empty( $attributes['defaultExpanded'] );
 $level            = isset( $attributes['level'] ) ? (string) $attributes['level'] : '3';
 $anchor_attr      = isset( $attributes['anchor'] ) ? (string) $attributes['anchor'] : '';
@@ -43,16 +39,6 @@ $heading_tag = 'h' . $level;
 
 // Anchor: author override wins, otherwise auto-slug from the question.
 $anchor = $anchor_attr !== '' ? $anchor_attr : slugify_question( $question );
-
-/**
- * Fires once for each FAQ item rendered on the page.
- *
- * @param string $question        The question.
- * @param string $anchor          The id the item carries.
- * @param string $answer_override The block's plain-text answer, '' when unset.
- * @param string $content         The rendered answer.
- */
-do_action( 'awt_faq_item_rendered', $question, $anchor, $answer_override, $content );
 
 $panel_id  = unique_id( 'awt-faq-panel' );
 $button_id = unique_id( 'awt-faq-button' );

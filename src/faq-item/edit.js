@@ -6,7 +6,6 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl, SelectControl } from '@wordpress/components';
-import PremiumNotice from '../shared/premium-notice';
 
 const TEMPLATE = [
 	[
@@ -19,9 +18,6 @@ const TEMPLATE = [
 ];
 
 export default function Edit( { attributes, setAttributes, context } ) {
-	// `answer` (the plain-text SEO shadow) is intentionally not destructured: the
-	// attribute stays in block.json for clean round-trip of Premium-authored
-	// content, but the editable control is Premium-gated (see below).
 	const { question, defaultExpanded, level } = attributes;
 	const HeadingTag = `h${ level }`;
 	// Mirrors render.php: <li> only when an awt/accordion is above us (it
@@ -81,16 +77,6 @@ export default function Edit( { attributes, setAttributes, context } ) {
 						onChange={ ( v ) =>
 							setAttributes( { defaultExpanded: v } )
 						}
-					/>
-					<PremiumNotice
-						feature="faq-schema"
-						attributes={ attributes }
-						setAttributes={ setAttributes }
-						title={ __( 'FAQ rich results', 'awt-blocks' ) }
-						description={ __(
-							'Adds FAQ structured data so Google can show this Q&A in search results. Available in AWT Premium.',
-							'awt-blocks'
-						) }
 					/>
 				</PanelBody>
 			</InspectorControls>

@@ -7,14 +7,12 @@
 #   1. A Premium block implementation — a block directory whose slug is on the
 #      denylist below and that carries block.json / render.php.
 #   2. Any `premium-staging/` archive living inside the repo.
-#   3. FAQ structured data (FAQPage JSON-LD), which is a Premium capability.
-#      Premium code does not ship here, not even switched off.
 #
 # What this does NOT flag (by design: this is the shared base AWT Premium
 # relies on):
 #   - The PremiumNotice component, its `awt.premiumNotice` slot, and upsell
 #     copy / URLs.
-#   - General extension points (e.g. the awt_faq_item_rendered action).
+#   - General extension points (actions, filters).
 #   - Round-trip attributes kept in block.json (onClickFunction, etc.).
 #   - The design-system class contract that keeps a Premium slug live (e.g.
 #     Carbon's `header-search` classes) so Premium routes through it, not forks.
@@ -46,17 +44,6 @@ while IFS= read -r hit; do
   echo "❌ premium-staging present in free repo: ${hit#"$ROOT"/}"
   FAIL=1
 done < <(find "$ROOT" \( -name node_modules -o -name vendor \) -prune -o -type d -name "premium-staging" -print 2>/dev/null)
-
-# Premium capabilities recognisable by what they output.
-for base in "src" "build"; do
-  dir="$ROOT/$base"
-  [ -d "$dir" ] || continue
-  while IFS= read -r hit; do
-    [ -n "$hit" ] || continue
-    echo "❌ FAQ structured data found: ${hit#"$ROOT"/}"
-    FAIL=1
-  done < <(grep -rlE "FAQPage|awt_faq_schema_enabled" "$dir" 2>/dev/null)
-done
 
 if [ "$FAIL" -ne 0 ]; then
   echo ""

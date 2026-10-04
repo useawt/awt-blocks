@@ -14,8 +14,7 @@
 		"faq",
 		"question",
 		"answer",
-		"disclosure",
-		"schema"
+		"disclosure"
 	],
 	"supports": {
 		"html": false,
@@ -31,10 +30,6 @@
 			"type": "string",
 			"default": "Question?",
 			"role": "content"
-		},
-		"answer": {
-			"type": "string",
-			"default": ""
 		},
 		"defaultExpanded": {
 			"type": "boolean",

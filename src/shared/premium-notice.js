@@ -5,7 +5,7 @@
  * real control comes from AWT Premium, through the filter below.
  *
  * Props:
- *   - feature:     a stable key naming the capability (e.g. 'faq-schema').
+ *   - feature:     a stable key naming the capability (e.g. 'click-function').
  *   - title:       short bold heading (the capability name).
  *   - description: one-line plain-language explanation.
  *   - any others:  passed through to the filter below (typically the block's
