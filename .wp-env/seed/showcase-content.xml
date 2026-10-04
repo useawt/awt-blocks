@@ -4393,7 +4393,7 @@ Commenter avatars come from <a href="https://gravatar.com/">Gravatar</a>.]]></wp
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>FAQ block — renders the same accordion-item HTML structure but contributes to a Schema.org FAQPage JSON-LD block.</p>
+<p>FAQ block: renders the same accordion-item HTML structure, with each question in a heading.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"level":4} -->
