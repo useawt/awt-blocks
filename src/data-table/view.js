@@ -24,8 +24,9 @@
  *     to swap the unsorted icon (Carbon `arrows--vertical`) for the active
  *     sort-direction icon (Carbon `arrow--down`, rotated 180° for descending).
  *
- * Sort is client-side only; rows live in the DOM. Dynamic-data tables
- * (REST / WP_Query — Premium scope) will use a separate store.
+ * Sort is client-side only; rows live in the DOM. Tables filled from a live
+ * source (the `awt_data_table_data` filter) render the same rows and sort here
+ * too.
  */
 
 import { store, getElement } from '@wordpress/interactivity';
