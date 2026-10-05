@@ -24,6 +24,10 @@
 		"anchor": true
 	},
 	"attributes": {
+		"dataSource": {
+			"type": "object",
+			"default": {}
+		},
 		"headers": {
 			"type": "array",
 			"default": [

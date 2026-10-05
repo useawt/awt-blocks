@@ -3,6 +3,7 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	InspectorControls,
+	RichText,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -14,6 +15,7 @@ import {
 import { useState } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
+import { applyFilters } from '@wordpress/hooks';
 import {
 	escapeHtml,
 	mdInline,
@@ -21,6 +23,7 @@ import {
 	splitCommaSeparated,
 } from '../shared/import-format';
 import PremiumNotice from '../shared/premium-notice';
+import { SOURCE_NOTE_STYLE, useLinkGuard } from '../shared/source-locked';
 
 const TYPE_OPTIONS = [
 	{ label: 'Bulleted', value: 'unordered' },
@@ -235,6 +238,18 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	const isOrdered = type !== 'unordered';
 	const tagName = isOrdered ? 'ol' : 'ul';
 
+	// Other code (AWT Premium's live data) can fill the list from somewhere
+	// else. It then returns a short note saying from where: the list shows its
+	// items as they are and cannot be typed in, since the page would not show
+	// what was typed.
+	const sourceNote = applyFilters(
+		'awt.dataSourceNote',
+		'',
+		attributes,
+		'awt/list'
+	);
+	const guardLinks = useLinkGuard();
+
 	const [ dataFormat, setDataFormat ] = useState( 'text' );
 	const [ dataText, setDataText ] = useState( '' );
 
@@ -301,7 +316,9 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		.filter( Boolean )
 		.join( ' ' );
 
-	const blockProps = useBlockProps( { className: classes } );
+	const blockProps = useBlockProps(
+		sourceNote ? {} : { className: classes }
+	);
 	const innerProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 		allowedBlocks: [ 'awt/list-item' ],
@@ -345,39 +362,63 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					title={ __( 'Data', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<SelectControl
-						label={ __( 'Data source', 'awt-blocks' ) }
-						value={ dataFormat }
-						options={ FORMAT_OPTIONS }
-						onChange={ setDataFormat }
-					/>
-					<TextareaControl
-						label={ __( 'Paste content', 'awt-blocks' ) }
-						help={ PASTE_HELP[ dataFormat ] }
-						value={ dataText }
-						onChange={ setDataText }
-						rows={ 6 }
-					/>
-					<Button
-						variant="primary"
-						onClick={ applyData }
-						disabled={ ! dataText.trim() }
-					>
-						{ __( 'Generate list items', 'awt-blocks' ) }
-					</Button>
+					{ ! sourceNote && (
+						<>
+							<SelectControl
+								label={ __( 'Data source', 'awt-blocks' ) }
+								value={ dataFormat }
+								options={ FORMAT_OPTIONS }
+								onChange={ setDataFormat }
+							/>
+							<TextareaControl
+								label={ __( 'Paste content', 'awt-blocks' ) }
+								help={ PASTE_HELP[ dataFormat ] }
+								value={ dataText }
+								onChange={ setDataText }
+								rows={ 6 }
+							/>
+							<Button
+								variant="primary"
+								onClick={ applyData }
+								disabled={ ! dataText.trim() }
+							>
+								{ __( 'Generate list items', 'awt-blocks' ) }
+							</Button>
+						</>
+					) }
 					<PremiumNotice
 						feature="data-sources"
 						attributes={ attributes }
 						setAttributes={ setAttributes }
+						clientId={ clientId }
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
-							'Fill this list from JSON, a REST API, or your own posts and pages.',
+							'Fill this list from JSON, a REST API, a CSV file, or your own posts and pages.',
 							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
 			</InspectorControls>
-			<Tag { ...innerProps } />
+			{ sourceNote ? (
+				<div { ...blockProps }>
+					<p style={ SOURCE_NOTE_STYLE }>{ sourceNote }</p>
+					{ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- catches link clicks, which Enter on a link also fires. */ }
+					<Tag className={ classes } onClick={ guardLinks }>
+						{ innerItems.map( ( item ) => (
+							<RichText.Content
+								key={ item.clientId }
+								tagName="li"
+								className="cds--list__item"
+								value={ sanitizeInlineHtml(
+									item.attributes?.content || ''
+								) }
+							/>
+						) ) }
+					</Tag>
+				</div>
+			) : (
+				<Tag { ...innerProps } />
+			) }
 		</>
 	);
 }

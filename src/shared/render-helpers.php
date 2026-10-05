@@ -306,11 +306,15 @@ function inline_kses_allowed(): array {
 		'i'      => array(),
 		'code'   => array(),
 		'br'     => array(),
+		// `style` keeps the size an author gives an inline image in the
+		// editor (it writes `style="width: …"`); wp_kses passes it through
+		// safecss_filter_attr(), which keeps only safe properties.
 		'img'    => array(
 			'src'    => true,
 			'alt'    => true,
 			'width'  => true,
 			'height' => true,
+			'style'  => true,
 		),
 	);
 }

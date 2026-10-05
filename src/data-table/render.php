@@ -33,6 +33,28 @@ $default_sort_key = isset( $attributes['defaultSortKey'] ) ? (string) $attribute
 $default_sort_dir = isset( $attributes['defaultSortDirection'] ) ? (string) $attributes['defaultSortDirection'] : 'asc';
 $caption          = isset( $attributes['caption'] ) ? (string) $attributes['caption'] : '';
 
+/**
+ * Filters a Data table's columns and rows before they are shown. Free AWT
+ * shows what was typed; AWT Premium fills the table from a live source here
+ * (a JSON or REST address, a CSV file, the site's posts), keeping what was
+ * typed as the fallback.
+ *
+ * @param array{headers: array, rows: array} $data       The typed columns and rows.
+ * @param array                              $attributes The block's attributes.
+ */
+$live = apply_filters(
+	'awt_data_table_data',
+	array(
+		'headers' => $headers,
+		'rows'    => $rows,
+	),
+	$attributes
+);
+if ( is_array( $live ) && is_array( $live['headers'] ?? null ) && is_array( $live['rows'] ?? null ) ) {
+	$headers = $live['headers'];
+	$rows    = $live['rows'];
+}
+
 $container_class = $ds
 	? $ds->classes_for( 'data-table', array( 'stickyHeader' => $sticky_header ) )
 	: ( 'cds--data-table-container' . ( $sticky_header ? ' cds--data-table-container--sticky-header' : '' ) );

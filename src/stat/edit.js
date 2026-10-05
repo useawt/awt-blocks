@@ -5,6 +5,8 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
+import { applyFilters } from '@wordpress/hooks';
+import PremiumNotice from '../shared/premium-notice';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { value, heading, description, level, align } = attributes;
@@ -72,6 +74,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						onChange={ ( v ) => setAttributes( { align: v } ) }
 					/>
 				</PanelBody>
+				<PanelBody
+					title={ __( 'Trend line', 'awt-blocks' ) }
+					initialOpen={ false }
+				>
+					<PremiumNotice
+						feature="sparkline"
+						attributes={ attributes }
+						setAttributes={ setAttributes }
+						title={ __( 'Trend line', 'awt-blocks' ) }
+						description={ __(
+							'Show a small line of how the number has changed, under it. Available in AWT Premium.',
+							'awt-blocks'
+						) }
+					/>
+				</PanelBody>
 			</InspectorControls>
 			<div { ...blockProps }>
 				<RichText
@@ -82,6 +99,11 @@ export default function Edit( { attributes, setAttributes } ) {
 					placeholder={ __( '90%', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
+				{
+					// Anything another plugin shows beside the number, such as
+					// AWT Premium's trend line; nothing in free AWT.
+					applyFilters( 'awt.statAfterValue', null, attributes )
+				}
 				<RichText
 					tagName={ HeadingTag }
 					className="awt-stat__heading"

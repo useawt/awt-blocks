@@ -23,6 +23,10 @@
 		"anchor": true
 	},
 	"attributes": {
+		"dataSource": {
+			"type": "object",
+			"default": {}
+		},
 		"type": {
 			"type": "string",
 			"default": "unordered"

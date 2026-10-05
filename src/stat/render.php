@@ -51,10 +51,21 @@ $value_html       = $value !== '' ? sprintf( '<span class="awt-stat__value">%s</
 $heading_html     = $heading !== '' ? sprintf( '<%1$s class="awt-stat__heading">%2$s</%1$s>', $heading_tag, wp_kses_post( $heading ) ) : '';
 $description_html = $description !== '' ? sprintf( '<p class="awt-stat__description">%s</p>', wp_kses_post( $description ) ) : '';
 
+/**
+ * Filters what shows right after the statistic's number. Free AWT adds
+ * nothing; AWT Premium adds its trend line here. The markup is the filter's
+ * own, and is printed as it comes.
+ *
+ * @param string $html       Markup to add, '' for none.
+ * @param array  $attributes The block's attributes.
+ */
+$after_value = (string) apply_filters( 'awt_stat_after_value', '', $attributes );
+
 printf(
-	'<div %1$s>%2$s%3$s%4$s</div>',
+	'<div %1$s>%2$s%5$s%3$s%4$s</div>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	$value_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
 	$heading_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
-	$description_html // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
+	$description_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
+	$after_value // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- a filter's own markup, escaped where it is built.
 );

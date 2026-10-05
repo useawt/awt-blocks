@@ -231,3 +231,23 @@
 		padding-inline-start: 0.5rem;
 	}
 }
+
+// The Data table's import dialog: format, paste box, note and button, spaced
+// evenly. Its controls drop their own bottom margin.
+.awt-data-table__import {
+	display: grid;
+	gap: 16px;
+	justify-items: start;
+
+	> * {
+		width: 100%;
+	}
+
+	> .components-button {
+		width: auto;
+	}
+
+	p {
+		margin: 0;
+	}
+}

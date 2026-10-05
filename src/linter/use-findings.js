@@ -11,8 +11,24 @@
 
 import { useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import { applyFilters } from '@wordpress/hooks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
-import { runChecks, blockBg } from './checks';
+import { runChecks, blockBg, ALL_CHECKS, SEVERITY } from './checks';
+
+/**
+ * The checks to run. `awt.linterChecks` lets another plugin add checks for its
+ * own blocks: each takes the flat block list and the run context and returns
+ * findings, `{ clientId, checkId, severity, title, description }`, where
+ * `severity` is one of `SEVERITY` (passed as the second argument) and
+ * `checkId` is a string of the plugin's own, so it never collides with the
+ * numbered checks here.
+ *
+ * Read on every run, so a check added after the editor loaded is picked up.
+ */
+function checks() {
+	const filtered = applyFilters( 'awt.linterChecks', ALL_CHECKS, SEVERITY );
+	return Array.isArray( filtered ) ? filtered : ALL_CHECKS;
+}
 
 // Site language bridged from PHP get_bloginfo('language'); the page-level
 // override (awt_theme_page_lang meta) wins when set. Not read from the canvas iframe
@@ -93,12 +109,16 @@ export function useFindings() {
 
 	return useMemo(
 		() =>
-			runChecks( blocks, {
-				flat: true,
-				colors,
-				effectiveBg,
-				documentLang,
-			} ),
+			runChecks(
+				blocks,
+				{
+					flat: true,
+					colors,
+					effectiveBg,
+					documentLang,
+				},
+				checks()
+			),
 		[ blocks, colors, effectiveBg, documentLang ]
 	);
 }

@@ -43,6 +43,14 @@
 		"align": {
 			"type": "string",
 			"default": "start"
+		},
+		"sparkline": {
+			"type": "string",
+			"default": ""
+		},
+		"sparklineLabel": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"editorScript": "file:./index.js",

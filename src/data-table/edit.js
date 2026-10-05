@@ -1,6 +1,13 @@
-import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { __, _n, sprintf } from '@wordpress/i18n';
+import { useEffect, useMemo, useState } from '@wordpress/element';
+import { speak } from '@wordpress/a11y';
+import { applyFilters } from '@wordpress/hooks';
+import {
+	useBlockProps,
+	InspectorControls,
+	BlockControls,
+	RichText,
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
@@ -8,206 +15,229 @@ import {
 	ToggleControl,
 	TextareaControl,
 	Button,
+	Modal,
+	Notice,
+	ToolbarButton,
+	ToolbarDropdownMenu,
+	ToolbarGroup,
+	VisuallyHidden,
 } from '@wordpress/components';
+import tableIcon from '@carbon/icons/es/table/32';
+import rowInsertIcon from '@carbon/icons/es/row--insert/32';
+import rowDeleteIcon from '@carbon/icons/es/row--delete/32';
+import columnInsertIcon from '@carbon/icons/es/column--insert/32';
+import columnDeleteIcon from '@carbon/icons/es/column--delete/32';
+import importIcon from '@carbon/icons/es/document--import/32';
+import { blockIcon } from '../shared/block-icon';
 import { iconMaskImage } from '../shared/icon-picker';
-import { sanitizeInlineHtml, mdInline } from '../shared/import-format';
 import PremiumNotice from '../shared/premium-notice';
-import { slugifyKey, plainText, dedupeKeys } from './columns';
+import { SOURCE_NOTE_STYLE, useLinkGuard } from '../shared/source-locked';
+import { sanitizeInlineHtml } from '../shared/import-format';
+import { plainText } from './columns';
+import { IMPORT_FORMATS } from './import';
 
-// Free tier supplies static/inline sources (text, HTML, Markdown). The dynamic
-// live-data sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via
-// the shared PremiumNotice box below the picker — not as dead disabled options.
-const DATA_SOURCE_OPTIONS = [
-	{ label: __( 'Text', 'awt-blocks' ), value: 'text' },
-	{ label: __( 'HTML', 'awt-blocks' ), value: 'html' },
-	{ label: __( 'Markdown', 'awt-blocks' ), value: 'markdown' },
+const ICONS = {
+	table: blockIcon( tableIcon ),
+	rowInsert: blockIcon( rowInsertIcon ),
+	rowDelete: blockIcon( rowDeleteIcon ),
+	columnInsert: blockIcon( columnInsertIcon ),
+	columnDelete: blockIcon( columnDeleteIcon ),
+	import: blockIcon( importIcon ),
+};
+
+// Typed cells keep the inline formatting render.php allows: links, bold,
+// italic, inline code and images.
+const CELL_FORMATS = [
+	'core/bold',
+	'core/italic',
+	'core/link',
+	'core/code',
+	'core/image',
 ];
 
-// Parse a pasted HTML <table> into { headers, rows }. The first row with <th>
-// cells (or the first row) is the header; remaining rows become data.
-function parseHtmlTable( raw ) {
-	const doc = new window.DOMParser().parseFromString(
-		raw || '',
-		'text/html'
-	);
-	const table = doc.querySelector( 'table' );
-	if ( ! table ) {
-		return null;
-	}
-	const trEls = Array.from( table.querySelectorAll( 'tr' ) );
-	if ( ! trEls.length ) {
-		return null;
-	}
-	// Column keys come from the plain text; the visible label + cell values keep
-	// allowlisted inline formatting (links, bold, italic, code, images).
-	const cellPlain = ( c ) => ( c.textContent || '' ).trim();
-	const cellHtml = ( c ) => sanitizeInlineHtml( c.innerHTML );
-	let headerIdx = trEls.findIndex( ( tr ) => tr.querySelector( 'th' ) );
-	if ( headerIdx === -1 ) {
-		headerIdx = 0;
-	}
-	const headers = dedupeKeys(
-		Array.from( trEls[ headerIdx ].children ).map( ( c, i ) => ( {
-			key: slugifyKey( cellPlain( c ), i ),
-			text: cellHtml( c ),
-		} ) )
-	);
-	const rows = trEls
-		.filter( ( _, i ) => i !== headerIdx )
-		.map( ( tr ) => {
-			const cells = Array.from( tr.children );
-			const row = {};
-			headers.forEach( ( h, i ) => {
-				row[ h.key ] = cells[ i ] ? cellHtml( cells[ i ] ) : '';
-			} );
-			return row;
-		} );
-	return { headers, rows };
-}
+// Free AWT reads pasted text (CSV, rows separated by |, HTML, Markdown). The
+// live sources (JSON, REST, WP_Query) are AWT Premium and are surfaced via the
+// shared PremiumNotice box in the Data panel — not as dead disabled options.
+const IMPORT_OPTIONS = [
+	{
+		label: __( 'CSV, or a spreadsheet copy', 'awt-blocks' ),
+		value: 'csv',
+	},
+	{
+		label: __( 'Text (values separated by |)', 'awt-blocks' ),
+		value: 'text',
+	},
+	{ label: __( 'HTML table', 'awt-blocks' ), value: 'html' },
+	{ label: __( 'Markdown table', 'awt-blocks' ), value: 'markdown' },
+];
 
-// Parse a pasted Markdown table (header row, a |---|---| separator, then data).
-function parseMarkdownTable( raw ) {
-	const lines = ( raw || '' )
-		.split( /\r?\n/ )
-		.map( ( l ) => l.trim() )
-		.filter( Boolean );
-	if ( lines.length < 2 ) {
-		return null;
-	}
-	const splitRow = ( l ) =>
-		l
-			.replace( /^\|/, '' )
-			.replace( /\|$/, '' )
-			.split( '|' )
-			.map( ( c ) => c.trim() );
-	if (
-		! /^[\s|:-]+$/.test( lines[ 1 ] ) ||
-		lines[ 1 ].indexOf( '-' ) === -1
-	) {
-		return null; // second line must be the --- separator row
-	}
-	// Keys from the plain header text; label + cells through the inline-Markdown
-	// converter (links, bold, italic, code, images → safe HTML).
-	const headers = dedupeKeys(
-		splitRow( lines[ 0 ] ).map( ( t, i ) => ( {
-			key: slugifyKey( t, i ),
-			text: mdInline( t ),
-		} ) )
-	);
-	const rows = lines.slice( 2 ).map( ( l ) => {
-		const cells = splitRow( l );
-		const row = {};
-		headers.forEach( ( h, i ) => {
-			row[ h.key ] = cells[ i ] ? mdInline( cells[ i ] ) : '';
-		} );
-		return row;
-	} );
-	return { headers, rows };
-}
+const IMPORT_HELP = {
+	csv: __(
+		'The first row is the column headings. Values can be separated by commas, semicolons or tabs, so you can paste straight from a spreadsheet.',
+		'awt-blocks'
+	),
+	text: __(
+		'One row per line, the column headings first, values separated by |.',
+		'awt-blocks'
+	),
+	html: __(
+		'Paste an HTML <table>. Its header row and body rows become the table.',
+		'awt-blocks'
+	),
+	markdown: __(
+		'Paste a Markdown table: a header row, a |---|---| separator row, then data rows.',
+		'awt-blocks'
+	),
+};
 
-// Boolean cell renderer — mirrors render.php which emits a Carbon checkmark
-// SVG for truthy values and an em-dash for everything else. Without this, the
-// editor previewed pricing-comparison rows as raw "true"/"yes" strings
-// instead of the icon. Truthy set matches render.php exactly.
+const IMPORT_ERROR = {
+	csv: __( 'There is no data to import.', 'awt-blocks' ),
+	text: __( 'There is no data to import.', 'awt-blocks' ),
+	html: __( 'No <table> found in the pasted HTML.', 'awt-blocks' ),
+	markdown: __(
+		'That doesn’t look like a Markdown table. Include a header row and a |---|---| separator row.',
+		'awt-blocks'
+	),
+};
+
+// Boolean cell renderer — mirrors render.php, which emits a Carbon checkmark
+// for truthy values and a dash for everything else. Truthy set matches
+// render.php exactly.
 const TRUTHY = new Set( [ '1', 'true', 'yes', '✓', 'y', 'on' ] );
 const isTruthy = ( v ) =>
 	v === true || TRUTHY.has( String( v ).trim().toLowerCase() );
 
-const CheckmarkIcon = () => (
-	<span
-		aria-hidden="true"
-		style={ {
-			display: 'inline-block',
-			width: '1rem',
-			height: '1rem',
-			background: 'var(--cds-support-success, #24a148)',
-			WebkitMaskImage: iconMaskImage( 'checkmark', [ 32 ] ),
-			maskImage: iconMaskImage( 'checkmark', [ 32 ] ),
-			WebkitMaskRepeat: 'no-repeat',
-			maskRepeat: 'no-repeat',
-			WebkitMaskPosition: 'center',
-			maskPosition: 'center',
-			WebkitMaskSize: 'contain',
-			maskSize: 'contain',
-		} }
-	/>
-);
+// A typed cell's text fills its cell, so an empty cell can still be clicked
+// into, and the cell stays a cell for screen readers (the text inside it is
+// the text box, named by its column and row).
+const CELL_TEXT_STYLE = { minHeight: '1.25em' };
 
-const SubtractIcon = () => (
-	<span
-		aria-hidden="true"
-		style={ {
-			display: 'inline-block',
-			width: '1rem',
-			height: '1rem',
-			background: 'var(--cds-text-secondary, #525252)',
-			WebkitMaskImage: iconMaskImage( 'subtract', [ 32 ] ),
-			maskImage: iconMaskImage( 'subtract', [ 32 ] ),
-			WebkitMaskRepeat: 'no-repeat',
-			maskRepeat: 'no-repeat',
-			WebkitMaskPosition: 'center',
-			maskPosition: 'center',
-			WebkitMaskSize: 'contain',
-			maskSize: 'contain',
-		} }
-	/>
-);
+/**
+ * A click on a cell's padding puts the cursor in its text, as a click on the
+ * text does. Keyboard users reach the text with Tab.
+ *
+ * @param {MouseEvent} event The click.
+ */
+const focusCellText = ( event ) => {
+	if ( event.target === event.currentTarget ) {
+		event.currentTarget
+			.querySelector( '[contenteditable="true"]' )
+			?.focus();
+	}
+};
 
-const BooleanCell = ( { value } ) => {
+const maskStyle = ( name, colour ) => ( {
+	display: 'inline-block',
+	width: '1rem',
+	height: '1rem',
+	background: colour,
+	WebkitMaskImage: iconMaskImage( name, [ 32 ] ),
+	maskImage: iconMaskImage( name, [ 32 ] ),
+	WebkitMaskRepeat: 'no-repeat',
+	maskRepeat: 'no-repeat',
+	WebkitMaskPosition: 'center',
+	maskPosition: 'center',
+	WebkitMaskSize: 'contain',
+	maskSize: 'contain',
+} );
+
+/**
+ * A yes/no cell. In the editor it is a button that flips the value, named by
+ * what it shows, with its state as `aria-pressed`.
+ *
+ * @param {Object}   props
+ * @param {*}        props.value    The cell's value.
+ * @param {string}   props.label    "<column>, row <n>", for the button's name.
+ * @param {Function} props.onChange Receives 'yes' or 'no'.
+ * @param {Function} props.onFocus  Marks the cell as the current one.
+ */
+const BooleanCell = ( { value, label, onChange, onFocus } ) => {
 	const yes = isTruthy( value );
 	return (
 		<td className="awt-data-table__cell--boolean">
-			<span className="cds--visually-hidden">
-				{ yes
-					? __( 'Included', 'awt-blocks' )
-					: __( 'Not included', 'awt-blocks' ) }
-			</span>
-			{ yes ? <CheckmarkIcon /> : <SubtractIcon /> }
+			<Button
+				size="small"
+				aria-pressed={ yes }
+				aria-label={ sprintf(
+					/* translators: %s: column heading and row number, e.g. "Backups, row 2". */
+					__( '%s: included', 'awt-blocks' ),
+					label
+				) }
+				onClick={ () => onChange( yes ? 'no' : 'yes' ) }
+				onFocus={ onFocus }
+			>
+				<span
+					aria-hidden="true"
+					style={
+						yes
+							? maskStyle(
+									'checkmark',
+									'var(--cds-support-success, #24a148)'
+							  )
+							: maskStyle(
+									'subtract',
+									'var(--cds-text-secondary, #525252)'
+							  )
+					}
+				/>
+			</Button>
 		</td>
 	);
 };
 
-function parseHeaders( raw ) {
-	return raw
-		.split( '\n' )
-		.map( ( line ) => {
-			const [ key, ...rest ] = line.split( '|' );
-			const text = rest.length > 0 ? rest.join( '|' ).trim() : key.trim();
-			return key.trim() ? { key: key.trim(), text } : null;
-		} )
-		.filter( Boolean );
+/**
+ * A yes/no cell that cannot be changed here: the icon, and its value in words
+ * for screen readers.
+ *
+ * @param {Object} props
+ * @param {*}      props.value The cell's value.
+ */
+const StaticBooleanCell = ( { value } ) => {
+	const yes = isTruthy( value );
+	return (
+		<td className="awt-data-table__cell--boolean">
+			<span
+				aria-hidden="true"
+				style={
+					yes
+						? maskStyle(
+								'checkmark',
+								'var(--cds-support-success, #24a148)'
+						  )
+						: maskStyle(
+								'subtract',
+								'var(--cds-text-secondary, #525252)'
+						  )
+				}
+			/>
+			<VisuallyHidden>
+				{ yes ? __( 'Yes', 'awt-blocks' ) : __( 'No', 'awt-blocks' ) }
+			</VisuallyHidden>
+		</td>
+	);
+};
+
+/**
+ * A key for a new column, unique among the others.
+ *
+ * @param {Array} headers The current columns.
+ * @return {string} The key.
+ */
+function newColumnKey( headers ) {
+	const taken = new Set( headers.map( ( h ) => h.key ) );
+	let n = headers.length + 1;
+	while ( taken.has( `col${ n }` ) ) {
+		n++;
+	}
+	return `col${ n }`;
 }
 
-function stringifyHeaders( hs ) {
-	return ( hs || [] ).map( ( h ) => `${ h.key }|${ h.text }` ).join( '\n' );
-}
-
-function parseRows( raw, headers ) {
-	const keys = ( headers || [] ).map( ( h ) => h.key );
-	return raw
-		.split( '\n' )
-		.map( ( line ) => {
-			if ( ! line.trim() ) {
-				return null;
-			}
-			const cols = line.split( '|' ).map( ( c ) => c.trim() );
-			const row = {};
-			keys.forEach( ( k, i ) => {
-				row[ k ] = cols[ i ] || '';
-			} );
-			return row;
-		} )
-		.filter( Boolean );
-}
-
-function stringifyRows( rows, headers ) {
-	const keys = ( headers || [] ).map( ( h ) => h.key );
-	return ( rows || [] )
-		.map( ( r ) => keys.map( ( k ) => r[ k ] || '' ).join( '|' ) )
-		.join( '\n' );
-}
-
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	isSelected,
+	clientId,
+} ) {
 	const {
 		headers,
 		rows,
@@ -221,82 +251,204 @@ export default function Edit( { attributes, setAttributes } ) {
 		caption,
 	} = attributes;
 
-	// Data source picker (editor-only UI state). Text shows the inline
-	// Headers/Rows editors; HTML/Markdown show a paste-and-generate importer.
-	const [ dataSource, setDataSource ] = useState( 'text' );
+	// Other code (AWT Premium's live data) can fill the table from somewhere
+	// else. It then returns a short note saying from where: the table shows
+	// that data and cannot be typed in, since the page would not show what
+	// was typed.
+	const sourceNote = applyFilters(
+		'awt.dataSourceNote',
+		'',
+		attributes,
+		'awt/data-table'
+	);
+	const guardLinks = useLinkGuard();
+
+	// The cell the toolbar's row and column actions work from: `row` is -1
+	// for the heading row. Null until a cell has been focused, and again once
+	// the block is left, so an action never works on a cell out of sight.
+	const [ current, setCurrent ] = useState( null );
+	useEffect( () => {
+		if ( ! isSelected ) {
+			setCurrent( null );
+		}
+	}, [ isSelected ] );
+	const [ importing, setImporting ] = useState( false );
+	const [ importFormat, setImportFormat ] = useState( 'csv' );
 	const [ importText, setImportText ] = useState( '' );
+	const [ importError, setImportError ] = useState( '' );
 
-	// Raw text buffers for the Headers/Rows fields. Editing the attribute
-	// arrays directly on every keystroke (parse → stringify round-trip) stripped
-	// trailing spaces and empty lines as you typed, so you literally couldn't
-	// type a space at the end of a label or press Enter to start a new row.
-	// Holding the raw string in local state and parsing into attributes in
-	// parallel keeps the textarea exactly as typed.
-	const [ headerText, setHeaderText ] = useState( () =>
-		stringifyHeaders( headers )
-	);
-	const [ rowText, setRowText ] = useState( () =>
-		stringifyRows( rows, headers )
-	);
+	const columnName = ( h, c ) =>
+		plainText( h.text ) ||
+		sprintf(
+			/* translators: %d: column number. */
+			__( 'Column %d', 'awt-blocks' ),
+			c + 1
+		);
+	const cellLabel = ( h, c, r ) =>
+		sprintf(
+			/* translators: 1: column heading, 2: row number. */
+			__( '%1$s, row %2$d', 'awt-blocks' ),
+			columnName( h, c ),
+			r + 1
+		);
 
-	const onHeaderTextChange = ( v ) => {
-		setHeaderText( v );
-		const newHeaders = parseHeaders( v );
-		// Re-key the rows against the new header set so columns stay aligned.
+	const setCell = ( r, key, value ) =>
 		setAttributes( {
-			headers: newHeaders,
-			rows: parseRows( rowText, newHeaders ),
+			rows: rows.map( ( row, i ) =>
+				i === r ? { ...row, [ key ]: value } : row
+			),
 		} );
+	const setHeading = ( c, text ) =>
+		setAttributes( {
+			headers: headers.map( ( h, i ) =>
+				i === c ? { ...h, text } : h
+			),
+		} );
+
+	const emptyRow = () =>
+		Object.fromEntries( headers.map( ( h ) => [ h.key, '' ] ) );
+	const insertRow = ( at ) => {
+		const next = [ ...rows ];
+		next.splice( at, 0, emptyRow() );
+		setAttributes( { rows: next } );
+		setCurrent( { row: at, col: current?.col ?? 0 } );
+		speak( __( 'Row added.', 'awt-blocks' ) );
 	};
-	const onRowTextChange = ( v ) => {
-		setRowText( v );
-		setAttributes( { rows: parseRows( v, headers ) } );
+	const deleteRow = ( at ) => {
+		setAttributes( { rows: rows.filter( ( _, i ) => i !== at ) } );
+		setCurrent( null );
+		speak( __( 'Row deleted.', 'awt-blocks' ) );
+	};
+	const insertColumn = ( at ) => {
+		const key = newColumnKey( headers );
+		const next = [ ...headers ];
+		next.splice( at, 0, { key, text: '' } );
+		setAttributes( {
+			headers: next,
+			rows: rows.map( ( row ) => ( { ...row, [ key ]: '' } ) ),
+		} );
+		setCurrent( { row: current?.row ?? -1, col: at } );
+		speak( __( 'Column added.', 'awt-blocks' ) );
+	};
+	const deleteColumn = ( at ) => {
+		const { key } = headers[ at ];
+		setAttributes( {
+			headers: headers.filter( ( _, i ) => i !== at ),
+			rows: rows.map( ( row ) => {
+				const { [ key ]: dropped, ...rest } = row; // eslint-disable-line no-unused-vars
+				return rest;
+			} ),
+			...( defaultSortKey === key ? { defaultSortKey: '' } : {} ),
+		} );
+		setCurrent( null );
+		speak( __( 'Column deleted.', 'awt-blocks' ) );
 	};
 
+	// With no cell chosen, new rows and columns go at the end. A cell that
+	// is gone (an undo removed its row or column) counts as none.
+	const known =
+		current && current.row < rows.length && current.col < headers.length
+			? current
+			: null;
+	const row = known?.row ?? null;
+	const col = known?.col ?? null;
+	const tableControls = [
+		{
+			title: __( 'Insert row before', 'awt-blocks' ),
+			icon: ICONS.rowInsert,
+			isDisabled: row === null || row < 0,
+			onClick: () => insertRow( row ),
+		},
+		{
+			title: __( 'Insert row after', 'awt-blocks' ),
+			icon: ICONS.rowInsert,
+			onClick: () => insertRow( row === null ? rows.length : row + 1 ),
+		},
+		{
+			title: __( 'Delete row', 'awt-blocks' ),
+			icon: ICONS.rowDelete,
+			isDisabled: row === null || row < 0,
+			onClick: () => deleteRow( row ),
+		},
+		{
+			title: __( 'Insert column before', 'awt-blocks' ),
+			icon: ICONS.columnInsert,
+			isDisabled: col === null,
+			onClick: () => insertColumn( col ),
+		},
+		{
+			title: __( 'Insert column after', 'awt-blocks' ),
+			icon: ICONS.columnInsert,
+			onClick: () =>
+				insertColumn( col === null ? headers.length : col + 1 ),
+		},
+		{
+			title: __( 'Delete column', 'awt-blocks' ),
+			icon: ICONS.columnDelete,
+			isDisabled: col === null || headers.length < 2,
+			onClick: () => deleteColumn( col ),
+		},
+	];
+
+	const openImport = () => {
+		setImportError( '' );
+		setImporting( true );
+	};
 	const applyImport = () => {
-		const parsed =
-			dataSource === 'html'
-				? parseHtmlTable( importText )
-				: parseMarkdownTable( importText );
+		const parsed = IMPORT_FORMATS[ importFormat ]( importText );
 		if ( ! parsed || ! parsed.headers.length ) {
-			// eslint-disable-next-line no-alert
-			window.alert(
-				dataSource === 'html'
-					? __( 'No <table> found in the pasted HTML.', 'awt-blocks' )
-					: __(
-							'That doesn’t look like a Markdown table. Include a header row and a |---|---| separator row.',
-							'awt-blocks'
-					  )
-			);
+			setImportError( IMPORT_ERROR[ importFormat ] );
 			return;
 		}
-		if ( rows.length ) {
-			// eslint-disable-next-line no-alert -- native confirm is the editor-standard guard for destructive replaces (core uses it too)
-			const ok = window.confirm(
-				__(
-					'Replace the current table data with the pasted content?',
-					'awt-blocks'
-				)
-			);
-			if ( ! ok ) {
-				return;
-			}
-		}
-		setAttributes( { headers: parsed.headers, rows: parsed.rows } );
-		setHeaderText( stringifyHeaders( parsed.headers ) );
-		setRowText( stringifyRows( parsed.rows, parsed.headers ) );
+		setAttributes( {
+			headers: parsed.headers,
+			rows: parsed.rows,
+			...( parsed.headers.some( ( h ) => h.key === defaultSortKey )
+				? {}
+				: { defaultSortKey: '' } ),
+		} );
 		setImportText( '' );
-		setDataSource( 'text' ); // drop back to the inline editors to show the result
+		setImporting( false );
+		setCurrent( null );
+		speak(
+			sprintf(
+				/* translators: %d: how many rows the table has now. */
+				_n(
+					'The table was replaced: %d row.',
+					'The table was replaced: %d rows.',
+					parsed.rows.length,
+					'awt-blocks'
+				),
+				parsed.rows.length
+			)
+		);
 	};
+
+	// Filled from elsewhere, the table shows its content as it is, after the
+	// same clean-up an imported table gets.
+	const shownRows = useMemo(
+		() =>
+			sourceNote
+				? rows.map( ( r ) =>
+						Object.fromEntries(
+							headers.map( ( h ) => [
+								h.key,
+								sanitizeInlineHtml(
+									String( r[ h.key ] ?? '' )
+								),
+							] )
+						)
+				  )
+				: rows,
+		[ sourceNote, rows, headers ]
+	);
+
 	// Mirror render.php class grammar: the SIZE / ZEBRA / STATIC / SORTABLE
 	// modifiers belong on the <table>, not the .cds--data-table-container.
 	// The container only ever carries the optional --sticky-header modifier.
-	// Editor was putting size on the container, so Carbon's per-row height
-	// rules (which key off .cds--data-table--xs / --sm / --md / etc. on
-	// the table) never matched in the editor preview.
 	// Deliberate difference from render.php: the front end gives this container
 	// tabindex="0" so a keyboard user can scroll a table wider than its box
-	// (WCAG 2.1.1). The editor preview does not, because a tab stop on the block
+	// (WCAG 2.1.1). The editor does not, because a tab stop on the block
 	// wrapper competes with the editor's own block-selection focus handling, and
 	// the requirement is about the published page. Do not "restore parity" here
 	// without checking block selection still works.
@@ -305,8 +457,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			stickyHeader ? ' cds--data-table-container--sticky-header' : ''
 		}`,
 	} );
-	// sticky-header lives on the CONTAINER class (blockProps above), not the
-	// table — Carbon's table-level sticky rules break plain-table layout.
 	const tableClasses = [
 		'cds--data-table',
 		`cds--data-table--${ size }`,
@@ -319,6 +469,22 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return (
 		<>
+			{ ! sourceNote && (
+				<BlockControls group="other">
+					<ToolbarGroup>
+						<ToolbarDropdownMenu
+							icon={ ICONS.table }
+							label={ __( 'Rows and columns', 'awt-blocks' ) }
+							controls={ tableControls }
+						/>
+						<ToolbarButton
+							icon={ ICONS.import }
+							label={ __( 'Import data', 'awt-blocks' ) }
+							onClick={ openImport }
+						/>
+					</ToolbarGroup>
+				</BlockControls>
+			) }
 			<InspectorControls>
 				<PanelBody
 					title={ __( 'Data table', 'awt-blocks' ) }
@@ -381,8 +547,8 @@ export default function Edit( { attributes, setAttributes } ) {
 										label: __( 'None', 'awt-blocks' ),
 										value: '',
 									},
-									...headers.map( ( h ) => ( {
-										label: plainText( h.text ),
+									...headers.map( ( h, c ) => ( {
+										label: columnName( h, c ),
 										value: h.key,
 									} ) ),
 								] }
@@ -411,60 +577,16 @@ export default function Edit( { attributes, setAttributes } ) {
 					title={ __( 'Data', 'awt-blocks' ) }
 					initialOpen={ false }
 				>
-					<SelectControl
-						label={ __( 'Data source', 'awt-blocks' ) }
-						value={ dataSource }
-						options={ DATA_SOURCE_OPTIONS }
-						onChange={ setDataSource }
-					/>
-					{ dataSource === 'text' && (
+					{ ! sourceNote && (
 						<>
-							<TextareaControl
-								label={ __(
-									'Headers (one per line: key|label)',
+							<p className="components-base-control__help">
+								{ __(
+									'Type in the table. Add and remove rows and columns, or import CSV, from the block toolbar.',
 									'awt-blocks'
 								) }
-								value={ headerText }
-								onChange={ onHeaderTextChange }
-								rows={ 4 }
-							/>
-							<TextareaControl
-								label={ __(
-									'Rows, one per line (values separated by |, in header order)',
-									'awt-blocks'
-								) }
-								value={ rowText }
-								onChange={ onRowTextChange }
-								rows={ 8 }
-							/>
-						</>
-					) }
-					{ ( dataSource === 'html' ||
-						dataSource === 'markdown' ) && (
-						<>
-							<TextareaControl
-								label={ __( 'Paste content', 'awt-blocks' ) }
-								help={
-									dataSource === 'html'
-										? __(
-												'Paste an HTML <table>. Its header row and body rows become the table data.',
-												'awt-blocks'
-										  )
-										: __(
-												'Paste a Markdown table: a header row, a |---|---| separator row, then data rows.',
-												'awt-blocks'
-										  )
-								}
-								value={ importText }
-								onChange={ setImportText }
-								rows={ 8 }
-							/>
-							<Button
-								variant="primary"
-								onClick={ applyImport }
-								disabled={ ! importText.trim() }
-							>
-								{ __( 'Generate table', 'awt-blocks' ) }
+							</p>
+							<Button variant="secondary" onClick={ openImport }>
+								{ __( 'Import data', 'awt-blocks' ) }
 							</Button>
 						</>
 					) }
@@ -472,57 +594,196 @@ export default function Edit( { attributes, setAttributes } ) {
 						feature="data-sources"
 						attributes={ attributes }
 						setAttributes={ setAttributes }
+						clientId={ clientId }
 						title={ __( 'More data sources', 'awt-blocks' ) }
 						description={ __(
-							'Fill this table from JSON, a REST API, or your own posts and pages. Available in AWT Premium.',
+							'Fill this table from JSON, a REST API, a CSV file, or your own posts and pages. Available in AWT Premium.',
 							'awt-blocks'
 						) }
 					/>
 				</PanelBody>
 			</InspectorControls>
+			{ importing && (
+				<Modal
+					title={ __( 'Import data', 'awt-blocks' ) }
+					onRequestClose={ () => setImporting( false ) }
+				>
+					<div className="awt-data-table__import">
+						<SelectControl
+							__nextHasNoMarginBottom
+							label={ __( 'Format', 'awt-blocks' ) }
+							value={ importFormat }
+							options={ IMPORT_OPTIONS }
+							onChange={ ( v ) => {
+								setImportFormat( v );
+								setImportError( '' );
+							} }
+						/>
+						<TextareaControl
+							__nextHasNoMarginBottom
+							label={ __( 'Paste the data', 'awt-blocks' ) }
+							help={ IMPORT_HELP[ importFormat ] }
+							value={ importText }
+							onChange={ ( v ) => {
+								setImportText( v );
+								setImportError( '' );
+							} }
+							rows={ 10 }
+						/>
+						{ importError && (
+							<Notice status="error" isDismissible={ false }>
+								{ importError }
+							</Notice>
+						) }
+						{ rows.length > 0 && (
+							<p className="components-base-control__help">
+								{ __(
+									'This replaces the rows and columns the table has now.',
+									'awt-blocks'
+								) }
+							</p>
+						) }
+						<Button
+							variant="primary"
+							onClick={ applyImport }
+							disabled={ ! importText.trim() }
+							accessibleWhenDisabled
+						>
+							{ __( 'Replace the table', 'awt-blocks' ) }
+						</Button>
+					</div>
+				</Modal>
+			) }
 			<div { ...blockProps }>
-				<table className={ tableClasses }>
+				{ sourceNote && (
+					<p
+						className="awt-data-table__source-note"
+						style={ SOURCE_NOTE_STYLE }
+					>
+						{ sourceNote }
+					</p>
+				) }
+				{ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- catches link clicks, which Enter on a link also fires. */ }
+				<table
+					className={ tableClasses }
+					onClick={ sourceNote ? guardLinks : undefined }
+				>
 					{ caption && <caption>{ caption }</caption> }
 					<thead>
 						<tr>
-							{ headers.map( ( h ) => (
-								// Wrap header text in Carbon's label span (as render.php does)
-								// so the XL-size `.cds--table-header-label{display:block}`
-								// rule can align header text with body cells. Content is
-								// re-sanitized here so typed/imported inline formatting renders.
+							{ headers.map( ( h, c ) => (
+								// Carbon's label span, as render.php writes it, so the
+								// XL-size `.cds--table-header-label{display:block}` rule
+								// aligns heading text with the cells below.
 								<th key={ h.key } scope="col">
-									<span
-										className="cds--table-header-label"
-										dangerouslySetInnerHTML={ {
-											__html: sanitizeInlineHtml(
-												String( h.text || '' )
-											),
-										} }
-									/>
+									{ sourceNote ? (
+										<RichText.Content
+											tagName="span"
+											className="cds--table-header-label"
+											value={ sanitizeInlineHtml(
+												h.text || ''
+											) }
+										/>
+									) : (
+										<RichText
+											tagName="span"
+											className="cds--table-header-label"
+											value={ h.text || '' }
+											onChange={ ( v ) =>
+												setHeading( c, v )
+											}
+											allowedFormats={ CELL_FORMATS }
+											placeholder={
+												isSelected
+													? __(
+															'Heading',
+															'awt-blocks'
+													  )
+													: undefined
+											}
+											aria-label={ sprintf(
+												/* translators: %d: column number. */
+												__(
+													'Column %d heading',
+													'awt-blocks'
+												),
+												c + 1
+											) }
+											onFocus={ () =>
+												setCurrent( {
+													row: -1,
+													col: c,
+												} )
+											}
+										/>
+									) }
 								</th>
 							) ) }
 						</tr>
 					</thead>
 					<tbody>
-						{ rows.map( ( r, idx ) => (
-							<tr key={ idx }>
-								{ headers.map( ( h ) =>
-									h.cellType === 'boolean' ? (
+						{ shownRows.map( ( r, i ) => (
+							<tr key={ i }>
+								{ headers.map( ( h, c ) => {
+									if ( sourceNote ) {
+										return h.cellType === 'boolean' ? (
+											<StaticBooleanCell
+												key={ h.key }
+												value={ r[ h.key ] }
+											/>
+										) : (
+											<RichText.Content
+												key={ h.key }
+												tagName="td"
+												value={ String(
+													r[ h.key ] ?? ''
+												) }
+											/>
+										);
+									}
+									return h.cellType === 'boolean' ? (
 										<BooleanCell
 											key={ h.key }
 											value={ r[ h.key ] }
+											label={ cellLabel( h, c, i ) }
+											onChange={ ( v ) =>
+												setCell( i, h.key, v )
+											}
+											onFocus={ () =>
+												setCurrent( { row: i, col: c } )
+											}
 										/>
 									) : (
+										// eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- a mouse shortcut to the text box inside, which Tab reaches.
 										<td
 											key={ h.key }
-											dangerouslySetInnerHTML={ {
-												__html: sanitizeInlineHtml(
-													String( r[ h.key ] || '' )
-												),
-											} }
-										/>
-									)
-								) }
+											onClick={ focusCellText }
+										>
+											<RichText
+												tagName="div"
+												style={ CELL_TEXT_STYLE }
+												value={ String(
+													r[ h.key ] ?? ''
+												) }
+												onChange={ ( v ) =>
+													setCell( i, h.key, v )
+												}
+												allowedFormats={ CELL_FORMATS }
+												aria-label={ cellLabel(
+													h,
+													c,
+													i
+												) }
+												onFocus={ () =>
+													setCurrent( {
+														row: i,
+														col: c,
+													} )
+												}
+											/>
+										</td>
+									);
+								} ) }
 							</tr>
 						) ) }
 					</tbody>
