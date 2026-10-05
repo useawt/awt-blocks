@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- When a visitor picks an option in the Dropdown block, it now fires a `change` event on its form field and an
+  `awt:dropdown-change` event with the option's value and label.
+
 ## 2026.10.0 (2026-10-03)
 
 ### [New]

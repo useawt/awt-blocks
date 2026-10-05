@@ -239,4 +239,52 @@ test.describe( 'Dropdown keyboard contract', () => {
 		expect( s.expanded ).toBe( 'true' );
 		expect( s.highlightedText ).toBe( options[ 0 ] );
 	} );
+
+	test( 'a new choice tells the page, and re-choosing it does not', async ( {
+		page,
+	} ) => {
+		// Record both events the page can listen for. Setting the hidden input's
+		// value from script fires nothing on its own, so a chart or form script
+		// would never hear the choice without these.
+		await page.evaluate( ( sel ) => {
+			const dd = document.querySelector( sel );
+			window.__ddEvents = [];
+			dd.addEventListener( 'awt:dropdown-change', ( e ) =>
+				window.__ddEvents.push( { type: e.type, ...e.detail } )
+			);
+			dd.querySelector( 'input[type="hidden"]' ).addEventListener(
+				'change',
+				( e ) =>
+					window.__ddEvents.push( {
+						type: e.type,
+						value: e.target.value,
+					} )
+			);
+		}, ROOT );
+
+		await page.keyboard.press( 'ArrowDown' );
+		await page.keyboard.press( 'ArrowDown' );
+		await page.keyboard.press( 'Enter' );
+
+		const chosen = await page.evaluate( ( sel ) => {
+			const dd = document.querySelector( sel );
+			const opt = dd.querySelector( '[aria-selected="true"]' );
+			return {
+				value: opt.dataset.value,
+				label: opt.textContent.trim(),
+			};
+		}, ROOT );
+		expect( await page.evaluate( () => window.__ddEvents ) ).toEqual( [
+			{ type: 'change', value: chosen.value },
+			{ type: 'awt:dropdown-change', ...chosen },
+		] );
+
+		// Opening lands on the chosen option, so Enter re-chooses it: no change.
+		await page.keyboard.press( 'ArrowDown' );
+		await page.keyboard.press( 'Enter' );
+		expect(
+			await page.evaluate( () => window.__ddEvents.length ),
+			're-choosing the same option is not a change'
+		).toBe( 2 );
+	} );
 } );

@@ -5,6 +5,10 @@
  * positions the listbox; installOutsideDismiss closes on outside-click,
  * Escape, or focus moving outside. Selection updates the trigger's display
  * value + the hidden <input> that participates in form submission.
+ *
+ * A new choice fires a native `change` on the hidden input and an
+ * `awt:dropdown-change` CustomEvent (detail: { value, label }) on the
+ * `.cds--dropdown` root, both bubbling, for app/JS consumers.
  */
 
 import { store, getElement, withSyncEvent } from '@wordpress/interactivity';
@@ -151,14 +155,35 @@ function selectOption( parts, el ) {
 		o.setAttribute( 'aria-selected', String( o === el ) );
 		o.classList.toggle( ACTIVE, o === el );
 	} );
+	const label = el.textContent.trim();
+	const value = el.dataset.value || '';
 	const labelEl = parts.root.querySelector( '.cds--list-box__label' );
 	if ( labelEl ) {
-		labelEl.textContent = el.textContent.trim();
+		labelEl.textContent = label;
 	}
+	const changed = parts.hidden ? parts.hidden.value !== value : true;
 	if ( parts.hidden ) {
-		parts.hidden.value = el.dataset.value || '';
+		parts.hidden.value = value;
 	}
 	close( parts, /* returnFocus */ true );
+
+	// Tell the page about the choice, the way the content switcher and menu
+	// button do. Setting `.value` from script fires nothing, so without this a
+	// chart or a form script listening on the hidden input never hears it.
+	// Re-choosing the option already chosen is not a change, matching a native
+	// <select>.
+	if ( ! changed ) {
+		return;
+	}
+	if ( parts.hidden ) {
+		parts.hidden.dispatchEvent( new Event( 'change', { bubbles: true } ) );
+	}
+	parts.root.dispatchEvent(
+		new CustomEvent( 'awt:dropdown-change', {
+			detail: { value, label },
+			bubbles: true,
+		} )
+	);
 }
 
 function getParts( ref ) {
