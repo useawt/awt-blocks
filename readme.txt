@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.0
+Stable tag: 2026.10.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.1 (2026-10-05) =
+* [Improvement] When a visitor picks an option in the Dropdown block, it now fires a `change` event on its form field and an `awt:dropdown-change` event with the option's value and label.
+
 = 2026.10.0 (2026-10-03) =
 * [New] WordPress's List, Table and Code blocks can now be turned into AWT's List, Data table and Code snippet blocks, and back, from the block toolbar's Transform to menu.
 * [Improvement] Every AWT block has its own icon in the block inserter, the block toolbar and List View.
@@ -361,7 +364,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.35 — 2026-09-23 =
 * [Improvement] Images you crop in the Media Library now show cropped everywhere, including as featured images.
-
-= 2026.09.34 — 2026-09-23 =
-* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 <!-- CHANGELOG_END -->
