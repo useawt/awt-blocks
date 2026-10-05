@@ -24,7 +24,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 FAIL=0
 
 # Block slugs reserved for AWT Premium — never ship as an implementation here.
-PREMIUM_BLOCKS=("header-search")
+PREMIUM_BLOCKS=("header-search" "chart" "timeline" "timeline-item")
 
 for base in "src" "build"; do
   dir="$ROOT/$base"
