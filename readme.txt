@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.1
+Stable tag: 2026.10.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.2 (2026-10-07) =
+* [New] Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
+
 = 2026.10.1 (2026-10-05) =
 * [Improvement] When a visitor picks an option in the Dropdown block, it now fires a `change` event on its form field and an `awt:dropdown-change` event with the option's value and label.
 
@@ -361,7 +364,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.09.36 (2026-09-26) =
 * [Improvement] Text improvements to admin pages and authoring experience.
 * [Improvement] Other small improvements.
-
-= 2026.09.35 — 2026-09-23 =
-* [Improvement] Images you crop in the Media Library now show cropped everywhere, including as featured images.
 <!-- CHANGELOG_END -->
