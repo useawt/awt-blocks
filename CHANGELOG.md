@@ -15,15 +15,8 @@
 ### [New]
 
 - Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and
-  imports data you paste: CSV (separated by commas, semicolons or tabs, so a spreadsheet copy works), an HTML
-  table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
-
-### [Improvement]
-
-- For developers: new filters let a plugin fill a Data table or a List with its own rows
-  (`awt_data_table_data`, `awt_list_items`, and `awt.dataSourceNote` in the editor), add its own checks to
-  the accessibility checker (`awt.linterChecks`), and add to a Stat block's number (`awt_stat_after_value`,
-  `awt.statAfterValue`).
+  imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a
+  Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
 
 ## 2026.10.1 (2026-10-05)
 
