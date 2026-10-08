@@ -69,6 +69,54 @@ test.describe( 'Decorative images', () => {
 		} );
 	}
 
+	// Before WordPress 7.1 the Image block had no "Mark as decorative" of its
+	// own, so AWT gives it one, and an Image marked there is saved without
+	// the `role="none"` that 7.1 writes. 7.1 reads that as an older Image
+	// block and used to drop the mark on the way, bringing the error back
+	// (awt-workspace #25). This markup is what 6.6 to 7.0 save.
+	test( 'an Image marked decorative before WordPress 7.1 keeps the mark', async ( {
+		admin,
+		editor,
+		page,
+		requestUtils,
+	} ) => {
+		const { id } = await requestUtils.createPost( {
+			title: 'Decorative image saved before WordPress 7.1',
+			content:
+				'<!-- wp:image {"isDecorative":true} -->\n' +
+				'<figure class="wp-block-image"><img src="https://example.com/decorative.png" alt=""/></figure>\n' +
+				'<!-- /wp:image -->',
+		} );
+		await admin.visitAdminPage( 'post.php', `post=${ id }&action=edit` );
+
+		await expect
+			.poll( () =>
+				page.evaluate( () => {
+					const [ image ] =
+						window.wp?.data
+							?.select( 'core/block-editor' )
+							.getBlocks() ?? [];
+					return (
+						image && {
+							isValid: image.isValid,
+							isDecorative: image.attributes.isDecorative,
+						}
+					);
+				} )
+			)
+			.toEqual( { isValid: true, isDecorative: true } );
+
+		await expect
+			.poll( async () => page.evaluate( ALT_FINDINGS ), {
+				message: 'the image is still marked, so nothing to report',
+			} )
+			.toBe( 0 );
+
+		await selectOuterBlock( page );
+		await editor.openDocumentSettingsSidebar();
+		await expect( page.getByLabel( 'Mark as decorative' ) ).toBeChecked();
+	} );
+
 	test( 'the alt text help names what it links to and what else to do', async ( {
 		admin,
 		editor,

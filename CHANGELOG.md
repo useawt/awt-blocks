@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [A11y]
+
+- Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update
+  to WordPress 7.1.
+
 ## 2026.10.3 (2026-10-08)
 
 ### [Improvement]
