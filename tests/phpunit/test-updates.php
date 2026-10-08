@@ -122,6 +122,22 @@ class Test_Updates extends WP_UnitTestCase {
 
 		$this->assertInstanceOf( WP_Error::class, $result );
 		$this->assertStringContainsString( 'useawt.com/faq/#updating', $result->get_error_message() );
+		$this->assertStringContainsString( 'Plugins → Add Plugin → Upload Plugin and choose "Replace current with uploaded"', $result->get_error_message() );
+	}
+
+	/**
+	 * Before WordPress 6.8 the button was "Add New Plugin", and the message
+	 * names the one the site shows.
+	 */
+	public function test_a_manual_update_names_the_older_button(): void {
+		global $wp_version;
+		$saved = $wp_version;
+
+		$wp_version = '6.7.2'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- restored below.
+		$result     = Updates\explain_manual_update( false, '', null, array( 'plugin' => plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE ) ) );
+		$wp_version = $saved; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- restoring.
+
+		$this->assertStringContainsString( 'Plugins → Add New Plugin → Upload Plugin', $result->get_error_message() );
 	}
 
 	/**

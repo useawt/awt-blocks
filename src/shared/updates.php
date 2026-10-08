@@ -636,11 +636,17 @@ function explain_manual_update( $reply, $package, $upgrader, $hook_extra = array
 		return $reply;
 	}
 
+	// WordPress 6.8 renamed "Add New Plugin" to "Add Plugin"; name the button
+	// this site shows. "Replace current with uploaded" has not changed.
+	$add = version_compare( get_bloginfo( 'version' ), '6.8-alpha', '>=' )
+		? __( 'Add Plugin', 'awt-blocks' )
+		: __( 'Add New Plugin', 'awt-blocks' );
 	return new \WP_Error(
 		'awt_manual_update',
 		sprintf(
-			/* translators: %s: URL of the update instructions. */
-			__( 'This version can\'t be downloaded automatically. Download it from the AWT website, then go to Plugins → Add Plugin → Upload Plugin and choose "Replace current with uploaded". Your settings and content are kept. %s', 'awt-blocks' ),
+			/* translators: 1: WordPress's "Add Plugin" button. 2: URL of the update instructions. */
+			__( 'This version can\'t be downloaded automatically. Download it from the AWT website, then go to Plugins → %1$s → Upload Plugin and choose "Replace current with uploaded". Your settings and content are kept. %2$s', 'awt-blocks' ),
+			$add,
 			'https://useawt.com/faq/#updating'
 		)
 	);
