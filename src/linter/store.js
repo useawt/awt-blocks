@@ -9,12 +9,17 @@ import { createReduxStore, register } from '@wordpress/data';
 
 export const LINTER_STORE = 'awt/linter';
 
-const DEFAULT_STATE = { findings: [] };
+// `scopeColors`: what each palette color and token looks like in each Carbon
+// theme, read from the canvas (`scope-colors.js`); null until it can be read.
+const DEFAULT_STATE = { findings: [], scopeColors: null };
 
 const store = createReduxStore( LINTER_STORE, {
 	reducer( state = DEFAULT_STATE, action ) {
 		if ( action.type === 'SET_FINDINGS' ) {
 			return { ...state, findings: action.findings };
+		}
+		if ( action.type === 'SET_SCOPE_COLORS' ) {
+			return { ...state, scopeColors: action.scopeColors };
 		}
 		return state;
 	},
@@ -22,10 +27,16 @@ const store = createReduxStore( LINTER_STORE, {
 		setFindings( findings ) {
 			return { type: 'SET_FINDINGS', findings };
 		},
+		setScopeColors( scopeColors ) {
+			return { type: 'SET_SCOPE_COLORS', scopeColors };
+		},
 	},
 	selectors: {
 		getFindings( state ) {
 			return state.findings;
+		},
+		getScopeColors( state ) {
+			return state.scopeColors;
 		},
 		getFindingsForBlock( state, clientId ) {
 			return state.findings.filter( ( f ) => f.clientId === clientId );

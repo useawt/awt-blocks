@@ -63,15 +63,46 @@ function toRgb( color ) {
 }
 
 /**
+ * How opaque a color is, 0 to 1: the alpha of rgba() or of 8-digit hex.
+ * @param {string} color CSS color string.
+ */
+export function alphaOf( color ) {
+	const v = String( color ).trim();
+	const rgba = v.match(
+		/^rgba?\(\s*\d+[,\s]+\d+[,\s]+\d+\s*[,/]\s*([\d.]+)(%?)\s*\)$/i
+	);
+	if ( rgba ) {
+		const a = parseFloat( rgba[ 1 ] ) / ( rgba[ 2 ] ? 100 : 1 );
+		return Number.isFinite( a ) ? Math.min( 1, Math.max( 0, a ) ) : 1;
+	}
+	const hex = v.replace( /^#/, '' );
+	if ( /^[0-9a-f]{8}$/i.test( hex ) ) {
+		return parseInt( hex.slice( 6, 8 ), 16 ) / 255;
+	}
+	return 1;
+}
+
+/**
  * WCAG contrast ratio between two colors (hex or rgb()). null if unparseable.
- * @param {string} colorA First color (hex or rgb()).
- * @param {string} colorB Second color (hex or rgb()).
+ *
+ * The first color is the one in front. When it is see-through (Carbon's
+ * placeholder and disabled text are), it is mixed with the second first, the
+ * way the browser paints it; judging it as solid overstated its contrast.
+ *
+ * @param {string} colorA Color in front, e.g. the text (hex or rgb()).
+ * @param {string} colorB Color behind it, e.g. the background (hex or rgb()).
  */
 export function ratio( colorA, colorB ) {
-	const a = toRgb( colorA );
+	let a = toRgb( colorA );
 	const b = toRgb( colorB );
 	if ( ! a || ! b ) {
 		return null;
+	}
+	const alpha = alphaOf( colorA );
+	if ( alpha < 1 ) {
+		a = a.map( ( c, i ) =>
+			Math.round( c * alpha + b[ i ] * ( 1 - alpha ) )
+		);
 	}
 	const la = relativeLuminance( a ) + 0.05;
 	const lb = relativeLuminance( b ) + 0.05;

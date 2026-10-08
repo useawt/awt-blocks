@@ -9,16 +9,19 @@
  *   - AA pass/fail badges for normal and large text;
  *   - a warning when the pair fails AA.
  *
- * Effective colors resolve own textColor/backgroundColor (palette slug or
- * custom hex), falling back to the nearest ancestor's background and finally to
- * Carbon's default text/surface (#161616 on #ffffff) — which passes, so the
- * warning only appears once an author-chosen pair actually fails.
+ * The colors are the ones the block is really shown with (`linter/surfaces.js`):
+ * its own text and background, else what it inherits and the surface behind
+ * it, in every color theme a visitor can see it in. A palette color takes its
+ * value in that theme (it follows light and dark), so on a site that shows
+ * both, the preview gives one result for light mode and one for dark mode.
+ * Without the AWT theme's colors it judges the palette's own values against
+ * Carbon's default text and surface (#161616 on #ffffff), as it always did.
  */
 
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { Fragment } from '@wordpress/element';
+import { Fragment, useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
 	InspectorControls,
@@ -26,44 +29,12 @@ import {
 } from '@wordpress/block-editor';
 import { getBlockType } from '@wordpress/blocks';
 import { ratio } from './linter/wcag';
+import { surfaces, isDarkScope } from './linter/surfaces';
+import { editorSchemes } from './linter/scope-colors';
+import { LINTER_STORE } from './linter/store';
 
 const DEFAULT_TEXT = '#161616'; // Carbon text-primary
 const DEFAULT_BG = '#ffffff'; // Carbon background
-
-function slugFromVar( v ) {
-	const m = String( v ).match( /\|([^|]+)$/ );
-	return m ? m[ 1 ] : null;
-}
-
-function resolveValue( value, colors ) {
-	if ( ! value ) {
-		return null;
-	}
-	if ( value[ 0 ] === '#' || /^rgba?\(/i.test( value ) ) {
-		return value;
-	}
-	if ( value.indexOf( 'var:preset|color|' ) === 0 ) {
-		const s = slugFromVar( value );
-		return s && colors[ s ] ? colors[ s ] : null;
-	}
-	return colors[ value ] || null;
-}
-
-function ownText( attrs, colors ) {
-	if ( attrs.textColor && colors[ attrs.textColor ] ) {
-		return colors[ attrs.textColor ];
-	}
-	const s = attrs.style && attrs.style.color;
-	return s && s.text ? resolveValue( s.text, colors ) : null;
-}
-
-function ownBg( attrs, colors ) {
-	if ( attrs.backgroundColor && colors[ attrs.backgroundColor ] ) {
-		return colors[ attrs.backgroundColor ];
-	}
-	const s = attrs.style && attrs.style.color;
-	return s && s.background ? resolveValue( s.background, colors ) : null;
-}
 
 function Badge( { ok, label } ) {
 	return (
@@ -77,6 +48,48 @@ function Badge( { ok, label } ) {
 	);
 }
 
+function Result( { text, bg, label } ) {
+	const r = ratio( text, bg );
+	const ratioText = r
+		? `${ r.toFixed( 2 ) }:1`
+		: __( 'Unknown', 'awt-blocks' );
+	const passNormal = r !== null && r >= 4.5;
+	const passLarge = r !== null && r >= 3.0;
+
+	return (
+		<div className="awt-contrast__result">
+			{ label && <p className="awt-contrast__mode">{ label }</p> }
+			<p className="awt-contrast__ratio">
+				{ __( 'Contrast ratio:', 'awt-blocks' ) }{ ' ' }
+				<strong>{ ratioText }</strong>
+			</p>
+			<div className="awt-contrast__badges">
+				<Badge
+					ok={ passNormal }
+					label={ __( 'AA normal text', 'awt-blocks' ) }
+				/>
+				<Badge
+					ok={ passLarge }
+					label={ __( 'AA large text', 'awt-blocks' ) }
+				/>
+			</div>
+			{ ! passNormal && (
+				<p className="awt-contrast__warn">
+					{ passLarge
+						? __(
+								'Passes for large text only (24px and up, or 18.66px and up if bold). Normal-size text needs more contrast to pass WCAG AA.',
+								'awt-blocks'
+						  )
+						: __(
+								'Not enough contrast for WCAG AA (needs 4.5:1 for normal text, 3:1 for large text). Choose colors with more contrast.',
+								'awt-blocks'
+						  ) }
+				</p>
+			) }
+		</div>
+	);
+}
+
 const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		const type = getBlockType( props.name );
@@ -86,76 +99,82 @@ const withContrastPreview = createHigherOrderComponent( ( BlockEdit ) => {
 			type.supports.color
 		);
 
-		const { colors, ancestorBg } = useSelect(
+		const scopeColors = useSelect(
+			( select ) => select( LINTER_STORE ).getScopeColors(),
+			[]
+		);
+		// A string, so the component only re-renders when a result changes.
+		const viewsKey = useSelect(
 			( select ) => {
+				if ( ! supportsColor ) {
+					return '';
+				}
 				const be = select( blockEditorStore );
-				const map = {};
+				const colors = {};
 				( be.getSettings().colors || [] ).forEach( ( c ) => {
 					if ( c && c.slug && c.color ) {
-						map[ c.slug ] = c.color;
+						colors[ c.slug ] = c.color;
 					}
 				} );
-				let abg = null;
-				const parents = be.getBlockParents( props.clientId, true );
-				for ( const pid of parents ) {
-					const pb = be.getBlock( pid );
-					const b = pb ? ownBg( pb.attributes || {}, map ) : null;
-					if ( b ) {
-						abg = b;
-						break;
-					}
-				}
-				return { colors: map, ancestorBg: abg };
+				const block = be.getBlock( props.clientId ) || {
+					name: props.name,
+					attributes: props.attributes,
+				};
+				const ancestors = be
+					.getBlockParents( props.clientId, true )
+					.map( ( id ) => be.getBlock( id ) )
+					.filter( Boolean );
+				return JSON.stringify(
+					surfaces( block, ancestors, {
+						colors,
+						scopeColors,
+						schemes: editorSchemes(),
+					} )
+				);
 			},
-			[ props.clientId ]
+			[
+				props.clientId,
+				props.name,
+				props.attributes,
+				supportsColor,
+				scopeColors,
+			]
+		);
+		const views = useMemo(
+			() => ( viewsKey ? JSON.parse( viewsKey ) : [] ),
+			[ viewsKey ]
 		);
 
 		if ( ! supportsColor ) {
 			return <BlockEdit { ...props } />;
 		}
 
-		const attrs = props.attributes || {};
-		const text = ownText( attrs, colors ) || DEFAULT_TEXT;
-		const bg = ownBg( attrs, colors ) || ancestorBg || DEFAULT_BG;
-		const r = ratio( text, bg );
-		const ratioText = r
-			? `${ r.toFixed( 2 ) }:1`
-			: __( 'Unknown', 'awt-blocks' );
-		const passNormal = r !== null && r >= 4.5;
-		const passLarge = r !== null && r >= 3.0;
+		// Name the mode when there is more than one, or when the only one is
+		// dark, so the numbers are never read as the light ones.
+		const named =
+			views.length > 1 || views.some( ( v ) => isDarkScope( v.scope ) );
 
 		return (
 			<Fragment>
 				<BlockEdit { ...props } />
 				<InspectorControls group="color">
 					<div className="awt-contrast">
-						<p className="awt-contrast__ratio">
-							{ __( 'Contrast ratio:', 'awt-blocks' ) }{ ' ' }
-							<strong>{ ratioText }</strong>
-						</p>
-						<div className="awt-contrast__badges">
-							<Badge
-								ok={ passNormal }
-								label={ __( 'AA normal text', 'awt-blocks' ) }
-							/>
-							<Badge
-								ok={ passLarge }
-								label={ __( 'AA large text', 'awt-blocks' ) }
-							/>
-						</div>
-						{ ! passNormal && (
-							<p className="awt-contrast__warn">
-								{ passLarge
-									? __(
-											'Passes for large text only (24px and up, or 18.66px and up if bold). Normal-size text needs more contrast to pass WCAG AA.',
-											'awt-blocks'
-									  )
-									: __(
-											'Not enough contrast for WCAG AA (needs 4.5:1 for normal text, 3:1 for large text). Choose colors with more contrast.',
-											'awt-blocks'
-									  ) }
-							</p>
-						) }
+						{ views.map( ( v, i ) => {
+							let label = null;
+							if ( named && v.scope ) {
+								label = isDarkScope( v.scope )
+									? __( 'Dark mode', 'awt-blocks' )
+									: __( 'Light mode', 'awt-blocks' );
+							}
+							return (
+								<Result
+									key={ v.scope || i }
+									text={ v.text || DEFAULT_TEXT }
+									bg={ v.bg || v.pageBg || DEFAULT_BG }
+									label={ label }
+								/>
+							);
+						} ) }
 					</div>
 				</InspectorControls>
 			</Fragment>

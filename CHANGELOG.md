@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The contrast check in the Color panel and the accessibility checks now judge colors in light and dark
+  mode, the way your site shows them, and say which mode fails.
+
 ## 2026.10.2 (2026-10-07)
 
 ### [New]

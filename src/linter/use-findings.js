@@ -13,7 +13,9 @@ import { useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { applyFilters } from '@wordpress/hooks';
 import { store as blockEditorStore } from '@wordpress/block-editor';
-import { runChecks, blockBg, ALL_CHECKS, SEVERITY } from './checks';
+import { runChecks, ALL_CHECKS, SEVERITY } from './checks';
+import { LINTER_STORE } from './store';
+import { editorSchemes } from './scope-colors';
 
 /**
  * The checks to run. `awt.linterChecks` lets another plugin add checks for its
@@ -40,7 +42,13 @@ function siteDocumentLang() {
 }
 
 export function useFindings() {
-	const { blocks, colors, effectiveBg, documentLang } = useSelect(
+	// Read on its own: the selector below must not touch the linter store,
+	// which this hook writes to, or every write would run it again.
+	const scopeColors = useSelect(
+		( select ) => select( LINTER_STORE ).getScopeColors(),
+		[]
+	);
+	const { blocks, colors, ancestors, documentLang } = useSelect(
 		( select ) => {
 			const be = select( blockEditorStore );
 			const settings = be.getSettings();
@@ -70,37 +78,21 @@ export function useFindings() {
 				.map( ( id ) => be.getBlock( id ) )
 				.filter( Boolean );
 
-			// Effective background per block: its own, else the nearest ancestor's.
-			// getBlockParents(id, true) is ordered nearest-first.
-			const bg = {};
-			const ownBgCache = {};
-			const ownBg = ( id, b ) => {
-				if ( ! ( id in ownBgCache ) ) {
-					ownBgCache[ id ] = blockBg( b, colorMap );
-				}
-				return ownBgCache[ id ];
-			};
+			// Ancestors per block, nearest first (getBlockParents(id, true)),
+			// so the contrast checks can find the surface and the theme each
+			// block sits in.
+			const parents = {};
 			list.forEach( ( b ) => {
-				let resolved = ownBg( b.clientId, b );
-				if ( ! resolved ) {
-					const parents = be.getBlockParents( b.clientId, true );
-					for ( const pid of parents ) {
-						const pbg = ownBg( pid, be.getBlock( pid ) || {} );
-						if ( pbg ) {
-							resolved = pbg;
-							break;
-						}
-					}
-				}
-				if ( resolved ) {
-					bg[ b.clientId ] = resolved;
-				}
+				parents[ b.clientId ] = be
+					.getBlockParents( b.clientId, true )
+					.map( ( pid ) => be.getBlock( pid ) )
+					.filter( Boolean );
 			} );
 
 			return {
 				blocks: list,
 				colors: colorMap,
-				effectiveBg: bg,
+				ancestors: parents,
 				documentLang: effectiveLang,
 			};
 		},
@@ -114,11 +106,13 @@ export function useFindings() {
 				{
 					flat: true,
 					colors,
-					effectiveBg,
+					ancestors,
+					scopeColors,
+					schemes: editorSchemes(),
 					documentLang,
 				},
 				checks()
 			),
-		[ blocks, colors, effectiveBg, documentLang ]
+		[ blocks, colors, ancestors, scopeColors, documentLang ]
 	);
 }

@@ -217,10 +217,24 @@ add_action(
 			// The linter's document-lang check uses this rather than the editor
 			// canvas iframe, which doesn't replicate language_attributes() and
 			// would otherwise produce a false "language not set" on every page.
+			//
+			// `colorScheme`, from the AWT theme: its light and dark Carbon themes
+			// and which of the two visitors can see. The contrast preview and the
+			// linter judge each block in those; null under another theme.
+			$color_scheme = null;
+			if ( function_exists( '\\AWT\\Theme\\theme_scopes' ) && function_exists( '\\AWT\\Theme\\visitor_schemes' ) ) {
+				$color_scheme = array(
+					'scopes'  => \AWT\Theme\theme_scopes(),
+					'schemes' => \AWT\Theme\visitor_schemes(),
+				);
+			}
 			wp_localize_script(
 				'awt-editor',
 				'awtEditorData',
-				array( 'documentLang' => get_bloginfo( 'language' ) )
+				array(
+					'documentLang' => get_bloginfo( 'language' ),
+					'colorScheme'  => $color_scheme,
+				)
 			);
 
 			$editor_css = __DIR__ . '/build/index.css';

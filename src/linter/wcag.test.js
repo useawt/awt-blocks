@@ -4,7 +4,13 @@
  * is exactly 21:1, identical colors are exactly 1:1.
  */
 
-import { hexToRgb, rgbStringToRgb, relativeLuminance, ratio } from './wcag';
+import {
+	hexToRgb,
+	rgbStringToRgb,
+	relativeLuminance,
+	ratio,
+	alphaOf,
+} from './wcag';
 
 describe( 'hexToRgb', () => {
 	test( 'parses 6-digit hex with and without #', () => {
@@ -73,5 +79,23 @@ describe( 'ratio', () => {
 	test( 'unparseable input returns null, not NaN', () => {
 		expect( ratio( 'banana', '#fff' ) ).toBeNull();
 		expect( ratio( '#fff', undefined ) ).toBeNull();
+	} );
+} );
+
+describe( 'see-through colors', () => {
+	test( 'alphaOf reads rgba() and 8-digit hex', () => {
+		expect( alphaOf( 'rgba(22, 22, 22, 0.4)' ) ).toBeCloseTo( 0.4 );
+		expect( alphaOf( '#16161640' ) ).toBeCloseTo( 0.251, 2 );
+		expect( alphaOf( '#161616' ) ).toBe( 1 );
+		expect( alphaOf( 'rgb(22, 22, 22)' ) ).toBe( 1 );
+	} );
+
+	test( 'a see-through text color is mixed with the background first', () => {
+		// Carbon White's placeholder text paints as about #a2a2a2 on white.
+		const r = ratio( 'rgba(22, 22, 22, 0.4)', '#ffffff' );
+		expect( r ).toBeGreaterThan( 2.5 );
+		expect( r ).toBeLessThan( 2.65 );
+		// Judged as solid it would have been 18.1:1.
+		expect( ratio( '#16161640', '#ffffff' ) ).toBeLessThan( 2 );
 	} );
 } );

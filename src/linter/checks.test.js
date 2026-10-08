@@ -352,6 +352,141 @@ describe( '#12 color contrast (Error)', () => {
 	} );
 } );
 
+describe( '#12 and #17 in light and dark', () => {
+	// What the canvas reports for Carbon White and g100 (scope-colors.js).
+	const SCOPE_COLORS = {
+		palette: {
+			white: { 'text-secondary': '#525252', 'layer-01': '#f4f4f4' },
+			g100: { 'text-secondary': '#c6c6c6', 'layer-01': '#262626' },
+		},
+		tokens: {
+			white: {
+				background: '#ffffff',
+				'text-primary': '#161616',
+				'layer-01': '#f4f4f4',
+			},
+			g100: {
+				background: '#161616',
+				'text-primary': '#f4f4f4',
+				'layer-01': '#262626',
+			},
+		},
+	};
+	const BOTH = { light: 'white', dark: 'g100', visitor: [ 'white', 'g100' ] };
+	const LIGHT_ONLY = { light: 'white', dark: 'g100', visitor: [ 'white' ] };
+	const themed = ( schemes = BOTH ) =>
+		ctx( {
+			colors: { ...COLORS, 'text-secondary': '#525252' },
+			scopeColors: SCOPE_COLORS,
+			schemes,
+		} );
+	const finding = ( f, id ) => f.find( ( x ) => x.checkId === id );
+
+	test( 'a palette color on a custom white background fails only in dark mode', () => {
+		// #c6c6c6 on #fff is 1.71:1; #525252 on #fff is 7.81:1.
+		const f = runChecks(
+			[
+				B( 'core/paragraph', {
+					textColor: 'text-secondary',
+					style: { color: { background: '#ffffff' } },
+					content: 'hi',
+				} ),
+			],
+			themed()
+		);
+		expect( finding( f, 12 ).title ).toBe(
+			'Text contrast is too low in dark mode (1.7:1)'
+		);
+	} );
+	test( 'a palette color in a dark section is judged at its dark value', () => {
+		// Light value on #161616 would be 2.32:1; the dark one is 10.59:1.
+		const tree = [
+			B( 'awt/section', { themeScope: 'g100' }, [
+				B( 'core/paragraph', {
+					textColor: 'text-secondary',
+					content: 'hi',
+				} ),
+			] ),
+		];
+		expect( has( runChecks( tree, themed() ), 12 ) ).toBe( false );
+	} );
+	test( 'a custom color in a dark section fails against the section', () => {
+		const tree = [
+			B( 'awt/section', { themeScope: 'g100' }, [
+				B( 'core/paragraph', {
+					style: { color: { text: '#525252' } },
+					content: 'hi',
+				} ),
+			] ),
+		];
+		// One theme only, so the title names no mode.
+		expect( finding( runChecks( tree, themed() ), 12 ).title ).toBe(
+			'Text contrast is too low (2.3:1)'
+		);
+	} );
+	test( 'a custom color on the page fails where the site shows dark mode', () => {
+		const block = () =>
+			B( 'core/paragraph', {
+				style: { color: { text: '#333333' } },
+				content: 'hi',
+			} );
+		expect(
+			finding( runChecks( [ block() ], themed() ), 12 ).title
+		).toMatch( /in dark mode/ );
+		expect(
+			has( runChecks( [ block() ], themed( LIGHT_ONLY ) ), 12 )
+		).toBe( false );
+	} );
+	test( 'text in a template part with no background set is not judged', () => {
+		const tree = [
+			B( 'core/template-part', { slug: 'footer' }, [
+				B( 'core/paragraph', {
+					style: { color: { text: '#333333' } },
+					content: 'hi',
+				} ),
+			] ),
+		];
+		expect( has( runChecks( tree, themed() ), 12 ) ).toBe( false );
+	} );
+	test( 'without theme colors, a block is judged once at the palette values', () => {
+		const f = runChecks(
+			[
+				B( 'core/paragraph', {
+					textColor: 'text-secondary',
+					style: { color: { background: '#ffffff' } },
+					content: 'hi',
+				} ),
+			],
+			ctx( { colors: { ...COLORS, 'text-secondary': '#525252' } } )
+		);
+		expect( has( f, 12 ) ).toBe( false );
+	} );
+	test( 'a palette highlight follows the theme; a custom one is judged in each', () => {
+		const palette = runChecks(
+			[
+				B( 'core/paragraph', {
+					content:
+						'a <mark style="background-color:rgba(0, 0, 0, 0)" class="has-inline-color has-text-secondary-color">hi</mark> b',
+				} ),
+			],
+			themed()
+		);
+		expect( has( palette, 17 ) ).toBe( false );
+		const custom = runChecks(
+			[
+				B( 'core/paragraph', {
+					content:
+						'a <mark style="background-color:rgba(0, 0, 0, 0);color:#525252" class="has-inline-color">hi</mark> b',
+				} ),
+			],
+			themed()
+		);
+		expect( finding( custom, 17 ).title ).toBe(
+			'Highlighted text contrast is too low in dark mode (2.3:1)'
+		);
+	} );
+} );
+
 describe( '#13 table without header cells (Warning)', () => {
 	test( 'fires when there is a body but no head cells', () => {
 		const f = runChecks(

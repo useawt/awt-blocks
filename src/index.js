@@ -27,6 +27,7 @@ import { useSelect, useDispatch } from '@wordpress/data';
 import { useFindings } from './linter/use-findings';
 import { LinterList } from './linter/Panel';
 import { LINTER_STORE } from './linter/store';
+import { ScopeColorsRunner } from './linter/scope-colors-runner';
 
 const SIDEBAR_NAME = 'awt-accessibility';
 
@@ -142,6 +143,7 @@ function AccessibilityPlugin() {
 	return (
 		<Fragment>
 			<LinterRunner />
+			<ScopeColorsRunner />
 
 			<PluginSidebarMoreMenuItem target={ SIDEBAR_NAME } icon={ ICON }>
 				{ __( 'Accessibility checks', 'awt-blocks' ) }

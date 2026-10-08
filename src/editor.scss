@@ -97,6 +97,16 @@
 	grid-column: 1 / -1;
 	margin-block-start: 12px;
 
+	// One result per color mode when the block is seen in light and dark.
+	&__result + &__result {
+		margin-block-start: 8px;
+	}
+	&__mode {
+		margin: 0 0 4px;
+		font-size: 13px;
+		font-weight: 600;
+		line-height: 1.5;
+	}
 	&__ratio {
 		margin: 0 0 6px;
 		font-size: 13px;

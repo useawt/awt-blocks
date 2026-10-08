@@ -17,6 +17,13 @@
  */
 
 import { ratio } from './wcag';
+import {
+	surfaces,
+	colorIn,
+	hasOwnText,
+	ancestorsFromTree,
+	modeSuffix,
+} from './surfaces';
 
 export const SEVERITY = { ERROR: 'error', WARNING: 'warning', INFO: 'info' };
 
@@ -473,63 +480,14 @@ export function checkIdenticalLinkText( blocks ) {
  * Wave C
  * ------------------------------------------------------------------ */
 
-function slugFromVar( value ) {
-	const m = String( value ).match( /\|([^|]+)$/ ); // "var:preset|color|link-primary" → "link-primary"
-	return m ? m[ 1 ] : null;
-}
-
-function resolveColorValue( value, colors ) {
-	if ( ! value ) {
-		return null;
-	}
-	if ( value[ 0 ] === '#' || /^rgba?\(/i.test( value ) ) {
-		return value;
-	}
-	if ( value.indexOf( 'var:preset|color|' ) === 0 ) {
-		const slug = slugFromVar( value );
-		return slug && colors[ slug ] ? colors[ slug ] : null;
-	}
-	return colors[ value ] || null;
-}
-
-export function blockBg( b, colors ) {
-	const slug = attr( b, 'backgroundColor', '' );
-	if ( slug && colors[ slug ] ) {
-		return colors[ slug ];
-	}
-	const style =
-		b.attributes && b.attributes.style && b.attributes.style.color;
-	return style && style.background
-		? resolveColorValue( style.background, colors )
-		: null;
-}
-
-function blockText( b, colors ) {
-	const slug = attr( b, 'textColor', '' );
-	if ( slug && colors[ slug ] ) {
-		return colors[ slug ];
-	}
-	const style =
-		b.attributes && b.attributes.style && b.attributes.style.color;
-	return style && style.text ? resolveColorValue( style.text, colors ) : null;
-}
-
 function isCustomColor( value ) {
 	return !! value && ( value[ 0 ] === '#' || /^rgba?\(/i.test( value ) );
 }
 
-function buildBgMap( tree, colors, inherited = null, map = {} ) {
-	for ( const b of tree ) {
-		const own = blockBg( b, colors );
-		const eff = own || inherited;
-		if ( eff ) {
-			map[ b.clientId ] = eff;
-		}
-		if ( b.innerBlocks && b.innerBlocks.length ) {
-			buildBgMap( b.innerBlocks, colors, eff, map );
-		}
-	}
-	return map;
+// Ancestors per block, nearest first: given by the live path, else built from
+// the fixture tree.
+function ancestorsOf( context ) {
+	return context.ancestors || ancestorsFromTree( context.tree || [] );
 }
 
 // #11 — Color overrides outside the design-system palette (Warning). Flags a
@@ -565,15 +523,14 @@ export function checkColorOverrides( blocks ) {
 	return out;
 }
 
-// #12 — Color contrast errors (Error). Only fires when a text-bearing block has
-// an explicit text color AND an explicit background (own or inherited from a
-// direct ancestor), so it never guesses against an unknown default surface.
+// #12 — Color contrast errors (Error). Fires when a text-bearing block sets its
+// own text color and the surface behind it is known: a background set on it or
+// on the way up, an AWT Section with its own theme, or (when the theme's colors
+// are known) the page. Judged in every color theme a visitor can see the block
+// in (`surfaces.js`), so a pair that only fails in dark mode is caught, and the
+// message names the mode.
 export function checkContrast( blocks, context = {} ) {
-	const colors = context.colors || {};
-	// Live path supplies a precomputed effective-background map (own + ancestor,
-	// resolved via getBlockParents); the fixture path falls back to a tree walk.
-	const bgMap =
-		context.effectiveBg || buildBgMap( context.tree || [], colors );
+	const ancestors = ancestorsOf( context );
 	const TEXT_BLOCKS = [
 		'core/paragraph',
 		'core/heading',
@@ -583,24 +540,32 @@ export function checkContrast( blocks, context = {} ) {
 	];
 	const out = [];
 	for ( const b of blocks ) {
-		if ( ! TEXT_BLOCKS.includes( b.name ) ) {
+		if ( ! TEXT_BLOCKS.includes( b.name ) || ! hasOwnText( b ) ) {
 			continue;
 		}
-		const text = blockText( b, colors );
-		const bg = blockBg( b, colors ) || bgMap[ b.clientId ];
-		if ( ! text || ! bg ) {
-			continue;
+		const views = surfaces( b, ancestors[ b.clientId ], context );
+		let worst = null;
+		for ( const v of views ) {
+			if ( ! v.text || ! v.bg ) {
+				continue;
+			}
+			const r = ratio( v.text, v.bg );
+			if ( r && r < 4.5 && ( ! worst || r < worst.r ) ) {
+				worst = { r, scope: v.scope };
+			}
 		}
-		const r = ratio( text, bg );
-		if ( r && r < 4.5 ) {
+		if ( worst ) {
+			const where = modeSuffix( worst.scope, views.length );
 			out.push( {
 				clientId: b.clientId,
 				checkId: 12,
 				severity: SEVERITY.ERROR,
-				title: `Text contrast is too low (${ r.toFixed( 1 ) }:1)`,
-				description: `The contrast between this text and its background is ${ r.toFixed(
+				title: `Text contrast is too low${ where } (${ worst.r.toFixed(
+					1
+				) }:1)`,
+				description: `The contrast between this text and its background is ${ worst.r.toFixed(
 					2
-				) }:1. To meet WCAG AA, normal text needs at least 4.5:1 (large text 3:1). Choose colors with more contrast.`,
+				) }:1${ where }. To meet WCAG AA, normal text needs at least 4.5:1 (large text 3:1). Choose colors with more contrast.`,
 			} );
 		}
 	}
@@ -620,8 +585,9 @@ function isTransparent( value ) {
 }
 
 // Resolve a <mark>'s text/background color from its inline style (rgb/hex) or
-// its WordPress palette class (has-{slug}-color / has-{slug}-background-color).
-function colorFromMark( el, prop, colors ) {
+// its WordPress palette class (has-{slug}-color / has-{slug}-background-color),
+// as the palette color looks in the given theme.
+function colorFromMark( el, prop, scope, context ) {
 	const inline = prop === 'color' ? el.style.color : el.style.backgroundColor;
 	if ( inline && prop === 'background-color' && isTransparent( inline ) ) {
 		return null; // see-through — judge against the block's effective background
@@ -632,7 +598,7 @@ function colorFromMark( el, prop, colors ) {
 	const classAttr = el.getAttribute( 'class' ) || '';
 	if ( prop === 'background-color' ) {
 		const m = classAttr.match( /has-([a-z0-9-]+)-background-color/ );
-		return m && colors[ m[ 1 ] ] ? colors[ m[ 1 ] ] : null;
+		return m ? colorIn( m[ 1 ], scope, context ) : null;
 	}
 	// Text color: strip background-color classes AND the marker class
 	// `has-inline-color` (which would otherwise match as slug "inline" and
@@ -641,21 +607,19 @@ function colorFromMark( el, prop, colors ) {
 		.replace( /has-[a-z0-9-]+-background-color/g, '' )
 		.replace( /\bhas-inline-color\b/g, '' );
 	const m = cleaned.match( /has-([a-z0-9-]+)-color/ );
-	return m && colors[ m[ 1 ] ] ? colors[ m[ 1 ] ] : null;
+	return m ? colorIn( m[ 1 ], scope, context ) : null;
 }
 
 // #17 — Highlighted-text (<mark>) contrast (Error). WordPress's Highlight format
 // wraps a passage in <mark> with its own text + background color; #12 only looks
 // at block-level colors, so a low-contrast highlight slips through. Reads the
 // mark's own colors (inline style or palette class), falling back to the block's
-// text color and effective background.
+// text color and the surface behind it, in every theme the block is seen in.
 export function checkMarkContrast( blocks, context = {} ) {
 	if ( typeof DOMParser === 'undefined' ) {
 		return [];
 	}
-	const colors = context.colors || {};
-	const bgMap =
-		context.effectiveBg || buildBgMap( context.tree || [], colors );
+	const ancestors = ancestorsOf( context );
 	const out = [];
 	for ( const b of blocks ) {
 		const chunks = richTextHtml( b ).filter( ( html ) =>
@@ -664,49 +628,54 @@ export function checkMarkContrast( blocks, context = {} ) {
 		if ( ! chunks.length ) {
 			continue;
 		}
-		const blockFg = blockText( b, colors ) || '#161616';
-		const blockBgColor =
-			blockBg( b, colors ) || bgMap[ b.clientId ] || null;
-		let flagged = false;
+		const views = surfaces( b, ancestors[ b.clientId ], context );
+		const marks = [];
 		for ( const html of chunks ) {
-			if ( flagged ) {
-				break;
-			}
-			let doc;
 			try {
-				doc = new DOMParser().parseFromString(
+				const doc = new DOMParser().parseFromString(
 					`<div>${ html }</div>`,
 					'text/html'
 				);
+				marks.push( ...doc.querySelectorAll( 'mark' ) );
 			} catch ( e ) {
-				continue;
+				// Unparseable chunk: nothing to judge.
 			}
-			doc.querySelectorAll( 'mark' ).forEach( ( mark ) => {
-				if ( flagged ) {
-					return; // one finding per block is enough
-				}
-				const fg = colorFromMark( mark, 'color', colors ) || blockFg;
+		}
+		let worst = null;
+		for ( const v of views ) {
+			for ( const mark of marks ) {
+				const fg =
+					colorFromMark( mark, 'color', v.scope, context ) ||
+					v.text ||
+					'#161616';
 				const bg =
-					colorFromMark( mark, 'background-color', colors ) ||
-					blockBgColor;
+					colorFromMark(
+						mark,
+						'background-color',
+						v.scope,
+						context
+					) || v.bg;
 				if ( ! bg ) {
-					return; // nothing to judge the highlight against
+					continue; // nothing to judge the highlight against
 				}
 				const r = ratio( fg, bg );
-				if ( r && r < 4.5 ) {
-					flagged = true;
-					out.push( {
-						clientId: b.clientId,
-						checkId: 17,
-						severity: SEVERITY.ERROR,
-						title: `Highlighted text contrast is too low (${ r.toFixed(
-							1
-						) }:1)`,
-						description: `A highlighted passage (added with the Highlight format) has ${ r.toFixed(
-							2
-						) }:1 contrast between its text and highlight color. WCAG AA needs at least 4.5:1 (large text 3:1). Pick a darker or lighter highlight, or change the text color.`,
-					} );
+				if ( r && r < 4.5 && ( ! worst || r < worst.r ) ) {
+					worst = { r, scope: v.scope };
 				}
+			}
+		}
+		if ( worst ) {
+			const where = modeSuffix( worst.scope, views.length );
+			out.push( {
+				clientId: b.clientId,
+				checkId: 17,
+				severity: SEVERITY.ERROR,
+				title: `Highlighted text contrast is too low${ where } (${ worst.r.toFixed(
+					1
+				) }:1)`,
+				description: `A highlighted passage (added with the Highlight format) has ${ worst.r.toFixed(
+					2
+				) }:1 contrast between its text and highlight color${ where }. WCAG AA needs at least 4.5:1 (large text 3:1). Pick a darker or lighter highlight, or change the text color.`,
 			} );
 		}
 	}
