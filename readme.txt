@@ -56,8 +56,8 @@ AWT Blocks is English today. Every string a user reads is prepared for translati
 == Installation ==
 
 1. Download AWT Blocks and the AWT theme from useawt.com.
-2. In Plugins → Add New → Upload Plugin, upload the plugin ZIP and activate it.
-3. In Appearance → Themes → Add New → Upload Theme, upload the theme ZIP and activate it. The blocks need it: the theme carries the colors, typography and spacing they are drawn with, so on any other theme they will look wrong.
+2. In Plugins → Add Plugin → Upload Plugin, upload the plugin ZIP and activate it. Before WordPress 6.8, the button says "Add New Plugin".
+3. In Appearance → Themes → Add Theme → Upload Theme, upload the theme ZIP and activate it. Before WordPress 6.8, the button says "Add New Theme". The blocks need it: the theme carries the colors, typography and spacing they are drawn with, so on any other theme they will look wrong.
 4. Open any page in the editor. AWT blocks appear in the inserter, and the accessibility checker icon appears in the top bar.
 
 == Frequently Asked Questions ==
