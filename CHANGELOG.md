@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The "Mark as decorative" checkbox lines up with the other block settings.
+
 ## 2026.10.4 (2026-10-08)
 
 ### [A11y]

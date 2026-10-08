@@ -40,7 +40,7 @@ import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { InspectorControls } from '@wordpress/block-editor';
-import { CheckboxControl } from '@wordpress/components';
+import { CheckboxControl, PanelBody } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
 // Blocks that ask for alt text. The value is the block's own alt attribute,
@@ -103,24 +103,29 @@ const withDecorativeControl = createHigherOrderComponent( ( BlockEdit ) => {
 			<Fragment>
 				<BlockEdit { ...props } />
 				<InspectorControls group="settings">
-					<CheckboxControl
-						__nextHasNoMarginBottom
-						label={ __( 'Mark as decorative', 'awt-blocks' ) }
-						help={ __(
-							'Hidden from assistive technologies.',
-							'awt-blocks'
-						) }
-						checked={ !! attributes.isDecorative }
-						onChange={ ( value ) =>
-							// Alt text and this are two answers to one
-							// question, so choosing this clears the other.
-							setAttributes(
-								value
-									? { isDecorative: true, [ altKey ]: '' }
-									: { isDecorative: false }
-							)
-						}
-					/>
+					{ /* A panel of its own, with no title: the sidebar's
+					   padding and dividers come from panels, so a bare
+					   control sits flush against its left edge. */ }
+					<PanelBody>
+						<CheckboxControl
+							__nextHasNoMarginBottom
+							label={ __( 'Mark as decorative', 'awt-blocks' ) }
+							help={ __(
+								'Hidden from assistive technologies.',
+								'awt-blocks'
+							) }
+							checked={ !! attributes.isDecorative }
+							onChange={ ( value ) =>
+								// Alt text and this are two answers to one
+								// question, so choosing this clears the other.
+								setAttributes(
+									value
+										? { isDecorative: true, [ altKey ]: '' }
+										: { isDecorative: false }
+								)
+							}
+						/>
+					</PanelBody>
 				</InspectorControls>
 			</Fragment>
 		);

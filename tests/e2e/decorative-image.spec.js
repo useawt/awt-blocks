@@ -59,6 +59,18 @@ test.describe( 'Decorative images', () => {
 				} )
 				.toBe( 1 );
 
+			// It sits in the sidebar's panels, lined up with the alt text
+			// field, not flush against the sidebar's edge.
+			const left = async ( locator ) => ( await locator.boundingBox() ).x;
+			expect(
+				await left( page.getByLabel( 'Mark as decorative' ) ),
+				'the checkbox lines up with the alt text field'
+			).toBe(
+				await left(
+					page.getByRole( 'textbox', { name: 'Alternative text' } )
+				)
+			);
+
 			await page.getByLabel( 'Mark as decorative' ).click();
 
 			await expect
