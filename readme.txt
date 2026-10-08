@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.3
+Stable tag: 2026.10.4
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.4 (2026-10-08) =
+* [A11y] Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update to WordPress 7.1.
+
 = 2026.10.3 (2026-10-08) =
 * [Improvement] The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
 
@@ -360,7 +363,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.38 (2026-09-27) =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
-
-= 2026.09.37 (2026-09-26) =
-* [Improvement] WordPress no longer wrongly says the plugin is untested on minor WordPress updates, such as 7.1.2.
 <!-- CHANGELOG_END -->

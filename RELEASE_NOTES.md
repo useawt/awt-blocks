@@ -1,5 +1,5 @@
-## 2026.10.3 (2026-10-08)
+## 2026.10.4 (2026-10-08)
 
-### [Improvement]
+### [A11y]
 
-- The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
+- Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update to WordPress 7.1.
