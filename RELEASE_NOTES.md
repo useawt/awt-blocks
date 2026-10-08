@@ -1,5 +1,6 @@
-## 2026.10.4 (2026-10-08)
+## 2026.10.5 (2026-10-08)
 
-### [A11y]
+### [Improvement]
 
-- Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update to WordPress 7.1.
+- The "Mark as decorative" checkbox lines up with the other block settings.
+- The steps for updating AWT Blocks by hand name the "Add Plugin" button your version of WordPress shows.
