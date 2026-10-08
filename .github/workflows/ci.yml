@@ -178,6 +178,52 @@ jobs:
           path: awt-blocks/test-results/
           retention-days: 7
 
+  # The oldest WordPress AWT supports ("Requires at least", keep in step).
+  # Every other job runs the latest, where code that leans on something new
+  # in core passes: the Image block's "Mark as decorative" arrived in 7.1,
+  # and AWT told 6.6 to 7.0 users to tick a box they did not have
+  # (awt-workspace #25). Safe SVG needs a newer WordPress, so it stays off.
+  e2e-oldest-wp:
+    name: E2E tests on WordPress 6.6
+    runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
+    env:
+      WP_ENV_CORE: WordPress/WordPress#6.6.2
+    defaults:
+      run:
+        working-directory: awt-blocks
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: awt-blocks
+      - uses: actions/checkout@v4
+        with:
+          repository: useawt/awt-theme
+          path: awt-theme
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: awt-blocks/package-lock.json
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Build blocks
+        run: WP_EXPERIMENTAL_MODULES=true npm run build
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Start wp-env
+        run: npx wp-env start
+      - name: Playwright
+        run: |
+          npx wp-env run tests-cli -- bash -c 'wp core version && wp theme activate awt && wp plugin activate awt-blocks'
+          npx playwright test --project=e2e tests/e2e/decorative-image.spec.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-traces-wp66
+          path: awt-blocks/test-results/
+          retention-days: 7
+
   perf:
     name: Performance budgets (Lighthouse)
     runs-on: ubuntu-latest
