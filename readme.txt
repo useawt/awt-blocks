@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.2
+Stable tag: 2026.10.3
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -329,6 +329,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.3 (2026-10-08) =
+* [Improvement] The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
+
 = 2026.10.2 (2026-10-07) =
 * [New] Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
 
@@ -360,8 +363,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.09.37 (2026-09-26) =
 * [Improvement] WordPress no longer wrongly says the plugin is untested on minor WordPress updates, such as 7.1.2.
-
-= 2026.09.36 (2026-09-26) =
-* [Improvement] Text improvements to admin pages and authoring experience.
-* [Improvement] Other small improvements.
 <!-- CHANGELOG_END -->

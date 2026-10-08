@@ -1,5 +1,5 @@
-## 2026.10.2 (2026-10-07)
+## 2026.10.3 (2026-10-08)
 
-### [New]
+### [Improvement]
 
-- Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
+- The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
