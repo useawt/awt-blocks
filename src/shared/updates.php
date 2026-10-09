@@ -574,9 +574,9 @@ function details( $result, $action, $args ) {
 	}
 
 	// Null on every site that does not check for updates: free sites with
-	// updates off, sites whose last download failed, and AWT Premium sites
-	// until they have their own update address. The window has to open on
-	// all of them; reading "tested up to" out of null used to stop PHP.
+	// updates off, sites whose last download failed, and builds of AWT that
+	// update from another address. The window has to open on all of them;
+	// reading "tested up to" out of null used to stop PHP.
 	$header = installed_header();
 	$data   = manifest() ?? $header;
 
