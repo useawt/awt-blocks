@@ -66,7 +66,8 @@ const TIMEOUT = 5;
 /**
  * Where a package may come from. The theme's `inc/updates.php` has the long
  * version: nothing signs the manifest, so the destination is pinned down and
- * anything else is refused, whatever the manifest says.
+ * anything else is refused, whatever the manifest says, unless code on the
+ * site adds another place (see package_sources()).
  */
 const PACKAGE_HOST = 'github.com';
 
@@ -76,7 +77,7 @@ const PACKAGE_PATH = '/useawt/';
 add_filter( 'site_transient_update_plugins', __NAMESPACE__ . '\\offer_update' );
 add_filter( 'auto_update_plugin', __NAMESPACE__ . '\\should_auto_update', 10, 2 );
 add_filter( 'plugins_api', __NAMESPACE__ . '\\details', 10, 3 );
-add_action( 'in_plugin_update_message-awt-blocks/awt-blocks.php', __NAMESPACE__ . '\\pair_note' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- core names this hook after the plugin file.
+add_action( 'admin_init', __NAMESPACE__ . '\\add_pair_note' );
 add_filter( 'upgrader_pre_download', __NAMESPACE__ . '\\explain_manual_update', 10, 4 );
 add_filter( 'plugin_row_meta', __NAMESPACE__ . '\\author_opens_new_tab', 10, 2 );
 
@@ -185,6 +186,42 @@ function cached(): ?array {
 }
 
 /**
+ * The places a package may come from: a host, and the path its packages sit
+ * under.
+ *
+ * AWT's releases on GitHub, unless code on this site adds a place through
+ * `awt_update_package_sources`, the same filter the theme reads. AWT Premium
+ * adds its own download address. A path has to start and end with "/", so
+ * that "/useawt/" can never match "/useawt-not/".
+ *
+ * @return array<int, array{host: string, path: string}> The allowed places.
+ */
+function package_sources(): array {
+	$sources = apply_filters(
+		'awt_update_package_sources',
+		array(
+			array(
+				'host' => PACKAGE_HOST,
+				'path' => PACKAGE_PATH,
+			),
+		)
+	);
+
+	$valid = array();
+	foreach ( is_array( $sources ) ? $sources : array() as $source ) {
+		$host = strtolower( (string) ( $source['host'] ?? '' ) );
+		$path = (string) ( $source['path'] ?? '' );
+		if ( $host !== '' && str_starts_with( $path, '/' ) && str_ends_with( $path, '/' ) ) {
+			$valid[] = array(
+				'host' => $host,
+				'path' => $path,
+			);
+		}
+	}
+	return $valid;
+}
+
+/**
  * The package URL, or '' when it is not one of ours.
  *
  * @param string $url Whatever the manifest named.
@@ -201,13 +238,14 @@ function trusted_package( string $url ): string {
 	if ( ( $parts['scheme'] ?? '' ) !== 'https' ) {
 		return '';
 	}
-	if ( strtolower( (string) ( $parts['host'] ?? '' ) ) !== PACKAGE_HOST ) {
-		return '';
+	$host = strtolower( (string) ( $parts['host'] ?? '' ) );
+	$path = (string) ( $parts['path'] ?? '' );
+	foreach ( package_sources() as $source ) {
+		if ( $host === $source['host'] && str_starts_with( $path, $source['path'] ) ) {
+			return $url;
+		}
 	}
-	if ( strpos( (string) ( $parts['path'] ?? '' ), PACKAGE_PATH ) !== 0 ) {
-		return '';
-	}
-	return $url;
+	return '';
 }
 
 /**
@@ -335,9 +373,23 @@ function parse( $response ): ?array {
 	return $data;
 }
 
+/**
+ * The plugin's main file: the one with the "Plugin Name:" header, which
+ * WordPress loads and names the plugin after.
+ *
+ * Usually the file that defines `AWT_BLOCKS_FILE`. A build that loads this
+ * plugin's code from a main file of its own says so through
+ * `awt_blocks_plugin_file`: AWT Premium Blocks loads it as
+ * `awt-blocks-core.php`, and without this every update entry would be filed
+ * under that name, which WordPress has never heard of.
+ */
+function plugin_file(): string {
+	return (string) apply_filters( 'awt_blocks_plugin_file', \AWT\Blocks\AWT_BLOCKS_FILE );
+}
+
 /** The plugin's `directory/file.php` key, which is how WordPress names it. */
 function basename_key(): string {
-	return plugin_basename( \AWT\Blocks\AWT_BLOCKS_FILE );
+	return plugin_basename( plugin_file() );
 }
 
 /** The plugin's directory name. */
@@ -407,12 +459,20 @@ function offer_update( $transient ) {
 		 */
 		$target  = automatic_allowed() ? auto_install_target( $data, $installed ) : null;
 		$package = null === $target ? '' : trusted_package( (string) ( $target['plugin']['package'] ?? '' ) );
-		if ( null === $target || '' === $package ) {
-			$transient->no_update[ $key ] = current_entry( $key, $installed, $data );
-			unset( $transient->response[ $key ] );
-			return $transient;
-		}
-		$offer = (string) $target['version'];
+		$offer   = null === $target ? $installed : (string) $target['version'];
+	}
+
+	// Served to every site since 2026-09-21 — see the file docblock. A
+	// Premium site with no licence empties it. Given the version on offer,
+	// which during cron is not always the newest.
+	$package = (string) apply_filters( 'awt_blocks_update_package', $package, $data, $offer );
+
+	// Unattended, no package means nothing to install, so nothing is offered:
+	// an empty package would have WordPress try, fail and email the owner.
+	if ( wp_doing_cron() && '' === $package ) {
+		$transient->no_update[ $key ] = current_entry( $key, $installed, $data );
+		unset( $transient->response[ $key ] );
+		return $transient;
 	}
 
 	$entry = (object) array(
@@ -421,8 +481,7 @@ function offer_update( $transient ) {
 		'plugin'        => $key,
 		'new_version'   => $offer,
 		'url'           => (string) ( $data['plugin']['releaseUrl'] ?? '' ),
-		// Served to every site since 2026-09-21 — see the file docblock.
-		'package'       => (string) apply_filters( 'awt_blocks_update_package', $package, $data ),
+		'package'       => $package,
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
 		'tested'        => tested_up_to( $data ),
@@ -500,6 +559,10 @@ function should_auto_update( $update, $item ) {
  * `build/changelog.json`, written at release, so the window opens with no
  * network call.
  *
+ * Name and homepage come from the installed copy's own header, so a build
+ * that brings its own (AWT Premium Blocks) is described as itself, as the
+ * theme's window does.
+ *
  * @param mixed  $result Whatever an earlier filter returned.
  * @param string $action The plugins_api action being performed.
  * @param object $args   Its arguments.
@@ -510,14 +573,19 @@ function details( $result, $action, $args ) {
 		return $result;
 	}
 
-	$data = manifest();
+	// Null on every site that does not check for updates: free sites with
+	// updates off, sites whose last download failed, and AWT Premium sites
+	// until they have their own update address. The window has to open on
+	// all of them; reading "tested up to" out of null used to stop PHP.
+	$header = installed_header();
+	$data   = manifest() ?? $header;
 
 	return (object) array(
-		'name'          => 'AWT Blocks',
+		'name'          => $header['name'] !== '' ? $header['name'] : 'AWT Blocks',
 		'slug'          => slug(),
 		'version'       => (string) ( $data['version'] ?? \AWT\Blocks\AWT_BLOCKS_VERSION ),
 		'author'        => author_link(),
-		'homepage'      => 'https://useawt.com',
+		'homepage'      => $header['homepage'] !== '' ? $header['homepage'] : 'https://useawt.com',
 		'requires'      => (string) ( $data['requiresWp'] ?? '' ),
 		'requires_php'  => (string) ( $data['requiresPhp'] ?? '' ),
 		'tested'        => tested_up_to( $data ),
@@ -526,6 +594,32 @@ function details( $result, $action, $args ) {
 			'changelog' => changelog_html(),
 		),
 		'external'      => true,
+	);
+}
+
+/**
+ * What the installed copy's main file says about itself.
+ *
+ * Keyed the way the manifest names the same facts, so it stands in for a
+ * manifest when there is none to read, plus the plugin's name and homepage.
+ *
+ * @return array{name: string, homepage: string, version: string, requiresWp: string, requiresPhp: string, testedWp: string}
+ *         Each '' when the header does not carry it.
+ */
+function installed_header(): array {
+	return array_map(
+		'strval',
+		get_file_data(
+			plugin_file(),
+			array(
+				'name'        => 'Plugin Name',
+				'homepage'    => 'Plugin URI',
+				'version'     => 'Version',
+				'requiresWp'  => 'Requires at least',
+				'requiresPhp' => 'Requires PHP',
+				'testedWp'    => 'Tested up to',
+			)
+		)
 	);
 }
 
@@ -605,6 +699,17 @@ function changelog_html(): string {
 }
 
 /**
+ * Hook the pair reminder to this plugin's row.
+ *
+ * Core names the hook after the plugin's main file. That is known only once
+ * every plugin has loaded and could say otherwise (see plugin_file()), so
+ * the hook is added on admin_init rather than when this file loads.
+ */
+function add_pair_note(): void {
+	add_action( 'in_plugin_update_message-' . basename_key(), __NAMESPACE__ . '\\pair_note' ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- core names this hook after the plugin file.
+}
+
+/**
  * Append the pair reminder to the update row on the Plugins screen.
  *
  * The theme and the plugin are one product in two halves, and a site running
@@ -638,16 +743,23 @@ function explain_manual_update( $reply, $package, $upgrader, $hook_extra = array
 
 	// WordPress 6.8 renamed "Add New Plugin" to "Add Plugin"; name the button
 	// this site shows. "Replace current with uploaded" has not changed.
-	$add = version_compare( get_bloginfo( 'version' ), '6.8-alpha', '>=' )
+	$add     = version_compare( get_bloginfo( 'version' ), '6.8-alpha', '>=' )
 		? __( 'Add Plugin', 'awt-blocks' )
 		: __( 'Add New Plugin', 'awt-blocks' );
-	return new \WP_Error(
-		'awt_manual_update',
-		sprintf(
-			/* translators: 1: WordPress's "Add Plugin" button. 2: URL of the update instructions. */
-			__( 'This version can\'t be downloaded automatically. Download it from the AWT website, then go to Plugins → %1$s → Upload Plugin and choose "Replace current with uploaded". Your settings and content are kept. %2$s', 'awt-blocks' ),
-			$add,
-			'https://useawt.com/faq/#updating'
-		)
+	$message = sprintf(
+		/* translators: 1: WordPress's "Add Plugin" button. 2: URL of the update instructions. */
+		__( 'This version can\'t be downloaded automatically. Download it from the AWT website, then go to Plugins → %1$s → Upload Plugin and choose "Replace current with uploaded". Your settings and content are kept. %2$s', 'awt-blocks' ),
+		$add,
+		'https://useawt.com/faq/#updating'
 	);
+
+	/**
+	 * Filters what WordPress shows when AWT Blocks has no package to download.
+	 *
+	 * A build that empties the package for its own reason (AWT Premium does,
+	 * on a site with no licence) knows the next step better than this does.
+	 *
+	 * @param string $message Plain text, shown as WordPress's update error.
+	 */
+	return new \WP_Error( 'awt_manual_update', (string) apply_filters( 'awt_blocks_manual_update_message', $message ) );
 }

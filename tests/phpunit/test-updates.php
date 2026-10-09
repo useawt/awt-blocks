@@ -42,6 +42,9 @@ class Test_Updates extends WP_UnitTestCase {
 		delete_option( 'awt_theme_settings' );
 		remove_all_filters( 'awt_blocks_update_package' );
 		remove_all_filters( 'awt_update_check_enabled' );
+		remove_all_filters( 'awt_update_package_sources' );
+		remove_all_filters( 'awt_blocks_manual_update_message' );
+		remove_all_filters( 'awt_blocks_plugin_file' );
 		parent::tear_down();
 	}
 
@@ -306,7 +309,143 @@ class Test_Updates extends WP_UnitTestCase {
 		$this->assertFalse( Updates\package_folder_matches() );
 	}
 
+	/**
+	 * Code on the site can add a place packages may come from, through the
+	 * filter the theme reads too. https is still required, and the path must
+	 * be closed with "/".
+	 */
+	public function test_another_package_source_can_be_added(): void {
+		add_filter(
+			'awt_update_package_sources',
+			static fn ( $sources ) => array_merge(
+				$sources,
+				array(
+					array(
+						'host' => 'downloads.example.com',
+						'path' => '/awt/',
+					),
+					array(
+						'host' => 'loose.example.com',
+						'path' => '/awt',
+					),
+				)
+			)
+		);
+
+		$this->assertSame( 'https://downloads.example.com/awt/2099.zip', Updates\trusted_package( 'https://downloads.example.com/awt/2099.zip' ) );
+		$this->assertSame( '', Updates\trusted_package( 'http://downloads.example.com/awt/2099.zip' ), 'plain http' );
+		$this->assertSame( '', Updates\trusted_package( 'https://loose.example.com/awt-not/2099.zip' ), 'an open path' );
+		$this->assertCount( 2, Updates\package_sources(), 'GitHub and the closed one' );
+	}
+
+	/**
+	 * Unattended, a package the filter empties is the same as no package:
+	 * nothing is offered, so WordPress does not try, fail and email the owner.
+	 */
+	public function test_cron_installs_nothing_when_the_filter_empties_the_package(): void {
+		add_filter( 'awt_update_environment', static fn () => 'production' );
+		add_filter( 'awt_blocks_update_package', '__return_empty_string' );
+		$key = Updates\basename_key();
+		$this->cache( '2099.01.1', $this->releases( array( '2099.01.1' => array( 'autoInstall' => true ) ) ) );
+
+		$result = Updates\offer_update( $this->transient() );
+
+		$this->assertArrayNotHasKey( $key, $result->response );
+		$this->assertArrayHasKey( $key, $result->no_update );
+	}
+
+	/**
+	 * A build that empties the package can say what to do instead.
+	 */
+	public function test_the_manual_update_message_can_be_replaced(): void {
+		add_filter( 'awt_blocks_manual_update_message', static fn () => 'Add your licence key first.' );
+
+		$result = Updates\explain_manual_update( false, '', null, array( 'plugin' => Updates\basename_key() ) );
+
+		$this->assertSame( 'Add your licence key first.', $result->get_error_message() );
+	}
+
+	/**
+	 * A build that loads this plugin's code from a main file of its own is
+	 * filed under that file. AWT Premium Blocks loads it as
+	 * `awt-blocks-core.php`, and the update entry, the auto-update answer and
+	 * the pair reminder were all filed under that name, which WordPress has
+	 * never heard of.
+	 */
+	public function test_the_plugin_is_named_after_its_main_file(): void {
+		add_filter( 'awt_blocks_plugin_file', static fn () => WP_PLUGIN_DIR . '/awt-premium-blocks/awt-premium-blocks.php' );
+		remove_all_filters( 'wp_doing_cron' );
+		set_current_screen( 'plugins' );
+		$this->cache( '2099.01.0' );
+		$this->set_manifest_slug( 'awt-premium-blocks' );
+
+		$result = Updates\offer_update( $this->transient() );
+		Updates\add_pair_note();
+
+		$this->assertSame( 'awt-premium-blocks/awt-premium-blocks.php', Updates\basename_key() );
+		$this->assertSame( 'awt-premium-blocks', Updates\slug() );
+		$this->assertArrayHasKey( 'awt-premium-blocks/awt-premium-blocks.php', $result->response );
+		$this->assertIsBool( Updates\should_auto_update( null, (object) array( 'plugin' => 'awt-premium-blocks/awt-premium-blocks.php' ) ), 'answered as ours' );
+		$this->assertSame( 10, has_action( 'in_plugin_update_message-awt-premium-blocks/awt-premium-blocks.php', 'AWT\\Blocks\\Updates\\pair_note' ) );
+	}
+
+	/* --------------------------------------------------- the details window */
+
+	/**
+	 * Asking for the plugin's details with no manifest used to stop PHP: the
+	 * window's "tested up to" line was read out of null. That is every site
+	 * with updates off and every AWT Premium site. The theme had the same
+	 * fault (fixed 2026-10-07); the plugin's window now opens on the
+	 * installed copy's header too.
+	 */
+	public function test_the_details_window_opens_with_no_manifest(): void {
+		add_filter( 'awt_update_check_enabled', '__return_false' );
+
+		$info = Updates\details( false, 'plugin_information', (object) array( 'slug' => Updates\slug() ) );
+
+		$this->assertIsObject( $info );
+		$this->assertSame( \AWT\Blocks\AWT_BLOCKS_VERSION, $info->version );
+		$this->assertSame( 'AWT Blocks', $info->name );
+		$this->assertSame( 'https://useawt.com', $info->homepage );
+		$this->assertSame( Updates\installed_header()['requiresWp'], $info->requires );
+	}
+
+	/**
+	 * The window names the plugin by its own header, so AWT Premium Blocks is
+	 * not called "AWT Blocks" with useawt.com as its homepage.
+	 */
+	public function test_the_details_window_names_the_installed_plugin(): void {
+		add_filter( 'awt_update_check_enabled', '__return_false' );
+		$dir = get_temp_dir() . 'awt-premium-blocks';
+		wp_mkdir_p( $dir );
+		$file = $dir . '/awt-premium-blocks.php';
+		file_put_contents( $file, "<?php\n/**\n * Plugin Name: AWT Premium Blocks\n * Plugin URI:  https://awtpremium.com\n * Version:     2099.01.0\n */\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents -- a fixture.
+		add_filter( 'awt_blocks_plugin_file', static fn () => $file );
+
+		$info = Updates\details( false, 'plugin_information', (object) array( 'slug' => Updates\slug() ) );
+
+		$this->assertSame( 'AWT Premium Blocks', $info->name );
+		$this->assertSame( 'https://awtpremium.com', $info->homepage );
+		wp_delete_file( $file );
+	}
+
 	// --- helpers ------------------------------------------------------------
+
+	/**
+	 * Say in the cached manifest which folder the plugin's package unpacks to.
+	 *
+	 * @param string $slug Folder name.
+	 */
+	private function set_manifest_slug( string $slug ): void {
+		set_site_transient(
+			Updates\CACHE_KEY,
+			array_replace_recursive(
+				(array) get_site_transient( Updates\CACHE_KEY ),
+				array( 'plugin' => array( 'slug' => $slug ) )
+			),
+			HOUR_IN_SECONDS
+		);
+	}
 
 	/* ------------------------------------------- what may install itself */
 

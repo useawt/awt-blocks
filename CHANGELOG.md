@@ -10,6 +10,18 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- The plugin's "View details" window opens when update checks are off. It showed a critical error
+  before.
+- For developers: the `awt_update_package_sources` filter adds a place updates may download from, and
+  `awt_blocks_manual_update_message` changes the message shown when an update can't be downloaded.
+  A plugin that loads AWT Blocks from a main file of its own names it with `awt_blocks_plugin_file`.
+  When the `awt_blocks_update_package` filter leaves no package, the plugin no longer tries to update
+  itself in the background.
+
 ## 2026.10.5 (2026-10-08)
 
 ### [Improvement]
