@@ -14,7 +14,7 @@ permissions:
 jobs:
   premium-guard:
     name: No premium code in free repo
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
 
   lint:
     name: Lint (ESLint, PHPCS, markdownlint)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v4
@@ -64,7 +64,7 @@ jobs:
   # workspace root, where no sibling can exist.
   class-parity:
     name: Class parity (editor vs render)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     defaults:
       run:
@@ -89,7 +89,7 @@ jobs:
 
   test:
     name: Unit tests (Jest)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v4
@@ -106,7 +106,7 @@ jobs:
   # that start wp-env check out both repos side by side.
   test-php:
     name: PHP tests (PHPUnit in wp-env)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     defaults:
       run:
@@ -141,7 +141,7 @@ jobs:
 
   e2e:
     name: E2E tests (Playwright in wp-env)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     defaults:
       run:
@@ -185,7 +185,7 @@ jobs:
   # (awt-workspace #25). Safe SVG needs a newer WordPress, so it stays off.
   e2e-oldest-wp:
     name: E2E tests on WordPress 6.6
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     env:
       WP_ENV_CORE: WordPress/WordPress#6.6.2
@@ -226,7 +226,7 @@ jobs:
 
   perf:
     name: Performance budgets (Lighthouse)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event_name != 'schedule'
     timeout-minutes: 30
     permissions:
@@ -328,7 +328,7 @@ jobs:
 
   compat:
     name: Plugin compatibility (Floor A)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     defaults:
       run:
