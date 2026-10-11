@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.5\n"
+"Project-Id-Version: AWT Blocks 2026.10.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-08T17:31:47+00:00\n"
+"POT-Creation-Date: 2026-10-11T16:30:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -277,29 +277,29 @@ msgid "Select"
 msgstr ""
 
 #: src/shared/new-tab-note.php:51
-#: src/shared/updates.php:542
+#: src/shared/updates.php:636
 msgid "(opens in a new tab)"
 msgstr ""
 
-#: src/shared/updates.php:574
-#: src/shared/updates.php:578
+#: src/shared/updates.php:668
+#: src/shared/updates.php:672
 msgid "This copy of AWT Blocks has no release notes."
 msgstr ""
 
-#: src/shared/updates.php:614
+#: src/shared/updates.php:719
 msgid "Update the AWT theme and AWT Blocks together. They work as a pair."
 msgstr ""
 
-#: src/shared/updates.php:642
+#: src/shared/updates.php:747
 msgid "Add Plugin"
 msgstr ""
 
-#: src/shared/updates.php:643
+#: src/shared/updates.php:748
 msgid "Add New Plugin"
 msgstr ""
 
 #. translators: 1: WordPress's "Add Plugin" button. 2: URL of the update instructions.
-#: src/shared/updates.php:648
+#: src/shared/updates.php:751
 #, php-format
 msgid "This version can't be downloaded automatically. Download it from the AWT website, then go to Plugins → %1$s → Upload Plugin and choose \"Replace current with uploaded\". Your settings and content are kept. %2$s"
 msgstr ""

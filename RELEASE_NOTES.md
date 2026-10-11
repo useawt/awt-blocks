@@ -1,6 +1,5 @@
-## 2026.10.5 (2026-10-08)
+## 2026.10.6 (2026-10-11)
 
 ### [Improvement]
 
-- The "Mark as decorative" checkbox lines up with the other block settings.
-- The steps for updating AWT Blocks by hand name the "Add Plugin" button your version of WordPress shows.
+- The plugin's "View details" window opens when update checks are off.
