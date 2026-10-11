@@ -6,11 +6,7 @@
 // `tile` carries `.cds--tile-group`; `form` carries the `.cds--label` used by
 // the legend.
 
-@use '@carbon/styles/scss/config' with (
-	$css--font-face: false,
-	$css--default-type: false,
-	$css--reset: false
-);
+@use '../shared/carbon-config';
 
 @use '@carbon/styles/scss/components/tile';
 @use '@carbon/styles/scss/components/form';
