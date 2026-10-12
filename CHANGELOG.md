@@ -25,6 +25,8 @@
 - A new Checkbox, Toggle or Menu button puts the cursor in its label.
 - Enter at the start of a Button, Link, Tag or Modal opener moves it, and what follows it, to a new
   row.
+- Typing in a Select or Dropdown's options stays where the cursor is, and keeps spaces and new
+  lines.
 
 ## 2026.10.6 (2026-10-11)
 

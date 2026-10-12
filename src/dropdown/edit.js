@@ -9,29 +9,11 @@ import {
 	TextControl,
 	SelectControl,
 	ToggleControl,
-	TextareaControl,
 } from '@wordpress/components';
 import CarbonDefaultToggle, {
 	fieldFrameClass,
 } from '../shared/carbon-default-toggle';
-
-function parseOptions( raw ) {
-	return raw
-		.split( '\n' )
-		.map( ( line ) => {
-			const [ value, ...rest ] = line.split( '|' );
-			const label =
-				rest.length > 0 ? rest.join( '|' ).trim() : value.trim();
-			return value.trim() ? { value: value.trim(), label } : null;
-		} )
-		.filter( Boolean );
-}
-
-function stringifyOptions( opts ) {
-	return ( opts || [] )
-		.map( ( o ) => `${ o.value }|${ o.label }` )
-		.join( '\n' );
-}
+import OptionsField from '../shared/options-field';
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -77,16 +59,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						checked={ disabled }
 						onChange={ ( v ) => setAttributes( { disabled: v } ) }
 					/>
-					<TextareaControl
-						label={ __(
-							'Options (one per line: value|label)',
-							'awt-blocks'
-						) }
-						value={ stringifyOptions( options ) }
-						onChange={ ( v ) =>
-							setAttributes( { options: parseOptions( v ) } )
-						}
-						rows={ 6 }
+					<OptionsField
+						options={ options }
+						onChange={ ( v ) => setAttributes( { options: v } ) }
 					/>
 				</PanelBody>
 				<PanelBody
