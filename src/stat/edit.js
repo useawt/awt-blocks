@@ -98,6 +98,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { value: v } ) }
 					placeholder={ __( '90%', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
 				/>
 				{
 					// Anything another plugin shows beside the number, such as
@@ -114,6 +115,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						'awt-blocks'
 					) }
 					allowedFormats={ [ 'core/bold', 'core/italic' ] }
+					disableLineBreaks
 				/>
 				<RichText
 					tagName="p"

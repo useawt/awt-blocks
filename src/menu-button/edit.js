@@ -157,6 +157,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						disabled={ disabled }
 						aria-haspopup="menu"
 						aria-expanded="false"
+						// A preview: out of the Tab order, so a new menu button
+						// puts the cursor in its label.
+						tabIndex={ -1 }
 					>
 						<RichText
 							tagName="span"
@@ -164,6 +167,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							onChange={ ( v ) => setAttributes( { label: v } ) }
 							placeholder={ __( 'Menu label', 'awt-blocks' ) }
 							allowedFormats={ [] }
+							disableLineBreaks
 						/>
 						{ /* Use `cds--btn__icon` class (matches render.php's `icon( 'chevron-down', 16, 'cds--btn__icon' )`)
 					     so the chevron picks up Carbon's margin-inline-start: 0.5rem and the

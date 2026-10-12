@@ -5,6 +5,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl } from '@wordpress/components';
+import { useEnterAddsNext } from '../shared/enter-adds-next';
 
 const KIND = [ 'primary', 'secondary', 'tertiary', 'ghost', 'danger' ].map(
 	( v ) => ( { value: v, label: v } )
@@ -14,7 +15,20 @@ const SIZE = [ 'sm', 'md', 'lg', 'xl' ].map( ( v ) => ( {
 	label: v,
 } ) );
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	insertBlocksAfter,
+	onRemove,
+} ) {
+	const onEnter = useEnterAddsNext(
+		clientId,
+		'awt/modal-opener',
+		{ text: '' },
+		attributes.text,
+		insertBlocksAfter
+	);
 	const { text, kind, size, modalId } = attributes;
 	const blockProps = useBlockProps( {
 		// `cds--btn--{size}` sets no height; only `cds--layout--size-{size}`
@@ -63,6 +77,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { text: v } ) }
 					allowedFormats={ [] }
 					placeholder={ __( 'Button label', 'awt-blocks' ) }
+					disableLineBreaks
+					__unstableOnSplitAtEnd={ onEnter }
+					onRemove={ onRemove }
 				/>
 			</button>
 		</>

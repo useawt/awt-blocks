@@ -45,6 +45,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onChange={ ( v ) => setAttributes( { label: v } ) }
 				allowedFormats={ [] }
 				placeholder={ __( 'What is this choice about?', 'awt-blocks' ) }
+				disableLineBreaks
 			/>
 			{ children }
 		</fieldset>

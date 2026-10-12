@@ -11,6 +11,7 @@ import {
 	TextControl,
 } from '@wordpress/components';
 import LinkField from '../shared/link-field';
+import { useEnterAddsNext } from '../shared/enter-adds-next';
 
 const TYPES = [
 	'red',
@@ -32,7 +33,20 @@ const TARGET_OPTIONS = [
 	{ label: 'New tab/window', value: '_blank' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	insertBlocksAfter,
+	onRemove,
+} ) {
+	const onEnter = useEnterAddsNext(
+		clientId,
+		'awt/tag',
+		{ text: '' },
+		attributes.text,
+		insertBlocksAfter
+	);
 	const { text, type, size, filter, href, target, rel } = attributes;
 	const isLink = !! href;
 	// A linked tag renders as an <a>; a dismissible (filter) tag has a close
@@ -124,6 +138,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { text: v } ) }
 					placeholder={ __( 'Tag label', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
+					__unstableOnSplitAtEnd={ onEnter }
+					onRemove={ onRemove }
 				/>
 				{ showClose && (
 					<button

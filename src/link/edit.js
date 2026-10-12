@@ -14,6 +14,7 @@ import {
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import looksLikeUrl from '../shared/looks-like-url';
 import LinkField from '../shared/link-field';
+import { useEnterAddsNext } from '../shared/enter-adds-next';
 
 const SIZE_OPTIONS = [
 	{ label: 'Small (sm)', value: 'sm' },
@@ -28,7 +29,20 @@ const TARGET_OPTIONS = [
 	{ label: 'Top frame', value: '_top' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	insertBlocksAfter,
+	onRemove,
+} ) {
+	const onEnter = useEnterAddsNext(
+		clientId,
+		'awt/link',
+		{ text: '' },
+		attributes.text,
+		insertBlocksAfter
+	);
 	const {
 		text,
 		href,
@@ -141,6 +155,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { text: v } ) }
 					placeholder={ __( 'Link text', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
+					__unstableOnSplitAtEnd={ onEnter }
+					onRemove={ onRemove }
 				/>
 				{ iconName && (
 					<span className="cds--link__icon" aria-hidden="true">

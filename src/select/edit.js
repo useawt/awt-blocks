@@ -164,6 +164,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					onChange={ ( v ) => setAttributes( { label: v } ) }
 					placeholder={ __( 'Label', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
 				/>
 				<div
 					className="cds--select-input__wrapper"

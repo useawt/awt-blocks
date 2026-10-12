@@ -116,6 +116,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					checked={ !! checked }
 					disabled={ disabled }
 					readOnly
+					// A preview: out of the Tab order, so a new checkbox puts
+					// the cursor in its label and Tab skips a box that does
+					// nothing here.
+					tabIndex={ -1 }
 				/>
 				<label htmlFor={ id } className="cds--checkbox-label">
 					<RichText
@@ -125,6 +129,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						onChange={ ( v ) => setAttributes( { label: v } ) }
 						placeholder={ __( 'Checkbox label', 'awt-blocks' ) }
 						allowedFormats={ [] }
+						disableLineBreaks
 					/>
 				</label>
 				{ helperText && (

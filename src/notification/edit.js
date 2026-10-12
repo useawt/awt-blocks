@@ -162,6 +162,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									'awt-blocks'
 								) }
 								allowedFormats={ [] }
+								disableLineBreaks
 							/>{ ' ' }
 							<RichText
 								tagName="span"
@@ -174,6 +175,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									'Subtitle (optional)',
 									'awt-blocks'
 								) }
+								disableLineBreaks
 							/>
 						</p>
 						{ variant === 'toast' && (
@@ -188,6 +190,7 @@ export default function Edit( { attributes, setAttributes } ) {
 									'Caption (toast only)',
 									'awt-blocks'
 								) }
+								disableLineBreaks
 							/>
 						) }
 					</div>

@@ -188,6 +188,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { heading: v } ) }
 					placeholder={ __( 'Modal heading', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
 				/>
 				<div { ...innerProps } />
 				<div className="cds--modal-footer">

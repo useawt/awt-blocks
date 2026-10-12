@@ -93,6 +93,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 						placeholder={ __( 'Trigger text', 'awt-blocks' ) }
 						allowedFormats={ [ 'core/bold', 'core/italic' ] }
 						tabIndex={ 0 }
+						disableLineBreaks
 					/>
 					{ /* Reveal the tooltip while the block is selected so the author can
 					     preview the chosen alignment (positioned via the editor-only CSS

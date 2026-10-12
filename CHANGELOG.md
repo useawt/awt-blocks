@@ -19,6 +19,10 @@
 - A Tag, Button, Link, Modal opener, Menu button, Tooltip, Notification or Statistic left empty
   doesn't show on the page.
 - A form field or Modal left without a label or heading keeps the word it used to start with.
+- Enter at the end of a Tag, Button, Link or Modal opener starts the next one instead of a second
+  line.
+- Enter no longer adds a second line to block labels and headings.
+- A new Checkbox, Toggle or Menu button puts the cursor in its label.
 
 ## 2026.10.6 (2026-10-11)
 

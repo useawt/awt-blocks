@@ -22,6 +22,7 @@ import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import PremiumNotice from '../shared/premium-notice';
 import looksLikeUrl from '../shared/looks-like-url';
 import LinkField from '../shared/link-field';
+import { useEnterAddsNext } from '../shared/enter-adds-next';
 
 const KIND_OPTIONS = [
 	{ label: 'Primary', value: 'primary' },
@@ -53,7 +54,20 @@ const ICON_POSITION_OPTIONS = [
 	{ label: 'Trailing', value: 'trailing' },
 ];
 
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( {
+	attributes,
+	setAttributes,
+	clientId,
+	insertBlocksAfter,
+	onRemove,
+} ) {
+	const onEnter = useEnterAddsNext(
+		clientId,
+		'awt/button',
+		{ text: '' },
+		attributes.text,
+		insertBlocksAfter
+	);
 	const {
 		text,
 		kind,
@@ -272,6 +286,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { text: v } ) }
 					placeholder={ __( 'Button label', 'awt-blocks' ) }
 					allowedFormats={ [] }
+					disableLineBreaks
+					__unstableOnSplitAtEnd={ onEnter }
+					onRemove={ onRemove }
 				/>
 				{ iconPosition !== 'leading' && iconEl }
 			</Tag>

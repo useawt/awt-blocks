@@ -146,6 +146,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ ( v ) => setAttributes( { label: v } ) }
 					allowedFormats={ [] }
 					placeholder={ __( 'Label', 'awt-blocks' ) }
+					disableLineBreaks
 				/>
 				<div
 					className={ `cds--dropdown cds--list-box cds--list-box--${ size } cds--layout--size-${ size }${

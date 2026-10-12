@@ -114,6 +114,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						defaultChecked={ toggled }
 						disabled={ disabled }
 						readOnly
+						// A preview: out of the Tab order, so a new toggle puts
+						// the cursor in its label and Tab skips a switch that
+						// does nothing here.
+						tabIndex={ -1 }
 					/>
 					<label htmlFor={ id } className="cds--toggle__label">
 						<RichText
@@ -127,6 +131,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 							onChange={ ( v ) => setAttributes( { label: v } ) }
 							placeholder={ __( 'Toggle label', 'awt-blocks' ) }
 							allowedFormats={ [] }
+							disableLineBreaks
 						/>
 						<span className={ appearanceClasses }>
 							<span className={ switchClasses }></span>
