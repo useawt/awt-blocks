@@ -5,7 +5,7 @@ import {
 	RichText,
 } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl } from '@wordpress/components';
-import { useEnterAddsNext } from '../shared/enter-adds-next';
+import { useRowEnter } from '../shared/row-enter';
 
 const KIND = [ 'primary', 'secondary', 'tertiary', 'ghost', 'danger' ].map(
 	( v ) => ( { value: v, label: v } )
@@ -22,7 +22,7 @@ export default function Edit( {
 	insertBlocksAfter,
 	onRemove,
 } ) {
-	const onEnter = useEnterAddsNext(
+	const enterProps = useRowEnter(
 		clientId,
 		'awt/modal-opener',
 		{ text: '' },
@@ -78,7 +78,7 @@ export default function Edit( {
 					allowedFormats={ [] }
 					placeholder={ __( 'Button label', 'awt-blocks' ) }
 					disableLineBreaks
-					__unstableOnSplitAtEnd={ onEnter }
+					{ ...enterProps }
 					onRemove={ onRemove }
 				/>
 			</button>

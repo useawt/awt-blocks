@@ -11,7 +11,7 @@ import {
 	TextControl,
 } from '@wordpress/components';
 import LinkField from '../shared/link-field';
-import { useEnterAddsNext } from '../shared/enter-adds-next';
+import { useRowEnter } from '../shared/row-enter';
 
 const TYPES = [
 	'red',
@@ -40,7 +40,7 @@ export default function Edit( {
 	insertBlocksAfter,
 	onRemove,
 } ) {
-	const onEnter = useEnterAddsNext(
+	const enterProps = useRowEnter(
 		clientId,
 		'awt/tag',
 		{ text: '' },
@@ -139,7 +139,7 @@ export default function Edit( {
 					placeholder={ __( 'Tag label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 					disableLineBreaks
-					__unstableOnSplitAtEnd={ onEnter }
+					{ ...enterProps }
 					onRemove={ onRemove }
 				/>
 				{ showClose && (

@@ -22,7 +22,7 @@ import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import PremiumNotice from '../shared/premium-notice';
 import looksLikeUrl from '../shared/looks-like-url';
 import LinkField from '../shared/link-field';
-import { useEnterAddsNext } from '../shared/enter-adds-next';
+import { useRowEnter } from '../shared/row-enter';
 
 const KIND_OPTIONS = [
 	{ label: 'Primary', value: 'primary' },
@@ -61,7 +61,7 @@ export default function Edit( {
 	insertBlocksAfter,
 	onRemove,
 } ) {
-	const onEnter = useEnterAddsNext(
+	const enterProps = useRowEnter(
 		clientId,
 		'awt/button',
 		{ text: '' },
@@ -287,7 +287,7 @@ export default function Edit( {
 					placeholder={ __( 'Button label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 					disableLineBreaks
-					__unstableOnSplitAtEnd={ onEnter }
+					{ ...enterProps }
 					onRemove={ onRemove }
 				/>
 				{ iconPosition !== 'leading' && iconEl }

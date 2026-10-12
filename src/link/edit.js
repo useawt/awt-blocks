@@ -14,7 +14,7 @@ import {
 import IconPicker, { iconMaskImage } from '../shared/icon-picker';
 import looksLikeUrl from '../shared/looks-like-url';
 import LinkField from '../shared/link-field';
-import { useEnterAddsNext } from '../shared/enter-adds-next';
+import { useRowEnter } from '../shared/row-enter';
 
 const SIZE_OPTIONS = [
 	{ label: 'Small (sm)', value: 'sm' },
@@ -36,7 +36,7 @@ export default function Edit( {
 	insertBlocksAfter,
 	onRemove,
 } ) {
-	const onEnter = useEnterAddsNext(
+	const enterProps = useRowEnter(
 		clientId,
 		'awt/link',
 		{ text: '' },
@@ -156,7 +156,7 @@ export default function Edit( {
 					placeholder={ __( 'Link text', 'awt-blocks' ) }
 					allowedFormats={ [] }
 					disableLineBreaks
-					__unstableOnSplitAtEnd={ onEnter }
+					{ ...enterProps }
 					onRemove={ onRemove }
 				/>
 				{ iconName && (

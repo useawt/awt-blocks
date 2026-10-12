@@ -177,3 +177,51 @@ test( 'Enter in a tag starts the next tag, never a second line', async ( {
 		'awt/inline-set[awt/tag "Beta", awt/tag "New"] | core/paragraph ""'
 	);
 } );
+
+test( 'Enter at the start of a link next to a button moves it to its own row', async ( {
+	admin,
+	editor,
+	page,
+	pageUtils,
+	requestUtils,
+} ) => {
+	// A link added after a button lands in the button's row, and the author
+	// had no way to put it on a line of its own (found 2026-10-12).
+	const created = await requestUtils.createPage( {
+		title: 'Break a row',
+		content:
+			'<!-- wp:awt/inline-set --><!-- wp:awt/button {"text":"Get started"} /--><!-- wp:awt/link {"text":"Learn more","href":"/more"} /--><!-- /wp:awt/inline-set -->',
+		status: 'draft',
+	} );
+	await admin.editPost( created.id );
+	const rows = () =>
+		page.evaluate( () => {
+			const store = window.wp.data.select( 'core/block-editor' );
+			return store
+				.getBlocks()
+				.map( ( row ) =>
+					row.innerBlocks
+						.map( ( b ) => b.attributes.text )
+						.join( ' + ' )
+				);
+		} );
+
+	// At the start of the first one: nothing.
+	await editor.canvas.getByText( 'Get started' ).click();
+	await page.keyboard.press( 'Home' );
+	await page.keyboard.press( 'Enter' );
+	expect( await rows() ).toEqual( [ 'Get started + Learn more' ] );
+
+	// At the start of the link: it moves down, and the cursor goes with it.
+	await editor.canvas.getByText( 'Learn more' ).click();
+	await page.keyboard.press( 'Home' );
+	await page.keyboard.press( 'Enter' );
+	await expect.poll( rows ).toEqual( [ 'Get started', 'Learn more' ] );
+	await page.keyboard.type( '>' );
+	await expect.poll( rows ).toEqual( [ 'Get started', '>Learn more' ] );
+
+	// One undo for the typing, one for the break.
+	await pageUtils.pressKeys( 'primary+z' );
+	await pageUtils.pressKeys( 'primary+z' );
+	await expect.poll( rows ).toEqual( [ 'Get started + Learn more' ] );
+} );
