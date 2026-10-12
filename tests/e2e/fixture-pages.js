@@ -158,6 +158,10 @@ const FORMS = `
 <!-- wp:awt/radio-button {"label":"Yearly","value":"yearly"} /-->
 <!-- /wp:awt/radio-button-group -->
 <!-- wp:awt/toggle {"label":"Two-factor authentication","name":"twofa","toggled":true} /-->
+<!-- A field nobody typed a label into: new fields start empty, and an empty
+     label falls back to the word the field used to start with, so the
+     field still has a name. -->
+<!-- wp:awt/text-input {"label":"","name":"nolabel"} /-->
 <!-- wp:awt/button {"text":"Create account","type":"submit","size":"md"} /-->
 <!-- wp:awt/button {"text":"Cancel","kind":"secondary","size":"md"} /-->
 <!-- wp:awt/button {"text":"Delete","kind":"danger","size":"md"} /-->

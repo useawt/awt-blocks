@@ -15,6 +15,10 @@
 ### [Improvement]
 
 - You can add a Tag to a Hero.
+- New blocks start empty, with a hint, so you can type your own text right away.
+- A Tag, Button, Link, Modal opener, Menu button, Tooltip, Notification or Statistic left empty
+  doesn't show on the page.
+- A form field or Modal left without a label or heading keeps the word it used to start with.
 
 ## 2026.10.6 (2026-10-11)
 

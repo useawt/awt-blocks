@@ -43,6 +43,12 @@ $icon_name     = isset( $attributes['iconName'] ) ? (string) $attributes['iconNa
 $icon_position = isset( $attributes['iconPosition'] ) ? (string) $attributes['iconPosition'] : 'trailing';
 $expressive    = ! empty( $attributes['isExpressive'] );
 
+// No text and no icon: a button with nothing on it and no name. A new button
+// starts empty, so this is one nobody typed into.
+if ( \AWT\Blocks\Render\is_blank( $text ) && $icon_name === '' ) {
+	return;
+}
+
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
 $modifiers = array(

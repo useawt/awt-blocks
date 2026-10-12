@@ -27,7 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label      = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Toggle label', 'awt-blocks' );
+// A new field starts with an empty label. Left that way, it keeps the word it
+// used to start with, so the field still has a name.
+$label      = \AWT\Blocks\Render\text_or( (string) ( $attributes['label'] ?? '' ), __( 'Toggle label', 'awt-blocks' ) );
 $name       = isset( $attributes['name'] ) ? (string) $attributes['name'] : '';
 $size       = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $toggled    = ! empty( $attributes['toggled'] );

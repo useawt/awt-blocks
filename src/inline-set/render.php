@@ -19,6 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Every child left empty (a new button, link or tag starts empty and prints
+// nothing): no empty row with its gap and margin.
+if ( trim( $content ) === '' ) {
+	return;
+}
+
 $orientation = isset( $attributes['orientation'] ) ? (string) $attributes['orientation'] : 'horizontal';
 $gap         = isset( $attributes['gap'] ) ? (string) $attributes['gap'] : 'md';
 $align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'start';

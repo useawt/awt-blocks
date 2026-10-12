@@ -122,6 +122,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					className="cds--tag__label"
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }
+					placeholder={ __( 'Tag label', 'awt-blocks' ) }
 					allowedFormats={ [] }
 				/>
 				{ showClose && (

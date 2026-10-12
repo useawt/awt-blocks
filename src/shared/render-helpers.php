@@ -207,6 +207,36 @@ function _read_carbon_icon( string $file, int $size, string $extra_class = '' ):
 }
 
 /**
+ * Is this text empty once its tags and spaces are gone?
+ *
+ * Blocks added from the inserter start with their text empty (a hint shows
+ * in the editor), so a block nobody typed into reaches the page with '' or
+ * what the editor leaves behind, such as a lone <br> or a non-breaking space.
+ *
+ * @param string $text The attribute's value.
+ * @return bool True when there is nothing to read.
+ */
+function is_blank( string $text ): bool {
+	$plain = html_entity_decode( wp_strip_all_tags( $text ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+	return '' === preg_replace( '/[\s\x{00A0}]+/u', '', $plain );
+}
+
+/**
+ * The text, or a fallback when it is blank.
+ *
+ * For a form field or a dialog, which needs a name more than it needs to be
+ * pretty: left empty, it keeps the word it used to start with, so the field
+ * is still labelled and the form still works.
+ *
+ * @param string $text     The attribute's value.
+ * @param string $fallback What to use instead.
+ * @return string
+ */
+function text_or( string $text, string $fallback ): string {
+	return is_blank( $text ) ? $fallback : $text;
+}
+
+/**
  * Is this a web address, or is it prose someone typed into a URL field?
  *
  * `esc_url()` gives anything without a scheme an `http://`, so the sentence

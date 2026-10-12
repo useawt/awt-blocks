@@ -26,8 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 $value       = isset( $attributes['value'] ) ? (string) $attributes['value'] : '';
 $heading     = isset( $attributes['heading'] ) ? (string) $attributes['heading'] : '';
 $description = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';
-$level       = isset( $attributes['level'] ) ? (string) $attributes['level'] : 'none';
-$align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'start';
+
+// A new statistic starts empty. With nothing in it, it prints nothing.
+if ( \AWT\Blocks\Render\is_blank( $value . $heading . $description ) ) {
+	return;
+}
+
+$level = isset( $attributes['level'] ) ? (string) $attributes['level'] : 'none';
+$align = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'start';
 
 // Constrain level to none | 2..6.
 if ( ! in_array( $level, array( 'none', '2', '3', '4', '5', '6' ), true ) ) {

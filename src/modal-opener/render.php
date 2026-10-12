@@ -18,6 +18,11 @@ $kind     = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'prima
 $size     = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $modal_id = isset( $attributes['modalId'] ) ? (string) $attributes['modalId'] : 'awt-modal';
 
+// A button with no text has nothing on it and no name. A new one starts empty.
+if ( \AWT\Blocks\Render\is_blank( $text ) ) {
+	return;
+}
+
 // Carbon's button height comes from the `--cds-layout-size-height` variable,
 // which only `cds--layout--size-{size}` sets — `cds--btn--{size}` does not.
 // Without it the button sits at Carbon's `lg` default whatever size is chosen,

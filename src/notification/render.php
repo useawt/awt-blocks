@@ -22,9 +22,16 @@ $kind               = isset( $attributes['kind'] ) ? (string) $attributes['kind'
 $notification_title = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Notification', 'awt-blocks' );
 $subtitle           = isset( $attributes['subtitle'] ) ? (string) $attributes['subtitle'] : '';
 $caption            = isset( $attributes['caption'] ) ? (string) $attributes['caption'] : '';
-$low_contrast       = ! empty( $attributes['lowContrast'] );
-$hide_close         = ! empty( $attributes['hideCloseButton'] );
-$variant            = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'inline';
+
+// A new notification starts with an empty title. With no text at all it
+// would be an icon in a box.
+if ( \AWT\Blocks\Render\is_blank( $notification_title . $subtitle . $caption ) ) {
+	return;
+}
+
+$low_contrast = ! empty( $attributes['lowContrast'] );
+$hide_close   = ! empty( $attributes['hideCloseButton'] );
+$variant      = isset( $attributes['variant'] ) ? (string) $attributes['variant'] : 'inline';
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 

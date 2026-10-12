@@ -20,7 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$label        = isset( $attributes['label'] ) ? (string) $attributes['label'] : __( 'Dropdown', 'awt-blocks' );
+// A new field starts with an empty label. Left that way, it keeps the word it
+// used to start with, so the field still has a name.
+$label        = \AWT\Blocks\Render\text_or( (string) ( $attributes['label'] ?? '' ), __( 'Dropdown', 'awt-blocks' ) );
 $placeholder  = isset( $attributes['placeholder'] ) ? (string) $attributes['placeholder'] : __( 'Choose…', 'awt-blocks' );
 $helper_text  = isset( $attributes['helperText'] ) ? (string) $attributes['helperText'] : '';
 $invalid      = ! empty( $attributes['invalid'] );

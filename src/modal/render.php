@@ -23,8 +23,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$modal_id         = isset( $attributes['id'] ) && $attributes['id'] !== '' ? (string) $attributes['id'] : unique_id( 'awt-modal' );
-$heading          = isset( $attributes['heading'] ) ? (string) $attributes['heading'] : '';
+$modal_id = isset( $attributes['id'] ) && $attributes['id'] !== '' ? (string) $attributes['id'] : unique_id( 'awt-modal' );
+// A new modal starts with an empty heading. The heading names the dialog, so
+// left empty it keeps the words it used to start with.
+$heading          = \AWT\Blocks\Render\text_or( (string) ( $attributes['heading'] ?? '' ), __( 'Modal heading', 'awt-blocks' ) );
 $label            = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $size             = isset( $attributes['size'] ) ? (string) $attributes['size'] : 'md';
 $primary_action   = isset( $attributes['primaryAction'] ) ? (string) $attributes['primaryAction'] : __( 'Continue', 'awt-blocks' );

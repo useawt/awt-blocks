@@ -25,6 +25,11 @@ $enter_delay_ms = isset( $attributes['enterDelayMs'] ) ? (int) $attributes['ente
 $leave_delay_ms = isset( $attributes['leaveDelayMs'] ) ? (int) $attributes['leaveDelayMs'] : 300;
 $trigger_text   = isset( $attributes['triggerText'] ) ? (string) $attributes['triggerText'] : '';
 
+// No trigger text: nothing to hover or focus. A new tooltip starts empty.
+if ( \AWT\Blocks\Render\is_blank( $trigger_text ) ) {
+	return;
+}
+
 $tooltip_id = unique_id( 'awt-tooltip' );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;

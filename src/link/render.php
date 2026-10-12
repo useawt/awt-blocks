@@ -32,6 +32,12 @@ $visited   = isset( $attributes['visited'] ) ? (bool) $attributes['visited'] : f
 $disabled  = ! empty( $attributes['disabled'] );
 $icon_name = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'] : '';
 
+// No text and no icon: a link with nothing to click and no name. A new link
+// starts empty, so this is one nobody typed into.
+if ( \AWT\Blocks\Render\is_blank( $text ) && $icon_name === '' ) {
+	return;
+}
+
 // Carbon link visited semantics:
 //
 // - Default `.cds--link` already overrides the browser's purple :visited

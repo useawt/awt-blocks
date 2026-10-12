@@ -25,6 +25,13 @@ $href     = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $target   = isset( $attributes['target'] ) ? (string) $attributes['target'] : '';
 $rel      = isset( $attributes['rel'] ) ? (string) $attributes['rel'] : '';
 
+// A tag added from the inserter starts empty. Left that way it prints
+// nothing: an empty chip says nothing, and a linked one is a link with no
+// accessible name.
+if ( \AWT\Blocks\Render\is_blank( $text ) ) {
+	return;
+}
+
 $is_link = $href !== '';
 // A linked tag renders as <a>; "dismissible" + link are mutually exclusive
 // (no close <button> inside an anchor).

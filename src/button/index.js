@@ -12,11 +12,13 @@ import { registerBlockType } from '@wordpress/blocks';
 import metadata from './block.json';
 import carbonIcon from '@carbon/icons/es/button--centered/32';
 import { blockIcon } from '../shared/block-icon';
+import { startsEmpty } from '../shared/starts-empty';
 import Edit from './edit';
 
 registerBlockType( metadata.name, {
 	icon: blockIcon( carbonIcon ),
 	edit: Edit,
+	variations: startsEmpty( { text: '' } ),
 	// No save() because this block is server-rendered via render.php.
 	save: () => null,
 	// Empty for v1. Per Stage 0 policy: never remove an entry once added; bump

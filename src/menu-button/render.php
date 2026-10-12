@@ -26,6 +26,12 @@ $menu_alignment = isset( $attributes['menuAlignment'] ) ? (string) $attributes['
 $disabled       = ! empty( $attributes['disabled'] );
 $items          = isset( $attributes['items'] ) && is_array( $attributes['items'] ) ? $attributes['items'] : array();
 
+// A menu button with no label has nothing on it and no name. A new one starts
+// empty.
+if ( \AWT\Blocks\Render\is_blank( $label ) ) {
+	return;
+}
+
 $menu_id    = unique_id( 'awt-menu' );
 $trigger_id = $menu_id . '-trigger';
 
