@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.6\n"
+"Project-Id-Version: AWT Blocks 2026.10.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-11T16:30:36+00:00\n"
+"POT-Creation-Date: 2026-10-12T09:33:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -83,12 +83,12 @@ msgid "Breadcrumbs"
 msgstr ""
 
 #: src/button/render.php:28
-#: src/button/edit.js:121
+#: src/button/edit.js:135
 msgid "Button"
 msgstr ""
 
-#: src/checkbox/render.php:18
-#: src/checkbox/edit.js:126
+#: src/checkbox/render.php:20
+#: src/checkbox/edit.js:130
 msgid "Checkbox label"
 msgstr ""
 
@@ -153,22 +153,22 @@ msgstr ""
 msgid "Not included"
 msgstr ""
 
-#: src/dropdown/render.php:23
-#: src/dropdown/edit.js:52
+#: src/dropdown/render.php:25
+#: src/dropdown/edit.js:34
 msgid "Dropdown"
 msgstr ""
 
-#: src/dropdown/render.php:24
-#: src/select/render.php:31
+#: src/dropdown/render.php:26
+#: src/select/render.php:33
 msgid "Choose…"
 msgstr ""
 
 #: src/footer-link/render.php:18
 #: src/side-nav-link/render.php:30
-#: src/button/edit.js:171
+#: src/button/edit.js:185
 #: src/icon/edit.js:25
-#: src/link/edit.js:62
-#: src/tag/edit.js:89
+#: src/link/edit.js:76
+#: src/tag/edit.js:103
 msgid "Link"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgid "Close menu"
 msgstr ""
 
 #: src/link/render.php:19
-#: src/link/edit.js:142
+#: src/link/edit.js:156
 #: src/skip-link/edit.js:57
 #: src/testimonial/edit.js:228
 msgid "Link text"
@@ -203,15 +203,20 @@ msgstr ""
 msgid "Open modal"
 msgstr ""
 
-#: src/modal/render.php:30
+#: src/modal/render.php:29
+#: src/modal/edit.js:189
+msgid "Modal heading"
+msgstr ""
+
+#: src/modal/render.php:32
 msgid "Continue"
 msgstr ""
 
-#: src/modal/render.php:31
+#: src/modal/render.php:33
 msgid "Cancel"
 msgstr ""
 
-#: src/modal/render.php:149
+#: src/modal/render.php:151
 msgid "Close"
 msgstr ""
 
@@ -220,8 +225,8 @@ msgstr ""
 msgid "Notification"
 msgstr ""
 
-#: src/notification/render.php:82
-#: src/notification/edit.js:199
+#: src/notification/render.php:89
+#: src/notification/edit.js:202
 msgid "Close notification"
 msgstr ""
 
@@ -271,8 +276,8 @@ msgstr ""
 msgid "Option"
 msgstr ""
 
-#: src/select/render.php:22
-#: src/select/edit.js:56
+#: src/select/render.php:24
+#: src/select/edit.js:38
 msgid "Select"
 msgstr ""
 
@@ -332,12 +337,12 @@ msgid "Scroll tabs right"
 msgstr ""
 
 #: src/tag/render.php:20
-#: src/tag/edit.js:53
+#: src/tag/edit.js:67
 msgid "Tag"
 msgstr ""
 
-#: src/tag/render.php:63
-#: src/tag/edit.js:131
+#: src/tag/render.php:70
+#: src/tag/edit.js:149
 msgid "Dismiss"
 msgstr ""
 
@@ -346,18 +351,18 @@ msgstr ""
 msgid "Read the full story"
 msgstr ""
 
-#: src/text-area/render.php:31
+#: src/text-area/render.php:33
 #: src/form/edit.js:108
 #: src/toggletip/edit.js:63
 #: src/tooltip/edit.js:42
 msgid "Description"
 msgstr ""
 
-#: src/text-input/render.php:38
-#: src/dropdown/edit.js:148
+#: src/text-input/render.php:40
+#: src/dropdown/edit.js:123
 #: src/menu-button/edit.js:103
 #: src/password-input/edit.js:173
-#: src/select/edit.js:165
+#: src/select/edit.js:140
 #: src/text-area/edit.js:167
 #: src/text-input/edit.js:304
 msgid "Label"
@@ -367,16 +372,16 @@ msgstr ""
 msgid "Expandable tile"
 msgstr ""
 
-#: src/toggle/render.php:30
-#: src/toggle/edit.js:128
+#: src/toggle/render.php:32
+#: src/toggle/edit.js:132
 msgid "Toggle label"
 msgstr ""
 
-#: src/toggle/render.php:36
+#: src/toggle/render.php:38
 msgid "Off"
 msgstr ""
 
-#: src/toggle/render.php:37
+#: src/toggle/render.php:39
 msgid "On"
 msgstr ""
 
@@ -480,16 +485,16 @@ msgid "Open by default"
 msgstr ""
 
 #: src/accordion-item/edit.js:40
-#: src/button/edit.js:165
+#: src/button/edit.js:179
 #: src/checkbox/edit.js:72
 #: src/content-switcher-item/edit.js:36
-#: src/dropdown/edit.js:76
-#: src/link/edit.js:93
+#: src/dropdown/edit.js:58
+#: src/link/edit.js:107
 #: src/menu-button/edit.js:87
 #: src/menu-button/edit.js:128
 #: src/password-input/edit.js:72
 #: src/radio-button/edit.js:28
-#: src/select/edit.js:83
+#: src/select/edit.js:65
 #: src/tab/edit.js:29
 #: src/text-area/edit.js:94
 #: src/text-input/edit.js:180
@@ -522,18 +527,18 @@ msgid "Start"
 msgstr ""
 
 #: src/accordion/edit.js:48
-#: src/button/edit.js:129
+#: src/button/edit.js:143
 #: src/content-switcher/edit.js:123
 #: src/data-table/edit.js:503
-#: src/dropdown/edit.js:66
+#: src/dropdown/edit.js:48
 #: src/icon/edit.js:69
-#: src/link/edit.js:77
+#: src/link/edit.js:91
 #: src/menu-button/edit.js:73
-#: src/modal-opener/edit.js:48
+#: src/modal-opener/edit.js:62
 #: src/modal/edit.js:84
 #: src/password-input/edit.js:61
-#: src/select/edit.js:73
-#: src/tag/edit.js:64
+#: src/select/edit.js:55
+#: src/tag/edit.js:78
 #: src/text-input/edit.js:169
 #: src/toggle/edit.js:64
 msgid "Size"
@@ -552,7 +557,7 @@ msgid "Breadcrumb item"
 msgstr ""
 
 #: src/breadcrumb-item/edit.js:19
-#: src/link/edit.js:64
+#: src/link/edit.js:78
 #: src/testimonial/edit.js:211
 msgid "URL"
 msgstr ""
@@ -573,74 +578,74 @@ msgstr ""
 msgid "No trailing slash"
 msgstr ""
 
-#: src/button/edit.js:123
+#: src/button/edit.js:137
 #: src/color-scheme-toggle/edit.js:77
 #: src/header-action/edit.js:77
 #: src/menu-button/edit.js:67
-#: src/modal-opener/edit.js:42
+#: src/modal-opener/edit.js:56
 #: src/notification/edit.js:101
 #: src/testimonial/edit.js:147
 msgid "Kind"
 msgstr ""
 
-#: src/button/edit.js:135
+#: src/button/edit.js:149
 #: src/list/edit.js:341
 msgid "Expressive text size"
 msgstr ""
 
-#: src/button/edit.js:136
+#: src/button/edit.js:150
 #: src/list/edit.js:342
 msgid "Grows with the screen size. Good for landing pages."
 msgstr ""
 
-#: src/button/edit.js:146
+#: src/button/edit.js:160
 msgid "Submit the form"
 msgstr ""
 
-#: src/button/edit.js:149
+#: src/button/edit.js:163
 msgid "Not available while a URL is set. A URL turns the button into a link."
 msgstr ""
 
-#: src/button/edit.js:153
+#: src/button/edit.js:167
 msgid "Sends the form. The button must be inside a Form block."
 msgstr ""
 
-#: src/button/edit.js:175
+#: src/button/edit.js:189
 msgid "URL (turns the button into a link)"
 msgstr ""
 
-#: src/button/edit.js:184
-#: src/link/edit.js:70
+#: src/button/edit.js:198
+#: src/link/edit.js:84
 #: src/testimonial/edit.js:221
 #: src/tile/edit.js:155
 msgid "This is not a web address, so the link won't work. Use a full address or a path starting with /."
 msgstr ""
 
-#: src/button/edit.js:191
-#: src/link/edit.js:103
+#: src/button/edit.js:205
+#: src/link/edit.js:117
 #: src/modal/edit.js:133
-#: src/tag/edit.js:101
+#: src/tag/edit.js:115
 msgid "Target"
 msgstr ""
 
-#: src/button/edit.js:198
-#: src/link/edit.js:109
+#: src/button/edit.js:212
+#: src/link/edit.js:123
 #: src/modal/edit.js:142
-#: src/tag/edit.js:108
+#: src/tag/edit.js:122
 #: src/testimonial/edit.js:244
 msgid "Link relationship"
 msgstr ""
 
-#: src/button/edit.js:201
-#: src/link/edit.js:112
+#: src/button/edit.js:215
+#: src/link/edit.js:126
 #: src/modal/edit.js:145
-#: src/tag/edit.js:111
+#: src/tag/edit.js:125
 #: src/testimonial/edit.js:247
 msgid "Optional. Sets the rel attribute. New-tab links already get “noopener noreferrer”."
 msgstr ""
 
-#: src/button/edit.js:209
-#: src/button/edit.js:213
+#: src/button/edit.js:223
+#: src/button/edit.js:227
 #: src/header-action/edit.js:59
 #: src/icon/edit.js:54
 #: src/shared/icon-picker.js:146
@@ -649,32 +654,32 @@ msgstr ""
 msgid "Icon"
 msgstr ""
 
-#: src/button/edit.js:214
-#: src/link/edit.js:119
+#: src/button/edit.js:228
+#: src/link/edit.js:133
 #: src/testimonial/edit.js:254
 msgid "Search the Carbon icon library, or leave empty for none."
 msgstr ""
 
-#: src/button/edit.js:222
+#: src/button/edit.js:236
 msgid "Icon position"
 msgstr ""
 
-#: src/button/edit.js:232
+#: src/button/edit.js:246
 msgid "On click"
 msgstr ""
 
-#: src/button/edit.js:239
+#: src/button/edit.js:253
 #: src/modal/edit.js:163
 msgid "Run a JavaScript function"
 msgstr ""
 
-#: src/button/edit.js:243
+#: src/button/edit.js:257
 #: src/modal/edit.js:167
 msgid "Call a JavaScript function by name when clicked."
 msgstr ""
 
-#: src/button/edit.js:273
-#: src/modal-opener/edit.js:65
+#: src/button/edit.js:287
+#: src/modal-opener/edit.js:79
 msgid "Button label"
 msgstr ""
 
@@ -683,9 +688,9 @@ msgid "Checkbox"
 msgstr ""
 
 #: src/checkbox/edit.js:42
-#: src/dropdown/edit.js:54
+#: src/dropdown/edit.js:36
 #: src/password-input/edit.js:49
-#: src/select/edit.js:58
+#: src/select/edit.js:40
 #: src/text-area/edit.js:48
 #: src/text-input/edit.js:142
 #: src/toggle/edit.js:59
@@ -711,47 +716,47 @@ msgstr ""
 #: src/checkbox/edit.js:67
 #: src/password-input/edit.js:67
 #: src/radio-button-group/edit.js:97
-#: src/select/edit.js:88
+#: src/select/edit.js:70
 #: src/text-area/edit.js:89
 #: src/text-input/edit.js:175
 msgid "Required"
 msgstr ""
 
 #: src/checkbox/edit.js:78
-#: src/dropdown/edit.js:104
+#: src/dropdown/edit.js:79
 #: src/password-input/edit.js:118
 #: src/radio-button-group/edit.js:103
-#: src/select/edit.js:121
+#: src/select/edit.js:96
 #: src/text-area/edit.js:121
 #: src/text-input/edit.js:235
 msgid "Help & validation"
 msgstr ""
 
 #: src/checkbox/edit.js:82
-#: src/dropdown/edit.js:108
+#: src/dropdown/edit.js:83
 #: src/password-input/edit.js:122
 #: src/radio-button-group/edit.js:107
-#: src/select/edit.js:125
+#: src/select/edit.js:100
 #: src/text-area/edit.js:125
 #: src/text-input/edit.js:239
 msgid "Helper text"
 msgstr ""
 
 #: src/checkbox/edit.js:87
-#: src/dropdown/edit.js:113
+#: src/dropdown/edit.js:88
 #: src/password-input/edit.js:127
 #: src/radio-button-group/edit.js:112
-#: src/select/edit.js:130
+#: src/select/edit.js:105
 #: src/text-area/edit.js:130
 #: src/text-input/edit.js:244
 msgid "Invalid"
 msgstr ""
 
 #: src/checkbox/edit.js:92
-#: src/dropdown/edit.js:118
+#: src/dropdown/edit.js:93
 #: src/password-input/edit.js:132
 #: src/radio-button-group/edit.js:117
-#: src/select/edit.js:135
+#: src/select/edit.js:110
 #: src/text-area/edit.js:135
 #: src/text-input/edit.js:249
 msgid "Invalid message"
@@ -1092,21 +1097,16 @@ msgstr ""
 msgid "Leave it empty and tick “Mark as decorative”."
 msgstr ""
 
-#: src/dropdown/edit.js:59
+#: src/dropdown/edit.js:41
 #: src/password-input/edit.js:54
 #: src/text-area/edit.js:53
 #: src/text-input/edit.js:157
 msgid "Placeholder"
 msgstr ""
 
-#: src/dropdown/edit.js:81
-#: src/select/edit.js:98
-msgid "Options (one per line: value|label)"
-msgstr ""
-
-#: src/dropdown/edit.js:93
+#: src/dropdown/edit.js:68
 #: src/password-input/edit.js:90
-#: src/select/edit.js:110
+#: src/select/edit.js:85
 #: src/text-area/edit.js:110
 #: src/text-input/edit.js:224
 msgid "Style"
@@ -1409,88 +1409,88 @@ msgstr ""
 msgid "Header navigation"
 msgstr ""
 
-#: src/hero/edit.js:40
+#: src/hero/edit.js:42
 msgid "Original proportions"
 msgstr ""
 
-#: src/hero/edit.js:41
+#: src/hero/edit.js:43
 msgid "Square (1:1)"
 msgstr ""
 
-#: src/hero/edit.js:42
+#: src/hero/edit.js:44
 msgid "Landscape (4:3)"
 msgstr ""
 
-#: src/hero/edit.js:43
+#: src/hero/edit.js:45
 msgid "Landscape (3:2)"
 msgstr ""
 
-#: src/hero/edit.js:44
+#: src/hero/edit.js:46
 msgid "Widescreen (16:9)"
 msgstr ""
 
-#: src/hero/edit.js:45
+#: src/hero/edit.js:47
 msgid "Portrait (3:4)"
 msgstr ""
 
-#: src/hero/edit.js:46
+#: src/hero/edit.js:48
 msgid "Portrait (4:5)"
 msgstr ""
 
-#: src/hero/edit.js:49
+#: src/hero/edit.js:51
 msgid "Equal to text"
 msgstr ""
 
-#: src/hero/edit.js:50
+#: src/hero/edit.js:52
 msgid "Narrower than text"
 msgstr ""
 
-#: src/hero/edit.js:51
+#: src/hero/edit.js:53
 msgid "Wider than text"
 msgstr ""
 
-#: src/hero/edit.js:162
+#: src/hero/edit.js:164
 msgid "Hero"
 msgstr ""
 
-#: src/hero/edit.js:164
+#: src/hero/edit.js:166
 #: src/section/edit.js:162
 msgid "Layout"
 msgstr ""
 
-#: src/hero/edit.js:169
+#: src/hero/edit.js:171
 msgid "Text only (centered)"
 msgstr ""
 
-#: src/hero/edit.js:176
+#: src/hero/edit.js:178
 msgid "Text + image on right"
 msgstr ""
 
-#: src/hero/edit.js:201
+#: src/hero/edit.js:203
 msgid "Replace image"
 msgstr ""
 
-#: src/hero/edit.js:205
+#: src/hero/edit.js:207
 msgid "Upload image"
 msgstr ""
 
-#: src/hero/edit.js:216
+#: src/hero/edit.js:218
 msgid "Image alt text"
 msgstr ""
 
-#: src/hero/edit.js:226
+#: src/hero/edit.js:228
 msgid "Image shape"
 msgstr ""
 
-#: src/hero/edit.js:230
+#: src/hero/edit.js:232
 msgid "Crop the image to a fixed shape. \"Original proportions\" keeps the image uncropped."
 msgstr ""
 
-#: src/hero/edit.js:241
+#: src/hero/edit.js:243
 msgid "Image column width"
 msgstr ""
 
-#: src/hero/edit.js:245
+#: src/hero/edit.js:247
 msgid "How much horizontal space the image gets next to the text. Applies on wider screens; the image stacks below the text on small screens."
 msgstr ""
 
@@ -1531,7 +1531,7 @@ msgid "Search by name, then pick an icon."
 msgstr ""
 
 #: src/icon/edit.js:77
-#: src/tag/edit.js:55
+#: src/tag/edit.js:69
 msgid "Color"
 msgstr ""
 
@@ -1639,19 +1639,19 @@ msgstr ""
 msgid "Wrap to next line when out of space"
 msgstr ""
 
-#: src/link/edit.js:83
+#: src/link/edit.js:97
 msgid "Inline style"
 msgstr ""
 
-#: src/link/edit.js:88
+#: src/link/edit.js:102
 msgid "Show visited state"
 msgstr ""
 
-#: src/link/edit.js:99
+#: src/link/edit.js:113
 msgid "Target & icon"
 msgstr ""
 
-#: src/link/edit.js:118
+#: src/link/edit.js:132
 #: src/testimonial/edit.js:253
 msgid "Trailing icon"
 msgstr ""
@@ -1804,19 +1804,19 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
-#: src/menu-button/edit.js:165
+#: src/menu-button/edit.js:168
 msgid "Menu label"
 msgstr ""
 
-#: src/modal-opener/edit.js:29
+#: src/modal-opener/edit.js:43
 msgid "Modal opener"
 msgstr ""
 
-#: src/modal-opener/edit.js:33
+#: src/modal-opener/edit.js:47
 msgid "Modal ID to open"
 msgstr ""
 
-#: src/modal-opener/edit.js:34
+#: src/modal-opener/edit.js:48
 msgid "Use the same ID as the Modal block."
 msgstr ""
 
@@ -1868,10 +1868,6 @@ msgstr ""
 msgid "Editing preview. On your site, the modal stays hidden until a visitor opens it."
 msgstr ""
 
-#: src/modal/edit.js:189
-msgid "Modal heading"
-msgstr ""
-
 #: src/notification/edit.js:115
 msgid "Inline"
 msgstr ""
@@ -1892,11 +1888,11 @@ msgstr ""
 msgid "Notification title"
 msgstr ""
 
-#: src/notification/edit.js:173
+#: src/notification/edit.js:174
 msgid "Subtitle (optional)"
 msgstr ""
 
-#: src/notification/edit.js:187
+#: src/notification/edit.js:189
 msgid "Caption (toast only)"
 msgstr ""
 
@@ -1937,7 +1933,7 @@ msgid "Password input"
 msgstr ""
 
 #: src/password-input/edit.js:77
-#: src/select/edit.js:93
+#: src/select/edit.js:75
 #: src/text-area/edit.js:104
 #: src/text-input/edit.js:190
 #: src/toggle/edit.js:75
@@ -2162,7 +2158,7 @@ msgstr ""
 msgid "Recommended when a page has more than one <section>."
 msgstr ""
 
-#: src/select/edit.js:63
+#: src/select/edit.js:45
 msgid "Placeholder (first option)"
 msgstr ""
 
@@ -2230,6 +2226,10 @@ msgstr ""
 
 #: src/shared/link-field.js:62
 msgid "Search for a page, or type an address"
+msgstr ""
+
+#: src/shared/options-field.js:67
+msgid "Options (one per line: value|label)"
 msgstr ""
 
 #: src/shared/premium-notice.js:63
@@ -2325,11 +2325,11 @@ msgstr ""
 msgid "90%"
 msgstr ""
 
-#: src/stat/edit.js:112
+#: src/stat/edit.js:113
 msgid "Heading describing the statistic"
 msgstr ""
 
-#: src/stat/edit.js:123
+#: src/stat/edit.js:125
 msgid "Description (optional)"
 msgstr ""
 
@@ -2337,16 +2337,20 @@ msgstr ""
 msgid "Tab label"
 msgstr ""
 
-#: src/tag/edit.js:74
+#: src/tag/edit.js:88
 msgid "Filter (dismissible)"
 msgstr ""
 
-#: src/tag/edit.js:77
+#: src/tag/edit.js:91
 msgid "Not available when the tag is a link."
 msgstr ""
 
-#: src/tag/edit.js:93
+#: src/tag/edit.js:107
 msgid "URL (makes the tag a link)"
+msgstr ""
+
+#: src/tag/edit.js:139
+msgid "Tag label"
 msgstr ""
 
 #: src/testimonial/edit.js:90
