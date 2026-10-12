@@ -30,6 +30,8 @@ const ALLOWED = [
 	// belongs in a hero next to the ones that follow a link.
 	'awt/modal-opener',
 	'awt/link',
+	// A short label like "New" or "Beta" above the heading.
+	'awt/tag',
 ];
 
 // Image sizing options. Plain-language labels keep the real ratio in parens so

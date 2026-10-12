@@ -10,6 +10,12 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## Unreleased
+
+### [Improvement]
+
+- You can add a Tag to a Hero.
+
 ## 2026.10.6 (2026-10-11)
 
 ### [Improvement]

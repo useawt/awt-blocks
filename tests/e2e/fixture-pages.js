@@ -258,6 +258,18 @@ const CONTENT = `
 <!-- wp:awt/pricing-tile {"tierName":"Essentials","price":"0","pricePeriod":"forever","description":"The full component set.","ctaText":"Get started"} /-->
 <!-- wp:awt/pagination {"totalPages":5,"currentPage":2,"baseUrl":"/docs"} /-->
 <!-- /wp:awt/section -->
+
+<!-- A hero in the current format, with a tag above its heading. The hero took
+     no tag at first, so typing /tag inside one offered nothing. -->
+<!-- wp:awt/hero {"version":2} -->
+<!-- wp:awt/tag {"text":"New","type":"blue"} /-->
+<!-- wp:heading {"className":"awt-hero__heading"} -->
+<h2 class="wp-block-heading awt-hero__heading">A hero with a tag</h2>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"awt-hero__description"} -->
+<p class="awt-hero__description">The tag sits above the heading.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:awt/hero -->
 `;
 
 /* Markup an author wrote by hand, in a Custom HTML block.
