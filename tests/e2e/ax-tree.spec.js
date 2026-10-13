@@ -366,6 +366,20 @@ const PROBES = [
 		sel: '.cds--select--invalid',
 	},
 	{
+		// The Dropdown's helper and error text. Neither was tied to the
+		// combobox, so a screen reader read the name and nothing else, and
+		// never said the field was invalid (reported 2026-10-13). `desc` and
+		// `invalid=true` on the combobox are the point of these two.
+		page: 'forms',
+		key: 'dropdown (helper text)',
+		sel: '.wp-block-awt-dropdown:has(.cds--form__helper-text)',
+	},
+	{
+		page: 'forms',
+		key: 'dropdown (invalid)',
+		sel: '.wp-block-awt-dropdown:has(.cds--list-box[data-invalid])',
+	},
+	{
 		page: 'forms',
 		key: 'text-input (required)',
 		sel: '.cds--text-input-wrapper',

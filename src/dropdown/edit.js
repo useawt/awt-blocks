@@ -127,7 +127,25 @@ export default function Edit( { attributes, setAttributes } ) {
 					className={ `cds--dropdown cds--list-box cds--list-box--${ size } cds--layout--size-${ size }${
 						invalid ? ' cds--dropdown--invalid' : ''
 					}${ disabled ? ' cds--dropdown--disabled' : '' }` }
+					data-invalid={ invalid ? '' : undefined }
 				>
+					{ /* Carbon's error icon — mirrors render.php's
+					     `icon( 'warning--filled', 16, … )`. No `fill`
+					     attribute: Carbon's CSS fills it from the list
+					     box's `data-invalid`. */ }
+					{ invalid && (
+						<svg
+							className="cds--list-box__invalid-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 16 16"
+							width="16"
+							height="16"
+							aria-hidden="true"
+							focusable="false"
+						>
+							<path d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.1,7-7S11.9,1,8,1z M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z" />
+						</svg>
+					) }
 					<button
 						type="button"
 						className="cds--list-box__field"

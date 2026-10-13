@@ -337,6 +337,21 @@ const PROBES = [
 		sel: '.cds--select__invalid-icon',
 		box: true,
 	},
+	/* The Dropdown in error had no icon, only a red outline (found
+	   2026-10-13, alongside its missing error description). Carbon's
+	   list-box icon, as on the Select. */
+	{
+		page: 'forms',
+		key: 'dropdown (invalid)',
+		sel: '.cds--list-box[data-invalid] .cds--list-box__field',
+		box: true,
+	},
+	{
+		page: 'forms',
+		key: 'dropdown (invalid) error icon',
+		sel: '.cds--list-box__invalid-icon',
+		box: true,
+	},
 	{
 		page: 'forms',
 		key: 'text-input (warning)',

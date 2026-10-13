@@ -14,7 +14,9 @@
 declare( strict_types = 1 );
 
 use function AWT\Blocks\Render\unique_id;
+use function AWT\Blocks\Render\describedby;
 use function AWT\Blocks\Render\field_frame_class;
+use function AWT\Blocks\Render\icon;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -36,6 +38,28 @@ $root_id    = unique_id( 'awt-dd' );
 $trigger_id = $root_id . '-trigger';
 $listbox_id = $root_id . '-listbox';
 $label_id   = $root_id . '-label';
+
+// The helper and error text are tied to the field, as in Text input and
+// Select, so a screen reader reads them with it. They had no ids and the
+// field pointed at neither, so "Plan, combobox" was all anyone heard, with
+// no error and no sign it was invalid (reported by the outside accessibility
+// review, 2026-10-13).
+$helper_id  = $helper_text !== '' ? $root_id . '-helper' : '';
+$invalid_id = ( $invalid && $invalid_text !== '' ) ? $root_id . '-error' : '';
+$described  = describedby( array( $helper_id, $invalid_id ) );
+
+$trigger_described = '';
+if ( $described !== '' ) {
+	$trigger_described .= ' aria-describedby="' . esc_attr( $described ) . '"';
+}
+if ( $invalid ) {
+	$trigger_described .= ' aria-invalid="true"';
+}
+
+// Carbon's error icon inside the field, as on Select and Text input, so the
+// field itself says "error" in more than red. `data-invalid` on the list box
+// is what Carbon's CSS fills it from and makes room for it by.
+$invalid_icon_html = $invalid ? icon( 'warning--filled', 16, 'cds--list-box__invalid-icon' ) : '';
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 
@@ -102,9 +126,9 @@ ob_start();
 ?>
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
 	<label id="<?php echo esc_attr( $label_id ); ?>" class="<?php echo esc_attr( $dd_label_class ); ?>" for="<?php echo esc_attr( $trigger_id ); ?>"><?php echo wp_kses_post( $label ); ?></label>
-	<div class="<?php echo esc_attr( $root_class ); ?>" id="<?php echo esc_attr( $root_id ); ?>">
+	<div class="<?php echo esc_attr( $root_class ); ?>" id="<?php echo esc_attr( $root_id ); ?>"<?php echo $invalid ? ' data-invalid' : ''; ?>>
 		<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="" />
-		<button
+		<?php echo $invalid ? $invalid_icon_html . "\n\t\t" : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- icon() returns Carbon's own SVG markup read from disk. On the same line as the button, so a field with no error renders byte-identically to before. ?><button
 			type="button"
 			id="<?php echo esc_attr( $trigger_id ); ?>"
 			class="<?php echo esc_attr( $dd_trigger_class ); ?>"
@@ -113,7 +137,7 @@ ob_start();
 			aria-controls="<?php echo esc_attr( $listbox_id ); ?>"
 			aria-expanded="false"
 			aria-activedescendant=""
-			aria-labelledby="<?php echo esc_attr( $label_id ); ?>"
+			aria-labelledby="<?php echo esc_attr( $label_id ); ?>"<?php echo $trigger_described . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with esc_attr(). The explicit "\n" replaces the one PHP swallows after the closing tag. ?>
 			<?php echo $disabled ? 'disabled' : ''; ?>
 			data-wp-on--click="actions.toggle"
 			data-wp-on--keydown="actions.keydown"
@@ -164,10 +188,10 @@ ob_start();
 		</ul>
 	</div>
 	<?php if ( $invalid && $invalid_text !== '' ) : ?>
-		<div class="<?php echo esc_attr( $dd_error_class ); ?>"><?php echo wp_kses_post( $invalid_text ); ?></div>
+		<div id="<?php echo esc_attr( $invalid_id ); ?>" class="<?php echo esc_attr( $dd_error_class ); ?>"><?php echo wp_kses_post( $invalid_text ); ?></div>
 	<?php endif; ?>
 	<?php if ( $helper_text !== '' ) : ?>
-		<div class="<?php echo esc_attr( $dd_helper_class ); ?>"><?php echo wp_kses_post( $helper_text ); ?></div>
+		<div id="<?php echo esc_attr( $helper_id ); ?>" class="<?php echo esc_attr( $dd_helper_class ); ?>"><?php echo wp_kses_post( $helper_text ); ?></div>
 	<?php endif; ?>
 </div>
 <?php

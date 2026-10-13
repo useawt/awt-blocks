@@ -174,7 +174,7 @@
 			aria-controls="awt-dd-{3}-listbox"
 			aria-expanded="false"
 			aria-activedescendant=""
-			aria-labelledby="awt-dd-{3}-label"
+			aria-labelledby="awt-dd-{3}-label" aria-describedby="awt-dd-{3}-helper"
 						data-wp-on--click="actions.toggle"
 			data-wp-on--keydown="actions.keydown"
 		>
@@ -209,14 +209,15 @@
 				</li>
 					</ul>
 	</div>
-				<div class="cds--form__helper-text">Closest data center.</div>
+				<div id="awt-dd-{3}-helper" class="cds--form__helper-text">Closest data center.</div>
 	</div>
 
 
 <div class="cds--dropdown__wrapper awt-field--framed wp-block-awt-dropdown awt-spacing-05" data-wp-interactive="awt/dropdown">
 	<label id="awt-dd-{4}-label" class="cds--label" for="awt-dd-{4}-trigger">Plan</label>
-	<div class="cds--dropdown cds--list-box cds--list-box--md cds--dropdown--invalid cds--layout--size-md" id="awt-dd-{4}">
+	<div class="cds--dropdown cds--list-box cds--list-box--md cds--dropdown--invalid cds--layout--size-md" id="awt-dd-{4}" data-invalid>
 		<input type="hidden" name="" value="" />
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false" class="cds--list-box__invalid-icon"><path d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.1,7-7S11.9,1,8,1z M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2	c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z"/><path d="M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8	c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z" data-icon-path="inner-path" opacity="0"/></svg>
 		<button
 			type="button"
 			id="awt-dd-{4}-trigger"
@@ -226,7 +227,7 @@
 			aria-controls="awt-dd-{4}-listbox"
 			aria-expanded="false"
 			aria-activedescendant=""
-			aria-labelledby="awt-dd-{4}-label"
+			aria-labelledby="awt-dd-{4}-label" aria-describedby="awt-dd-{4}-error" aria-invalid="true"
 						data-wp-on--click="actions.toggle"
 			data-wp-on--keydown="actions.keydown"
 		>
@@ -261,7 +262,7 @@
 				</li>
 					</ul>
 	</div>
-			<div class="cds--form-requirement">Choose a plan.</div>
+			<div id="awt-dd-{4}-error" class="cds--form-requirement">Choose a plan.</div>
 		</div>
 
 

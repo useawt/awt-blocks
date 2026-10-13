@@ -154,6 +154,8 @@ const FORMS = `
 <!-- wp:awt/text-area {"label":"Why are you signing up?","name":"reason"} /-->
 <!-- wp:awt/select {"label":"Plan","name":"plan"} /-->
 <!-- wp:awt/select {"label":"Region","name":"region","invalid":true,"invalidText":"Choose a region."} /-->
+<!-- wp:awt/dropdown {"label":"Data center","name":"datacenter","helperText":"Closest to your users."} /-->
+<!-- wp:awt/dropdown {"label":"Billing cycle","name":"cycle","invalid":true,"invalidText":"Choose a billing cycle."} /-->
 <!-- wp:awt/text-input {"label":"Account id","name":"account","value":"AC-4471","readonly":true} /-->
 <!-- wp:awt/text-area {"label":"Terms you accepted","name":"terms","value":"Recorded at sign-up.","readonly":true} /-->
 <!-- wp:awt/text-input {"label":"Legacy plan","name":"legacy","disabled":true} /-->

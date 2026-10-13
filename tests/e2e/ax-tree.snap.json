@@ -172,6 +172,30 @@
 				"    none [ignored: uninteresting]",
 				"      StaticText \"Select all regions\""
 			],
+			"forms/dropdown (helper text)": [
+				"none [ignored: uninteresting]",
+				"  LabelText",
+				"    StaticText \"Data center\"",
+				"  generic",
+				"    combobox \"Data center\" desc=\"Closest to your users.\" value=\"Choose…\" expanded=false required=false invalid=false",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Choose…\"",
+				"      generic",
+				"  generic",
+				"    StaticText \"Closest to your users.\""
+			],
+			"forms/dropdown (invalid)": [
+				"none [ignored: uninteresting]",
+				"  LabelText",
+				"    StaticText \"Billing cycle\"",
+				"  generic",
+				"    combobox \"Billing cycle\" desc=\"Choose a billing cycle.\" value=\"Choose…\" expanded=false required=false invalid=true",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Choose…\"",
+				"      generic",
+				"  generic",
+				"    StaticText \"Choose a billing cycle.\""
+			],
 			"forms/password-input": [
 				"generic",
 				"  LabelText",
@@ -621,6 +645,30 @@
 				"  LabelText",
 				"    none [ignored: uninteresting]",
 				"      StaticText \"Select all regions\""
+			],
+			"forms/dropdown (helper text)": [
+				"none [ignored: uninteresting]",
+				"  LabelText",
+				"    StaticText \"Data center\"",
+				"  generic",
+				"    combobox \"Data center\" desc=\"Closest to your users.\" value=\"Choose…\" expanded=false required=false invalid=false",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Choose…\"",
+				"      generic",
+				"  generic",
+				"    StaticText \"Closest to your users.\""
+			],
+			"forms/dropdown (invalid)": [
+				"none [ignored: uninteresting]",
+				"  LabelText",
+				"    StaticText \"Billing cycle\"",
+				"  generic",
+				"    combobox \"Billing cycle\" desc=\"Choose a billing cycle.\" value=\"Choose…\" expanded=false required=false invalid=true",
+				"      none [ignored: uninteresting]",
+				"        StaticText \"Choose…\"",
+				"      generic",
+				"  generic",
+				"    StaticText \"Choose a billing cycle.\""
 			],
 			"forms/password-input": [
 				"generic",
