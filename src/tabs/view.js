@@ -6,7 +6,8 @@
  * the block works without JavaScript; clicking or keyboard-navigating
  * (Left/Right/Home/End) updates the selected tab + reveals the matching
  * panel. Keyboard pattern follows WAI-ARIA's "automatic activation" tabs
- * pattern (arrow keys move + activate immediately).
+ * pattern (arrow keys move + activate immediately). The keys skip disabled
+ * tabs and wrap between the first and last tab that is not disabled.
  */
 
 import { store, getElement, withSyncEvent } from '@wordpress/interactivity';
@@ -31,6 +32,10 @@ function getTabs( root ) {
 	return Array.from(
 		root.querySelectorAll( '.cds--tab--list [role="tab"]' )
 	);
+}
+
+function isEnabled( tab ) {
+	return ! tab.disabled && tab.getAttribute( 'aria-disabled' ) !== 'true';
 }
 
 function getPanels( root ) {
@@ -158,8 +163,7 @@ store( 'awt/tabs', {
 				const already = tabs.find(
 					( t ) => t.getAttribute( 'aria-selected' ) === 'true'
 				);
-				const fallback =
-					tabs.find( ( t ) => ! t.disabled ) || tabs[ 0 ];
+				const fallback = tabs.find( isEnabled ) || tabs[ 0 ];
 				activate( root, already || fallback );
 			}
 
@@ -244,7 +248,15 @@ store( 'awt/tabs', {
 			if ( ! root ) {
 				return;
 			}
-			const tabs = getTabs( root );
+			// Disabled tabs are left out. A disabled button cannot take
+			// focus, so landing on one selected it and showed its panel
+			// while focus stayed on the tab before, now marked not
+			// selected, and the next Arrow press went nowhere (reported by
+			// the outside accessibility review, 2026-10-13).
+			const tabs = getTabs( root ).filter( isEnabled );
+			if ( tabs.length === 0 ) {
+				return;
+			}
 			let idx = tabs.indexOf( btn );
 			const horizontal = root.classList.contains(
 				'cds--tabs--horizontal'
