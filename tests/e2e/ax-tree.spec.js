@@ -488,10 +488,13 @@ const PROBES = [
 	   submenu are exactly where names and states go wrong, and all three are
 	   invisible to a resting scan. --- */
 	{
+		// Its own group, read with the dialog closed: an open modal makes the
+		// rest of the page inert (2026-10-13), so the accordion behind it has
+		// no node in the tree.
 		page: 'widgets',
 		key: 'accordion (first item open)',
 		sel: '.cds--accordion',
-		group: 'opened',
+		group: 'accordion',
 	},
 	{
 		// Rooted at the inner container, not at `#axe-modal`. The outer overlay
@@ -525,11 +528,12 @@ const PROBES = [
  * the resting tree and call it the opened one.
  */
 const GROUP_SETUP = {
-	opened: async ( page ) => {
+	accordion: async ( page ) => {
 		const heading = page.locator( '.cds--accordion__heading' ).first();
 		await heading.click();
 		await expect( heading ).toHaveAttribute( 'aria-expanded', 'true' );
-
+	},
+	opened: async ( page ) => {
 		await page.getByRole( 'button', { name: 'Open the dialog' } ).click();
 		const dialog = page.locator( '#axe-modal' );
 		await expect( dialog ).toHaveClass( /\bis-visible\b/ );
@@ -554,6 +558,7 @@ const GROUP_SETUP = {
 
 /** Which page each non-default group runs on. */
 const GROUP_PAGE = {
+	accordion: 'widgets',
 	opened: 'widgets',
 	listbox: 'widgets',
 	submenu: 'content',
@@ -970,7 +975,7 @@ test.describe( 'Accessibility-tree snapshots', () => {
 		}
 	}
 
-	for ( const group of [ 'opened', 'listbox', 'submenu' ] ) {
+	for ( const group of [ 'accordion', 'opened', 'listbox', 'submenu' ] ) {
 		const pageKey = GROUP_PAGE[ group ];
 		for ( const scheme of SCHEMES ) {
 			// eslint-disable-next-line playwright/expect-expect
@@ -1055,7 +1060,7 @@ test.describe( 'Accessibility-tree snapshots', () => {
 	test.afterAll( () => {
 		const expectedRuns =
 			PAGES.length * SCHEMES.length +
-			3 * SCHEMES.length /* opened, listbox, submenu */ +
+			4 * SCHEMES.length /* accordion, opened, listbox, submenu */ +
 			SCHEMES.length; /* header nav, mobile only */
 
 		if ( UPDATING ) {

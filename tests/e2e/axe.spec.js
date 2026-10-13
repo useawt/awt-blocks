@@ -3,7 +3,7 @@
  *
  * Runs axe over three fixture pages — interactive widgets, forms, and content
  * blocks — in BOTH color schemes and at BOTH desktop and 375px width, plus a
- * pass with the accordion expanded and the modal open at each width, plus a
+ * pass with the accordion expanded, then the modal open, at each width, plus a
  * mobile-only pass with the header navigation opened. 18 runs in total.
  *
  * Widths matter as much as schemes, and until 2026-08-04 this gate only ran at
@@ -342,6 +342,11 @@ test.describe( 'axe-core: WCAG 2.2 AA on rendered AWT blocks', () => {
 					'true'
 				);
 
+				// Scanned before the dialog opens: an open modal makes the rest
+				// of the page inert (2026-10-13), and axe skips inert content,
+				// so the open panel would pass unscanned.
+				const withAccordion = await analyze( page );
+
 				await page
 					.getByRole( 'button', { name: 'Open the dialog' } )
 					.click();
@@ -358,10 +363,13 @@ test.describe( 'axe-core: WCAG 2.2 AA on rendered AWT blocks', () => {
 				} );
 
 				const run = `widgets|${ scheme }|opened|${ viewport.key }`;
-				assertAgainstBaseline(
-					run,
-					flatten( run, await analyze( page ) )
-				);
+				const found = [
+					...flatten( run, withAccordion ),
+					...flatten( run, await analyze( page ) ),
+				];
+				assertAgainstBaseline( run, [
+					...new Map( found.map( ( v ) => [ v.id, v ] ) ).values(),
+				] );
 			} );
 		}
 	}
