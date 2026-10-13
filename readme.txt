@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.7
+Stable tag: 2026.10.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -188,7 +188,8 @@ published third-party audit, and it does not replace one. A formal independent
 audit is still planned before commercial launch, and its report will appear
 here.
 
-**Ten findings received so far. All ten are fixed.** Newest first.
+The findings below are all fixed, newest first. The full list is at
+[useawt.com/accessibility](https://useawt.com/accessibility/).
 
 1. **2026-08-07. A select in error was marked by colour alone, and lost even
    that on focus.** Carbon draws an error icon inside a select that has an
@@ -309,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-03
+- Last reviewed: 2026-10-13
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -329,6 +330,14 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.8 (2026-10-13) =
+* [A11y] In Tabs block, better support for disabled tabs on arrow key navigation.
+* [A11y] In Dropdown block, improved support for screen readers' communication of states.
+* [A11y] Improved accessibility in Safari.
+* [A11y] Better focus handling in Safari.
+* [A11y] Further Safari improvements.
+* [A11y] Improved display of Dropdown blocks with error states with an icon.
+
 = 2026.10.7 (2026-10-12) =
 * [A11y] If you add a Button, Link, Tag, Modal opener, Menu button, Tooltip, Notification or Statistic and leave it without text, your site doesn't show it.
 * [A11y] If you leave a form field's label or a Modal's heading empty, your site shows a default one, such as "Label" or "Modal heading".
@@ -365,8 +374,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.09.42 (2026-09-30) =
 * [Improvement] The Data table block's Default sort column list shows column names as plain text, such as `&` instead of `&amp;`.
 * [Improvement] In Safari, clicking or tapping an item in a Header menu dropdown now opens its link.
-
-= 2026.09.41 (2026-09-29) =
-* [A11y] Links from blocks that open in a new tab now have specific screen reader adaptations, which make it clear that the click causes a context change by opening a new tab.
-* [A11y] A Header navigation block with no links in it now shows nothing, instead of an empty menu.
 <!-- CHANGELOG_END -->
