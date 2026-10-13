@@ -127,7 +127,11 @@ printf(
 		. '<nav id="%3$s" class="%4$s" aria-label="%5$s"'
 		. ' data-wp-class--awt-nav-open="state.navOpen" data-wp-watch="callbacks.focusManage"'
 		. ' data-wp-on--keydown="actions.onMenuKey">'
-			. '<ul class="%6$s">%7$s</ul>'
+			// `role="list"`: the list has no markers, and Safari stops treating
+			// a list with no markers as a list, so VoiceOver gave no count and
+			// no end of list (reported by the outside accessibility review on
+			// the submenus, 2026-10-13; this list has the same styling).
+			. '<ul class="%6$s" role="list">%7$s</ul>'
 		. '</nav>'
 	. '</div>',
 	$trigger_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.

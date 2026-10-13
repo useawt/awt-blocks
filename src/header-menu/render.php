@@ -9,7 +9,7 @@
  *   <li class="cds--header__submenu">
  *     <a class="cds--header__menu-item cds--header__menu-title"
  *        aria-haspopup="menu" aria-expanded="false"> Label <svg arrow/> </a>
- *     <ul class="cds--header__menu"> … inner items … </ul>
+ *     <ul class="cds--header__menu" role="list"> … inner items … </ul>
  *   </li>
  *
  * Carbon reveals the submenu via the adjacency rule
@@ -72,7 +72,11 @@ printf(
 		. ' data-wp-bind--aria-expanded="context.submenuOpen"'
 		. ' data-wp-on--click="actions.toggleSubmenu"'
 		. ' data-wp-on--keydown="actions.onSubmenuKey">%3$s%4$s</a>'
-		. '<ul class="%5$s" aria-label="%6$s">%7$s</ul>'
+		// `role="list"`: Safari stops treating a list with no markers as a
+		// list, so VoiceOver gave the submenu no count and no end, and moved
+		// from its last link straight to the next item in the header
+		// (reported by the outside accessibility review, 2026-10-13).
+		. '<ul class="%5$s" role="list" aria-label="%6$s">%7$s</ul>'
 	. '</li>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	esc_attr( $title_class ),
