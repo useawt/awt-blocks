@@ -41,22 +41,30 @@ const WIDGETS = `
 <!-- wp:awt/tabs {"ariaLabel":"Product details"} -->
 <!-- wp:awt/tab {"label":"Overview"} /-->
 <!-- wp:awt/tab {"label":"Specifications"} /-->
+<!-- wp:awt/tab {"label":"Reviews","disabled":true} /-->
 <!-- wp:awt/tab-panel -->
 <!-- wp:paragraph --><p>Overview panel.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tab-panel -->
 <!-- wp:awt/tab-panel -->
 <!-- wp:paragraph --><p>Specifications panel.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tab-panel -->
+<!-- wp:awt/tab-panel -->
+<!-- wp:paragraph --><p>Reviews panel.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tab-panel -->
 <!-- /wp:awt/tabs -->
 
 <!-- wp:awt/tabs {"orientation":"vertical","ariaLabel":"Partnership options"} -->
 <!-- wp:awt/tab {"label":"Referrer"} /-->
 <!-- wp:awt/tab {"label":"Infrastructure"} /-->
+<!-- wp:awt/tab {"label":"Reseller","disabled":true} /-->
 <!-- wp:awt/tab-panel -->
 <!-- wp:paragraph --><p>Referrer panel.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tab-panel -->
 <!-- wp:awt/tab-panel -->
 <!-- wp:paragraph --><p>Infrastructure panel.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/tab-panel -->
+<!-- wp:awt/tab-panel -->
+<!-- wp:paragraph --><p>Reseller panel.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/tab-panel -->
 <!-- /wp:awt/tabs -->
 

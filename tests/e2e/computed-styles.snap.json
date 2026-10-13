@@ -2598,6 +2598,37 @@
 					"padding": "14px 63px 32px 15px"
 				}
 			},
+			"widgets/tab (disabled)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgba(22, 22, 22, 0.25)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgba(22, 22, 22, 0.25) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": {
+					"top": "0px none rgba(22, 22, 22, 0.25)",
+					"right": "0px none rgba(22, 22, 22, 0.25)",
+					"bottom": "2px solid rgb(224, 224, 224)",
+					"left": "0px none rgba(22, 22, 22, 0.25)"
+				},
+				"effectiveBackground": "rgb(255, 255, 255)",
+				"contrast": 1.73,
+				"box": {
+					"blockSize": "48px",
+					"padding": "0px 16px 0px 16px"
+				}
+			},
 			"widgets/tab (focused)": {
 				"matches": {
 					"focus": true,
@@ -2803,6 +2834,37 @@
 					"blockSize": "24px",
 					"padding": "4px 4px 4px 4px",
 					"inlineSize": "24px"
+				}
+			},
+			"widgets/vertical tab (disabled)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "flex",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgba(22, 22, 22, 0.25)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgba(22, 22, 22, 0.25) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": {
+					"top": "0px none rgba(22, 22, 22, 0.25)",
+					"right": "0px none rgba(22, 22, 22, 0.25)",
+					"bottom": "0px none rgb(224, 224, 224)",
+					"left": "0px none rgba(22, 22, 22, 0.25)"
+				},
+				"effectiveBackground": "rgb(244, 244, 244)",
+				"contrast": 1.72,
+				"box": {
+					"blockSize": "63px",
+					"padding": "0px 16px 0px 16px"
 				}
 			}
 		},
@@ -5403,6 +5465,37 @@
 					"padding": "14px 63px 32px 15px"
 				}
 			},
+			"widgets/tab (disabled)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "block",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgba(244, 244, 244, 0.25)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgba(244, 244, 244, 0.25) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": {
+					"top": "0px none rgba(244, 244, 244, 0.25)",
+					"right": "0px none rgba(244, 244, 244, 0.25)",
+					"bottom": "2px solid rgb(57, 57, 57)",
+					"left": "0px none rgba(244, 244, 244, 0.25)"
+				},
+				"effectiveBackground": "rgb(22, 22, 22)",
+				"contrast": 2.16,
+				"box": {
+					"blockSize": "48px",
+					"padding": "0px 16px 0px 16px"
+				}
+			},
 			"widgets/tab (focused)": {
 				"matches": {
 					"focus": true,
@@ -5608,6 +5701,37 @@
 					"blockSize": "24px",
 					"padding": "4px 4px 4px 4px",
 					"inlineSize": "24px"
+				}
+			},
+			"widgets/vertical tab (disabled)": {
+				"matches": {
+					"focus": false,
+					"focusVisible": false,
+					"hover": false
+				},
+				"display": "flex",
+				"visibility": "visible",
+				"opacity": "1",
+				"color": "rgba(244, 244, 244, 0.25)",
+				"backgroundColor": "rgba(0, 0, 0, 0)",
+				"fontSize": "14px",
+				"fontWeight": "400",
+				"lineHeight": "18.0001px",
+				"textDecoration": "none solid rgba(244, 244, 244, 0.25) auto",
+				"outline": "2px solid rgba(0, 0, 0, 0)",
+				"outlineOffset": "-2px",
+				"boxShadow": "none",
+				"border": {
+					"top": "0px none rgba(244, 244, 244, 0.25)",
+					"right": "0px none rgba(244, 244, 244, 0.25)",
+					"bottom": "0px none rgb(57, 57, 57)",
+					"left": "0px none rgba(244, 244, 244, 0.25)"
+				},
+				"effectiveBackground": "rgb(38, 38, 38)",
+				"contrast": 2.18,
+				"box": {
+					"blockSize": "63px",
+					"padding": "0px 16px 0px 16px"
 				}
 			}
 		}

@@ -401,6 +401,8 @@
 				"        StaticText \"Overview\"",
 				"      tab \"Specifications\" selected=false invalid=false",
 				"        StaticText \"Specifications\"",
+				"      tab \"Reviews\" selected=false disabled=true invalid=false",
+				"        StaticText \"Reviews\"",
 				"  tabpanel \"Overview\"",
 				"    paragraph",
 				"      StaticText \"Overview panel.\""
@@ -849,6 +851,8 @@
 				"        StaticText \"Overview\"",
 				"      tab \"Specifications\" selected=false invalid=false",
 				"        StaticText \"Specifications\"",
+				"      tab \"Reviews\" selected=false disabled=true invalid=false",
+				"        StaticText \"Reviews\"",
 				"  tabpanel \"Overview\"",
 				"    paragraph",
 				"      StaticText \"Overview panel.\""

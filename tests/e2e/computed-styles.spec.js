@@ -527,6 +527,22 @@ const PROBES = [
 		sel: '.cds--tabs__nav-link[aria-selected="false"]',
 		box: true,
 	},
+	/* A disabled tab is marked by faded text, as in Carbon. The colour went to
+	   the <li> and the button kept its own, so a disabled tab looked like one
+	   you could open, and a horizontal one also drew a second line under it
+	   (found 2026-10-13). */
+	{
+		page: 'widgets',
+		key: 'tab (disabled)',
+		sel: '.cds--tabs:not(.awt-tabs--vertical-source) .cds--tabs__nav-item--disabled .cds--tabs__nav-link',
+		box: true,
+	},
+	{
+		page: 'widgets',
+		key: 'vertical tab (disabled)',
+		sel: '.awt-tabs--vertical-source .cds--tabs__nav-item--disabled .cds--tabs__nav-link',
+		box: true,
+	},
 	{
 		page: 'widgets',
 		key: 'tab (focused)',
