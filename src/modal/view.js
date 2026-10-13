@@ -10,8 +10,12 @@
  *   - Focus trap: Tab from the last focusable wraps to the first, and
  *     Shift+Tab from the first wraps to the last.
  *
+ *   - The rest of the page is `inert` while the modal is open, so a screen
+ *     reader cannot read it either (see `makeRestInert`).
+ *
  * The modal doesn't re-render itself when toggled; it just mutates
- * `aria-hidden`, the inline `display`, body scroll lock, and focus.
+ * `aria-hidden`, the inline `display`, body scroll lock, `inert` on the rest
+ * of the page, and focus.
  */
 
 import { store, getElement } from '@wordpress/interactivity';
@@ -70,6 +74,48 @@ function returnToOrigin( modal ) {
 	origins.delete( modal );
 }
 
+// What each open modal made inert, so closing it undoes exactly that.
+const inerted = new WeakMap();
+
+const NOT_CONTENT = [ 'SCRIPT', 'STYLE', 'TEMPLATE', 'LINK', 'NOSCRIPT' ];
+
+/**
+ * Make everything on the page but the open modal `inert`.
+ *
+ * `aria-modal` alone left the page behind the dialog readable: VoiceOver in
+ * Safari does not honour it, and its reading cursor walked out of the dialog
+ * into the page, while Tab, which the trap below holds, stayed in (reported
+ * by the outside accessibility review, 2026-10-13). The modal is lifted to
+ * the end of <body> first, so its siblings there are the whole page.
+ * Anything already inert is left alone, so a modal opened from another one
+ * makes the first inert and gives it back on close.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function makeRestInert( modal ) {
+	const made = [];
+	for ( const el of modal.ownerDocument.body.children ) {
+		if ( el === modal || el.inert || NOT_CONTENT.includes( el.tagName ) ) {
+			continue;
+		}
+		el.inert = true;
+		made.push( el );
+	}
+	inerted.set( modal, made );
+}
+
+/**
+ * Give the page back. Before focus returns to the opener, which is in it.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function restoreRest( modal ) {
+	( inerted.get( modal ) || [] ).forEach( ( el ) => {
+		el.inert = false;
+	} );
+	inerted.delete( modal );
+}
+
 function focusableIn( modal ) {
 	return Array.from( modal.querySelectorAll( FOCUSABLE ) ).filter( ( el ) => {
 		if ( el.hasAttribute( 'aria-hidden' ) || el.closest( '[hidden]' ) ) {
@@ -98,6 +144,7 @@ function open( modal, returnTo ) {
 	document.body.style.overflow = 'hidden';
 
 	liftToBody( modal );
+	makeRestInert( modal );
 
 	const items = focusableIn( modal );
 	if ( items.length > 0 ) {
@@ -138,6 +185,7 @@ function close( modal ) {
 	modal.classList.remove( 'is-visible' );
 	modal.setAttribute( 'aria-hidden', 'true' );
 	document.body.style.overflow = '';
+	restoreRest( modal );
 	returnToOrigin( modal );
 
 	const h = handlers.get( modal );

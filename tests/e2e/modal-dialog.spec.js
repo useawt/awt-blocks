@@ -133,6 +133,45 @@ test.describe( 'Modal dialog', () => {
 		await expect( opener ).toBeFocused();
 	} );
 
+	// The page behind an open dialog is inert, so a screen reader cannot read
+	// it either. `aria-modal` alone left it readable to VoiceOver in Safari,
+	// whose reading cursor walked out of the dialog while Tab stayed in
+	// (reported by the outside accessibility review, 2026-10-13).
+	test( 'the page behind the open dialog is inert until it closes', async ( {
+		page,
+	} ) => {
+		await page.goto( `/?page_id=${ pageId }` );
+		const opener = page.getByRole( 'button', {
+			name: 'Open the form dialog',
+		} );
+		const state = () =>
+			page.evaluate( () => {
+				const modal = document.getElementById( 'trap-modal' );
+				const behind = [ ...document.querySelectorAll( 'a' ) ].find(
+					( a ) =>
+						a.textContent === 'A link on the page behind the dialog'
+				);
+				return {
+					behind: !! behind.closest( '[inert]' ),
+					dialog: !! modal.closest( '[inert]' ),
+				};
+			} );
+
+		await opener.click();
+		await expect( page.locator( '#trap-modal' ) ).toHaveClass(
+			/is-visible/
+		);
+		expect( await state() ).toEqual( { behind: true, dialog: false } );
+
+		await page.keyboard.press( 'Escape' );
+		await expect( page.locator( '#trap-modal' ) ).not.toHaveClass(
+			/is-visible/
+		);
+		expect( await state() ).toEqual( { behind: false, dialog: false } );
+		// The page is back before focus returns to the opener, which is in it.
+		await expect( opener ).toBeFocused();
+	} );
+
 	// A modal covers the page, so it takes the page's colour — not the colour
 	// of the Section it happens to be written inside. A call to action moved
 	// into a dark footer band opened both of its forms in dark on a light
