@@ -155,10 +155,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						{ KIND_ICONS[ kind ] || KIND_ICONS.info }
 					</div>
 					<div className={ `${ base }__text-wrapper` }>
-						<p
-							className={ `${ base }__title` }
-							style={ { margin: 0 } }
-						>
+						<p className={ `${ base }__title` }>
 							<span className="cds--visually-hidden">
 								{ `${
 									KIND_LABELS[ kind ] || KIND_LABELS.info
