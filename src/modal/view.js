@@ -11,7 +11,9 @@
  *     Shift+Tab from the first wraps to the last.
  *
  *   - The rest of the page is `inert` while the modal is open, so a screen
- *     reader cannot read it either (see `makeRestInert`).
+ *     reader cannot read it either (see `makeRestInert`). Text the dialog
+ *     is named or described by out there is copied in until it closes (see
+ *     `borrowOutsideText`).
  *
  * The modal doesn't re-render itself when toggled; it just mutates
  * `aria-hidden`, the inline `display`, body scroll lock, `inert` on the rest
@@ -116,6 +118,95 @@ function restoreRest( modal ) {
 	inerted.delete( modal );
 }
 
+// What each open modal copied in, so closing it puts the page back as it was.
+const borrowed = new WeakMap();
+
+const REFERENCES = [ 'aria-labelledby', 'aria-describedby' ];
+
+/**
+ * Copy into the dialog any text it is named or described by from outside it.
+ *
+ * An author can point a modal's Labelled by or Described by (Accessibility
+ * panel) at text anywhere on the page. While the modal is open that page is
+ * inert, and Chrome will not take a name or a description from inert text:
+ * the dialog came out with no name at all, since the panel's Labelled by had
+ * replaced its heading's (found testing the panel-names fix, 2026-10-14). So
+ * each outside reference, on the dialog or on anything in it, is pointed at
+ * a hidden copy inside the dialog while it is open. `hidden` keeps the copy
+ * off the screen and out of the reading order; a name or description is
+ * still taken from it, which is what `hidden` text referenced this way is
+ * for. References inside the modal are left alone.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function borrowOutsideText( modal ) {
+	const doc = modal.ownerDocument;
+	const host = modal.querySelector( '[role="dialog"]' ) || modal;
+	const made = { attrs: [], copies: [] };
+	const copyOf = new Map();
+	const holders = [
+		modal,
+		...modal.querySelectorAll( '[aria-labelledby], [aria-describedby]' ),
+	];
+	for ( const el of holders ) {
+		for ( const attr of REFERENCES ) {
+			const value = el.getAttribute( attr );
+			if ( ! value ) {
+				continue;
+			}
+			let changed = false;
+			const ids = value
+				.trim()
+				.split( /\s+/ )
+				.map( ( id ) => {
+					const source = doc.getElementById( id );
+					if ( ! source || modal.contains( source ) ) {
+						return id;
+					}
+					if ( ! copyOf.has( id ) ) {
+						const copy = doc.createElement( 'span' );
+						copy.id = `${ id }--awt-modal-copy`;
+						copy.hidden = true;
+						copy.textContent = (
+							source.getAttribute( 'aria-label' ) ||
+							source.textContent ||
+							''
+						)
+							.replace( /\s+/g, ' ' )
+							.trim();
+						host.appendChild( copy );
+						made.copies.push( copy );
+						copyOf.set( id, copy.id );
+					}
+					changed = true;
+					return copyOf.get( id );
+				} );
+			if ( changed ) {
+				made.attrs.push( [ el, attr, value ] );
+				el.setAttribute( attr, ids.join( ' ' ) );
+			}
+		}
+	}
+	borrowed.set( modal, made );
+}
+
+/**
+ * Point every reference back at the page and remove the copies.
+ *
+ * @param {HTMLElement} modal The modal root.
+ */
+function returnOutsideText( modal ) {
+	const made = borrowed.get( modal );
+	if ( ! made ) {
+		return;
+	}
+	made.attrs.forEach( ( [ el, attr, value ] ) =>
+		el.setAttribute( attr, value )
+	);
+	made.copies.forEach( ( copy ) => copy.remove() );
+	borrowed.delete( modal );
+}
+
 function focusableIn( modal ) {
 	return Array.from( modal.querySelectorAll( FOCUSABLE ) ).filter( ( el ) => {
 		if ( el.hasAttribute( 'aria-hidden' ) || el.closest( '[hidden]' ) ) {
@@ -144,6 +235,7 @@ function open( modal, returnTo ) {
 	document.body.style.overflow = 'hidden';
 
 	liftToBody( modal );
+	borrowOutsideText( modal );
 	makeRestInert( modal );
 
 	const items = focusableIn( modal );
@@ -185,6 +277,7 @@ function close( modal ) {
 	modal.classList.remove( 'is-visible' );
 	modal.setAttribute( 'aria-hidden', 'true' );
 	document.body.style.overflow = '';
+	returnOutsideText( modal );
 	restoreRest( modal );
 	returnToOrigin( modal );
 

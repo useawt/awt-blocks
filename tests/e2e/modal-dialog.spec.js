@@ -44,6 +44,28 @@ const PAGE_CONTENT = `
 <!-- /wp:awt/section -->
 `;
 
+/**
+ * An element's name and description as Chrome exposes them.
+ *
+ * @param {Object} cdp      CDP session.
+ * @param {string} selector CSS selector.
+ */
+async function axNameAndDescription( cdp, selector ) {
+	const { root } = await cdp.send( 'DOM.getDocument', { depth: -1 } );
+	const { nodeId } = await cdp.send( 'DOM.querySelector', {
+		nodeId: root.nodeId,
+		selector,
+	} );
+	const { nodes } = await cdp.send( 'Accessibility.getPartialAXTree', {
+		nodeId,
+		fetchRelatives: false,
+	} );
+	return {
+		name: nodes[ 0 ].name?.value ?? '',
+		description: nodes[ 0 ].description?.value ?? '',
+	};
+}
+
 test.describe( 'Modal dialog', () => {
 	let pageId;
 
@@ -170,6 +192,61 @@ test.describe( 'Modal dialog', () => {
 		expect( await state() ).toEqual( { behind: false, dialog: false } );
 		// The page is back before focus returns to the opener, which is in it.
 		await expect( opener ).toBeFocused();
+	} );
+
+	// The page is inert while the dialog is open, and Chrome takes no name or
+	// description from inert text, so a Labelled by or Described by pointing
+	// out of the dialog left it with no name at all. Read from Chrome's own
+	// tree: Playwright's role queries compute names themselves and find these
+	// anyway, which is how the gap was first missed.
+	test( 'a name and description from outside the dialog are read while it is open', async ( {
+		page,
+		requestUtils,
+	} ) => {
+		const created = await requestUtils.createPage( {
+			title: 'Modal named from outside',
+			content: `
+<!-- wp:paragraph {"anchor":"gate-outside-name"} --><p id="gate-outside-name">Name from the page</p><!-- /wp:paragraph -->
+<!-- wp:paragraph {"anchor":"gate-outside-desc"} --><p id="gate-outside-desc">Description from the page</p><!-- /wp:paragraph -->
+<!-- wp:awt/modal-opener {"text":"Open the named dialog","modalId":"outside-modal"} /-->
+<!-- wp:awt/modal {"id":"outside-modal","heading":"Heading","primaryAction":"Done","ariaLabelledby":"gate-outside-name","ariaDescribedby":"gate-outside-desc"} -->
+<!-- wp:paragraph --><p>Body.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/modal -->`,
+			status: 'publish',
+		} );
+		await page.goto( `/?page_id=${ created.id }` );
+		const cdp = await page.context().newCDPSession( page );
+
+		await page
+			.getByRole( 'button', { name: 'Open the named dialog' } )
+			.click();
+		await expect( page.locator( '#outside-modal' ) ).toHaveClass(
+			/is-visible/
+		);
+		expect(
+			await axNameAndDescription( cdp, '#outside-modal [role="dialog"]' )
+		).toEqual( {
+			name: 'Name from the page',
+			description: 'Description from the page',
+		} );
+
+		await page.keyboard.press( 'Escape' );
+		await expect( page.locator( '#outside-modal' ) ).not.toHaveClass(
+			/is-visible/
+		);
+		// The page's own references are back, and the copies gone.
+		const dialog = page.locator( '#outside-modal [role="dialog"]' );
+		await expect( dialog ).toHaveAttribute(
+			'aria-labelledby',
+			'gate-outside-name'
+		);
+		await expect( dialog ).toHaveAttribute(
+			'aria-describedby',
+			'gate-outside-desc'
+		);
+		await expect( page.locator( '[id$="--awt-modal-copy"]' ) ).toHaveCount(
+			0
+		);
 	} );
 
 	// A modal covers the page, so it takes the page's colour — not the colour
