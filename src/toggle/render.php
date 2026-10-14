@@ -118,7 +118,12 @@ $html .= '<label for="' . esc_attr( $input_id ) . '" class="' . esc_attr( $toggl
 $html .= '<span class="' . esc_attr( $toggle_label_text_class ) . '">' . wp_kses_post( $label ) . '</span>';
 $html .= '<span class="' . esc_attr( $toggle_appearance_class ) . '">';
 $html .= '<span class="' . esc_attr( $toggle_switch_class ) . '" data-wp-class--cds--toggle__switch--checked="state.checked"></span>';
-$html .= '<span class="' . esc_attr( $toggle_text_class ) . '">' . esc_html( $toggled ? $label_b : $label_a ) . '</span>';
+// The On/Off text is for sight only, as in Carbon: the switch reports its own
+// state. Inside the label it became part of the name, so a screen reader heard
+// "Tell me about events Yes, switch, on", the name changed on every toggle,
+// and VoiceOver could read the old text first (reported by the outside
+// accessibility review, 2026-10-14).
+$html .= '<span class="' . esc_attr( $toggle_text_class ) . '" aria-hidden="true">' . esc_html( $toggled ? $label_b : $label_a ) . '</span>';
 $html .= '</span>';
 $html .= '</label>';
 $html .= '</div>';

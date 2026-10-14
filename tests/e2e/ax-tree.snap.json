@@ -284,14 +284,14 @@
 			],
 			"forms/toggle": [
 				"generic",
-				"  switch \"Two-factor authentication On\" checked=true invalid=false",
+				"  switch \"Two-factor authentication\" checked=true invalid=false",
 				"  LabelText",
 				"    none [ignored: uninteresting]",
 				"      StaticText \"Two-factor authentication\"",
 				"    generic",
 				"      none [ignored: uninteresting]",
-				"      none [ignored: uninteresting]",
-				"        StaticText \"On\""
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]"
 			],
 			"widgets/accordion (closed)": [
 				"list",
@@ -758,14 +758,14 @@
 			],
 			"forms/toggle": [
 				"generic",
-				"  switch \"Two-factor authentication On\" checked=true invalid=false",
+				"  switch \"Two-factor authentication\" checked=true invalid=false",
 				"  LabelText",
 				"    none [ignored: uninteresting]",
 				"      StaticText \"Two-factor authentication\"",
 				"    generic",
 				"      none [ignored: uninteresting]",
-				"      none [ignored: uninteresting]",
-				"        StaticText \"On\""
+				"      none [ignored: ariaHiddenElement]",
+				"        none [ignored: ariaHiddenSubtree]"
 			],
 			"widgets/accordion (closed)": [
 				"list",

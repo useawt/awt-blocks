@@ -135,7 +135,10 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 						/>
 						<span className={ appearanceClasses }>
 							<span className={ switchClasses }></span>
-							<span className="cds--toggle__text">
+							<span
+								className="cds--toggle__text"
+								aria-hidden="true"
+							>
 								{ toggled ? labelB : labelA }
 							</span>
 						</span>
