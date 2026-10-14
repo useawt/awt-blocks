@@ -2,13 +2,13 @@
 /**
  * An aria-label set on a block is written once, on the element it names.
  *
- * The Accessibility panel's render filter copies `ariaLabel` onto a block's
- * outer element. Five blocks already put their own `ariaLabel` on an inner
- * element (a tablist, a button, a `<nav>`, a `<ul>`), and the filter added a
- * second copy to their wrapper: on a `<div>` or `<span>` with no role, where
- * axe reports it as needs-review and the axe gate does not fail on it, and on
- * the side nav's `<aside>`, where it gave two landmarks one name. Issue
- * useawt/awt-workspace#13, 2026-09-27.
+ * Blocks that declare `ariaLabel` in their own block.json put it in place
+ * themselves (a tablist, a button, a `<nav>`, a `<ul>`), and the panel's
+ * filter used to add a second copy to their wrapper: on a `<div>` or `<span>`
+ * with no role, and on the side nav's `<aside>`, where it gave two landmarks
+ * one name. Issue useawt/awt-workspace#13, 2026-09-27. Since 2026-10-14 the
+ * filter routes every panel attribute per block (NAME_TARGETS in
+ * global-controls.php); where each one lands is held by test-panel-names.php.
  *
  * @package AWT\Blocks
  */
@@ -116,8 +116,8 @@ class Test_Aria_Label_Once extends WP_UnitTestCase {
 	}
 
 	/**
-	 * A block that does not declare `ariaLabel` still gets the panel's label
-	 * on its outer element.
+	 * A block with no entry in NAME_TARGETS still gets the panel's label on
+	 * its outer element (a plain tile, which is named as a group).
 	 */
 	public function test_panel_label_still_reaches_other_blocks() {
 		$html = $this->render( 'awt/tile', '<!-- wp:paragraph --><p>x</p><!-- /wp:paragraph -->' );
