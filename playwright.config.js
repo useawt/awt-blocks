@@ -37,7 +37,7 @@ module.exports = defineConfig( {
 			name: 'webkit',
 			testDir: './tests/e2e',
 			testMatch:
-				/(header-submenu-click|notification-dismiss-focus)\.spec\.js/,
+				/(header-submenu-click|header-submenu-disclosure|notification-dismiss-focus)\.spec\.js/,
 			use: { ...devices[ 'Desktop Safari' ] },
 		},
 		{

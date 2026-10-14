@@ -8,9 +8,16 @@
  *
  *   <li class="cds--header__submenu">
  *     <a class="cds--header__menu-item cds--header__menu-title"
- *        aria-haspopup="menu" aria-expanded="false"> Label <svg arrow/> </a>
- *     <ul class="cds--header__menu" role="list"> … inner items … </ul>
+ *        role="button" aria-expanded="false" aria-controls="…"> Label <svg arrow/> </a>
+ *     <ul id="…" class="cds--header__menu" role="list"> … inner items … </ul>
  *   </li>
+ *
+ * One departure from Carbon: no `aria-haspopup="menu"`. The panel is a
+ * list of links reached with Tab, not a menu, so announcing a menu promised
+ * arrow keys that do nothing, and some screen readers change mode for it
+ * (reported by the outside accessibility review, 2026-10-14). Without it
+ * the title is a disclosure, "Patterns, button, collapsed", which is what it
+ * is; `aria-controls` names the panel it opens.
  *
  * Carbon reveals the submenu via the adjacency rule
  * `.cds--header__menu-title[aria-expanded="true"] + .cds--header__menu`,
@@ -44,6 +51,7 @@ $submenu_class = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'subm
 $title_class   = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'menu-title' ) ) : 'cds--header__menu-item cds--header__menu-title';
 $menu_class    = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'menu' ) ) : 'cds--header__menu';
 $arrow_class   = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'menu-arrow' ) ) : 'cds--header__menu-arrow';
+$menu_id       = \AWT\Blocks\Render\unique_id( 'awt-submenu' );
 
 // Carbon's chevron glyph (16×16), matching its compiled HeaderMenu output.
 $arrow_svg = sprintf(
@@ -68,7 +76,7 @@ $wrapper_attrs = get_block_wrapper_attributes(
 
 printf(
 	'<li %1$s>'
-		. '<a class="%2$s" role="button" tabindex="0" aria-haspopup="menu" aria-expanded="false"'
+		. '<a class="%2$s" role="button" tabindex="0" aria-expanded="false" aria-controls="%8$s"'
 		. ' data-wp-bind--aria-expanded="context.submenuOpen"'
 		. ' data-wp-on--click="actions.toggleSubmenu"'
 		. ' data-wp-on--keydown="actions.onSubmenuKey">%3$s%4$s</a>'
@@ -76,7 +84,7 @@ printf(
 		// list, so VoiceOver gave the submenu no count and no end, and moved
 		// from its last link straight to the next item in the header
 		// (reported by the outside accessibility review, 2026-10-13).
-		. '<ul class="%5$s" role="list" aria-label="%6$s">%7$s</ul>'
+		. '<ul id="%8$s" class="%5$s" role="list" aria-label="%6$s">%7$s</ul>'
 	. '</li>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	esc_attr( $title_class ),
@@ -84,5 +92,6 @@ printf(
 	$arrow_svg, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above.
 	esc_attr( $menu_class ),
 	esc_attr( $aria ),
-	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
+	$content, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
+	esc_attr( $menu_id )
 );

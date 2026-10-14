@@ -88,7 +88,6 @@ export default function Edit( {
 				<a
 					className="cds--header__menu-item cds--header__menu-title"
 					role="button"
-					aria-haspopup="menu"
 					aria-expanded={ open ? 'true' : 'false' }
 					href="#"
 					onClick={ ( e ) => e.preventDefault() }
