@@ -29,6 +29,7 @@ const TEXT_SPACING = `* { line-height: 1.5 !important; letter-spacing: 0.12em !i
 
 test.describe( 'Tag labels', () => {
 	let url;
+	let pageId;
 
 	test.beforeAll( async ( { requestUtils } ) => {
 		const created = await requestUtils.createPage( {
@@ -36,7 +37,8 @@ test.describe( 'Tag labels', () => {
 			content: CONTENT,
 			status: 'publish',
 		} );
-		url = `/?page_id=${ created.id }`;
+		pageId = created.id;
+		url = `/?page_id=${ pageId }`;
 	} );
 
 	const tag = ( page, text ) =>
@@ -123,5 +125,33 @@ test.describe( 'Tag labels', () => {
 		await expect(
 			spaced.locator( '.cds--definition-tooltip' )
 		).toBeVisible();
+	} );
+
+	// The editor writes `white-space: pre-wrap` on its text fields as an inline
+	// style, so a long label wrapped onto several lines in the editor while
+	// the page kept it on one (found by the owner, 2026-10-14).
+	test( 'a long label stays on one line in the editor, as on the page', async ( {
+		page,
+		admin,
+		editor,
+	} ) => {
+		const sizes = ( tags ) =>
+			tags.evaluateAll( ( els ) =>
+				els.map( ( el ) => {
+					const r = el.getBoundingClientRect();
+					return [ Math.round( r.width ), Math.round( r.height ) ];
+				} )
+			);
+		await page.goto( url );
+		const onPage = await sizes( page.locator( '.wp-block-awt-tag' ) );
+
+		await admin.editPost( pageId );
+		const tags = editor.canvas.locator( '.wp-block-awt-tag' );
+		await expect( tags ).toHaveCount( onPage.length );
+		await expect( tags.nth( 1 ).locator( '.cds--tag__label' ) ).toHaveCSS(
+			'white-space',
+			'nowrap'
+		);
+		expect( await sizes( tags ) ).toEqual( onPage );
 	} );
 } );
