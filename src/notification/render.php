@@ -62,6 +62,21 @@ $kind_icon_map = array(
 );
 $kind_icon     = $kind_icon_map[ $kind ] ?? 'information--filled';
 
+// The kind as words, read before the title. Colour and the icon were the only
+// signs of it, and the icon is hidden from screen readers, so a warning was
+// read as a plain message (reported by the outside accessibility review,
+// 2026-10-14). Carbon names the icon instead (`statusIconDescription`, which
+// defaults to "notification"); hidden text in the title reads as one
+// sentence, "Warning: The events feed changes on 1 October". A difference
+// from Carbon, D10 in the Stage 1 spec.
+$kind_labels = array(
+	'info'    => __( 'Information:', 'awt-blocks' ),
+	'success' => __( 'Success:', 'awt-blocks' ),
+	'warning' => __( 'Warning:', 'awt-blocks' ),
+	'error'   => __( 'Error:', 'awt-blocks' ),
+);
+$kind_label  = $kind_labels[ $kind ] ?? $kind_labels['info'];
+
 $is_alert          = $kind === 'error';
 $notification_role = $is_alert ? 'alert' : 'status';
 $aria_live         = $is_alert ? 'assertive' : 'polite';
@@ -103,7 +118,7 @@ printf(
 	. '<div class="%2$s__details">'
 	. '<div class="%2$s__icon" aria-hidden="true">%3$s</div>'
 	. '<div class="%2$s__text-wrapper">'
-	. '<p class="%2$s__title">%4$s%5$s</p>'
+	. '<p class="%2$s__title"><span class="cds--visually-hidden">%8$s </span>%4$s%5$s</p>'
 	. '%6$s'
 	. '</div>'
 	. '</div>'
@@ -115,5 +130,6 @@ printf(
 	wp_kses_post( $notification_title ),
 	$subtitle !== '' ? ' <span class="' . esc_attr( $base ) . '__subtitle">' . wp_kses_post( $subtitle ) . '</span>' : '',
 	$caption_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
-	$close_btn // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
+	$close_btn, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
+	esc_html( $kind_label )
 );

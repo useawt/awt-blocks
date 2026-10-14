@@ -8,6 +8,14 @@ import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 
 const KINDS = [ 'info', 'success', 'warning', 'error' ];
 
+// The kind as words, read before the title (mirrors render.php).
+const KIND_LABELS = {
+	info: __( 'Information:', 'awt-blocks' ),
+	success: __( 'Success:', 'awt-blocks' ),
+	warning: __( 'Warning:', 'awt-blocks' ),
+	error: __( 'Error:', 'awt-blocks' ),
+};
+
 // Carbon filled-icon SVG paths for the four notification kinds. These match
 // the icon names render.php passes to the server-side icon() helper so editor
 // and front-end show the same glyphs.
@@ -151,6 +159,11 @@ export default function Edit( { attributes, setAttributes } ) {
 							className={ `${ base }__title` }
 							style={ { margin: 0 } }
 						>
+							<span className="cds--visually-hidden">
+								{ `${
+									KIND_LABELS[ kind ] || KIND_LABELS.info
+								} ` }
+							</span>
 							<RichText
 								tagName="span"
 								value={ title }
