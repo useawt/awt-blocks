@@ -194,13 +194,19 @@ export default function Edit( { attributes, setAttributes } ) {
 						{ items.map( ( item, idx ) => (
 							<li
 								key={ idx }
-								className="cds--menu-item"
-								role="menuitem"
-								aria-disabled={ item.disabled || undefined }
+								className={
+									item.disabled
+										? 'cds--menu-item cds--menu-item--disabled'
+										: 'cds--menu-item'
+								}
+								role="none"
 							>
 								<button
 									type="button"
 									className="cds--menu-item__button"
+									role="menuitem"
+									tabIndex={ -1 }
+									aria-disabled={ item.disabled || undefined }
 									data-value={ item.value }
 								>
 									{ item.label }

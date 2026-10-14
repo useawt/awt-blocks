@@ -131,12 +131,17 @@ foreach ( $items as $idx => $item ) {
 	$item_link     = isset( $item['link'] ) ? (string) $item['link'] : '';
 	$item_disabled = ! empty( $item['disabled'] );
 
+	// The button is the menu item, since it is what takes focus; the <li> is
+	// only a wrapper. With the role on the <li>, arrowing landed on a plain
+	// button: "Edit, button" instead of "Edit, menu item, 1 of 3" (reported by
+	// the outside accessibility review, 2026-10-14). A disabled item keeps
+	// focus, as a menu's disabled items should, so it is `aria-disabled`, not
+	// `disabled`, and has no click action.
 	$item_attrs = html_attrs(
 		array(
-			'class'         => $menu_item_class,
-			'role'          => 'menuitem',
-			'data-index'    => $idx,
-			'aria-disabled' => $item_disabled ? 'true' : null,
+			'class'      => $menu_item_class . ( $item_disabled ? ' cds--menu-item--disabled' : '' ),
+			'role'       => 'none',
+			'data-index' => $idx,
 		)
 	);
 
@@ -150,9 +155,10 @@ foreach ( $items as $idx => $item ) {
 			'class'             => $item_btn_class,
 			'data-value'        => $item_value,
 			'data-link'         => $item_link !== '' ? esc_url( $item_link ) : null,
+			'role'              => 'menuitem',
 			'data-wp-on--click' => $item_disabled ? null : 'actions.selectItem',
 			'tabindex'          => '-1',
-			'disabled'          => $item_disabled,
+			'aria-disabled'     => $item_disabled ? 'true' : null,
 		)
 	);
 
