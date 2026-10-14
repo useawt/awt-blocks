@@ -1,4 +1,4 @@
-<form class="cds--form wp-block-awt-form awt-spacing-05" method="post"><div class="cds--form__header"><h2 class="cds--form__title">Sign up</h2><p class="cds--form__description">Name and email are required.</p></div>
+<form class="cds--form wp-block-awt-form awt-spacing-05" method="post"><div class="cds--form__header"><h2 class="cds--form__title">Sign up</h2><p class="cds--form__description">Fields are required unless marked optional.</p></div>
 <div class="cds--form-item cds--text-input-wrapper awt-field--framed wp-block-awt-text-input awt-spacing-05">
 	<label for="awt-text-input-{0}" class="cds--label">Name</label>
 	<div class="cds--text-input__field-outer-wrapper">
@@ -19,26 +19,46 @@
 	</div>
 
 
-<div class="cds--form-item cds--checkbox-wrapper wp-block-awt-checkbox awt-spacing-05"><input type="checkbox" id="awt-checkbox-{2}" class="cds--checkbox" name="sub" /><label for="awt-checkbox-{2}" class="cds--checkbox-label"><span class="cds--checkbox-label-text">Subscribe to newsletter</span></label></div>
+<div class="cds--form-item cds--text-input-wrapper awt-field--framed wp-block-awt-text-input awt-spacing-05">
+	<label for="awt-text-input-{2}" class="cds--label">Company (optional)</label>
+	<div class="cds--text-input__field-outer-wrapper">
+		<div class="cds--text-input__field-wrapper">
+			<input  id="awt-text-input-{2}" type="text" name="company" class="cds--text-input cds--text-input--md cds--layout--size-md" />
+					</div>
+			</div>
+	</div>
+
+
+<div class="cds--form-item cds--checkbox-wrapper wp-block-awt-checkbox awt-spacing-05"><input type="checkbox" id="awt-checkbox-{3}" class="cds--checkbox" name="sub" /><label for="awt-checkbox-{3}" class="cds--checkbox-label"><span class="cds--checkbox-label-text">Subscribe to newsletter</span></label></div>
 
 <button class="cds--btn cds--btn--primary cds--btn--lg cds--layout--size-lg wp-block-awt-button awt-spacing-05" type="submit"><span>Submit</span></button>
 </form>
 
 <form class="cds--form wp-block-awt-form awt-spacing-05" method="post">
 <div class="cds--form-item cds--text-input-wrapper awt-field--framed wp-block-awt-text-input awt-spacing-05">
-	<label for="awt-text-input-{3}" class="cds--label">Email</label>
+	<label for="awt-text-input-{4}" class="cds--label">Name (optional)</label>
 	<div class="cds--text-input__field-outer-wrapper">
 		<div class="cds--text-input__field-wrapper">
-			<input  id="awt-text-input-{3}" type="email" name="email" class="cds--text-input cds--text-input--md cds--layout--size-md" />
+			<input  id="awt-text-input-{4}" type="text" name="name" class="cds--text-input cds--text-input--md cds--layout--size-md" />
+					</div>
+			</div>
+	</div>
+
+
+<div class="cds--form-item cds--text-input-wrapper awt-field--framed wp-block-awt-text-input awt-spacing-05">
+	<label for="awt-text-input-{5}" class="cds--label">Email</label>
+	<div class="cds--text-input__field-outer-wrapper">
+		<div class="cds--text-input__field-wrapper">
+			<input  id="awt-text-input-{5}" type="email" name="email" class="cds--text-input cds--text-input--md cds--layout--size-md" required />
 					</div>
 			</div>
 	</div>
 
 
 <div class="cds--form-item cds--text-area-wrapper awt-field--framed wp-block-awt-text-area awt-spacing-05">
-	<label for="awt-textarea-{4}" class="cds--label">Message</label>
+	<label for="awt-textarea-{6}" class="cds--label">Message</label>
 	<div class="cds--text-area__wrapper">
-		<textarea  id="awt-textarea-{4}" name="message" class="cds--text-area" rows="4"></textarea>
+		<textarea  id="awt-textarea-{6}" name="message" class="cds--text-area" rows="4" required></textarea>
 			</div>
 		</div>
 
