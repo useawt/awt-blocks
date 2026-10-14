@@ -68,8 +68,8 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	} = attributes;
 	const { replaceInnerBlocks, __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
-	const getBlocks = useSelect(
-		( select ) => select( blockEditorStore ).getBlocks,
+	const { getBlocks, getBlockAttributes } = useSelect(
+		( select ) => select( blockEditorStore ),
 		[]
 	);
 
@@ -80,8 +80,15 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 	// Highlight (<mark>) are registered and survive the rich-text conversion.
 	// The change lands unsaved: the author reviews and saves; until then the
 	// front end keeps rendering the stored v1 markup via render.php's v1 branch.
+	//
+	// The version is read from the editor, not from this render's props. React
+	// can run an effect twice for one mount (its development build does, on
+	// sites with SCRIPT_DEBUG on), and on the second run the props still say
+	// v1 while the first run has already built the v2 blocks; it then wrapped
+	// those new heading and paragraph blocks in an Inline set as if they were
+	// old buttons, so a new Hero showed its text twice (found 2026-10-14).
 	useEffect( () => {
-		if ( Number( version ) === 2 ) {
+		if ( Number( getBlockAttributes( clientId )?.version ) === 2 ) {
 			return;
 		}
 		const body = [];
