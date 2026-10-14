@@ -99,7 +99,7 @@ class Test_Starts_Empty extends WP_UnitTestCase {
 	 * Blocks saved without the attribute still get its default.
 	 */
 	public function test_saved_without_the_attribute_keeps_the_default() {
-		$this->assertStringContainsString( '<span class="cds--tag__label">Tag</span>', do_blocks( '<!-- wp:awt/tag /-->' ) );
+		$this->assertStringContainsString( '<span class="cds--tag__label" title="Tag">Tag</span>', do_blocks( '<!-- wp:awt/tag /-->' ) );
 		$this->assertStringContainsString( 'Button', do_blocks( '<!-- wp:awt/button /-->' ) );
 		$this->assertStringContainsString( 'Link text', do_blocks( '<!-- wp:awt/link {"href":"/x"} /-->' ) );
 	}

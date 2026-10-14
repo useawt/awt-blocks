@@ -3,7 +3,9 @@
 	"apiVersion": 3,
 	"name": "awt/tag",
 	"carbonStyles": [
-		"tag"
+		"tag",
+		"tooltip",
+		"popover"
 	],
 	"awt_component": "tag",
 	"title": "Tag",
@@ -53,6 +55,7 @@
 		}
 	},
 	"editorScript": "file:./index.js",
+	"viewScriptModule": "file:./view.js",
 	"render": "file:./render.php",
 	"style": "file:./style-index.css"
 }
