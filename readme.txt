@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.8
+Stable tag: 2026.10.9
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-13
+- Last reviewed: 2026-10-14
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -330,6 +330,14 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.9 (2026-10-14) =
+* [A11y] In Toggle block, screen readers no longer read the On/Off text as part of its name.
+* [A11y] In Menu button block, screen readers announce each item as a menu item with its position.
+* [A11y] In the header navigation, screen readers announce a submenu as a button that shows its links, not as a menu.
+* [A11y] In Tag block, a label too long for the tag shows its full text on hover, and in a tooltip that opens from the keyboard or by touch.
+* [A11y] If you set an accessible name in a block's Accessibility panel, screen readers now announce it on the block's field, button or code area.
+* [Improvement] On sites with WordPress debugging on, a new Hero no longer shows its heading and description twice.
+
 = 2026.10.8 (2026-10-13) =
 * [A11y] In Tabs block, better support for disabled tabs on arrow key navigation.
 * [A11y] In Dropdown block, improved support for screen readers' communication of states.
@@ -370,8 +378,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.10.0 (2026-10-03) =
 * [New] WordPress's List, Table and Code blocks can now be turned into AWT's List, Data table and Code snippet blocks, and back, from the block toolbar's Transform to menu.
 * [Improvement] Every AWT block has its own icon in the block inserter, the block toolbar and List View.
-
-= 2026.09.42 (2026-09-30) =
-* [Improvement] The Data table block's Default sort column list shows column names as plain text, such as `&` instead of `&amp;`.
-* [Improvement] In Safari, clicking or tapping an item in a Header menu dropdown now opens its link.
 <!-- CHANGELOG_END -->

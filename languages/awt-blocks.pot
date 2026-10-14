@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.8\n"
+"Project-Id-Version: AWT Blocks 2026.10.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-13T18:30:36+00:00\n"
+"POT-Creation-Date: 2026-10-14T14:37:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -172,10 +172,10 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: src/header-menu/render.php:35
+#: src/header-menu/render.php:42
 #: src/menu-button/render.php:22
 #: src/header-menu/edit.js:49
-#: src/header-menu/edit.js:102
+#: src/header-menu/edit.js:101
 msgid "Menu"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "Tag"
 msgstr ""
 
-#: src/tag/render.php:70
+#: src/tag/render.php:84
 #: src/tag/edit.js:149
 msgid "Dismiss"
 msgstr ""
@@ -395,42 +395,66 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: src/accessibility-panel.js:78
+#: src/accessibility-panel.js:79
+msgid "This block does not use this name. Clear it to remove it."
+msgstr ""
+
+#: src/accessibility-panel.js:83
 msgid "Search and pick the content’s language so screen readers pronounce it correctly. Leave blank to inherit the page language."
 msgstr ""
 
-#: src/accessibility-panel.js:82
+#: src/accessibility-panel.js:87
 msgid "Search languages…"
 msgstr ""
 
-#: src/accessibility-panel.js:152
-#: src/accessibility-panel.js:208
+#: src/accessibility-panel.js:162
+msgid "A tab panel takes its name from its tab. To change it, change the tab’s label."
+msgstr ""
+
+#: src/accessibility-panel.js:167
+msgid "A switcher panel takes its name from its switcher segment. To change it, change the segment’s label."
+msgstr ""
+
+#: src/accessibility-panel.js:172
+msgid "A divider is decorative, so it has no name."
+msgstr ""
+
+#: src/accessibility-panel.js:177
+msgid "Name the icon in its Icon settings: turn off Decorative and fill in Accessible name."
+msgstr ""
+
+#: src/accessibility-panel.js:183
+msgid "Screen readers read the tag’s text. To change what they hear, change the text."
+msgstr ""
+
+#: src/accessibility-panel.js:237
+#: src/accessibility-panel.js:294
 #: src/index.js:154
 msgid "Accessibility"
 msgstr ""
 
-#: src/accessibility-panel.js:156
-#: src/accessibility-panel.js:290
+#: src/accessibility-panel.js:241
+#: src/accessibility-panel.js:404
 msgid "Language (lang)"
 msgstr ""
 
-#: src/accessibility-panel.js:185
+#: src/accessibility-panel.js:271
 msgid "from the aria-labelledby element"
 msgstr ""
 
-#: src/accessibility-panel.js:195
+#: src/accessibility-panel.js:281
 msgid "(none: screen readers may have nothing to read out)"
 msgstr ""
 
-#: src/accessibility-panel.js:218
+#: src/accessibility-panel.js:315
 msgid "Accessible name:"
 msgstr ""
 
-#: src/accessibility-panel.js:229
+#: src/accessibility-panel.js:329
 msgid "What screen readers will most likely read out. Only change it below if you have a clear reason."
 msgstr ""
 
-#: src/accessibility-panel.js:236
+#: src/accessibility-panel.js:339
 #: src/breadcrumb/edit.js:42
 #: src/content-switcher/edit.js:133
 #: src/form/edit.js:86
@@ -444,32 +468,32 @@ msgstr ""
 msgid "Accessible name (aria-label)"
 msgstr ""
 
-#: src/accessibility-panel.js:244
+#: src/accessibility-panel.js:350
 msgid "Replaces the name above. Leave blank to keep it."
 msgstr ""
 
-#: src/accessibility-panel.js:250
+#: src/accessibility-panel.js:358
 msgid "Described by (aria-describedby)"
 msgstr ""
 
-#: src/accessibility-panel.js:258
+#: src/accessibility-panel.js:366
 msgid "Type the ID of another element on the page whose text adds a longer description (without the “#”)."
 msgstr ""
 
-#: src/accessibility-panel.js:264
+#: src/accessibility-panel.js:373
 msgid "Labelled by (aria-labelledby)"
 msgstr ""
 
-#: src/accessibility-panel.js:272
+#: src/accessibility-panel.js:384
 msgid "Type the ID of another element whose text should be this block’s accessible name (without the “#”)."
 msgstr ""
 
-#: src/accessibility-panel.js:278
+#: src/accessibility-panel.js:392
 #: src/testimonial/edit.js:349
 msgid "Role"
 msgstr ""
 
-#: src/accessibility-panel.js:284
+#: src/accessibility-panel.js:398
 msgid "Only roles that suit this block’s element are listed."
 msgstr ""
 
@@ -1449,48 +1473,48 @@ msgstr ""
 msgid "Wider than text"
 msgstr ""
 
-#: src/hero/edit.js:164
+#: src/hero/edit.js:171
 msgid "Hero"
 msgstr ""
 
-#: src/hero/edit.js:166
+#: src/hero/edit.js:173
 #: src/section/edit.js:162
 msgid "Layout"
 msgstr ""
 
-#: src/hero/edit.js:171
+#: src/hero/edit.js:178
 msgid "Text only (centered)"
 msgstr ""
 
-#: src/hero/edit.js:178
+#: src/hero/edit.js:185
 msgid "Text + image on right"
 msgstr ""
 
-#: src/hero/edit.js:203
+#: src/hero/edit.js:210
 msgid "Replace image"
 msgstr ""
 
-#: src/hero/edit.js:207
+#: src/hero/edit.js:214
 msgid "Upload image"
 msgstr ""
 
-#: src/hero/edit.js:218
+#: src/hero/edit.js:225
 msgid "Image alt text"
 msgstr ""
 
-#: src/hero/edit.js:228
+#: src/hero/edit.js:235
 msgid "Image shape"
 msgstr ""
 
-#: src/hero/edit.js:232
+#: src/hero/edit.js:239
 msgid "Crop the image to a fixed shape. \"Original proportions\" keeps the image uncropped."
 msgstr ""
 
-#: src/hero/edit.js:243
+#: src/hero/edit.js:250
 msgid "Image column width"
 msgstr ""
 
-#: src/hero/edit.js:247
+#: src/hero/edit.js:254
 msgid "How much horizontal space the image gets next to the text. Applies on wider screens; the image stacks below the text on small screens."
 msgstr ""
 
