@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
@@ -52,6 +52,10 @@ export default function Edit( {
 	// A linked tag renders as an <a>; a dismissible (filter) tag has a close
 	// <button>. The two are mutually exclusive — a link wins.
 	const showClose = filter && ! isLink;
+	// Named as on the page, "Dismiss Region: us-east" (render.php).
+	const box = document.createElement( 'textarea' );
+	box.innerHTML = ( text || '' ).replace( /<[^>]*>/g, '' );
+	const labelText = box.value.trim();
 	const Wrapper = isLink ? 'a' : 'span';
 	const blockProps = useBlockProps( {
 		className: `cds--tag cds--tag--${ type } cds--tag--${ size }${
@@ -146,7 +150,15 @@ export default function Edit( {
 					<button
 						type="button"
 						className="cds--tag__close-icon"
-						aria-label={ __( 'Dismiss', 'awt-blocks' ) }
+						aria-label={
+							labelText
+								? sprintf(
+										/* translators: %s: the tag's label, for example "Region: us-east". */
+										__( 'Dismiss %s', 'awt-blocks' ),
+										labelText
+								  )
+								: __( 'Dismiss', 'awt-blocks' )
+						}
 						tabIndex={ -1 }
 						onClick={ ( e ) => e.preventDefault() }
 					>

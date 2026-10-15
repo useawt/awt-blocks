@@ -8,9 +8,15 @@
  * covers hover). This does the same, for plain tags only, and only while the
  * label is actually cut off. The check runs again when the tag changes size,
  * so text spacing or a font that loads late is caught too.
+ *
+ * It also wires a filter tag's dismiss button, which had nothing attached
+ * and did nothing (reported by the outside accessibility review,
+ * 2026-10-15). Pressing it hides the tag, as Carbon's web component does,
+ * and moves focus to the next control, as closing a notification does.
  */
 
-import { store, getElement } from '@wordpress/interactivity';
+import { store, getContext, getElement } from '@wordpress/interactivity';
+import { nextFocus } from '../shared/next-focus';
 
 const CONTAINER =
 	'cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--bottom cds--definition--tooltip--tag';
@@ -94,6 +100,21 @@ function update( tag ) {
 }
 
 store( 'awt/tag', {
+	actions: {
+		dismiss( event ) {
+			const button = event?.currentTarget;
+			const tag = button?.closest( '[data-wp-interactive="awt/tag"]' );
+			// Found before hiding: a hidden tag has no layout, and nothing
+			// inside it can be measured.
+			const target = tag ? nextFocus( tag ) : null;
+			getContext().dismissed = true;
+			if ( target ) {
+				target.focus();
+			} else {
+				button?.blur();
+			}
+		},
+	},
 	callbacks: {
 		init() {
 			const tag = getElement().ref;

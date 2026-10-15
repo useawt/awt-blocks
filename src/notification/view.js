@@ -17,59 +17,7 @@
  */
 
 import { store, getContext } from '@wordpress/interactivity';
-
-const FOCUSABLE = [
-	'a[href]',
-	'area[href]',
-	'button:not([disabled])',
-	'input:not([disabled]):not([type="hidden"])',
-	'select:not([disabled])',
-	'textarea:not([disabled])',
-	'summary',
-	'iframe',
-	'audio[controls]',
-	'video[controls]',
-	'[contenteditable="true"]',
-	'[tabindex]',
-].join( ',' );
-
-function canTakeFocus( el ) {
-	return (
-		el.tabIndex >= 0 &&
-		! el.closest( '[hidden], [inert]' ) &&
-		el.getClientRects().length > 0 &&
-		getComputedStyle( el ).visibility !== 'hidden'
-	);
-}
-
-/**
- * Where focus goes when a notification closes.
- *
- * @param {HTMLElement} note The notification being dismissed.
- * @return {HTMLElement|null} The next control after it, or the region
- *                            around it.
- */
-function nextFocus( note ) {
-	const doc = note.ownerDocument;
-	const next = Array.from( doc.querySelectorAll( FOCUSABLE ) ).find(
-		( el ) =>
-			! note.contains( el ) &&
-			// eslint-disable-next-line no-bitwise
-			note.compareDocumentPosition( el ) &
-				doc.defaultView.Node.DOCUMENT_POSITION_FOLLOWING &&
-			canTakeFocus( el )
-	);
-	if ( next ) {
-		return next;
-	}
-	const region =
-		note.parentElement?.closest( 'section, main, [role="main"]' ) ||
-		doc.querySelector( 'main' );
-	if ( region && ! region.hasAttribute( 'tabindex' ) ) {
-		region.setAttribute( 'tabindex', '-1' );
-	}
-	return region;
-}
+import { nextFocus } from '../shared/next-focus';
 
 store( 'awt/notification', {
 	actions: {

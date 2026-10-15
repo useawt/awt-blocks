@@ -69,19 +69,31 @@ $tag_close_class = $ds
 // treats interactive tags apart. Before, a cut-off label could not be read at
 // all, and the WCAG text spacing overrides cut off "Accessible toilet, ground
 // floor" (reported by the outside accessibility review, 2026-10-14).
+//
+// A filter tag's dismiss button hides the tag (view.js). It had no script
+// and did nothing, and every one was named just "Dismiss"; it now names the
+// tag it removes, "Dismiss Region: us-east" (reported by the outside
+// accessibility review, 2026-10-15).
 $wrapper_extra = array( 'class' => $tag_root_class );
 if ( ! $is_link && ! $filter ) {
 	$wrapper_extra['data-wp-interactive'] = 'awt/tag';
 	$wrapper_extra['data-wp-init']        = 'callbacks.init';
+}
+if ( $filter ) {
+	$wrapper_extra['data-wp-interactive']  = 'awt/tag';
+	$wrapper_extra['data-wp-context']      = wp_json_encode( array( 'dismissed' => false ) );
+	$wrapper_extra['data-wp-bind--hidden'] = 'context.dismissed';
 }
 $wrapper_attrs = get_block_wrapper_attributes( $wrapper_extra );
 $label_title   = trim( html_entity_decode( wp_strip_all_tags( $text ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
 
 $dismiss = $filter
 	? sprintf(
-		'<button type="button" class="%1$s" aria-label="%2$s">%3$s</button>',
+		'<button type="button" class="%1$s" aria-label="%2$s" data-wp-on--click="actions.dismiss">%3$s</button>',
 		esc_attr( $tag_close_class ),
-		esc_attr__( 'Dismiss', 'awt-blocks' ),
+		// A tag with no text renders nothing, so there is always a label to name.
+		/* translators: %s: the tag's label, for example "Region: us-east". */
+		esc_attr( sprintf( __( 'Dismiss %s', 'awt-blocks' ), $label_title ) ),
 		icon( 'close' )
 	)
 	: '';
