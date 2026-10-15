@@ -97,10 +97,25 @@ $mark_svgs = array(
 );
 $mark_html = $mark_svgs[ $mark_style ] ?? '';
 
-// Build the quote body.
-$quote_html = $quote !== ''
-	? sprintf( '<blockquote class="awt-testimonial__quote">%s</blockquote>', wp_kses_post( $quote ) )
-	: '';
+// Build the quote body. It opens with a hidden "Quote:": VoiceOver and
+// TalkBack do not announce a blockquote, so a listener on an Apple or Android
+// device heard the quote as the site's own words (outside accessibility
+// review, 2026-10-15). JAWS and NVDA already say "block quote" and now hear
+// the word as well. The word is in the site's language, so a testimonial set
+// to another language in the Accessibility panel does not read it in that
+// language's voice.
+$quote_html = '';
+if ( $quote !== '' ) {
+	$site_lang  = (string) get_bloginfo( 'language' );
+	$block_lang = isset( $attributes['awtLang'] ) ? trim( (string) $attributes['awtLang'] ) : '';
+	$quote_html = sprintf(
+		'<blockquote class="awt-testimonial__quote"><span class="cds--visually-hidden"%1$s>%2$s </span>%3$s</blockquote>',
+		( $block_lang !== '' && $site_lang !== '' && strcasecmp( $block_lang, $site_lang ) !== 0 ) ? ' lang="' . esc_attr( $site_lang ) . '"' : '',
+		/* translators: read by screen readers before a testimonial's quotation. */
+		esc_html__( 'Quote:', 'awt-blocks' ),
+		wp_kses_post( $quote )
+	);
+}
 
 // Build the avatar (if URL set; alt may be empty — linter flags that as Error).
 $avatar_html = '';
