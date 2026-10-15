@@ -34,7 +34,9 @@ $wrapper_attrs = get_block_wrapper_attributes(
 );
 
 printf(
-	'<nav %1$s><ol class="%2$s">%3$s</ol></nav>',
+	// `role="list"`: Carbon takes the markers off the trail, and Safari then
+	// stops treating a list with no markers as a list, as for the header menus.
+	'<nav %1$s><ol class="%2$s" role="list">%3$s</ol></nav>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	esc_attr( $list_class ),
 	$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.

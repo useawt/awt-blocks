@@ -29,7 +29,9 @@ $heading = $section_title !== ''
 	: '';
 
 printf(
-	'<div %1$s>%2$s<ul class="%3$s">%4$s</ul></div>',
+	// `role="list"`: Carbon takes the markers off these lists, and Safari then
+	// stops treating a list with no markers as a list, as for the header menus.
+	'<div %1$s>%2$s<ul class="%3$s" role="list">%4$s</ul></div>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	$heading, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
 	esc_attr( $links_class ),

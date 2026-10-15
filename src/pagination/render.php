@@ -197,7 +197,9 @@ foreach ( $pages_to_render as $item ) {
 }
 
 printf(
-	'<nav %1$s><ul class="%5$s">%2$s%3$s%4$s</ul></nav>',
+	// `role="list"`: Carbon takes the markers off the pages, and Safari then
+	// stops treating a list with no markers as a list, as for the header menus.
+	'<nav %1$s><ul class="%5$s" role="list">%2$s%3$s%4$s</ul></nav>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	$prev_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.
 	$items_html, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with all dynamic parts escaped.

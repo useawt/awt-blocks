@@ -52,8 +52,20 @@ if ( $ds ) {
 	}
 }
 
-$class         = classnames( $base_class, array(), (string) ( $attributes['className'] ?? '' ) );
-$wrapper_attrs = get_block_wrapper_attributes( array( 'class' => $class ) );
+$class      = classnames( $base_class, array(), (string) ( $attributes['className'] ?? '' ) );
+$list_attrs = array( 'class' => $class );
+
+// Carbon's bulleted and numbered lists take the browser's markers away
+// (`list-style: none`) and draw their own dash or number. Safari then stops
+// treating the list as a list: VoiceOver reads the items but never says
+// "list, 3 items" or where it ends (reported by the outside accessibility
+// review, 2026-10-15). `role="list"` gives it back, as for the header menus.
+// The native numbered type keeps its markers and needs nothing. A Role set in
+// the Accessibility panel wins.
+if ( $list_type !== 'ordered-native' && trim( (string) ( $attributes['awtRole'] ?? '' ) ) === '' ) {
+	$list_attrs['role'] = 'list';
+}
+$wrapper_attrs = get_block_wrapper_attributes( $list_attrs );
 
 /**
  * Filters a List's items, to take them from somewhere other than the list's

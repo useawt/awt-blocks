@@ -23,7 +23,7 @@ class Test_Panel_Names extends WP_UnitTestCase {
 	const EXTRA = <<<'HTML'
 <!-- wp:awt/side-nav -->
 <!-- wp:awt/side-nav-section {"title":"Guides"} -->
-<!-- wp:awt/side-nav-link {"label":"Install","url":"/install"} /-->
+<!-- wp:awt/side-nav-link {"text":"Install","href":"/install"} /-->
 <!-- wp:awt/side-nav-divider /-->
 <!-- /wp:awt/side-nav-section -->
 <!-- /wp:awt/side-nav -->
@@ -312,12 +312,12 @@ HTML;
 			'text input'           => array( 'awt/text-input', array( 'label' => 'L' ), '', '/^<input\b/' ),
 			'password input'       => array( 'awt/password-input', array( 'label' => 'L' ), '', '/^<input\b(?=[^>]*\stype="password")/' ),
 			'radio button'         => array( 'awt/radio-button', array( 'label' => 'L' ), '', '/^<input\b(?=[^>]*\stype="radio")/' ),
-			'side nav section'     => array( 'awt/side-nav-section', array( 'title' => 'Guides' ), '<!-- wp:awt/side-nav-link {"label":"A","url":"/a"} /-->', '/^<ul\b(?=[^>]*\bcds--side-nav__menu\b)/' ),
+			'side nav section'     => array( 'awt/side-nav-section', array( 'title' => 'Guides' ), '<!-- wp:awt/side-nav-link {"text":"A","href":"/a"} /-->', '/^<ul\b(?=[^>]*\bcds--side-nav__menu\b)/' ),
 			'side nav link'        => array(
 				'awt/side-nav-link',
 				array(
-					'label' => 'A',
-					'url'   => '/a',
+					'text' => 'A',
+					'href' => '/a',
 				),
 				'',
 				'/^<a\b/',
@@ -352,7 +352,7 @@ HTML;
 				'',
 				'/^<button\b(?=[^>]*\bcds--toggletip-button\b)/',
 			),
-			'side nav'             => array( 'awt/side-nav', array(), '<!-- wp:awt/side-nav-link {"label":"A","url":"/a"} /-->', '/^<nav\b/' ),
+			'side nav'             => array( 'awt/side-nav', array(), '<!-- wp:awt/side-nav-link {"text":"A","href":"/a"} /-->', '/^<nav\b/' ),
 			'header menu'          => array( 'awt/header-menu', array( 'text' => 'Products' ), '<!-- wp:awt/header-nav-item {"text":"A","href":"/a"} /-->', '/^<ul\b(?=[^>]*\bcds--header__menu\b)/' ),
 		);
 	}
@@ -590,7 +590,7 @@ HTML;
 				'awtRole' => 'presentation',
 				'awtLang' => 'fr',
 			),
-			'<!-- wp:awt/side-nav-link {"label":"A","url":"/a"} /-->'
+			'<!-- wp:awt/side-nav-link {"text":"A","href":"/a"} /-->'
 		);
 		$this->assertMatchesRegularExpression( '/<aside\b(?=[^>]*\srole="presentation")/', $html );
 		$this->assertMatchesRegularExpression( '/<nav\b(?=[^>]*\slang="fr")/', $html );

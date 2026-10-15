@@ -100,7 +100,7 @@
 <p class="awt-spacing-06 wp-block-paragraph"><strong>Unordered (flat):</strong></p>
 
 
-<ul class="cds--list--unordered wp-block-awt-list awt-spacing-05">
+<ul class="cds--list--unordered wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">First unordered item</li>
 
 <li class="cds--list__item">Second unordered item</li>
@@ -112,9 +112,9 @@
 <p class="awt-spacing-06 wp-block-paragraph"><strong>Unordered (nested):</strong></p>
 
 
-<ul class="cds--list--unordered wp-block-awt-list awt-spacing-05">
+<ul class="cds--list--unordered wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Fruits
-<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05">
+<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Apple</li>
 
 <li class="cds--list__item">Banana</li>
@@ -124,11 +124,11 @@
 </li>
 
 <li class="cds--list__item">Vegetables
-<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05">
+<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Carrot</li>
 
 <li class="cds--list__item">Spinach
-<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05">
+<ul class="cds--list--unordered cds--list--nested wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Baby spinach</li>
 
 <li class="cds--list__item">Mature spinach</li>
@@ -154,9 +154,9 @@
 <p class="awt-spacing-06 wp-block-paragraph"><strong>Ordered (Carbon-styled, nested):</strong> outer level shows "1." counter; nested level switches to lower-latin "a." per Carbon's spec.</p>
 
 
-<ol class="cds--list--ordered wp-block-awt-list awt-spacing-05">
+<ol class="cds--list--ordered wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Install
-<ol class="cds--list--ordered cds--list--nested wp-block-awt-list awt-spacing-05">
+<ol class="cds--list--ordered cds--list--nested wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Download the zip</li>
 
 <li class="cds--list__item">Upload via WordPress admin</li>
@@ -166,7 +166,7 @@
 </li>
 
 <li class="cds--list__item">Configure
-<ol class="cds--list--ordered cds--list--nested wp-block-awt-list awt-spacing-05">
+<ol class="cds--list--ordered cds--list--nested wp-block-awt-list awt-spacing-05" role="list">
 <li class="cds--list__item">Open the welcome wizard</li>
 
 <li class="cds--list__item">Pick a style variation</li>
@@ -216,7 +216,7 @@
 <p class="awt-spacing-06 wp-block-paragraph"><strong>Default (with trailing slash):</strong></p>
 
 
-<nav class="cds--breadcrumb wp-block-awt-breadcrumb awt-spacing-05" aria-label="Showcase breadcrumb (with trailing slash)"><ol class="cds--breadcrumb__list">
+<nav class="cds--breadcrumb wp-block-awt-breadcrumb awt-spacing-05" aria-label="Showcase breadcrumb (with trailing slash)"><ol class="cds--breadcrumb__list" role="list">
 <li class="cds--breadcrumb-item"><a class="cds--link" href="/">Home</a></li>
 
 <li class="cds--breadcrumb-item"><a class="cds--link" href="/section">Section</a></li>
@@ -228,7 +228,7 @@
 <p class="awt-spacing-06 wp-block-paragraph"><strong>noTrailingSlash:</strong></p>
 
 
-<nav class="cds--breadcrumb cds--breadcrumb--no-trailing-slash wp-block-awt-breadcrumb awt-spacing-05" aria-label="Showcase breadcrumb (no trailing slash)"><ol class="cds--breadcrumb__list">
+<nav class="cds--breadcrumb cds--breadcrumb--no-trailing-slash wp-block-awt-breadcrumb awt-spacing-05" aria-label="Showcase breadcrumb (no trailing slash)"><ol class="cds--breadcrumb__list" role="list">
 <li class="cds--breadcrumb-item"><a class="cds--link" href="/">Home</a></li>
 
 <li class="cds--breadcrumb-item"><a class="cds--link" href="/section">Section</a></li>
@@ -538,7 +538,7 @@
 <h2 class="wp-block-heading awt-spacing-05">awt/accordion + awt/accordion-item</h2>
 
 
-<ul class="cds--accordion cds--accordion--end cds--accordion--md wp-block-awt-accordion awt-spacing-05" data-wp-interactive="awt/accordion" data-wp-context="{&quot;singleOpen&quot;:true}">
+<ul class="cds--accordion cds--accordion--end cds--accordion--md wp-block-awt-accordion awt-spacing-05" data-wp-interactive="awt/accordion" data-wp-context="{&quot;singleOpen&quot;:true}" role="list">
 <li class="cds--accordion__item wp-block-awt-accordion-item"><button id="awt-accordion-button-{22}" type="button" class="cds--accordion__heading" aria-expanded="false" aria-controls="awt-accordion-panel-{23}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title">First section</span></button><div id="awt-accordion-panel-{23}" class="cds--accordion__content" role="region" aria-labelledby="awt-accordion-button-{22}" hidden>
 
 <p class="awt-spacing-06 wp-block-paragraph">Content of the first accordion section.</p>
@@ -684,8 +684,8 @@
 <h3 class="wp-block-heading awt-spacing-05">awt/side-nav + awt/side-nav-section + awt/side-nav-link + awt/side-nav-divider</h3>
 
 
-<aside class="cds--side-nav cds--side-nav--persistent cds--side-nav--ux wp-block-awt-side-nav" id="showcase-side-nav" data-wp-interactive="awt/side-nav" data-wp-init="callbacks.foldIntoHeaderMenu"><nav class="cds--side-nav__navigation" aria-label="Showcase side nav"><ul class="cds--side-nav__items">
-<li class="cds--side-nav__section wp-block-awt-side-nav-section"><div class="cds--side-nav__heading" id="awt-side-nav-section-{29}">Getting started</div><ul class="cds--side-nav__menu" aria-labelledby="awt-side-nav-section-{29}">
+<aside class="cds--side-nav cds--side-nav--persistent cds--side-nav--ux wp-block-awt-side-nav" id="showcase-side-nav" data-wp-interactive="awt/side-nav" data-wp-init="callbacks.foldIntoHeaderMenu"><nav class="cds--side-nav__navigation" aria-label="Showcase side nav"><ul class="cds--side-nav__items" role="list">
+<li class="cds--side-nav__section wp-block-awt-side-nav-section"><div class="cds--side-nav__heading" id="awt-side-nav-section-{29}">Getting started</div><ul class="cds--side-nav__menu" role="list" aria-labelledby="awt-side-nav-section-{29}">
 <li class="cds--side-nav__item wp-block-awt-side-nav-link"><a class="cds--side-nav__link" href="/overview"><span class="cds--side-nav__link-text">Overview</span></a></li>
 
 <li class="cds--side-nav__item wp-block-awt-side-nav-link"><a class="cds--side-nav__link" href="/install"><span class="cds--side-nav__link-text">Install</span></a></li>
@@ -693,7 +693,7 @@
 
 <li class="cds--side-nav__divider" role="separator"></li>
 
-<li class="cds--side-nav__section wp-block-awt-side-nav-section"><div class="cds--side-nav__heading" id="awt-side-nav-section-{30}">Reference</div><ul class="cds--side-nav__menu" aria-labelledby="awt-side-nav-section-{30}">
+<li class="cds--side-nav__section wp-block-awt-side-nav-section"><div class="cds--side-nav__heading" id="awt-side-nav-section-{30}">Reference</div><ul class="cds--side-nav__menu" role="list" aria-labelledby="awt-side-nav-section-{30}">
 <li class="cds--side-nav__item wp-block-awt-side-nav-link"><a class="cds--side-nav__link" href="/reference/blocks"><span class="cds--side-nav__link-text">Blocks</span></a></li>
 
 <li class="cds--side-nav__item wp-block-awt-side-nav-link"><a class="cds--side-nav__link" href="/reference/patterns"><span class="cds--side-nav__link-text">Patterns</span></a></li>
@@ -704,7 +704,7 @@
 <h3 class="wp-block-heading awt-spacing-05">awt/footer-section + awt/footer-link</h3>
 
 
-<div class="cds--footer__section wp-block-awt-footer-section"><h2 class="cds--footer__heading">Showcase</h2><ul class="cds--footer__links">
+<div class="cds--footer__section wp-block-awt-footer-section"><h2 class="cds--footer__heading">Showcase</h2><ul class="cds--footer__links" role="list">
 <li class="cds--footer__link wp-block-awt-footer-link"><a class="cds--link" href="/about">About</a></li>
 
 <li class="cds--footer__link wp-block-awt-footer-link"><a class="cds--link" href="/privacy">Privacy</a></li>
@@ -793,7 +793,7 @@
 <h2 class="wp-block-heading awt-spacing-05">Frequently asked questions</h2>
 
 
-<ul class="cds--accordion cds--accordion--end cds--accordion--md wp-block-awt-accordion awt-spacing-05" data-wp-interactive="awt/accordion" data-wp-context="{&quot;singleOpen&quot;:true}">
+<ul class="cds--accordion cds--accordion--end cds--accordion--md wp-block-awt-accordion awt-spacing-05" data-wp-interactive="awt/accordion" data-wp-context="{&quot;singleOpen&quot;:true}" role="list">
 <li class="cds--accordion__item wp-block-awt-accordion-item"><button id="awt-accordion-button-{31}" type="button" class="cds--accordion__heading" aria-expanded="false" aria-controls="awt-accordion-panel-{32}" data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle"><svg class="cds--accordion__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" focusable="false" aria-hidden="true"><path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z"/></svg><span class="cds--accordion__title">Is AWT really free?</span></button><div id="awt-accordion-panel-{32}" class="cds--accordion__content" role="region" aria-labelledby="awt-accordion-button-{31}" hidden>
 
 <p class="awt-spacing-06 wp-block-paragraph">Yes. The theme and the blocks plugin are GPL-2.0-or-later and ship via WordPress.org with no telemetry, no callbacks, and no license keys.</p>
@@ -1021,7 +1021,7 @@
 <p class="awt-spacing-06 wp-block-paragraph">On archive / blog templates, leave Total pages = 0 and the block reads <code>$wp_query-&gt;max_num_pages</code> automatically. Below is a static 12-page example.</p>
 
 
-<nav class="cds--pagination-nav wp-block-awt-pagination awt-spacing-05" aria-label="Pagination"><ul class="cds--pagination-nav__list"><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-3" aria-label="Previous page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 8 10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"/></svg></a></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-1" aria-label="Page 1">1</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--ellipsis" aria-hidden="true">…</span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-3" aria-label="Page 3">3</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--current" aria-current="page"><span class="cds--visually-hidden">Page 4, current page</span><span aria-hidden="true">4</span></span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-5" aria-label="Page 5">5</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--ellipsis" aria-hidden="true">…</span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-12" aria-label="Page 12">12</a></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-5" aria-label="Next page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"/></svg></a></li></ul></nav>
+<nav class="cds--pagination-nav wp-block-awt-pagination awt-spacing-05" aria-label="Pagination"><ul class="cds--pagination-nav__list" role="list"><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-3" aria-label="Previous page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M5 8 10 3 10.7 3.7 6.4 8 10.7 12.3 10 13z"/></svg></a></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-1" aria-label="Page 1">1</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--ellipsis" aria-hidden="true">…</span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-3" aria-label="Page 3">3</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--current" aria-current="page"><span class="cds--visually-hidden">Page 4, current page</span><span aria-hidden="true">4</span></span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-5" aria-label="Page 5">5</a></li><li class="cds--pagination-nav__list-item"><span class="cds--pagination-nav__page cds--pagination-nav__page--ellipsis" aria-hidden="true">…</span></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-12" aria-label="Page 12">12</a></li><li class="cds--pagination-nav__list-item"><a class="cds--pagination-nav__page" href="#page-5" aria-label="Next page"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M11 8 6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"/></svg></a></li></ul></nav>
 
 
 <hr class="wp-block-separator has-alpha-channel-opacity"/>

@@ -65,7 +65,9 @@ $wrapper_attrs = get_block_wrapper_attributes(
 );
 
 printf(
-	'<aside %1$s><nav class="%2$s" aria-label="%3$s"><ul class="%4$s">%5$s</ul></nav></aside>',
+	// `role="list"`: Carbon takes the markers off its lists, and Safari then
+	// stops treating a list with no markers as a list, as for the header menus.
+	'<aside %1$s><nav class="%2$s" aria-label="%3$s"><ul class="%4$s" role="list">%5$s</ul></nav></aside>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 	esc_attr( $nav_class ),
 	esc_attr( $aria_label ),

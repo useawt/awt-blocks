@@ -57,6 +57,9 @@ $heading = $section_title !== ''
 $menu_attrs = html_attrs(
 	array(
 		'class'           => $menu_class,
+		// Carbon takes the markers off, and Safari then stops treating a list
+		// with no markers as a list, as for the header menus.
+		'role'            => 'list',
 		'aria-labelledby' => $heading_id,
 	)
 );

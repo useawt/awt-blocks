@@ -35,12 +35,17 @@ $accordion_class = $ds
 
 $context = wp_json_encode( array( 'singleOpen' => $single_open ) );
 
-$wrapper_attrs = get_block_wrapper_attributes(
-	array(
-		'class'               => $accordion_class,
-		'data-wp-interactive' => 'awt/accordion',
-		'data-wp-context'     => $context,
-	)
+$accordion_attrs = array(
+	'class'               => $accordion_class,
+	'data-wp-interactive' => 'awt/accordion',
+	'data-wp-context'     => $context,
 );
+// Carbon builds the accordion as a list and takes the markers off, and Safari
+// stops treating a list with no markers as a list; `role="list"` gives it
+// back, as for the header menus. A Role set in the Accessibility panel wins.
+if ( trim( (string) ( $attributes['awtRole'] ?? '' ) ) === '' ) {
+	$accordion_attrs['role'] = 'list';
+}
+$wrapper_attrs = get_block_wrapper_attributes( $accordion_attrs );
 
 printf( '<ul %1$s>%2$s</ul>', $wrapper_attrs, $content ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core; inner-block markup, escaped by each inner block on render.
