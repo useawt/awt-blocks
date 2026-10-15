@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.9\n"
+"Project-Id-Version: AWT Blocks 2026.10.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T14:37:40+00:00\n"
+"POT-Creation-Date: 2026-10-15T07:41:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -221,12 +221,32 @@ msgid "Close"
 msgstr ""
 
 #: src/notification/render.php:22
-#: src/notification/edit.js:99
+#: src/notification/edit.js:107
 msgid "Notification"
 msgstr ""
 
-#: src/notification/render.php:89
-#: src/notification/edit.js:202
+#: src/notification/render.php:73
+#: src/notification/edit.js:13
+msgid "Information:"
+msgstr ""
+
+#: src/notification/render.php:74
+#: src/notification/edit.js:14
+msgid "Success:"
+msgstr ""
+
+#: src/notification/render.php:75
+#: src/notification/edit.js:15
+msgid "Warning:"
+msgstr ""
+
+#: src/notification/render.php:76
+#: src/notification/edit.js:16
+msgid "Error:"
+msgstr ""
+
+#: src/notification/render.php:104
+#: src/notification/edit.js:212
 msgid "Close notification"
 msgstr ""
 
@@ -607,7 +627,7 @@ msgstr ""
 #: src/header-action/edit.js:77
 #: src/menu-button/edit.js:67
 #: src/modal-opener/edit.js:56
-#: src/notification/edit.js:101
+#: src/notification/edit.js:109
 #: src/testimonial/edit.js:147
 msgid "Kind"
 msgstr ""
@@ -791,7 +811,7 @@ msgid "Code snippet"
 msgstr ""
 
 #: src/code-snippet/edit.js:91
-#: src/notification/edit.js:110
+#: src/notification/edit.js:118
 #: src/tile/edit.js:106
 msgid "Variant"
 msgstr ""
@@ -1892,31 +1912,31 @@ msgstr ""
 msgid "Editing preview. On your site, the modal stays hidden until a visitor opens it."
 msgstr ""
 
-#: src/notification/edit.js:115
+#: src/notification/edit.js:123
 msgid "Inline"
 msgstr ""
 
-#: src/notification/edit.js:119
+#: src/notification/edit.js:127
 msgid "Toast"
 msgstr ""
 
-#: src/notification/edit.js:125
+#: src/notification/edit.js:133
 msgid "Low contrast"
 msgstr ""
 
-#: src/notification/edit.js:132
+#: src/notification/edit.js:140
 msgid "Hide close button"
 msgstr ""
 
-#: src/notification/edit.js:160
+#: src/notification/edit.js:170
 msgid "Notification title"
 msgstr ""
 
-#: src/notification/edit.js:174
+#: src/notification/edit.js:184
 msgid "Subtitle (optional)"
 msgstr ""
 
-#: src/notification/edit.js:189
+#: src/notification/edit.js:199
 msgid "Caption (toast only)"
 msgstr ""
 

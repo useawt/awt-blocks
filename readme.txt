@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.9
+Stable tag: 2026.10.10
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-14
+- Last reviewed: 2026-10-15
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -330,6 +330,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.10 (2026-10-15) =
+* [A11y] In Notification block, screen readers read its type, such as "Warning:", before its title.
+* [A11y] In Safari, lists in the List, Accordion, Breadcrumb, Pagination, Side navigation and footer blocks are announced as lists, with their number of items.
+
 = 2026.10.9 (2026-10-14) =
 * [A11y] In Toggle block, screen readers no longer read the On/Off text as part of its name.
 * [A11y] In Menu button block, screen readers announce each item as a menu item with its position.
@@ -374,8 +378,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.10.1 (2026-10-05) =
 * [Improvement] When a visitor picks an option in the Dropdown block, it now fires a `change` event on its form field and an `awt:dropdown-change` event with the option's value and label.
-
-= 2026.10.0 (2026-10-03) =
-* [New] WordPress's List, Table and Code blocks can now be turned into AWT's List, Data table and Code snippet blocks, and back, from the block toolbar's Transform to menu.
-* [Improvement] Every AWT block has its own icon in the block inserter, the block toolbar and List View.
 <!-- CHANGELOG_END -->
