@@ -31,16 +31,30 @@ $copy_btn_class        = $ds ? $ds->classes_for( 'code-snippet', array( 'element
 $copy_btn_inline_class = $ds ? $ds->classes_for( 'code-snippet', array( 'element' => 'copy-button-inline' ) ) : 'cds--snippet-button cds--copy-btn cds--snippet-button--inline';
 $container_class       = $ds ? $ds->classes_for( 'code-snippet', array( 'element' => 'container' ) ) : 'cds--snippet-container';
 
+// A single- or multi-line snippet's scrolling box is a tab stop only while
+// its code overflows, so a keyboard user can scroll it (view.js decides, on
+// load and whenever the box changes size). While it is one it is a region
+// named "Code snippet", or the name set in the Accessibility panel. It used
+// to be a tab stop always, with no role or name, even when nothing scrolled
+// (reported by the outside accessibility review, 2026-10-15). Carbon's own
+// is always a tab stop, a read-only text box named "Copy to clipboard".
+$context = array(
+	'copyLabel'   => $copy_label,
+	'copiedLabel' => $copied_label,
+);
+$extra   = array();
+if ( ! $is_inline ) {
+	$context['regionLabel'] = __( 'Code snippet', 'awt-blocks' );
+	$extra['data-wp-init']  = 'callbacks.watchScroll';
+}
 $wrapper_attrs = get_block_wrapper_attributes(
-	array(
-		'class'               => $root_class,
-		'data-wp-interactive' => 'awt/code-snippet',
-		'data-wp-context'     => wp_json_encode(
-			array(
-				'copyLabel'   => $copy_label,
-				'copiedLabel' => $copied_label,
-			)
+	array_merge(
+		array(
+			'class'               => $root_class,
+			'data-wp-interactive' => 'awt/code-snippet',
+			'data-wp-context'     => wp_json_encode( $context ),
 		),
+		$extra
 	)
 );
 
@@ -95,9 +109,10 @@ if ( $is_inline ) {
  * not scroll, one level above the box that does, so a keyboard user could focus
  * the snippet and still not reach the code past the right edge (WCAG 2.1.1; axe
  * `scrollable-region-focusable`, which pointed at the <pre>, not the container).
- * Only the scrolling element is focusable now, so neither variant carries a tab
- * stop that does nothing. No `role` is added: a <pre> announces its own content,
- * and overriding its role would cost the preformatted semantics for nothing.
+ * Only the scrolling element is focusable now. The `tabindex` printed here is
+ * the starting state, so a page without scripts can still be scrolled from the
+ * keyboard; view.js then keeps it only while the code overflows, and adds the
+ * region role and name with it (see the context above).
  */
 $is_multi        = 'multi' === $variant;
 $container_extra = $is_multi ? '' : ' tabindex="0"';

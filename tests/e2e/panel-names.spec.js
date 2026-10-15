@@ -50,16 +50,18 @@ test( 'panel names reach the element a screen reader meets', async ( {
 	} );
 	await page.goto( `/?page_id=${ created.id }` );
 
-	// The auditor's case: the focusable code area itself is named.
+	// The auditor's case: the code's scrolling box itself is named, the
+	// <pre> of a multi-line snippet and the container of a single-line one.
+	// It is a tab stop only while its code overflows, and these fit
+	// (code-snippet-tab-stop.spec.js).
 	const area = page.getByRole( 'region', {
 		name: 'Opening hours endpoint example',
 		exact: true,
 	} );
 	await expect( area ).toHaveJSProperty( 'tagName', 'PRE' );
-	await expect( area ).toHaveAttribute( 'tabindex', '0' );
 	await expect(
 		page.getByRole( 'region', { name: 'Activation command', exact: true } )
-	).toHaveAttribute( 'tabindex', '0' );
+	).toHaveClass( /cds--snippet-container/ );
 
 	await expect(
 		page.getByRole( 'switch', { name: 'Email alerts', exact: true } )
