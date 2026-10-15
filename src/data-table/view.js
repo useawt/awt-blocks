@@ -31,7 +31,7 @@
  * too.
  */
 
-import { store, getElement } from '@wordpress/interactivity';
+import { store, getContext, getElement } from '@wordpress/interactivity';
 
 const original = new WeakMap();
 
@@ -110,24 +110,31 @@ function setIndicators( table, activeKey, direction ) {
 	} );
 }
 
+/**
+ * The live region's message after a sort, from the translated messages
+ * render.php puts in the store's state.
+ *
+ * @param {HTMLElement} table     The table element.
+ * @param {string}      key       Column key of the active sort.
+ * @param {string}      direction 'asc', 'desc' or 'none'.
+ * @return {string} The message.
+ */
 function announcementFor( table, key, direction ) {
+	const { state } = store( 'awt/data-table' );
 	if ( ! key || direction === 'none' ) {
-		return 'Table sort cleared. Rows restored to original order.';
+		return state.sortCleared;
 	}
 	const btn = table.querySelector(
 		`thead th[data-key="${ key }"] .cds--table-sort`
 	);
 	const columnLabel = btn?.dataset.columnLabel || key;
-	const dirWord = direction === 'asc' ? 'ascending' : 'descending';
-	return `Table sorted by ${ columnLabel } ${ dirWord }.`;
+	const message =
+		direction === 'asc' ? state.sortedAscending : state.sortedDescending;
+	// A translation may number the placeholder ("%1$s").
+	return message.replace( /%(1\$)?s/, () => columnLabel );
 }
 
 store( 'awt/data-table', {
-	state: {
-		// Bound to the visually-hidden live region's text. Updating this
-		// triggers an SR announcement (aria-live="polite").
-		sortAnnouncement: '',
-	},
 	callbacks: {
 		init() {
 			const root = getElement().ref;
@@ -168,11 +175,14 @@ store( 'awt/data-table', {
 				{ ascending: 'asc', descending: 'desc' }[ next ] || 'none';
 			applySort( table, key, direction );
 			setIndicators( table, key, direction );
-			// Trigger the live-region announcement. Writing to state.sortAnnouncement
-			// causes the wired `data-wp-text` element to re-render, which screen
-			// readers pick up via aria-live="polite".
-			const { state } = store( 'awt/data-table' );
-			state.sortAnnouncement = announcementFor( table, key, direction );
+			// Trigger the live-region announcement. Writing to this table's
+			// context.sortAnnouncement re-renders its `data-wp-text` element,
+			// which screen readers pick up via aria-live="polite".
+			getContext().sortAnnouncement = announcementFor(
+				table,
+				key,
+				direction
+			);
 		},
 	},
 } );

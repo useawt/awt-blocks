@@ -91,6 +91,25 @@ if ( $caption_id !== '' ) {
 	$table_attrs['aria-labelledby'] = $caption_id;
 }
 
+// What the live region says after a sort, translated here: view.js had the
+// messages in English only. Each table keeps its own message in its context,
+// so sorting one table does not make every table on the page announce it
+// (both found 2026-10-15, after the outside accessibility review's sort
+// button finding).
+if ( $sortable ) {
+	$table_attrs['data-wp-context'] = wp_json_encode( array( 'sortAnnouncement' => '' ) );
+	wp_interactivity_state(
+		'awt/data-table',
+		array(
+			/* translators: %s: the column's label, for example "Name". */
+			'sortedAscending'  => __( 'Table sorted by %s ascending.', 'awt-blocks' ),
+			/* translators: %s: the column's label, for example "Name". */
+			'sortedDescending' => __( 'Table sorted by %s descending.', 'awt-blocks' ),
+			'sortCleared'      => __( 'Table sort cleared. Rows restored to original order.', 'awt-blocks' ),
+		)
+	);
+}
+
 $wrapper_attrs = get_block_wrapper_attributes( $table_attrs );
 
 $table_class = $ds
@@ -253,7 +272,7 @@ ob_start();
 				// on the <th> tells SRs the current state, but doesn't announce
 				// CHANGES — the live region fills that gap.
 		?>
-		<div class="awt-data-table__sort-announce <?php echo esc_attr( $visually_hidden_class ); ?>" aria-live="polite" aria-atomic="true" data-wp-text="state.sortAnnouncement"></div>
+		<div class="awt-data-table__sort-announce <?php echo esc_attr( $visually_hidden_class ); ?>" aria-live="polite" aria-atomic="true" data-wp-text="context.sortAnnouncement"></div>
 	<?php endif; ?>
 </div>
 <?php

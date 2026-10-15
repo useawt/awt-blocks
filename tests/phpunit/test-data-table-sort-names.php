@@ -64,6 +64,32 @@ class Test_Data_Table_Sort_Names extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Each table keeps its own message, and the messages are translated.
+	 *
+	 * The script had them in English only, and one shared message made every
+	 * sortable table on the page announce a sort in any of them (found
+	 * 2026-10-15).
+	 */
+	public function test_messages_translated_and_per_table() {
+		$translate = static function ( $text, $original, $domain ) {
+			return ( 'awt-blocks' === $domain && 'Table sorted by %s ascending.' === $original )
+				? 'Tabelle nach %s aufsteigend sortiert.'
+				: $text;
+		};
+		add_filter( 'gettext', $translate, 10, 3 );
+		$html = $this->render( true );
+		remove_filter( 'gettext', $translate, 10 );
+
+		$this->assertStringContainsString( 'data-wp-context="{&quot;sortAnnouncement&quot;:&quot;&quot;}"', $html );
+		$this->assertStringContainsString( 'data-wp-text="context.sortAnnouncement"', $html );
+		$this->assertStringNotContainsString( 'state.sortAnnouncement', $html );
+		$state = wp_interactivity_state( 'awt/data-table' );
+		$this->assertSame( 'Tabelle nach %s aufsteigend sortiert.', $state['sortedAscending'] );
+		$this->assertSame( 'Table sorted by %s descending.', $state['sortedDescending'] );
+		$this->assertSame( 'Table sort cleared. Rows restored to original order.', $state['sortCleared'] );
+	}
+
+	/**
 	 * A table that does not sort has plain headers.
 	 */
 	public function test_plain_headers_without_sort() {
