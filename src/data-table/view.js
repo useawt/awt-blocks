@@ -10,9 +10,11 @@
  *   - `aria-sort` on the <th> reflects the current state ("ascending" /
  *     "descending" / "none"). Screen readers announce this on focus.
  *
- *   - The sort button carries an `aria-label` that view.js updates on every
- *     click so the announcement describes what the NEXT click will do —
- *     e.g. "Sort by Amount, currently ascending. Click to sort descending."
+ *   - The sort button is named by its visible column label alone. It used
+ *     to carry "Sort by Amount, currently ascending. Click to sort
+ *     descending.", which repeated `aria-sort`, and a header's name is read
+ *     before every cell in its column (outside accessibility review,
+ *     2026-10-15).
  *
  *   - A visually-hidden live region (`.awt-data-table__sort-announce`)
  *     announces sort changes when they happen — aria-sort alone only tells
@@ -77,8 +79,6 @@ function applySort( table, key, direction ) {
  * - `cds--table-sort--active` + `cds--table-sort--descending` on the <button>
  *   drive Carbon's CSS that swaps the unsorted icon for the active icon and
  *   rotates the active icon 180° for descending.
- * - `aria-label` on the active button gets rewritten so focusing it after a
- *   sort tells the user what clicking it AGAIN will do (the cycle pattern).
  * @param {HTMLElement} table     The table element.
  * @param {string}      activeKey Column key of the active sort.
  * @param {string}      direction 'ascending' or 'descending'.
@@ -87,7 +87,6 @@ function setIndicators( table, activeKey, direction ) {
 	table.querySelectorAll( 'thead th[data-key]' ).forEach( ( th ) => {
 		const isActive = th.dataset.key === activeKey;
 		const btn = th.querySelector( '.cds--table-sort' );
-		const columnLabel = btn?.dataset.columnLabel || th.dataset.key;
 
 		if ( isActive && direction !== 'none' ) {
 			const ariaSort = direction === 'asc' ? 'ascending' : 'descending';
@@ -98,14 +97,6 @@ function setIndicators( table, activeKey, direction ) {
 					'cds--table-sort--descending',
 					direction === 'desc'
 				);
-				// Next-state hint in the aria-label: after asc the next click
-				// gives desc; after desc the next click gives none.
-				const nextHint =
-					direction === 'asc' ? 'descending' : 'unsorted';
-				btn.setAttribute(
-					'aria-label',
-					`Sort by ${ columnLabel }, currently ${ ariaSort }. Click to sort ${ nextHint }.`
-				);
 			}
 		} else {
 			th.setAttribute( 'aria-sort', 'none' );
@@ -114,7 +105,6 @@ function setIndicators( table, activeKey, direction ) {
 					'cds--table-sort--active',
 					'cds--table-sort--descending'
 				);
-				btn.setAttribute( 'aria-label', `Sort by ${ columnLabel }` );
 			}
 		}
 	} );

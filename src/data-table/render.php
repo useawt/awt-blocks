@@ -158,20 +158,18 @@ foreach ( $headers as $h ) {
 	$key  = isset( $h['key'] ) ? (string) $h['key'] : '';
 	$text = isset( $h['text'] ) ? (string) $h['text'] : $key;
 	if ( $sortable ) {
-		// Accessible name on the button: tells SR users what clicking will do.
-		// view.js updates it on every click so the announcement reflects the
-		// NEXT state, not the current one (which `aria-sort` already covers).
-		$initial_aria_label = sprintf(
-			/* translators: %s: column header text */
-			__( 'Sort by %s', 'awt-blocks' ),
-			wp_strip_all_tags( $text )
-		);
+		// The button is named by its visible label alone, as in Carbon and the
+		// ARIA sortable table example: `aria-sort` on the <th> carries the
+		// state, and the live region below announces each change. It used to
+		// carry "Sort by Name, currently ascending. Click to sort descending.",
+		// and a header's name is what a screen reader reads before every cell
+		// in its column (reported by the outside accessibility review,
+		// 2026-10-15).
 		$headers_html .= sprintf(
-			'<th scope="col" data-key="%1$s" aria-sort="none"><button type="button" class="%7$s" aria-label="%4$s" data-wp-on--click="actions.sortColumn" data-column-label="%5$s"><span class="%8$s"><span class="%9$s">%2$s</span>%3$s%6$s</span></button></th>',
+			'<th scope="col" data-key="%1$s" aria-sort="none"><button type="button" class="%6$s" data-wp-on--click="actions.sortColumn" data-column-label="%4$s"><span class="%7$s"><span class="%8$s">%2$s</span>%3$s%5$s</span></button></th>',
 			esc_attr( $key ),
 			kses_inline( $text ),
 			$sort_icon_unsorted,
-			esc_attr( $initial_aria_label ),
 			esc_attr( wp_strip_all_tags( $text ) ),
 			$sort_icon_active,
 			esc_attr( $sort_btn_class ),
