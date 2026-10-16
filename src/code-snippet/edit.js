@@ -48,20 +48,34 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	// Mirror render.php: inline variant uses <span> wrapper, single/multi
 	// use <div><pre><code> + a copy button (when not hideCopyBtn).
+	// The button sits in Carbon's tooltip container, as on the page, where it
+	// opens with the "Copied" text after a copy; here it stays closed.
 	const showCopy = ! hideCopyBtn;
 	const copyBtn = showCopy && (
-		<button
-			type="button"
-			className={
-				variant === 'inline'
-					? 'cds--snippet-button cds--copy-btn cds--snippet-button--inline'
-					: 'cds--snippet-button cds--copy-btn'
-			}
-			aria-label={ copyLabel }
-			onClick={ ( e ) => e.preventDefault() }
+		<span
+			className={ `cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--${
+				variant === 'inline' ? 'bottom' : 'left'
+			} cds--tooltip cds--icon-tooltip awt-snippet-copy` }
 		>
-			<CopyIcon />
-		</button>
+			<button
+				type="button"
+				className={
+					variant === 'inline'
+						? 'cds--snippet-button cds--copy-btn cds--snippet-button--inline'
+						: 'cds--snippet-button cds--copy-btn'
+				}
+				aria-label={ copyLabel }
+				onClick={ ( e ) => e.preventDefault() }
+			>
+				<CopyIcon />
+			</button>
+			<span className="cds--popover" aria-hidden="true">
+				<span className="cds--popover-content cds--tooltip-content">
+					{ copiedLabel }
+				</span>
+				<span className="cds--popover-caret" />
+			</span>
+		</span>
 	);
 	const preview =
 		variant === 'inline' ? (
