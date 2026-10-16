@@ -2,10 +2,14 @@
  * AWT Code snippet — view-side store.
  *
  * Click the copy button → write the snippet text to the clipboard via the
- * async navigator.clipboard API. On success, swap the button label to the
- * "copied" string for ~1.5s and back. Falls back to a hidden textarea
- * select+execCommand("copy") path when navigator.clipboard isn't available
- * (older Safari, non-HTTPS dev pages).
+ * async navigator.clipboard API. On success, open Carbon's tooltip beside the
+ * button with the "Copied" text and put the same text in the snippet's status
+ * message, for 2s (Carbon's feedback timeout). The button keeps its name: it
+ * used to swap it to "Copied", which most screen readers do not announce on
+ * the button you are on, and nothing showed on screen but a colour (reported
+ * by the outside accessibility review, 2026-10-15). Falls back to a hidden
+ * textarea select+execCommand("copy") path when navigator.clipboard isn't
+ * available (older Safari, non-HTTPS dev pages).
  *
  * It also keeps the snippet's scrolling box a tab stop only while the code
  * overflows. The box arrives with `tabindex="0"`; while the code fits, the
@@ -18,6 +22,10 @@
  */
 
 import { store, getElement, getContext } from '@wordpress/interactivity';
+
+// The pending close of each button's confirmation, so a second copy
+// restarts it.
+const timers = new WeakMap();
 
 function scrolls( box ) {
 	return (
@@ -100,16 +108,30 @@ store( 'awt/code-snippet', {
 			}
 			const codeEl = root.querySelector( 'code' );
 			const text = codeEl ? codeEl.textContent : '';
-			const ctx = getContext();
+			const { copiedLabel } = getContext();
+			const tip = btn.closest( '.awt-snippet-copy' );
+			const status = root.querySelector( '[role="status"]' );
 			copyText( text ).then( () => {
-				const original =
-					btn.getAttribute( 'aria-label' ) || ctx.copyLabel;
-				btn.setAttribute( 'aria-label', ctx.copiedLabel );
 				btn.classList.add( 'cds--snippet-button--copied' );
-				setTimeout( () => {
-					btn.setAttribute( 'aria-label', original );
-					btn.classList.remove( 'cds--snippet-button--copied' );
-				}, 1500 );
+				tip?.classList.add( 'cds--popover--open' );
+				if ( status ) {
+					// Emptied first, so a second copy is announced again.
+					status.textContent = '';
+					requestAnimationFrame( () => {
+						status.textContent = copiedLabel;
+					} );
+				}
+				clearTimeout( timers.get( btn ) );
+				timers.set(
+					btn,
+					setTimeout( () => {
+						btn.classList.remove( 'cds--snippet-button--copied' );
+						tip?.classList.remove( 'cds--popover--open' );
+						if ( status ) {
+							status.textContent = '';
+						}
+					}, 2000 )
+				);
 			} );
 		},
 	},

@@ -4,7 +4,9 @@
 	"name": "awt/code-snippet",
 	"carbonStyles": [
 		"code-snippet",
-		"copy-button"
+		"copy-button",
+		"tooltip",
+		"popover"
 	],
 	"awt_component": "code-snippet",
 	"title": "Code snippet",

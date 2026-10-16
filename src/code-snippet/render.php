@@ -60,14 +60,28 @@ $wrapper_attrs = get_block_wrapper_attributes(
 
 $code_attrs = $language !== '' ? sprintf( ' data-language="%s"', esc_attr( $language ) ) : '';
 
+// The copy button sits in Carbon's tooltip, which opens with the "Copied"
+// text for two seconds after a copy, and a status message says the same to
+// screen readers. Before, a copy only swapped the button's own name, which
+// most screen readers do not announce on the button you are on, and showed no
+// text (reported by the outside accessibility review, 2026-10-15). Carbon
+// shows the tooltip but renames the button; here the name stays "Copy". The
+// tooltip opens to the left of a block snippet's button, inside the snippet,
+// and below an inline one's.
+$copy_with_tip = static function ( string $button_class, string $align ) use ( $copy_label, $copied_label ): string {
+	return sprintf(
+		'<span class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--%1$s cds--tooltip cds--icon-tooltip awt-snippet-copy"><button type="button" class="%2$s" aria-label="%3$s" data-wp-on--click="actions.copy">%4$s</button><span class="cds--popover" aria-hidden="true"><span class="cds--popover-content cds--tooltip-content">%5$s</span><span class="cds--popover-caret"></span></span></span><span class="cds--visually-hidden" role="status"></span>',
+		esc_attr( $align ),
+		esc_attr( $button_class ),
+		esc_attr( $copy_label ),
+		icon( 'copy', 16 ),
+		esc_html( $copied_label )
+	);
+};
+
 $copy_btn = '';
 if ( ! $is_inline && ! $hide_copy_btn ) {
-	$copy_btn = sprintf(
-		'<button type="button" class="%1$s" aria-label="%2$s" data-wp-on--click="actions.copy">%3$s</button>',
-		esc_attr( $copy_btn_class ),
-		esc_attr( $copy_label ),
-		icon( 'copy', 16 )
-	);
+	$copy_btn = $copy_with_tip( $copy_btn_class, 'left' );
 }
 
 if ( $is_inline ) {
@@ -76,12 +90,7 @@ if ( $is_inline ) {
 		$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 		$code_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built with esc_attr() above.
 		esc_html( $code ),
-		$hide_copy_btn ? '' : sprintf(
-			' <button type="button" class="%1$s" aria-label="%2$s" data-wp-on--click="actions.copy">%3$s</button>',
-			esc_attr( $copy_btn_inline_class ),
-			esc_attr( $copy_label ),
-			icon( 'copy', 16 ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- icon() returns vetted plugin-bundled SVG markup.
-		)
+		$hide_copy_btn ? '' : ' ' . $copy_with_tip( $copy_btn_inline_class, 'bottom' ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above with every dynamic part escaped; icon() returns vetted plugin-bundled SVG markup.
 	);
 	return;
 }
