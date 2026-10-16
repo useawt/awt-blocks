@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.10\n"
+"Project-Id-Version: AWT Blocks 2026.10.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-15T07:41:49+00:00\n"
+"POT-Creation-Date: 2026-10-16T13:38:43+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -100,6 +100,11 @@ msgstr ""
 msgid "Copied"
 msgstr ""
 
+#: src/code-snippet/render.php:47
+#: src/code-snippet/edit.js:87
+msgid "Code snippet"
+msgstr ""
+
 #: src/color-scheme-toggle/render.php:38
 #: src/contrast-preview.js:167
 msgid "Light mode"
@@ -139,17 +144,27 @@ msgstr ""
 msgid "View switcher"
 msgstr ""
 
-#. translators: %s: column header text
-#: src/data-table/render.php:166
+#. translators: %s: the column's label, for example "Name".
+#: src/data-table/render.php:105
 #, php-format
-msgid "Sort by %s"
+msgid "Table sorted by %s ascending."
 msgstr ""
 
-#: src/data-table/render.php:216
+#. translators: %s: the column's label, for example "Name".
+#: src/data-table/render.php:107
+#, php-format
+msgid "Table sorted by %s descending."
+msgstr ""
+
+#: src/data-table/render.php:108
+msgid "Table sort cleared. Rows restored to original order."
+msgstr ""
+
+#: src/data-table/render.php:233
 msgid "Included"
 msgstr ""
 
-#: src/data-table/render.php:216
+#: src/data-table/render.php:233
 msgid "Not included"
 msgstr ""
 
@@ -168,7 +183,7 @@ msgstr ""
 #: src/button/edit.js:185
 #: src/icon/edit.js:25
 #: src/link/edit.js:76
-#: src/tag/edit.js:103
+#: src/tag/edit.js:107
 msgid "Link"
 msgstr ""
 
@@ -357,13 +372,15 @@ msgid "Scroll tabs right"
 msgstr ""
 
 #: src/tag/render.php:20
-#: src/tag/edit.js:67
+#: src/tag/edit.js:71
 msgid "Tag"
 msgstr ""
 
-#: src/tag/render.php:84
-#: src/tag/edit.js:149
-msgid "Dismiss"
+#. translators: %s: the tag's label, for example "Region: us-east".
+#: src/tag/render.php:96
+#: src/tag/edit.js:157
+#, php-format,js-format
+msgid "Dismiss %s"
 msgstr ""
 
 #: src/testimonial/render.php:133
@@ -582,7 +599,7 @@ msgstr ""
 #: src/modal/edit.js:84
 #: src/password-input/edit.js:61
 #: src/select/edit.js:55
-#: src/tag/edit.js:78
+#: src/tag/edit.js:82
 #: src/text-input/edit.js:169
 #: src/toggle/edit.js:64
 msgid "Size"
@@ -668,14 +685,14 @@ msgstr ""
 #: src/button/edit.js:205
 #: src/link/edit.js:117
 #: src/modal/edit.js:133
-#: src/tag/edit.js:115
+#: src/tag/edit.js:119
 msgid "Target"
 msgstr ""
 
 #: src/button/edit.js:212
 #: src/link/edit.js:123
 #: src/modal/edit.js:142
-#: src/tag/edit.js:122
+#: src/tag/edit.js:126
 #: src/testimonial/edit.js:244
 msgid "Link relationship"
 msgstr ""
@@ -683,7 +700,7 @@ msgstr ""
 #: src/button/edit.js:215
 #: src/link/edit.js:126
 #: src/modal/edit.js:145
-#: src/tag/edit.js:125
+#: src/tag/edit.js:129
 #: src/testimonial/edit.js:247
 msgid "Optional. Sets the rel attribute. New-tab links already get “noopener noreferrer”."
 msgstr ""
@@ -804,10 +821,6 @@ msgstr ""
 #: src/text-area/edit.js:135
 #: src/text-input/edit.js:249
 msgid "Invalid message"
-msgstr ""
-
-#: src/code-snippet/edit.js:87
-msgid "Code snippet"
 msgstr ""
 
 #: src/code-snippet/edit.js:91
@@ -1575,7 +1588,7 @@ msgid "Search by name, then pick an icon."
 msgstr ""
 
 #: src/icon/edit.js:77
-#: src/tag/edit.js:69
+#: src/tag/edit.js:73
 msgid "Color"
 msgstr ""
 
@@ -2381,20 +2394,24 @@ msgstr ""
 msgid "Tab label"
 msgstr ""
 
-#: src/tag/edit.js:88
+#: src/tag/edit.js:92
 msgid "Filter (dismissible)"
 msgstr ""
 
-#: src/tag/edit.js:91
+#: src/tag/edit.js:95
 msgid "Not available when the tag is a link."
 msgstr ""
 
-#: src/tag/edit.js:107
+#: src/tag/edit.js:111
 msgid "URL (makes the tag a link)"
 msgstr ""
 
-#: src/tag/edit.js:139
+#: src/tag/edit.js:143
 msgid "Tag label"
+msgstr ""
+
+#: src/tag/edit.js:160
+msgid "Dismiss"
 msgstr ""
 
 #: src/testimonial/edit.js:90

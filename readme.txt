@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.10
+Stable tag: 2026.10.11
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-15
+- Last reviewed: 2026-10-16
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -330,6 +330,13 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.11 (2026-10-16) =
+* [A11y] In Tag block with Filter on, the dismiss button removes the tag and moves focus to the next control, and screen readers hear which tag it removes.
+* [A11y] In sortable Data table blocks, screen readers name each column by its label alone, such as "Name", not "Sort by Name" and the sort instructions.
+* [A11y] In sortable Data table blocks, the sort announcements are translated, and with more than one table on a page, only the table you sorted announces it.
+* [A11y] In Code snippet block, a snippet is a stop for the Tab key only while its code is too wide or too long to show, and screen readers then hear it as a region named "Code snippet".
+* [A11y] In Code snippet block, Copy shows a "Copied" tooltip beside the button for two seconds, and screen readers announce it. The button keeps its name.
+
 = 2026.10.10 (2026-10-15) =
 * [A11y] In Notification block, screen readers read its type, such as "Warning:", before its title.
 * [A11y] In Safari, lists in the List, Accordion, Breadcrumb, Pagination, Side navigation and footer blocks are announced as lists, with their number of items.
@@ -375,7 +382,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.10.2 (2026-10-07) =
 * [New] Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
-
-= 2026.10.1 (2026-10-05) =
-* [Improvement] When a visitor picks an option in the Dropdown block, it now fires a `change` event on its form field and an `awt:dropdown-change` event with the option's value and label.
 <!-- CHANGELOG_END -->
