@@ -165,13 +165,22 @@ if ( $variant === 'selectable' ) {
 		return;
 	}
 
+	// An independent tile is Carbon's SelectableTile, which shows a checkbox:
+	// an empty square until selected, then a filled, checked one (view.js swaps
+	// them, as Carbon's React re-render does). It used to show the radio
+	// tile's filled checkmark in both states, so an unselected tile looked
+	// selected (outside accessibility review, 2026-10-20).
+	$checkbox_svg = '<svg focusable="false" preserveAspectRatio="xMidYMid meet" fill="currentColor" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'
+		. '<path d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z"/>'
+		. '</svg>';
+
 	$context_json = wp_json_encode( array( 'role' => 'checkbox' ) );
 	printf(
 		'<div %1$s role="checkbox" aria-checked="false" tabindex="0" data-wp-interactive="awt/tile" data-wp-context=\'%2$s\' data-wp-on--click="actions.toggle" data-wp-on--keydown="actions.keydown"><span class="%3$s" aria-hidden="true">%4$s</span><span class="%5$s">%6$s</span></div>',
 		$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
 		esc_attr( $context_json ),
 		esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'checkmark-persistent' ) ) : 'cds--tile__checkmark cds--tile__checkmark--persistent' ),
-		$checkmark_svg, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG.
+		$checkbox_svg, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG.
 		esc_attr( $ds ? $ds->classes_for( 'tile', array( 'element' => 'selectable-content' ) ) : 'cds--tile-content' ),
 		$content // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
 	);

@@ -248,10 +248,12 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 		);
 	}
 
-	// A selectable tile previews with the checkmark the server renders, so the
+	// A selectable tile previews with the icon the server renders, so the
 	// canvas shows the control the visitor will meet. `aria-hidden` matches the
-	// server: the checkmark is decoration, and the state is already carried by
-	// the radio or by aria-checked.
+	// server: the icon is decoration, and the state is already carried by the
+	// radio or by aria-checked. A grouped (radio) tile has Carbon's filled
+	// checkmark; an independent one has Carbon's empty checkbox, as it starts
+	// unselected.
 	const Checkmark = ( { persistent } ) => (
 		<span
 			className={ `cds--tile__checkmark${
@@ -259,16 +261,29 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			}` }
 			aria-hidden="true"
 		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 16 16"
-				width="16"
-				height="16"
-				fill="currentColor"
-				focusable="false"
-			>
-				<path d="M8,1C4.1,1,1,4.1,1,8c0,3.9,3.1,7,7,7s7-3.1,7-7C15,4.1,11.9,1,8,1z M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z" />
-			</svg>
+			{ persistent ? (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 32 32"
+					width="16"
+					height="16"
+					fill="currentColor"
+					focusable="false"
+				>
+					<path d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z" />
+				</svg>
+			) : (
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 16 16"
+					width="16"
+					height="16"
+					fill="currentColor"
+					focusable="false"
+				>
+					<path d="M8,1C4.1,1,1,4.1,1,8c0,3.9,3.1,7,7,7s7-3.1,7-7C15,4.1,11.9,1,8,1z M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z" />
+				</svg>
+			) }
 		</span>
 	);
 
