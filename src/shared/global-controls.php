@@ -348,7 +348,7 @@ const NAME_TARGETS = array(
 	'awt/dropdown'               => array( 'name' => array( array( 'role' => 'combobox' ) ) ),
 	'awt/toggle'                 => array( 'name' => array( array( 'role' => 'switch' ) ) ),
 	'awt/menu-button'            => array( 'name' => array( array( 'tag' => 'BUTTON' ) ) ),
-	'awt/tooltip'                => array( 'name' => array( array( 'attr' => 'tabindex' ) ) ),
+	'awt/tooltip'                => array( 'name' => array( array( 'tag' => 'BUTTON' ) ) ),
 	'awt/toggletip'              => array( 'name' => array( array( 'tag' => 'BUTTON' ) ) ),
 	'awt/modal'                  => array( 'name' => array( array( 'role' => 'dialog' ) ) ),
 	'awt/code-snippet'           => array(

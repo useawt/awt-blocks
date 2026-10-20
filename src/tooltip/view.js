@@ -3,6 +3,8 @@
  *
  * Hover: show after enterDelayMs, hide after leaveDelayMs.
  * Focus: show immediately, hide on blur immediately.
+ * Tap, Enter or Space: toggle. A mouse click only keeps it open, since hover
+ * has already shown it.
  * Escape: hide when focused.
  *
  * Positioning runs through the shared floating-ui helper so the tooltip flips
@@ -38,12 +40,25 @@ function resolvePlacement( triggerEl ) {
 	return 'top';
 }
 
+function isOpen( triggerEl ) {
+	const tooltipEl = resolveTooltipEl( triggerEl );
+	return !! tooltipEl && ! tooltipEl.hidden;
+}
+
+function clearTimers( ctx ) {
+	clearTimeout( ctx._showTimer );
+	clearTimeout( ctx._hideTimer );
+	ctx._showTimer = null;
+	ctx._hideTimer = null;
+}
+
 function open( triggerEl ) {
 	const tooltipEl = resolveTooltipEl( triggerEl );
 	if ( ! tooltipEl ) {
 		return;
 	}
 	tooltipEl.removeAttribute( 'hidden' );
+	triggerEl.setAttribute( 'aria-expanded', 'true' );
 	if ( handles.has( triggerEl ) ) {
 		return;
 	}
@@ -59,6 +74,7 @@ function close( triggerEl ) {
 	if ( tooltipEl ) {
 		tooltipEl.setAttribute( 'hidden', '' );
 	}
+	triggerEl.setAttribute( 'aria-expanded', 'false' );
 	const handle = handles.get( triggerEl );
 	if ( handle ) {
 		handle.dispose();
@@ -124,6 +140,33 @@ store( 'awt/tooltip', {
 		keydown( event ) {
 			if ( event.key === 'Escape' ) {
 				close( getElement().ref );
+			}
+		},
+		// A tap or click can focus the button before its click arrives, and
+		// focus opens the tooltip, so the toggle reads the state from here.
+		press( event ) {
+			const ctx = getContext();
+			ctx._press = {
+				pointer: event.pointerType,
+				wasOpen: isOpen( getElement().ref ),
+			};
+		},
+		toggle( event ) {
+			const ctx = getContext();
+			const trigger = getElement().ref;
+			// Enter and Space click with no pointer press (detail 0).
+			const press = event.detail ? ctx._press : null;
+			ctx._press = null;
+			clearTimers( ctx );
+			if ( press?.pointer === 'mouse' ) {
+				open( trigger );
+				return;
+			}
+			const wasOpen = press ? press.wasOpen : isOpen( trigger );
+			if ( wasOpen ) {
+				close( trigger );
+			} else {
+				open( trigger );
 			}
 		},
 	},

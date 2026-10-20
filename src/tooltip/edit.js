@@ -85,7 +85,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 				<span className={ classes }>
 					<RichText
 						tagName="span"
-						className="cds--tooltip__trigger"
+						className="cds--definition-term"
 						value={ triggerText }
 						onChange={ ( v ) =>
 							setAttributes( { triggerText: v } )

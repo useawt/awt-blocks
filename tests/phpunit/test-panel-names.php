@@ -262,7 +262,7 @@ HTML;
 					'description' => 'D',
 				),
 				'',
-				'/^<span(?=[^>]*\stabindex="0")(?=[^>]*\srole="group")/',
+				'/^<button\b(?![^>]*\brole=)[^>]*\bcds--definition-term/',
 			),
 			'tab'                  => array( 'awt/tab', array( 'label' => 'T' ), '', '/^<button\b[^>]*\brole="tab"/' ),
 			'modal'                => array( 'awt/modal', array( 'heading' => 'H' ), $para, '/^<div\b[^>]*\brole="dialog"/' ),

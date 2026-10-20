@@ -9,7 +9,7 @@
 	"awt_component": "tooltip",
 	"title": "Tooltip",
 	"category": "awt-feedback",
-	"description": "A short hint that appears when visitors hover over or focus text, an icon or a button.",
+	"description": "A short hint on underlined text. It opens on hover, focus or tap.",
 	"textdomain": "awt-blocks",
 	"keywords": [
 		"tooltip",

@@ -473,6 +473,13 @@
 				"  none [ignored: uninteresting]",
 				"    button \"About storage limits\" expanded=false invalid=false",
 				"    generic"
+			],
+			"widgets/tooltip (closed)": [
+				"generic",
+				"  button \"Retention\" desc=\"Backups are kept for 30 days.\" expanded=false invalid=false",
+				"    StaticText \"Retention\"",
+				"  none [ignored: notRendered]",
+				"    none [ignored: notRendered]"
 			]
 		},
 		"dark": {
@@ -947,6 +954,13 @@
 				"  none [ignored: uninteresting]",
 				"    button \"About storage limits\" expanded=false invalid=false",
 				"    generic"
+			],
+			"widgets/tooltip (closed)": [
+				"generic",
+				"  button \"Retention\" desc=\"Backups are kept for 30 days.\" expanded=false invalid=false",
+				"    StaticText \"Retention\"",
+				"  none [ignored: notRendered]",
+				"    none [ignored: notRendered]"
 			]
 		}
 	}

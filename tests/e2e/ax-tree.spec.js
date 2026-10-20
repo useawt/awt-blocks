@@ -305,6 +305,15 @@ const PROBES = [
 		sel: '.wp-block-awt-toggletip',
 	},
 	{
+		// No probe covered the Tooltip, so when its trigger was a focusable
+		// span that screen readers read as plain text, every gate stayed green
+		// (outside accessibility review, 2026-10-20). Closed, so the hint
+		// reaches the button only as its description.
+		page: 'widgets',
+		key: 'tooltip (closed)',
+		sel: '.wp-block-awt-tooltip',
+	},
+	{
 		page: 'widgets',
 		key: 'tile (expandable, closed)',
 		sel: '.cds--tile--expandable',

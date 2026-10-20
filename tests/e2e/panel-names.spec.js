@@ -99,10 +99,10 @@ test( 'panel names reach the element a screen reader meets', async ( {
 	await expect(
 		page.getByRole( 'group', { name: 'Welcome', exact: true } )
 	).toBeVisible();
-	// The tooltip's trigger is the element that takes focus.
+	// The tooltip's trigger is the button that takes focus.
 	await expect(
-		page.getByRole( 'group', { name: 'Save help', exact: true } )
-	).toHaveAttribute( 'tabindex', '0' );
+		page.getByRole( 'button', { name: 'Save help', exact: true } )
+	).toHaveClass( 'cds--definition-term' );
 	await expect(
 		page.locator( '[aria-label="Ignored tag name"]' )
 	).toHaveCount( 0 );
