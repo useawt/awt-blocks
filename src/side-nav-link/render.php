@@ -20,7 +20,7 @@
 
 declare( strict_types = 1 );
 
-use function AWT\Blocks\CurrentUrl\matches_current;
+use function AWT\Blocks\CurrentUrl\current_state;
 use function AWT\Blocks\Render\icon;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -33,7 +33,7 @@ $icon_name  = isset( $attributes['iconName'] ) ? (string) $attributes['iconName'
 $is_current = ! empty( $attributes['isCurrent'] );
 $match_mode = isset( $attributes['matchMode'] ) ? (string) $attributes['matchMode'] : 'exact';
 
-$aria_current = ( $is_current || matches_current( $href, $match_mode ) ) ? 'page' : null;
+$aria_current = $is_current ? 'page' : current_state( $href, $match_mode );
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 

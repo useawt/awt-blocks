@@ -108,6 +108,8 @@ const ALLOWED = {
 			'The mobile menu toggle is render-only — the editor previews the desktop nav.',
 		'cds--header__menu-toggle__hidden':
 			'Mobile toggle state, render-only as above.',
+		'cds--header__menu-item--current':
+			'Set only when the page being shown sits beneath a section link (aria-current="true"). The editor shows no page, so it has no current state to draw, just as it never writes aria-current="page".',
 	},
 	modal: {
 		'cds--modal':

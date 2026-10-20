@@ -2,8 +2,9 @@
 /**
  * AWT Header nav item — server-rendered output.
  *
- * Computes aria-current="page" via the shared current-URL matcher
- * (spec §1 "Current-URL matching"). Explicit isCurrent attribute overrides.
+ * Computes aria-current via the shared current-URL matcher (spec §1
+ * "Current-URL matching"): "page" on the page itself, "true" on a section
+ * link the page sits beneath. Explicit isCurrent attribute overrides.
  *
  * @var array $attributes
  *
@@ -12,7 +13,7 @@
 
 declare( strict_types = 1 );
 
-use function AWT\Blocks\CurrentUrl\matches_current;
+use function AWT\Blocks\CurrentUrl\current_state;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -23,7 +24,7 @@ $href       = isset( $attributes['href'] ) ? (string) $attributes['href'] : '#';
 $is_current = ! empty( $attributes['isCurrent'] );
 $match_mode = isset( $attributes['matchMode'] ) ? (string) $attributes['matchMode'] : 'exact';
 
-$aria_current = ( $is_current || matches_current( $href, $match_mode ) ) ? 'page' : null;
+$aria_current = $is_current ? 'page' : current_state( $href, $match_mode );
 
 // Carbon's CSS expects the `header__menu-item` class on the anchor, NOT on
 // the list item. That class carries the 3rem block-size, the flex layout,
@@ -43,8 +44,18 @@ $current_attr = $aria_current ? sprintf( ' aria-current="%s"', esc_attr( $aria_c
 
 // §A: the <a> link class comes from the active design system (shares the
 // 'header-nav' component slug with awt/header-nav). Guarded for non-AWT themes.
-$ds         = function_exists( '\\AWT\\Theme\\DesignSystem\\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
-$link_class = $ds ? $ds->classes_for( 'header-nav', array( 'element' => 'menu-item' ) ) : 'cds--header__menu-item';
+$ds = function_exists( '\\AWT\\Theme\\DesignSystem\\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
+
+// A section link (aria-current="true") gets Carbon's current-item class, which
+// draws the same underline as aria-current="page".
+$is_active  = 'true' === $aria_current;
+$link_class = $ds ? $ds->classes_for(
+	'header-nav',
+	array(
+		'element'  => 'menu-item',
+		'isActive' => $is_active,
+	)
+) : 'cds--header__menu-item' . ( $is_active ? ' cds--header__menu-item--current' : '' );
 
 printf(
 	'<li %1$s><a class="%2$s" href="%3$s"%4$s>%5$s</a></li>',

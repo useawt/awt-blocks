@@ -1,6 +1,6 @@
 <?php
 /**
- * Current-URL matching for aria-current="page" on navigation blocks.
+ * Current-URL matching for aria-current on navigation blocks.
  *
  * Implements the contract from phase-1 spec §1 "Current-URL matching":
  *   - Normalizes both sides (strip protocol+host when same-origin, trailing
@@ -8,6 +8,14 @@
  *   - Exact match by default; `prefix` opts a nav item into "highlight on any
  *     descendant route."
  *   - Pure server-side; runs in render callbacks.
+ *
+ * A link to the page being shown is `aria-current="page"`. A section link in
+ * prefix mode, on a page beneath it, is `aria-current="true"`: the reader is
+ * in that section, not on its page. Search results and 404 pages mark nothing.
+ * Home matches only the front page, and a link with a query string matches
+ * only a request carrying the same values: the query is otherwise ignored, so
+ * `/?s=library` and, with plain permalinks, every `/?page_id=` used to count
+ * as Home (outside accessibility review, 2026-10-20).
  *
  * @package AWT\Blocks
  */
@@ -85,52 +93,108 @@ function current_path(): string {
 }
 
 /**
- * Decide whether an href matches the current request URL.
+ * Whether the current request carries every query value an href names.
+ *
+ * An href with no query string asks for nothing, so it always passes.
+ *
+ * @param string $href Block's href attribute.
+ * @return bool
+ */
+function query_matches( string $href ): bool {
+	$wanted_query = (string) wp_parse_url( $href, PHP_URL_QUERY );
+	if ( $wanted_query === '' ) {
+		return true;
+	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+	wp_parse_str( $wanted_query, $wanted );
+	wp_parse_str( (string) wp_parse_url( $request_uri, PHP_URL_QUERY ), $have );
+
+	foreach ( $wanted as $key => $value ) {
+		if ( ! isset( $have[ $key ] ) || ! is_scalar( $value ) || ! is_scalar( $have[ $key ] ) || (string) $have[ $key ] !== (string) $value ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+/**
+ * How an href relates to the page being shown.
  *
  * Placeholder hrefs ('#', '', '#anchor') never match — they're not navigation.
  *
- * @param string $href      Block's href attribute.
- * @param string $mode      'exact' or 'prefix'.
- * @return bool
+ * @param string $href Block's href attribute.
+ * @param string $mode 'exact' or 'prefix'.
+ * @return string|null 'page' for the page being shown, 'true' for a prefix
+ *                     link the page sits beneath, null otherwise.
  */
-function matches_current( string $href, string $mode = 'exact' ): bool {
+function current_state( string $href, string $mode = 'exact' ): ?string {
 	if ( $href === '' || $href === '#' || str_starts_with( $href, '#' ) ) {
-		return false;
+		return null;
+	}
+
+	// No menu item is a search result or a missing page.
+	if ( is_search() || is_404() ) {
+		return null;
 	}
 
 	$current = current_path();
 	if ( $current === '' ) {
-		return false;
+		return null;
 	}
 
 	$target = normalize( $href );
 
 	// Same string returned by normalize() means the URL was external — skip.
 	if ( $target === $href && ( str_contains( $href, '://' ) ) ) {
-		return false;
+		return null;
 	}
 
-	if ( $mode === 'prefix' ) {
-		if ( $target === '' || $target === '/' ) {
-			return $current === '/';
-		}
-		return $current === $target || str_starts_with( $current, $target . '/' );
-	}
-
-	// Exact match mode.
 	if ( $target === '' ) {
-		return $current === '/';
+		$target = '/';
 	}
-	return $current === $target;
+
+	if ( ! query_matches( $href ) ) {
+		return null;
+	}
+
+	if ( $target === '/' ) {
+		// The request path of every view on a plain-permalink site is "/",
+		// so Home needs the front page itself, unless the href names a query.
+		$has_query = (string) wp_parse_url( $href, PHP_URL_QUERY ) !== '';
+		return ( $current === '/' && ( $has_query || is_front_page() ) ) ? 'page' : null;
+	}
+
+	if ( $current === $target ) {
+		return 'page';
+	}
+
+	if ( $mode === 'prefix' && str_starts_with( $current, $target . '/' ) ) {
+		return 'true';
+	}
+
+	return null;
+}
+
+/**
+ * Decide whether an href matches the current request URL: the page itself,
+ * or in prefix mode a page beneath it.
+ *
+ * @param string $href      Block's href attribute.
+ * @param string $mode      'exact' or 'prefix'.
+ * @return bool
+ */
+function matches_current( string $href, string $mode = 'exact' ): bool {
+	return current_state( $href, $mode ) !== null;
 }
 
 /**
  * Keep one aria-current="page" in a navigation, the most specific one.
  *
- * A parent item set to match on prefix stays highlighted while the reader is
- * on any page beneath it, which is what makes a section readable at a glance.
- * On the child's own page both then claim `aria-current="page"`, and a screen
- * reader announces two current pages in one menu — there is only ever one.
+ * A parent item set to match on prefix now says `aria-current="true"` on the
+ * pages beneath it (current_state()). Two items can still both claim the page
+ * when one is marked "Always mark as the current page", and a screen reader
+ * then announces two current pages in one menu — there is only ever one.
  *
  * Only an ancestor loses the attribute: an item whose path another current
  * item sits beneath. Two current items that are not related that way are left
