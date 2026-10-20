@@ -6,6 +6,11 @@
  * content panel. The view-side Interactivity store handles toggle + sibling
  * coordination (singleOpen context from the parent accordion).
  *
+ * The button sits in a heading (h3 unless the section's Heading level says
+ * otherwise), as the FAQ question's does, so the section titles are in a
+ * screen reader's list of headings. Carbon's accordion has no heading; the
+ * titles were buttons only (outside accessibility review, 2026-10-20).
+ *
  * @var array  $attributes
  * @var string $content
  *
@@ -25,6 +30,13 @@ $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\Desig
 $accordion_title  = isset( $attributes['title'] ) ? (string) $attributes['title'] : __( 'Section', 'awt-blocks' );
 $default_expanded = ! empty( $attributes['defaultExpanded'] );
 $disabled         = ! empty( $attributes['disabled'] );
+$level            = isset( $attributes['level'] ) ? (string) $attributes['level'] : '3';
+
+// Constrain level to 2..6.
+if ( ! in_array( $level, array( '2', '3', '4', '5', '6' ), true ) ) {
+	$level = '3';
+}
+$heading_tag = 'h' . $level;
 
 $panel_id  = unique_id( 'awt-accordion-panel' );
 $button_id = unique_id( 'awt-accordion-button' );
@@ -64,11 +76,13 @@ $arrow_svg = '<svg class="' . esc_attr( $arrow_class ) . '" xmlns="http://www.w3
 
 printf(
 	'<li %1$s>'
+	. '<%13$s class="awt-accordion-item__heading" style="margin:0;">'
 	. '<button id="%2$s" type="button" class="%10$s" aria-expanded="%3$s" aria-controls="%4$s"%5$s'
 	. ' data-wp-interactive="awt/accordion-item" data-wp-on--click="actions.toggle">'
 	. '%6$s'
 	. '<span class="%11$s">%7$s</span>'
 	. '</button>'
+	. '</%13$s>'
 	. '<div id="%4$s" class="%12$s" role="region" aria-labelledby="%2$s"%8$s>%9$s</div>'
 	. '</li>',
 	$wrapper_attrs, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core.
@@ -82,5 +96,6 @@ printf(
 	$content, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render.
 	esc_attr( $heading_class ),
 	esc_attr( $title_class ),
-	esc_attr( $content_class )
+	esc_attr( $content_class ),
+	tag_escape( $heading_tag )
 );

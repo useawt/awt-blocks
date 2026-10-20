@@ -38,6 +38,10 @@
 		"disabled": {
 			"type": "boolean",
 			"default": false
+		},
+		"level": {
+			"type": "string",
+			"default": "3"
 		}
 	},
 	"editorScript": "file:./index.js",
