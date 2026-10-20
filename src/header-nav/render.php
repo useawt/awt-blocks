@@ -126,7 +126,7 @@ printf(
 		. ' data-wp-class--awt-nav-open="state.navOpen" data-wp-on--click="actions.closeNav"></div>'
 		. '<nav id="%3$s" class="%4$s" aria-label="%5$s"'
 		. ' data-wp-class--awt-nav-open="state.navOpen" data-wp-watch="callbacks.focusManage"'
-		. ' data-wp-on--keydown="actions.onMenuKey">'
+		. ' data-wp-on--keydown="actions.onMenuKey" data-wp-on--focusout="actions.onMenuFocusOut">'
 			// `role="list"`: the list has no markers, and Safari stops treating
 			// a list with no markers as a list, so VoiceOver gave no count and
 			// no end of list (reported by the outside accessibility review on

@@ -151,26 +151,6 @@ const menuItems = ( nav ) =>
 const triggerOf = ( el ) =>
 	el?.closest( '.cds--header' )?.querySelector( '.awt-header-nav__trigger' );
 
-// Move focus to the first focusable element in the main content (or the main
-// landmark itself). Used when Tab leaves the bottom of the open menu.
-const focusMain = ( doc ) => {
-	const main = doc.querySelector(
-		'main, [role="main"], #main-content, .cds--content'
-	);
-	if ( ! main ) {
-		return;
-	}
-	const first = [ ...main.querySelectorAll( FOCUSABLE ) ].find( isVisible );
-	if ( first ) {
-		first.focus();
-		return;
-	}
-	if ( ! main.hasAttribute( 'tabindex' ) ) {
-		main.setAttribute( 'tabindex', '-1' );
-	}
-	main.focus();
-};
-
 const { state } = store( 'awt/header-nav', {
 	state: {
 		navOpen: false,
@@ -228,17 +208,27 @@ const { state } = store( 'awt/header-nav', {
 				// Shift+Tab off the first item → back to the trigger.
 				event.preventDefault();
 				triggerOf( nav )?.focus();
-			} else if (
-				! event.shiftKey &&
-				active === items[ items.length - 1 ]
-			) {
-				// Tab off the last item → close the menu and move focus to the
-				// first focusable element in the main content (Carbon behavior).
-				event.preventDefault();
-				const doc = nav.ownerDocument;
-				state.navOpen = false;
-				focusMain( doc );
 			}
+			// Tab off the last item is left to the browser: focus goes on in
+			// page order, to the header controls after the menu, and
+			// onMenuFocusOut closes the menu. It used to close the menu and
+			// jump to the main content, skipping the color scheme button and
+			// the breadcrumb (outside accessibility review, 2026-10-20).
+		} ),
+		// Close the open drawer once focus has moved to something outside it.
+		// Not for the trigger (Shift+Tab off the first item goes there and the
+		// menu stays open), and not when nothing takes focus: a press on a
+		// link in Safari, or a click on the page, which the backdrop handles.
+		onMenuFocusOut: withSyncEvent( ( event ) => {
+			if ( ! state.navOpen ) {
+				return;
+			}
+			const nav = getElement().ref;
+			const next = event.relatedTarget;
+			if ( ! next || nav.contains( next ) || next === triggerOf( nav ) ) {
+				return;
+			}
+			state.navOpen = false;
 		} ),
 
 		toggleSubmenu: withSyncEvent( ( event ) => {
