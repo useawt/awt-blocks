@@ -77,10 +77,17 @@ test.describe( 'Mobile menu Tab order', () => {
 			).trim();
 		} );
 
+		// The header script has run once it has collapsed the menu; a key
+		// pressed before that does nothing (CI's WebKit, 2026-10-20).
+		await page.waitForFunction( () =>
+			document.documentElement.classList.contains(
+				'awt-header-collapsed'
+			)
+		);
 		// Opened from the keyboard: Safari does not focus a clicked button.
 		await page.locator( '.awt-header-nav__trigger' ).focus();
 		await page.keyboard.press( 'Enter' );
-		expect( await menuOpen( page ) ).toBe( true );
+		await expect.poll( () => menuOpen( page ) ).toBe( true );
 		await page.keyboard.press( tab );
 		const first = await describe( page );
 		expect( first.inMenu ).toBe( true );
