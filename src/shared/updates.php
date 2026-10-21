@@ -660,6 +660,40 @@ function author_opens_new_tab( $meta, $file ) {
 }
 
 /**
+ * Turn one changelog entry into safe HTML.
+ *
+ * The changelog is written in a little Markdown: bold, code spans and links.
+ * Escape first, then turn those into markup, or people are shown literal
+ * asterisks and a link as its address in angle brackets (2026.10.12, found by
+ * the owner). The theme's What's new panel does the same; this copy is here
+ * because the plugin must work without the theme.
+ *
+ * Links: `[text](https://…)` shows the text, `<https://…>` the address. Only
+ * http and https addresses become links.
+ *
+ * @param string $text Entry text as written in the changelog.
+ * @return string Escaped HTML.
+ */
+function format_entry_text( string $text ): string {
+	$out  = esc_html( $text );
+	$out  = (string) preg_replace( '/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $out );
+	$out  = (string) preg_replace( '/`([^`]+)`/', '<code>$1</code>', $out );
+	$link = static function ( string $address, string $label ): string {
+		return '<a href="' . esc_url( wp_specialchars_decode( $address, ENT_QUOTES ) ) . '">' . $label . '</a>';
+	};
+	$out  = (string) preg_replace_callback(
+		'/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/',
+		static fn( array $m ): string => $link( $m[2], $m[1] ),
+		$out
+	);
+	return (string) preg_replace_callback(
+		'/&lt;(https?:\/\/\S+?)&gt;/',
+		static fn( array $m ): string => $link( $m[1], $m[1] ),
+		$out
+	);
+}
+
+/**
  * The bundled changelog as HTML for the details window.
  */
 function changelog_html(): string {
@@ -685,13 +719,7 @@ function changelog_html(): string {
 			if ( ! empty( $entry['severity'] ) ) {
 				$html .= '<strong>[' . esc_html( (string) $entry['severity'] ) . ']</strong> ';
 			}
-			// The changelog is written in a little Markdown — bold and code
-			// spans. Escape first, then turn those two into markup, or people
-			// are shown literal asterisks.
-			$out   = esc_html( $text );
-			$out   = (string) preg_replace( '/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $out );
-			$out   = (string) preg_replace( '/`([^`]+)`/', '<code>$1</code>', $out );
-			$html .= $out . '</li>';
+			$html .= format_entry_text( $text ) . '</li>';
 		}
 		$html .= '</ul>';
 	}
