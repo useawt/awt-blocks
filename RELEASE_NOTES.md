@@ -1,9 +1,8 @@
-## 2026.10.11 (2026-10-16)
+## 2026.10.12 (2026-10-21)
 
 ### [A11y]
 
-- In Tag block with Filter on, the dismiss button removes the tag and moves focus to the next control, and screen readers hear which tag it removes.
-- In sortable Data table blocks, screen readers name each column by its label alone, such as "Name", not "Sort by Name" and the sort instructions.
-- In sortable Data table blocks, the sort announcements are translated, and with more than one table on a page, only the table you sorted announces it.
-- In Code snippet block, a snippet is a stop for the Tab key only while its code is too wide or too long to show, and screen readers then hear it as a region named "Code snippet".
-- In Code snippet block, Copy shows a "Copied" tooltip beside the button for two seconds, and screen readers announce it. The button keeps its name.
+- Various accessibility improvements. Details: <https://useawt.com/accessibility/>
+- In Accordion block, each section title is a heading: Heading 3 unless you choose another level.
+- In Tooltip block, the trigger text has a dotted underline.
+- In selectable Tile blocks outside a group, the icon is an empty box until the tile is selected.

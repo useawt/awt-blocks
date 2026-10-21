@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.11
+Stable tag: 2026.10.12
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-16
+- Last reviewed: 2026-10-21
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -330,6 +330,12 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.12 (2026-10-21) =
+* [A11y] Various accessibility improvements. Details: <https://useawt.com/accessibility/>
+* [A11y] In Accordion block, each section title is a heading: Heading 3 unless you choose another level.
+* [A11y] In Tooltip block, the trigger text has a dotted underline.
+* [A11y] In selectable Tile blocks outside a group, the icon is an empty box until the tile is selected.
+
 = 2026.10.11 (2026-10-16) =
 * [A11y] In Tag block with Filter on, the dismiss button removes the tag and moves focus to the next control, and screen readers hear which tag it removes.
 * [A11y] In sortable Data table blocks, screen readers name each column by its label alone, such as "Name", not "Sort by Name" and the sort instructions.
@@ -379,7 +385,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.10.3 (2026-10-08) =
 * [Improvement] The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
-
-= 2026.10.2 (2026-10-07) =
-* [New] Data table: type straight into the table's cells. The block toolbar adds and removes rows and columns, and imports data you paste: CSV (commas, semicolons or tabs, so a spreadsheet copy works), an HTML table, a Markdown table, or rows separated by |. This replaces the Headers and Rows boxes in the sidebar.
 <!-- CHANGELOG_END -->

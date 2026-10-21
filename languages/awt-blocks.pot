@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.10.11\n"
+"Project-Id-Version: AWT Blocks 2026.10.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-16T13:38:43+00:00\n"
+"POT-Creation-Date: 2026-10-21T12:01:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -67,12 +67,12 @@ msgstr ""
 msgid "AWT: Sections"
 msgstr ""
 
-#: src/accordion-item/render.php:25
+#: src/accordion-item/render.php:30
 msgid "Section"
 msgstr ""
 
 #: src/breadcrumb-item/render.php:16
-#: src/header-nav-item/render.php:21
+#: src/header-nav-item/render.php:22
 #: src/breadcrumb-item/edit.js:43
 msgid "Item"
 msgstr ""
@@ -101,7 +101,7 @@ msgid "Copied"
 msgstr ""
 
 #: src/code-snippet/render.php:47
-#: src/code-snippet/edit.js:87
+#: src/code-snippet/edit.js:101
 msgid "Code snippet"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgstr ""
 msgid "Segment"
 msgstr ""
 
-#: src/content-switcher/render.php:26
+#: src/content-switcher/render.php:34
 msgid "View switcher"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgid "Close"
 msgstr ""
 
 #: src/notification/render.php:22
-#: src/notification/edit.js:107
+#: src/notification/edit.js:120
 msgid "Notification"
 msgstr ""
 
@@ -260,9 +260,16 @@ msgstr ""
 msgid "Error:"
 msgstr ""
 
-#: src/notification/render.php:104
-#: src/notification/edit.js:212
+#: src/notification/render.php:111
+#: src/notification/edit.js:87
 msgid "Close notification"
+msgstr ""
+
+#. translators: %s: the notification's title, for example "Connection lost".
+#: src/notification/render.php:113
+#: src/notification/edit.js:84
+#, php-format,js-format
+msgid "Close notification: %s"
 msgstr ""
 
 #: src/pagination/render.php:27
@@ -390,7 +397,7 @@ msgstr ""
 
 #: src/text-area/render.php:33
 #: src/form/edit.js:108
-#: src/toggletip/edit.js:63
+#: src/toggletip/edit.js:79
 #: src/tooltip/edit.js:42
 msgid "Description"
 msgstr ""
@@ -422,8 +429,16 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: src/toggletip/render.php:29
+#: src/toggletip/render.php:46
+#: src/toggletip/edit.js:38
 msgid "More information"
+msgstr ""
+
+#. translators: %s: the toggletip's label, for example "Storage limits".
+#: src/toggletip/render.php:48
+#: src/toggletip/edit.js:35
+#, php-format,js-format
+msgid "More information: %s"
 msgstr ""
 
 #: src/accessibility-panel.js:38
@@ -534,18 +549,55 @@ msgstr ""
 msgid "Only roles that suit this block’s element are listed."
 msgstr ""
 
-#: src/accordion-item/edit.js:31
+#: src/accordion-item/edit.js:32
 msgid "Accordion item"
 msgstr ""
 
-#: src/accordion-item/edit.js:33
+#: src/accordion-item/edit.js:34
+msgid "Title heading level"
+msgstr ""
+
+#: src/accordion-item/edit.js:35
+msgid "The heading level for the section title."
+msgstr ""
+
+#: src/accordion-item/edit.js:43
+#: src/faq-item/edit.js:50
+#: src/stat/edit.js:40
+msgid "Heading 2"
+msgstr ""
+
+#: src/accordion-item/edit.js:47
+#: src/faq-item/edit.js:54
+msgid "Heading 3 (default)"
+msgstr ""
+
+#: src/accordion-item/edit.js:54
+#: src/faq-item/edit.js:61
+#: src/stat/edit.js:48
+msgid "Heading 4"
+msgstr ""
+
+#: src/accordion-item/edit.js:58
+#: src/faq-item/edit.js:65
+#: src/stat/edit.js:52
+msgid "Heading 5"
+msgstr ""
+
+#: src/accordion-item/edit.js:62
+#: src/faq-item/edit.js:69
+#: src/stat/edit.js:56
+msgid "Heading 6"
+msgstr ""
+
+#: src/accordion-item/edit.js:68
 #: src/faq-item/edit.js:75
 #: src/tile/edit.js:204
 #: src/tooltip/edit.js:55
 msgid "Open by default"
 msgstr ""
 
-#: src/accordion-item/edit.js:40
+#: src/accordion-item/edit.js:75
 #: src/button/edit.js:179
 #: src/checkbox/edit.js:72
 #: src/content-switcher-item/edit.js:36
@@ -563,7 +615,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/accordion-item/edit.js:75
+#: src/accordion-item/edit.js:114
 msgid "Section title"
 msgstr ""
 
@@ -644,7 +696,7 @@ msgstr ""
 #: src/header-action/edit.js:77
 #: src/menu-button/edit.js:67
 #: src/modal-opener/edit.js:56
-#: src/notification/edit.js:109
+#: src/notification/edit.js:122
 #: src/testimonial/edit.js:147
 msgid "Kind"
 msgstr ""
@@ -823,33 +875,33 @@ msgstr ""
 msgid "Invalid message"
 msgstr ""
 
-#: src/code-snippet/edit.js:91
-#: src/notification/edit.js:118
+#: src/code-snippet/edit.js:105
+#: src/notification/edit.js:131
 #: src/tile/edit.js:106
 msgid "Variant"
 msgstr ""
 
-#: src/code-snippet/edit.js:97
+#: src/code-snippet/edit.js:111
 msgid "Code language"
 msgstr ""
 
-#: src/code-snippet/edit.js:100
+#: src/code-snippet/edit.js:114
 msgid "A short code like “js” or “php”. Tells screen readers the language."
 msgstr ""
 
-#: src/code-snippet/edit.js:106
+#: src/code-snippet/edit.js:120
 msgid "Code"
 msgstr ""
 
-#: src/code-snippet/edit.js:112
+#: src/code-snippet/edit.js:126
 msgid "Hide copy button"
 msgstr ""
 
-#: src/code-snippet/edit.js:119
+#: src/code-snippet/edit.js:133
 msgid "Copy button label"
 msgstr ""
 
-#: src/code-snippet/edit.js:124
+#: src/code-snippet/edit.js:138
 msgid "Label shown after copying"
 msgstr ""
 
@@ -1179,30 +1231,6 @@ msgstr ""
 
 #: src/faq-item/edit.js:42
 msgid "The heading level for the question."
-msgstr ""
-
-#: src/faq-item/edit.js:50
-#: src/stat/edit.js:40
-msgid "Heading 2"
-msgstr ""
-
-#: src/faq-item/edit.js:54
-msgid "Heading 3 (default)"
-msgstr ""
-
-#: src/faq-item/edit.js:61
-#: src/stat/edit.js:48
-msgid "Heading 4"
-msgstr ""
-
-#: src/faq-item/edit.js:65
-#: src/stat/edit.js:52
-msgid "Heading 5"
-msgstr ""
-
-#: src/faq-item/edit.js:69
-#: src/stat/edit.js:56
-msgid "Heading 6"
 msgstr ""
 
 #: src/faq-item/edit.js:126
@@ -1925,31 +1953,31 @@ msgstr ""
 msgid "Editing preview. On your site, the modal stays hidden until a visitor opens it."
 msgstr ""
 
-#: src/notification/edit.js:123
+#: src/notification/edit.js:136
 msgid "Inline"
 msgstr ""
 
-#: src/notification/edit.js:127
+#: src/notification/edit.js:140
 msgid "Toast"
 msgstr ""
 
-#: src/notification/edit.js:133
+#: src/notification/edit.js:146
 msgid "Low contrast"
 msgstr ""
 
-#: src/notification/edit.js:140
+#: src/notification/edit.js:153
 msgid "Hide close button"
 msgstr ""
 
-#: src/notification/edit.js:170
+#: src/notification/edit.js:183
 msgid "Notification title"
 msgstr ""
 
-#: src/notification/edit.js:184
+#: src/notification/edit.js:197
 msgid "Subtitle (optional)"
 msgstr ""
 
-#: src/notification/edit.js:199
+#: src/notification/edit.js:212
 msgid "Caption (toast only)"
 msgstr ""
 
@@ -2662,31 +2690,31 @@ msgstr ""
 msgid "On state label"
 msgstr ""
 
-#: src/toggletip/edit.js:44
+#: src/toggletip/edit.js:60
 msgid "Toggletip"
 msgstr ""
 
-#: src/toggletip/edit.js:48
+#: src/toggletip/edit.js:64
 msgid "Trigger label"
 msgstr ""
 
-#: src/toggletip/edit.js:49
+#: src/toggletip/edit.js:65
 msgid "Optional. Shown before the info button."
 msgstr ""
 
-#: src/toggletip/edit.js:57
+#: src/toggletip/edit.js:73
 msgid "Trigger accessible name"
 msgstr ""
 
-#: src/toggletip/edit.js:58
+#: src/toggletip/edit.js:74
 msgid "Read by screen readers."
 msgstr ""
 
-#: src/toggletip/edit.js:64
+#: src/toggletip/edit.js:80
 msgid "The text shown in the pop-up."
 msgstr ""
 
-#: src/toggletip/edit.js:75
+#: src/toggletip/edit.js:91
 msgid "Placement"
 msgstr ""
 
@@ -4001,7 +4029,7 @@ msgstr ""
 
 #: src/tooltip/block.json
 msgctxt "block description"
-msgid "A short hint that appears when visitors hover over or focus text, an icon or a button."
+msgid "A short hint on underlined text. It opens on hover, focus or tap."
 msgstr ""
 
 #: src/tooltip/block.json
