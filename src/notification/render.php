@@ -96,12 +96,28 @@ if ( ! $hide_close ) {
 }
 $wrapper_attrs = get_block_wrapper_attributes( $wrapper_extra );
 
+// The close button names the notification it closes: every one was just
+// "Close notification", so a page of them listed identical buttons (outside
+// accessibility review, 2026-10-21). The title, or the subtitle when there is
+// no title. Carbon's own is a fixed "close notification".
+$close_subject = '';
+foreach ( array( $notification_title, $subtitle ) as $candidate ) {
+	$close_subject = trim( html_entity_decode( wp_strip_all_tags( $candidate ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+	if ( '' !== $close_subject ) {
+		break;
+	}
+}
+$close_name = '' === $close_subject
+	? __( 'Close notification', 'awt-blocks' )
+	/* translators: %s: the notification's title, for example "Connection lost". */
+	: sprintf( __( 'Close notification: %s', 'awt-blocks' ), $close_subject );
+
 $close_btn = $hide_close
 	? ''
 	: sprintf(
 		'<button type="button" class="%1$s__close-button" aria-label="%2$s" data-wp-on--click="actions.dismiss">%3$s</button>',
 		esc_attr( $base ),
-		esc_attr__( 'Close notification', 'awt-blocks' ),
+		esc_attr( $close_name ),
 		// Carbon's notification close button uses a 20px icon — matches the 20px
 		// kind icon and the editor preview's hardcoded 20×20 SVG. The helper
 		// defaults to 16, which made the published close glyph smaller than the

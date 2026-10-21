@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
@@ -72,6 +72,19 @@ const KIND_ICONS = {
 			<path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm5.4,19L11,10.6,12.6,9,23,19.4Z" />
 		</svg>
 	),
+};
+
+// The close button names its notification, as render.php does.
+const closeName = ( title, subtitle ) => {
+	const plain = ( html ) => ( html || '' ).replace( /<[^>]*>/g, '' ).trim();
+	const subject = plain( title ) || plain( subtitle );
+	return subject
+		? sprintf(
+				/* translators: %s: the notification's title, for example "Connection lost". */
+				__( 'Close notification: %s', 'awt-blocks' ),
+				subject
+		  )
+		: __( 'Close notification', 'awt-blocks' );
 };
 
 export default function Edit( { attributes, setAttributes } ) {
@@ -209,7 +222,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<button
 						type="button"
 						className={ `${ base }__close-button` }
-						aria-label={ __( 'Close notification', 'awt-blocks' ) }
+						aria-label={ closeName( title, subtitle ) }
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

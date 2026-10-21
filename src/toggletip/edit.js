@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
@@ -21,6 +21,22 @@ const ALIGN_OPTIONS = [
 	'left',
 	'right',
 ].map( ( v ) => ( { value: v, label: v } ) );
+
+// The button names what it explains, as render.php does: a name the author
+// typed is kept; the default gains the label.
+const buttonName = ( ariaLabel, label ) => {
+	if ( ariaLabel && ariaLabel.trim() && ariaLabel !== 'More information' ) {
+		return ariaLabel;
+	}
+	const text = ( label || '' ).replace( /<[^>]*>/g, '' ).trim();
+	return text
+		? sprintf(
+				/* translators: %s: the toggletip's label, for example "Storage limits". */
+				__( 'More information: %s', 'awt-blocks' ),
+				text
+		  )
+		: __( 'More information', 'awt-blocks' );
+};
 
 export default function Edit( { attributes, setAttributes } ) {
 	const { label, description, ariaLabel, align } = attributes;
@@ -93,7 +109,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<button
 						type="button"
 						className="cds--toggletip-button"
-						aria-label={ ariaLabel }
+						aria-label={ buttonName( ariaLabel, label ) }
 						aria-expanded="false"
 						onClick={ ( e ) => e.preventDefault() }
 					>

@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $label       = isset( $attributes['label'] ) ? (string) $attributes['label'] : '';
 $description = isset( $attributes['description'] ) ? (string) $attributes['description'] : '';
-$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : __( 'More information', 'awt-blocks' );
+$aria_label  = isset( $attributes['ariaLabel'] ) ? (string) $attributes['ariaLabel'] : '';
 $align       = isset( $attributes['align'] ) ? (string) $attributes['align'] : 'bottom';
 
 $allowed_aligns = array( 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left', 'right' );
@@ -35,6 +35,18 @@ if ( ! in_array( $align, $allowed_aligns, true ) ) {
 }
 
 $popover_id = unique_id( 'awt-toggletip' );
+
+// The button names what it explains: left at the default it was "More
+// information" beside every label (outside accessibility review,
+// 2026-10-21). A name the author typed is kept as it is. Carbon's own is a
+// fixed "Show information".
+$label_text = trim( html_entity_decode( wp_strip_all_tags( $label ), ENT_QUOTES | ENT_HTML5, 'UTF-8' ) );
+if ( \AWT\Blocks\Render\is_blank( $aria_label ) || 'More information' === $aria_label ) {
+	$aria_label = '' === $label_text
+		? __( 'More information', 'awt-blocks' )
+		/* translators: %s: the toggletip's label, for example "Storage limits". */
+		: sprintf( __( 'More information: %s', 'awt-blocks' ), $label_text );
+}
 
 $ds = function_exists( '\AWT\Theme\DesignSystem\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
 

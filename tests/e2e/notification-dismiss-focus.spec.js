@@ -47,8 +47,9 @@ test( 'closing a notification moves focus to the next control', async ( {
 	await closes.first().focus();
 	await page.keyboard.press( 'Enter' );
 	await expect( page.getByText( 'First' ) ).toBeHidden();
-	// The next control is the second notification's close button.
-	expect( await focused() ).toBe( 'Close notification' );
+	// The next control is the second notification's close button, which
+	// says so in its name since 2026-10-21.
+	expect( await focused() ).toBe( 'Close notification: Second' );
 	await expect( closes ).toHaveCount( 1 );
 
 	// Closing the last one moves on to the link after them, past the
