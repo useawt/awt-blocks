@@ -155,6 +155,60 @@ test.describe( 'Modal dialog', () => {
 		await expect( opener ).toBeFocused();
 	} );
 
+	// A dialog whose content brings its own submit button leaves both button
+	// labels empty. The footer bar used to print anyway, 64px of nothing under
+	// the 48px Carbon keeps for it, and pushed a demo form's Send button below
+	// the fold of a 768px-tall laptop screen. With no footer the content ends
+	// the dialog, with the same padding under it as beside it.
+	test( 'a dialog with no button labels ends with its content', async ( {
+		page,
+	} ) => {
+		await page.goto( `/?page_id=${ pageId }` );
+
+		for ( const [ opener, id ] of [
+			[ 'Open the form dialog', 'trap-modal' ],
+			[ 'Open the dialog in the dark band', 'band-modal' ],
+		] ) {
+			await page.getByText( opener, { exact: true } ).click();
+			await expect( page.locator( `#${ id }` ) ).toHaveClass(
+				/is-visible/
+			);
+
+			const measured = await page.evaluate( ( modalId ) => {
+				const container = document.querySelector(
+					`#${ modalId } .cds--modal-container`
+				);
+				const content = container.querySelector(
+					'.cds--modal-content'
+				);
+				const styles = getComputedStyle( content );
+				return {
+					footers:
+						container.querySelectorAll( '.cds--modal-footer' )
+							.length,
+					belowContent: Math.round(
+						container.getBoundingClientRect().bottom -
+							parseFloat(
+								getComputedStyle( container ).borderBottomWidth
+							) -
+							content.getBoundingClientRect().bottom
+					),
+					paddingBelow: styles.paddingBlockEnd,
+					paddingBeside: styles.paddingInlineStart,
+				};
+			}, id );
+
+			expect( measured.footers ).toBe( 0 );
+			expect( measured.belowContent ).toBe( 0 );
+			expect( measured.paddingBelow ).toBe( measured.paddingBeside );
+
+			await page.keyboard.press( 'Escape' );
+			await expect( page.locator( `#${ id }` ) ).not.toHaveClass(
+				/is-visible/
+			);
+		}
+	} );
+
 	// The page behind an open dialog is inert, so a screen reader cannot read
 	// it either. `aria-modal` alone left it readable to VoiceOver in Safari,
 	// whose reading cursor walked out of the dialog while Tab stayed in

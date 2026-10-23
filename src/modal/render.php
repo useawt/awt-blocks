@@ -130,6 +130,13 @@ $cancel_button_html = '' !== trim( $secondary_action )
 	)
 	: '';
 
+// No buttons, no footer. The bar is a fixed 64px tall, so printed empty it
+// left a blank strip under the content of every modal that carries its own
+// submit button. style.scss gives the content a bottom padding of its own in
+// that case. The `if` and `endif` below start at the left edge so that they
+// print nothing: indented, their tabs would land in every modal's output.
+$has_footer = '' !== $cancel_button_html || '' !== $primary_button_html;
+
 ob_start();
 ?>
 <div <?php echo $wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() output is pre-escaped by core. ?>>
@@ -150,10 +157,12 @@ ob_start();
 		?>
 		<button type="button" class="<?php echo esc_attr( $close_button_class ); ?>" aria-label="<?php echo esc_attr__( 'Close', 'awt-blocks' ); ?>" data-wp-on--click="actions.close"><?php echo $close_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static plugin-authored SVG; dynamic classes escaped with esc_attr() above. ?></button>
 		<div class="<?php echo esc_attr( $modal_content_class ); ?>"><?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- inner-block markup, escaped by each inner block on render. ?></div>
+<?php if ( $has_footer ) : ?>
 		<div class="<?php echo esc_attr( $footer_class ); ?>">
 			<?php echo $cancel_button_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built + escaped above. ?>
 			<?php echo $primary_button_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built + escaped above. ?>
 		</div>
+<?php endif; ?>
 	</div>
 </div>
 <?php

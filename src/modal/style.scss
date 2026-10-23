@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/components/modal';
 @use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/spacing' as *;
 
 // The block spacing system puts a margin on every block's outer element. This
 // block's outer element is the full-screen overlay, so that margin moves the
@@ -21,4 +22,17 @@
 	// column down the middle of the screen. It covers the viewport, so it
 	// takes neither the width nor the spacing the layout hands its children.
 	max-inline-size: none;
+}
+
+// A modal with no button labels prints no footer (render.php), which leaves
+// the content as the container's last child. Carbon keeps 48px under the
+// content whether or not a footer follows, including in its own button-less
+// "passive" modal; with no buttons that is a blank band under a form that
+// brings its own submit button. 16px matches the content's side padding and
+// the header's top padding, so the text sits in an even frame and never
+// touches the bottom edge. The editor's preview drops its footer the same way
+// and has no container, hence the second selector.
+.wp-block-awt-modal > .cds--modal-container > .cds--modal-content:last-child,
+.wp-block-awt-modal > .cds--modal-content:last-child {
+	padding-block-end: $spacing-05;
 }
