@@ -1,8 +1,5 @@
-## 2026.10.12 (2026-10-21)
+## 2026.10.13 (2026-10-23)
 
-### [A11y]
+### [Improvement]
 
-- Various accessibility improvements. Details: <https://useawt.com/accessibility/>
-- In Accordion block, each section title is a heading: Heading 3 unless you choose another level.
-- In Tooltip block, the trigger text has a dotted underline.
-- In selectable Tile blocks outside a group, the icon is an empty box until the tile is selected.
+- If you leave both button labels of a Modal empty, your site no longer shows an empty bar and extra space under the content.

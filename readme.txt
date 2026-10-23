@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.12
+Stable tag: 2026.10.13
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -330,6 +330,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.13 (2026-10-23) =
+* [Improvement] If you leave both button labels of a Modal empty, your site no longer shows an empty bar and extra space under the content.
+
 = 2026.10.12 (2026-10-21) =
 * [A11y] Various accessibility improvements. Details: <https://useawt.com/accessibility/>
 * [A11y] In Accordion block, each section title is a heading: Heading 3 unless you choose another level.
@@ -382,7 +385,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 
 = 2026.10.4 (2026-10-08) =
 * [A11y] Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update to WordPress 7.1.
-
-= 2026.10.3 (2026-10-08) =
-* [Improvement] The contrast check in the Color panel and the accessibility checks now judge colors in light and dark mode, the way your site shows them, and say which mode fails.
 <!-- CHANGELOG_END -->

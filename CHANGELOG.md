@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## 2026.10.13 (2026-10-23)
+
+### [Improvement]
+
+- If you leave both button labels of a Modal empty, your site no longer shows an empty bar and extra
+  space under the content.
+
 ## 2026.10.12 (2026-10-21)
 
 ### [A11y]
