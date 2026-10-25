@@ -23,8 +23,18 @@ const PAGE_CONTENT = `
 <!-- wp:paragraph --><p>An accessibility-first theme.</p><!-- /wp:paragraph -->
 <!-- /wp:awt/accordion-item -->
 <!-- /wp:awt/accordion -->
+<!-- wp:awt/faq-item {"question":"Does it work without JavaScript?"} -->
+<!-- wp:paragraph --><p>Yes.</p><!-- /wp:paragraph -->
+<!-- /wp:awt/faq-item -->
 <!-- /wp:awt/section -->
 `;
+
+// The arrow's angle in degrees: 90 points down (closed), -90 up (open).
+const arrowAngle = ( item ) =>
+	item.locator( '.cds--accordion__arrow' ).evaluate( ( el ) => {
+		const m = new DOMMatrix( getComputedStyle( el ).transform );
+		return Math.round( ( Math.atan2( m.b, m.a ) * 180 ) / Math.PI );
+	} );
 
 test.describe( 'AWT blocks render on the front end', () => {
 	let pageId;
@@ -66,6 +76,18 @@ test.describe( 'AWT blocks render on the front end', () => {
 		await expect( page.locator( '.cds--list--unordered li' ) ).toHaveCount(
 			2
 		);
+
+		// The arrow turns when its section opens. Carbon's rule for that needs
+		// the button directly inside the item; ours sits in a heading, and the
+		// arrow once stopped turning with nothing failing.
+		for ( const item of [
+			page.locator( '.cds--accordion__item:not(.awt-faq-item)' ).first(),
+			page.locator( '.awt-faq-item' ).first(),
+		] ) {
+			await expect.poll( () => arrowAngle( item ) ).toBe( 90 );
+			await item.locator( '.cds--accordion__heading' ).click();
+			await expect.poll( () => arrowAngle( item ) ).toBe( -90 );
+		}
 
 		// Interactivity API behavior: the accordion opens on click.
 		const accordionBtn = page.locator( '.cds--accordion__heading' ).first();
