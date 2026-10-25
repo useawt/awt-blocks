@@ -36,6 +36,20 @@ const arrowAngle = ( item ) =>
 		return Math.round( ( Math.atan2( m.b, m.a ) * 180 ) / Math.PI );
 	} );
 
+// The arrow turns when its section opens. Carbon's rule for that needs the
+// button directly inside the item; ours sits in a heading, and the arrow once
+// stopped turning with nothing failing.
+async function expectArrowsToTurn( page ) {
+	for ( const item of [
+		page.locator( '.cds--accordion__item:not(.awt-faq-item)' ).first(),
+		page.locator( '.awt-faq-item' ).first(),
+	] ) {
+		await expect.poll( () => arrowAngle( item ) ).toBe( 90 );
+		await item.locator( '.cds--accordion__heading' ).click();
+		await expect.poll( () => arrowAngle( item ) ).toBe( -90 );
+	}
+}
+
 test.describe( 'AWT blocks render on the front end', () => {
 	let pageId;
 
@@ -77,17 +91,7 @@ test.describe( 'AWT blocks render on the front end', () => {
 			2
 		);
 
-		// The arrow turns when its section opens. Carbon's rule for that needs
-		// the button directly inside the item; ours sits in a heading, and the
-		// arrow once stopped turning with nothing failing.
-		for ( const item of [
-			page.locator( '.cds--accordion__item:not(.awt-faq-item)' ).first(),
-			page.locator( '.awt-faq-item' ).first(),
-		] ) {
-			await expect.poll( () => arrowAngle( item ) ).toBe( 90 );
-			await item.locator( '.cds--accordion__heading' ).click();
-			await expect.poll( () => arrowAngle( item ) ).toBe( -90 );
-		}
+		await expectArrowsToTurn( page );
 
 		// Interactivity API behavior: the accordion opens on click.
 		const accordionBtn = page.locator( '.cds--accordion__heading' ).first();
@@ -105,5 +109,27 @@ test.describe( 'AWT blocks render on the front end', () => {
 				( t ) => ! t.includes( 'Failed to load resource' )
 			)
 		).toEqual( [] );
+	} );
+
+	test( 'arrows point and turn the same way on a right-to-left site', async ( {
+		page,
+	} ) => {
+		// What WordPress does on a right-to-left site: each shared block
+		// stylesheet is swapped for its -rtl twin, and the theme's stays as is.
+		let swapped = 0;
+		await page.route( '**/build/shared-css/carbon-*.css*', ( route ) => {
+			swapped++;
+			return route.continue( {
+				url: route
+					.request()
+					.url()
+					.replace( /\.css(\?|$)/, '-rtl.css$1' ),
+			} );
+		} );
+		await page.goto( `/?page_id=${ pageId }` );
+		await page.evaluate( () => ( document.documentElement.dir = 'rtl' ) );
+		expect( swapped ).toBeGreaterThan( 0 );
+
+		await expectArrowsToTurn( page );
 	} );
 } );
