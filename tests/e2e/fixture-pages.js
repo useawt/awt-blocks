@@ -200,6 +200,7 @@ const CONTENT = `
 <!-- wp:awt/tag {"text":"Filterable","type":"blue","filter":true} /-->
 <!-- wp:awt/tag {"text":"Outlined","type":"outline","filter":true} /-->
 <!-- wp:awt/tag {"text":"High contrast","type":"high-contrast","filter":true} /-->
+<!-- wp:awt/tag {"text":"Changelog","type":"cool-gray","href":"/docs/changelog"} /-->
 
 <!-- wp:awt/data-table {"caption":"Services and owners","sortable":true,"zebra":true} /-->
 
