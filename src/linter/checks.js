@@ -317,6 +317,28 @@ function collectHeadings( blocks ) {
 				} );
 			}
 		}
+		// awt/accordion-item and awt/faq-item always wrap their trigger in an
+		// <h2>–<h6> (`level`, default "3"; render.php clamps anything else to
+		// 3). The item comes before its panel's inner blocks in render order,
+		// so a heading inside the panel follows it here too.
+		if ( b.name === 'awt/accordion-item' || b.name === 'awt/faq-item' ) {
+			const level = String( attr( b, 'level', '3' ) );
+			hs.push( {
+				clientId: b.clientId,
+				level: /^[2-6]$/.test( level ) ? Number( level ) : 3,
+			} );
+		}
+		// Fixed levels, printed only when the text is there: the pricing tile's
+		// tier name is an <h3>, the form's title an <h2>.
+		if (
+			b.name === 'awt/pricing-tile' &&
+			attr( b, 'tierName', 'Essentials' ) !== ''
+		) {
+			hs.push( { clientId: b.clientId, level: 3 } );
+		}
+		if ( b.name === 'awt/form' && attr( b, 'legend', '' ) !== '' ) {
+			hs.push( { clientId: b.clientId, level: 2 } );
+		}
 	}
 	return hs;
 }

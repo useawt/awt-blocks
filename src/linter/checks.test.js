@@ -174,6 +174,83 @@ describe( '#2 heading-level skips (Warning)', () => {
 		);
 		expect( has( f, 2 ) ).toBe( false );
 	} );
+	test( 'an H4 inside an FAQ item follows the item’s own H3', () => {
+		const f = runChecks(
+			[
+				B( 'core/heading', { level: 2 } ),
+				B( 'awt/accordion', {}, [
+					B( 'awt/faq-item', { question: 'Companion 1.2.0' }, [
+						B( 'core/heading', { level: 4 } ),
+					] ),
+				] ),
+			],
+			ctx()
+		);
+		expect( has( f, 2 ) ).toBe( false );
+	} );
+	test( 'an H4 inside an accordion item follows the item’s own H3', () => {
+		const f = runChecks(
+			[
+				B( 'core/heading', { level: 2 } ),
+				B( 'awt/accordion', {}, [
+					B( 'awt/accordion-item', { title: 'Section' }, [
+						B( 'core/heading', { level: 4 } ),
+					] ),
+				] ),
+			],
+			ctx()
+		);
+		expect( has( f, 2 ) ).toBe( false );
+	} );
+	test( 'fires on an FAQ item set to H4 right after an H2', () => {
+		const f = runChecks(
+			[
+				B( 'core/heading', { level: 2 } ),
+				B( 'awt/faq-item', { question: 'Is it free?', level: '4' } ),
+			],
+			ctx()
+		);
+		expect( has( f, 2 ) ).toBe( true );
+	} );
+	test( 'fires on a pricing tile’s H3 tier name right after an H1', () => {
+		const f = runChecks(
+			[
+				B( 'core/heading', { level: 1 } ),
+				B( 'awt/pricing-tile', { tierName: 'Pro' } ),
+			],
+			ctx()
+		);
+		expect( has( f, 2 ) ).toBe( true );
+	} );
+	test( 'silent on a pricing tile with no tier name', () => {
+		const f = runChecks(
+			[
+				B( 'core/heading', { level: 1 } ),
+				B( 'awt/pricing-tile', { tierName: '' } ),
+			],
+			ctx()
+		);
+		expect( has( f, 2 ) ).toBe( false );
+	} );
+	test( 'a form title is an H2 in the sequence, a form without one is not', () => {
+		const titled = runChecks(
+			[
+				B( 'awt/form', { legend: 'Contact us' } ),
+				B( 'core/heading', { level: 4 } ),
+			],
+			ctx()
+		);
+		expect( has( titled, 2 ) ).toBe( true );
+		const untitled = runChecks(
+			[
+				B( 'core/heading', { level: 3 } ),
+				B( 'awt/form', {} ),
+				B( 'core/heading', { level: 4 } ),
+			],
+			ctx()
+		);
+		expect( has( untitled, 2 ) ).toBe( false );
+	} );
 } );
 
 describe( '#5 non-descriptive link text (Warning)', () => {
