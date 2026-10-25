@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.13
+Stable tag: 2026.10.14
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -330,6 +330,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.14 (2026-10-25) =
+* [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+
 = 2026.10.13 (2026-10-23) =
 * [Improvement] If you leave both button labels of a Modal empty, your site no longer shows an empty bar and extra space under the content.
 
@@ -382,7 +385,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 = 2026.10.5 (2026-10-08) =
 * [Improvement] The "Mark as decorative" checkbox lines up with the other block settings.
 * [Improvement] The steps for updating AWT Blocks by hand name the "Add Plugin" button your version of WordPress shows.
-
-= 2026.10.4 (2026-10-08) =
-* [A11y] Image: on WordPress 6.6 to 7.0 you can now tick "Mark as decorative", and the mark stays when you update to WordPress 7.1.
 <!-- CHANGELOG_END -->
