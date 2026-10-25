@@ -10,6 +10,13 @@
      markdownlint enforces the structure in CI. Newest release first.
      The Unreleased section accumulates entries between releases. -->
 
+## 2026.10.16 (2026-10-25)
+
+### [Improvement]
+
+- Accessibility checks count the headings of Accordion item, FAQ question, Pricing tile and Form
+  blocks when they check heading levels.
+
 ## 2026.10.15 (2026-10-25)
 
 ### [Improvement]

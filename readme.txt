@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.15
+Stable tag: 2026.10.16
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -330,6 +330,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.10.16 (2026-10-25) =
+* [Improvement] Accessibility checks count the headings of Accordion item, FAQ question, Pricing tile and Form blocks when they check heading levels.
+
 = 2026.10.15 (2026-10-25) =
 * [Improvement] No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
 
@@ -381,7 +384,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [Improvement] Enter no longer adds a second line to block labels and headings.
 * [Improvement] A new Checkbox, Toggle or Menu button puts the cursor in its label.
 * [Improvement] Typing in a Select or Dropdown's options stays where the cursor is.
-
-= 2026.10.6 (2026-10-11) =
-* [Improvement] The plugin's "View details" window opens when update checks are off.
 <!-- CHANGELOG_END -->

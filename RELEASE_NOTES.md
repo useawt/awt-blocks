@@ -1,5 +1,5 @@
-## 2026.10.15 (2026-10-25)
+## 2026.10.16 (2026-10-25)
 
 ### [Improvement]
 
-- No changes in the plugin itself. It carries the same version number as the AWT theme, which has changes in this release.
+- Accessibility checks count the headings of Accordion item, FAQ question, Pricing tile and Form blocks when they check heading levels.
