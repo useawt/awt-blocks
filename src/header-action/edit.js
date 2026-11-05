@@ -14,7 +14,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	// Mirror render.php structure: <a> when href is set and no panel; <button>
 	// otherwise. Sizing/spacing comes from `.cds--header__action` in theme.css
 	// (same CSS for editor + published) — no inline styles here.
-	const blockProps = useBlockProps( { className: 'cds--header__action' } );
+	const hasLabel = kind === 'with-label' && !! label;
+	const blockProps = useBlockProps( {
+		className: hasLabel
+			? 'cds--header__action cds--header__action--with-label'
+			: 'cds--header__action',
+	} );
 
 	const iconNode = iconName && (
 		<span
@@ -40,7 +45,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const inner = (
 		<>
 			{ iconNode }
-			{ kind === 'with-label' && label && (
+			{ hasLabel && (
 				<span className="cds--header__action-label">{ label }</span>
 			) }
 		</>

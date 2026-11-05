@@ -15,26 +15,62 @@
  * The second assertion is the one that keeps the fix honest: releasing the
  * width for every action would have widened every existing header for a
  * variant it does not use, so an icon-only action has to stay square.
+ *
+ * The width came from a `:has()` rule alone until 2026-11-05, when an old
+ * Edge (before 105, no `:has()`) showed the same overlap again: the browser
+ * drops the rule and the square stands. The last test removes every `:has()`
+ * rule from the page, which is what such a browser does, and measures again.
  */
 
 const { test, expect } = require( './fixtures' );
 
 const LABEL_CLASS = 'cds--header__action-label';
 
+const WITH_LABEL_CLASS = 'cds--header__action--with-label';
+
 // What render.php emits for kind="with-label", added to a live action.
 const addLabel = ( page, text ) =>
 	page.evaluate(
-		( [ cls, label ] ) => {
+		( [ cls, modifier, label ] ) => {
 			const action = [
 				...document.querySelectorAll( '.cds--header__action' ),
 			].find( ( a ) => a.getBoundingClientRect().width > 0 );
 			const span = document.createElement( 'span' );
 			span.className = cls;
 			span.textContent = label;
+			action.classList.add( modifier );
 			action.appendChild( span );
 		},
-		[ LABEL_CLASS, text ]
+		[ LABEL_CLASS, WITH_LABEL_CLASS, text ]
 	);
+
+// Delete every rule whose selector uses `:has()`, as a browser without it
+// would. An index walk, not `for...of`: a CSSRuleList is not iterable.
+const dropHasRules = ( page ) =>
+	page.evaluate( () => {
+		let dropped = 0;
+		const walk = ( owner ) => {
+			for ( let i = owner.cssRules.length - 1; i >= 0; i-- ) {
+				const rule = owner.cssRules[ i ];
+				if ( rule.selectorText !== undefined ) {
+					if ( rule.selectorText.includes( ':has(' ) ) {
+						owner.deleteRule( i );
+						dropped++;
+					}
+				} else if ( rule.cssRules ) {
+					walk( rule );
+				}
+			}
+		};
+		for ( const sheet of Array.from( document.styleSheets ) ) {
+			try {
+				walk( sheet );
+			} catch {
+				// A cross-origin sheet cannot be read; it holds no theme rules.
+			}
+		}
+		return dropped;
+	} );
 
 const boxes = ( page ) =>
 	page.evaluate( ( cls ) => {
@@ -140,5 +176,35 @@ test.describe( 'Header action with a label', () => {
 					.getAttribute( 'aria-label' )
 			)
 		).toBeTruthy();
+	} );
+
+	test( 'the label still fits in a browser without :has()', async ( {
+		page,
+	} ) => {
+		await page.setViewportSize( { width: 1440, height: 800 } );
+		await page.goto( '/' );
+		await page
+			.locator( '.cds--header__action' )
+			.first()
+			.waitFor( { state: 'attached' } );
+
+		expect(
+			await dropHasRules( page ),
+			'the page should have had :has() rules to drop'
+		).toBeGreaterThan( 0 );
+
+		const before = await boxes( page );
+		await addLabel( page, 'Learn' );
+		const after = await boxes( page );
+
+		expect(
+			Math.round( after.label.right ),
+			'the label must not run past the button that holds it'
+		).toBeLessThanOrEqual( Math.round( after.button.right ) );
+
+		expect(
+			after.button.width,
+			'a labelled action has to be wider than an icon-only one'
+		).toBeGreaterThan( before.plainWidth );
 	} );
 } );

@@ -25,9 +25,11 @@ $href      = isset( $attributes['href'] ) ? (string) $attributes['href'] : '';
 $panel_id  = isset( $attributes['panelId'] ) ? (string) $attributes['panelId'] : '';
 $kind      = isset( $attributes['kind'] ) ? (string) $attributes['kind'] : 'icon-only';
 
+$has_label = $kind === 'with-label' && $label !== '';
+
 // §A: CSS classes from the active design system (guarded for non-AWT themes).
 $ds           = function_exists( '\\AWT\\Theme\\DesignSystem\\get_active' ) ? \AWT\Theme\DesignSystem\get_active() : null;
-$action_class = $ds ? $ds->classes_for( 'header-action' ) : 'cds--header__action';
+$action_class = $ds ? $ds->classes_for( 'header-action', array( 'with_label' => $has_label ) ) : 'cds--header__action' . ( $has_label ? ' cds--header__action--with-label' : '' );
 $icon_class   = $ds ? $ds->classes_for( 'header-action', array( 'element' => 'icon' ) ) : 'cds--header__action-icon';
 $label_class  = $ds ? $ds->classes_for( 'header-action', array( 'element' => 'label' ) ) : 'cds--header__action-label';
 
@@ -38,7 +40,7 @@ if ( $icon_html === '' ) {
 }
 
 $inner = $icon_html;
-if ( $kind === 'with-label' && $label !== '' ) {
+if ( $has_label ) {
 	$inner .= sprintf( '<span class="%s">%s</span>', esc_attr( $label_class ), esc_html( $label ) );
 }
 
