@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.10.16
+Stable tag: 2026.11.0
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -310,7 +310,7 @@ Reports about real barriers are treated as bugs, not feature requests.
 ## Dates
 
 - Statement prepared: 2026-07-17
-- Last reviewed: 2026-10-21
+- Last reviewed: 2026-11-05
 <!-- ACCESSIBILITY_END -->
 
 == Compatibility notes ==
@@ -330,6 +330,9 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.11.0 (2026-11-05) =
+* [Improvement] A header action set to "icon with label" no longer runs over the next action in older browsers.
+
 = 2026.10.16 (2026-10-25) =
 * [Improvement] Accessibility checks count the headings of Accordion item, FAQ question, Pricing tile and Form blocks when they check heading levels.
 
@@ -374,14 +377,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [A11y] Better focus handling in Safari.
 * [A11y] Further Safari improvements.
 * [A11y] Improved display of Dropdown blocks with error states with an icon.
-
-= 2026.10.7 (2026-10-12) =
-* [A11y] If you add a Button, Link, Tag, Modal opener, Menu button, Tooltip, Notification or Statistic and leave it without text, your site doesn't show it.
-* [A11y] If you leave a form field's label or a Modal's heading empty, your site shows a default one, such as "Label" or "Modal heading".
-* [Improvement] You can add a Tag to a Hero.
-* [Improvement] New blocks start empty and show a hint.
-* [Improvement] Ability to quickly add the same type of blocks by pressing Enter: Tag, Button, Link and Modal opener.
-* [Improvement] Enter no longer adds a second line to block labels and headings.
-* [Improvement] A new Checkbox, Toggle or Menu button puts the cursor in its label.
-* [Improvement] Typing in a Select or Dropdown's options stays where the cursor is.
 <!-- CHANGELOG_END -->
