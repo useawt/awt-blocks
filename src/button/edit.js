@@ -281,6 +281,7 @@ export default function Edit( {
 			>
 				{ iconPosition === 'leading' && iconEl }
 				<RichText
+					identifier="text"
 					tagName="span"
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }

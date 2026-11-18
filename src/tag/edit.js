@@ -136,6 +136,7 @@ export default function Edit( {
 			</InspectorControls>
 			<Wrapper { ...blockProps }>
 				<RichText
+					identifier="text"
 					tagName="span"
 					className="cds--tag__label"
 					value={ text }

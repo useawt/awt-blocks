@@ -72,6 +72,7 @@ export default function Edit( {
 				onClick={ ( e ) => e.preventDefault() }
 			>
 				<RichText
+					identifier="text"
 					tagName="span"
 					value={ text }
 					onChange={ ( v ) => setAttributes( { text: v } ) }

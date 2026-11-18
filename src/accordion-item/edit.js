@@ -107,6 +107,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							<path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z" />
 						</svg>
 						<RichText
+							identifier="title"
 							tagName="span"
 							className="cds--accordion__title"
 							value={ title }

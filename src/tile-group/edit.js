@@ -39,6 +39,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<fieldset { ...innerProps }>
 			<RichText
+				identifier="label"
 				tagName="legend"
 				className="cds--label"
 				value={ label }

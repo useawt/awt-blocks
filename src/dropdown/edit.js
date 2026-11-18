@@ -115,6 +115,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				} ) }
 			>
 				<RichText
+					identifier="label"
 					tagName="label"
 					className="cds--label"
 					value={ label }

@@ -84,6 +84,7 @@ export default function Edit( { attributes, setAttributes, isSelected } ) {
 			<div { ...useBlockProps( { className: 'awt-block-wrap' } ) }>
 				<span className={ classes }>
 					<RichText
+						identifier="triggerText"
 						tagName="span"
 						className="cds--definition-term"
 						value={ triggerText }

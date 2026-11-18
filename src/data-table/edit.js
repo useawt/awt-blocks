@@ -2,6 +2,7 @@ import { __, _n, sprintf } from '@wordpress/i18n';
 import { useEffect, useMemo, useState } from '@wordpress/element';
 import { speak } from '@wordpress/a11y';
 import { applyFilters } from '@wordpress/hooks';
+import { useRefEffect } from '@wordpress/compose';
 import {
 	useBlockProps,
 	InspectorControls,
@@ -124,6 +125,40 @@ const focusCellText = ( event ) => {
 			.querySelector( '[contenteditable="true"]' )
 			?.focus();
 	}
+};
+
+const ARROW_KEYS = [ 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight' ];
+
+/**
+ * Shift with an arrow key selects inside the cell, as in any text field: as
+ * far as the start or the end of the cell's text, and no further.
+ *
+ * WordPress's own arrow handling carries a selection on into the next block
+ * once it reaches the first or last character. In a table that is the next
+ * cell, which the editor then reads as the whole table selected; and a cell
+ * of one line is always at its first and last line, so Shift+Up or Shift+Down
+ * left the cell at once (owner's report, 2026-11-18). Stopping the key at the
+ * table leaves the browser's own selection, which stays in the text box.
+ * Arrow keys without Shift still move from cell to cell as before.
+ *
+ * A native listener, because WordPress's handler is a native listener on an
+ * element around the block, which React's onKeyDown would reach too late.
+ *
+ * @param {HTMLElement} node The table.
+ * @return {Function} Removes the listener.
+ */
+const keepShiftSelectionInCell = ( node ) => {
+	const onKeyDown = ( event ) => {
+		if (
+			event.shiftKey &&
+			ARROW_KEYS.includes( event.key ) &&
+			event.target.isContentEditable
+		) {
+			event.stopPropagation();
+		}
+	};
+	node.addEventListener( 'keydown', onKeyDown );
+	return () => node.removeEventListener( 'keydown', onKeyDown );
 };
 
 const maskStyle = ( name, colour ) => ( {
@@ -262,6 +297,7 @@ export default function Edit( {
 		'awt/data-table'
 	);
 	const guardLinks = useLinkGuard();
+	const tableRef = useRefEffect( keepShiftSelectionInCell, [] );
 
 	// The cell the toolbar's row and column actions work from: `row` is -1
 	// for the heading row. Null until a cell has been focused, and again once
@@ -665,6 +701,7 @@ export default function Edit( {
 				) }
 				{ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- catches link clicks, which Enter on a link also fires. */ }
 				<table
+					ref={ tableRef }
 					className={ tableClasses }
 					onClick={ sourceNote ? guardLinks : undefined }
 				>
@@ -686,6 +723,7 @@ export default function Edit( {
 										/>
 									) : (
 										<RichText
+											identifier={ `headers.${ c }.text` }
 											tagName="span"
 											className="cds--table-header-label"
 											value={ h.text || '' }
@@ -760,6 +798,7 @@ export default function Edit( {
 											onClick={ focusCellText }
 										>
 											<RichText
+												identifier={ `rows.${ i }.${ h.key }` }
 												tagName="div"
 												style={ CELL_TEXT_STYLE }
 												value={ String(

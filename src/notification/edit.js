@@ -175,6 +175,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								} ` }
 							</span>
 							<RichText
+								identifier="title"
 								tagName="span"
 								value={ title }
 								onChange={ ( v ) =>
@@ -188,6 +189,7 @@ export default function Edit( { attributes, setAttributes } ) {
 								disableLineBreaks
 							/>{ ' ' }
 							<RichText
+								identifier="subtitle"
 								tagName="span"
 								className={ `${ base }__subtitle` }
 								value={ subtitle }
@@ -203,6 +205,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						</p>
 						{ variant === 'toast' && (
 							<RichText
+								identifier="caption"
 								tagName="div"
 								className={ `${ base }__caption` }
 								value={ caption }

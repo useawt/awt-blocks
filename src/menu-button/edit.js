@@ -162,6 +162,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						tabIndex={ -1 }
 					>
 						<RichText
+							identifier="label"
 							tagName="span"
 							value={ label }
 							onChange={ ( v ) => setAttributes( { label: v } ) }

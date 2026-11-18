@@ -67,6 +67,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				 * page now render the identical thing.
 				 */ }
 				<RichText
+					identifier="title"
 					tagName="div"
 					id={ headingId }
 					className="cds--side-nav__heading"

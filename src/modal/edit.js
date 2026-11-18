@@ -182,6 +182,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<p className="cds--modal-header__label">{ label }</p>
 				) }
 				<RichText
+					identifier="heading"
 					tagName="h2"
 					className="cds--modal-header__heading"
 					value={ heading }

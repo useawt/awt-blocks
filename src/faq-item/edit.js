@@ -117,6 +117,7 @@ export default function Edit( { attributes, setAttributes, context } ) {
 							<path d="M11 8L6 13l-.7-.7L9.6 8 5.3 3.7 6 3z" />
 						</svg>
 						<RichText
+							identifier="question"
 							tagName="span"
 							className="cds--accordion__title awt-faq-item__question"
 							value={ question }

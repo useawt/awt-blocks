@@ -127,6 +127,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				} ) }
 			>
 				<RichText
+					identifier="label"
 					tagName="label"
 					htmlFor={ id }
 					className={ [

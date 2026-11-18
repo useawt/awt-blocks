@@ -104,6 +104,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						</span>
 					) }
 					<RichText
+						identifier="text"
 						tagName="span"
 						className="cds--side-nav__link-text"
 						value={ text }

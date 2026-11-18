@@ -313,6 +313,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<figure { ...blockProps }>
 				{ MARK_SVGS[ markStyle ] || null }
 				<RichText
+					identifier="quote"
 					tagName="blockquote"
 					className="awt-testimonial__quote"
 					value={ quote }
@@ -330,6 +331,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 					<div className="awt-testimonial__source-details">
 						<RichText
+							identifier="authorName"
 							tagName="div"
 							className="awt-testimonial__source-name"
 							value={ authorName }
@@ -340,6 +342,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							allowedFormats={ [] }
 						/>
 						<RichText
+							identifier="authorRole"
 							tagName="div"
 							className="awt-testimonial__source-role"
 							value={ authorRole }
@@ -350,6 +353,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							allowedFormats={ [] }
 						/>
 						<RichText
+							identifier="authorOrg"
 							tagName="div"
 							className="awt-testimonial__source-org"
 							value={ authorOrg }

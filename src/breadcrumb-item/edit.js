@@ -36,6 +36,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<li { ...useBlockProps( { className: 'cds--breadcrumb-item' } ) }>
 				<RichText
+					identifier="text"
 					tagName={ isLink ? 'a' : 'span' }
 					className={ isLink ? 'cds--link' : undefined }
 					value={ text }

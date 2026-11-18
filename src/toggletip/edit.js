@@ -98,6 +98,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			<span { ...blockProps }>
 				{ label && (
 					<RichText
+						identifier="label"
 						tagName="span"
 						className="cds--toggletip-label"
 						value={ label }

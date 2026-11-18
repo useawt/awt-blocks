@@ -43,6 +43,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<div { ...blockProps }>
 				<RichText
+					identifier="title"
 					tagName="h2"
 					className="cds--footer__heading"
 					value={ title }

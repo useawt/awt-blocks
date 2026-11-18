@@ -52,6 +52,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				<label htmlFor={ id } className="cds--radio-button__label">
 					<span className="cds--radio-button__appearance"></span>
 					<RichText
+						identifier="label"
 						tagName="span"
 						className="cds--radio-button__label-text"
 						value={ label }

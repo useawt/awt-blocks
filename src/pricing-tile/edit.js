@@ -113,6 +113,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<div className="awt-pricing-tile__badge">{ badge }</div>
 				) }
 				<RichText
+					identifier="tierName"
 					tagName="h3"
 					className="awt-pricing-tile__tier-name"
 					value={ tierName }
@@ -122,6 +123,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				/>
 				<div className="awt-pricing-tile__price-row">
 					<RichText
+						identifier="price"
 						tagName="span"
 						className="awt-pricing-tile__price"
 						value={ price }
@@ -136,6 +138,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					) }
 				</div>
 				<RichText
+					identifier="description"
 					tagName="p"
 					className="awt-pricing-tile__description"
 					value={ description }
@@ -158,6 +161,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					href={ ctaHref }
 				>
 					<RichText
+						identifier="ctaText"
 						tagName="span"
 						value={ ctaText }
 						onChange={ ( v ) => setAttributes( { ctaText: v } ) }

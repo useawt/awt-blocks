@@ -121,6 +121,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 					/>
 					<label htmlFor={ id } className="cds--toggle__label">
 						<RichText
+							identifier="label"
 							tagName="span"
 							className={
 								hideLabel

@@ -123,6 +123,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 				/>
 				<label htmlFor={ id } className="cds--checkbox-label">
 					<RichText
+						identifier="label"
 						tagName="span"
 						className="cds--checkbox-label-text"
 						value={ label }

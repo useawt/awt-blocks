@@ -92,6 +92,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 			<div { ...blockProps }>
 				<RichText
+					identifier="value"
 					tagName="span"
 					className="awt-stat__value"
 					value={ value }
@@ -106,6 +107,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					applyFilters( 'awt.statAfterValue', null, attributes )
 				}
 				<RichText
+					identifier="heading"
 					tagName={ HeadingTag }
 					className="awt-stat__heading"
 					value={ heading }
@@ -118,6 +120,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					disableLineBreaks
 				/>
 				<RichText
+					identifier="description"
 					tagName="p"
 					className="awt-stat__description"
 					value={ description }

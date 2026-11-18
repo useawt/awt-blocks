@@ -46,6 +46,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				onClick={ ( e ) => e.preventDefault() }
 			>
 				<RichText
+					identifier="label"
 					tagName="span"
 					className="cds--content-switcher__label"
 					value={ label }

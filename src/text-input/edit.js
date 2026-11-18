@@ -296,6 +296,7 @@ export default function Edit( { attributes, setAttributes, clientId } ) {
 			</InspectorControls>
 			<div { ...useBlockProps( { className: wrapperClasses } ) }>
 				<RichText
+					identifier="label"
 					tagName="label"
 					htmlFor={ id }
 					className={ labelClasses }
