@@ -4,7 +4,7 @@ Tags: accessibility, blocks, carbon-design-system, block-editor
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 2026.11.0
+Stable tag: 2026.11.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -330,6 +330,10 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 == Changelog ==
 
 <!-- CHANGELOG_START -->
+= 2026.11.1 (2026-11-18) =
+* [Improvement] Shift with an arrow key selects text in AWT blocks instead of whole blocks, and in a Data table the selection stays in the cell.
+* [Improvement] Data table columns keep their widths while you type in the editor.
+
 = 2026.11.0 (2026-11-05) =
 * [Improvement] A header action set to "icon with label" no longer runs over the next action in older browsers.
 
@@ -369,12 +373,4 @@ Known limitations: page builders (Elementor, Beaver Builder) work alongside AWT,
 * [A11y] In Tag block, a label too long for the tag shows its full text on hover, and in a tooltip that opens from the keyboard or by touch.
 * [A11y] If you set an accessible name in a block's Accessibility panel, screen readers now announce it on the block's field, button or code area.
 * [Improvement] On sites with WordPress debugging on, a new Hero no longer shows its heading and description twice.
-
-= 2026.10.8 (2026-10-13) =
-* [A11y] In Tabs block, better support for disabled tabs on arrow key navigation.
-* [A11y] In Dropdown block, improved support for screen readers' communication of states.
-* [A11y] Improved accessibility in Safari.
-* [A11y] Better focus handling in Safari.
-* [A11y] Further Safari improvements.
-* [A11y] Improved display of Dropdown blocks with error states with an icon.
 <!-- CHANGELOG_END -->

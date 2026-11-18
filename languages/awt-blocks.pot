@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AWT Blocks 2026.11.0\n"
+"Project-Id-Version: AWT Blocks 2026.11.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/awt-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-05T14:29:32+00:00\n"
+"POT-Creation-Date: 2026-11-18T12:28:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: awt-blocks\n"
@@ -73,7 +73,7 @@ msgstr ""
 
 #: src/breadcrumb-item/render.php:16
 #: src/header-nav-item/render.php:22
-#: src/breadcrumb-item/edit.js:43
+#: src/breadcrumb-item/edit.js:44
 msgid "Item"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgid "Button"
 msgstr ""
 
 #: src/checkbox/render.php:20
-#: src/checkbox/edit.js:130
+#: src/checkbox/edit.js:131
 msgid "Checkbox label"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgstr ""
 #: src/header-menu/render.php:42
 #: src/menu-button/render.php:22
 #: src/header-menu/edit.js:49
-#: src/header-menu/edit.js:101
+#: src/header-menu/edit.js:102
 msgid "Menu"
 msgstr ""
 
@@ -208,7 +208,7 @@ msgid "Close menu"
 msgstr ""
 
 #: src/link/render.php:19
-#: src/link/edit.js:156
+#: src/link/edit.js:157
 #: src/skip-link/edit.js:57
 #: src/testimonial/edit.js:228
 msgid "Link text"
@@ -219,7 +219,7 @@ msgid "Open modal"
 msgstr ""
 
 #: src/modal/render.php:29
-#: src/modal/edit.js:189
+#: src/modal/edit.js:190
 msgid "Modal heading"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgid "Hide password"
 msgstr ""
 
 #: src/radio-button/render.php:19
-#: src/radio-button/edit.js:59
+#: src/radio-button/edit.js:60
 msgid "Option"
 msgstr ""
 
@@ -385,13 +385,13 @@ msgstr ""
 
 #. translators: %s: the tag's label, for example "Region: us-east".
 #: src/tag/render.php:96
-#: src/tag/edit.js:157
+#: src/tag/edit.js:158
 #, php-format,js-format
 msgid "Dismiss %s"
 msgstr ""
 
 #: src/testimonial/render.php:133
-#: src/testimonial/edit.js:369
+#: src/testimonial/edit.js:373
 msgid "Read the full story"
 msgstr ""
 
@@ -403,12 +403,12 @@ msgid "Description"
 msgstr ""
 
 #: src/text-input/render.php:40
-#: src/dropdown/edit.js:123
+#: src/dropdown/edit.js:124
 #: src/menu-button/edit.js:103
-#: src/password-input/edit.js:173
-#: src/select/edit.js:140
-#: src/text-area/edit.js:167
-#: src/text-input/edit.js:304
+#: src/password-input/edit.js:174
+#: src/select/edit.js:141
+#: src/text-area/edit.js:168
+#: src/text-input/edit.js:305
 msgid "Label"
 msgstr ""
 
@@ -417,7 +417,7 @@ msgid "Expandable tile"
 msgstr ""
 
 #: src/toggle/render.php:32
-#: src/toggle/edit.js:132
+#: src/toggle/edit.js:133
 msgid "Toggle label"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgid "More information: %s"
 msgstr ""
 
 #: src/accessibility-panel.js:38
-#: src/data-table/edit.js:547
+#: src/data-table/edit.js:613
 #: src/testimonial/edit.js:141
 msgid "None"
 msgstr ""
@@ -541,7 +541,7 @@ msgid "Type the ID of another element whose text should be this block’s access
 msgstr ""
 
 #: src/accessibility-panel.js:392
-#: src/testimonial/edit.js:349
+#: src/testimonial/edit.js:352
 msgid "Role"
 msgstr ""
 
@@ -615,7 +615,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: src/accordion-item/edit.js:114
+#: src/accordion-item/edit.js:115
 msgid "Section title"
 msgstr ""
 
@@ -642,7 +642,7 @@ msgstr ""
 #: src/accordion/edit.js:48
 #: src/button/edit.js:143
 #: src/content-switcher/edit.js:123
-#: src/data-table/edit.js:503
+#: src/data-table/edit.js:569
 #: src/dropdown/edit.js:48
 #: src/icon/edit.js:69
 #: src/link/edit.js:91
@@ -791,8 +791,8 @@ msgstr ""
 msgid "Call a JavaScript function by name when clicked."
 msgstr ""
 
-#: src/button/edit.js:287
-#: src/modal-opener/edit.js:79
+#: src/button/edit.js:288
+#: src/modal-opener/edit.js:80
 msgid "Button label"
 msgstr ""
 
@@ -947,7 +947,7 @@ msgstr ""
 msgid "Only needed if your own code has to know which segment was picked. Leave it empty for ordinary content switching."
 msgstr ""
 
-#: src/content-switcher-item/edit.js:53
+#: src/content-switcher-item/edit.js:54
 msgid "Segment label"
 msgstr ""
 
@@ -979,213 +979,213 @@ msgstr ""
 msgid "Not enough contrast for WCAG AA (needs 4.5:1 for normal text, 3:1 for large text). Choose colors with more contrast."
 msgstr ""
 
-#: src/data-table/edit.js:63
+#: src/data-table/edit.js:64
 msgid "CSV, or a spreadsheet copy"
 msgstr ""
 
-#: src/data-table/edit.js:67
+#: src/data-table/edit.js:68
 msgid "Text (values separated by |)"
 msgstr ""
 
-#: src/data-table/edit.js:70
+#: src/data-table/edit.js:71
 msgid "HTML table"
 msgstr ""
 
-#: src/data-table/edit.js:71
+#: src/data-table/edit.js:72
 msgid "Markdown table"
 msgstr ""
 
-#: src/data-table/edit.js:75
+#: src/data-table/edit.js:76
 msgid "The first row is the column headings. Values can be separated by commas, semicolons or tabs, so you can paste straight from a spreadsheet."
 msgstr ""
 
-#: src/data-table/edit.js:79
+#: src/data-table/edit.js:80
 msgid "One row per line, the column headings first, values separated by |."
 msgstr ""
 
-#: src/data-table/edit.js:83
+#: src/data-table/edit.js:84
 msgid "Paste an HTML <table>. Its header row and body rows become the table."
 msgstr ""
 
-#: src/data-table/edit.js:87
+#: src/data-table/edit.js:88
 msgid "Paste a Markdown table: a header row, a |---|---| separator row, then data rows."
 msgstr ""
 
-#: src/data-table/edit.js:94
 #: src/data-table/edit.js:95
+#: src/data-table/edit.js:96
 msgid "There is no data to import."
 msgstr ""
 
-#: src/data-table/edit.js:96
+#: src/data-table/edit.js:97
 msgid "No <table> found in the pasted HTML."
 msgstr ""
 
-#: src/data-table/edit.js:97
+#: src/data-table/edit.js:98
 msgid "That doesn’t look like a Markdown table. Include a header row and a |---|---| separator row."
 msgstr ""
 
 #. translators: %s: column heading and row number, e.g. "Backups, row 2".
-#: src/data-table/edit.js:163
+#: src/data-table/edit.js:198
 #, js-format
 msgid "%s: included"
 msgstr ""
 
-#: src/data-table/edit.js:214
+#: src/data-table/edit.js:249
 msgid "Yes"
 msgstr ""
 
-#: src/data-table/edit.js:214
+#: src/data-table/edit.js:249
 msgid "No"
 msgstr ""
 
 #. translators: %d: column number.
 #. translators: %d: column number
-#: src/data-table/edit.js:284
+#: src/data-table/edit.js:350
 #: src/data-table/transforms.js:60
 #, js-format
 msgid "Column %d"
 msgstr ""
 
 #. translators: 1: column heading, 2: row number.
-#: src/data-table/edit.js:290
+#: src/data-table/edit.js:356
 #, js-format
 msgid "%1$s, row %2$d"
 msgstr ""
 
-#: src/data-table/edit.js:315
+#: src/data-table/edit.js:381
 msgid "Row added."
 msgstr ""
 
-#: src/data-table/edit.js:320
+#: src/data-table/edit.js:386
 msgid "Row deleted."
 msgstr ""
 
-#: src/data-table/edit.js:331
+#: src/data-table/edit.js:397
 msgid "Column added."
 msgstr ""
 
-#: src/data-table/edit.js:344
+#: src/data-table/edit.js:410
 msgid "Column deleted."
 msgstr ""
 
-#: src/data-table/edit.js:357
+#: src/data-table/edit.js:423
 msgid "Insert row before"
 msgstr ""
 
-#: src/data-table/edit.js:363
+#: src/data-table/edit.js:429
 msgid "Insert row after"
 msgstr ""
 
-#: src/data-table/edit.js:368
+#: src/data-table/edit.js:434
 msgid "Delete row"
 msgstr ""
 
-#: src/data-table/edit.js:374
+#: src/data-table/edit.js:440
 msgid "Insert column before"
 msgstr ""
 
-#: src/data-table/edit.js:380
+#: src/data-table/edit.js:446
 msgid "Insert column after"
 msgstr ""
 
-#: src/data-table/edit.js:386
+#: src/data-table/edit.js:452
 msgid "Delete column"
 msgstr ""
 
 #. translators: %d: how many rows the table has now.
-#: src/data-table/edit.js:416
+#: src/data-table/edit.js:482
 #, js-format
 msgid "The table was replaced: %d row."
 msgid_plural "The table was replaced: %d rows."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/data-table/edit.js:477
+#: src/data-table/edit.js:543
 msgid "Rows and columns"
 msgstr ""
 
-#: src/data-table/edit.js:482
-#: src/data-table/edit.js:589
-#: src/data-table/edit.js:608
+#: src/data-table/edit.js:548
+#: src/data-table/edit.js:655
+#: src/data-table/edit.js:674
 msgid "Import data"
 msgstr ""
 
-#: src/data-table/edit.js:490
+#: src/data-table/edit.js:556
 msgid "Data table"
 msgstr ""
 
-#: src/data-table/edit.js:494
+#: src/data-table/edit.js:560
 msgid "Table caption"
 msgstr ""
 
-#: src/data-table/edit.js:495
+#: src/data-table/edit.js:561
 msgid "Describes the table. Everyone sees it; screen readers read it first."
 msgstr ""
 
-#: src/data-table/edit.js:514
+#: src/data-table/edit.js:580
 msgid "Striped rows"
 msgstr ""
 
-#: src/data-table/edit.js:519
+#: src/data-table/edit.js:585
 msgid "Fit width to content"
 msgstr ""
 
-#: src/data-table/edit.js:526
+#: src/data-table/edit.js:592
 msgid "Sticky header"
 msgstr ""
 
-#: src/data-table/edit.js:533
+#: src/data-table/edit.js:599
 msgid "Sortable columns"
 msgstr ""
 
-#: src/data-table/edit.js:540
+#: src/data-table/edit.js:606
 msgid "Default sort column"
 msgstr ""
 
-#: src/data-table/edit.js:560
+#: src/data-table/edit.js:626
 msgid "Default sort direction"
 msgstr ""
 
-#: src/data-table/edit.js:577
+#: src/data-table/edit.js:643
 #: src/list/edit.js:362
 msgid "Data"
 msgstr ""
 
-#: src/data-table/edit.js:583
+#: src/data-table/edit.js:649
 msgid "Type in the table. Add and remove rows and columns, or import CSV, from the block toolbar."
 msgstr ""
 
-#: src/data-table/edit.js:598
+#: src/data-table/edit.js:664
 #: src/list/edit.js:394
 msgid "More data sources"
 msgstr ""
 
-#: src/data-table/edit.js:599
+#: src/data-table/edit.js:665
 msgid "Fill this table from JSON, a REST API, a CSV file, or your own posts and pages. Available in AWT Premium."
 msgstr ""
 
-#: src/data-table/edit.js:614
+#: src/data-table/edit.js:680
 msgid "Format"
 msgstr ""
 
-#: src/data-table/edit.js:624
+#: src/data-table/edit.js:690
 msgid "Paste the data"
 msgstr ""
 
-#: src/data-table/edit.js:640
+#: src/data-table/edit.js:706
 msgid "This replaces the rows and columns the table has now."
 msgstr ""
 
-#: src/data-table/edit.js:652
+#: src/data-table/edit.js:718
 msgid "Replace the table"
 msgstr ""
 
-#: src/data-table/edit.js:698
+#: src/data-table/edit.js:786
 msgid "Heading"
 msgstr ""
 
 #. translators: %d: column number.
-#: src/data-table/edit.js:706
+#: src/data-table/edit.js:794
 #, js-format
 msgid "Column %d heading"
 msgstr ""
@@ -1233,7 +1233,7 @@ msgstr ""
 msgid "The heading level for the question."
 msgstr ""
 
-#: src/faq-item/edit.js:126
+#: src/faq-item/edit.js:127
 msgid "Question?"
 msgstr ""
 
@@ -1270,8 +1270,8 @@ msgstr ""
 msgid "Also adds an external-link icon."
 msgstr ""
 
-#: src/footer-link/edit.js:54
-#: src/side-nav-link/edit.js:113
+#: src/footer-link/edit.js:55
+#: src/side-nav-link/edit.js:114
 msgid "Link label"
 msgstr ""
 
@@ -1283,8 +1283,8 @@ msgstr ""
 msgid "Icon (optional)"
 msgstr ""
 
-#: src/footer-section/edit.js:50
-#: src/side-nav-section/edit.js:75
+#: src/footer-section/edit.js:51
+#: src/side-nav-section/edit.js:76
 msgid "Section heading (optional)"
 msgstr ""
 
@@ -1486,7 +1486,7 @@ msgstr ""
 msgid "Turn this on when the automatic address matching gets it wrong."
 msgstr ""
 
-#: src/header-nav-item/edit.js:85
+#: src/header-nav-item/edit.js:86
 msgid "Nav item label"
 msgstr ""
 
@@ -1889,7 +1889,7 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
-#: src/menu-button/edit.js:168
+#: src/menu-button/edit.js:169
 msgid "Menu label"
 msgstr ""
 
@@ -1969,15 +1969,15 @@ msgstr ""
 msgid "Hide close button"
 msgstr ""
 
-#: src/notification/edit.js:183
+#: src/notification/edit.js:184
 msgid "Notification title"
 msgstr ""
 
-#: src/notification/edit.js:197
+#: src/notification/edit.js:199
 msgid "Subtitle (optional)"
 msgstr ""
 
-#: src/notification/edit.js:212
+#: src/notification/edit.js:215
 msgid "Caption (toast only)"
 msgstr ""
 
@@ -2104,19 +2104,19 @@ msgstr ""
 msgid "Button URL"
 msgstr ""
 
-#: src/pricing-tile/edit.js:120
+#: src/pricing-tile/edit.js:121
 msgid "Tier name"
 msgstr ""
 
-#: src/pricing-tile/edit.js:129
+#: src/pricing-tile/edit.js:131
 msgid "Price (e.g. $49)"
 msgstr ""
 
-#: src/pricing-tile/edit.js:143
+#: src/pricing-tile/edit.js:146
 msgid "Short description of this plan"
 msgstr ""
 
-#: src/pricing-tile/edit.js:164
+#: src/pricing-tile/edit.js:168
 msgid "Get started"
 msgstr ""
 
@@ -2406,19 +2406,19 @@ msgstr ""
 msgid "Show a small line of how the number has changed, under it. Available in AWT Premium."
 msgstr ""
 
-#: src/stat/edit.js:99
+#: src/stat/edit.js:100
 msgid "90%"
 msgstr ""
 
-#: src/stat/edit.js:113
+#: src/stat/edit.js:115
 msgid "Heading describing the statistic"
 msgstr ""
 
-#: src/stat/edit.js:125
+#: src/stat/edit.js:128
 msgid "Description (optional)"
 msgstr ""
 
-#: src/tab/edit.js:50
+#: src/tab/edit.js:51
 msgid "Tab label"
 msgstr ""
 
@@ -2434,11 +2434,11 @@ msgstr ""
 msgid "URL (makes the tag a link)"
 msgstr ""
 
-#: src/tag/edit.js:143
+#: src/tag/edit.js:144
 msgid "Tag label"
 msgstr ""
 
-#: src/tag/edit.js:160
+#: src/tag/edit.js:161
 msgid "Dismiss"
 msgstr ""
 
@@ -2538,15 +2538,15 @@ msgstr ""
 msgid "Remove avatar"
 msgstr ""
 
-#: src/testimonial/edit.js:320
+#: src/testimonial/edit.js:321
 msgid "Write the quote here"
 msgstr ""
 
-#: src/testimonial/edit.js:339
+#: src/testimonial/edit.js:341
 msgid "Author name"
 msgstr ""
 
-#: src/testimonial/edit.js:359
+#: src/testimonial/edit.js:363
 msgid "Organization"
 msgstr ""
 
@@ -2622,7 +2622,7 @@ msgstr ""
 msgid "Option 2"
 msgstr ""
 
-#: src/tile-group/edit.js:47
+#: src/tile-group/edit.js:48
 msgid "What is this choice about?"
 msgstr ""
 
@@ -2734,7 +2734,7 @@ msgstr ""
 msgid "Hide delay"
 msgstr ""
 
-#: src/tooltip/edit.js:93
+#: src/tooltip/edit.js:94
 msgid "Trigger text"
 msgstr ""
 
