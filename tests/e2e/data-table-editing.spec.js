@@ -255,4 +255,58 @@ test.describe( 'Data table editing', () => {
 			editor.canvas.getByRole( 'link', { name: 'Linked item' } )
 		).toBeVisible();
 	} );
+
+	test( 'columns keep their widths while you type, and settle once you leave the table', async ( {
+		admin,
+		editor,
+	} ) => {
+		await admin.createNewPost( { title: 'Steady columns' } );
+		await editor.insertBlock( {
+			name: 'core/paragraph',
+			attributes: { content: 'Before' },
+		} );
+		await editor.insertBlock( {
+			name: 'awt/data-table',
+			attributes: {
+				headers: [
+					{ key: 'name', text: 'Name' },
+					{ key: 'type', text: 'Type' },
+					{ key: 'owner', text: 'Owner' },
+				],
+				rows: [
+					{ name: 'Load balancer', type: 'HTTP', owner: 'Maria' },
+					{ name: 'Database', type: 'PostgreSQL', owner: 'Aisha' },
+				],
+			},
+		} );
+		const widths = () =>
+			editor.canvas
+				.locator( '.wp-block-awt-data-table thead th' )
+				.evaluateAll( ( ths ) =>
+					ths.map( ( th ) => th.getBoundingClientRect().width )
+				);
+
+		// A table sizes its columns to their text, so each key in a cell
+		// whose text outgrew its column used to move every column.
+		const cell = editor.canvas.getByRole( 'textbox', {
+			name: 'Type, row 1',
+		} );
+		await cell.click();
+		const before = await widths();
+		await cell.press( 'End' );
+		await cell.pressSequentially(
+			' and HTTPS, with a longer description that wraps'
+		);
+		expect( await widths() ).toEqual( before );
+		await editor.canvas
+			.getByRole( 'textbox', { name: 'Owner, row 2' } )
+			.click();
+		expect( await widths() ).toEqual( before );
+
+		// Leaving the table lets them fit the text, as the page shows them.
+		await editor.canvas.getByText( 'Before' ).click();
+		await expect
+			.poll( async () => ( await widths() )[ 1 ] )
+			.toBeGreaterThan( before[ 1 ] + 50 );
+	} );
 } );

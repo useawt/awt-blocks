@@ -308,6 +308,36 @@ export default function Edit( {
 			setCurrent( null );
 		}
 	}, [ isSelected ] );
+	// Column widths held while typing. A table sizes its columns to their
+	// text, so once a cell's text outgrew its column, every column moved with
+	// each key (owner's report, 2026-11-18). While the focus is in the table
+	// the columns keep the widths they had when it arrived, and longer text
+	// wraps in its cell; when the focus leaves, they settle to the text, as
+	// the published page shows them. In pixels, the table's own width too, so
+	// a table wider than the page, which scrolls, keeps its shape.
+	const [ heldWidths, setHeldWidths ] = useState( null );
+	const holdWidths = ( event ) => {
+		if ( heldWidths || sourceNote ) {
+			return;
+		}
+		const table = event.currentTarget;
+		setHeldWidths( {
+			table: table.getBoundingClientRect().width,
+			columns: [ ...table.querySelectorAll( 'thead th' ) ].map(
+				( th ) => th.getBoundingClientRect().width
+			),
+		} );
+	};
+	const releaseWidths = ( event ) => {
+		if ( ! event.currentTarget.contains( event.relatedTarget ) ) {
+			setHeldWidths( null );
+		}
+	};
+	// A column added or taken away (an undo can do it while typing) needs
+	// widths of its own.
+	useEffect( () => {
+		setHeldWidths( null );
+	}, [ headers.length ] );
 	const [ importing, setImporting ] = useState( false );
 	const [ importFormat, setImportFormat ] = useState( 'csv' );
 	const [ importText, setImportText ] = useState( '' );
@@ -704,6 +734,13 @@ export default function Edit( {
 					ref={ tableRef }
 					className={ tableClasses }
 					onClick={ sourceNote ? guardLinks : undefined }
+					onFocus={ holdWidths }
+					onBlur={ releaseWidths }
+					style={
+						heldWidths
+							? { tableLayout: 'fixed', width: heldWidths.table }
+							: undefined
+					}
 				>
 					{ caption && <caption>{ caption }</caption> }
 					<thead>
@@ -712,7 +749,20 @@ export default function Edit( {
 								// Carbon's label span, as render.php writes it, so the
 								// XL-size `.cds--table-header-label{display:block}` rule
 								// aligns heading text with the cells below.
-								<th key={ h.key } scope="col">
+								<th
+									key={ h.key }
+									scope="col"
+									style={
+										heldWidths?.columns[ c ]
+											? {
+													width: heldWidths.columns[
+														c
+													],
+													boxSizing: 'border-box',
+											  }
+											: undefined
+									}
+								>
 									{ sourceNote ? (
 										<RichText.Content
 											tagName="span"
